@@ -1,0 +1,16 @@
+---
+import { Code as Default } from '@astrojs/starlight/components';
+
+interface Props {
+	code: string;
+	lang?: string;
+}
+
+/**
+ * This component is a basic wrapper for the `<Code>` component from Starlight used for Markdoc
+ * fenced code blocks that ensures that we do not pass any child content to the `<Code>` component
+ * which is an usage not supported by Expressive Code and would throw an error.
+ */
+---
+
+<Default {...Astro.props} />

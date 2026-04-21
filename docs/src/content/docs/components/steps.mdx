@@ -1,0 +1,120 @@
+---
+title: Steps
+description: Learn how to style numbered lists of tasks to create step-by-step guides in Starlight.
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+To style a numbered list of tasks to create step-by-step guides, use the `<Steps>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Steps slot="preview">
+
+1. Create a new Starlight project:
+
+   <Tabs syncKey="pkg">
+
+   <TabItem label="npm">
+
+   ```sh
+   npm create astro@latest -- --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="pnpm">
+
+   ```sh
+   pnpm create astro --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="Yarn">
+
+   ```sh
+   yarn create astro --template starlight
+   ```
+
+   </TabItem>
+
+   </Tabs>
+
+2. Write your first documentation page.
+
+</Steps>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Steps } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+Use the `<Steps>` component to style numbered lists of tasks.
+This is useful for more complex step-by-step guides where each step needs to be clearly highlighted.
+
+Wrap `<Steps>` around a standard Markdown ordered list.
+All the usual Markdown syntax is applicable inside `<Steps>`.
+
+<Preview>
+
+````mdx
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% steps %}
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+{% /steps %}
+````
+
+</Fragment>
+
+<Steps slot="preview">
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>
+
+</Preview>
+
+## `<Steps>` Props
+
+**Implementation:** [`Steps.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Steps.astro)
+
+The `<Steps>` component does not accept any props.

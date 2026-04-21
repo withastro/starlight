@@ -1,0 +1,230 @@
+---
+title: 页面
+description: 了解如何使用 Starlight 创建和管理文档站点页面。
+sidebar:
+  order: 1
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+Starlight 根据你的内容生成站点的 HTML 页面，并通过 Markdown frontmatter 提供灵活的选项。
+此外，Starlight 项目可以完全使用 [Astro 强大的页面生成工具](https://docs.astro.build/zh-cn/basics/astro-pages/)。
+本指南介绍了 Starlight 中的页面生成工作原理。
+
+## 内容页面
+
+### 文件格式
+
+Starlight 支持在 Markdown 和 MDX 中创作内容，无需任何配置。
+你可以按照 [“Markdoc” 指南](/zh-cn/guides/authoring-content/#markdoc) 添加对 Markdoc 的支持。
+
+### 添加页面
+
+通过在 `src/content/docs/` 中创建 `.md` 或 `.mdx` 文件来添加新页面。
+使用子文件夹来组织文件并创建多个路径段。
+
+举个例子，以下文件结构将在 `example.com/hello-world` 和 `example.com/reference/faq` 生成页面：
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - hello-world.md
+      - reference/
+        - faq.md
+
+</FileTree>
+
+### 类型安全的 frontmatter
+
+所有的 Starlight 页面都共享一个可定制的 [通用 frontmatter 属性集](/zh-cn/reference/frontmatter/)，用于控制页面的外观：
+
+```md
+---
+title: Hello, World!
+description: 这是我的 Starlight 网站中的一个页面
+---
+```
+
+如果你忘记了一些重要的东西，Starlight 会提醒你。
+
+## 自定义页面
+
+对于高级用例，你可以通过创建 `src/pages/` 目录来添加自定义页面。
+`src/pages/` 目录使用 [Astro 的基于文件的路由](https://docs.astro.build/zh-cn/basics/astro-pages/#基于文件的路由)， 并支持 `.astro` 文件等其他页面格式。
+
+这对于需要完全自定义布局或从其他数据源生成页面的情况非常有用。
+
+举个例子，以下文件结构将在 `example.com/custom` 和 `example.com/archived` 生成页面：
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - hello-world.md
+  - pages/
+    - custom.astro
+    - archived.html
+
+</FileTree>
+
+在 [Astro 文档中的“页面”指南](https://docs.astro.build/zh-cn/basics/astro-pages/) 中了解更多。
+
+### 在自定义页面中使用 Starlight 的设计
+
+要在自定义页面中使用 Starlight 布局，请使用 [`<StarlightPage />` 组件](#starlightpage-组件)包装页面内容。
+
+如果你正在动态生成内容但仍想使用 Starlight 的设计，这会很有帮助。
+
+要在标题中添加和 Starlight 的 Markdown 锚点链接样式一样的锚点链接，你可以在自定义页面中使用 [`<AnchorHeading>` 组件](#anchorheading-组件)。
+
+```astro
+---
+// src/pages/custom-page/example.astro
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+import CustomComponent from './CustomComponent.astro';
+---
+
+<StarlightPage frontmatter={{ title: '我的自定义页面' }}>
+	<p>这是一个有自定义组件的自定义页面：</p>
+	<CustomComponent />
+
+	<AnchorHeading level="2" id="learn-more">了解更多</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/">在 Starlight 文档中阅读更多</a>
+	</p>
+</StarlightPage>
+```
+
+#### `<StarlightPage>` 组件
+
+`<StarlightPage />` 组件使用 Starlight 的布局和样式渲染完整页面内容。
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: '我的自定义页面' }}>
+	<!-- 自定义页面内容 -->
+</StarlightPage>
+```
+
+`<StarlightPage />` 组件接受以下 props。
+
+##### `frontmatter`
+
+**必填**  
+**类型：** `StarlightPageFrontmatter`
+
+为此页面设置 [frontmatter 属性](/zh-cn/reference/frontmatter/)，类似于 Markdown 页面中的 frontmatter。
+[`title`](/zh-cn/reference/frontmatter/#title-必填) 属性是必填的，其他所有属性都是可选的。
+
+以下是与 Markdown frontmatter 不同的属性：
+
+- [`slug`](/zh-cn/reference/frontmatter/#slug) 属性不受支持，并且会根据自定义页面的 URL 自动设置。
+- [`editUrl`](/zh-cn/reference/frontmatter/#editurl) 选项需要一个 URL 来显示编辑链接。
+- 用于自定义页面如何在 [自动生成的链接组](/zh-cn/reference/configuration/#sidebar) 中显示的 [`sidebar`](/zh-cn/reference/frontmatter/#sidebar) frontmatter 属性不可用。使用 `<StarlightPage />` 组件的页面不是集合的一部分，不能添加到自动生成的侧边栏组中。
+- [`draft`](/zh-cn/reference/frontmatter/#draft) 选项仅会显示页面为草稿的 [通知](/zh-cn/reference/overrides/#draftcontentnotice)，但不会自动将其从生产版本中排除。
+
+##### `sidebar`
+
+**类型：**[`SidebarItem[]`](/zh-cn/reference/configuration/#sidebaritem)  
+**默认值：** 根据 [全局 `sidebar` 配置](/zh-cn/reference/configuration/#sidebar) 生成的侧边栏
+
+为此页面提供自定义站点导航侧边栏。
+如果未设置，此页面将使用默认的全局侧边栏。
+
+例如，以下页面使用指向主页的链接和一组指向各种其他自定义页面的链接覆盖了默认的侧边栏。
+
+```astro {3-13}
+<StarlightPage
+	frontmatter={{ title: '猎户座' }}
+	sidebar={[
+		{ label: '首页', link: '/' },
+		{
+			label: '星座',
+			items: [
+				{ label: '仙女座', link: '/andromeda/' },
+				{ label: '猎户座', link: '/orion/' },
+				{ label: '射手座', link: '/sagittarius/', badge: 'Stub' },
+			],
+		},
+	]}
+>
+	示例内容。
+</StarlightPage>
+```
+
+了解更多有关自定义侧边栏的可用选项，请参阅[“侧边栏导航”](/zh-cn/guides/sidebar/)指南。
+
+##### `hasSidebar`
+
+**类型：** `boolean`  
+**默认值：** 如果 [`frontmatter.template`](/zh-cn/reference/frontmatter/#template) 是 `'splash'`，为`false`，否则为 `true`
+
+控制是否在此页面上显示侧边栏。
+
+##### `headings`
+
+**类型：** `{ depth: number; slug: string; text: string }[]`  
+**默认值：** `[]`
+
+提供此页面上所有标题的数组。
+如果提供了，Starlight 将从这些标题生成页面目录。
+
+##### `dir`
+
+**类型：** `'ltr' | 'rtl'`  
+**默认值：** 当前语言环境的书写方向
+
+设置此页面内容的书写方向。
+
+##### `lang`
+
+**类型：** `string`  
+**默认值：** 当前语言环境的语言
+
+为此页面的内容设置 BCP-47 语言标签，例如 `en`、`zh-CN` 或 `pt-BR`。
+
+##### `isFallback`
+
+**类型：** `boolean`  
+**默认值：** `false`
+
+表示此页面是否使用了[回退内容](/zh-cn/guides/i18n/#回退内容)，因为当前语言没有翻译。
+
+#### `<AnchorHeading>` 组件
+
+`<AnchorHeading />` 组件渲染一个 HTML 标题元素，并带有一个可点击的锚点链接，样式与 Starlight 的 Markdown 样式一样。
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-heading">子标题</AnchorHeading>
+```
+
+它接受以下属性以及任何其他有效的[全局 HTML 属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes)。
+
+##### `level`
+
+**必填**  
+**类型：** `1 | 2 | 3 | 4 | 5 | 6`
+
+要渲染的标题级别。
+例如，`level="1"` 将渲染一个 `<h1>` 元素。
+
+##### `id`
+
+**必填**  
+**类型：** `string`
+
+用于此标题的唯一 ID。
+这将用作渲染标题的 `id` 属性，并且锚点图标将链接到它。

@@ -1,0 +1,150 @@
+---
+title: 배지
+description: Starlight에서 배지를 사용하여 추가 정보를 표시하는 방법을 알아보세요.
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+상태나 카테고리와 같은 작은 정보를 표시하려면 `<Badge>` 컴포넌트를 사용합니다.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="새 항목" />
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+`<Badge>` 컴포넌트를 사용하여 배지를 표시하고 표시할 콘텐츠를 `<Badge>` 컴포넌트의 [`text`](#text) 속성에 전달합니다.
+
+기본적으로 배지는 사이트의 테마 강조 색상을 사용합니다.
+기본적으로 제공되는 배지 색상을 사용하려면 [`variant`](#variant) 속성을 지원되는 값 중 하나로 설정하세요.
+
+<Preview>
+
+```mdx
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="노트" variant="note" />
+- <Badge text="성공" variant="success" />
+- <Badge text="팁" variant="tip" />
+- <Badge text="주의" variant="caution" />
+- <Badge text="위험" variant="danger" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+- {% badge text="노트" variant="note" /%}
+- {% badge text="성공" variant="success" /%}
+- {% badge text="팁" variant="tip" /%}
+- {% badge text="주의" variant="caution" /%}
+- {% badge text="위험" variant="danger" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="노트" variant="note" />
+	- <Badge text="성공" variant="success" />
+	- <Badge text="팁" variant="tip" />
+	- <Badge text="주의" variant="caution" />
+	- <Badge text="위험" variant="danger" />
+</Fragment>
+
+</Preview>
+
+### 다른 크기 사용
+
+[`size`](#size) 속성을 사용하여 배지 텍스트의 크기를 조절할 수 있습니다.
+
+<Preview>
+
+```mdx /size="\w+"/
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="새 항목" size="small" />
+- <Badge text="개선된 새 항목" size="medium" />
+- <Badge text="더 큰 개선된 새 항목" size="large" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+- {% badge text="새 항목" size="small" /%}
+- {% badge text="개선된 새 항목" size="medium" /%}
+- {% badge text="더 큰 개선된 새 항목" size="large" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="새 항목" size="small" />
+	- <Badge text="개선된 새 항목" size="medium" />
+	- <Badge text="더 큰 개선된 새 항목" size="large" />
+</Fragment>
+
+</Preview>
+
+### 배지 사용자 정의
+
+`class` 또는 `style`과 같은 다른 `<span>` 속성을 사용자 정의 CSS와 함께 사용하여 배지를 사용자 정의합니다.
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="사용자 정의" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+{% badge text="사용자 정의" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
+
+<Badge
+	slot="preview"
+	text="사용자 정의"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## `<Badge>` 속성
+
+**구현:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+`<Badge>` 컴포넌트는 다음 속성과 [기타 `<span>` 속성](https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes)도 허용합니다:
+
+### `text`
+
+**필수**  
+**타입:** `string`
+
+배지에 표시할 텍스트 콘텐츠입니다.
+
+### `variant`
+
+**타입:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**기본값:** `'default'`
+
+사용할 배지 색상 변형: `note` (파란색), `tip` (보라색), `danger` (빨간색), `caution` (오렌지색), `success` (초록색), `default` (테마 강조 색상).
+
+### `size`
+
+**타입:** `'small' | 'medium' | 'large'`
+
+표시할 배지의 크기를 정의합니다.

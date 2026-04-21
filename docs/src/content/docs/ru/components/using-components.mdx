@@ -1,0 +1,94 @@
+---
+title: Использование компонентов
+description: Использование компонентов в MDX и Markdoc с помощью Starlight.
+sidebar:
+  order: 1
+---
+
+Компоненты позволяют легко и последовательно переиспользовать часть пользовательского интерфейса или стиля.
+Примерами могут служить карточки-ссылки или встраиваемые ролики YouTube.
+Starlight поддерживает использование компонентов в файлах [MDX](https://mdxjs.com/) и [Markdoc](https://markdoc.dev/), а также предоставляет некоторые общие компоненты для применения.
+
+[Узнайте больше о создании компонентов в документации Astro](https://docs.astro.build/ru/basics/astro-components/).
+
+## Использование компонента в MDX
+
+Вы можете использовать компонент, импортировав его в ваш файл MDX, а затем отобразив его как тег JSX.
+Они выглядят как HTML-теги, но начинаются с заглавной буквы, соответствующей имени в вашем операторе `import`:
+
+```mdx
+---
+# src/content/docs/example.mdx
+title: Добро пожаловать в мою документацию
+---
+
+import { Icon } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
+
+<Icon name="open-book" />
+
+<CustomCard>Компоненты могут содержать **вложенное содержимое**.</CustomCard>
+```
+
+Поскольку Starlight работает на базе Astro, вы можете использовать в своих файлах MDX любые компоненты, созданные на [поддерживаемом UI-фреймворке (React, Preact, Svelte, Vue, Solid и Alpine)](https://docs.astro.build/ru/guides/framework-components/).
+Узнайте больше об [использовании компонентов в MDX](https://docs.astro.build/ru/guides/integrations-guide/mdx/#using-components-in-mdx) в документации Astro.
+
+## Использование компонента в Markdoc
+
+Добавьте поддержку создания контента в Markdoc, следуя нашему [руководству по настройке Markdoc](/ru/guides/authoring-content/#markdoc).
+
+С помощью пресета Starlight Markdoc вы можете использовать встроенные компоненты Starlight с синтаксисом тегов `{% %}` в Markdoc.
+В отличие от MDX, компоненты в Markdoc не нужно импортировать.
+Следующий пример отображает [компонент карточки](/ru/components/cards/) Starlight в файле Markdoc:
+
+```markdoc
+---
+# src/content/docs/example.mdoc
+title: Добро пожаловать в мою документацию
+---
+
+{% card title="Звёзды" icon="star" %}
+Сириус, Вега, Бетельгейзе
+{% /card %}
+```
+
+Дополнительные сведения об использовании компонентов в файлах Markdoc см. в [документация по интеграции Astro Markdoc](https://docs.astro.build/ru/guides/integrations-guide/markdoc/#render-components).
+
+## Встроенные компоненты
+
+Starlight предоставляет встроенные компоненты для частых случаев, нужных в документации.
+Эти компоненты доступны из пакета `@astrojs/starlight/components` в файлах MDX и из [пресета Starlight Markdoc](/ru/guides/authoring-content/#markdoc) в файлах Markdoc.
+
+Список доступных компонентов и способы их использования см. на боковой панели.
+
+## Совместимость со стилями Starlight
+
+Starlight применяет стандартную стилистику к содержимому Markdown, например, добавляет поля между элементами.
+Если эти стили конфликтуют с внешним видом вашего компонента, установите класс `not-content` для своего компонента, чтобы отключить их.
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Стилизация содержимого по умолчанию не влияет на Starlight.</p>
+</div>
+```
+
+## Параметры компонента
+
+Используйте тип [`ComponentProps`](https://docs.astro.build/ru/guides/typescript/#%D1%82%D0%B8%D0%BF-componentprops) из `astro/types` для ссылки на `Props`, принимаемые компонентом, даже если они не экспортируются самим компонентом.
+Это может быть полезно при обёртке или расширении существующего компонента.
+
+В следующем примере используется `ComponentProps` для получения типа параметров, принимаемых встроенным компонентом Starlight `Badge`:
+
+```astro
+---
+// src/components/Example.astro
+import type { ComponentProps } from 'astro/types';
+import { Badge } from '@astrojs/starlight/components';
+
+type BadgeProps = ComponentProps<typeof Badge>;
+---
+```

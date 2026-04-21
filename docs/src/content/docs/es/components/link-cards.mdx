@@ -1,0 +1,128 @@
+---
+title: Tarjetas de enlace
+description: Aprende a mostrar enlaces de forma destacada como tarjetas en Starlight.
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Para mostrar enlaces a diferentes páginas de forma destacada, utiliza el componente `<LinkCard>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkCard
+	slot="preview"
+	title="Personalización de Starlight"
+	description="Aprende a personalizar tu sitio de Starlight con estilos personalizados, fuentes y más."
+	href="/es/guides/customization/"
+/>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Mostrar un enlace de forma destacada utilizando el componente `<LinkCard>`.
+Cada `<LinkCard>` requiere un atributo [`title`](#title) y un atributo [`href`](#href).
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Creación de contenido en Markdown"
+	href="/es/guides/authoring-content/"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard title="Creación de contenido en Markdown" href="/es/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Creación de contenido en Markdown"
+	href="/es/guides/authoring-content/"
+/>
+
+</Preview>
+
+### Agregar una descripción de enlace
+
+Agrega una descripción breve a una tarjeta de enlace utilizando el atributo [`description`](#description).
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Internacionalización"
+	href="/es/guides/i18n/"
+	description="Configura Starlight para admitir varios idiomas."
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="Internacionalización"
+	 href="/es/guides/i18n/"
+	 description="Configura Starlight para admitir varios idiomas." /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Internacionalización"
+	href="/es/guides/i18n/"
+	description="Configura Starlight para admitir varios idiomas."
+/>
+
+</Preview>
+
+### Agrupar tarjetas de enlace
+
+Muestra varias tarjetas de enlace una al lado de la otra cuando hay suficiente espacio agrupándolas con el componente [`<CardGrid>`](/es/components/card-grids/).
+Ve la guía [“Agrupar tarjetas de enlace”](/es/components/card-grids/#agrupar-tarjetas) para un ejemplo.
+
+## Props de `<LinkCard>`
+
+**Implementación:** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+El componente `<LinkCard>` acepta las siguientes propiedades, así como todos los demás atributos de los elementos [`<a>`](https://developer.mozilla.org/es/docs/Web/HTML/Element/a):
+
+### `title`
+
+**requerido**  
+**tipo:** `string`
+
+El título de la tarjeta de enlace a mostrar.
+
+### `href`
+
+**requerido**  
+**tipo:** `string`
+
+El URL al que enlazar cuando se interactúa con la tarjeta.
+
+### `description`
+
+**tipo:** `string`
+
+Una descripción opcional para mostrar debajo del título.

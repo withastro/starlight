@@ -1,0 +1,94 @@
+---
+title: 컴포넌트 사용
+description: Starlight와 함께 MDX 및 Markdoc에서 컴포넌트 사용.
+sidebar:
+  order: 1
+---
+
+컴포넌트를 사용하면 쉽고 일관되게 UI 조각이나 스타일을 재사용할 수 있습니다.
+링크 카드나 YouTube 삽입 등을 예로 들 수 있습니다.
+Starlight는 [MDX](https://mdxjs.com/) 및 [Markdoc](https://markdoc.dev/) 파일에서 컴포넌트 사용을 지원하며 사용할 수 있는 몇 가지 공통 컴포넌트를 제공합니다.
+
+[Astro 문서에서 컴포넌트 구축에 대해 자세히 알아보세요](https://docs.astro.build/ko/basics/astro-components/).
+
+## MDX에서 컴포넌트 사용
+
+MDX 파일에서 컴포넌트를 가져온 다음 JSX 태그로 렌더링하여 사용할 수 있습니다.
+이는 HTML 태그처럼 보이지만 `import` 문에 있는 이름과 일치하는 대문자로 시작합니다.
+
+```mdx
+---
+# src/content/docs/example.mdx
+title: 내 문서에 오신 것을 환영합니다
+---
+
+import { Icon } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
+
+<Icon name="open-book" />
+
+<CustomCard>컴포넌트에는 **중첩된 콘텐츠**가 포함될 수도 있습니다.</CustomCard>
+```
+
+Starlight는 Astro로 구동되므로 [지원되는 UI 프레임워크(React, Preact, Svelte, Vue, Solid, Alpine)](https://docs.astro.build/ko/guides/framework-components/)로 빌드된 컴포넌트를 MDX 파일에 추가할 수 있습니다.
+Astro 문서에서 [MDX에서 컴포넌트 사용](https://docs.astro.build/ko/guides/integrations-guide/mdx/#mdx에서-컴포넌트-사용)에 대해 자세히 알아보세요.
+
+## Markdoc에서 컴포넌트 사용
+
+[Markdoc 설정 가이드](/ko/guides/authoring-content/#markdoc)에 따라 Markdoc에서 콘텐츠 작성에 대한 지원을 추가하세요.
+
+Starlight Markdoc 프리셋을 사용하면 Starlight의 내장 컴포넌트를 Markdoc의 `{% %}` 태그 구문과 함께 사용할 수 있습니다.
+MDX와 달리 Markdoc에서는 컴포넌트를 가져올 필요가 없습니다.
+다음 예시는 Starlight의 [카드 컴포넌트](/ko/components/cards/)를 Markdoc 파일에서 렌더링합니다:
+
+```markdoc
+---
+# src/content/docs/example.mdoc
+title: 내 문서에 오신 것을 환영합니다
+---
+
+{% card title="별" icon="star" %}
+시리우스, 베가, 베텔게우스
+{% /card %}
+```
+
+Markdoc 파일에서 컴포넌트를 사용하는 방법에 대한 자세한 내용은 [Astro Markdoc 통합 문서](https://docs.astro.build/ko/guides/integrations-guide/markdoc/#컴포넌트-렌더링)를 참조하세요.
+
+## 내장 컴포넌트
+
+Starlight는 일반적인 문서 사용 사례를 위한 내장 컴포넌트를 제공합니다.
+이러한 컴포넌트는 MDX 파일의 `@astrojs/starlight/components` 패키지와 Markdoc 파일의 [Starlight Markdoc 프리셋](/ko/guides/authoring-content/#markdoc)에서 사용할 수 있습니다.
+
+사용 가능한 컴포넌트 목록과 사용 방법은 사이드바를 참조하세요.
+
+## Starlight 스타일과의 호환성
+
+Starlight는 요소 사이에 여백을 추가하는 등 Markdown 콘텐츠에 기본 스타일을 적용합니다.
+이러한 스타일이 컴포넌트의 모양과 충돌하는 경우 컴포넌트에 `not-content` 클래스를 추가하여 비활성화하세요.
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Starlight의 기본 콘텐츠 스타일링의 영향을 받지 않습니다.</p>
+</div>
+```
+
+## 컴포넌트 속성
+
+컴포넌트 자체에서 내보내지 않더라도 컴포넌트에서 허용하는 `Props`를 참조하려면 `astro/types`의 [`ComponentProps`](https://docs.astro.build/ko/guides/typescript/#componentprops-타입) 타입을 사용합니다.
+이는 기존 컴포넌트를 래핑하거나 확장할 때 유용할 수 있습니다.
+
+다음 예시는 `ComponentProps`를 사용하여 Starlight의 내장 `Badge` 컴포넌트가 허용하는 속성의 타입을 가져옵니다:
+
+```astro
+---
+// src/components/Example.astro
+import type { ComponentProps } from 'astro/types';
+import { Badge } from '@astrojs/starlight/components';
+
+type BadgeProps = ComponentProps<typeof Badge>;
+---
+```

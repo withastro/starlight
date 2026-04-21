@@ -1,0 +1,103 @@
+---
+title: Code
+description: Apprenez à afficher du code avec coloration syntaxique dans Starlight sans blocs de code Markdown.
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+Le composant `<Code>` affiche du code avec coloration syntaxique.
+Il est utile lorsque l'utilisation d'un [bloc de code Markdown](/fr/guides/authoring-content/#blocs-de-code) n'est pas possible, par exemple pour afficher des données provenant de sources externes comme des fichiers, des bases de données ou des API.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Code
+	slot="preview"
+	code={`## Bienvenue
+
+Bonjour depuis **l'espace** !`}
+lang="md"
+title="exemple.md"
+ins={3}
+/>
+
+</Preview>
+
+## Importation
+
+```tsx
+import { Code } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Utilisez le composant `<Code>` pour afficher du code avec coloration syntaxique, par exemple lorsque vous affichez du code provenant de sources externes.
+
+Consultez la [documentation sur le « Composant Code » d'Expressive Code](https://expressive-code.com/key-features/code-component/) pour plus de détails sur l'utilisation du composant `<Code>` et la liste des props disponibles.
+
+<Preview>
+
+```mdx
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log("Cela peut provenir d'un fichier ou d'un CMS !");`;
+export const fileName = 'exemple.js';
+export const highlights = ['fichier', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% code
+	 code="console.log(\"Cela peut provenir d'un fichier ou d'un CMS !\");"
+   lang="js"
+   title="exemple.js"
+   meta="'fichier' 'CMS'" /%}
+```
+
+</Fragment>
+
+export const exampleCode = `console.log("Cela peut provenir d'un fichier ou d'un CMS !");`;
+export const fileName = 'exemple.js';
+export const highlights = ['fichier', 'CMS'];
+
+<Code
+	slot="preview"
+	code={exampleCode}
+	lang="js"
+	title={fileName}
+	mark={highlights}
+/>
+
+</Preview>
+
+### Afficher du code importé
+
+Dans les fichiers MDX et les composants Astro, utilisez le [suffixe d'importation `?raw` de Vite](https://vite.dev/guide/assets#importing-asset-as-string) pour importer n'importe quel fichier de code sous forme de chaîne de caractères.
+Vous pouvez ensuite passer cette chaîne importée au composant `<Code>` pour l'inclure dans votre page.
+
+<Preview>
+
+```mdx "?raw"
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/tsconfig.json?raw';
+
+<Code code={importedCode} lang="json" title="tsconfig.json" />
+```
+
+import importedCode from '../../../../../../examples/basics/tsconfig.json?raw';
+
+<Code slot="preview" code={importedCode} lang="json" title="tsconfig.json" />
+
+</Preview>
+
+## Props de `<Code>`
+
+**Implémentation :** [`Code.astro`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/components/Code.astro)
+
+Le composant `<Code>` accepte toutes les props documentées dans la [documentation sur le « Composant Code » d'Expressive Code](https://expressive-code.com/key-features/code-component/#available-props).

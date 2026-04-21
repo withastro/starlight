@@ -1,0 +1,17 @@
+---
+import { attachRouteDataAndRunMiddleware } from '../utils/routing/middleware';
+import {
+	generateStarlightPageRouteData,
+	type StarlightPageProps as Props,
+} from '../utils/starlight-page';
+import Page from './Page.astro';
+
+export type StarlightPageProps = Props;
+
+await attachRouteDataAndRunMiddleware(
+	Astro,
+	await generateStarlightPageRouteData({ props: Astro.props, context: Astro })
+);
+---
+
+<Page><slot /></Page>

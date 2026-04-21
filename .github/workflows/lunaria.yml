@@ -1,0 +1,46 @@
+name: Lunaria
+
+on:
+  # Trigger the workflow every time a pull request is opened or synchronized at the target `main` branch
+  pull_request_target:
+    types: [opened, synchronize]
+    branches: [main]
+    paths:
+      - 'docs/**'
+
+# Allow this job to clone the repository and comment on the pull request
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lunaria-overview:
+    name: Generate Lunaria Overview
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          # Necessary for Lunaria to work properly
+          # Makes the action clone the entire git history
+          fetch-depth: 0
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
+
+      - name: Setup Node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: 22.12.0
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+        shell: bash
+
+      - name: Generate Lunaria Overview
+        uses: yanthomasdev/lunaria-action@06ad5ab2704d030708baf3b279ca0446b418e853 # v0.1.0
+        with:
+          token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
+          working-directory: docs

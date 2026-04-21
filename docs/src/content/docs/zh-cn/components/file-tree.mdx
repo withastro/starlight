@@ -1,0 +1,225 @@
+---
+title: 文件树
+description: 了解如何在 Starlight 中显示带有文件图标和可折叠子目录的目录结构。
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+要显示带有文件图标和可折叠子目录的目录结构，请使用 `<FileTree>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<FileTree slot="preview">
+
+- astro.config.mjs 一个 **重要** 文件
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { FileTree } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<FileTree>` 组件可以显示带有文件图标和可折叠子目录的文件树。
+
+使用 `<FileTree>` 内的 [无序 Markdown 列表](https://www.markdownguide.org/basic-syntax/#unordered-lists) 来指定文件和目录的结构。
+使用嵌套列表可以创建子目录，或在列表项末尾添加 `/` 以将其渲染为没有特定内容的目录。
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+
+</Preview>
+
+### 高亮显示条目
+
+通过将文件或目录的名称加粗，来使文件或目录从中脱颖而出，例如 `**README.md**`。
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### 添加注释
+
+通过在名称后添加更多文本来向文件或目录添加注释。
+注释中支持内联 Markdown 格式，例如粗体和斜体。
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro 一个 **重要** 文件
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - Header.astro 一个 **重要** 文件
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro 一个 **重要** 文件
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### 添加占位符
+
+将 `...` 或 `…` 作为名称来添加占位符文件和目录。
+这可用于向读者指示文件夹应包含更多项目，而无需明确指定所有项目。
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+
+</Preview>
+
+## `<FileTree>` 的属性
+
+**实现：** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
+
+`<FileTree>` 组件不接受任何 props。

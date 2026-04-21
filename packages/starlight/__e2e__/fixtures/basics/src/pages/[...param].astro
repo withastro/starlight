@@ -1,0 +1,17 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+/**
+ * The name of this dynamic route is intentionally set to `[...param]` to test a head propagation
+ * issue that occurs for dynamic routes alphabetically sorted before the Starlight default route
+ * (`[...slug]`) rendering the `<StarlightPage>` component.
+ */
+
+export function getStaticPaths() {
+	return [{ params: { param: 'custom-page' } }];
+}
+---
+
+<StarlightPage frontmatter={{ title: 'A custom page' }}>
+	<p>This is a custom page</p>
+</StarlightPage>

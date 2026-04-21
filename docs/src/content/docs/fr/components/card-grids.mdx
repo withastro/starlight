@@ -1,0 +1,181 @@
+---
+title: Grilles de cartes
+description: Apprenez à regrouper plusieurs cartes dans une grille dans Starlight.
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Pour regrouper plusieurs composants [`<Card>`](/fr/components/cards/) ou [`<LinkCard>`](/fr/components/link-cards/) dans une grille, utilisez le composant `<CardGrid>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="Étoiles" icon="star">
+		Sirius, Véga, Bételgeuse
+	</Card>
+	<Card title="Lunes" icon="moon">
+		Io, Europe, Ganymède
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Importation
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+### Grouper des cartes
+
+Affichez plusieurs composants [`<Card>`](/fr/components/cards/) côte à côte lorsqu'il y a suffisamment d'espace en les regroupant à l'aide du composant `<CardGrid>`.
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Regardez-ça" icon="open-book">
+		Contenu intéressant que vous souhaitez mettre en évidence.
+	</Card>
+	<Card title="Et autre chose" icon="information">
+		Plus d'informations que vous souhaitez partager.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="Regardez-ça" icon="open-book" %}
+Contenu intéressant que vous souhaitez mettre en évidence.
+{% /card %}
+
+{% card title="Et autre chose" icon="information" %}
+Plus d'informations que vous souhaitez partager.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="Regardez-ça" icon="open-book">
+		Contenu intéressant que vous souhaitez mettre en évidence.
+	</Card>
+	<Card title="Et autre chose" icon="information">
+		Plus d'informations que vous souhaitez partager.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### Grouper des cartes de liaison
+
+Affichez plusieurs composants [`<LinkCard>`](/fr/components/link-cards/) côte à côte lorsqu'il y a suffisamment d'espace en les regroupant à l'aide du composant `<CardGrid>`.
+
+<Preview>
+
+```mdx {3,9}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard
+		title="Création de contenu en Markdown"
+		href="/fr/guides/authoring-content/"
+	/>
+	<LinkCard title="Composants" href="/fr/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,7}
+{% cardgrid %}
+{% linkcard
+   title="Création de contenu en Markdown"
+	 href="/fr/guides/authoring-content/" /%}
+
+{% linkcard title="Composants" href="/fr/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard
+		title="Création de contenu en Markdown"
+		href="/fr/guides/authoring-content/"
+	/>
+	<LinkCard title="Composants" href="/fr/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### Décaler des cartes
+
+Décalez la deuxième colonne de la grille verticalement pour ajouter un intérêt visuel en ajoutant l'attribut [`stagger`](#stagger) au composant `<CardGrid>`.
+
+Cet attribut est utile sur votre page d'accueil pour afficher les principales fonctionnalités de votre projet.
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Regardez-ça" icon="open-book">
+		Contenu intéressant que vous souhaitez mettre en évidence.
+	</Card>
+	<Card title="Et autre chose" icon="information">
+		Plus d'informations que vous souhaitez partager.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="Regardez-ça" icon="open-book" %}
+Contenu intéressant que vous souhaitez mettre en évidence.
+{% /card %}
+
+{% card title="Et autre chose" icon="information" %}
+Plus d'informations que vous souhaitez partager.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="Regardez-ça" icon="open-book">
+		Contenu intéressant que vous souhaitez mettre en évidence.
+	</Card>
+	<Card title="Et autre chose" icon="information">
+		Plus d'informations que vous souhaitez partager.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Props de `<CardGrid>`
+
+**Implémentation :** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+Le composant `<CardGrid>` accepte les props suivantes :
+
+### `stagger`
+
+**Type :** `boolean`
+
+Définit si les cartes de la grille doivent être décalées ou non.

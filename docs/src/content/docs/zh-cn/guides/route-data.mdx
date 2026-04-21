@@ -1,0 +1,137 @@
+---
+title: 路由数据
+description: 了解 Starlight 的页面数据模型是如何用于渲染你的页面以及如何自定义它。
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+当 Starlight 渲染文档中的页面时，它首先创建一个路由数据对象来表示该页面上的内容。
+本指南解释了路由数据是如何生成的，如何使用它，以及如何自定义它来修改Starlight的默认行为。
+
+有关可用属性的完整列表，请参阅 [“路由数据参考”](/zh-cn/reference/route-data/)。
+
+## 什么是路由数据？
+
+Starlight 路由数据是一个包含渲染单个页面所需的所有信息的对象。
+它包括当前页面的信息以及从你的 Starlight 配置生成的数据。
+
+## 使用路由数据
+
+Starlight 的所有组件都使用路由数据来决定为每个页面渲染什么。
+例如，[`siteTitle`](/zh-cn/reference/route-data/#sitetitle) 字符串用于显示网站标题，[`sidebar`](/zh-cn/reference/route-data/#sidebar) 数组用于渲染全局侧边栏导航。
+
+你可以在 Astro 组件中通过 `Astro.locals.starlightRoute` 全局变量访问这些数据：
+
+```astro title="example.astro" {2}
+---
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<p>此网站的页面标题是 “{siteTitle}”</p>
+```
+
+例如，在 [重写组件](/zh-cn/guides/overriding-components/) 以自定义显示内容时，这会很有用。
+
+## 自定义路由数据
+
+Starlight 的路由数据是开箱即用的，不需要任何配置。但是，对于高级用例，你可能需要自定义某些或所有页面的路由数据，以修改你的网站显示方式。
+
+这与 [重写组件](/zh-cn/guides/overriding-components/) 的概念类似，但不是修改 Starlight 渲染数据的方式，而是修改 Starlight 渲染的数据。
+
+### 什么时候自定义路由数据
+
+当你希望以现有配置选项无法实现的方式修改 Starlight 处理数据的方式时，自定义路由数据会很有用。
+
+例如，你可能想要过滤侧边栏项目或自定义特定页面的标题。
+像这样的更改不需要修改 Starlight 的默认组件，只需要传递给这些组件的数据。
+
+### 如何自定义路由数据
+
+你可以使用一种特殊形式的 “中间件” 来自定义路由数据。
+这是一个每次 Starlight 渲染页面时都会调用的函数，可以修改路由数据对象中的值。
+
+<Steps>
+
+1. 创建一个新文件，使用 Starlight 的 `defineRouteMiddleware()` 工具函数导出一个 `onRequest` 函数：
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware(() => {});
+   ```
+
+2. 告诉 Starlight 你的路由数据中间件文件在 `astro.config.mjs` 中的位置：
+
+   ```js ins={9}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'My delightful docs site',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
+   });
+   ```
+
+3. 更新你的 `onRequest` 函数来修改路由数据。
+
+   你的中间件接收的第一个参数是 [Astro 的上下文对象](https://docs.astro.build/zh-cn/reference/api-reference/)。
+   它包含关于当前页面渲染的完整信息，包括当前 URL 和 `locals`。
+
+   在这个例子中，我们将在每页标题的末尾添加一个感叹号，使我们的文档更加精彩。
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware((context) => {
+   	// 获取此页面的内容集合条目。
+   	const { entry } = context.locals.starlightRoute;
+   	// 更新标题以添加感叹号。
+   	entry.data.title = entry.data.title + '!';
+   });
+   ```
+
+</Steps>
+
+#### 多个路由中间件
+
+Starlight 还支持提供多个中间件。
+将 `routeMiddleware` 设置为路径数组，以添加多个中间件处理程序：
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'My site with multiple middleware',
+			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
+		}),
+	],
+});
+```
+
+#### 等待稍后的路由中间件
+
+为了在执行代码之前等待堆栈中稍后的中间件运行，你可以等待作为第二个参数传递给中间件函数的 `next()` 回调。这对于等待插件的中间件运行后再进行更改非常有用。
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// 等待后续中间件运行。
+	await next();
+	// 修改路由数据
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + '!';
+});
+```

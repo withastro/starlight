@@ -1,0 +1,12 @@
+---
+import { paths } from '../../utils/routing';
+import CommonPage from '../common.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+	return paths;
+}
+---
+
+<CommonPage />

@@ -1,0 +1,145 @@
+---
+title: Кнопки-ссылки
+description: Узнайте, как создавать кнопки-ссылки в Starlight для визуального выделения ссылок, призывающих к действию.
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Для отображения визуально различимых ссылок, призывающих к действию, используйте компонент `<LinkButton>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkButton slot="preview" href="/ru/getting-started/">
+	Прочитайте документацию
+</LinkButton>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { LinkButton } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Используйте компонент `<LinkButton>` для визуального выделения ссылок, призывающих к действию.
+Кнопка-ссылка полезна для направления пользователей к наиболее релевантному или действующему контенту и часто используется на целевых страницах.
+
+`<LinkButton>` требует обязательного заполнения атрибута [`href`](#href).
+Кроме того, можно настроить внешний вид кнопки ссылки с помощью атрибута [`variant`](#variant), который может иметь одно из следующих значений: `primary` (по умолчанию), `secondary` или `minimal`.
+
+<Preview>
+
+```mdx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/ru/getting-started/">Первые шаги</LinkButton>
+<LinkButton href="/ru/reference/configuration/" variant="secondary">
+	Справочник по конфигурации
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkbutton href="/ru/getting-started/" %}Первые шаги{% /linkbutton %}
+
+{% linkbutton href="/ru/reference/configuration/" variant="secondary" %}
+Справочник по конфигурации
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<LinkButton href="/ru/getting-started/">Первые шаги</LinkButton>
+	<LinkButton href="/ru/reference/configuration/" variant="secondary">
+		Справочник по конфигурации
+	</LinkButton>
+</Fragment>
+
+</Preview>
+
+### Добавление иконок
+
+Включите иконку в кнопку-ссылку, используя атрибут [`icon`](#icon), содержащий имя [одной из встроенных иконок Starlight](/ru/reference/icons/#все-иконки).
+
+Атрибут [`iconPlacement`](#iconplacement) можно использовать для размещения иконки перед текстом, задав ему значение `start` (по умолчанию `end`).
+
+<Preview>
+
+```mdx {6-7}
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Похожие: Astro
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4-5}
+{% linkbutton
+   href="https://docs.astro.build"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+Похожие: Astro
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<LinkButton
+	slot="preview"
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Похожие: Astro
+</LinkButton>
+
+</Preview>
+
+## Параметры `<LinkButton>`
+
+**Реализация:** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
+
+Компонент `<LinkButton>` принимает следующие параметры, а также любые [другие атрибуты `<a>`](https://developer.mozilla.org/ru/docs/Web/HTML/Element/a):
+
+### `href`
+
+**обязательный**  
+**тип:** `string`
+
+URL-адрес, на который указывает кнопка-ссылка.
+
+### `variant`
+
+**тип:** `'primary' | 'secondary' | 'minimal'`  
+**по умолчанию:** `'primary'`
+
+Внешний вид кнопки-ссылки.
+Установите значение `primary` для заметной ссылки с призывом к действию, использующей акцентный цвет темы, `secondary` — для менее заметной ссылки, или `minimal` — для ссылки с минимальным оформлением.
+
+### `icon`
+
+**тип:** `string`
+
+Кнопка-ссылка может содержать атрибут `icon` с именем [одной из встроенных иконок Starlight](/ru/reference/icons/#все-иконки).
+
+### `iconPlacement`
+
+**тип:** `'start' | 'end'`  
+**по умолчанию:** `'end'`
+
+Определяет расположение значка по отношению к тексту кнопки-ссылки.

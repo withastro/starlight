@@ -1,0 +1,139 @@
+---
+title: Datos de Ruta
+description: Aprende cómo se utiliza el modelo de datos de página de Starlight para renderizar tus páginas y cómo puedes personalizarlo.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Cuando Starlight renderiza una página en tu documentación, primero crea un objeto de datos de ruta para representar lo que hay en esa página.
+Esta guía explica cómo se generan los datos de ruta, cómo usarlos y cómo puedes personalizarlos para modificar el comportamiento predeterminado de Starlight.
+
+Consulta la [“Referencia de los Datos de Ruta”](/es/reference/route-data/) para obtener una lista completa de las propiedades disponibles.
+
+## ¿Qué son los datos de ruta?
+
+Los datos de ruta de Starlight son un objeto que contiene toda la información necesaria para renderizar una sola página.
+Incluye información de la página actual, así como datos generados a partir de tu configuración de Starlight.
+
+## Uso de los datos de ruta
+
+Todos los componentes de Starlight utilizan los datos de ruta para decidir qué renderizar en cada página.
+Por ejemplo, la cadena [`siteTitle`](/es/reference/route-data/#sitetitle) se utiliza para mostrar el título del sitio y el array [`sidebar`](/es/reference/route-data/#sidebar) se utiliza para renderizar la navegación global de la barra lateral.
+
+Puedes acceder a estos datos desde la variable global `Astro.locals.starlightRoute` en los componentes de Astro:
+
+```astro title="ejemplo.astro" {2}
+---
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<p>El título de este sitio es “{siteTitle}”</p>
+```
+
+Esto puede ser útil, por ejemplo, al construir [sustituciones de componentes](/es/guides/overriding-components/) para personalizar lo que se muestra.
+
+## Personalización de los datos de ruta
+
+Los datos de ruta de Starlight funcionan de forma predeterminada y no requieren ninguna configuración.
+Sin embargo, para casos de uso avanzados, es posible que desees personalizar los datos de ruta para algunas o todas las páginas para modificar cómo se muestra tu sitio.
+
+Este es un concepto similar a las [sustituciones de componentes](/es/guides/overriding-components/), pero en lugar de modificar cómo Starlight renderiza tus datos, modificas los datos que Starlight renderiza.
+
+### Cuándo personalizar los datos de ruta
+
+La personalización de los datos de ruta puede ser útil cuando deseas modificar cómo Starlight procesa tus datos de una manera que no es posible con las opciones de configuración existentes.
+
+Por ejemplo, es posible que desees filtrar elementos de la barra lateral o personalizar los títulos de páginas específicas.
+Cambios como este no requieren modificar los componentes predeterminados de Starlight, solo los datos que se pasan a esos componentes.
+
+### Cómo personalizar los datos de ruta
+
+Puedes personalizar los datos de ruta utilizando una forma especial de “middleware”.
+Esta es una función que se llama cada vez que Starlight renderiza una página y puede modificar los valores del objeto de datos de ruta.
+
+<Steps>
+
+1.  Crea un nuevo archivo que exporte una función `onRequest` utilizando la utilidad `defineRouteMiddleware()` de Starlight:
+
+    ```ts
+    // src/routeData.ts
+    import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+    export const onRequest = defineRouteMiddleware(() => {});
+    ```
+
+2.  Indica a Starlight dónde se encuentra tu archivo de middleware de datos de ruta en `astro.config.mjs`:
+
+    ```js ins={9}
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Mi increíble sitio de documentación',
+    			routeMiddleware: './src/routeData.ts',
+    		}),
+    	],
+    });
+    ```
+
+3.  Actualiza tu función `onRequest` para modificar los datos de ruta.
+
+    El primer argumento que recibirá tu middleware es el [objeto `context` de Astro](https://docs.astro.build/es/reference/api-reference/).
+    Este contiene información completa sobre la renderización de la página actual, incluyendo la URL actual y las `locals`.
+
+    En este ejemplo, vamos a hacer que nuestra documentación sea más emocionante añadiendo un signo de exclamación al final del título de cada página.
+
+    ```ts
+    // src/routeData.ts
+    import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+    export const onRequest = defineRouteMiddleware((context) => {
+    	// Obtiene la entrada de la colección de contenido para esta página.
+    	const { entry } = context.locals.starlightRoute;
+    	// Actualiza el título para añadir un signo de exclamación.
+    	entry.data.title = entry.data.title + '!';
+    });
+    ```
+
+</Steps>
+
+#### Múltiple middleware de ruta
+
+Starlight también admite proporcionar múltiples middleware.
+Establece `routeMiddleware` en un array de rutas para añadir más de un manejador de middleware:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Mi sitio con múltiples middleware',
+			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
+		}),
+	],
+});
+```
+
+#### Esperando middleware de ruta posterior
+
+Para esperar a que se ejecute el middleware posterior en la pila antes de ejecutar tu código, puedes usar `await` en la función de callback `next()` que se pasa como segundo argumento a tu función de middleware.
+Esto puede ser útil para esperar a que se ejecute el middleware de un plugin antes de realizar cambios, por ejemplo.
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// Espera a que se ejecute el middleware posterior.
+	await next();
+	// Modifica los datos de ruta.
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + '!';
+});
+```

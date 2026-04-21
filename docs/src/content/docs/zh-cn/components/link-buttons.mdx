@@ -1,0 +1,145 @@
+---
+title: 链接按钮
+description: 了解如何在 Starlight 中创建链接按钮，以在视觉上获得独特的号召性用语链接。
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+要在视觉上展示不同的号召性用语链接，请使用 `<LinkBut​​ton>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkButton slot="preview" href="/zh-cn/getting-started/">
+	阅读文档
+</LinkButton>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { LinkButton } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<LinkBut​​ton>` 组件，以在视觉上展示独特的号召性用语链接。
+链接按钮可用于将用户引导至紧密关联或可操作的部分，并且通常在登陆页面上使用。
+
+`<LinkButton>` 需要 [`href`](#href) 属性。
+可选部分有，使用 [`variant`](#variant) 属性来自定义链接按钮的外观，该属性可以设置为 `primary`（默认值）、`secondary` 或 `minimal`。
+
+<Preview>
+
+```mdx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/zh-cn/getting-started/">开始使用</LinkButton>
+<LinkButton href="/zh-cn/reference/configuration/" variant="secondary">
+	配置参考
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkbutton href="/zh-cn/getting-started/" %}开始使用{% /linkbutton %}
+
+{% linkbutton href="/zh-cn/reference/configuration/" variant="secondary" %}
+配置参考
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<LinkButton href="/zh-cn/getting-started/">开始使用</LinkButton>
+	<LinkButton href="/zh-cn/reference/configuration/" variant="secondary">
+		配置参考
+	</LinkButton>
+</Fragment>
+
+</Preview>
+
+### 向链接按钮添加图标
+
+使用设置为 [Starlight 内置图标之一](/zh-cn/reference/icons/#所有图标) 名称的 [`icon`](#icon) 属性，以在链接按钮中包含图标。
+
+可通过设置 [`iconPlacement`](#iconplacement) 属性为 `start`（默认为 `end`）来将图标放置在文本之前。
+
+<Preview>
+
+```mdx {6-7}
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	有关内容：Astro
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4-5}
+{% linkbutton
+   href="https://docs.astro.build"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+有关内容：Astro
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<LinkButton
+	slot="preview"
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	有关内容：Astro
+</LinkButton>
+
+</Preview>
+
+## `<LinkButton>` 的属性
+
+**实现：** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
+
+`<LinkBut​​ton>` 组件接受以下属性以及任何 [其他 `<a>` 属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a)：
+
+### `href`
+
+**必要属性**  
+**类型：** `string`
+
+链接按钮指向的 URL。
+
+### `variant`
+
+**类型：** `'primary' | 'secondary' | 'minimal'`  
+**默认值：** `'primary'`
+
+链接按钮的外观。
+将链接设置为 `primary` 用于显示主题强调色的号召性用语链接；设置为 `secondary` 用于显示不太显眼的链接；设置为 `minimal` 用于显示最低优先级的链接。
+
+### `icon`
+
+**类型：** `string`
+
+链接按钮可以包含一个 `icon` 属性，该属性应设置为 [Starlight 的内置图标之一](/zh-cn/reference/icons/#所有图标) 的名称。
+
+### `iconPlacement`
+
+**类型：** `'start' | 'end'`  
+**默认值：** `'end'`
+
+决定了图标相对于链接按钮文本的位置。

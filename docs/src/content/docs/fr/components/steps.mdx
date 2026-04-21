@@ -1,0 +1,120 @@
+---
+title: Étapes
+description: Apprenez à mettre en forme des listes numérotées de tâches pour créer des guides étape par étape dans Starlight.
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Pour mettre en forme une liste numérotée de tâches et créer des guides étape par étape, utilisez le composant `<Steps>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Steps slot="preview">
+
+1. Créez un nouveau projet Starlight :
+
+   <Tabs syncKey="pkg">
+
+   <TabItem label="npm">
+
+   ```sh
+   npm create astro@latest -- --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="pnpm">
+
+   ```sh
+   pnpm create astro --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="Yarn">
+
+   ```sh
+   yarn create astro --template starlight
+   ```
+
+   </TabItem>
+
+   </Tabs>
+
+2. Écrivez votre première page de documentation.
+
+</Steps>
+
+</Preview>
+
+## Importation
+
+```tsx
+import { Steps } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Utilisez le composant `<Steps>` pour mettre en forme des listes numérotées de tâches.
+Celui-ci est utile pour des guides étape par étape plus complexes où chaque étape doit être clairement mise en évidence.
+
+Entourez une liste ordonnée standard Markdown avec le composant `<Steps>`.
+Toute la syntaxe Markdown habituelle est utilisable à l'intérieur de `<Steps>`.
+
+<Preview>
+
+````mdx
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Importez le composant dans votre fichier MDX :
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Entourez les éléments de votre liste ordonnée avec `<Steps>`.
+
+</Steps>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% steps %}
+
+1. Importez le composant dans votre fichier MDX :
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Entourez les éléments de votre liste ordonnée avec `<Steps>`.
+
+{% /steps %}
+````
+
+</Fragment>
+
+<Steps slot="preview">
+
+1. Importez le composant dans votre fichier MDX :
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Entourez les éléments de votre liste ordonnée avec `<Steps>`.
+
+</Steps>
+
+</Preview>
+
+## Props de `<Steps>`
+
+**Implémentation :** [`Steps.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Steps.astro)
+
+Le composant `<Steps>` n'accepte pas de props.

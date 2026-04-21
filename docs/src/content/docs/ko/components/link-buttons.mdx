@@ -1,0 +1,145 @@
+---
+title: 링크 버튼
+description: 시각적으로 뚜렷한 콜투액션 링크를 위해 Starlight에서 링크 버튼을 만드는 방법을 알아보세요.
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+시각적으로 뚜렷한 콜투액션 링크를 표시하려면 `<LinkButton>` 컴포넌트를 사용합니다.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkButton slot="preview" href="/ko/getting-started/">
+	문서 읽기
+</LinkButton>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { LinkButton } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+시각적으로 구분되는 콜투액션 링크를 표시하려면 `<LinkButton>` 컴포넌트를 사용합니다.
+링크 버튼은 가장 관련성이 높거나 실행 가능한 콘텐츠로 사용자를 안내하는 데 유용하며 랜딩 페이지에서 자주 사용됩니다.
+
+`<LinkButton>`에는 [`href`](#href) 속성이 필요합니다.
+선택적으로 `primary` (기본값), `secondary`, `minimal`로 설정할 수 있는 [`variant`](#variant) 속성을 사용하여 링크 버튼의 모양을 사용자 정의합니다.
+
+<Preview>
+
+```mdx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/ko/getting-started/">시작하기</LinkButton>
+<LinkButton href="/ko/reference/configuration/" variant="secondary">
+	구성 참조
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkbutton href="/ko/getting-started/" %}시작하기{% /linkbutton %}
+
+{% linkbutton href="/ko/reference/configuration/" variant="secondary" %}
+구성 참조
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<LinkButton href="/ko/getting-started/">시작하기</LinkButton>
+	<LinkButton href="/ko/reference/configuration/" variant="secondary">
+		구성 참조
+	</LinkButton>
+</Fragment>
+
+</Preview>
+
+### 링크 버튼에 아이콘 추가
+
+[Starlight의 내장 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 [`icon`](#icon) 속성을 사용하여 링크 버튼에 아이콘을 포함시킵니다.
+
+텍스트 앞에 아이콘을 배치하기 위해 [`iconPlacement`](#iconplacement) 속성을 `start`로 설정할 수 있습니다 (기본값은 `end`).
+
+<Preview>
+
+```mdx {6-7}
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton
+	href="https://docs.astro.build/ko"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	관련: Astro
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4-5}
+{% linkbutton
+   href="https://docs.astro.build/ko"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+관련: Astro
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<LinkButton
+	slot="preview"
+	href="https://docs.astro.build/ko"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	관련: Astro
+</LinkButton>
+
+</Preview>
+
+## `<LinkButton>` 속성
+
+**구현:** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
+
+`<LinkButton>` 컴포넌트는 다음 속성과 [기타 `<a>` 속성](https://developer.mozilla.org/ko/docs/Web/HTML/Element/a)도 허용합니다:
+
+### `href`
+
+**필수**  
+**타입:** `string`
+
+링크 버튼이 가리키는 URL입니다.
+
+### `variant`
+
+**타입:** `'primary' | 'secondary' | 'minimal'`  
+**기본값:** `'primary'`
+
+링크 버튼의 모양입니다.
+테마 강조 색상을 사용하여 눈에 잘 띄는 콜투액션 링크를 만들려면 `primary`, 덜 눈에 띄는 링크를 만들려면 `secondary`, 최소한의 스타일을 적용한 링크를 만들려면 `minimal`로 설정합니다.
+
+### `icon`
+
+**타입:** `string`
+
+링크 버튼에는 [Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 `icon` 속성을 포함할 수 있습니다.
+
+### `iconPlacement`
+
+**타입:** `'start' | 'end'`  
+**기본값:** `'end'`
+
+링크 버튼 텍스트에 상대적인 아이콘의 위치를 결정합니다.

@@ -1,0 +1,137 @@
+---
+title: 경로 데이터
+description: Starlight의 페이지 데이터 모델이 페이지를 렌더링하는 데 어떻게 사용되는지, 그리고 이를 어떻게 사용자 정의할 수 있는지 알아보세요.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Starlight가 문서에서 페이지를 렌더링할 때, 먼저 해당 페이지의 내용을 나타내는 경로 데이터 객체를 생성합니다.
+이 가이드에서는 경로 데이터가 어떻게 생성되는지, 어떻게 사용하는지, 그리고 Starlight의 기본 동작을 수정하기 위해 어떻게 사용자 정의할 수 있는지 설명합니다.
+
+사용 가능한 속성의 전체 목록은 ["경로 데이터 참조"](/ko/reference/route-data/)를 확인하세요.
+
+## 경로 데이터란 무엇인가요?
+
+Starlight 경로 데이터는 단일 페이지를 렌더링하는 데 필요한 모든 정보를 담고 있는 객체입니다.
+여기에는 현재 페이지에 대한 정보뿐만 아니라 Starlight 구성에서 생성된 데이터도 포함됩니다.
+
+## 경로 데이터 사용하기
+
+Starlight의 모든 컴포넌트는 경로 데이터를 사용하여 각 페이지에 무엇을 렌더링할지 결정합니다. 예를 들어, [`siteTitle`](/ko/reference/route-data/#sitetitle) 문자열은 사이트 제목을 표시하는 데 사용되고, [`sidebar`](/ko/reference/route-data/#sidebar) 배열은 전역 사이드바 탐색을 렌더링하는 데 사용됩니다.
+
+Astro 컴포넌트에서 `Astro.locals.starlightRoute` 전역 변수를 통해 이 데이터에 접근할 수 있습니다.
+
+```astro title="example.astro" {2}
+---
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<p>The title of this site is “{siteTitle}”</p>
+```
+
+예를 들어, [컴포넌트 재정의](/ko/guides/overriding-components/)를 구축하여 표시되는 내용을 사용자 정의할 때 유용할 수 있습니다.
+
+## 경로 데이터 사용자 정의
+
+Starlight의 경로 데이터는 별도의 구성 없이 바로 작동합니다.
+하지만 고급 사용 사례의 경우, 일부 또는 모든 페이지에 대한 경로 데이터를 사용자 정의하여 사이트 표시 방식을 변경할 수 있습니다.
+
+이는 [컴포넌트 재정의](/ko/guides/overriding-components/)와 유사한 개념이지만, Starlight가 데이터를 렌더링하는 방식을 수정하는 대신 Starlight가 렌더링하는 데이터를 수정합니다.
+
+### 경로 데이터 사용자 정의가 필요한 경우
+
+경로 데이터 사용자 정의는 Starlight가 데이터를 처리하는 방식을 기존 구성 옵션으로는 불가능한 방식으로 수정하고 싶을 때 유용할 수 있습니다.
+
+예를 들어, 특정 페이지의 사이드바 항목을 필터링하거나 제목을 사용자 정의할 수 있습니다. 이와 같은 변경 사항은 Starlight의 기본 컴포넌트를 수정할 필요 없이 해당 컴포넌트에 전달되는 데이터만 수정하면 됩니다.
+
+### 경로 데이터를 사용자 정의하는 방법
+
+"미들웨어"의 특수한 형태를 사용하여 경로 데이터를 사용자 정의할 수 있습니다.
+이는 Starlight가 페이지를 렌더링할 때마다 호출되는 함수로, 경로 데이터 객체의 값을 수정할 수 있습니다.
+
+<Steps>
+
+1. Starlight의 `defineRouteMiddleware()` 유틸리티를 사용하여 `onRequest` 함수를 내보내는 새 파일을 만듭니다.
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware(() => {});
+   ```
+
+2. `astro.config.mjs`에서 경로 데이터 미들웨어 파일의 위치를 Starlight에 알려줍니다.
+
+   ```js ins={9}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: '나의 즐거운 문서 사이트',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
+   });
+   ```
+
+3. `onRequest` 함수를 업데이트하여 경로 데이터를 수정합니다.
+
+   미들웨어가 받는 첫 번째 인자는 [Astro의 `context` 객체](https://docs.astro.build/ko/reference/api-reference/)입니다.
+   여기에는 현재 URL과 `locals`를 포함하여 현재 페이지 렌더링에 대한 모든 정보가 포함되어 있습니다.
+
+   이 예제에서는 모든 페이지 제목의 끝에 느낌표를 추가하여 문서를 더욱 흥미롭게 만들 것입니다.
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware((context) => {
+   	// 이 페이지의 콘텐츠 컬렉션 항목을 가져옵니다.
+   	const { entry } = context.locals.starlightRoute;
+   	// 제목에 느낌표를 추가하여 업데이트합니다.
+   	entry.data.title = entry.data.title + '!';
+   });
+   ```
+
+</Steps>
+
+#### 여러 경로 미들웨어
+
+Starlight는 여러 개의 미들웨어 제공도 지원합니다.
+둘 이상의 미들웨어 핸들러를 추가하려면 `routeMiddleware`를 경로 배열로 설정하세요.
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: '여러 미들웨어가 있는 내 사이트',
+			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
+		}),
+	],
+});
+```
+
+#### 추가된 경로 미들웨어 대기
+
+코드 실행 전에 스택에 추가된 미들웨어가 실행될 때까지 기다리려면 미들웨어 함수에 두 번째 인자로 전달되는 `next()` 콜백을 await할 수 있습니다.
+예를 들어, 변경하기 전에 플러그인의 미들웨어가 실행될 때까지 기다리는 데 유용할 수 있습니다.
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// 추가된 미들웨어가 실행될 때까지 기다립니다.
+	await next();
+	// 경로 데이터를 수정합니다.
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + '!';
+});
+```

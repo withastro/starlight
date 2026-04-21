@@ -1,0 +1,160 @@
+---
+import { TabItem, Tabs } from '@astrojs/starlight/components';
+import ColorEditor, { type Props as EditorProps } from './theme-designer/color-editor.astro';
+import ContrastLevel, {
+	type Props as ContrastLevelProps,
+} from './theme-designer/contrast-level.astro';
+import Presets, { type Props as PresetsProps } from './theme-designer/presets.astro';
+import Preview from './theme-designer/preview.astro';
+
+interface Props {
+	labels: {
+		presets: PresetsProps['labels'];
+		contrast: ContrastLevelProps['labels'];
+		editor: EditorProps['labels'] & { accentColor: string; grayColor: string };
+		preview: Record<
+			'darkMode' | 'lightMode' | 'bodyText' | 'linkText' | 'dimText' | 'inlineCode',
+			string
+		>;
+	};
+}
+const {
+	labels: { presets, contrast, editor, preview },
+} = Astro.props;
+---
+
+<Presets labels={presets} />
+
+<ContrastLevel labels={contrast} />
+
+<div>
+	<theme-designer>
+		<div class="sl-flex controls not-content">
+			<ColorEditor key="accent" legend={editor.accentColor} labels={editor} />
+			<ColorEditor key="gray" legend={editor.grayColor} labels={editor} />
+		</div>
+
+		<div class="preview" data-accent-preview>
+			<Preview labels={preview} data-dark />
+			<Preview labels={preview} data-light />
+		</div>
+
+		<Tabs>
+			<TabItem label="CSS">
+				<slot name="css-docs" />
+				<pre
+					class="generated-code"
+					tabindex="0"><code style="background-color: var(--astro-code-color-background);color: var(--sl-color-text)" data-theme-css /></pre>
+			</TabItem>
+			<TabItem label="Tailwind">
+				<slot name="tailwind-docs" />
+				<pre
+					class="generated-code"
+					tabindex="0"><code style="background-color: var(--astro-code-color-background);color: var(--sl-color-text)" data-theme-tailwind /></pre>
+			</TabItem>
+		</Tabs>
+	</theme-designer>
+</div>
+
+<script>
+	import { getPalettes } from './theme-designer/color-lib';
+	import { store, minimumContrast } from './theme-designer/store';
+
+	class ThemeDesigner extends HTMLElement {
+		#stylesheet = new CSSStyleSheet();
+
+		constructor() {
+			super();
+			// Add our stylesheet to the document.
+			document.adoptedStyleSheets = [...document.adoptedStyleSheets, this.#stylesheet];
+			// Update theme palettes on user input.
+			const onInput = () => this.#update();
+			store.accent.subscribe(onInput);
+			store.gray.subscribe(onInput);
+			minimumContrast.subscribe(onInput);
+		}
+
+		#update() {
+			const palettes = getPalettes({
+				accent: store.accent.get(),
+				gray: store.gray.get(),
+				minimumContrast: minimumContrast.get(),
+			});
+			this.#updatePreview(palettes);
+			this.#updateStylesheet(palettes);
+			this.#updateTailwindConfig(palettes);
+		}
+
+		/** Apply the generated palettes to the style attributes of the in-content preview panes. */
+		#updatePreview({ dark, light }: ReturnType<typeof getPalettes>) {
+			const previews = this.querySelectorAll<HTMLDivElement>('[data-accent-preview] > *');
+			previews.forEach((preview) => {
+				const theme = 'dark' in preview.dataset ? dark : light;
+				Object.entries(theme).forEach(([key, color]) => {
+					preview.style.setProperty(`--sl-color-${key}`, color);
+				});
+			});
+		}
+
+		/** Convert a color palette into a string of CSS rules. */
+		#paletteToRules(palette: ReturnType<typeof getPalettes>['dark' | 'light']) {
+			return Object.entries(palette)
+				.map(([key, color]) => `--sl-color-${key}: ${color};`)
+				.join('\n\t');
+		}
+
+		/** Update the CSS stylesheet applied to the current page and offered to users to copy. */
+		#updateStylesheet({ dark, light }: ReturnType<typeof getPalettes>) {
+			const styles = `/* Dark mode colors. */
+:root {\n\t${this.#paletteToRules(dark)}\n}
+/* Light mode colors. */
+:root[data-theme='light'] {\n\t${this.#paletteToRules(light)}\n}`;
+			this.#stylesheet.replaceSync(styles);
+			const codePreview = this.querySelector('[data-theme-css]');
+			if (codePreview) codePreview.innerHTML = styles;
+		}
+
+		#updateTailwindConfig({ dark, light }: ReturnType<typeof getPalettes>) {
+			const config = `/* Generated accent color palettes. */
+--color-accent-200: ${dark['accent-high']};
+--color-accent-600: ${light.accent};
+--color-accent-900: ${light['accent-high']};
+--color-accent-950: ${dark['accent-low']};
+/* Generated gray color palettes. */
+--color-gray-100: ${light['gray-7']};
+--color-gray-200: ${light['gray-6']};
+--color-gray-300: ${light['gray-5']};
+--color-gray-400: ${light['gray-4']};
+--color-gray-500: ${light['gray-3']};
+--color-gray-700: ${light['gray-2']};
+--color-gray-800: ${light['gray-1']};
+--color-gray-900: ${light.white};`;
+			const codePreview = this.querySelector('[data-theme-tailwind]');
+			if (codePreview) codePreview.innerHTML = config;
+		}
+	}
+
+	customElements.define('theme-designer', ThemeDesigner);
+</script>
+
+<style>
+	.controls {
+		flex-wrap: wrap;
+		gap: 1.5rem;
+	}
+	.controls > :global(*) {
+		flex: 1 1;
+	}
+	.preview {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5rem;
+	}
+
+	.generated-code {
+		height: 16rem;
+		background-color: var(--astro-code-color-background);
+		overflow: auto scroll;
+		user-select: all;
+	}
+</style>

@@ -1,0 +1,303 @@
+---
+title: プラグインとインテグレーション
+description: プラグインやインテグレーションをチェックして、Starlightを拡張しましょう！
+sidebar:
+  order: 1
+---
+
+:::tip[自分のものを追加しよう！]
+Starlight向けのプラグインやツールを作成しましたか？このページにリンクを追加するPRを作成しましょう！
+:::
+
+## プラグイン
+
+[プラグイン](/ja/reference/plugins/)により、Starlightの設定やUI、動作をカスタマイズできます。また、プラグインは簡単に共有や再利用ができます。Starlightチームが公式にサポートする公式プラグインと、Starlightユーザーがメンテナンスするコミュニティ製プラグインでサイトを拡張しましょう。
+
+### 公式プラグイン
+
+<CardGrid>
+	<LinkCard
+		href="/ja/guides/site-search/#algolia-docsearch"
+		title="Algolia DocSearch"
+		description="デフォルトの検索プロバイダーであるPagefindを、Algolia DocSearchに置き換えます。"
+	/>
+</CardGrid>
+
+### コミュニティ製プラグイン
+
+<CardGrid>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-links-validator"
+		title="starlight-links-validator"
+		description="Starlightページ内のリンクが壊れていないかをチェックします。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-typedoc"
+		title="starlight-typedoc"
+		description="TypeDocにより、TypeScriptコードからStarlightページを生成します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-blog"
+		title="starlight-blog"
+		description="ドキュメントサイトにブログを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-openapi"
+		title="starlight-openapi"
+		description="OpenAPI/Swaggerの仕様からドキュメントページを作成します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-obsidian"
+		title="starlight-obsidian"
+		description="Obsidianの保管庫をStarlightサイトに公開します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-image-zoom"
+		title="starlight-image-zoom"
+		description="ドキュメントの画像にズーム機能を追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/lorenzolewis/starlight-utils"
+		title="starlight-utils"
+		description="よく使うユーティリティのコレクションでStarlightを拡張します。"
+	/>
+	<LinkCard
+		href="https://github.com/trueberryless/starlight-view-modes"
+		title="starlight-view-modes"
+		description="ドキュメントサイトにさまざまな表示モード機能を追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-versions"
+		title="starlight-versions"
+		description="Starlightのドキュメントページをバージョン管理します。"
+	/>
+	<LinkCard
+		href="https://inox-tools.fryuni.dev/star-warp"
+		title="star-warp"
+		description="ドキュメント内の検索結果を高速に移動します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-heading-badges"
+		title="starlight-heading-badges"
+		description="MarkdownやMDXの見出しにバッジを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/Fevol/starlight-site-graph"
+		title="starlight-site-graph"
+		description="ページのサイドバーにインタラクティブなサイトグラフを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-sidebar-topics"
+		title="starlight-sidebar-topics"
+		description="ドキュメントを、それぞれ独自のサイドバーをもつ複数のセクションに分割します。"
+	/>
+	<LinkCard
+		href="https://github.com/trueberryless-org/starlight-cooler-credit"
+		title="starlight-cooler-credit"
+		description="目次の下部にStarlightやAstroへのクレジットを表示します。"
+	/>
+	<LinkCard
+		href="https://github.com/dragomano/starlight-giscus"
+		title="starlight-giscus"
+		description="ドキュメントサイトにGiscusコメント機能を追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-videos"
+		title="starlight-videos"
+		description="動画ガイドやコースでドキュメントを充実させます。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-kbd"
+		title="starlight-kbd"
+		description="キーボードショートカットを簡単にドキュメント化します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-auto-sidebar"
+		title="starlight-auto-sidebar"
+		description="自動生成されたサイドバーグループを調整します。"
+	/>
+	<LinkCard
+		href="https://github.com/delucis/starlight-llms-txt"
+		title="starlight-llms-txt"
+		description="llmstxt.orgに基づいて、ドキュメントサイトにllms.txtを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/trueberryless-org/starlight-toc-overview-customizer"
+		title="starlight-toc-overview-customizer"
+		description="カスタマイズ可能な概要タイトルでStarlightの目次を調整します。"
+	/>
+	<LinkCard
+		href="https://delucis.github.io/starlight-markdown-blocks/"
+		title="starlight-markdown-blocks"
+		description="カスタムブロックタイプでStarlightのMarkdownアサイド構文を拡張します。"
+	/>
+	<LinkCard
+		href="https://github.com/WindMillCode/starlight-fullview-mode"
+		title="starlight-fullview-mode"
+		description="サイドバーを折りたたみ、コンテンツを拡大してフルスクリーン表示を実現します。"
+	/>
+	<LinkCard
+		href="https://github.com/frostybee/starlight-scroll-to-top"
+		title="starlight-scroll-to-top"
+		description="ドキュメントサイトにページトップへのスクロールボタンを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/frostybee/starlight-codeblock-fullscreen"
+		title="starlight-codeblock-fullscreen"
+		description="ドキュメント内のExpressive Codeブロックにフルスクリーン切り替え機能を追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-auto-drafts"
+		title="starlight-auto-drafts"
+		description="下書きページのデフォルト動作を調整し、本番モードでは下書きページへのサイドバーリンクを自動的に削除します。"
+	/>
+	<LinkCard
+		href="https://github.com/corsfix/starlight-contextual-menu"
+		title="starlight-contextual-menu"
+		description="Starlightドキュメントにコンテキストメニューを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-changelogs"
+		title="starlight-changelogs"
+		description="プロジェクトのドキュメントと一緒に変更履歴を表示します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-github-alerts"
+		title="starlight-github-alerts"
+		description="GitHubアラートをStarlightのアサイドとしてレンダリングします。"
+	/>
+	<LinkCard
+		href="https://github.com/dlcastillop/starlight-page-actions"
+		title="starlight-page-actions"
+		description="ドキュメントにページアクションボタンを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/typesense/starlight-docsearch-typesense"
+		title="starlight-docsearch-typesense"
+		description="公式のAlgolia DocSearchプラグインに代わる、Typesenseを使用した検索プラグインです。"
+	/>
+	<LinkCard
+		href="https://github.com/trueberryless-org/starlight-sidebar-swipe/"
+		title="starlight-sidebar-swipe"
+		description="Discord Mobileのように、モバイルデバイスで左サイドバーをスワイプ可能にします。"
+	/>
+	<LinkCard
+		href="https://github.com/Rettend/starlight-plugin-icons"
+		title="starlight-plugin-icons"
+		description="Astro Starlightのサイドバー、コードブロック、ファイルツリーにアイコンを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/dlcastillop/starlight-ui-tweaks"
+		title="starlight-ui-tweaks"
+		description="カスタムナビゲーションリンク、広告、マーケティングフッター、よりシンプルなテーマ切り替えでコアUIコンポーネントを拡張します。"
+	/>
+	<LinkCard
+		href="https://frostybee.github.io/starlight-tags/"
+		title="starlight-tags"
+		description="コンテンツの整理や検索のために、Starlightドキュメントページにタグを追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/dionysuzx/starlight-copy-button"
+		title="starlight-copy-button"
+		description="ページタイトルにある洗練されたボタンで、ドキュメントのMarkdown全文をコピーします。"
+	/>
+	<LinkCard
+		href="https://frostybee.github.io/starlight-telescope/"
+		title="starlight-telescope"
+		description="曖昧検索とキーボード中心の操作により、Starlightドキュメント内のあらゆるページへ素早く移動します。"
+	/>
+	<LinkCard
+		href="https://frostybee.github.io/starlight-announcement/"
+		title="starlight-announcement"
+		description="Starlightで作成したドキュメントに、非表示機能、バリエーション、スケジュール設定、ページ指定などの機能を備えた高度な告知バナーを追加します。"
+	/>
+</CardGrid>
+
+## コミュニティ製ツールとインテグレーション
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+以下のコミュニティ製ツールやインテグレーションにより、Starlightサイトに機能を追加できます。
+
+<CardGrid>
+	<LinkCard
+		href="https://www.feelback.dev/blog/new-astro-starlight-integration/"
+		title="FeelBack"
+		description="ユーザーフィードバックシステムをドキュメントページに追加します。"
+	/>
+	<LinkCard
+		href="https://github.com/val-town/notion-to-astro"
+		title="notion-to-astro"
+		description="NotionのエクスポートをAstro Starlightドキュメントに変換します。"
+	/>
+	<LinkCard
+		href="https://github.com/mattjennings/astro-live-code"
+		title="astro-live-code"
+		description="MDXコードブロックをインタラクティブなコンポーネントとしてレンダリングします。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-i18n"
+		title="starlight-i18n"
+		description="Starlightページの翻訳を支援するVisual Studio Code拡張機能です。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-package-managers"
+		title="starlight-package-managers"
+		description="複数のパッケージマネージャーに対応したnpm関連コマンドをすばやく表示します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-showcases"
+		title="starlight-showcases"
+		description="ショーケースページを作成するためのStarlightコンポーネントセットです。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/generator-starlight-plugin"
+		title="@hideoo/starlight-plugin"
+		description="Starlightプラグインをすばやく雛形から作成するジェネレーターです。"
+	/>
+	<LinkCard
+		href="https://github.com/Linkerin/starlight-to-pdf"
+		title="starlight-to-pdf"
+		description="StarlightサイトをPDFファイルに変換するCLIツールです。"
+	/>
+	<LinkCard
+		href="https://github.com/joesaby/astro-plantuml"
+		title="astro-plantuml"
+		description="Markdownコードブロック内のPlantUMLコンテンツをレンダリングします。"
+	/>
+	<LinkCard
+		href="https://github.com/joesaby/astro-mermaid"
+		title="astro-mermaid"
+		description="Markdownコードブロック内のMermaidコンテンツをクライアントサイドでレンダリングします。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/astro-d2"
+		title="astro-d2"
+		description="D2のMarkdownコードブロックをダイアグラムに変換します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-links"
+		title="starlight-links"
+		description="StarlightのMarkdownおよびMDXコンテンツリンクにIntelliSenseを提供するVisual Studio Code拡張機能です。"
+	/>
+	<LinkCard
+		href="https://docs.contentisland.net/templates/starlight/"
+		title="contentisland-cli"
+		description="StarlightプロジェクトをContent Island Headless CMSに接続・同期して、ドキュメントを編集・管理します。"
+	/>
+	<LinkCard
+		href="https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown"
+		title="starlight-sidebar-topics-dropdown"
+		description="ドキュメントページを複数のサブページに分割し、サイドバーのドロップダウンメニューで切り替えられるようにします。"
+	/>
+	<LinkCard
+		href="https://github.com/trueberryless-org/starlight-save-file-component"
+		title="starlight-save-file-component"
+		description="Starlightサイト上にダウンロードアセットへのリンクをすばやく表示します。"
+	/>
+	<LinkCard
+		href="https://github.com/trueberryless-org/starlight-contributor-list"
+		title="starlight-contributor-list"
+		description="プロジェクトの全コントリビューター一覧を表示します。"
+	/>
+</CardGrid>

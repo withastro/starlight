@@ -1,0 +1,31 @@
+---
+title: アイコン
+description: Starlightで利用可能なすべてのアイコンの概要。
+---
+
+Starlightには、`<Icon>`コンポーネントを使用してコンテンツに表示できる、組み込みのアイコンセットが用意されています。
+
+## アイコンの使用
+
+アイコンは[`<Icon>`](/ja/components/icons/)コンポーネントを使用して表示できます。また、[カード](/ja/components/cards/)や[ヒーローアクション](/ja/reference/frontmatter/#hero)の設定など、他のコンポーネントでもよく使用されます。
+
+## `StarlightIcon` 型
+
+TypeScriptの`StarlightIcon`型を使用して、[Starlightの組み込みアイコン](#すべてのアイコン)の名前を参照できます。
+
+```ts {2} /icon: (StarlightIcon)/
+// src/icon.ts
+import type { StarlightIcon } from '@astrojs/starlight/types';
+
+function getIconLabel(icon: StarlightIcon) {
+	// …
+}
+```
+
+## すべてのアイコン
+
+利用可能なすべてのアイコンとその関連名が以下にリストされています。アイコンをクリックすると、その名前がクリップボードにコピーされます。
+
+import IconsList from '~/components/icons-list.astro';
+
+<IconsList labels={{ copied: 'コピー完了！' }} />

@@ -1,0 +1,23 @@
+---
+import { render } from 'astro:content';
+import Page from '../components/Page.astro';
+import { getRoute, useRouteData } from '../utils/routing/data';
+import { attachRouteDataAndRunMiddleware } from '../utils/routing/middleware';
+
+const route = await getRoute(Astro);
+/**
+ * The call to `render` from `astro:content` is purposely made in this file to work around a
+ * development mode head propagation issue which is heavily tied to `astro:content` imports. Even
+ * though we have a test for this, refactoring and moving this code to a different file should be
+ * avoided for now until the linked issue which also contains more details is resolved.
+ *
+ * @see https://github.com/withastro/astro/issues/13724
+ */
+const renderResult = await render(route.entry);
+
+await attachRouteDataAndRunMiddleware(Astro, useRouteData(Astro, route, renderResult));
+
+const { Content, entry } = Astro.locals.starlightRoute;
+---
+
+<Page>{Content && <Content frontmatter={entry.data} />}</Page>

@@ -1,0 +1,233 @@
+---
+title: Seiten
+description: Lerne, wie du mit Starlight die Seiten deiner Dokumentationswebsite erstellst und verwaltest.
+sidebar:
+  order: 1
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+Starlight generiert die HTML-Seiten deiner Website auf der Grundlage deines Inhalts, wobei flexible Optionen über das Markdown-Frontmatter bereitgestellt werden.
+Außerdem haben Starlight-Projekte vollen Zugriff auf [Astros leistungsstarke Werkzeuge zur Seitengenerierung](https://docs.astro.build/de/basics/astro-pages/).
+Dieser Leitfaden zeigt, wie die Seitenerstellung in Starlight funktioniert.
+
+## Seiten mit Inhalten
+
+### Dateiformate
+
+Starlight unterstützt das Verfassen von Inhalten in Markdown und MDX, ohne dass eine Konfiguration erforderlich ist.
+Du kannst die Unterstützung für Markdoc hinzufügen, indem du dem [„Markdoc“ Leitfaden](/de/guides/authoring-content/#markdoc) folgst.
+
+### Seiten hinzufügen
+
+Füge neue Seiten zu deiner Website hinzu, indem du `.md` oder `.mdx` Dateien in `src/content/docs/` erstellst.
+Verwende Unterordner, um deine Dateien zu organisieren und um mehrere Pfadsegmente zu erstellen.
+
+Die folgende Dateistruktur erzeugt zum Beispiel Seiten unter `example.com/hello-world` und `example.com/reference/faq`:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - hello-world.md
+      - reference/
+        - faq.md
+
+</FileTree>
+
+### Typsicheres Frontmatter
+
+Alle Starlight-Seiten haben ein anpassbares [gemeinsames Set von Frontmatter-Eigenschaften](/de/reference/frontmatter/), um zu steuern, wie die Seite aussieht:
+
+```md
+---
+title: Hallo, Welt!
+description: Dies ist eine Seite in meiner Starlight-Website
+---
+```
+
+Wenn du etwas Wichtiges vergisst, wird dich Starlight darauf aufmerksam machen.
+
+## Benutzerdefinierte Seiten
+
+Für fortgeschrittene Anwendungsfälle kannst du benutzerdefinierte Seiten hinzufügen, indem du ein Verzeichnis `src/pages/` erstellst.
+Das Verzeichnis `src/pages/` verwendet [Astros dateibasiertes Routing](https://docs.astro.build/de/basics/astro-pages/#dateibasiertes-routing) und unterstützt neben anderen Seitenformaten auch `.astro`-Dateien.
+Das ist hilfreich, wenn du Seiten mit einem völlig eigenen Layout erstellen oder eine Seite aus einer anderen Datenquelle generieren willst.
+
+In diesem Projekt werden zum Beispiel Markdown-Inhalte in `src/content/docs/` mit Astro- und HTML-Routen in `src/pages/` gemischt:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - hello-world.md
+  - pages/
+    - custom.astro
+    - archived.html
+
+</FileTree>
+
+Mehr dazu findest du in der [„Seiten“-Anleitung in der Astro-Dokumentation](https://docs.astro.build/de/basics/astro-pages/).
+
+### Das Starlight-Design in eigenen Seiten verwenden
+
+Um das Starlight-Layout in benutzerdefinierten Seiten zu verwenden, umhüllst du deinen Seiteninhalt mit der [Komponente `<StarlightPage />`](#starlightpage-komponente).
+Das kann hilfreich sein, wenn du Inhalte dynamisch generierst, aber trotzdem das Starlight-Design verwenden willst.
+
+Um Ankerlinks zu Überschriften hinzuzufügen, die den Markdown-Ankerlinkstilen von Starlight entsprechen, kannst du die [`<AnchorHeading>`-Komponente](#anchorheading-komponente) in deinen eigenen Seiten verwenden.
+
+```astro
+---
+// src/pages/custom-page/example.astro
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+import CustomComponent from './CustomComponent.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Meine eigene Seite' }}>
+	<p>
+		Dies ist eine benutzerdefinierte Seite mit einer benutzerdefinierten
+		Komponente:
+	</p>
+	<CustomComponent />
+
+	<AnchorHeading level="2" id="erfahre-menr">Erfahre mehr</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/">
+			Lies mehr in der Starlight-Dokumentation
+		</a>
+	</p>
+</StarlightPage>
+```
+
+#### `<StarlightPage>`-Komponente
+
+Die Komponente `<StarlightPage />` rendert eine ganze Seite mit dem Layout und den Stilen von Starlight.
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Meine eigene Seite' }}>
+	<!-- Benutzerdefinierter Seiteninhalt -->
+</StarlightPage>
+```
+
+Die Komponente `<StarlightPage />` akzeptiert die folgenden Eigenschaften.
+
+##### `frontmatter`
+
+**erforderlich**  
+**Typ:** `StarlightPageFrontmatter`
+
+Setzt die [Frontmatter Eigenschaften](/de/reference/frontmatter/) für diese Seite, ähnlich wie Frontmatter in Markdown-Seiten.
+Die Eigenschaft [`title`](/de/reference/frontmatter/#title-erforderlich) ist erforderlich und alle anderen Eigenschaften sind optional.
+
+Die folgenden Eigenschaften unterscheiden sich von Markdown frontmatter:
+
+- Die Eigenschaft [`slug`](/de/reference/frontmatter/#slug) wird nicht unterstützt und wird automatisch anhand der URL der benutzerdefinierten Seite gesetzt.
+- Die Option [`editUrl`](/de/reference/frontmatter/#editurl) erfordert eine URL, um einen Bearbeitungslink anzuzeigen.
+- Die Frontmatter-Eigenschaft [`sidebar`](/de/reference/frontmatter/#sidebar), mit der du festlegen kannst, wie die Seite in [autogenerierten Linkgruppen](/de/reference/configuration/#sidebar) erscheint, ist nicht verfügbar. Seiten, die die Komponente `<StarlightPage />` verwenden, sind nicht Teil einer Sammlung und können nicht zu einer automatisch generierten Seitenleistengruppe hinzugefügt werden.
+- Die Option [`draft`](/de/reference/frontmatter/#draft) zeigt nur einen [Hinweis](/de/reference/overrides/#draftcontentnotice) an, dass die Seite ein Entwurf ist, schließt sie aber nicht automatisch von der Produktion aus.
+
+##### `sidebar`
+
+**Typ:** [`SidebarItem[]`](/de/reference/configuration/#sidebaritem)  
+**Standard:** die Seitenleiste, die auf der Grundlage der [globalen `Sidebar`-Konfiguration](/de/reference/configuration/#sidebar) erzeugt wird
+
+Legt eine benutzerdefinierte Navigationsleiste für diese Seite fest.
+Wenn sie nicht gesetzt wird, verwendet die Seite die globale Standard-Seitenleiste.
+
+Die folgende Seite ersetzt zum Beispiel die Standard-Seitenleiste durch einen Link zur Homepage und eine Gruppe von Links zu verschiedenen anderen benutzerdefinierten Seiten.
+
+```astro {3-13}
+<StarlightPage
+	frontmatter={{ title: 'Orion' }}
+	sidebar={[
+		{ label: 'Home', link: '/' },
+		{
+			label: 'Constellations',
+			items: [
+				{ label: 'Andromeda', link: '/andromeda/' },
+				{ label: 'Orion', link: '/orion/' },
+				{ label: 'Ursa Minor', link: '/ursa-minor/', badge: 'Platzhalter' },
+			],
+		},
+	]}
+>
+	Beispiel-Inhalt.
+</StarlightPage>
+```
+
+In der Anleitung [„Seitenleisten-Navigation“](/de/guides/sidebar/) erfährst du mehr über die verfügbaren Optionen zum Anpassen der Seitenleiste.
+
+##### `hasSidebar`
+
+**Typ:** `boolean`  
+**Standard:** `false` wenn [`frontmatter.template`](/de/reference/frontmatter/#template) `'splash'` ist, sonst `true`
+
+Legt fest, ob die Seitenleiste auf dieser Seite angezeigt werden soll oder nicht.
+
+##### `headings`
+
+**Typ:** `{ depth: number; slug: string; text: string }[]`  
+**Standard:** `[]`
+
+Gib ein Array mit allen Überschriften auf dieser Seite an.
+Starlight wird das Inhaltsverzeichnis der Seite aus diesen Überschriften generieren, wenn sie angegeben sind.
+
+##### `dir`
+
+**Typ:** `'ltr' | 'rtl'`  
+**Standard:** die Schreibrichtung für das aktuelle Gebietsschema
+
+Legt die Schreibrichtung für den Inhalt dieser Seite fest.
+
+##### `lang`
+
+**Typ:** `String`  
+**Standard:** die Sprache des aktuellen Gebietsschemas
+
+Setzt das BCP-47 Sprach-Tag für den Inhalt dieser Seite, z.&nbsp;B. `en`, `zh-CN` oder `pt-BR`.
+
+##### `isFallback`
+
+**Typ:** `boolean`  
+**Standard:** `false`
+
+Gibt an, ob diese Seite [Fallback-Inhalt](/de/guides/i18n/#fallback-inhalt) verwendet, weil es für die aktuelle Sprache keine Übersetzung gibt.
+
+#### `<AnchorHeading>`-Komponente
+
+Die Komponente `<AnchorHeading />` rendert ein HTML-Überschriftenelement mit einem klickbaren Anker-Link, der den Markdown-Styles von Starlight entspricht.
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="unterüberschrift">Unterüberschrift</AnchorHeading>
+```
+
+Sie akzeptiert die folgenden Requisiten sowie alle anderen gültigen [globalen HTML-Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+
+##### `level`
+
+**erforderlich**  
+**Typ:** `1 | 2 | 3 | 4 | 5 | 6`
+
+Die zu rendernde Überschriftsebene.
+Zum Beispiel würde `level="1"` ein `<h1>`-Element darstellen.
+
+##### `id`
+
+**erforderlich**  
+**Typ:** `string`
+
+Die eindeutige ID für diese Überschrift.
+Dieser wird als `id`-Attribut der gerenderten Überschrift verwendet und das Ankersymbol verlinkt darauf.

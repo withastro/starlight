@@ -1,0 +1,128 @@
+---
+title: 图标
+description: 了解如何在 Starlight 中显示图标。
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+要显示 Starlight [内置图标集](/zh-cn/reference/icons/#所有图标) 中的图标，请使用 `<Icon>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Icon
+	slot="preview"
+	name="open-book"
+	color="var(--sl-color-text-accent)"
+	size="4rem"
+/>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { Icon } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<Icon>` 组件来显示图标。
+图标需要将 [`name`](#name) 设置为 [Starlight 的内置图标之一](/zh-cn/reference/icons/#所有图标)，并且可以选择是否包含 [`label`](#label) 来为屏幕阅读器提供上下文。
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" />
+<Icon name="starlight" label="Starlight 的 logo" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" /%}
+{% icon name="starlight" label="Starlight 的 logo" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" />
+	<Icon name="starlight" label="Starlight 的 logo" />
+</Fragment>
+
+</Preview>
+
+### 自定义图标
+
+[`size`](#size) 和 [`color`](#color) 属性可使用 CSS 单位和颜色值来调整图标的外观。
+[`class`](#class) 属性可用于向图标添加自定义 CSS 类。
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" color="goldenrod" size="2rem" />
+	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+</Fragment>
+
+</Preview>
+
+## `<Icon>` 的属性
+
+**实现：** [`Icon.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Icon.astro)
+
+`<Icon>` 组件接受以下属性：
+
+### `name`
+
+**必要属性**  
+**类型：** [`StarlightIcon`](/zh-cn/reference/icons/#starlighticon-类型)
+
+要显示的图标名称设置为 [Starlight 的内置图标之一](/zh-cn/reference/icons/#所有图标)。
+
+### `label`
+
+**类型：** `string`
+
+一个可选标签，用于为无障碍技术（例如屏幕阅读器）提供上下文。
+
+当未设置 `label` 时，该图标将在无障碍下完全隐藏。
+在这种情况下，请确保在没有图标的情况下，上下文仍然可以理解。
+例如，仅具有图标的链接 **必须** 包含 `label` 属性才能易于识读，但如果链接已经包含了文本，并且图标纯粹是装饰性的，那么省略 `label` 也许更有意义。
+
+### `size`
+
+**类型：** `string`
+
+图标的大小使用 CSS 单位。
+
+### `color`
+
+**类型：** `string`
+
+使用 CSS 颜色值的图标颜色。
+
+### `class`
+
+**类型：** `string`
+
+要添加到图标的自定义 CSS 类。

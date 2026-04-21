@@ -1,0 +1,45 @@
+name: "\U0001F4DA Docs Issue"
+description: Report an issue with the Starlight documentation
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to let us know something is wrong! Please fill out this form as completely as possible.
+  - type: input
+    id: docs-page
+    attributes:
+      label: What page of the docs did you find an issue on?
+      description: If this issue applies to multiple pages, include additional pages in your bug description.
+      placeholder: https://starlight.astro.build/...
+    validations:
+      required: true
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the issue
+      description: A clear and concise description of what the issue is.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: What operating system are you using?
+      placeholder: Mac, Windows, Linux
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: What browser are you using?
+      placeholder: Chrome, Firefox, Safari
+    validations:
+      required: true
+  - type: checkboxes
+    id: will-pr
+    attributes:
+      label: Participation
+      options:
+        - label: I am willing to submit a pull request for this issue.
+          required: false

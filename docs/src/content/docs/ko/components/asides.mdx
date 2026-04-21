@@ -1,0 +1,194 @@
+---
+title: 보조 내용
+description: Starlight에서 보조 내용을 사용하여 페이지의 주요 콘텐츠와 함께 보조 정보를 표시하는 방법을 알아보세요.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+페이지의 주요 콘텐츠와 함께 보조 정보를 표시하려면 `<Aside>` 컴포넌트를 사용합니다.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Aside slot="preview">
+    필수적이지 않은 보충 정보는 `<Aside>`에 포함하세요.
+</Aside>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { Aside } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+`<Aside>` 컴포넌트를 사용하여 보조 내용 (“admonitions” 또는 “callouts”이라고도 함)을 표시합니다.
+
+`<Aside>`에는 보조 내용의 색상, 아이콘 및 기본 제목을 제어하는 선택적 [`type`](#type) 속성이 있을 수 있습니다.
+
+<Preview>
+
+````mdx
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>보조 내용의 콘텐츠입니다.</Aside>
+
+<Aside type="caution">몇 가지 주의해야 할 내용입니다.</Aside>
+
+<Aside type="tip">
+
+보조 내용에는 다른 콘텐츠도 지원됩니다.
+
+```js
+// 예시 코드 스니펫.
+```
+
+</Aside>
+
+<Aside type="danger">비밀번호를 다른 사람에게 알려주지 마세요.</Aside>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% aside %}
+보조 내용의 콘텐츠입니다.
+{% /aside %}
+
+{% aside type="caution" %}
+몇 가지 주의해야 할 내용입니다.
+{% /aside %}
+
+{% aside type="tip" %}
+보조 내용에는 다른 콘텐츠도 지원됩니다.
+
+```js
+// 예시 코드 스니펫.
+```
+{% /aside %}
+
+{% aside type="danger" %}
+비밀번호를 다른 사람에게 알려주지 마세요.
+{% /aside %}
+````
+
+</Fragment>
+
+<Fragment slot="preview">
+
+    <Aside>보조 내용의 콘텐츠입니다.</Aside>
+
+    <Aside type="caution">몇 가지 주의해야 할 내용입니다.</Aside>
+
+    <Aside type="tip">
+
+    보조 내용에는 다른 콘텐츠도 지원됩니다.
+
+    ```js
+    // 예시 코드 스니펫.
+    ```
+
+    </Aside>
+
+    <Aside type="danger">비밀번호를 다른 사람에게 알려주지 마세요.</Aside>
+
+</Fragment>
+
+</Preview>
+
+Starlight는 또한 `<Aside>` 컴포넌트의 대안으로 Markdown 및 MDX에서 보조 내용을 렌더링하기 위한 사용자 정의 구문을 제공합니다.
+사용자 정의 구문에 대한 자세한 내용은 [“Markdown에서 콘텐츠 작성하기”](/ko/guides/authoring-content/#보조-내용) 가이드를 참조하세요.
+
+### 사용자 정의 제목 사용
+
+[`title`](#title) 속성을 사용하여 보조 내용의 기본 제목을 재정의합니다.
+
+<Preview>
+
+```mdx 'title="조심하세요!"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="조심하세요!">
+	사용자 정의 제목을 *사용하는* 경고 보조 내용입니다.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'title="조심하세요!"'
+{% aside type="caution" title="조심하세요!" %}
+사용자 정의 제목을 *사용하는* 경고 보조 내용입니다.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="caution" title="조심하세요!">
+	사용자 정의 제목을 *사용하는* 경고 보조 내용입니다.
+</Aside>
+
+</Preview>
+
+### 사용자 정의 아이콘 사용
+
+[Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 [`icon`](#icon) 속성을 사용하여 기본 아이콘을 재정의합니다.
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	사용자 정의 아이콘을 *사용하는* 보조 팁입니다.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+사용자 정의 아이콘을 *사용하는* 보조 팁입니다.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	사용자 정의 아이콘을 *사용하는* 보조 팁입니다.
+</Aside>
+
+</Preview>
+
+## `<Aside>` 속성
+
+**구현:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
+
+`<Aside>` 컴포넌트는 다음과 같은 속성을 허용합니다:
+
+### `type`
+
+**타입:** `'note' | 'tip' | 'caution' | 'danger'`  
+**기본값:** `'note'`
+
+표시할 보조 내용의 유형입니다:
+
+- `note` 보조 내용은 파란색이며 정보 아이콘을 표시합니다 (기본값).
+- `tip` 보조 내용은 보라색이며 로켓 아이콘을 표시합니다.
+- `caution` 보조 내용은 노란색이며 삼각형 경고 아이콘을 표시합니다.
+- `danger` 보조 내용은 빨간색이며 팔각형 경고 아이콘을 표시합니다.
+
+### `title`
+
+**타입:** `string`
+
+표시할 보조 내용의 제목입니다.
+`title`이 설정되어 있지 않으면 현재 보조 내용의 `type`이 기본 제목으로 사용됩니다.
+
+### `icon`
+
+**타입:** [`StarlightIcon`](/ko/reference/icons/#starlighticon-타입)
+
+보조 내용은 [Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 `icon` 속성을 포함할 수 있습니다.

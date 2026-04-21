@@ -1,0 +1,128 @@
+---
+title: Icônes
+description: Apprenez à afficher des icônes avec Starlight.
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+Pour afficher des icônes depuis un [ensemble d'icônes disponibles](/fr/reference/icons/#toutes-les-icônes) avec Starlight, utilisez le composant `<Icon>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Icon
+	slot="preview"
+	name="open-book"
+	color="var(--sl-color-text-accent)"
+	size="4rem"
+/>
+
+</Preview>
+
+## Importation
+
+```tsx
+import { Icon } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Affichez une icône en utilisant le composant `<Icon>`.
+Une icône requiert un attribut [`name`](#name) défini avec [une des icônes disponibles avec Starlight](/fr/reference/icons/#toutes-les-icônes) et peut éventuellement inclure un [`label`](#label) pour fournir un contexte aux lecteurs d'écran.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" />
+<Icon name="starlight" label="Le logo de Starlight" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" /%}
+{% icon name="starlight" label="Le logo de Starlight" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" />
+	<Icon name="starlight" label="Le logo de Starlight" />
+</Fragment>
+
+</Preview>
+
+### Personnaliser les icônes
+
+Les attributs [`size`](#size) et [`color`](#color) peuvent être utilisés pour ajuster l'apparence de l'icône en utilisant des unités et valeurs de couleur CSS.
+L'attribut [`class`](#class) peut être utilisé pour ajouter des classes CSS personnalisées à l'icône.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" color="goldenrod" size="2rem" />
+	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+</Fragment>
+
+</Preview>
+
+## Props de `<Icon>`
+
+**Implémentation :** [`Icon.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Icon.astro)
+
+Le composant `<Icon>` accepte les props suivants :
+
+### `name`
+
+**Obligatoire**  
+**Type :** [`StarlightIcon`](/fr/reference/icons/#type-starlighticon)
+
+Le nom de l'icône à afficher correspondant à [une des icônes disponibles avec Starlight](/fr/reference/icons/#toutes-les-icônes).
+
+### `label`
+
+**Type :** `string`
+
+Une étiquette optionnelle pour fournir un contexte aux technologies d'assistance, comme les lecteurs d'écran.
+
+Quand l'attribut `label` n'est pas défini, l'icône sera complètement masquée des technologies d'assistance.
+Dans ce cas, assurez-vous que le contexte reste compréhensible sans l'icône.
+Par exemple, un lien contenant uniquement l'icône **doit** inclure l'attribut `label` pour être accessible, mais si un lien contient du texte et que l'icône est purement décorative, omettre l'attribut `label` peut avoir du sens.
+
+### `size`
+
+**Type :** `string`
+
+La taille de l'icône utilisant des unités CSS.
+
+### `color`
+
+**Type :** `string`
+
+La couleur de l'icône utilisant une valeur de couleur CSS.
+
+### `class`
+
+**Type :** `string`
+
+Classes CSS personnalisées à ajouter à l'icône.

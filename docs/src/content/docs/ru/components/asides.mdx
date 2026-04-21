@@ -1,0 +1,194 @@
+---
+title: Вставки
+description: Узнайте, как использовать вставки в Starlight для отображения второстепенной информации рядом с основным содержимым страницы.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Для отображения второстепенной информации рядом с основным содержимым страницы используйте компонент `<Aside>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Aside slot="preview">
+    Включите несущественную, дополнительную информацию в `<Aside>`.
+</Aside>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { Aside } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Отображайте вставки (также известные как «наставления» или «призывы») с помощью компонента `<Aside>`.
+
+`<Aside>` может иметь дополнительный атрибут [`type`](#type), который управляет цветом, значком и заголовком по умолчанию.
+
+<Preview>
+
+````mdx
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Некоторый контент.</Aside>
+
+<Aside type="caution">Некоторое предостережение.</Aside>
+
+<Aside type="tip">
+
+Другой контент также поддерживается.
+
+```js
+// Например, фрагмент кода.
+```
+
+</Aside>
+
+<Aside type="danger">Никому не сообщайте свой пароль.</Aside>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% aside %}
+Некоторый контент.
+{% /aside %}
+
+{% aside type="caution" %}
+Некоторое предостережение.
+{% /aside %}
+
+{% aside type="tip" %}
+Другой контент также поддерживается.
+
+```js
+// Например, фрагмент кода.
+```
+{% /aside %}
+
+{% aside type="danger" %}
+Никому не сообщайте свой пароль.
+{% /aside %}
+````
+
+</Fragment>
+
+<Fragment slot="preview">
+
+    <Aside>Некоторый контент.</Aside>
+
+    <Aside type="caution">Некоторое предостережение.</Aside>
+
+    <Aside type="tip">
+
+    Другой контент также поддерживается.
+
+    ```js
+    // Например, фрагмент кода.
+    ```
+
+    </Aside>
+
+    <Aside type="danger">Никому не сообщайте свой пароль.</Aside>
+
+</Fragment>
+
+</Preview>
+
+Starlight также предоставляет собственный синтаксис для рендеринга в Markdown и MDX в качестве альтернативы компоненту `<Aside>`.
+Подробную информацию о пользовательском синтаксисе см. в руководстве [Создание контента в Markdown](/ru/guides/authoring-content/#вставки).
+
+### Использование пользовательских заголовков
+
+Переопределяйте стандартные заголовки вставок, используя атрибут [`title`](#title).
+
+<Preview>
+
+```mdx 'title="Осторожно!"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="Осторожно!">
+	Предупреждение *с* пользовательским заголовком.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'title="Осторожно!"'
+{% aside type="caution" title="Осторожно!" %}
+Предупреждение *с* пользовательским заголовком.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="caution" title="Осторожно!">
+	Предупреждение *с* пользовательским заголовком.
+</Aside>
+
+</Preview>
+
+### Использование пользовательских иконок
+
+Переопределяйте стандартные иконки боковой панели, используя атрибут [`icon`](#icon) с именем одной из [встроенных иконок Starlight](/ru/reference/icons/#все-иконки).
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	Подсказка *с* пользовательской иконкой.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+Подсказка *с* пользовательской иконкой.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	Подсказка *с* пользовательской иконкой.
+</Aside>
+
+</Preview>
+
+## Параметры `<Aside>`
+
+**Реализация:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
+
+Компонент `<Aside>` принимает следующие параметры:
+
+### `type`
+
+**тип:** `'note' | 'tip' | 'caution' | 'danger'`  
+**по умолчанию:** `'note'`
+
+Тип вставки для отображения:
+
+- `note` (по умолчанию), вставка синего цвета, с информационной иконкой.
+- `tip`, вставка фиолетового цвета, с иконкой ракеты.
+- `caution`, вставка жёлтого цвета, с треугольной предупреждающей иконкой.
+- `danger`, вставка красного цвета, с восьмиугольнаой предупреждающей иконкой.
+
+### `title`
+
+**тип:** `string`
+
+Заголовок вставки для отображения.
+Если `title` не установлен, будет использоваться заголовок по умолчанию для текущего `type` вставки.
+
+### `icon`
+
+**тип:** [`StarlightIcon`](/ru/reference/icons/#тип-starlighticon)
+
+Вставка может включать атрибут `icon`, содержащий имя одной из [встроенных иконок Starlight](/ru/reference/icons/#все-иконки).

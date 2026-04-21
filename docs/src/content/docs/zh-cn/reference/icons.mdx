@@ -1,0 +1,32 @@
+---
+title: 图标参考
+description: Starlight 中所有可用图标的概述。
+---
+
+Starlight 提供了一组内置图标，你可以使用 `<Icon>` 组件在内容中显示这些图标。
+
+## 使用图标
+
+可以使用 [`<Icon>`](/zh-cn/components/icons/) 组件来显示图标。
+图标也常用于其他组件，例如 [卡片](/zh-cn/components/cards/) 或 [hero actions](/zh-cn/reference/frontmatter/#hero) 等设置。
+
+## `StarlightIcon` 类型
+
+使用 `StarlightIcon` TypeScript 类型来引用 [Starlight 的内置图标的名称](#所有图标)。
+
+```ts {2} /icon: (StarlightIcon)/
+// src/icon.ts
+import type { StarlightIcon } from '@astrojs/starlight/types';
+
+function getIconLabel(icon: StarlightIcon) {
+	// …
+}
+```
+
+## 所有图标
+
+下面显示了所有可用图标，包括它们对应名称的列表。单击图标将其名称复制到剪贴板。
+
+import IconsList from '~/components/icons-list.astro';
+
+<IconsList labels={{ copied: '已复制！' }} />

@@ -1,0 +1,116 @@
+---
+title: Ручне налаштування
+description: Дізнайтеся, як налаштувати Starlight вручну для додавання його в існуючий проект Astro.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Найшвидший спосіб створити новий сайт Starlight - це скористатися командою `create astro` як показано у [Вступі](/uk/getting-started/#створіть-новий-проєкт).
+Якщо ви хочете додати Starlight до існуючого проекту Astro, цей посібник пояснить як.
+
+## Налаштування Starlight
+
+Щоб слідувати цьому посібнику, вам знадобиться існуючий проєкт Astro.
+
+### Додайте інтеґрацію Starlight
+
+Starlight є [інтеґрацією Astro](https://docs.astro.build/en/guides/integrations-guide/). Додайте її до свого сайту, виконавши команду `astro add` у кореневій директорії вашого проєкту:
+
+<Tabs syncKey="pkg">
+	<TabItem label="npm">```sh npx astro add starlight ```</TabItem>
+	<TabItem label="pnpm">```sh pnpm astro add starlight ```</TabItem>
+	<TabItem label="Yarn">```sh yarn astro add starlight ```</TabItem>
+</Tabs>
+
+Це встановить необхідні залежності та додасть Starlight до масиву integrations у вашому конфіґураційному файлі Astro.
+
+### Налаштуйте інтеґрацію
+
+Інтеґрація Starlight налаштовується у файлі `astro.config.mjs`.
+
+Додайте `title`, щоб почати:
+
+```js ins={8}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Мій чудовий сайт документації',
+		}),
+	],
+});
+```
+
+Знайдіть усі доступні параметри в [документації з налаштування Starlight](/uk/reference/configuration/).
+
+### Налаштуйте колекції контенту
+
+Starlight побудований поверх [колекцій вмісту](https://docs.astro.build/en/guides/content-collections/) в Astro, які налаштовуються в файлі `src/content/config.ts`.
+
+Створіть або оновіть файл конфіґурації вмісту, додавши колекцію `docs`, яка використовує `docsSchema` від Starlight:
+
+```js ins={3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+### Додайте вміст
+
+Starlight тепер налаштовано, і час додати трохи вмісту!
+
+Створіть директорію `src/content/docs/` і почніть з додавання файлу `index.md`.
+Це буде домашня сторінка вашого нового сайту:
+
+```md
+---
+# src/content/docs/index.md
+title: Моя документація
+description: Дізнайтеся більше про мій проєкт на цьому сайті документації, створеному за допомогою Starlight.
+---
+
+Ласкаво просимо до мого проєкту!
+```
+
+Starlight використовує маршрутизацію на основі файлів, що означає, що кожен файл Markdown, MDX або Markdoc у `src/content/docs/` стане сторінкою на вашому сайті. Метадані Frontmatter (поля `title` і `description` в наведеному вище прикладі) можуть змінити спосіб відображення кожної сторінки.
+Перегляньте всі доступні параметри в [документації frontmatter](/uk/reference/frontmatter/).
+
+## Поради щодо існуючих сайтів
+
+Якщо у вас вже є існуючий проект Astro, ви можете використовувати Starlight для швидкого додавання розділу документації на ваш сайт.
+
+### Використання Starlight з підшляхами
+
+Щоб додати всі сторінки Starlight в підшлях, розмістіть весь свій вміст в підкаталозі `src/content/docs/`.
+
+Наприклад, якщо Starlight сторінки повинні всі починатися з `/guides/`, додайте свій вміст в `src/content/docs/guides/` каталог:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **guides/**
+        - guide.md
+        - index.md
+  - pages/
+- astro.config.mjs
+
+</FileTree>
+
+У майбутньому ми плануємо краще підтримувати цей випадок, щоб уникнути необхідності в додатковій вкладеній директорії в `src/content/docs/`.
+
+### Використання Starlight з SSR
+
+Щоб увімкнути SSR, дотримуйтесь посібника [“Адаптери для рендерингу на вимогу”](https://docs.astro.build/en/guides/server-side-rendering/) в документації Astro, щоб додати серверний адаптер до вашого проєкту Starlight.
+
+Сторінки документації, згенеровані Starlight, попередньо рендеряться за замовчуванням незалежно від режиму виводу вашого проєкту. Щоб вимкнути попередній рендеринг ваших сторінок Starlight, встановіть [параметр конфіґурації `prerender`](/uk/reference/configuration/#prerender) у значення `false`.

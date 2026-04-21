@@ -1,0 +1,192 @@
+---
+title: 補足情報
+description: Starlightで補足情報を使用して、ページのメインコンテンツの横に補足情報を表示する方法を学びます。
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+ページのメインコンテンツの横に補足情報を表示するには、`<Aside>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+<Aside slot="preview">
+    `<Aside>`に重要ではない補足情報を含めます。
+</Aside>
+</Preview>
+
+## インポート
+
+```tsx
+import { Aside } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+`<Aside>`コンポーネントを使用して補足情報（「アドモニション」や「コールアウト」とも呼ばれる）を表示します。
+
+`<Aside>`にはオプションの[`type`](#type)属性があり、これによって補足情報の色、アイコン、およびデフォルトのタイトルが制御されます。
+
+<Preview>
+
+````mdx
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>補足情報のコンテンツ。</Aside>
+
+<Aside type="caution">注意が必要なコンテンツ。</Aside>
+
+<Aside type="tip">
+
+補足情報には他のコンテンツも対応しています。
+
+```js
+// たとえば、コードスニペットなど。
+```
+
+</Aside>
+
+<Aside type="danger">パスワードを誰にも教えないでください。</Aside>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% aside %}
+補足情報のコンテンツ。
+{% /aside %}
+
+{% aside type="caution" %}
+注意が必要なコンテンツ。
+{% /aside %}
+
+{% aside type="tip" %}
+補足情報には他のコンテンツも対応しています。
+
+```js
+// たとえば、コードスニペットなど。
+```
+{% /aside %}
+
+{% aside type="danger" %}
+パスワードを誰にも教えないでください。
+{% /aside %}
+````
+
+</Fragment>
+
+<Fragment slot="preview">
+
+    <Aside>補足情報のコンテンツ。</Aside>
+
+    <Aside type="caution">注意が必要なコンテンツ。</Aside>
+
+    <Aside type="tip">
+
+    補足情報には他のコンテンツも対応しています。
+
+    ```js
+    // たとえば、コードスニペットなど。
+    ```
+    </Aside>
+
+    <Aside type="danger">パスワードを誰にも教えないでください。</Aside>
+
+</Fragment>
+
+</Preview>
+
+Starlightは、`<Aside>`コンポーネントの代替として、MarkdownとMDXで補足情報をレンダリングするためのカスタム構文も提供しています。
+カスタム構文の詳細については、["MarkdownでのContent作成"](/ja/guides/authoring-content/#補足情報)ガイドを参照してください。
+
+### カスタムタイトルの使用
+
+[`title`](#title)属性を使用して、デフォルトの補足情報タイトルを上書きできます。
+
+<Preview>
+
+```mdx 'title="注意してください！"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="注意してください！">
+	カスタムタイトル*付きの*警告補足情報。
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'title="注意してください！"'
+{% aside type="caution" title="注意してください！" %}
+カスタムタイトル*付きの*警告補足情報。
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="caution" title="注意してください！">
+	カスタムタイトル*付きの*警告補足情報。
+</Aside>
+  
+</Preview>
+
+### カスタムアイコンの使用
+
+[`icon`](#icon)属性を使用して、デフォルトの補足情報アイコンを上書きできます。  
+値には、[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前を指定します。
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	カスタムアイコン*付きの*ヒント補足情報。
+</Aside>
+```
+
+ <Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+カスタムアイコン*付きの*ヒント補足情報。
+{% /aside %}
+```
+
+ </Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	カスタムアイコン*付きの*ヒント補足情報。
+</Aside>
+
+</Preview>
+
+## `<Aside>` プロパティ
+
+**実装:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
+
+`<Aside>`コンポーネントは以下のプロパティを受け入れます：
+
+### `type`
+
+**型:** `'note' | 'tip' | 'caution' | 'danger'`  
+**デフォルト:** `'note'`
+
+表示する補足情報のタイプ：
+
+- `note`補足情報（デフォルト）は青色で、情報アイコンを表示します。
+- `tip`補足情報は紫色で、ロケットアイコンを表示します。
+- `caution`補足情報は黄色で、三角形の警告アイコンを表示します。
+- `danger`補足情報は赤色で、八角形の警告アイコンを表示します。
+
+### `title`
+
+**型:** `string`
+
+補足情報に表示するタイトル。
+`title`が設定されていない場合、現在の補足情報に`type`のデフォルトタイトルが使用されます。
+
+### `icon`
+
+**型:** [`StarlightIcon`](/ja/reference/icons/#starlighticon-型)
+
+補足情報に`icon`属性を設定して、[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前を指定できます。

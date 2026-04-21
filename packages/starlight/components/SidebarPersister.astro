@@ -1,0 +1,78 @@
+---
+/*
+  This component is designed to wrap the tree of `<SidebarSublist>` components in the sidebar.
+
+  It does the following:
+  - Wraps the tree in an `<sl-sidebar-state-persist>` custom element
+  - Before the tree renders, adds an inline script which loads state and defines
+  the behaviour for the `<sl-sidebar-restore>` custom element.
+  - After the tree renders, adds an inline script which restores the sidebar scroll state.
+
+  Notes:
+  - On smaller viewports, restoring state is skipped as the sidebar is collapsed inside a menu.
+  - The state is parsed from session storage and restored.
+  - This is a progressive enhancement, so any errors are swallowed silently.
+
+  The `aria-hidden` attribute on script tags is used to prevent a Safari/VoiceOver bug where the
+  script is read out loud due to them being inside a container with `display: contents`.
+  @see https://bugs.webkit.org/show_bug.cgi?id=283645
+  @see https://github.com/withastro/starlight/pull/2633
+*/
+
+import { getSidebarHash } from '../utils/navigation';
+
+const hash = getSidebarHash(Astro.locals.starlightRoute.sidebar);
+
+declare global {
+	interface Window {
+		/** Restored scroll position. Briefly stored on the `window` global to pass between inline scripts. */
+		_starlightScrollRestore?: number;
+	}
+}
+---
+
+<sl-sidebar-state-persist data-hash={hash}>
+	<script is:inline aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script>
+
+	<slot />
+
+	<script is:inline aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script>
+</sl-sidebar-state-persist>
+
+<style>
+	@layer starlight.core {
+		sl-sidebar-state-persist {
+			display: contents;
+		}
+	}
+</style>

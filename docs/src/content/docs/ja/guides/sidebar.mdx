@@ -1,0 +1,729 @@
+---
+title: サイドバーのナビゲーション
+description: Starlightサイトのサイドバーのナビゲーションリンクを設定・カスタマイズする方法を学びます。
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+import SidebarPreview from '~/components/sidebar-preview.astro';
+
+サイドバーはユーザーがサイト内を移動するための主要な方法の1つであるため、サイドバーを整理することは良いドキュメントの鍵となります。Starlightでは、サイドバーのレイアウトとコンテンツをカスタマイズするためのオプション一式を提供しています。
+
+## デフォルトのサイドバー
+
+Starlightはデフォルトで、ドキュメントのファイルシステム構造に基づいてサイドバーを自動的に生成します。その際、各ファイルの`title`プロパティをサイドバーのエントリとして使用します。
+
+たとえば以下のファイル構造があるとします。
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+      - stars/
+        - betelgeuse.md
+
+</FileTree>
+
+すると以下のサイドバーが自動的に生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星座',
+			items: [
+				{ label: 'アンドロメダ座', link: '' },
+				{ label: 'オリオン座', link: '' },
+			],
+		},
+		{
+			label: '星',
+			items: [{ label: 'ベテルギウス', link: '' }],
+		},
+	]}
+/>
+
+自動生成されるサイドバーについては、[自動生成されるグループ](#自動生成されるグループ)のセクションで詳しく説明します。
+
+## リンクとリンクグループを追加する
+
+サイドバーのリンクと（折りたたみ可能なヘッダー内の）リンクグループを設定するには、`astro.config.mjs`で[`starlight.sidebar`](/ja/reference/configuration/#sidebar)プロパティを使用します。
+
+リンクとグループを組み合わせることで、さまざまなサイドバーレイアウトを作成できます。
+
+### 内部リンク
+
+`slug`プロパティをもつオブジェクトを使用して、`src/content/docs/`内のページへのリンクを追加します。デフォルトでは、リンク先ページのタイトルがラベルとして使用されます。
+
+たとえば、以下の設定があるとします。
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'constellations/andromeda' },
+		{ slug: 'constellations/orion' },
+	],
+});
+```
+
+そして以下のファイル構造であるとします。
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+すると以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{ label: 'アンドロメダ座', link: '' },
+		{ label: 'オリオン座', link: '' },
+	]}
+/>
+
+リンク先ページのフロントマターから推測される値をオーバーライドするには、`label`、[`translations`](#国際化)、[`attrs`](#カスタムhtml属性)プロパティを追加します。
+
+ページのフロントマターからサイドバーの表示を制御する方法について、詳しくは[「自動生成されるリンクのカスタマイズ」](#自動生成されるリンクをフロントマターでカスタマイズする)を参照してください。
+
+#### 内部リンクの省略記法
+
+内部リンクは、ページのスラグを文字列として渡すだけの省略記法でも指定できます。
+
+たとえば、以下の設定は上記の`slug`を使用した設定と同等です。
+
+```js "slug:"
+starlight({
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
+});
+```
+
+### その他のリンク
+
+`label`と`link`プロパティをもつオブジェクトを使用して、外部ページやドキュメント以外のページへのリンクを追加します。
+
+```js "label:" "link:"
+starlight({
+	sidebar: [
+		// サイト内のドキュメント以外のページへのリンク。
+		{ label: '流星商店', link: '/shop/' },
+		// NASAのウェブサイトへの外部リンク。
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{ label: '流星商店', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
+	]}
+/>
+
+### グループ
+
+折りたたみ可能な見出しの下に関連するリンクをグループ化することで、サイドバーに構造を追加できます。グループには、リンクと他のサブグループを含められます。
+
+`label`と`items`プロパティをもつオブジェクトを使用して、グループを追加します。`label`はグループの見出しとして使用されます。`items`配列にリンクまたはサブグループを追加します。
+
+```js /^\s*(label:|items:)/
+starlight({
+	sidebar: [
+		// 「星座」というラベルのリンクグループ。
+		{
+			label: '星座',
+			items: [
+				'constellations/carina',
+				'constellations/centaurus',
+				// 季節の星座の入れ子になったリンクグループ。
+				{
+					label: '季節の星座',
+					items: [
+						'constellations/andromeda',
+						'constellations/orion',
+						'constellations/ursa-minor',
+					],
+				},
+			],
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星座',
+			items: [
+				{ label: 'りゅうこつ座', link: '' },
+				{ label: 'ケンタウルス座', link: '' },
+				{
+					label: '季節の星座',
+					items: [
+						{ label: 'アンドロメダ座', link: '' },
+						{ label: 'オリオン座', link: '' },
+						{ label: 'こぐま座', link: '' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+### 自動生成されるグループ
+
+Starlightはドキュメントのディレクトリに基づいて、サイドバーのグループを自動的に生成できます。これはグループ内のサイドバー項目を手動で入力したくない場合に便利です。
+
+デフォルトでは、ページはファイルの[`id`](/ja/reference/route-data/#id)に従ってアルファベット順に並べ替えられます。
+
+`label`と`autogenerate`プロパティをもつオブジェクトを使用して、自動生成されるグループを追加します。`autogenerate`の設定には、サイドバーのエントリに使用する`directory`を指定する必要があります。たとえば、以下のように設定したとします。
+
+```js "label:" "autogenerate:"
+starlight({
+	sidebar: [
+		{
+			label: '星座',
+			// constellationsディレクトリのリンクグループを自動生成します。
+			autogenerate: { directory: 'constellations' },
+		},
+	],
+});
+```
+
+そして以下のファイル構造があるとします。
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+すると以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星座',
+			items: [
+				{ label: 'りゅうこつ座', link: '' },
+				{ label: 'ケンタウルス座', link: '' },
+				{
+					label: 'seasonal',
+					items: [{ label: 'アンドロメダ座', link: '' }],
+				},
+			],
+		},
+	]}
+/>
+
+## 自動生成されるリンクをフロントマターでカスタマイズする
+
+個々のページで[`sidebar`フロントマターフィールド](/ja/reference/frontmatter/#sidebar)を使用して、自動生成されるリンクをカスタマイズできます。
+
+フロントマターのサイドバーオプションにより、[カスタムラベル](/ja/reference/frontmatter/#label)の設定、[カスタム属性](/ja/reference/frontmatter/#attrs)の使用、リンクへの[バッジ](/ja/reference/frontmatter/#badge)の追加、サイドバーのリンクの[非表示](/ja/reference/frontmatter/#hidden)、[独自のソート順](/ja/reference/frontmatter/#order)の定義が可能です。
+
+```md "sidebar:"
+---
+title: 私のページ
+sidebar:
+  # このリンクのカスタムラベルを設定します
+  label: カスタムサイドバーラベル
+  # このリンクの順番をカスタマイズします（数字が小さいほど上に表示されます）
+  order: 2
+  # このリンクにバッジを追加します
+  badge:
+    text: 新規
+    variant: tip
+---
+```
+
+上記のフロントマターを設定したページと一緒に自動生成されるグループは、以下のサイドバーを生成します。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'ガイド',
+			items: [
+				{ label: 'ページ', link: '' },
+				{
+					label: 'カスタムサイドバーラベル',
+					link: '',
+					badge: { text: '新規', variant: 'tip' },
+				},
+				{ label: '別のページ', link: '' },
+			],
+		},
+	]}
+/>
+
+:::note
+`sidebar`フロントマターの設定は、自動生成されるグループ内のリンクと`slug`プロパティで定義されたドキュメントリンクにのみ使用されます。`link`プロパティで定義されたリンクには適用されません。
+:::
+
+## バッジ
+
+リンク、グループ、自動生成されるグループには、ラベルの横にバッジを表示するための`badge`プロパティも含められます。
+
+```js {9,16}
+starlight({
+	sidebar: [
+		{
+			label: '星',
+			items: [
+				// 「超巨星」バッジ付きのリンク。
+				{
+					slug: 'stars/persei',
+					badge: '超巨星',
+				},
+			],
+		},
+		// 「要更新」バッジ付きの自動生成されるグループ。
+		{
+			label: '衛星',
+			badge: '要更新',
+			autogenerate: { directory: 'moons' },
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星',
+			items: [
+				{
+					label: 'ペルセウス座',
+					link: '',
+					badge: { text: '超巨星', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: '衛星',
+			badge: { text: '要更新', variant: 'default' },
+			items: [
+				{
+					label: 'イオ',
+					link: '',
+				},
+				{
+					label: 'エウロパ',
+					link: '',
+				},
+				{
+					label: 'ガニメデ',
+					link: '',
+				},
+			],
+		},
+	]}
+/>
+
+### バッジのバリアントとカスタムスタイル
+
+`text`と`variant`、`class`プロパティをもつオブジェクトを使用して、バッジのスタイルをカスタマイズできます。
+
+`text`は表示するコンテンツ、たとえば「新規」などを表わします。デフォルトでは、バッジにはサイトのアクセントカラーが使用されます。組み込みのバッジスタイルを使用するには、`variant`プロパティを`note`、`tip`、`danger`、`caution`、`success`のいずれかに設定します。
+
+また、`class`プロパティにCSSクラス名を設定することで、カスタムバッジスタイルを作成することも可能です。
+
+```js {9}
+starlight({
+	sidebar: [
+		{
+			label: '星',
+			items: [
+				// 「準備中」バッジ付きのリンク。
+				{
+					slug: 'stars/sirius',
+					badge: { text: '準備中', variant: 'caution' },
+				},
+			],
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星',
+			items: [
+				{
+					label: 'シリウス',
+					link: '',
+					badge: { text: '準備中', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+詳しくは、[バッジの使用とカスタマイズ](/ja/components/badges/#使用方法)を参照してください。
+
+## カスタムHTML属性
+
+リンク要素にカスタムのHTML属性を追加するには、`attrs`プロパティを使用します。
+
+以下の例では、リンクが新しいタブで開かれるよう、`attrs`を使用して`target="_blank"`属性を追加しています。また、リンクのラベルにカスタムの`style`属性を適用して斜体にします。
+
+```js {10}
+starlight({
+	sidebar: [
+		{
+			label: 'リソース',
+			items: [
+				// 新しいタブで開かれる、NASAのウェブサイトへの外部リンク。
+				{
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'リソース',
+			items: [
+				{
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
+### 自動生成されるリンクのカスタムHTML属性
+
+`autogenerate`設定で`attrs`プロパティを定義することで、[自動生成されるグループ](#自動生成されるグループ)内のすべてのリンクのHTML属性をカスタマイズできます。個々のページでは[`sidebar.attrs`フロントマターフィールド](/ja/reference/frontmatter/#attrs)を使用してカスタム属性を指定でき、これは`autogenerate.attrs`設定とマージされます。
+
+たとえば、以下の設定があるとします。
+
+```js {9}
+starlight({
+	sidebar: [
+		{
+			label: '星座',
+			autogenerate: {
+				// 'constellations'ディレクトリのリンクグループを自動生成します。
+				directory: 'constellations',
+				// このグループ内のすべてのリンクラベルを斜体にします。
+				attrs: { style: 'font-style: italic' },
+			},
+		},
+	],
+});
+```
+
+そして以下のファイル構造があるとします。
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+すると、自動生成されるすべてのリンクが斜体になった以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星座',
+			items: [
+				{
+					label: 'りゅうこつ座',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'ケンタウルス座',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'seasonal',
+					items: [
+						{
+							label: 'アンドロメダ座',
+							link: '',
+							attrs: { style: 'font-style: italic' },
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+## 国際化
+
+リンクやグループのラベルをサポート対象の言語向けに翻訳するには、リンクやグループのエントリに`translations`プロパティを使用します。[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags)の言語タグ、たとえば`"en"`、`"ar"`、`"zh-CN"`をキーとして、翻訳されたラベルを値として指定します。`label`プロパティは、デフォルトのロケールと、翻訳がない言語に対して使用されます。
+
+```js {5-7,11-13,18-20}
+starlight({
+	sidebar: [
+		{
+			label: '星座',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					label: 'アンドロメダ座',
+					translations: {
+						'pt-BR': 'Andrômeda',
+					},
+					slug: 'constellations/andromeda',
+				},
+				{
+					label: 'さそり座',
+					translations: {
+						'pt-BR': 'Escorpião',
+					},
+					slug: 'constellations/scorpius',
+				},
+			],
+		},
+	],
+});
+```
+
+ブラジルポルトガル語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelação',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+### 内部リンクの国際化
+
+[内部リンク](#内部リンク)は、デフォルトでコンテンツのフロントマターの翻訳されたページタイトルを自動的に使用します。
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: '星座',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromeda' },
+				{ slug: 'constellations/scorpius' },
+			],
+		},
+	],
+});
+```
+
+ブラジルポルトガル語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+多言語サイトでは、`slug`の値にURLの言語部分は含まれません。たとえば、`en/intro`と`pt-br/intro`にページがある場合、サイドバーを設定する際のスラグは`intro`となります。
+
+### バッジの国際化
+
+[バッジ](#バッジ)の`text`プロパティは、文字列か、多言語サイトの場合はロケールごとの値をもつオブジェクトを指定できます。オブジェクト形式を使用する場合、キーは[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags)タグ（`en`、`ar`、`zh-CN`など）である必要があります。
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: '星座',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							ja: '新規',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+ブラジルポルトガル語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
+## グループを折りたたむ
+
+`collapsed`プロパティを`true`に設定することで、リンクのグループをデフォルトで折りたためます。
+
+```js {5-6}
+starlight({
+	sidebar: [
+		{
+			label: '星座',
+			// デフォルトでグループを折りたたみます。
+			collapsed: true,
+			items: ['constellations/andromeda', 'constellations/orion'],
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星座',
+			collapsed: true,
+			items: [
+				{ label: 'アンドロメダ座', link: '' },
+				{ label: 'オリオン座', link: '' },
+			],
+		},
+	]}
+/>
+
+[自動生成されるグループ](#自動生成されるグループ)は、親グループの`collapsed`値に従います。
+
+```js {5-6}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			// デフォルトでグループと自動生成されるサブグループを折りたたみます。
+			collapsed: true,
+			autogenerate: { directory: 'constellations' },
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星座',
+			collapsed: true,
+			items: [
+				{ label: 'りゅうこつ座', link: '' },
+				{ label: 'ケンタウルス座', link: '' },
+				{
+					label: 'seasonal',
+					collapsed: true,
+					items: [{ label: 'アンドロメダ座', link: '' }],
+				},
+			],
+		},
+	]}
+/>
+
+この動作は、`autogenerate.collapsed`プロパティを定義することで上書きできます。
+
+```js {5-7} "collapsed: true"
+starlight({
+	sidebar: [
+		{
+			label: '星座',
+			// 「星座」グループは折りたたみませんが、自動生成されるサブグループは折りたたみます。
+			collapsed: false,
+			autogenerate: { directory: 'constellations', collapsed: true },
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: '星座',
+			items: [
+				{ label: 'りゅうこつ座', link: '' },
+				{ label: 'ケンタウルス座', link: '' },
+				{
+					label: 'seasonal',
+					collapsed: true,
+					items: [{ label: 'アンドロメダ座', link: '' }],
+				},
+			],
+		},
+	]}
+/>

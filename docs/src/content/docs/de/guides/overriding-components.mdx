@@ -1,0 +1,152 @@
+---
+title: Komponenten ersetzen
+description: In Starlight kannst du eingebauten Komponenten ersetzen, um eigene Elemente in die Benutzeroberfläche deiner Dokumentationswebsite einzufügen.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Starlights Standard-UI und Konfigurations&shy;optionen sind so gestaltet, dass sie flexibel sind und für eine Reihe von Inhalten funktionieren. Ein Großteil des Standardaussehens von Starlight kann mit [CSS](/de/guides/css-and-tailwind/) und [Konfigurations&shy;optionen](/de/guides/customization/) angepasst werden.
+
+Wenn du mehr brauchst als das, was von Haus aus möglich ist, unterstützt Starlight die Erstellung eigener Komponenten, um die Standardkomponenten zu erweitern oder zu ersetzen.
+
+## Wann solltest du ersetzen
+
+Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wenn:
+
+- Du das Aussehen eines Teils der Starlight-Benutzeroberfläche auf eine Weise ändern möchest, was mit [eigenem CSS](/de/guides/css-and-tailwind/) nicht möglich ist.
+- Du das Verhalten eines Teils der Starlight-Benutzeroberfläche ändern möchtest.
+- Du zusätzliche UI neben Starlights bestehender UI hinzufügen willst.
+
+## Wie kann man das ersetzen
+
+<Steps>
+
+1. Wähle die Starlight-Komponente, die du überschreiben möchtest.
+   Du kannst eine vollständige Liste der Komponenten in der [Komponenten-Ersetzung Referenz](/de/reference/overrides/) finden.
+
+   :::tip
+   Du bist dir nicht sicher, welche Komponente du überschreiben musst? Benutze die [interaktive Starlight Overrides Map](https://starlight-overrides-map.netlify.app/), um die Namen von Starlights UI-Komponenten zu erfahren.
+   :::
+
+   In diesem Beispiel wird die Starlight-Komponente [`SocialIcons`](/de/reference/overrides/#socialicons) in der Navigationsleiste der Website außer Kraft gesetzt.
+
+2. Erstelle eine Astro-Komponente, mit der du die Starlight-Komponente ersetzt.
+   Dieses Beispiel rendert einen Kontakt-Link.
+
+   ```astro
+   ---
+   // src/components/EmailLink.astro
+
+   const email = 'houston@example.com';
+   ---
+
+   <a href=`mailto:${email}`>Schreib mir</a>
+   ```
+
+3. Sage Starlight, dass deine benutzerdefinierte Komponente in der Konfigurations&shy;option [`components`](/de/reference/configuration/#components) in `astro.config.mjs` verwendet werden soll:
+
+   ```js {9-12}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Meine Dokumentation nutzt eigene Komponenten',
+   			components: {
+   				// Ersetze den Standardkomponent `SocialIcons`
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+## Eine integrierte Komponente wiederverwenden
+
+Du kannst mit den Standard-UI-Komponenten von Starlight genauso arbeiten, wie du es mit deinen eigenen tun würdest: Importieren und Rendern in deinen eigenen benutzerdefinierten Komponenten. Dadurch kannst du die gesamte grundlegende Benutzeroberfläche von Starlight in deinem Design beibehalten und gleichzeitig zusätzliche Benutzeroberflächen hinzufügen.
+
+Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die einen E-Mail-Link zusammen mit der Standardkomponente `SocialIcons` rendert:
+
+```astro {3,7}
+---
+// src/components/EmailLink.astro
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
+---
+
+<a href="mailto:houston@example.com">Schreib mir</a>
+<Default><slot /></Default>
+```
+
+Wenn du eine eingebaute Komponente innerhalb einer benutzerdefinierten Komponente renderst, füge ein [`<slot />`](https://docs.astro.build/de/basics/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden soll, wenn sie Kindelemente erhält.
+
+Wenn du die Komponenten [`PageFrame`](/de/reference/overrides/#pageframe) oder [`TwoColumnContent`](/de/reference/overrides/#twocolumncontent) wiederverwendst, die [benannte Slots](https://docs.astro.build/de/basics/astro-components/#benannte-slots) enthalten, musst du auch diese Slots [übertragen](https://docs.astro.build/de/basics/astro-components/#slots-weitergeben).
+
+Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die die Komponente `TwoColumnContent` wiederverwendet. Diese integrierte Komponente enthält einen zusätzlichen benannten Slot, nämlich `right-sidebar`, welcher übertragen werden muss:
+
+```astro {8}
+---
+// src/components/CustomContent.astro
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
+
+## Seitendaten verwenden
+
+Wenn du eine Starlight-Komponente überschreibst, kannst du auf das globale [`starlightRoute`-Objekt](/de/guides/route-data/) zugreifen, das alle Daten für die aktuelle Seite enthält.
+Dadurch kannst du diese Werte verwenden, um zu steuern, wie deine Komponentenvorlage gerendert wird.
+
+Im folgenden Beispiel zeigt eine Ersatzkomponente [`PageTitle`](/de/reference/overrides/#pagetitle) den Titel der aktuellen Seite an, wie er im Frontmatter des Inhalts festgelegt wird:
+
+```astro {4} "{title}"
+---
+// src/components/Title.astro
+
+const { title } = Astro.locals.starlightRoute.entry.data;
+---
+
+<h1 id="_top">{title}</h1>
+
+<style>
+	h1 {
+		font-family: 'Comic Sans';
+	}
+</style>
+```
+
+Weitere Informationen zu allen verfügbaren Eigenschaften findest du in der [Routendaten-Referenz](/de/reference/route-data/).
+
+### Nur auf bestimmten Seiten überschreiben
+
+Komponenten&shy;überschreibungen gelten für alle Seiten. Du kannst jedoch bedingt mit Werten aus `starlightRoute` rendern, um zu bestimmen, wann deine benutzerdefinierte Benutzeroberfläche, wann die Standard&shy;benutzeroberfläche von Starlight oder sogar etwas völlig anderes angezeigt werden soll.
+
+Im folgenden Beispiel zeigt eine Komponente, die Starlights [`Footer`](/de/reference/overrides/#fußzeile) überschreibt, nur auf der Startseite „Verwendet Starlight 🌟“ an und zeigt ansonsten auf allen anderen Seiten die Standardfußzeile an:
+
+```astro
+---
+// src/components/ConditionalFooter.astro
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const isHomepage = Astro.locals.starlightRoute.id === '';
+---
+
+{
+	isHomepage ? (
+		<footer>Verwendet Starlight 🌟</footer>
+	) : (
+		<Default>
+			<slot />
+		</Default>
+	)
+}
+```
+
+Weitere Informationen zum bedingten Rendering findest du im [Astro-Leitfaden zur Vorlagensyntax](https://docs.astro.build/de/basics/astro-syntax/#dynamisches-html).

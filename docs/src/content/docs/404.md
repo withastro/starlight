@@ -1,0 +1,14 @@
+---
+title: Not found
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  title: '404'
+  tagline: <strong>Houston, we have a problem.</strong> We couldn’t find that page.<br>Check the URL or try using the search bar.
+  actions:
+    - text: Go home
+      icon: right-arrow
+      link: /
+      variant: primary
+---

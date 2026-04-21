@@ -1,0 +1,150 @@
+---
+title: Badges
+description: Apprenez à utiliser les badges dans Starlight pour afficher des informations supplémentaires.
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+Pour afficher de petits éléments d'information, tels qu'un statut ou une étiquette, utilisez le composant `<Badge>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="Nouveau" />
+
+</Preview>
+
+## Importation
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Affichez un badge en utilisant le composant `<Badge>` et passez le contenu que vous souhaitez afficher à l'attribut [`text`](#text) du composant `<Badge>`.
+
+Par défaut, le badge utilisera la couleur d'accentuation du thème de votre site.
+Pour utiliser une des couleurs de badge disponibles, définissez l'attribut [`variant`](#variant) à l'une des valeurs prises en charge.
+
+<Preview>
+
+```mdx
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="Note" variant="note" />
+- <Badge text="Succès" variant="success" />
+- <Badge text="Astuce" variant="tip" />
+- <Badge text="Attention" variant="caution" />
+- <Badge text="Danger" variant="danger" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+- {% badge text="Note" variant="note" /%}
+- {% badge text="Succès" variant="success" /%}
+- {% badge text="Astuce" variant="tip" /%}
+- {% badge text="Attention" variant="caution" /%}
+- {% badge text="Danger" variant="danger" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="Note" variant="note" />
+	- <Badge text="Succès" variant="success" />
+	- <Badge text="Astuce" variant="tip" />
+	- <Badge text="Attention" variant="caution" />
+	- <Badge text="Danger" variant="danger" />
+</Fragment>
+
+</Preview>
+
+### Utiliser différentes tailles
+
+Utilisez l'attribut [`size`](#size) pour contrôler la taille du texte du badge.
+
+<Preview>
+
+```mdx /size="\w+"/
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="Nouveau" size="small" />
+- <Badge text="Nouveau et amélioré" size="medium" />
+- <Badge text="Nouveau, amélioré et plus grand" size="large" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+- {% badge text="Nouveau" size="small" /%}
+- {% badge text="Nouveau et amélioré" size="medium" /%}
+- {% badge text="Nouveau, amélioré et plus grand" size="large" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="Nouveau" size="small" />
+	- <Badge text="Nouveau et amélioré" size="medium" />
+	- <Badge text="Nouveau, amélioré et plus grand" size="large" />
+</Fragment>
+
+</Preview>
+
+### Personnaliser les badges
+
+Personnalisez les badges en utilisant n'importe quel autre attribut de l'élément `<span>` tel que `class` ou `style` avec du CSS personnalisé.
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Personnalisé" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+{% badge text="Personnalisé" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
+
+<Badge
+	slot="preview"
+	text="Personnalisé"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## Props de `<Badge>`
+
+**Implémentation :** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+Le composant `<Badge>` accepte les props suivantes ainsi que [tous les autres attributs de l'élément `<span>`](https://developer.mozilla.org/fr/docs/Web/HTML/Global_attributes) :
+
+### `text`
+
+**Obligatoire**  
+**Type :** `string`
+
+Le texte à afficher dans le badge.
+
+### `variant`
+
+**Type :** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**Par défaut :** `'default'`
+
+La variante de couleur du badge à utiliser : `note` (bleu), `tip` (violet), `danger` (rouge), `caution` (orange), `success` (vert), ou `default` (couleur d'accentuation du thème).
+
+### `size`
+
+**Type :** `'small' | 'medium' | 'large'`
+
+Définit la taille du badge à afficher.

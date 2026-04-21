@@ -1,0 +1,139 @@
+---
+title: Route Data
+description: Learn how Starlight’s page data model is used to render your pages and how you can customize it.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+When Starlight renders a page in your documentation, it first creates a route data object to represent what is on that page.
+This guide explains how route data is generated, how to use it, and how you can customize it to modify Starlight’s default behavior.
+
+See the [“Route Data Reference”](/reference/route-data/) for a full list of the available properties.
+
+## What is route data?
+
+Starlight route data is an object containing all the information required to render a single page.
+It includes information for the current page as well as data generated from your Starlight configuration.
+
+## Using route data
+
+All of Starlight’s components use route data to decide what to render for each page.
+For example, the [`siteTitle`](/reference/route-data/#sitetitle) string is used to display the site title and the [`sidebar`](/reference/route-data/#sidebar) array is used to render the global sidebar navigation.
+
+You can access this data from the `Astro.locals.starlightRoute` global in Astro components:
+
+```astro title="example.astro" {2}
+---
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<p>The title of this site is “{siteTitle}”</p>
+```
+
+This can be useful for example when building [component overrides](/guides/overriding-components/) to customize what you display.
+
+## Customizing route data
+
+Starlight’s route data works out of the box and does not require any configuration.
+However, for advanced use cases, you may want to customize route data for some or all pages to modify how your site displays.
+
+This is a similar concept to [component overrides](/guides/overriding-components/), but instead of modifying how Starlight renders your data, you modify the data Starlight renders.
+
+### When to customize route data
+
+Customizing route data can be useful when you want to modify how Starlight processes your data in a way not possible with existing configuration options.
+
+For example, you may want to filter sidebar items or customize titles for specific pages.
+Changes like this do not require modifying Starlight’s default components, only the data passed to those components.
+
+### How to customize route data
+
+You can customize route data using a special form of “middleware”.
+This is a function that is called every time Starlight renders a page and can modify values in the route data object.
+
+<Steps>
+
+1. Create a new file exporting an `onRequest` function using Starlight’s `defineRouteMiddleware()` utility:
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware(() => {});
+   ```
+
+2. Tell Starlight where your route data middleware file is located in `astro.config.mjs`:
+
+   ```js ins={9}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'My delightful docs site',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
+   });
+   ```
+
+3. Update your `onRequest` function to modify route data.
+
+   The first argument your middleware will receive is [Astro’s `context` object](https://docs.astro.build/en/reference/api-reference/).
+   This contains full information about the current page render, including the current URL and `locals`.
+
+   In this example, we are going to make our docs more exciting by adding an exclamation mark to the end of every page’s title.
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware((context) => {
+   	// Get the content collection entry for this page.
+   	const { entry } = context.locals.starlightRoute;
+   	// Update the title to add an exclamation mark.
+   	entry.data.title = entry.data.title + '!';
+   });
+   ```
+
+</Steps>
+
+#### Multiple route middleware
+
+Starlight also supports providing multiple middleware.
+Set `routeMiddleware` to an array of paths to add more than one middleware handler:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'My site with multiple middleware',
+			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
+		}),
+	],
+});
+```
+
+#### Waiting for later route middleware
+
+To wait for middleware later in the stack to run before executing your code, you can await the `next()` callback passed as the second argument to your middleware function.
+This can be useful to wait for a plugin’s middleware to run before making changes for example.
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// Wait for later middleware to run.
+	await next();
+	// Modify route data.
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + '!';
+});
+```

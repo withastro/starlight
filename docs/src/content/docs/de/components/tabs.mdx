@@ -1,0 +1,221 @@
+---
+title: Registerkarten
+description: Lerne, wie du in Starlight Oberflächen mit Registerkarten erstellst, um gleichwertige Informationen zu gruppieren.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Um eine Oberfläche mit Registerkarten zu erstellen, verwende die Komponenten `<Tabs>` und `<TabItem>`.
+Registerkarten sind nützlich, um gleichwertige Informationen zu gruppieren, wenn ein Nutzer nur eine von mehreren Optionen sehen muss.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Tabs slot="preview">
+	<TabItem label="Sterne">Sirius, Wega, Betelgeuse</TabItem>
+	<TabItem label="Monde">Io, Europa, Ganymed</TabItem>
+</Tabs>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Zeige eine Oberfläche mit Registerkarten an, indem du die Komponenten `<Tabs>` und `<TabItem>` benutzt.
+Jedes `<TabItem>` muss ein [`label`](#label) haben, um es den Benutzern anzuzeigen.
+
+<Preview>
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Sterne">Sirius, Wega, Betelgeuse</TabItem>
+	<TabItem label="Monde">Io, Europa, Ganymed</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% tabs %}
+{% tabitem label="Sterne" %}
+Sirius, Wega, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Monde" %}
+Io, Europa, Ganymed
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Sterne">Sirius, Wega, Betelgeuse</TabItem>
+	<TabItem label="Monde">Io, Europa, Ganymed</TabItem>
+</Tabs>
+
+</Preview>
+
+### Registerkarten synchronisieren
+
+Halte mehrere Registerkarten&shy;gruppen synchron, indem du das Attribut [`syncKey`](#synckey) hinzufügst.
+
+Alle `<Tabs>` auf einer Seite mit demselben Wert für `syncKey` zeigen dasselbe aktive Label an.
+Auf diese Weise kann dein Leser eine Auswahl treffen (z.&nbsp;B. sein Betriebssystem oder den Paketmanager), die dann beim Navigieren durch die Seiten beibehalten wird.
+
+Um zusammenhängende Tabs zu synchronisieren, füge eine identische `syncKey`-Eigenschaft zu jeder `<Tabs>`-Komponente hinzu und stelle sicher, dass sie alle die gleichen `<TabItem>`-Beschriftungen verwenden:
+
+<Preview>
+
+```mdx 'syncKey="constellations"'
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Ein paar Sterne:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Zwillinge">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Ein paar Exoplaneten:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Zwillinge">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'syncKey="constellations"'
+_Ein paar Sterne:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+Bellatrix, Rigel, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Zwillinge" %}
+Pollux, Castor A, Castor B
+{% /tabitem %}
+{% /tabs %}
+
+_Ein paar Exoplaneten:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+HD 34445 b, Gliese 179 b, Wasp-82 b
+{% /tabitem %}
+
+{% tabitem label="Zwillinge" %}
+Pollux b, HAT-P-24b, HD 50554 b
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+
+_Ein paar Sterne:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Zwillinge">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Ein paar Exoplaneten:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Zwillinge">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
+</Fragment>
+
+</Preview>
+
+### Hinzufügen von Symbolen zu Registerkarten
+
+Füge ein Symbol in ein Tab-Element ein, indem du das Attribut [`icon`](#icon) auf den Namen [eines der in Starlight eingebauten Symbole](/de/reference/icons/#alle-symbole) setzt, um ein Symbol neben dem Label anzuzeigen.
+
+<Preview>
+
+```mdx /icon="\w+"/
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Sterne" icon="star">
+		Sirius, Wega, Betelgeuse
+	</TabItem>
+	<TabItem label="Monde" icon="moon">
+		Io, Europa, Ganymed
+	</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /icon="\w+"/
+{% tabs %}
+{% tabitem label="Sterne" icon="star" %}
+Sirius, Wega, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Monde" icon="moon" %}
+Io, Europa, Ganymed
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Sterne" icon="star">
+		Sirius, Wega, Betelgeuse
+	</TabItem>
+	<TabItem label="Monde" icon="moon">
+		Io, Europa, Ganymed
+	</TabItem>
+</Tabs>
+
+</Preview>
+
+## `<Tabs>`-Eigenschaften
+
+**Implementation:** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro)
+
+Die Komponente `<Tabs>` fasst mehrere `<TabItem>`-Komponenten zusammen und akzeptiert die folgenden Eigenschaften:
+
+### `syncKey`
+
+**Typ:** `string`
+
+Ein Schlüssel, der verwendet wird, um mehrere Registerkarten&shy;gruppen über mehrere Seiten hinweg zu synchronisieren.
+
+## `<TabItem>`-Eigenschaften
+
+**Implementation:** [`TabItem.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/TabItem.astro)
+
+Ein Satz von Tabs besteht aus Tab-Elementen, die jeweils die folgenden Eigenschaften haben:
+
+### `label`
+
+**Erforderlich**  
+**Typ:** `string`
+
+Eine Registerkarte muss ein Attribut `label` enthalten, das auf den Text gesetzt ist, der in der Registerkarte angezeigt werden soll.
+
+### `icon`
+
+**Typ:** `string`
+
+Jedes Tab-Element kann ein `icon`-Attribut enthalten, das auf den Namen [eines von Starlights eingebauten Symbolen](/de/reference/icons/#alle-symbole) gesetzt ist, um ein Symbol neben dem Label anzuzeigen.

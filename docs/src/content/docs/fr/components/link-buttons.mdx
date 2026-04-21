@@ -1,0 +1,145 @@
+---
+title: Boutons de liaison
+description: Apprenez à créer des boutons de liaison dans Starlight pour des liens visuellement distincts qui appellent à l'action.
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Pour afficher des liens visuellement distincts qui appellent à l'action (également connus sous le nom de « call-to-action » ou « CTA » en anglais), utilisez le composant `<LinkButton>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkButton slot="preview" href="/fr/getting-started/">
+	Lire la documentation
+</LinkButton>
+
+</Preview>
+
+## Importation
+
+```tsx
+import { LinkButton } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Utilisez le composant `<LinkButton>` pour afficher un lien visuellement distinct qui appelle à l'action.
+Un bouton de liaison est utile pour diriger les utilisateurs vers le contenu le plus pertinent ou actionnable et est souvent utilisé sur les pages d'accueil.
+
+Le composant `<LinkButton>` nécessite un attribut [`href`](#href).
+Facultativement, personnalisez l'apparence du bouton de liaison en utilisant l'attribut [`variant`](#variant), qui peut être défini sur `primary` (la valeur par défaut), `secondary` ou `minimal`.
+
+<Preview>
+
+```mdx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/fr/getting-started/">Mise en route</LinkButton>
+<LinkButton href="/fr/reference/configuration/" variant="secondary">
+	Référence de configuration
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkbutton href="/fr/getting-started/" %}Mise en route{% /linkbutton %}
+
+{% linkbutton href="/fr/reference/configuration/" variant="secondary" %}
+Référence de configuration
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<LinkButton href="/fr/getting-started/">Mise en route</LinkButton>
+	<LinkButton href="/fr/reference/configuration/" variant="secondary">
+		Référence de configuration
+	</LinkButton>
+</Fragment>
+
+</Preview>
+
+### Ajouter des icônes aux boutons de liaison
+
+Incluez une icône dans un bouton de liaison en utilisant l'attribut [`icon`](#icon) défini avec [une des icônes disponibles avec Starlight](/fr/reference/icons/#toutes-les-icônes).
+
+L'attribut [`iconPlacement`](#iconplacement) peut être utilisé pour positionner l'icône avant le texte en le définissant sur `start` (par défaut à `end`).
+
+<Preview>
+
+```mdx {6-7}
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton
+	href="https://docs.astro.build/fr/"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Référence : Astro
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4-5}
+{% linkbutton
+   href="https://docs.astro.build/fr/"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+Référence : Astro
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<LinkButton
+	slot="preview"
+	href="https://docs.astro.build/fr/"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Référence : Astro
+</LinkButton>
+
+</Preview>
+
+## Props de `<LinkButton>`
+
+**Implémentation :** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
+
+Le composant `<LinkButton>` accepte les props suivantes et également tout [autre attribut de l'élément `<a>`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/a) :
+
+### `href`
+
+**Obligatoire**  
+**Type :** `string`
+
+L'URL vers laquelle le bouton de liaison pointe.
+
+### `variant`
+
+**Type :** `'primary' | 'secondary' | 'minimal'`  
+**Par défaut :** `'primary'`
+
+L'apparence du bouton de liaison.
+Définissez `primary` pour un lien qui appelle à l'action proéminent utilisant la couleur d'accentuation du thème, `secondary` pour un lien moins proéminent, ou `minimal` pour un lien avec un style minimal.
+
+### `icon`
+
+**Type :** `string`
+
+Un bouton de liaison peut inclure un attribut `icon` défini avec [une des icônes disponibles avec Starlight](/fr/reference/icons/#toutes-les-icônes).
+
+### `iconPlacement`
+
+**Type :** `'start' | 'end'`  
+**Par défaut :** `'end'`
+
+Détermine la position de l'icône par rapport au texte du bouton de liaison.

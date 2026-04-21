@@ -1,0 +1,10 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+const href = getRelativeLocaleUrl(Astro.currentLocale ?? 'en', '/reference/icons/');
+---
+
+<code>
+	<Fragment set:text="Array<{" />
+	label: string; icon: <a {href}>StarlightIcon</a>; href: string
+	<Fragment set:text="}>" />
+</code>

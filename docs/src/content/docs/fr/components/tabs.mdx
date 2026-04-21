@@ -1,0 +1,221 @@
+---
+title: Onglets
+description: Apprenez à créer des interfaces à onglets dans Starlight pour regrouper des informations équivalentes.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Pour créer une interface à onglets, utilisez les composants `<Tabs>` et `<TabItem>`.
+Des onglets sont utiles pour regrouper des informations équivalentes où un utilisateur n'a besoin de voir qu'une des options.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Tabs slot="preview">
+	<TabItem label="Étoiles">Sirius, Véga, Bételgeuse</TabItem>
+	<TabItem label="Lunes">Io, Europe, Ganymède</TabItem>
+</Tabs>
+
+</Preview>
+
+## Importation
+
+```tsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Affichez une interface à onglets en utilisant les composants `<Tabs>` et `<TabItem>`.
+Chaque composant `<TabItem>` doit avoir un [`label`](#label) à afficher aux utilisateurs.
+
+<Preview>
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Étoiles">Sirius, Véga, Bételgeuse</TabItem>
+	<TabItem label="Lunes">Io, Europe, Ganymède</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% tabs %}
+{% tabitem label="Étoiles" %}
+Sirius, Véga, Bételgeuse
+{% /tabitem %}
+
+{% tabitem label="Lunes" %}
+Io, Europe, Ganymède
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Étoiles">Sirius, Véga, Bételgeuse</TabItem>
+	<TabItem label="Lunes">Io, Europe, Ganymède</TabItem>
+</Tabs>
+
+</Preview>
+
+### Synchroniser des onglets
+
+Conservez plusieurs groupes d'onglets synchronisés en ajoutant l'attribut [`syncKey`](#synckey).
+
+Tous les composants `<Tabs>` avec la même valeur `syncKey` afficheront le même label actif.
+Cela permet à votre lecteur de choisir une fois (par exemple, son système d'exploitation ou son gestionnaire de paquets) et de voir son choix persister en naviguant entre différentes pages.
+
+Pour synchroniser des onglets liés, ajoutez une propriété `syncKey` identique à chaque composant `<Tabs>` et assurez-vous qu'ils utilisent tous les mêmes libellés avec le composant `<TabItem>` :
+
+<Preview>
+
+```mdx 'syncKey="constellations"'
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Quelques étoiles :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Bételgeuse</TabItem>
+	<TabItem label="Gémeaux">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Quelques exoplanètes :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gémeaux">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'syncKey="constellations"'
+_Quelques étoiles :_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+Bellatrix, Rigel, Bételgeuse
+{% /tabitem %}
+
+{% tabitem label="Gémeaux" %}
+Pollux, Castor A, Castor B
+{% /tabitem %}
+{% /tabs %}
+
+_Quelques exoplanètes :_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+HD 34445 b, Gliese 179 b, Wasp-82 b
+{% /tabitem %}
+
+{% tabitem label="Gémeaux" %}
+Pollux b, HAT-P-24b, HD 50554 b
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+
+_Quelques étoiles :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Bételgeuse</TabItem>
+	<TabItem label="Gémeaux">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Quelques exoplanètes :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gémeaux">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
+</Fragment>
+
+</Preview>
+
+### Ajouter des icônes aux onglets
+
+Incluez une icône dans un onglet en utilisant l'attribut [`icon`](#icon) défini avec [une des icônes disponibles avec Starlight](/fr/reference/icons/#toutes-les-icônes) pour afficher une icône à côté du libellé.
+
+<Preview>
+
+```mdx /icon="\w+"/
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Étoiles" icon="star">
+		Sirius, Véga, Bételgeuse
+	</TabItem>
+	<TabItem label="Lunes" icon="moon">
+		Io, Europe, Ganymède
+	</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /icon="\w+"/
+{% tabs %}
+{% tabitem label="Étoiles" icon="star" %}
+Sirius, Véga, Bételgeuse
+{% /tabitem %}
+
+{% tabitem label="Lunes" icon="moon" %}
+Io, Europe, Ganymède
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Étoiles" icon="star">
+		Sirius, Véga, Bételgeuse
+	</TabItem>
+	<TabItem label="Lunes" icon="moon">
+		Io, Europe, Ganymède
+	</TabItem>
+</Tabs>
+
+</Preview>
+
+## Props de `<Tabs>`
+
+**Implémentation :** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro)
+
+Le composant `<Tabs>` regroupe plusieurs composants `<TabItem>` et accepte les props suivantes :
+
+### `syncKey`
+
+**Type :** `string`
+
+Une clé utilisée pour conserver plusieurs groupes d'onglets synchronisés sur plusieurs pages.
+
+## Props de `<TabItem>`
+
+**Implémentation :** [`TabItem.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/TabItem.astro)
+
+Un ensemble d'onglets est composé d'onglets, chacun avec les props suivantes :
+
+### `label`
+
+**Obligatoire**  
+**Type :** `string`
+
+Un onglet doit inclure un attribut `label` défini avec le texte qui sera affiché dans l'onglet.
+
+### `icon`
+
+**Type :** `string`
+
+Chaque onglet peut inclure un attribut `icon` défini avec [une des icônes disponibles avec Starlight](/fr/reference/icons/#toutes-les-icônes) pour afficher une icône à côté du libellé.

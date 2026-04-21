@@ -1,0 +1,32 @@
+---
+title: Icons Reference
+description: An overview of all the icons available in Starlight.
+---
+
+Starlight provides a set of built-in icons that you can display in your content using the `<Icon>` component.
+
+## Use icons
+
+Icons can be displayed using the [`<Icon>`](/components/icons/) component.
+They are also often used in other components, such as [cards](/components/cards/) or settings like [hero actions](/reference/frontmatter/#hero).
+
+## `StarlightIcon` type
+
+Use the `StarlightIcon` TypeScript type to reference the names of [Starlight’s built-in icons](#all-icons).
+
+```ts {2} /icon: (StarlightIcon)/
+// src/icon.ts
+import type { StarlightIcon } from '@astrojs/starlight/types';
+
+function getIconLabel(icon: StarlightIcon) {
+	// …
+}
+```
+
+## All icons
+
+A list of all available icons is shown below with their associated names. Click an icon to copy its name to your clipboard.
+
+import IconsList from '~/components/icons-list.astro';
+
+<IconsList labels={{ copied: 'Copied!' }} />

@@ -1,0 +1,110 @@
+---
+title: Karten
+description: Lerne, wie du in Starlight Karten verwenden kannst, um Inhalte in einer Box anzuzeigen.
+sidebar:
+  order: 2
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+Um Inhalte in einer Box anzuzeigen, die den Stilen von Starlight entspricht, verwende die Komponente `<Card>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Card slot="preview" title="Monde" icon="moon">
+	Io, Europa, Ganymed
+</Card>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Card } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Zeige eine Karte an, indem du die Komponente `<Card>` verwendest und einen [`title`](#title) für die Karte angibst.
+
+<Preview>
+
+```mdx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Schau dir das an">
+	Interessante Inhalte, die du hervorheben möchtest.
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% card title="Schau dir das an" %}
+Interessante Inhalte, die du hervorheben möchtest.
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Schau dir das an">
+	Interessante Inhalte, die du hervorheben möchtest.
+</Card>
+
+</Preview>
+
+### Hinzufügen von Symbolen zu Karten
+
+Füge ein Symbol in eine Karte ein, indem du das Attribut [`icon`](#icon) auf den Namen [eines von Starlights eingebauten Symbolen](/de/reference/icons/#alle-symbole) setzt.
+
+<Preview>
+
+```mdx 'icon="star"'
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Sterne" icon="star">
+	Sirius, Wega, Betelgeuse
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+{% card title="Sterne" icon="star" %}
+Sirius, Wega, Betelgeuse
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Sterne" icon="star">
+	Sirius, Wega, Betelgeuse
+</Card>
+
+</Preview>
+
+### Karten gruppieren
+
+Zeige mehrere Karten nebeneinander an, wenn genügend Platz vorhanden ist, indem du sie mit der Komponente [`<CardGrid>`](/de/components/card-grids/) gruppierst.
+Siehe die Anleitung [„Karten gruppieren“](/de/components/card-grids/#karten-gruppieren) für ein Beispiel.
+
+## `<Card>`-Eigenschaften
+
+**Implementation:** [`Card.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Card.astro)
+
+Die Komponente `<Card>` akzeptiert die folgenden Eigenschaften:
+
+### `title`
+
+**Erforderlich**  
+**Typ:** `string`
+
+Der Titel der anzuzeigenden Karte.
+
+### `icon`
+
+**Typ:** `string`
+
+Eine Karte kann ein `icon`-Attribut enthalten, das auf den Namen [eines von Starlights eingebauten Symbolen](/de/reference/icons/#alle-symbole) gesetzt ist.

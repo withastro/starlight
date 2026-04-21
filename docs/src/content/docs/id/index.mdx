@@ -1,0 +1,164 @@
+---
+title: Starlight 🌟 Membangun website dokumentasi dengan Astro
+head:
+  - tag: title
+    content: Starlight 🌟 Membangun website dokumentasi dengan Astro
+description: Starlight membantu membangun website dokumentasi yang menawan dan berperforma tinggi dengan Astro.
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  title: Buat dokumentasi yang bersinar dengan Starlight
+  tagline: Semua yang Anda butuhkan untuk membangun website dokumentasi yang luar biasa. Cepat, ramah pengguna, dan sangat mudah digunakan.
+  image:
+    file: ~/assets/hero-star.webp
+  actions:
+    - text: Memulai
+      icon: right-arrow
+      link: /id/getting-started/
+    - text: Lihat di GitHub
+      icon: external
+      variant: minimal
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '~/components/about-astro.astro';
+import TestimonialGrid from '~/components/testimonial-grid.astro';
+import Testimonial from '~/components/testimonial.astro';
+
+<CardGrid stagger>
+	<Card title="Dokumentasi yang menawan" icon="open-book">
+		Sudah termasuk: Navigasi website, pencarian, terjemahan, SEO, tipografi yang
+		mudah dibaca, _code highlighting_, mode gelap, dan masih banyak lagi.
+	</Card>
+	<Card title="Berbasis Astro" icon="rocket">
+		Manfaatkan kekuatan penuh dan performa Astro. Kembangkan Starlight dengan
+		_library_ dan integrasi Astro favorit Anda.
+	</Card>
+	<Card title="Markdown, Markdoc, and MDX" icon="document">
+		Gunakan bahasa markup favorit Anda. Starlight menyediakan validasi
+		_frontmatter_ bawaan dengan TypeScript _type-safety_.
+	</Card>
+	<Card title="Gunakan komponen UI pilihan Anda" icon="puzzle">
+		Starlight adalah solusi dokumentasi yang lengkap dan _framework-agnostic_.
+		Kembangkan lebih jauh dengan React, Vue, Svelte, Solid, dan lain-lain.
+	</Card>
+</CardGrid>
+
+<TestimonialGrid title="Apa yang orang katakan">
+  <Testimonial
+    name="Rachel"
+    handle="rachelnabors"
+    cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
+  >
+    Tim Astro telah MERUBAH cara pembuatan dokumentasi dan Anda bisa mendapatkan semuanya langsung dengan proyek Starlight mereka.
+  </Testimonial>
+  <Testimonial
+    name="Flavio"
+    handle="flaviocopes"
+    cite="https://twitter.com/flaviocopes/status/1738237658717905108"
+  >
+    Astros _starter kit_ resmi Starlight adalah alat yang benar-benar luar biasa untuk membangun situs web dokumentasi
+  </Testimonial>
+  <Testimonial
+    name="Tomek"
+    handle="sulco"
+    cite="https://twitter.com/sulco/status/1735610348730802342"
+  >
+    Starlight adalah contoh terbaik DX yang hebat: kecepatan, kenyamanan, dan
+	perhatian terhadap detailnya sangat menginspirasi. Ia memperhatikan teknologi dan tampilan,
+	sehingga Anda dapat fokus pada konten Anda 👏
+
+    Tim StackBlitz sangat menyukainya!
+
+  </Testimonial>
+  <Testimonial
+    name="Roberto"
+    handle="RmeetsH"
+    cite="https://twitter.com/RmeetsH/status/1735783992018760090"
+  >
+    Starlight telah mengubah permainan bagi saya, memungkinkan saya untuk fokus pada pembuatan konten.
+
+    Desainnya yang intuitif tidak hanya menyederhanakan alur kerja saya tetapi juga mengurangi waktu orientasi bagi pengembang _open-source_.
+
+  </Testimonial>
+  <Testimonial
+    name="Joel"
+    handle="jhooks"
+    cite="https://twitter.com/jhooks/status/1727405160547418405"
+  >
+    Menghabiskan lebih banyak waktu dengan Starlight untuk dokumentasi Course Builder dan sejauh ini hasilnya sangat bagus. Banyak sentuhan yang bagus dan dapat fokus menulis dalam Markdown dan tidak mengutak-atik situs.
+  </Testimonial>
+  <Testimonial
+    name="Rick"
+    handle="rick_viscomi"
+    cite="https://twitter.com/rick_viscomi/status/1665867447910510593"
+  >
+    Mulai bermain dengan Starlight. Harus saya akui saya sangat terkesan dengan kinerjanya saat pertama kali digunakan.
+
+    💯💯💯💯
+
+  </Testimonial>
+  <Testimonial
+    name="Nicolas"
+    handle="beaussan"
+    cite="https://twitter.com/beaussan/status/1735625189583466893"
+  >
+    Starlight adalah cara terbaik untuk memulai dokumentasi, antara 
+	kekuatan dan kecepatan Astro, dan fitur dari Starlight, ini adalah pilihan yang 
+	tepat.
+
+    Ini telah menjadi pilihan saya untuk beberapa waktu sekarang, dan saya terus menyukainya!
+
+  </Testimonial>
+  <Testimonial
+    name="Sylwia"
+    handle="SylwiaVargas"
+    cite="https://x.com/SylwiaVargas/status/1726556825741578286"
+  >
+    Saya menggunakan Starlight pada pekerjaan terakhir saya dan menyukainya. Komponen yang hebat, 
+	desain yang intuitif, dan komunitas yang sangat responsif (kapan pun seseorang membutuhkan sesuatu, 
+	mereka akan segera mengirimkannya atau memberi tahu Anda solusinya). Pengalaman yang sangat menyenangkan.
+  </Testimonial>
+  <Testimonial
+    name="Lou Cyx"
+    handle="loucyx"
+    cite="https://elk.zone/m.webtoo.ls/@loucyx@mastodon.social/111587380021362284"
+  >
+    Dokumen di situs monorepo saya terlihat lebih baik dari sebelumnya berkat Starlight. Sangat mudah digunakan tanpa kehilangan semua kelebihan Astro. Terima kasih telah mengerjakannya!
+  </Testimonial>
+  <Testimonial
+    name="BowTiedWebReaper"
+    handle="BowTiedWebReapr"
+    cite="https://twitter.com/BowTiedWebReapr/status/1735633399501697517"
+  >
+    Starlight adalah alat andalan saya untuk dokumentasi. Alat ini memudahkan saya menambahkan dokumen ke situs web produk Astro saya yang sudah ada, dibanding menggunakan subdomain untuk digunakan dengan alat lain.
+  </Testimonial>
+  <Testimonial
+    name="Jeff"
+    handle="J_Everhart383"
+    cite="https://twitter.com/J_Everhart383/status/1691900590048292908"
+  >
+    Saya sedang membangun kembali dokumentasi WPEngine Atlas Platform. Percayalah ketika saya mengatakan Starlight memiliki semua yang Anda butuhkan untuk membuat platform dokumentasi A+&nbsp;🙌
+  </Testimonial>
+  <Testimonial
+    name="Chloe"
+    handle="solelychloe"
+    cite="https://twitter.com/solelychloe/status/1695115277602628082"
+  >
+    Cobalah Starlight!
+
+    Saya menggunakannya untuk beberapa situs saya dan hasilnya bagus.
+
+  </Testimonial>
+</TestimonialGrid>
+
+<AboutAstro title="Dipersembahkan oleh">
+Astro adalah _web framework_ serbaguna yang didesain untuk kecepatan.
+Gunakan konten Anda dari sumber mana saja dan _deploy_ di mana saja, 
+semuanya didukung oleh _library_ dan komponen UI favorit Anda.
+
+[Pelajari tentang Astro](https://astro.build/)
+
+</AboutAstro>

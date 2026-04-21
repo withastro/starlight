@@ -1,0 +1,150 @@
+---
+title: Значки
+description: Узнайте, как использовать значки в Starlight для отображения дополнительной информации.
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+Для отображения небольших фрагментов информации, таких как статус или категория, используйте компонент `<Badge>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="Новинка" />
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Отображайте значки с помощью компонента `<Badge>`, с передачей желаемого содержимого через атрибут [`text`](#text).
+
+По умолчанию значок будет использовать акцентный цвет темы вашего сайта.
+Чтобы использовать встроенный цвет значка, установите для атрибута [`variant`](#variant) одно из поддерживаемых значений.
+
+<Preview>
+
+```mdx
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="Примечание" variant="note" />
+- <Badge text="Успешно" variant="success" />
+- <Badge text="Совет" variant="tip" />
+- <Badge text="Внимание" variant="caution" />
+- <Badge text="Опасность" variant="danger" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+- {% badge text="Примечание" variant="note" /%}
+- {% badge text="Успешно" variant="success" /%}
+- {% badge text="Совет" variant="tip" /%}
+- {% badge text="Внимание" variant="caution" /%}
+- {% badge text="Опасность" variant="danger" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="Примечание" variant="note" />
+	- <Badge text="Успешно" variant="success" />
+	- <Badge text="Совет" variant="tip" />
+	- <Badge text="Внимание" variant="caution" />
+	- <Badge text="Опасность" variant="danger" />
+</Fragment>
+
+</Preview>
+
+### Использование разных размеров
+
+Используйте атрибут [`size`](#size) для управления размером текста значка.
+
+<Preview>
+
+```mdx /size="\w+"/
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="Новинки" size="small" />
+- <Badge text="Новинки и улучшения" size="medium" />
+- <Badge text="Новинки, улучшения и другое" size="large" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+- {% badge text="Новинки" size="small" /%}
+- {% badge text="Новинки и улучшения" size="medium" /%}
+- {% badge text="Новинки, улучшения и другое" size="large" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="Новинки" size="small" />
+	- <Badge text="Новинки и улучшения" size="medium" />
+	- <Badge text="Новинки, улучшения и другое" size="large" />
+</Fragment>
+
+</Preview>
+
+### Настройка значков
+
+Настраивайте значки, используя другие атрибуты `<span>`, такие как `class` или `style`, с помощью пользовательского CSS.
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Свой текст" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+{% badge text="Свой текст" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
+
+<Badge
+	slot="preview"
+	text="Свой текст"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## Параметры `<Badge>`
+
+**Реализация:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+Компонент `<Badge>` принимает следующие параметры, а также любые [другие атрибуты `<span>`](https://developer.mozilla.org/ru/docs/Web/HTML/Global_attributes):
+
+### `text`
+
+**обязательный**  
+**тип:** `string`
+
+Текстовое содержимое для отображения в значке.
+
+### `variant`
+
+**тип:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**по умолчанию:** `'default'`
+
+Вариант цвета значка для использования: `note` (синий), `tip` (фиолетовый), `danger` (красный), `caution` (оранжевый), `success` (зелёный) или `default` (акцентный цвет темы).
+
+### `size`
+
+**тип:** `'small' | 'medium' | 'large'`
+
+Определяет размер отображаемого значка.

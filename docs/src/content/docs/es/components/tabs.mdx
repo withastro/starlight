@@ -1,0 +1,221 @@
+---
+title: Pestañas
+description: Aprende a crear interfaces con pestañas en Starlight para agrupar información equivalente.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Para crear una interfaz con pestañas usa los componentes `<Tabs>` y `<TabItem>`.
+Las pestañas son útiles para agrupar información equivalente donde un usuario solo necesita ver una de varias opciones.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Tabs slot="preview">
+	<TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
+</Tabs>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Muestra una interfaz con pestañas usando los componentes `<Tabs>` y `<TabItem>`.
+Cada `<TabItem>` debe tener una [`label`](#label) para mostrar a los usuarios.
+
+<Preview>
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% tabs %}
+{% tabitem label="Estrellas" %}
+Sirius, Vega, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Lunas" %}
+Io, Europa, Ganymede
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
+</Tabs>
+
+</Preview>
+
+### Sincronizar pestañas
+
+Mantén sincronizados varios grupos de pestañas agregando el atributo [`syncKey`](#synckey).
+
+Todos las `<Tabs>` en una página con el mismo valor de `syncKey` mostrarán la misma etiqueta activa.
+Esto permite que el lector elija una vez (por ejemplo, su sistema operativo o administrador de paquetes) y vea su elección persistida a través de las navegaciones de página.
+
+Para sincronizar pestañas relacionadas, agrega una propiedad `syncKey` idéntica a cada componente `<Tabs>` y asegúrate de que todos usen las mismas etiquetas `<TabItem>`:
+
+<Preview>
+
+```mdx 'syncKey="constelaciones"'
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Algunas estrellas:_
+
+<Tabs syncKey="constelaciones">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Algunos exoplanetas:_
+
+<Tabs syncKey="constelaciones">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'syncKey="constelaciones"'
+_Algunas estrellas:_
+
+{% tabs syncKey="constelaciones" %}
+{% tabitem label="Orion" %}
+Bellatrix, Rigel, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Gemini" %}
+Pollux, Castor A, Castor B
+{% /tabitem %}
+{% /tabs %}
+
+_Algunos exoplanetas:_
+
+{% tabs syncKey="constelaciones" %}
+{% tabitem label="Orion" %}
+HD 34445 b, Gliese 179 b, Wasp-82 b
+{% /tabitem %}
+
+{% tabitem label="Gemini" %}
+Pollux b, HAT-P-24b, HD 50554 b
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+
+_Algunas estrellas:_
+
+<Tabs syncKey="constelaciones">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Algunos exoplanetas:_
+
+<Tabs syncKey="constelaciones">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
+</Fragment>
+
+</Preview>
+
+### Agregar iconos a las pestañas
+
+Incluye un icono en un elemento de pestaña usando el atributo [`icon`](#icon) establecido en el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos) para mostrar un icono junto a la etiqueta.
+
+<Preview>
+
+```mdx /icon="\w+"/
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Estrellas" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Lunas" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /icon="\w+"/
+{% tabs %}
+{% tabitem label="Estrellas" icon="star" %}
+Sirius, Vega, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Lunas" icon="moon" %}
+Io, Europa, Ganymede
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Estrellas" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Lunas" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
+</Tabs>
+
+</Preview>
+
+## Props de `<Tabs>`
+
+**Implementación:** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro)
+
+El componente `<Tabs>` agrupa varios componentes `<TabItem>` y acepta las siguientes propiedades:
+
+### `syncKey`
+
+**tipo:** `string`
+
+Una clave utilizada para mantener sincronizados varios grupos de pestañas en varias páginas.
+
+## Props de `<TabItem>`
+
+**Implementación:** [`TabItem.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/TabItem.astro)
+
+Un conjunto de pestañas está compuesto por elementos de pestaña, cada uno con las siguientes propiedades:
+
+### `label`
+
+**requerido**  
+**tipo:** `string`
+
+Un elemento de pestaña debe incluir un atributo `label` establecido en el texto que se mostrará en la pestaña.
+
+### `icon`
+
+**tipo:** `string`
+
+Cada elemento de pestaña puede incluir un atributo `icon` establecido en el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos) para mostrar un icono junto a la etiqueta.

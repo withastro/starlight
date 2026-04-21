@@ -1,0 +1,22 @@
+---
+interface Props {
+	minColumnWidth?: string;
+	gap?: string;
+}
+const { minColumnWidth, gap } = Astro.props;
+---
+
+<ul class="fluid-grid"><slot /></ul>
+
+<style define:vars={{ minColumnWidth, gap }}>
+	.fluid-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--minColumnWidth, 11rem)), 1fr));
+		gap: var(--gap, 1rem);
+		list-style: none;
+		padding: 0;
+	}
+	.fluid-grid > :global(*) {
+		margin-top: 0 !important;
+	}
+</style>

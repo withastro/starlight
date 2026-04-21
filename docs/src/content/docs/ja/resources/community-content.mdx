@@ -1,0 +1,249 @@
+---
+title: コミュニティコンテンツ
+description: コミュニティ製のガイドや記事、動画をチェックして、Starlightの学習や開発に役立てましょう！
+---
+
+:::tip[自分のものを追加しよう！]
+Starlightに関するコンテンツを作成しましたか？このページにリンクを追加するPRを作成しましょう！
+:::
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## 記事とレビュー
+
+以下は、Starlightやその開発体験について学ぶための記事のコレクションです。
+
+<CardGrid>
+	<LinkCard
+		href="https://devm.io/open-source/starlight-astro"
+		title="Starlightによる静的サイト生成"
+		description="「コンポーネントの設計において、大きすぎるアイデアも小さすぎるアイデアもありません」- StarlightリードのChris Swithinbankとのインタビュー"
+	/>
+	<LinkCard
+		href="https://frontendatscale.com/blog/hybrid-frontend-architecture/"
+		title="AstroとStarlightによるハイブリッドフロントエンドアーキテクチャ"
+		description="Maxi FerreiraとBen Holmesが、Starlight、TinaCMS、認証付きのインタラクティブAPIプレイグラウンドを使用してドキュメントサイトを作成します。"
+	/>
+	<LinkCard
+		href="https://www.olets.dev/posts/comparing-docs-site-builders-vuepress-vs-starlight/"
+		title="ドキュメントサイトビルダーの比較: VuePressとStarlight"
+		description="両フレームワークはどのように比較されるのでしょうか？"
+	/>
+	<LinkCard
+		href="https://astro.build/case-studies/wp-engine/"
+		title="ケーススタディ: 開発コストの大幅削減"
+		description="WP EngineがAstroのStarlightを活用して開発コストを50%以上削減した方法。"
+	/>
+	<LinkCard
+		href="https://maciekpalmowski.dev/blog/building-a-documentation-site-using-astro-starlight/"
+		title="Astro Starlightを使ったドキュメントサイトの構築"
+		description="Maciek Palmowskiが、PatchstackのドキュメントをどのようにStarlightに移行したかを紹介しています。"
+	/>
+	<LinkCard
+		href="https://blog.cloudflare.com/open-source-all-the-way-down-upgrading-our-developer-documentation/"
+		title="すべてをオープンソースで"
+		description="Cloudflareが開発者向けドキュメントをStarlightでアップグレードした方法。"
+	/>
+	<LinkCard
+		href="https://starlight-changelog.netlify.app/"
+		title="Starlight Changelog"
+		description="@astrojs/starlightパッケージのすべてのリリースを1つの見やすいページで確認できます。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/contributing-to-starlight"
+		title="Starlightへのコントリビューション"
+		description="Starlightのようなオープンソースプロジェクトへのコントリビューションについての個人的な経験とアドバイス。"
+	/>
+</CardGrid>
+
+## レシピとガイド
+
+レシピは通常、特定のタスクを読者に具体的に案内する、焦点を絞った短いハウツーガイドです。ステップバイステップの手順に従って、Starlightプロジェクトに新しい機能や動作を追加するための素晴らしい方法といえます！他のガイドでは、画像の使用やMDXの扱い方など、コンテンツの領域に関連する概念も説明しています。
+
+Starlightユーザーによってメンテナンスされている、コミュニティ製のコンテンツをチェックしてみましょう。
+
+<CardGrid>
+	<LinkCard
+		href="https://www.webpro.nl/scraps/versioned-docs-with-starlight-and-vercel"
+		title="StarlightとVercelでバージョン管理されたドキュメントを作成する"
+		description="プロジェクトの各メジャーバージョンごとにドキュメントのバージョンを分けて実装する方法についてのガイド。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-heading-links"
+		title="Starlightの見出しにリンクを追加する"
+		description="rehypeプラグインを使用して、ドキュメントの特定のセクションへのリンクを共有する方法についてのガイド。"
+	/>
+	<LinkCard
+		href="https://blog.otterlord.dev/posts/starlight-sponsors/"
+		title="Starlightサイトにスポンサーを追加する"
+		description="ドキュメントのサイドバーにカスタムスポンサーコンポーネントを実装する方法についてのガイド。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-og-images"
+		title="Open Graph画像をStarlightに追加する"
+		description="ソーシャル画像とそれに対応するメタタグを生成する方法についてのガイド。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-third-party-icon-sets"
+		title="サードパーティのアイコンセットをStarlightで使用する"
+		description="unplugin-iconsを使用して、Starlightで利用可能なアイコンの選択肢を拡張する方法についてのガイド。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-custom-html-head"
+		title="StarlightページのHTMLヘッドを編集する"
+		description="ウェブアナリティクス、フォント、スクリプトなどの共通のヘッドコンテンツを追加する方法について学びます。"
+	/>
+	<LinkCard
+		href="https://dev.to/mrrobot/publishing-documentation-with-astro-starlight-691"
+		title="AstroのStarlightでドキュメントを公開する"
+		description="Starlightドキュメントの始め方。"
+	/>
+	<LinkCard
+		href="https://events-3bg.pages.dev/jotter/starlight/"
+		title="ビュートランジションを有効にする"
+		description="Starlightドキュメントサイトにビュートランジション、クライアントサイドルーティング、SPAライクなナビゲーションのサポートを追加します。"
+	/>
+	<LinkCard
+		href="https://jamcomments.com/posts/structured-data-with-starlight"
+		title="Starlightページに構造化データを追加する"
+		description="ドキュメントページに動的なJSON-LD構造化データを作成する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://starlight-examples.netlify.app/"
+		title="Starlightの実例集"
+		description="Starlightドキュメントサイトでの実践的な方法を紹介するStackBlitz上のコレクションです。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notebooks/starlight-plugins-by-example"
+		title="実例で学ぶStarlightプラグイン"
+		description="Starlightプラグインと、その作成における一般的なパターンに関するノートと実例のコレクションです。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-progress-indicator/"
+		title="閲覧の進捗インジケーターを追加する"
+		description="Starlightサイトに水平方向の閲覧進捗バーを追加する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-sidebar-whitespace/"
+		title="Starlightサイドバーにカスタムスタイルを適用する"
+		description="少しのCSSでStarlightサイドバーのフォントや色などを調整する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-dropdown-and-list-together/"
+		title="モバイルではドロップダウン、デスクトップではリスト表示"
+		description="2つのプラグインを組み合わせて、デスクトップとモバイルの両方で最適な表示を実現します。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-autogenerate-whole-sidebar/"
+		title="ミドルウェアでStarlightサイドバーを処理する"
+		description="Nuxt Contentの規約に着想を得た、ルートミドルウェアによるサイドバーの順序やグループラベルの制御方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-custom-social-links"
+		title="カスタムアイコン付きのソーシャルリンクをStarlightに追加する"
+		description="Starlightサイトのヘッダーでソーシャルリンクにカスタムアイコンを使用する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-paste-images-with-visual-studio-code"
+		title="Visual Studio CodeでStarlightページに画像を貼り付ける"
+		description="Visual Studio Codeを使ってドキュメントページに画像を貼り付けることで、Starlightのドキュメント作成ワークフローを改善します。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-add-diagrams-using-d2"
+		title="D2を使ってStarlightドキュメントにダイアグラムを追加する"
+		description="D2を使用してStarlightドキュメントにダイアグラムを追加する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-og-images-cloudinary-astro-sdk"
+		title="Cloudinary Astro SDKを使ってStarlightのOpen Graph画像を生成する"
+		description="Cloudinary Astro SDKを使用して、StarlightドキュメントサイトのOpen Graph画像を生成する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-list-recent-github-releases"
+		title="Astro Content Layer APIを使ってStarlightにGitHubの最新リリースを一覧表示する"
+		description="Astro Content Layer APIを使用して、StarlightプロジェクトにGitHubの最新リリースを一覧表示する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-sitewide-banner"
+		title="Starlightにサイト全体で適用されるバナーを追加する"
+		description="Starlightに組み込まれたページごとのバナー機能を活用して、サイト全体で適用されるバナーを作成する方法を紹介しています。"
+	/>
+	<LinkCard
+		href="https://lirantal.com/blog/customizing-astro-starlight-sidebar-gated-content-auth"
+		title="認証が必要なコンテンツ向けにAstro Starlightのサイドバーをカスタマイズする"
+		description="ClerkとSSRを活用し、ユーザーのログイン状況に応じてStarlightのサイドバーの章を動的に非表示、あるいは表示することで、コース教材へのアクセスを制御する方法を紹介しています。"
+	/>
+</CardGrid>
+
+## 動画コンテンツ
+
+ライブストリームや教育コンテンツなど、Starlightに関する動画やチャンネルをチェックしてみましょう。
+
+import YouTubeGrid from '~/components/youtube-grid.astro';
+
+### 公式動画
+
+<YouTubeGrid
+	videos={[
+		{
+			href: 'https://www.youtube.com/watch?v=5u0Ds7wzUeI',
+			title: 'AstroによるStarlight',
+			description: '公式のStarlightローンチ動画をご覧ください。',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=j8K-ESJF814',
+			title: 'Starlight 1周年！',
+			description:
+				'Astroのコミュニティ製ドキュメントテーマについてSarahが語ります。',
+		},
+	]}
+/>
+
+### コミュニティ製の動画とストリーム
+
+<YouTubeGrid
+	videos={[
+		{
+			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+			title: '🌟 1分で起動チャレンジ',
+			description:
+				'Benが1分以内に新しいStarlightサイトを立ち上げる様子を見てみましょう！',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
+			title: 'StarlightとAstroでドキュメントを作成する',
+			description:
+				'ChrisとAlexが、Code with CodingCat.devでStarlightについて語ります。',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=sWkkHbwDeQc',
+			title: 'Astro Starlight',
+			description: '1分でStarlightを紹介します。',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=-Ki-1E5gNCk',
+			title:
+				'AstroによるStarlightドキュメントテンプレート（アプリのドキュメントを作る！）',
+			description: '5分で新しいStarlightサイトを立ち上げます。',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=12o7WxjAxjM',
+			title:
+				'プロキシを使ってNext.jsプロジェクトにStarlightドキュメントを組み込む',
+			description:
+				'Next.jsウェブサイト内にStarlightをサブディレクトリプロジェクトとしてセットアップします。',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=5pq80drDrNs',
+			title: 'このすごいツールでShadcnのドキュメントを30分で再現してみた',
+			description:
+				'この動画では、Starlightのどこがすごいのか、そしてなぜ次のプロジェクトで試してみる価値があるのかを解説します。',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=Q1E4Gkt63ko',
+			title: 'Chris Swithinbankと学ぶAstro Starlightとemoji-blast',
+			description:
+				'AstroのStarlight生みの親であるChrisが、新しいemoji-blastウェブサイトへのセットアップ方法を一緒に案内してくれます。🌟 🎇',
+		},
+	]}
+/>

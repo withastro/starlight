@@ -1,0 +1,179 @@
+---
+title: Cuadrículas de tarjetas
+description: Aprende a envolver varias tarjetas en una cuadrícula en Starlight.
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Para envolver múltiples componentes [`<Card>`](/es/components/cards/) o [`<LinkCard>`](/es/components/link-cards/) en una cuadrícula, usa el componente `<CardGrid>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="Estrellas" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Lunas" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+### Agrupar tarjetas
+
+Muestra varios componentes [`<Card>`](/es/components/cards/) uno al lado del otro cuando hay suficiente espacio agrupándolos con el componente `<CardGrid>`.
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Revisa esto" icon="open-book">
+		Contenido interesante que deseas destacar.
+	</Card>
+	<Card title="Otra caracaterística" icon="information">
+		Más información que deseas compartir.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="Revisa esto" icon="open-book" %}
+Contenido interesante que deseas destacar.
+{% /card %}
+
+{% card title="Otra caracaterística" icon="information" %}
+Más información que deseas compartir.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="Revisa esto" icon="open-book">
+		Contenido interesante que deseas destacar.
+	</Card>
+	<Card title="Otra caracaterística" icon="information">
+		Más información que deseas compartir.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### Agrupar tarjetas de enlace
+
+Muestra varios componentes [`<LinkCard>`](/es/components/link-cards/) uno al lado del otro cuando hay suficiente espacio agrupándolos con el componente `<CardGrid>`.
+
+<Preview>
+
+```mdx {3,9}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard
+		title="Creación de contenido en Markdown"
+		href="/es/guides/authoring-content/"
+	/>
+	<LinkCard title="Componentes" href="/es/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,5}
+{% cardgrid %}
+{% linkcard title="Creación de contenido en Markdown" href="/es/guides/authoring-content/" /%}
+
+{% linkcard title="Componentes" href="/es/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard
+		title="Creación de contenido en Markdown"
+		href="/es/guides/authoring-content/"
+	/>
+	<LinkCard title="Componentes" href="/es/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### Tarjetas escalonadas
+
+Cambia la segunda columna de la cuadrícula verticalmente para agregar interés visual agregando el atributo [`stagger`](#stagger) al componente `<CardGrid>`.
+
+Este atributo es útil en tu página de inicio para mostrar las características clave de tu proyecto.
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Revisa esto" icon="open-book">
+		Contenido interesante que deseas destacar.
+	</Card>
+	<Card title="Otra característica" icon="information">
+		Más información que deseas compartir.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="Revisa esto" icon="open-book" %}
+Contenido interesante que deseas destacar.
+{% /card %}
+
+{% card title="Otra característica" icon="information" %}
+Más información que deseas compartir.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="Revisa esto" icon="open-book">
+		Contenido interesante que deseas destacar.
+	</Card>
+	<Card title="Otra característica" icon="information">
+		Más información que deseas compartir.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Props de `<CardGrid>`
+
+**Implementación:** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+El componente `<CardGrid>` acepta las siguientes propiedades:
+
+### `stagger`
+
+**tipo:** `boolean`
+
+Define si se deben escalonar las tarjetas en la cuadrícula o no.

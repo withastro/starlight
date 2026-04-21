@@ -1,0 +1,221 @@
+---
+title: Вкладки
+description: Узнайте, как создавать интерфейсы с вкладками в Starlight для группировки равнозначной информации.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Для создания интерфейса с вкладками используйте компоненты `<Tabs>` и `<TabItem>`.
+Вкладки полезны для группировки эквивалентной информации, когда пользователю нужно увидеть только один из нескольких вариантов.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Tabs slot="preview">
+	<TabItem label="Звёзды">Сириус, Вега, Бетельгейзе</TabItem>
+	<TabItem label="Луны">Ио, Европа, Ганимед</TabItem>
+</Tabs>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Создавайте интерфейс с вкладками с помощью компонентов `<Tabs>` и `<TabItem>`.
+Каждый компонент `<TabItem>` должен иметь атрибут [`label`](#label) для отображения пользователям.
+
+<Preview>
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Звёзды">Сириус, Вега, Бетельгейзе</TabItem>
+	<TabItem label="Луны">Ио, Европа, Ганимед</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% tabs %}
+{% tabitem label="Звёзды" %}
+Сириус, Вега, Бетельгейзе
+{% /tabitem %}
+
+{% tabitem label="Луны" %}
+Ио, Европа, Ганимед
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Звёзды">Сириус, Вега, Бетельгейзе</TabItem>
+	<TabItem label="Луны">Ио, Европа, Ганимед</TabItem>
+</Tabs>
+
+</Preview>
+
+### Синхронизация вкладок
+
+Обеспечьте синхронизацию нескольких групп вкладок, добавив атрибут [`syncKey`](#synckey).
+
+Все `<Tabs>` с одинаковым значением `syncKey` будут отображать одну и ту же активную метку.
+Это позволит вашему читателю выбрать один раз (например, операционную систему или менеджер пакетов), и видеть, что их выбор сохраняется при переходе по страницам.
+
+Чтобы синхронизировать связанные вкладки, добавьте идентичное свойство `syncKey` к каждому компоненту `<Tabs>` и убедитесь, что все они используют одни и те же метки `<TabItem>`:
+
+<Preview>
+
+```mdx 'syncKey="constellations"'
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Некоторые звёзды:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">Беллатрикс, Ригель, Бетельгейзе</TabItem>
+	<TabItem label="Близнецы">Поллукс, Кастор А, Кастор Б</TabItem>
+</Tabs>
+
+_Некоторые экзопланеты:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Близнецы">Поллукс b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'syncKey="constellations"'
+_Некоторые звёзды:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+Беллатрикс, Ригель, Бетельгейзе
+{% /tabitem %}
+
+{% tabitem label="Gemini" %}
+Pollux, Castor A, Castor B
+{% /tabitem %}
+{% /tabs %}
+
+_Некоторые экзопланеты:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+HD 34445 b, Gliese 179 b, Wasp-82 b
+{% /tabitem %}
+
+{% tabitem label="Gemini" %}
+Pollux b, HAT-P-24b, HD 50554 b
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+
+_Некоторые звёзды:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">Беллатрикс, Ригель, Бетельгейзе</TabItem>
+	<TabItem label="Близнецы">Поллукс, Кастор А, Кастор Б</TabItem>
+</Tabs>
+
+_Некоторые экзопланеты:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Близнецы">Поллукс b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
+</Fragment>
+
+</Preview>
+
+### Добавление иконок
+
+Включите иконку в элемент вкладки, используя атрибут [`icon`](#icon), содержащий имя [одной из встроенных иконок Starlight](/ru/reference/icons/#все-иконки), чтобы отобразить иконку рядом с меткой.
+
+<Preview>
+
+```mdx /icon="\w+"/
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Звёзды" icon="star">
+		Сириус, Вега, Бетельгейзе
+	</TabItem>
+	<TabItem label="Луны" icon="moon">
+		Ио, Европа, Ганимед
+	</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /icon="\w+"/
+{% tabs %}
+{% tabitem label="Звёзды" icon="star" %}
+Сириус, Вега, Бетельгейзе
+{% /tabitem %}
+
+{% tabitem label="Луны" icon="moon" %}
+Ио, Европа, Ганимед
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="Звёзды" icon="star">
+		Сириус, Вега, Бетельгейзе
+	</TabItem>
+	<TabItem label="Луны" icon="moon">
+		Ио, Европа, Ганимед
+	</TabItem>
+</Tabs>
+
+</Preview>
+
+## Параметры `<Tabs>`
+
+**Реализация:** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro)
+
+Компонент `<Tabs>` объединяет несколько компонентов `<TabItem>` и принимает следующие параметры:
+
+### `syncKey`
+
+**тип:** `string`
+
+Ключ, используемый для синхронизации нескольких групп вкладок на нескольких страницах.
+
+## Параметры `<TabItem>`
+
+**Реализация:** [`TabItem.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/TabItem.astro)
+
+Набор вкладок состоит из элементов вкладок, каждый из которых имеет следующие параметры:
+
+### `label`
+
+**обязательный**  
+**тип:** `string`
+
+Элемент вкладки должен содержать атрибут `label`, содержащий текст, который будет отображаться на вкладке.
+
+### `icon`
+
+**тип:** `string`
+
+Каждый элемент вкладки может включать атрибут `icon` с именем [одной из встроенных иконок Starlight](/ru/reference/icons/#все-иконки), для отображения иконки рядом с меткой.

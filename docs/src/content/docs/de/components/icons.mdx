@@ -1,0 +1,128 @@
+---
+title: Symbole
+description: Erfahre, wie du Symbole in Starlight anzeigen kannst.
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+Um Symbole aus Starlights [eingebautem Symbol-Set](/de/reference/icons/#alle-symbole) anzuzeigen, verwende die `<Icon>` Komponente.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Icon
+	slot="preview"
+	name="open-book"
+	color="var(--sl-color-text-accent)"
+	size="4rem"
+/>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Icon } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Zeigt ein Symbol mit der Komponente `<Icon>` an.
+Ein Symbole benötigt einen [`name`](#name), der auf [eines der in Starlight eingebauten Symbolen](/de/reference/icons/#alle-symbole) gesetzt ist, und kann optional ein [`label`](#label) enthalten, um Kontext für Screenreader zu liefern.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" />
+<Icon name="starlight" label="Das Starlight-Logo" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" /%}
+{% icon name="starlight" label="Das Starlight-Logo" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" />
+	<Icon name="starlight" label="Das Starlight-Logo" />
+</Fragment>
+
+</Preview>
+
+### Anpassen von Symbolen
+
+Die Attribute [`size`](#size) und [`color`](#color) können verwendet werden, um das Aussehen des Symbols mit CSS-Einheiten und Farbwerten anzupassen.
+Das Attribut [`class`](#class) kann verwendet werden, um dem Symbol eigene CSS-Klassen hinzuzufügen.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" color="goldenrod" size="2rem" />
+	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+</Fragment>
+
+</Preview>
+
+## `<Icon>`-Eigenschaften
+
+**Implementation:** [`Icon.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Icon.astro)
+
+Die Komponente `<Icon>` akzeptiert die folgenden Eigenschaften:
+
+### `name`
+
+**Erforderlich**  
+**Typ:** [`StarlightIcon`](/de/reference/icons/#starlighticon-typ)
+
+Der Name des anzuzeigenden Symbols wird auf [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) gesetzt.
+
+### `label`
+
+**Typ:** `string`
+
+Eine optionale Beschriftung, die den Kontext für unterstützende Technologien wie Bildschirm&shy;lesegeräte liefert.
+
+Wenn `label` nicht gesetzt ist, wird das Symbol von assistiven Technologien vollständig ausgeblendet.
+In diesem Fall ist darauf zu achten, dass der Kontext auch ohne das Symbol verständlich ist.
+Ein Link, der nur das Symbol enthält, **muss** das Attribut `label` enthalten, um zugänglich zu sein, aber wenn ein Link Text enthält und das Symbol rein dekorativ ist, kann es sinnvoll sein, das `label` wegzulassen.
+
+### `size`
+
+**Typ:** `string`
+
+Die Größe des Symbols in CSS-Einheiten.
+
+### `color`
+
+**Typ:** `string`
+
+Die Farbe des Symbols unter Verwendung eines CSS-Farbwerts.
+
+### `class`
+
+**Typ:** `string`
+
+Benutzerdefinierte CSS-Klassen, die dem Symbol hinzugefügt werden können.

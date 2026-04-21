@@ -1,0 +1,130 @@
+---
+title: Cartes de liaison
+description: Apprenez à afficher des liens de manière proéminente sous forme de cartes dans Starlight.
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Pour afficher des liens vers différentes pages de manière proéminente, utilisez le composant `<LinkCard>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkCard
+	slot="preview"
+	title="Personnaliser Starlight"
+	description="Apprenez à vous approprier votre site Starlight avec des styles personnalisés, des polices de caractères, et plus encore."
+	href="/fr/guides/customization/"
+/>
+
+</Preview>
+
+## Importation
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Affichez un lien en évidence en utilisant le composant `<LinkCard>`.
+Chaque `<LinkCard>` nécessite un attribut [`title`](#title) ainsi qu'un attribut [`href`](#href).
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Création de contenu en Markdown"
+	href="/fr/guides/authoring-content/"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard
+   title="Création de contenu en Markdown"
+	 href="/fr/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Création de contenu en Markdown"
+	href="/fr/guides/authoring-content/"
+/>
+
+</Preview>
+
+### Ajouter une description à un lien
+
+Ajoutez une courte description à une carte de liaison en utilisant l'attribut [`description`](#description).
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Internationalisation"
+	href="/fr/guides/i18n/"
+	description="Configurer Starlight pour prendre en charge plusieurs langues."
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="Internationalisation"
+	 href="/fr/guides/i18n/"
+	 description="Configurer Starlight pour prendre en charge plusieurs langues." /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Internationalisation"
+	href="/fr/guides/i18n/"
+	description="Configurer Starlight pour prendre en charge plusieurs langues."
+/>
+
+</Preview>
+
+### Grouper des cartes de liaison
+
+Affichez plusieurs cartes de liaison côte à côte lorsqu'il y a suffisamment d'espace en les regroupant à l'aide du composant [`<CardGrid>`](/fr/components/card-grids/).
+Consultez le guide [« Grouper des cartes de liaison »](/fr/components/card-grids/#grouper-des-cartes-de-liaison) pour un exemple.
+
+## Props de `<LinkCard>`
+
+**Implémentation :** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+Le composant `<LinkCard>` accepte les props suivantes, ainsi que tous les autres [attributs de l'élément `<a>`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/a) :
+
+### `title`
+
+**Obligatoire**  
+**Type :** `string`
+
+Le titre de la carte de liaison à afficher.
+
+### `href`
+
+**Obligatoire**  
+**Type :** `string`
+
+L'URL vers laquelle pointer lors d'une interaction avec la carte.
+
+### `description`
+
+**Type :** `string`
+
+Une description facultative à afficher sous le titre.

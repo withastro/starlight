@@ -1,0 +1,194 @@
+---
+title: Nebenbemerkungen
+description: Lerne, wie du in Starlight zusätzliche Informationen neben dem Hauptinhalt einer Seite anzeigen kannst.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Um sekundäre Informationen neben dem Hauptinhalt einer Seite anzuzeigen, verwende die Komponente `<Aside>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Aside slot="preview">
+    Füge nicht wesentliche, ergänzende Informationen in ein `<Aside>`.
+</Aside>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Aside } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Zeige eine Nebenbemerkung (auch bekannt als „Hinweise“, „Ermahnungen“ oder „Aufrufe“) mit Hilfe der Komponente `<Aside>`.
+
+Ein `<Aside>` kann ein optionales [`type`](#type) Attribute haben, welches die Farbe, das Symbol und den Standardtitel der Nebenbemerkung steuert.
+
+<Preview>
+
+````mdx
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Einige Inhalte am Rande.</Aside>
+
+<Aside type="caution">Einige warnende Inhalte.</Aside>
+
+<Aside type="tip">
+
+Auch andere Inhalte werden durch Nebenbemerkungen unterstützt.
+
+```js
+// Ein Codeschnipsel zum Beispiel.
+```
+
+</Aside>
+
+<Aside type="danger">Gib dein Passwort nie an Dritte weiter!</Aside>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% aside %}
+Einige Inhalte am Rande.
+{% /aside %}
+
+{% aside type="caution" %}
+Einige warnende Inhalte.
+{% /aside %}
+
+{% aside type="tip" %}
+Auch andere Inhalte werden durch Nebenbemerkungen unterstützt.
+
+```js
+// Ein Codeschnipsel zum Beispiel.
+```
+{% /aside %}
+
+{% aside type="danger" %}
+Gib dein Passwort nie an Dritte weiter!
+{% /aside %}
+````
+
+</Fragment>
+
+<Fragment slot="preview">
+
+    <Aside>Einige Inhalte am Rande.</Aside>
+
+    <Aside type="caution">Einige warnende Inhalte.</Aside>
+
+    <Aside type="tip">
+
+    Auch andere Inhalte werden durch Nebenbemerkungen unterstützt.
+
+    ```js
+    // Ein Codeschnipsel zum Beispiel.
+    ```
+
+    </Aside>
+
+    <Aside type="danger">Gib dein Passwort nie an Dritte weiter!</Aside>
+
+</Fragment>
+
+</Preview>
+
+Starlight bietet auch eine benutzerdefinierte Syntax für die Darstellung von Nebenbemerkungen in Markdown und MDX als Alternative zur `<Aside>` Komponente.
+Siehe den Leitfaden [„Inhalte in Markdown verfassen“](/de/guides/authoring-content/#nebenbemerkungen) für Details zu dieser Syntax.
+
+### Benutzerdefinierte Titel verwenden
+
+Überschreibe die voreingestellten Überschriften der Nebenbemerkungen mit dem Attribut [`title`](#title).
+
+<Preview>
+
+```mdx 'title="Aufgepasst!"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="Aufgepasst!">
+	Ein Warnhinweis *mit* einem benutzerdefinierten Titel.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'title="Aufgepasst!"'
+{% aside type="caution" title="Aufgepasst!" %}
+Ein Warnhinweis *mit* einem benutzerdefinierten Titel.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="caution" title="Aufgepasst!">
+	Ein Warnhinweis *mit* einem benutzerdefinierten Titel.
+</Aside>
+
+</Preview>
+
+### Benutzerdefinierte Symbole verwenden
+
+Überschreibe die Standard-Symbole der Nebenbemerkungen, indem du das Attribut [`icon`](#icon) auf den Namen [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) setzt.
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	Ein Hinweis *mit* einem benutzerdefinierten Symbol.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+Ein Hinweis *mit* einem benutzerdefinierten Symbol.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	Ein Hinweis *mit* einem benutzerdefinierten Symbol.
+</Aside>
+
+</Preview>
+
+## `<Aside>`-Eigenschaften
+
+**Implementation:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
+
+Die Komponente `<Aside>` akzeptiert die folgenden Eigenschaften:
+
+### `type`
+
+**Typ:** `'note' | 'tip' | 'caution' | 'danger'`  
+**Standard:** `'note'`
+
+Die Art der Nebenbemerkung, die angezeigt werden soll:
+
+- `note`-Hinweise (die Standardeinstellung) sind blau und zeigen ein Informationssymbol an.
+- `tip`-Hinweise sind violett und zeigen ein Raketensymbol an.
+- `caution`-Hinweise sind gelb und zeigen ein dreieckiges Warnsymbol an.
+- `danger`-Hinweise sind rot und zeigen ein achteckiges Warnsymbol an.
+
+### `title`
+
+**Typ:** `string`
+
+Die Überschrift der anzuzeigenden Nebenbemerkung.
+Wenn `title` nicht gesetzt ist, wird der Standardtitel für den aktuellen `type` der Nebenbemerkung verwendet.
+
+### `icon`
+
+**Typ:** [`StarlightIcon`](/de/reference/icons/#starlighticon-typ)
+
+Eine Nebenbemerkung kann ein `icon`-Attribut enthalten, das auf den Namen [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) gesetzt ist.

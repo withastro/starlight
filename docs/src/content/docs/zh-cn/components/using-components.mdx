@@ -1,0 +1,94 @@
+---
+title: 使用组件
+description: 通过 Starlight 使用 MDX 和 Markdoc 中的组件
+sidebar:
+  order: 1
+---
+
+组件能让你更轻松、更连贯地复用部分 UI 或者样式。
+示例可能包括链接卡片或嵌入 YouTube。
+Starlight 支持使用 [MDX](https://mdxjs.com/) 和 [Markdoc](https://markdoc.dev/) 文件中的组件，并提供了一些常用组件供你使用。
+
+[在 Astro 文档中了解有关构建组件的更多信息](https://docs.astro.build/zh-cn/basics/astro-components/)。
+
+## 在 MDX 中使用组件
+
+你可以通过将组件导入 MDX 文件然后将其渲染为 JSX 标签来使用该组件。
+这些组件看起来像 HTML 标签，但是以 `import` 语句中的大写字母开头，并与之名称相匹配：
+
+```mdx
+---
+# src/content/docs/example.mdx
+title: 欢迎来到我的文档
+---
+
+import { Icon } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
+
+<Icon name="open-book" />
+
+<CustomCard>组件还可以包含 **嵌套内容**。</CustomCard>
+```
+
+由于 Starlight 由 Astro 提供支持，因此你可以在 MDX 文件中添加由 [受支持的 UI 框架（React、Preact、Svelte、Vue、Solid 和 Alpine）](https://docs.astro.build/zh-cn/guides/framework-components/) 构建的组件。
+在 Astro 文档中了解有关 [在 MDX 中使用组件](https://docs.astro.build/zh-cn/guides/integrations-guide/mdx/#在-mdx-中使用组件) 的更多信息。
+
+## 在 Markdoc 中使用组件
+
+跟随我们的 [Markdoc 设置指南](/zh-cn/guides/authoring-content/#markdoc) 来添加支持以在 Markdoc 中创作内容。
+
+使用 Starlight 的 Markdoc 预设，你可以将 Starlight 的内置组件与 Markdoc 的 `{% %}` 标签语法结合使用。
+与 MDX 不同的是，Markdoc 中的组件不需要导入。
+以下示例为，在 Markdoc 文件中渲染 Starlight 的 [卡片组件](/zh-cn/components/cards/)：
+
+```markdoc
+---
+# src/content/docs/example.mdoc
+title: 欢迎来到我的文档
+---
+
+{% card title="星星" icon="star" %}
+天狼星, 织女星, 参宿四
+{% /card %}
+```
+
+有关如何使用 Markdoc 文件中的组件的更多信息，请参阅 [Astro Markdoc 集成文档](https://docs.astro.build/zh-cn/guides/integrations-guide/markdoc/#渲染组件)。
+
+## 内置组件
+
+Starlight 为常见文档用例提供内置组件。
+这些组件可从 MDX 文件中的 `@astrojs/starlight/components` 包以及 Markdoc 文件中的 [Starlight Markdoc 预设](/zh-cn/guides/authoring-content/#markdoc) 中获取。
+
+请参阅侧边栏以获取可用组件的列表以及使用方式。
+
+## 和 Starlight 样式的兼容性
+
+Starlight 将默认样式应用于 Markdown 内容，例如，在元素之间添加边距。
+如果这些样式与你的组件外观存在冲突，请在组件上设置 `not-content` 类来禁用它们。
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>不受 Starlight 默认内容样式的影响。</p>
+</div>
+```
+
+## 组件 props
+
+使用 `astro/types` 中的 [`ComponentProps`](https://docs.astro.build/zh-cn/guides/typescript/#componentprops-类型) 类型来引用组件接受的 `Props`，即使它们不是由组件本身导出的。
+这在包装或扩展现有组件时非常有用。
+
+以下示例为，使用 `ComponentProps` 获取 Starlight 内置 `Badge` 组件接受的 props 类型：
+
+```astro
+---
+// src/components/Example.astro
+import type { ComponentProps } from 'astro/types';
+import { Badge } from '@astrojs/starlight/components';
+
+type BadgeProps = ComponentProps<typeof Badge>;
+---
+```

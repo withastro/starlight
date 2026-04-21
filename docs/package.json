@@ -1,0 +1,33 @@
+{
+  "name": "starlight-docs",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "playwright install --with-deps chromium && playwright test",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "tsc --noEmit",
+    "linkcheck": "CHECK_LINKS=true pnpm build",
+    "astro": "astro",
+    "lunaria:build": "lunaria build",
+    "grammars": "node grammars/generate.mjs"
+  },
+  "dependencies": {
+    "@astro-community/astro-embed-youtube": "^0.5.10",
+    "@astrojs/starlight": "workspace:*",
+    "@lunariajs/core": "^0.1.1",
+    "@types/culori": "^2.1.1",
+    "astro": "^6.0.1",
+    "culori": "^4.0.1",
+    "sharp": "^0.34.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "axe-playwright": "^2.0.3",
+    "sitemapper": "^3.2.12",
+    "starlight-links-validator": "^0.20.0"
+  }
+}

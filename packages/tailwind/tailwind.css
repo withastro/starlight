@@ -1,0 +1,85 @@
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+	/* Default accent color. Indigo is closest to Starlight’s defaults. */
+	--color-accent-50: var(--color-indigo-50);
+	--color-accent-100: var(--color-indigo-100);
+	--color-accent-200: var(--color-indigo-200);
+	--color-accent-300: var(--color-indigo-300);
+	--color-accent-400: var(--color-indigo-400);
+	--color-accent-500: var(--color-indigo-500);
+	--color-accent-600: var(--color-indigo-600);
+	--color-accent-700: var(--color-indigo-700);
+	--color-accent-800: var(--color-indigo-800);
+	--color-accent-900: var(--color-indigo-900);
+	--color-accent-950: var(--color-indigo-950);
+	/* Default gray scale. Zinc is closest to Starlight’s defaults. */
+	--color-gray-50: var(--color-zinc-50);
+	--color-gray-100: var(--color-zinc-100);
+	--color-gray-200: var(--color-zinc-200);
+	--color-gray-300: var(--color-zinc-300);
+	--color-gray-400: var(--color-zinc-400);
+	--color-gray-500: var(--color-zinc-500);
+	--color-gray-600: var(--color-zinc-600);
+	--color-gray-700: var(--color-zinc-700);
+	--color-gray-800: var(--color-zinc-800);
+	--color-gray-900: var(--color-zinc-900);
+	--color-gray-950: var(--color-zinc-950);
+}
+
+@layer base {
+	/* Restore crucial styles from Tailwind Preflight: https://tailwindcss.com/docs/preflight */
+	/* Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116) */
+	*,
+	::after,
+	::before {
+		border: 0 solid;
+	}
+	/* Keep base font-family styles even in non-Starlight pages. */
+	html,
+	:host {
+		font-family: var(--font-sans);
+	}
+	code,
+	kbd,
+	samp,
+	pre {
+		font-family: var(--font-mono);
+	}
+}
+
+@layer utilities {
+	/* Wire up Starlight theme to use Tailwind config. */
+	:root {
+		/* Use Tailwind-configured font families. */
+		--sl-font: var(--font-sans);
+		--sl-font-mono: var(--font-mono);
+		/* Dark mode Starlight theme variables. */
+		--sl-color-white: var(--color-white);
+		--sl-color-gray-1: var(--color-gray-200);
+		--sl-color-gray-2: var(--color-gray-300);
+		--sl-color-gray-3: var(--color-gray-400);
+		--sl-color-gray-4: var(--color-gray-600);
+		--sl-color-gray-5: var(--color-gray-700);
+		--sl-color-gray-6: var(--color-gray-800);
+		--sl-color-black: var(--color-gray-900);
+		--sl-color-accent-low: var(--color-accent-950, var(--color-accent-900, #1e1b4b));
+		--sl-color-accent: var(--color-accent-600, #4f46e5);
+		--sl-color-accent-high: var(--color-accent-200, #c7d2fe);
+		/* Light mode Starlight theme variables. */
+		&[data-theme='light'] {
+			--sl-color-white: var(--color-gray-900);
+			--sl-color-gray-1: var(--color-gray-800);
+			--sl-color-gray-2: var(--color-gray-700);
+			--sl-color-gray-3: var(--color-gray-500);
+			--sl-color-gray-4: var(--color-gray-400);
+			--sl-color-gray-5: var(--color-gray-300);
+			--sl-color-gray-6: var(--color-gray-200);
+			--sl-color-gray-7: var(--color-gray-100);
+			--sl-color-black: var(--color-white);
+			--sl-color-accent-low: var(--color-accent-200, #c7d2fe);
+			--sl-color-accent: var(--color-accent-600, #4f46e5);
+			--sl-color-accent-high: var(--color-accent-900, #312e81);
+		}
+	}
+}

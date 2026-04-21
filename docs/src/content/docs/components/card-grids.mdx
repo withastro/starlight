@@ -1,0 +1,173 @@
+---
+title: Card Grids
+description: Learn how to wrap multiple cards in a grid in Starlight.
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+To wrap multiple [`<Card>`](/components/cards/) or [`<LinkCard>`](/components/link-cards/) components in a grid, use the`<CardGrid>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Import
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+### Group cards
+
+Display multiple [`<Card>`](/components/cards/) components side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Check this out" icon="open-book">
+		Interesting content you want to highlight.
+	</Card>
+	<Card title="Other feature" icon="information">
+		More information you want to share.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="Check this out" icon="open-book" %}
+Interesting content you want to highlight.
+{% /card %}
+
+{% card title="Other feature" icon="information" %}
+More information you want to share.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="Check this out" icon="open-book">
+		Interesting content you want to highlight.
+	</Card>
+	<Card title="Other feature" icon="information">
+		More information you want to share.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### Group link cards
+
+Display multiple [`<LinkCard>`](/components/link-cards/) components side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
+
+<Preview>
+
+```mdx {3,6}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,5}
+{% cardgrid %}
+{% linkcard title="Authoring Markdown" href="/guides/authoring-content/" /%}
+
+{% linkcard title="Components" href="/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### Stagger cards
+
+Shift the second column of the grid vertically to add visual interest by adding the [`stagger`](#stagger) attribute to the `<CardGrid>` component.
+
+This attribute is useful on your home page to display your project’s key features.
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Check this out" icon="open-book">
+		Interesting content you want to highlight.
+	</Card>
+	<Card title="Other feature" icon="information">
+		More information you want to share.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="Check this out" icon="open-book" %}
+Interesting content you want to highlight.
+{% /card %}
+
+{% card title="Other feature" icon="information" %}
+More information you want to share.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="Check this out" icon="open-book">
+		Interesting content you want to highlight.
+	</Card>
+	<Card title="Other feature" icon="information">
+		More information you want to share.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## `<CardGrid>` Props
+
+**Implementation:** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+The `<CardGrid>` component accepts the following props:
+
+### `stagger`
+
+**type:** `boolean`
+
+Defines whether to stagger the cards in the grid or not.

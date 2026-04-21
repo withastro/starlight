@@ -1,0 +1,242 @@
+---
+title: Suche
+description: Finde heraus, welche Suchfunktionen in Starlight integriert sind und wie du sie anpassen kannst.
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Standardmäßig enthalten Websites, die Starlight verwenden, eine Volltextsuche mit [Pagefind](https://pagefind.app/), einem schnellen, bandbreitenarmen Suchwerkzeug für statische Websites.
+
+Es ist keine Konfiguration erforderlich, um die Suche zu aktivieren. Erstelle und implementiere deine Website und benutze dann die Suchleiste im Kopfbereich der Website, um nach Inhalten zu suchen.
+
+## Inhalte in den Suchergebnissen ausblenden
+
+### Eine Seite ausschließen
+
+Um eine Seite aus deinem Suchindex auszuschließen, füge [`pagefind: false`](/de/reference/frontmatter/#pagefind) zum Frontmatter der Seite hinzu:
+
+```md title="src/content/docs/not-indexed.md" ins={3}
+---
+title: Inhalt, der vor der Suche verborgen werden soll.
+pagefind: false
+---
+```
+
+### Einen Teil einer Seite ausschließen
+
+Pagefind ignoriert den Inhalt innerhalb eines Elements mit dem Attribut [`data-pagefind-ignore`](https://pagefind.app/docs/indexing/#removing-individual-elements-from-the-index).
+
+Im folgenden Beispiel wird der erste Absatz in den Suchergebnissen angezeigt, aber der Inhalt von `<div>` wird nicht angezeigt:
+
+```md title="src/content/docs/partially-indexed.md" ins="data-pagefind-ignore"
+---
+title: Seite teilweise indiziert
+---
+
+Dieser Text kann über die Suche gefunden werden.
+
+<div data-pagefind-ignore>
+
+Dieser Text wird von der Suche ausgeblendet.
+
+</div>
+```
+
+## Alternative Suchanbieter
+
+### Algolia DocSearch
+
+Wenn du Zugang zum [Algolia DocSearch-Programm](https://docsearch.algolia.com/) hast und es anstelle von Pagefind verwenden möchtest, kannst du das offizielle DocSearch-Plugin von Starlight verwenden.
+
+<Steps>
+
+1. Installiere `@astrojs/starlight-docsearch`:
+
+   <Tabs syncKey="pkg">
+
+   <TabItem label="npm">
+
+   ```sh
+   npm install @astrojs/starlight-docsearch
+   ```
+
+   </TabItem>
+
+   <TabItem label="pnpm">
+
+   ```sh
+   pnpm add @astrojs/starlight-docsearch
+   ```
+
+   </TabItem>
+
+   <TabItem label="Yarn">
+
+   ```sh
+   yarn add @astrojs/starlight-docsearch
+   ```
+
+   </TabItem>
+
+   </Tabs>
+
+2. Füge DocSearch zu deiner Starlight-Konfiguration [`plugins`](/de/reference/configuration/#plugins) in der Datei `astro.config.mjs` hinzu und gib deine `appId`, `apiKey` und `indexName` von Algolia an:
+
+   ```js ins={4,10-16}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Website mit DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					appId: 'DEINE_APP_ID',
+   					apiKey: 'DEIN_SUCH_API_SCHLÜSSEL',
+   					indexName: 'DEIN_INDEX_NAME',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+Mit dieser aktualisierten Konfiguration öffnet die Suchleiste deiner Website nun ein Algolia-Modal anstelle des Standardmodals.
+
+#### DocSearch Konfiguration
+
+Das Starlight DocSearch Plugin unterstützt die Anpassung der DocSearch Komponente mit den folgenden Optionen, die in der Konfiguration des Erweiterungsmoduls angegeben werden:
+
+- `maxResultsPerGroup`: Begrenzt die Anzahl der Ergebnisse, die für jede Suchgruppe angezeigt werden. Der Standardwert ist `5`.
+- `disableUserPersonalization`: Verhindere, dass DocSearch die letzten Suchen und Favoriten eines Nutzers im lokalen Speicher speichert. Der Standardwert ist `false`.
+- `insights`: Aktiviere das Algolia Insights Plugin und sende Suchereignisse an deinen DocSearch-Index. Der Standardwert ist `false`.
+- `searchParameters`: Ein Objekt, das die [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) anpasst.
+
+##### Zusätzliche DocSearch-Optionen
+
+Eine separate Konfigurationsdatei ist erforderlich, um Funktionsoptionen wie `transformItems()` oder `resultsFooterComponent()` an die DocSearch-Komponente zu übergeben.
+
+<Steps>
+
+1. Erstelle eine TypeScript-Datei, die deine DocSearch-Konfiguration exportiert.
+
+   ```ts
+   // src/config/docsearch.ts
+   import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+   export default {
+   	appId: 'DEINE_APP_ID',
+   	apiKey: 'DEIN_SUCH_API_SCHLÜSSEL',
+   	indexName: 'DEIN_INDEX_NAME',
+   	getMissingResultsUrl({ query }) {
+   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   	},
+   	// ...
+   } satisfies DocSearchClientOptions;
+   ```
+
+2. Übergib den Pfad zu deiner Konfigurationsdatei an das Starlight DocSearch Plugin in der Datei `astro.config.mjs`.
+
+   ```js {11-13}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Website mit DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					clientOptionsModule: './src/config/docsearch.ts',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+Alle unterstützten Optionen findest du in der [DocSearch JavaScript Client API Referenz](https://docsearch.algolia.com/docs/api/).
+
+#### Die Benutzeroberfläche von DocSearch übersetzen
+
+DocSearch stellt standardmäßig nur englische Benutzeroberflächen-Strings zur Verfügung.
+Füge mithilfe des in Starlight integrierten [Internationalisierungs&shy;systems](/de/guides/i18n/#starlights-ui-übersetzen) Übersetzungen der Benutzeroberfläche der Modale für deine Sprache hinzu.
+
+<Steps>
+
+1. Erweitere die Definition der Starlight-Inhaltssammlung `i18n` um das DocSearch-Schema in `src/content.config.ts`:
+
+   ```js ins={5} ins=/{ extend: .+ }/
+   // src/content.config.ts
+   import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+   import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+   import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
+
+   export const collections = {
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   	i18n: defineCollection({
+   		loader: i18nLoader(),
+   		schema: i18nSchema({ extend: docSearchI18nSchema() }),
+   	}),
+   };
+   ```
+
+2. Füge Übersetzungen zu deinen JSON-Dateien in `src/content/i18n/` hinzu.
+
+   Hier sind die englischen Standardwerte, die von DocSearch verwendet werden:
+
+   ```json title="src/content/i18n/en.json"
+   {
+   	"docsearch.searchBox.resetButtonTitle": "Clear the query",
+   	"docsearch.searchBox.resetButtonAriaLabel": "Clear the query",
+   	"docsearch.searchBox.cancelButtonText": "Cancel",
+   	"docsearch.searchBox.cancelButtonAriaLabel": "Cancel",
+   	"docsearch.searchBox.searchInputLabel": "Search",
+
+   	"docsearch.startScreen.recentSearchesTitle": "Recent",
+   	"docsearch.startScreen.noRecentSearchesText": "No recent searches",
+   	"docsearch.startScreen.saveRecentSearchButtonTitle": "Save this search",
+   	"docsearch.startScreen.removeRecentSearchButtonTitle": "Remove this search from history",
+   	"docsearch.startScreen.favoriteSearchesTitle": "Favorite",
+   	"docsearch.startScreen.removeFavoriteSearchButtonTitle": "Remove this search from favorites",
+
+   	"docsearch.errorScreen.titleText": "Unable to fetch results",
+   	"docsearch.errorScreen.helpText": "You might want to check your network connection.",
+
+   	"docsearch.footer.selectText": "to select",
+   	"docsearch.footer.selectKeyAriaLabel": "Enter key",
+   	"docsearch.footer.navigateText": "to navigate",
+   	"docsearch.footer.navigateUpKeyAriaLabel": "Arrow up",
+   	"docsearch.footer.navigateDownKeyAriaLabel": "Arrow down",
+   	"docsearch.footer.closeText": "to close",
+   	"docsearch.footer.closeKeyAriaLabel": "Escape key",
+   	"docsearch.footer.searchByText": "Search by",
+
+   	"docsearch.noResultsScreen.noResultsText": "No results for",
+   	"docsearch.noResultsScreen.suggestedQueryText": "Try searching for",
+   	"docsearch.noResultsScreen.reportMissingResultsText": "Believe this query should return results?",
+   	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
+   }
+   ```
+
+</Steps>
+
+### Community-Suchanbieter
+
+[Community-Plugins](/de/resources/plugins/#community-plugins) können auch Alternativen zum integrierten Suchanbieter Pagefind von Starlight bieten.
+
+#### Typesense DocSearch
+
+Das Community-Plugin [Starlight DocSearch Typesense](https://starlight-docsearch.typesense.org/) bietet eine Open-Source- und selbst hostbare Alternative, die die [DocSearch](https://github.com/typesense/typesense-docsearch.js)-Schnittstelle mit einem [Typesense](https://typesense.org/)-Backend integriert.
+
+Lies die Anleitung [„Erste Schritte“](https://starlight-docsearch.typesense.org/getting-started/) in der Starlight DocSearch Typesense-Dokumentation, um zu erfahren, wie du es in deinem Projekt verwenden kannst.

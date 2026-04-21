@@ -1,0 +1,199 @@
+---
+title: 路由数据参考
+description: Starlight 的路由数据对象的完整参考文档。
+---
+
+Starlight 的路由数据对象包含有关当前页面的信息。请在 [“路由数据”指南](/zh-cn/guides/route-data/) 中了解更多关于 Starlight 的数据模型如何工作的信息。
+
+在 Astro 组件中，从 `Astro.locals.starlightRoute` 访问路由数据：
+
+```astro {4}
+---
+// src/components/Custom.astro
+
+const { hasSidebar } = Astro.locals.starlightRoute;
+---
+```
+
+在 [路由中间件](/zh-cn/guides/route-data/#自定义路由数据) 中，从传递给你的中间件函数的上下文对象中访问路由数据：
+
+```ts {5}
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	const { hasSidebar } = context.locals.starlightRoute;
+});
+```
+
+## `starlightRoute`
+
+`starlightRoute` 对象具有以下属性:
+
+### `dir`
+
+**类型：** `'ltr' | 'rtl'`
+
+页面书写方向。
+
+### `lang`
+
+**类型：** `string`
+
+此页面区域设置的 BCP-47 语言标记，例如 `en`、`zh-CN` 或 `pt-BR`。
+
+### `locale`
+
+**类型：** `string | undefined`
+
+提供语言的基本路径。对于根语言环境的 slug，返回 `undefined`。
+
+### `siteTitle`
+
+**类型：** `string`
+
+该页面区域设置的站点标题。
+
+### `siteTitleHref`
+
+**类型：** `string`
+
+网站标题的 `href` 属性值，链接回主页，例如 `/`。对于多语言站点，这将包括当前区域设置，例如 `/en/` 或 `/zh-cn/`。
+
+### `slug`
+
+**类型：** `string`
+
+该页面的 slug 由内容文件名生成。
+
+此属性已弃用，并将在 Starlight 的未来版本中删除。通过使用 [Starlight 的 `docsLoader`](/zh-cn/manual-setup/#配置内容集合) 迁移到新的内容层 API，并使用 [`id`](#id) 属性代替。
+
+### `id`
+
+**类型：** `string`
+
+此页面的 slug，或者如果使用 [`legacy.collections`](https://docs.astro.build/zh-cn/reference/legacy-flags/#集合) 标志，则基于内容文件名的此页面的唯一 ID。
+
+### `isFallback`
+
+**类型：** `boolean | undefined`
+
+如果此页面在当前语言中未翻译，并且正在使用来自默认语言环境的回退内容，则为 `true`。
+仅在多语言站点中使用。
+
+### `entryMeta`
+
+**类型：** `{ dir: 'ltr' | 'rtl'; lang: string }`
+
+页面内容的区域设置元数据。当页面使用回退内容时，可以与顶级区域设置值不同。
+
+### `entry`
+
+当前页面的 Astro 内容集合条目。
+包括当前页面在 `entry.data` 中的 frontmatter 值。
+
+```ts
+entry: {
+	data: {
+		title: string;
+		description: string | undefined;
+		// 等等
+	}
+}
+```
+
+在 [Astro的集合条目类型参考](https://docs.astro.build/zh-cn/reference/modules/astro-content/#collectionentry) 中了解更多关于此对象结构的信息。
+
+### `sidebar`
+
+**类型：** `SidebarEntry[]`
+
+此页面的网站导航侧边栏条目。
+
+### `hasSidebar`
+
+**类型：** `boolean`
+
+是否在此页面上显示侧边栏。
+
+### `pagination`
+
+**类型：** `{ prev?: Link; next?: Link }`
+
+如果启用了侧边栏，则链接到侧边栏中的上一页和下一页。
+
+### `toc`
+
+**类型：** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+
+如果启用，则为此页面的目录。
+
+### `headings`
+
+**类型：** `{ depth: number; slug: string; text: string }[]`
+
+从当前页面提取的所有 Markdown 标题的数组。如果要构建一个遵循 Starlight 配置选项的目录组件，请使用 [`toc`](#toc)
+
+### `lastUpdated`
+
+**类型：** `Date | undefined`
+
+JavaScript `Date` 对象，表示启用时此页面上次更新的时间。
+
+### `editUrl`
+
+**类型：** `URL | undefined`
+
+如果启用，则用于编辑此页面的地址的 `URL` 对象。
+
+### `head`
+
+**类型：** [`HeadConfig[]`](/zh-cn/reference/configuration/#headconfig)
+
+包含在当前页面 `<head>` 中的所有标签的数组。包括重要的标签，如 `<title>` 和 `<meta charset="utf-8">`。
+
+## 工具函数
+
+### `defineRouteMiddleware()`
+
+使用 `defineRouteMiddleware()` 工具函数来帮助定义你的路由中间件模块：
+
+```ts "defineRouteMiddleware"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	// ...
+});
+```
+
+### `StarlightRouteData` 类型
+
+如果您正在编写需要使用 Starlight 路由数据的代码，您可以导入 `StarlightRouteData` 类型来匹配 `Astro.locals.starlightRoute` 的结构。
+
+在下面的例子中，`usePageTitleInTOC()` 函数更新路由数据，以使用当前页面的标题作为目录中第一个项目的标签，替换默认的 “Overview” 标签。
+`StarlightRouteData` 类型允许你检查路由数据更改是否有效。
+
+```ts "StarlightRouteData"
+// src/route-utils.ts
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+
+export function usePageTitleInTOC(starlightRoute: StarlightRouteData) {
+	const overviewLink = starlightRoute.toc?.items[0];
+	if (overviewLink) {
+		overviewLink.text = starlightRoute.entry.data.title;
+	}
+}
+```
+
+然后可以从路由中间件调用此函数：
+
+```ts {3,6}
+// src/route-middleware.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+import { usePageTitleInTOC } from './route-utils';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	usePageTitleInTOC(context.locals.starlightRoute);
+});
+```

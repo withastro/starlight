@@ -1,0 +1,88 @@
+---
+title: Temas
+description: Dale estilo a tus documentos con un tema de la comunidad para Starlight
+tableOfContents: false
+sidebar:
+  order: 2
+head:
+  - tag: style
+    content: |
+      body { --sl-content-width: 66.75rem; }
+---
+
+import ThemeGrid from '~/components/theme-grid.astro';
+
+Un tema es un plugin de Starlight que cambia la apariencia visual de un sitio con [CSS personalizado](/es/guides/css-and-tailwind/), [sustituciones de componentes](/es/guides/overriding-components/) u otras nuevas funcionalidades.
+
+## Temas de la Comunidad
+
+Instala un tema creado por la comunidad para personalizar rápidamente la apariencia de tu sitio.
+
+<ThemeGrid
+	labels={{
+		/** Etiqueta accesible para el interruptor de tema. */
+		legend: 'Vista previa',
+		/** Etiqueta accesible para la variante de esquema de color oscuro. */
+		dark: 'Oscuro',
+		/** Etiqueta accesible para la variante de esquema de color claro. */
+		light: 'Claro',
+	}}
+	themes={[
+		{
+			title: 'Starlight Rapide',
+			description:
+				'Tema de Starlight inspirado en el tema Vitesse de Visual Studio Code.',
+			href: 'https://starlight-theme-rapide.vercel.app/',
+			previews: { light: 'rapide-light.png', dark: 'rapide-dark.png' },
+		},
+		{
+			title: 'Starlight Obsidian Theme',
+			description:
+				'Tema de Starlight inspirado en el estilo de los sitios de Obsidian Publish.',
+			href: 'https://fevol.github.io/starlight-theme-obsidian/',
+			previews: { light: 'obsidian-light.png', dark: 'obsidian-dark.png' },
+		},
+		{
+			title: 'Catppuccin for Starlight',
+			description: 'Suave tema pastel para Starlight.',
+			href: 'https://catppuccin-starlight.otterlord.dev/',
+			previews: { light: 'catppuccin-light.png', dark: 'catppuccin-dark.png' },
+		},
+		{
+			title: 'Ion',
+			description: 'Un tema elegante y moderno para Starlight.',
+			href: 'https://louisescher.github.io/starlight-ion-theme/',
+			previews: { light: 'ion-light.png', dark: 'ion-dark.png' },
+		},
+		{
+			title: 'Starlight Black',
+			description: 'Tema de Starlight inspirado en la documentación de shadcn.',
+			href: 'https://starlight-theme-black.vercel.app/',
+			previews: { light: 'black-light.png', dark: 'black-dark.png' },
+		},
+		{
+			title: 'Starlight Flexoki',
+			description:
+				'Un tema cálido y amigable basado en la paleta de colores Flexoki.',
+			href: 'https://delucis.github.io/starlight-theme-flexoki/',
+			previews: { light: 'flexoki-light.png', dark: 'flexoki-dark.png' },
+		},
+		{
+			title: 'Starlight Nova',
+			description: 'Un tema moderno y hermoso para Starlight.',
+			href: 'https://starlight-theme-nova.pages.dev/',
+			previews: { light: 'nova-light.png', dark: 'nova-dark.png' },
+		},
+		{
+			title: 'Tema Starlight NextJS',
+			description: 'Tema de Starlight inspirado en la documentación de NextJS.',
+			href: 'https://starlight-nextjs-theme.trueberryless.org/',
+			previews: { light: 'nextjs-light.png', dark: 'nextjs-dark.png' },
+		},
+	]}
+/>
+
+:::tip[¡Añade el tuyo!]
+¿Has creado un tema para Starlight?
+¡[Abre una PR](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md#themes) añadiendo tu tema a esta página!
+:::

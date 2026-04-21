@@ -1,0 +1,150 @@
+---
+title: 徽章
+description: 了解如何在 Starlight 中使用徽章来显示额外的信息。
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+要显示小段信息，例如状态或类别，请使用 `<Badge>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="新" />
+
+</Preview>
+
+## 导入
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<Badge>` 组件显示徽章，并将要显示的内容传递给 `<Badge>` 组件的 [`text`](#text) 属性。
+
+默认情况下，徽章将使用你网站主题的强调色。
+要使用徽章内置的某一种颜色，请将 [`variant`](#variant) 属性设置为支持的值之一。
+
+<Preview>
+
+```mdx
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="注释" variant="note" />
+- <Badge text="成功" variant="success" />
+- <Badge text="提示" variant="tip" />
+- <Badge text="注意" variant="caution" />
+- <Badge text="危险" variant="danger" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+- {% badge text="注释" variant="note" /%}
+- {% badge text="成功" variant="success" /%}
+- {% badge text="提示" variant="tip" /%}
+- {% badge text="注意" variant="caution" /%}
+- {% badge text="危险" variant="danger" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="注释" variant="note" />
+	- <Badge text="成功" variant="success" />
+	- <Badge text="提示" variant="tip" />
+	- <Badge text="注意" variant="caution" />
+	- <Badge text="危险" variant="danger" />
+</Fragment>
+
+</Preview>
+
+### 使用不同的尺寸
+
+使用 [`size`](#size) 属性来控制徽章文本的大小。
+
+<Preview>
+
+```mdx /size="\w+"/
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="新" size="small" />
+- <Badge text="更新更强" size="medium" />
+- <Badge text="更新更强更逼格" size="large" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+- {% badge text="新" size="small" /%}
+- {% badge text="更新更强" size="medium" /%}
+- {% badge text="更新更强更逼格" size="large" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="新" size="small" />
+	- <Badge text="更新更强" size="medium" />
+	- <Badge text="更新更强更逼格" size="large" />
+</Fragment>
+
+</Preview>
+
+### 自定义徽章
+
+通过使用任何其他 `<span>` 属性（例如带有自定义 CSS 的 `class` 或 `style`）来自定义徽章。
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="自定义" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+{% badge text="自定义" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
+
+<Badge
+	slot="preview"
+	text="自定义"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## `<Badge>` 的属性
+
+**实现：** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+`<Badge>` 组件接受以下属性，以及所有 [其他的 `<span>` 属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes)：
+
+### `text`
+
+**必要属性**  
+**类型：** `string`
+
+要在徽章中显示的文本内容。
+
+### `variant`
+
+**类型：** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**默认值：** `'default'`
+
+要使用的徽章颜色变体：`note`（蓝色）、`tip`（紫色）、`danger`（红色）、`caution`（橙色）、`success`（绿色）或 `defaul`（主题强调色）。
+
+### `size`
+
+**类型：** `'small' | 'medium' | 'large'`
+
+定义要显示的徽章的大小。

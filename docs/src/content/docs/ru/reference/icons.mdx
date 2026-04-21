@@ -1,0 +1,32 @@
+---
+title: Иконки
+description: Обзор всех иконок, доступных в Starlight.
+---
+
+Starlight предоставляет набор общих иконок, которые вы можете отображать в своем контенте, используя компонент `<Icon>`.
+
+## Использование иконок
+
+Иконки можно отображать с помощью компонента [`<Icon>`](/ru/components/icons/).
+Они также часто используются в других компонентах, таких как [карточки](/ru/components/cards/) или в настройках, таких как [hero](/ru/reference/frontmatter/#hero).
+
+## Тип `StarlightIcon`
+
+Используйте тип TypeScript `StarlightIcon`, чтобы ссылаться на названия [встроенных иконок Starlight](#все-иконки).
+
+```ts {2} /icon: (StarlightIcon)/
+// src/icon.ts
+import type { StarlightIcon } from '@astrojs/starlight/types';
+
+function getIconLabel(icon: StarlightIcon) {
+	// …
+}
+```
+
+## Все иконки
+
+Список всех доступных иконок показан ниже с их соответствующими именами. Кликните по значку, чтобы скопировать код компонента для него.
+
+import IconsList from '~/components/icons-list.astro';
+
+<IconsList labels={{ copied: 'Скопировано!' }} />

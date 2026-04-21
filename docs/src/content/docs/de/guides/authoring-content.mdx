@@ -1,0 +1,698 @@
+---
+title: Inhalte in Markdown verfassen
+description: Ein Überblick über die von Starlight unterstützte Markdown-Syntax.
+---
+
+Starlight unterstützt die gesamte Bandbreite der [Markdown](https://daringfireball.net/projects/markdown/) Syntax in `.md` Dateien sowie Frontmatter [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) um Metadaten wie Titel und Beschreibung zu definieren.
+
+Bitte prüfe die [MDX-Dokumentation](https://mdxjs.com/docs/what-is-mdx/#markdown) oder [Markdoc-Dokumentation](https://markdoc.dev/docs/syntax), wenn du diese Dateiformate verwendest, da die Unterstützung und Verwendung von Markdown unterschiedlich sein kann.
+
+## Frontmatter
+
+Du kannst einzelne Seiten in Starlight anpassen, indem du Werte in deinen Frontmatter festlegst.
+Frontmatter wird oben in deinen Dateien zwischen `---`-Trennzeichen festgelegt:
+
+```md title="src/content/docs/example.md"
+---
+title: Mein Seitentitel
+---
+
+Nach dem zweiten `---` folgt der Seiteninhalt.
+```
+
+Jede Seite muss mindestens einen `title` enthalten.
+Alle verfügbaren Felder und Informationen zum Hinzufügen benutzerdefinierter Felder findst du in der [Frontmatter-Referenz](/de/reference/frontmatter/).
+
+## Inline-Stile
+
+Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
+
+```md
+Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
+```
+
+Du kannst [auf eine andere Seite](/de/getting-started/) verlinken.
+
+```md
+Du kannst [auf eine andere Seite](/de/getting-started/) verlinken.
+```
+
+Du kannst `inline code` mit Backticks hervorheben.
+
+```md
+Du kannst `inline code` mit Backticks hervorheben.
+```
+
+## Bilder
+
+Bilder in Starlight verwenden [Astros eingebaute optimierte Asset-Unterstützung](https://docs.astro.build/de/guides/images/).
+
+Markdown und MDX unterstützen die Markdown-Syntax für die Anzeige von Bildern, einschließlich Alt-Text für Bildschirmleser und unterstützende Technologien.
+
+![Eine Illustration von Planeten und Sternen mit dem Wort "Astro"](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+
+```md
+![Eine Illustration von Planeten und Sternen mit dem Wort "astro"](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+```
+
+Relative Bildpfade werden auch für in deinem Projekt lokal gespeicherte Bilder unterstützt.
+
+```md
+// src/content/docs/page-1.md
+
+![Ein Raketenschiff im Weltraum](../../assets/images/rocket.svg)
+```
+
+## Überschriften
+
+Mit einer Überschrift kannst du den Inhalt strukturieren. Überschriften in Markdown werden durch eine Reihe von `#` am Anfang der Zeile gekennzeichnet.
+
+### Wie du Seiteninhalte in Starlight strukturierst
+
+Starlight ist so konfiguriert, dass es automatisch den Seitentitel als Überschrift verwendet und eine "Übersicht"-Überschrift an den Anfang des Inhalts&shy;verzeichnisses jeder Seite setzt. Wir empfehlen, jede Seite mit normalem Text zu beginnen und die Seitenüberschriften ab `<h2>` zu verwenden:
+
+```md
+---
+title: Markdown Anleitung
+description: Wie man Markdown in Starlight benutzt
+---
+
+Diese Seite beschreibt, wie man Markdown in Starlight benutzt.
+
+## Inline-Stile
+
+## Überschriften
+```
+
+### Automatische Überschriften-Ankerlinks
+
+Wenn du Überschriften in Markdown verwendst, erhaltst du automatisch Ankerlinks, sodass du direkt auf bestimmte Abschnitte deiner Seite verlinken kannst:
+
+```md
+---
+title: Meine Seite mit Inhalt
+description: Wie man Starlights eingebaute Ankerlinks benutzt
+---
+
+## Einleitung
+
+Ich kann auf [meine Schlussfolgerung](#schlussfolgerung) weiter unten auf derselben Seite verlinken.
+
+## Schlussfolgerung
+
+`https://meine-site.com/seite1/#einleitung` navigiert direkt zu meiner Einleitung.
+```
+
+Überschriften der Ebene 2 (`<h2>`) und der Ebene 3 (`<h3>`) werden automatisch im Inhaltsverzeichnis der Seite angezeigt.
+
+Erfahre mehr darüber, wie Astro Kopfzeilen-IDs verarbeitet, in [der Astro-Dokumentation](https://docs.astro.build/de/guides/markdown-content/#%C3%BCberschriften-ids).
+
+## Nebenbemerkungen
+
+Nebenbemerkungen (auch bekannt als "Ermahnungen" oder "Callouts") sind nützlich, um sekundäre Informationen neben dem Hauptinhalt einer Seite anzuzeigen.
+
+Starlight bietet eine eigene Markdown-Syntax für die Darstellung von Nebeninformationen. Seitenblöcke werden mit einem Paar dreifacher Doppelpunkte `:::` angezeigt, um den Inhalt zu umschließen, und können vom Typ `note`, `tip`, `caution` oder `danger` sein.
+
+Du kannst alle anderen Markdown-Inhaltstypen innerhalb einer Nebenbemerkung verschachteln, allerdings eignen sich diese am besten für kurze und prägnante Inhaltsstücke.
+
+### Nebenbemerkung `note`
+
+:::note
+Starlight ist ein Toolkit für Dokumentations-Websites, das mit [Astro](https://astro.build/de) erstellt wurde. Du kannst mit diesem Befehl beginnen:
+
+```sh
+npm create astro@latest -- --template starlight
+```
+
+:::
+
+````md
+:::note
+Starlight ist ein Toolkit für Dokumentations-Websites, das mit [Astro](https://astro.build/de) erstellt wurde. Du kannst mit diesem Befehl beginnen:
+
+```sh
+npm create astro@latest -- --template starlight
+```
+
+:::
+````
+
+### Benutzerdefinierte Nebenbemerkungs&shy;titel
+
+Du kannst einen benutzerdefinierten Titel für die Nebenbemerkung in eckigen Klammern nach dem Typen angeben, z.&nbsp;B. `:::tip[Wusstest du schon?]`.
+
+:::tip[Wusstest du schon?]
+Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+:::
+
+```md
+:::tip[Wusstest du schon?]
+Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+:::
+```
+
+### Benutzerdefinierte Symbole für Nebenbemerkungen
+
+Du kannst ein benutzerdefiniertes Symbol für die Nebenbemerkungen in geschweiften Klammern nach dem Typ der Nebeninformation oder dem [benutzerdefinierten Titel](#benutzerdefinierte-nebenbemerkungstitel) angeben, z. B. `:::tip{icon="heart"}` oder `:::tip[Wusstest du schon?]{icon="heart"}`.
+Der Name des Symbols muss dem Namen [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) entsprechen.
+
+:::tip{icon="heart"}
+Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+:::
+
+```md
+:::tip{icon="heart"}
+Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+:::
+```
+
+### Weitere Typen
+
+Vorsichts- und Gefahrenhinweise sind hilfreich, um die Aufmerksamkeit des Benutzers auf Details zu lenken, über die er stolpern könnte.
+Wenn du diese häufig verwenden, kann das auch ein Zeichen dafür sein, dass die Sache, die du dokumentierst, von einem neuen Design profitieren könnte.
+
+:::caution
+Wenn du nicht sicher bist, ob du eine großartige Dokumentationswebsite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
+:::
+
+:::danger
+Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein und dein Produkt einfacher nutzen.
+
+- Übersichtliche Navigation
+- Benutzer-konfigurierbares Farben-Theme
+- [i18n-Unterstützung](/de/guides/i18n/)
+
+:::
+
+```md
+:::caution
+Wenn du nicht sicher bist, ob du eine großartige Dokumentationswebsite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
+:::
+
+:::danger
+Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein und dein Produkt einfacher nutzen.
+
+- Übersichtliche Navigation
+- Benutzer-konfigurierbares Farben-Theme
+- [i18n-Unterstützung](/de/guides/i18n/)
+
+:::
+```
+
+## Blockzitate
+
+> Dies ist ein Blockzitat, das üblicherweise verwendet wird, wenn eine andere Person oder ein Dokument zitiert wird.
+>
+> Blockzitate werden durch ein ">" am Anfang jeder Zeile gekennzeichnet.
+
+```md
+> Dies ist ein Blockzitat, das üblicherweise verwendet wird, wenn eine andere Person oder ein Dokument zitiert wird.
+>
+> Blockzitate werden durch ein ">" am Anfang jeder Zeile gekennzeichnet.
+```
+
+## Codeblöcke
+
+Ein Codeblock wird durch einen Block mit drei Backticks <code>```</code> am Anfang und Ende gekennzeichnet. Du kannst die verwendete Programmiersprache nach den ersten drei Backticks angeben.
+
+```js
+// Javascript-Code mit Syntaxhervorhebung.
+var fun = function lang(l) {
+	dateformat.i18n = require('./lang/' + l);
+	return true;
+};
+```
+
+````md
+```js
+// Javascript-Code mit Syntaxhervorhebung.
+var fun = function lang(l) {
+	dateformat.i18n = require('./lang/' + l);
+	return true;
+};
+```
+````
+
+### Expressive Code-Merkmale
+
+Starlight verwendet [Expressive Code](https://expressive-code.com/), um die Formatierungs&shy;möglichkeiten für Codeblöcke zu erweitern.
+Die Textmarker und Fensterrahmen-Plugins von Expressive Code sind standardmäßig aktiviert.
+Die Darstellung von Codeblöcken kann mit Starlights [`expressiveCode` Konfigurations&shy;option](/de/reference/configuration/#expressivecode) konfiguriert werden.
+
+#### Textmarkierungen
+
+Du kannst bestimmte Zeilen oder Teile deiner Codeblöcke hervorheben, indem du [Expressive Code Textmarkierungen](https://expressive-code.com/key-features/text-markers/) in der ersten Zeile deines Codeblocks verwendest.
+Verwende geschweifte Klammern (`{ }`), um ganze Zeilen hervorzuheben, und Anführungszeichen, um Textabschnitte zu markieren.
+
+Es gibt drei Hervorhebungsstile: neutral, um auf den Code aufmerksam zu machen, grün, um eingefügten Code zu kennzeichnen, und rot, um gelöschten Code zu kennzeichnen.
+Sowohl Text als auch ganze Zeilen können mit der Standardmarkierung oder in Kombination mit `ins=` und `del=` markiert werden, um die gewünschte Hervorhebung zu erzielen.
+
+Expressive Code bietet mehrere Optionen zur Anpassung des visuellen Erscheinungsbildes deiner Codebeispiele.
+Viele dieser Optionen können kombiniert werden, um sehr anschauliche Codebeispiele zu erstellen.
+Bitte schaue dir die [Expressive Code Dokumentation](https://expressive-code.com/key-features/text-markers/#configuration) an, um dich über die umfangreichen Optionen zu informieren.
+Einige der gebräuchlichsten Beispiele sind unten aufgeführt:
+
+- [Markiere ganze Zeilen und Zeilenbereiche mit dem Marker `{ }`](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
+
+  ```js {2-3}
+  function demo() {
+  	// Diese Zeile (#2) und die nächste Zeile sind hervorgehoben
+  	return 'Dies ist Zeile #3 dieses Ausschnittes';
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js {2-3}
+  function demo() {
+  	// Diese Zeile (#2) und die nächste Zeile sind hervorgehoben
+  	return 'Dies ist Zeile #3 dieses Ausschnittes';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// Diese Zeile (#2) und die nächste Zeile sind hervorgehoben
+  	return 'Dies ist Zeile #3 dieses Ausschnittes';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Markieren von Textabschnitten mit der Markierung `" "` oder regulären Ausdrücken](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
+
+  ```js "einzelne Begriffe" /Auch.*unterstützt/
+  // Auch einzelne Begriffe können hervorgehoben werden
+  function demo() {
+  	return 'Auch reguläre Ausdrücke (RegEx) werden unterstützt';
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js "einzelne Begriffe" /Auch.*unterstützt/
+  // Auch einzelne Begriffe können hervorgehoben werden
+  function demo() {
+  	return 'Auch reguläre Ausdrücke (RegEx) werden unterstützt';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'einzelne Begriffe' /Auch.*unterstützt/" %}
+  // Auch einzelne Begriffe können hervorgehoben werden
+  function demo() {
+  	return 'Auch reguläre Ausdrücke (RegEx) werden unterstützt';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Text oder Zeilen mit `ins` oder `del` als eingefügt oder gelöscht markieren](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
+
+  ```js "return true;" ins="eingefügte" del="gelöschte"
+  function demo() {
+  	console.log('Dies sind eingefügte und gelöschte Markertypen');
+  	// Die return-Anweisung verwendet den Standard-Markierungstyp
+  	return true;
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js "return true;" ins="eingefügte" del="gelöschte"
+  function demo() {
+  	console.log('Dies sind eingefügte und gelöschte Markertypen');
+  	// Die return-Anweisung verwendet den Standard-Markierungstyp
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='eingefügte' del='gelöschte'" %}
+  function demo() {
+  	console.log('Dies sind eingefügte und gelöschte Markertypen');
+  	// Die return-Anweisung verwendet den Standard-Markierungstyp
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Kombiniere die Syntaxhervorhebung mit einer `diff`-ähnlichen Syntax](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // Dieser gesamte Block wird als JavaScript hervorgehoben,
+      // und wir können ihm immer noch Diff-Markierungen hinzufügen!
+  -   console.log('Zu entfernender alter Code')
+  +   console.log('Neuer, glänzender Code!')
+    }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // Dieser gesamte Block wird als JavaScript hervorgehoben,
+      // und wir können ihm immer noch Diff-Markierungen hinzufügen!
+  -   console.log('Zu entfernender alter Code')
+  +   console.log('Neuer, glänzender Code!')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // Dieser gesamte Block wird als JavaScript hervorgehoben,
+      // und wir können ihm immer noch Diff-Markierungen hinzufügen!
+  -   console.log('Zu entfernender alter Code')
+  +   console.log('Neuer, glänzender Code!')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+#### Rahmen und Überschriften
+
+Codeblöcke können innerhalb eines fensterähnlichen Rahmens dargestellt werden.
+Ein Rahmen, der wie ein Terminalfenster aussieht, wird für Shell-Skriptsprachen (z.&nbsp;B. `bash` oder `sh`) verwendet.
+Andere Sprachen werden in einem Rahmen im Stil eines Code-Editors angezeigt, wenn sie einen Titel enthalten.
+
+Der optionale Titel eines Code-Blocks kann entweder mit einem `title="..."`-Attribut gesetzt werden, das den öffnenden Backticks und dem Sprachbezeichner des Code-Blocks folgt, oder mit einem Dateinamenkommentar in den ersten Zeilen des Codes.
+
+- [Hinzufügen einer Registerkarte für den Dateinamen mit einem Kommentar](https://expressive-code.com/key-features/frames/#code-editor-frames)
+
+  ```js
+  // meine-test-datei.js
+  console.log('Hallo Welt!');
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js
+  // meine-test-datei.js
+  console.log('Hallo Welt!');
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // meine-test-datei.js
+  console.log('Hallo Welt!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Hinzufügen eines Titels zu einem Terminalfenster](https://expressive-code.com/key-features/frames/#terminal-frames)
+
+  ```bash title="Installieren von Abhängigkeiten…"
+  npm install
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```bash title="Installieren von Abhängigkeiten…"
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="Installieren von Abhängigkeiten…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Fensterrahmen mit `frame="none"` deaktivieren](https://expressive-code.com/key-features/frames/#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "Dies wird trotz Verwendung der Bash-Sprache nicht als Terminal dargestellt"
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```bash frame="none"
+  echo "Dies wird trotz Verwendung der Bash-Sprache nicht als Terminal dargestellt"
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "Dies wird trotz Verwendung der Bash-Sprache nicht als Terminal dargestellt"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+## Details
+
+Details (auch bekannt als „Offenlegungen“ oder „Akkordeons“) sind nützlich, um Inhalte zu verbergen, die nicht unmittelbar relevant sind.
+Die Nutzer können auf eine kurze Zusammenfassung klicken, um den gesamten Inhalt zu sehen.
+
+Verwende die Standard-HTML-Elemente [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) und [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) in deinem Markdown-Inhalt, um ein Offenlegungs-Widget zu erstellen.
+
+Du kannst jede andere Markdown-Syntax innerhalb eines `<details>`-Elements verschachteln.
+
+<details>
+<summary>Wo und wann ist das Sternbild Andromeda am besten zu sehen?</summary>
+
+Das Sternbild [Andromeda](<https://de.wikipedia.org/wiki/Andromeda_(Sternbild)>) ist am Nachthimmel im Monat November in Breitengraden zwischen `+90°` und `−40°` am besten sichtbar.
+
+</details>
+
+```md
+<details>
+<summary>Wo und wann ist das Sternbild Andromeda am besten zu sehen?</summary>
+
+Das Sternbild [Andromeda](<https://de.wikipedia.org/wiki/Andromeda_(Sternbild)>) ist am Nachthimmel im Monat November in Breitengraden zwischen `+90°` und `−40°` am besten sichtbar.
+
+</details>
+```
+
+## Fußnoten
+
+[Fußnoten](https://www.markdownguide.org/extended-syntax/#footnotes) sind nützlich, um kurze Hinweise oder Erklärungen hinzuzufügen, ohne den Textfluss zu stören. Sie werden hochgestellt als nummerierte Links im Text angezeigt, die zu den entsprechenden Erläuterungen am Ende der Seite führen.
+
+Erstelle eine Fußnote mit eckigen Klammern, einem Caret (auch bekannt als Zirkumflex oder Dach) und einer Nummer:
+
+```md
+Hier ist eine Fußnote[^1] mit nachfolgendem Referenztext.
+
+[^1]: Meine Referenz.
+```
+
+## Andere allgemeine Markdown-Funktionen
+
+Starlight unterstützt alle anderen Markdown-Autorensyntaxen, wie Listen und Tabellen. Einen schnellen Überblick über alle Markdown-Syntaxelemente findest du im [Markdown Cheat Sheet von The Markdown Guide](https://www.markdownguide.org/cheat-sheet/).
+
+## Erweiterte Markdown- und MDX-Konfiguration
+
+Starlight verwendet Astros Markdown- und MDX-Renderer, der auf remark und rehype aufbaut. Du kannst eine Unterstützung für eigene Syntax und Verhalten hinzufügen, indem du `remarkPlugins` oder `rehypePlugins` in deiner Astro-Konfigurationsdatei hinzufügst. Weitere Informationen findest du unter ["Markdown konfigurieren"](https://docs.astro.build/de/guides/markdown-content/#markdown-plugins) in der Astro-Dokumentation.
+
+## Markdoc
+
+Starlight unterstützt die Erstellung von Inhalten in Markdoc mithilfe der experimentellen [Astro Markdoc-Integration](https://docs.astro.build/de/guides/integrations-guide/markdoc/) und der Starlight-Markdoc-Voreinstellung.
+
+### Erstelle ein neues Projekt mit Markdoc
+
+Starte ein neues Starlight-Projekt mit vorkonfiguriertem Markdoc mit `create astro`:
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+</Tabs>
+
+### Markdoc zu einem bestehenden Projekt hinzufügen
+
+Wenn du bereits eine Starlight-Website hast und Markdoc hinzufügen möchtest, befolge diese Schritte.
+
+<Steps>
+
+1.  Füge Astros Markdoc-Integration hinzu:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Installiere die Starlight-Markdoc-Voreinstellung:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  Erstelle eine Markdoc-Konfigurationsdatei unter `markdoc.config.mjs` und verwende die Starlight-Markdoc-Voreinstellung:
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+    	extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+Weitere Informationen zur Syntax und den Funktionen von Markdoc findest du in der [Markdoc-Dokumentation](https://markdoc.dev/docs/syntax) oder im [Astro Markdoc-Integrations&shy;handbuch](https://docs.astro.build/de/guides/integrations-guide/markdoc/).
+
+### Konfigurieren der Markdoc-Voreinstellung
+
+Die Voreinstellung `starlightMarkdoc()` akzeptiert die folgenden Konfigurationsoptionen:
+
+#### `headingLinks`
+
+**Typ:** `boolean`  
+**Standard:** `true`
+
+Legt fest, ob Überschriften mit einem anklickbaren Ankerlink dargestellt werden oder nicht.
+Entspricht der Option [`markdown.headingLinks`](/de/reference/configuration/#markdown), die für Markdown- und MDX-Dateien gilt.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// Deaktiviere die Standardunterstützung für Überschrift-Ankerlinks
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

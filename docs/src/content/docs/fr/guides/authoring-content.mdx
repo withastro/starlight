@@ -1,0 +1,697 @@
+---
+title: Création de contenu en Markdown
+description: Un aperçu de la syntaxe Markdown prise en charge par Starlight.
+---
+
+Starlight prend en charge l'ensemble de la syntaxe [Markdown](https://daringfireball.net/projects/markdown/) dans les fichiers `.md` ainsi que le frontmatter en [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) pour définir des métadonnées telles qu'un titre et une description.
+
+Veillez à consulter la [documentation de MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) ou la [documentation de Markdoc](https://markdoc.dev/docs/syntax) si vous utilisez ces formats de fichiers, car la prise en charge et l'utilisation de Markdown peuvent varier.
+
+## Frontmatter
+
+Vous pouvez personnaliser chaque page individuellement en définissant des valeurs dans leur frontmatter.
+Le frontmatter se situe en haut de vos fichiers entre les séparateurs `---` :
+
+```md title="src/content/docs/exemple.md"
+---
+title: Le titre de ma page
+---
+
+Le contenu de la page suit le second `---`.
+```
+
+Chaque page doit inclure au moins un titre (`title`).
+Consultez la [référence du frontmatter](/fr/reference/frontmatter/) pour connaître tous les champs disponibles et comment ajouter des champs personnalisés.
+
+## Styles incorporés au texte
+
+Le texte peut être en **gras**, en _italique_, ou ~~barré~~.
+
+```md
+Le texte peut être en **gras**, en _italique_, ou ~~barré~~.
+```
+
+Vous pouvez [faire un lien vers une autre page](/fr/getting-started/).
+
+```md
+Vous pouvez [faire un lien vers une autre page](/fr/getting-started/).
+```
+
+Vous pouvez mettre en évidence le `code incorporé au texte` en utilisant des accents graves.
+
+```md
+Vous pouvez mettre en évidence le `code incorporé au texte` en utilisant des accents graves.
+```
+
+## Images
+
+Les images dans Starlight utilisent [la prise en charge intégrée des ressources optimisées d'Astro](https://docs.astro.build/fr/guides/images/).
+
+Markdown et MDX prennent en charge la syntaxe Markdown pour l'affichage d'images qui incluent du texte alternatif pour les lecteurs d'écran et les technologies d'assistance.
+
+![Une illustration de planètes et d'étoiles avec le mot « astro »](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+
+```md
+![Une illustration de planètes et d'étoiles avec le mot « astro »](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+```
+
+Les chemins d'accès relatifs aux images sont également pris en charge pour les images stockées localement dans votre projet.
+
+```md
+// src/content/docs/page-1.md
+
+![Une fusée dans l'espace](../../assets/images/rocket.svg)
+```
+
+## En-têtes
+
+Vous pouvez structurer le contenu à l'aide d'en-têtes. En Markdown, les en-têtes sont indiqués par un certain nombre de `#` en début de ligne.
+
+### Comment structurer le contenu d'une page dans Starlight
+
+Starlight est configuré pour utiliser automatiquement le titre de votre page comme en-tête de premier niveau et inclura un en-tête « Aperçu » en haut de la table des matières de chaque page. Nous vous recommandons de commencer chaque page par un paragraphe de texte normal et d'utiliser des en-têtes de page à partir de `<h2>` :
+
+```md
+---
+title: Guide Markdown
+description: Comment utiliser Markdown dans Starlight
+---
+
+Cette page décrit comment utiliser Markdown dans Starlight.
+
+## Styles incorporés au texte
+
+## En-têtes
+```
+
+### Liens d'ancrage automatiques pour les en-têtes
+
+L'utilisation d'en-têtes en Markdown vous donnera automatiquement des liens d'ancrage afin que vous puissiez accéder directement à certaines sections de votre page :
+
+```md
+---
+title: Ma page de contenu
+description: Comment utiliser les liens d'ancrage intégrés de Starlight
+---
+
+## Introduction
+
+Je peux faire un lien vers [ma conclusion](#conclusion) plus bas sur la même page.
+
+## Conclusion
+
+`https://my-site.com/page1/#introduction` renvoie directement à mon Introduction.
+```
+
+Les en-têtes de niveau 2 (`<h2>`) et de niveau 3 (`<h3>`) apparaissent automatiquement dans la table des matières de la page.
+
+Pour en apprendre davantage sur la façon dont Astro traite les attributs `id` des en-têtes de section, consultez la [documentation d'Astro](https://docs.astro.build/fr/guides/markdown-content/#id-des-titres).
+
+## Encarts
+
+Les encarts (également connus sous le nom de « admonitions » ou « asides » en anglais) sont utiles pour afficher des informations secondaires à côté du contenu principal d'une page.
+
+Starlight fournit une syntaxe Markdown personnalisée pour le rendu des encarts. Les blocs d'encarts sont indiqués en utilisant une paire de triples points `:::` pour envelopper votre contenu, et peuvent être de type `note`, `tip`, `caution` ou `danger`.
+
+Vous pouvez imbriquer n'importe quel autre type de contenu Markdown à l'intérieur d'un encart, mais les encarts sont mieux adaptés à des morceaux de contenu courts et concis.
+
+### Encart de type note
+
+:::note
+Starlight est une boîte à outils pour sites web de documentation construite avec [Astro](https://astro.build/). Vous pouvez démarrer avec cette commande :
+
+```sh
+npm run create astro@latest --template starlight
+```
+
+:::
+
+````md
+:::note
+Starlight est une boîte à outils pour sites web de documentation construite avec [Astro](https://astro.build/). Vous pouvez démarrer avec cette commande :
+
+```sh
+npm run create astro@latest --template starlight
+```
+
+:::
+````
+
+### Titres d'encarts personnalisés
+
+Vous pouvez spécifier un titre personnalisé pour un encart entre crochets après le type d'encart, par exemple `:::tip[Le saviez-vous ?]`.
+
+:::tip[Le saviez-vous ?]
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
+:::
+
+```md
+:::tip[Le saviez-vous ?]
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
+:::
+```
+
+### Icônes d'encarts personnalisées
+
+Vous pouvez spécifier une icône personnalisée pour un encart en utilisant des accolades après le type d'encart ou le [titre personnalisé](#titres-dencarts-personnalisés), par exemple `:::tip{icon="heart"}` ou `:::tip[Le saviez-vous ?]{icon="heart"}` respectivement.
+Le nom de l'icône doit être défini avec le nom de [l'une des icônes intégrées à Starlight](/fr/reference/icons/#toutes-les-icônes).
+
+:::tip{icon="heart"}
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
+:::
+
+```md
+:::tip{icon="heart"}
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
+:::
+```
+
+### Plus de types d'encarts
+
+Les encarts de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le perturber. Si vous vous retrouvez à utiliser ces derniers fréquemment, cela pourrait aussi être un signe que ce que vous documentez pourrait bénéficier d'une refonte.
+
+:::caution
+Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](/fr/).
+:::
+
+:::danger
+Vos utilisateurs peuvent être plus productifs et trouver votre produit plus facile à utiliser grâce aux fonctionnalités utiles de Starlight.
+
+- Navigation claire
+- Thème de couleurs configurable par l'utilisateur
+- [Prise en charge i18n](/fr/guides/i18n/)
+
+:::
+
+```md
+:::caution
+Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](/fr/).
+:::
+
+:::danger
+Vos utilisateurs peuvent être plus productifs et trouver votre produit plus facile à utiliser grâce aux fonctionnalités utiles de Starlight.
+
+- Navigation claire
+- Thème de couleurs configurable par l'utilisateur
+- [Prise en charge i18n](/fr/guides/i18n/)
+
+:::
+```
+
+## Blocs de citation
+
+> Il s'agit d'un bloc de citation, couramment utilisé pour citer une autre personne ou un document.
+>
+> Les blocs de citation sont indiqués par un `>` au début de chaque ligne.
+
+```md
+> Il s'agit d'un bloc de citation, couramment utilisé pour citer une autre personne ou un document.
+>
+> Les blocs de citation sont indiqués par un `>` au début de chaque ligne.
+```
+
+## Blocs de code
+
+Un bloc de code est indiqué par un bloc avec trois accents graves <code>```</code> au début et à la fin. Vous pouvez indiquer le langage de programmation utilisé après les premiers accents graves.
+
+```js
+// Code Javascript avec coloration syntaxique.
+var fun = function lang(l) {
+	dateformat.i18n = require('./lang/' + l);
+	return true;
+};
+```
+
+````md
+```js
+// Code Javascript avec coloration syntaxique.
+var fun = function lang(l) {
+	dateformat.i18n = require('./lang/' + l);
+	return true;
+};
+```
+````
+
+### Fonctionnalités d'Expressive Code
+
+Starlight utilise [Expressive Code](https://expressive-code.com/) pour étendre les possibilités de formatage des blocs de code.
+Les modules d'extension Expressive Code de marqueurs de texte et de cadres de fenêtre sont activés par défaut.
+L'affichage des blocs de code peut être configuré à l'aide de [l'option de configuration `expressiveCode`](/fr/reference/configuration/#expressivecode) de Starlight.
+
+#### Marqueurs de texte
+
+Vous pouvez mettre en évidence des lignes ou des portions spécifiques de vos blocs de code à l'aide des [marqueurs de texte d'Expressive Code](https://expressive-code.com/key-features/text-markers/) sur la première ligne de votre bloc de code.
+Utilisez des accolades (`{ }`) pour mettre en évidence des lignes entières, et des guillemets pour mettre en évidence des chaînes de texte.
+
+Il existe trois styles de mise en évidence : neutre pour attirer l'attention sur le code, vert pour indiquer du code inséré, et rouge pour indiquer du code supprimé.
+Du texte et des lignes entières peuvent être marqués à l'aide du marqueur par défaut, ou en combinaison avec `ins=` et `del=` pour produire la mise en évidence souhaitée.
+
+Expressive Code fournit plusieurs options pour personnaliser l'apparence visuelle de vos exemples de code.
+Beaucoup d'entre elles peuvent être combinées pour obtenir des exemples de code très illustratifs.
+Veuillez explorer la [documentation d'Expressive Code](https://expressive-code.com/key-features/text-markers/#configuration) pour obtenir une liste complète des options disponibles.
+Certaines des options les plus courantes sont présentées ci-dessous :
+
+- [Marquer des lignes entières et des plages de lignes à l'aide du marqueur `{ }`](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges) :
+
+  ```js {2-3}
+  function demo() {
+  	// Cette ligne (#2) et la suivante sont mises en évidence
+  	return 'Ceci est la ligne #3 de cet exemple';
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js {2-3}
+  function demo() {
+  	// Cette ligne (#2) et la suivante sont mises en évidence
+  	return 'Ceci est la ligne #3 de cet exemple';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// Cette ligne (#2) et la suivante sont mises en évidence
+  	return 'Ceci est la ligne #3 de cet exemple';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Marquer des sélections de texte à l'aide du marqueur `" "` ou d'expressions régulières](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines) :
+
+  ```js "termes individuels" /Même.*charge/
+  // Des termes individuels peuvent également être mis en évidence
+  function demo() {
+  	return 'Même les expressions régulières sont prises en charge';
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js "termes individuels" /Même.*charge/
+  // Des termes individuels peuvent également être mis en évidence
+  function demo() {
+  	return 'Même les expressions régulières sont prises en charge';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'termes individuels' /Même.*charge/" %}
+  // Des termes individuels peuvent également être mis en évidence
+  function demo() {
+  	return 'Même les expressions régulières sont prises en charge';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Marquer du texte ou des lignes comme insérés ou supprimés avec `ins` ou `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del) :
+
+  ```js "return true;" ins="insertion" del="suppression"
+  function demo() {
+  	console.log("Voici des marqueurs d'insertion et de suppression");
+  	// La déclaration return utilise le type de marqueur par défaut
+  	return true;
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js "return true;" ins="insertion" del="suppression"
+  function demo() {
+  	console.log("Voici des marqueurs d'insertion et de suppression");
+  	// La déclaration return utilise le type de marqueur par défaut
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='insertion' del='suppression'" %}
+  function demo() {
+  	console.log("Voici des marqueurs d'insertion et de suppression");
+  	// La déclaration return utilise le type de marqueur par défaut
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Combiner coloration syntaxique et syntaxe de type `diff`](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax) :
+
+  ```diff lang="js"
+    function ceciEstDuJavaScript() {
+      // Ce bloc entier utilise la coloration syntaxique JavaScript,
+      // et nous pouvons toujours y ajouter des marqueurs de différence !
+  -   console.log('Ancien code à supprimer')
+  +   console.log('Nouveau code brillant !')
+    }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```diff lang="js"
+    function ceciEstDuJavaScript() {
+      // Ce bloc entier utilise la coloration syntaxique JavaScript,
+      // et nous pouvons toujours y ajouter des marqueurs de différence !
+  -   console.log('Ancien code à supprimer')
+  +   console.log('Nouveau code brillant !')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function ceciEstDuJavaScript() {
+      // Ce bloc entier utilise la coloration syntaxique JavaScript,
+      // et nous pouvons toujours y ajouter des marqueurs de différence !
+  -   console.log('Ancien code à supprimer')
+  +   console.log('Nouveau code brillant !')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+#### Cadres et titres
+
+Les blocs de code peuvent être affichés dans un cadre ressemblant à une fenêtre.
+Un cadre ressemblant à une fenêtre de terminal sera utilisé pour les langages de script shell (par exemple `bash` ou `sh`).
+Les autres langages s'affichent dans un cadre de style éditeur de code s'ils incluent un titre.
+
+Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `title="..."` après les accents graves d'ouverture et l'identifiant de langage, ou avec un nom de fichier en commentaire sur la première ligne du bloc de code.
+
+- [Ajouter un nom de fichier avec un commentaire](https://expressive-code.com/key-features/frames/#code-editor-frames) :
+
+  ```js
+  // mon-fichier-de-test.js
+  console.log('Hello World!');
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js
+  // mon-fichier-de-test.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // mon-fichier-de-test.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Ajouter un titre à une fenêtre de terminal](https://expressive-code.com/key-features/frames/#terminal-frames) :
+
+  ```bash title="Installation des dépendances…"
+  npm install
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```bash title="Installation des dépendances…"
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="Installation des dépendances…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Désactiver les cadres de fenêtre avec `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types) :
+
+  ```bash frame="none"
+  echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```bash frame="none"
+  echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+## Détails
+
+Détails (également connus comme « divulgations » ou « accordéons ») sont utiles pour masquer du contenu qui n'est pas immédiatement pertinent.
+Les utilisateurs peuvent cliquer sur un court résumé pour développer et afficher le contenu complet.
+
+Utilisez les éléments HTML standard [`<details>`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/details) et [`<summary>`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/summary) dans votre contenu Markdown pour créer un widget de divulgation.
+
+Vous pouvez imbriquer n'importe quelle autre syntaxe Markdown à l'intérieur d'un élément `<details>`.
+
+<details>
+<summary>Où et quand la constellation d'Andromède est-elle la plus visible ?</summary>
+
+La [constellation d'Andromède](<https://fr.wikipedia.org/wiki/Androm%C3%A8de_(constellation)>) est la plus visible dans le ciel nocturne pendant le mois de novembre aux latitudes comprises entre `+90°` et `−40°`.
+
+</details>
+
+```md
+<details>
+<summary>Où et quand la constellation d'Andromède est-elle la plus visible ?</summary>
+
+La [constellation d'Andromède](<https://fr.wikipedia.org/wiki/Androm%C3%A8de_(constellation)>) est la plus visible dans le ciel nocturne pendant le mois de novembre aux latitudes comprises entre `+90°` et `−40°`.
+
+</details>
+```
+
+## Notes de bas de page
+
+Les [notes de bas de page](https://www.markdownguide.org/extended-syntax/#footnotes) sont utiles pour ajouter de brèves références ou des précisions sans interrompre la lecture. Elles se présentent sous forme de liens numérotés en exposant qui permettent d'accéder au texte référencé, regroupé en bas de page.
+
+Définissez une note de bas de page à l'aide de crochets contenant un accent circonflexe et une référence numérotée :
+
+```md
+Voici une note de bas de page[^1] avec un texte complémentaire après.
+
+[^1]: Ma référence.
+```
+
+## Autres fonctionnalités courantes de Markdown
+
+Starlight prend en charge toutes les autres syntaxes de rédaction Markdown, telles que les listes et les tableaux. Voir [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) pour un aperçu rapide de tous les éléments de la syntaxe Markdown.
+
+## Configuration avancée de Markdown et MDX
+
+Starlight utilise le moteur de rendu Markdown et MDX d'Astro basé sur remark et rehype. Vous pouvez ajouter la prise en charge de syntaxe et comportement personnalisés en ajoutant `remarkPlugins` ou `rehypePlugins` dans votre fichier de configuration Astro. Pour en savoir plus, consultez [« Modules d’extension Markdown »](https://docs.astro.build/fr/guides/markdown-content/#modules-dextension-markdown) dans la documentation d'Astro.
+
+## Markdoc
+
+Starlight prend en charge la création de contenu en Markdoc en utilisant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) et le préréglage Markdoc de Starlight.
+
+### Créer un nouveau projet avec Markdoc
+
+Créez un nouveau projet Starlight avec Markdoc préconfiguré en utilisant `create astro` :
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+</Tabs>
+
+### Ajouter Markdoc à un projet existant
+
+Si vous disposez déjà d'un site Starlight et que vous souhaitez ajouter Markdoc, suivez ces étapes.
+
+<Steps>
+
+1.  Ajoutez l'intégration Markdoc d'Astro :
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Installez le préréglage Markdoc de Starlight :
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  Créez une configuration Markdoc dans le fichier `markdoc.config.mjs` et utilisez le préréglage Markdoc de Starlight :
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+    	extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+Pour en savoir plus sur la syntaxe et les fonctionnalités de Markdoc, consultez la [documentation Markdoc](https://markdoc.dev/docs/syntax) ou le [guide de l'intégration Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).
+
+### Configuration du préréglage Markdoc
+
+Le préréglage `starlightMarkdoc()` accepte les options de configuration suivantes :
+
+#### `headingLinks`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Contrôle si les en-têtes sont affichés avec des liens d'ancrage cliquables ou non.
+Équivaut à l'option [`markdown.headingLinks`](/fr/reference/configuration/#markdown) qui s'applique aux fichiers Markdown et MDX.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// Désactive les liens d'ancrage par défaut pour les en-têtes
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

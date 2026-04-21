@@ -1,0 +1,128 @@
+---
+title: 아이콘
+description: Starlight에서 아이콘을 표시하는 방법을 알아보세요.
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+Starlight의 [기본 제공 아이콘 세트](/ko/reference/icons/#모든-아이콘)의 아이콘을 표시하려면 `<Icon>` 컴포넌트를 사용하세요.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Icon
+	slot="preview"
+	name="open-book"
+	color="var(--sl-color-text-accent)"
+	size="4rem"
+/>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { Icon } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+`<Icon>` 컴포넌트를 사용하여 아이콘을 표시합니다.
+아이콘에는 [Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)로 설정된 [`name`](#name)이 필요하며, 화면 리더에 컨텍스트를 제공하기 위해 선택적으로 [`label`](#label)을 포함할 수 있습니다.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" />
+<Icon name="starlight" label="Starlight 로고" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" /%}
+{% icon name="starlight" label="Starlight 로고" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" />
+	<Icon name="starlight" label="Starlight 로고" />
+</Fragment>
+
+</Preview>
+
+### 아이콘 사용자 정의
+
+CSS 단위와 색상 값을 사용하여 아이콘의 모양을 조정하는 데 [`size`](#size) 및 [`color`](#color) 속성을 사용할 수 있습니다.
+[`class`](#class) 속성을 사용하여 아이콘에 사용자 정의 CSS 클래스를 추가할 수 있습니다.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" color="goldenrod" size="2rem" />
+	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+</Fragment>
+
+</Preview>
+
+## `<Icon>` 속성
+
+**구현:** [`Icon.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Icon.astro)
+
+`<Icon>` 컴포넌트는 다음 속성을 허용합니다:
+
+### `name`
+
+**필수**  
+**타입:** [`StarlightIcon`](/ko/reference/icons/#starlighticon-타입)
+
+표시할 아이콘의 이름을 [Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)로 설정합니다.
+
+### `label`
+
+**타입:** `string`
+
+화면 리더와 같은 보조 기술에 컨텍스트를 제공하기 위한 선택적 레이블입니다.
+
+`label`을 설정하지 않으면 보조 기술에서 아이콘이 완전히 숨겨집니다.
+이 경우 아이콘 없이도 문맥을 이해할 수 있는지 확인하세요.
+예를 들어 아이콘만 포함된 링크는 `label` 속성을 **포함해야** 액세스할 수 있지만, 링크에 텍스트가 포함되어 있고 아이콘이 순전히 장식용인 경우에는 `label`을 생략해도 괜찮습니다.
+
+### `size`
+
+**타입:** `string`
+
+CSS 단위를 사용한 아이콘 크기입니다.
+
+### `color`
+
+**타입:** `string`
+
+CSS 색상 값을 사용하는 아이콘의 색상입니다.
+
+### `class`
+
+**타입:** `string`
+
+아이콘에 추가할 사용자 정의 CSS 클래스입니다.

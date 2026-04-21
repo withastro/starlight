@@ -1,0 +1,150 @@
+---
+title: Abzeichen
+description: Lerne, wie du in Starlight Abzeichen verwenden kannst, um zusätzliche Informationen anzuzeigen.
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+Um wenige Informationen, wie z.&nbsp;B. einen Status oder eine Kategorie, anzuzeigen, verwende die Komponente `<Badge>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="Neu" />
+
+</Preview>
+
+## Import
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Zeige ein Abzeichen mit der Komponente `<Badge>` an und übergib den Inhalt, den du anzeigen möchtest, an das Attribut [`text`](#text) der Komponente `<Badge>`.
+
+Standardmäßig wird für das Abzeichen die Akzentfarbe des Themes deiner Website verwendet.
+Um eine eingebaute Abzeichen-Farbe zu verwenden, setze das Attribut [`variant`](#variant) auf einen der unterstützten Werte.
+
+<Preview>
+
+```mdx
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="Hinweis" variant="note" />
+- <Badge text="Erfolg" variant="success" />
+- <Badge text="Tipp" variant="tip" />
+- <Badge text="Warnung" variant="caution" />
+- <Badge text="Gefahr" variant="danger" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+- {% badge text="Hinweis" variant="note" /%}
+- {% badge text="Erfolg" variant="success" /%}
+- {% badge text="Tipp" variant="tip" /%}
+- {% badge text="Warnung" variant="caution" /%}
+- {% badge text="Gefahr" variant="danger" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="Hinweis" variant="note" />
+	- <Badge text="Erfolg" variant="success" />
+	- <Badge text="Tipp" variant="tip" />
+	- <Badge text="Warnung" variant="caution" />
+	- <Badge text="Gefahr" variant="danger" />
+</Fragment>
+
+</Preview>
+
+### Verschiedene Größen verwenden
+
+Verwende das Attribut [`size`](#size), um die Größe des Abzeichentextes zu steuern.
+
+<Preview>
+
+```mdx /size="\w+"/
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge text="Neu" size="small" />
+- <Badge text="Neu und verbessert" size="medium" />
+- <Badge text="Neu, verbessert und größer" size="large" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+- {% badge text="Neu" size="small" /%}
+- {% badge text="Neu und verbessert" size="medium" /%}
+- {% badge text="Neu, verbessert und größer" size="large" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	- <Badge text="Neu" size="small" />
+	- <Badge text="Neu und verbessert" size="medium" />
+	- <Badge text="Neu, verbessert und größer" size="large" />
+</Fragment>
+
+</Preview>
+
+### Abzeichen anpassen
+
+Passe Abzeichen an, indem du andere `<span>`-Attribute wie `class` oder `style` mit benutzerdefiniertem CSS verwendest.
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Individuell" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+{% badge text="Individuell" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
+
+<Badge
+	slot="preview"
+	text="Individuell"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## `<Badge>`-Eigenschaften
+
+**Implementation:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+Die `<Badge>`-Komponente akzeptiert die folgenden Eigenschaften und auch alle [anderen `<span>`-Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes):
+
+### `text`
+
+**Erforderlich**  
+**Typ:** `string`
+
+Der Textinhalt, der in dem Abzeichen angezeigt werden soll.
+
+### `variant`
+
+**Typ:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**Standard:** `'default'`
+
+Die zu verwendende Farbvariante des Abzeichens: `note` (blau), `tip` (lila), `danger` (rot), `caution` (orange), `success` (grün) oder `default` (Akzentfarbe des Themes).
+
+### `size`
+
+**Typ:** `'small' | 'medium' | 'large'`
+
+Bestimmt die Größe des anzuzeigenden Abzeichens.

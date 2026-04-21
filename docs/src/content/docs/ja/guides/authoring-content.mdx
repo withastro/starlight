@@ -1,0 +1,683 @@
+---
+title: Markdownでのコンテンツ作成
+description: StarlightがサポートするMarkdown構文の概要。
+---
+
+Starlightでは、`.md`ファイルにおいて[Markdown](https://daringfireball.net/projects/markdown/)構文のすべての機能を利用できます。また、タイトルや説明文（description）などのメタデータを定義するためのフロントマター[YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f)もサポートしています。
+
+MDXやMarkdocを使用する場合、サポートされるMarkdownの機能や使用方法が異なることがあるため、[MDXドキュメント](https://mdxjs.com/docs/what-is-mdx/#markdown)や[Markdocドキュメント](https://markdoc.dev/docs/syntax)を必ず確認してください。
+
+## フロントマター
+
+フロントマターに値を設定して、Starlightの個々のページをカスタマイズできます。フロントマターは、ファイル先頭の`---`によって区切られた区間に設定します。
+
+```md title="src/content/docs/example.md"
+---
+title: ページのタイトル
+---
+
+ページのコンテンツは、2つ目の`---`の後に続きます。
+```
+
+すべてのページには、少なくとも`title`が必要です。利用可能なすべてのフィールドと、カスタムフィールドの追加方法については、[フロントマターのリファレンス](/ja/reference/frontmatter/)を参照してください。
+
+## インラインスタイル
+
+テキストは**太字**、_斜体_、または~~取り消し線~~にできます。
+
+```md
+テキストは**太字**、_斜体_、または~~取り消し線~~にできます。
+```
+
+[別のページにリンク](/ja/getting-started/)できます。
+
+```md
+[別のページにリンク](/ja/getting-started/)できます。
+```
+
+バックティックで`インラインコード`を強調できます。
+
+```md
+バックティックで`インラインコード`を強調できます。
+```
+
+## 画像
+
+Starlightは、[Astro組み込みのアセット最適化機能](https://docs.astro.build/ja/guides/images/)を使用して画像を表示します。
+
+MarkdownとMDXは、スクリーンリーダーや支援技術のための代替テキストを含む画像を表示するためのMarkdown構文をサポートしています。
+
+![「astro」という単語を中心に据えた惑星と恒星のイラスト](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+
+```md
+![「astro」という単語を中心に据えた惑星と恒星のイラスト](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+```
+
+プロジェクトにローカルに保存されている画像についても、相対パスを使用して表示できます。
+
+```md
+// src/content/docs/page-1.md
+
+![宇宙空間に浮かぶロケット](../../assets/images/rocket.svg)
+```
+
+## 見出し
+
+見出しによりコンテンツを構造化できます。Markdownの見出しは、行の先頭にある`#`の数で示されます。
+
+### ページコンテンツを構造化する方法
+
+Starlightは、ページタイトルをトップレベルの見出しとして自動的に使用し、また各ページの目次の先頭に「概要」という見出しを含めます。各ページを通常のテキストコンテンツで開始し、ページ上の見出しは`<h2>`以下を使用することをおすすめします。
+
+```md
+---
+title: Markdownガイド
+description: StarlightでのMarkdownの使い方
+---
+
+このページでは、StarlightでMarkdownを使用する方法について説明します。
+
+## インラインスタイル
+
+## 見出し
+```
+
+### 見出しの自動アンカーリンク
+
+Markdownで見出しを使用するとアンカーリンクが自動的に付与されるため、ページの特定のセクションに直接リンクできます。
+
+```md
+---
+title: 私のページコンテンツ
+description: Starlightの組み込みアンカーリンクの使い方
+---
+
+## はじめに
+
+同じページの下部にある[結論](#結論)にリンクできます。
+
+## 結論
+
+`https://my-site.com/page1/#はじめに`は、「はじめに」に直接移動します。
+```
+
+レベル2（`<h2>`）とレベル3（`<h3>`）の見出しは、ページの目次に自動的に表示されます。
+
+Astroが見出しの`id`をどのように処理するかについて、詳しくは[Astroドキュメント](https://docs.astro.build/ja/guides/markdown-content/#見出しid)を参照してください。
+
+## 補足情報
+
+補足情報（「警告」や「吹き出し」とも呼ばれます）は、ページのメインコンテンツと並べて補助的な情報を表示するのに便利です。
+
+Starlightは、補足情報をレンダリングするためのカスタムMarkdown構文を提供しています。補足情報のブロックは、コンテンツを囲む3つのコロン`:::`によって示し、`note`（注釈）、`tip`（ヒント）、`caution`（注意）、`danger`（危険）というタイプに設定できます。
+
+他のMarkdownコンテンツを補足情報の中にネストできますが、補足情報は短く簡潔なコンテンツに最も適しています。
+
+### 注釈
+
+:::note
+Starlightは、[Astro](https://astro.build/)製のドキュメントサイト用ツールキットです。次のコマンドではじめられます。
+
+```sh
+npm create astro@latest -- --template starlight
+```
+
+:::
+
+````md
+:::note
+Starlightは、[Astro](https://astro.build/)製のドキュメントサイト用ツールキットです。次のコマンドではじめられます。
+
+```sh
+npm create astro@latest -- --template starlight
+```
+
+:::
+````
+
+### カスタムのタイトル
+
+補足情報のカスタムタイトルを、補足情報のタイプの後ろに角括弧で囲んで指定できます。たとえば`:::tip[ご存知でしたか？]`のようにできます。
+
+:::tip[ご存知でしたか？]
+Astroでは[「アイランドアーキテクチャ」](https://docs.astro.build/ja/concepts/islands/)を使用して、より高速なWebサイトを構築できます。
+:::
+
+```md
+:::tip[ご存知でしたか？]
+Astroでは[「アイランドアーキテクチャ」](https://docs.astro.build/ja/concepts/islands/)を使用して、より高速なWebサイトを構築できます。
+:::
+```
+
+### カスタムの補足アイコン
+
+補足情報のタイプまたは[カスタムタイトル](#カスタムのタイトル)の後ろに波括弧でカスタムアイコンを指定できます。たとえば`:::tip{icon="heart"}`や`:::tip[ご存知でしたか？]{icon="heart"}`のようにできます。アイコン名は、[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前に設定する必要があります。
+
+:::tip{icon="heart"}
+Astroでは[「アイランドアーキテクチャ」](https://docs.astro.build/ja/concepts/islands/)を使用して、高速なWebサイトを構築できます。
+:::
+
+```md
+:::tip{icon="heart"}
+Astroでは[「アイランドアーキテクチャ」](https://docs.astro.build/ja/concepts/islands/)を使用して、高速なWebサイトを構築できます。
+:::
+```
+
+### その他のタイプ
+
+注意（Caution）と危険（Danger）の補足は、ユーザーがつまずく可能性のある細かい点に注意を向けさせるのに役立ちます。もしこれらを多用しているとすれば、それはあなたがドキュメントを書いている対象の設計を見直す余地があることのサインかもしれません。
+
+:::caution
+もしあなたが素晴らしいドキュメントサイトを望んでいないのであれば、[Starlight](/ja/)は不要かもしれません。
+:::
+
+:::danger
+Starlightの便利な機能のおかげで、ユーザーはより生産的になり、プロダクトはより使いやすくなるかもしれません。
+
+- わかりやすいナビゲーション
+- ユーザーが設定可能なカラーテーマ
+- [国際化機能](/ja/guides/i18n/)
+
+:::
+
+```md
+:::caution
+もしあなたが素晴らしいドキュメントサイトを望んでいないのであれば、[Starlight](/ja/)は不要かもしれません。
+:::
+
+:::danger
+Starlightの便利な機能のおかげで、ユーザーはより生産的になり、プロダクトはより使いやすくなるかもしれません。
+
+- わかりやすいナビゲーション
+- ユーザーが設定可能なカラーテーマ
+- [国際化機能](/ja/guides/i18n/)
+
+:::
+```
+
+## 引用
+
+> これは引用です。他の人の言葉やドキュメントを引用するときによく使われます。
+>
+> 引用は、各行の先頭に`>`を付けることで示されます。
+
+```md
+> これは引用です。他の人の言葉やドキュメントを引用するときによく使われます。
+>
+> 引用は、各行の先頭に`>`を付けることで示されます。
+```
+
+## コードブロック
+
+コードのブロックは、先頭と末尾に3つのバックティック<code>```</code>を持つブロックで示されます。コードブロックを開始するバックティックの後ろに、使用されているプログラミング言語を指定できます。
+
+```js
+// シンタックスハイライトされたJavascriptコード。
+var fun = function lang(l) {
+	dateformat.i18n = require('./lang/' + l);
+	return true;
+};
+```
+
+````md
+```js
+// シンタックスハイライトされたJavascriptコード。
+var fun = function lang(l) {
+	dateformat.i18n = require('./lang/' + l);
+	return true;
+};
+```
+````
+
+### Expressive Codeの機能
+
+Starlightは、コードブロックのフォーマットを拡張するために[Expressive Code](https://expressive-code.com/)を使用しています。Expressive Codeのテキストマーカーとウィンドウフレームプラグインはデフォルトで有効になっています。コードブロックのレンダリングは、Starlightの[`expressiveCode`設定オプション](/ja/reference/configuration/#expressivecode)により設定できます。
+
+#### テキストマーカー
+
+[Expressive Codeのテキストマーカー](https://expressive-code.com/key-features/text-markers/)をコードブロックの先頭で使うことで、コードブロックの特定の行や部分をハイライトできます。波括弧（`{ }`）を使って行全体をハイライトし、引用符を使ってテキストの文字列をハイライトします。
+
+ハイライトのスタイルは3つあります。コードに注意を向けるための中立的なスタイル、挿入されたコードを示す緑色のスタイル、削除されたコードを示す赤色のスタイルです。テキストと行全体の両方を、デフォルトのマーカー、または`ins=`と`del=`を組み合わせてマークし、目的のハイライトを生成できます。
+
+Expressive Codeには、コードサンプルの外観をカスタマイズするためのさまざまなオプションが用意されています。これらの多くは組み合わせることができ、非常に明快なコードサンプルを作成できます。利用可能な多くのオプションについては、[Expressive Codeのドキュメント](https://expressive-code.com/key-features/text-markers/#configuration)を確認してください。最も一般的な例をいくつか以下に示します。
+
+- [行全体と行の範囲を`{ }`マーカーを使ってマークする](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
+
+  ```js {2-3}
+  function demo() {
+  	// この行（2行目）と次の行はハイライトされます
+  	return 'このスニペットの3行目です';
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js {2-3}
+  function demo() {
+  	// この行（2行目）と次の行はハイライトされます
+  	return 'このスニペットの3行目です';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// この行（2行目）と次の行はハイライトされます
+  	return 'このスニペットの3行目です';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [`" "`マーカーまたは正規表現を使って選択されたテキストをマークする](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
+
+  ```js "個別の用語" /正規表現.*います/
+  // 個別の用語もハイライトできます
+  function demo() {
+  	return '正規表現もサポートされています';
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js "個別の用語" /正規表現.*います/
+  // 個別の用語もハイライトできます
+  function demo() {
+  	return '正規表現もサポートされています';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'個別の用語' /正規表現.*います/" %}
+  // 個別の用語もハイライトできます
+  function demo() {
+  	return '正規表現もサポートされています';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [追加、削除されたテキストや行を、`ins`と`del`でマークする](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
+
+  ```js "return true;" ins="挿入" del="削除"
+  function demo() {
+  	console.log('これらは挿入と削除のマーカーです');
+  	// return文はデフォルトのマーカータイプを使用します
+  	return true;
+  }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js "return true;" ins="挿入" del="削除"
+  function demo() {
+  	console.log('これらは挿入と削除のマーカーです');
+  	// return文はデフォルトのマーカータイプを使用します
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='挿入' del='削除'" %}
+  function demo() {
+  	console.log('これらは挿入と削除のマーカーです');
+  	// return文はデフォルトのマーカータイプを使用します
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [構文ハイライトと`diff`風の構文を組み合わせる](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // このブロック全体はJavaScriptとしてハイライトされますが、
+      // diffマーカーの追加も可能です！
+  -   console.log('削除される古いコード')
+  +   console.log('新しいキラキラコード！')
+    }
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // このブロック全体はJavaScriptとしてハイライトされますが、
+      // diffマーカーの追加も可能です！
+  -   console.log('削除される古いコード')
+  +   console.log('新しいキラキラコード！')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // このブロック全体はJavaScriptとしてハイライトされますが、
+      // diffマーカーの追加も可能です！
+  -   console.log('削除される古いコード')
+  +   console.log('新しいキラキラコード！')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+#### フレームとタイトル
+
+コードブロックをウィンドウのようなフレームの中にレンダリングできます。シェルスクリプト言語（`bash`や`sh`など）には、ターミナルウィンドウのようなフレームが使用されます。その他の言語は、タイトルを含んでいる場合、コードエディタスタイルのフレーム内に表示されます。
+
+`title="..."`属性を、コードブロックの開始を表わすバックティックと言語識別子の後ろに続けて記述するか、コードの最初の行にファイル名コメントを記述することで、コードブロックにオプションでタイトルを設定できます。
+
+- [コメントによりファイル名タブを追加する](https://expressive-code.com/key-features/frames/#code-editor-frames)
+
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Terminalウィンドウにタイトルを追加する](https://expressive-code.com/key-features/frames/#terminal-frames)
+
+  ```bash title="依存関係のインストール中…"
+  npm install
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```bash title="依存関係のインストール中…"
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="依存関係のインストール中…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [`frame="none"`によりウィンドウフレームを無効化する](https://expressive-code.com/key-features/frames/#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "bash言語を使用していますが、これはターミナルとしてレンダリングされません"
+  ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```bash frame="none"
+  echo "bash言語を使用していますが、これはターミナルとしてレンダリングされません"
+  ```
+  ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "bash言語を使用していますが、これはターミナルとしてレンダリングされません"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+## Details
+
+Details（「ディスクロージャー」や「アコーディオン」とも呼ばれます）は、すぐには必要ないコンテンツを非表示にするのに便利です。ユーザーは短い要約をクリックして、コンテンツ全体を展開・表示できます。
+
+Markdownコンテンツ内で標準のHTML要素[`<details>`](https://developer.mozilla.org/ja/docs/Web/HTML/Element/details)と[`<summary>`](https://developer.mozilla.org/ja/docs/Web/HTML/Element/summary)を使用して、ディスクロージャーウィジェットを作成できます。
+
+`<details>`要素の中には、他のMarkdown構文をネストできます。
+
+<details>
+<summary>アンドロメダ座が最もよく見えるのはいつ、どこ？</summary>
+
+[アンドロメダ座](https://ja.wikipedia.org/wiki/アンドロメダ座)は、北緯`+90°`から南緯`-40°`の間の緯度で、11月の夜空に最もよく見えます。
+
+</details>
+
+```md
+<details>
+<summary>アンドロメダ座が最もよく見えるのはいつ、どこ？</summary>
+
+[アンドロメダ座](https://ja.wikipedia.org/wiki/アンドロメダ座)は、北緯`+90°`から南緯`-40°`の間の緯度で、11月の夜空に最もよく見えます。
+
+</details>
+```
+
+## 脚注
+
+[脚注](https://www.markdownguide.org/extended-syntax/#footnotes)は、コンテンツの流れを中断することなく、簡潔な参照や補足を追加するのに便利です。脚注は、ページの下部に集められた参照テキストへジャンプする、番号付きの上付きリンクとして表示されます。
+
+脚注は、角括弧とキャレット、番号付き参照を使用して定義します。
+
+```md
+ここに脚注[^1]があり、その後にテキストが続きます。
+
+[^1]: 参照内容。
+```
+
+## その他の一般的なMarkdown機能
+
+Starlightは、リストやテーブルなど、その他のMarkdown記法をすべてサポートしています。Markdownのすべての構文要素の概要については、[The Markdown GuideのMarkdownチートシート](https://www.markdownguide.org/cheat-sheet/)を参照してください。
+
+## 高度なMarkdownとMDXの設定
+
+Starlightは、remarkとrehypeをベースとした、AstroのMarkdown・MDXレンダラーを使用しています。Astroの設定ファイルに`remarkPlugins`または`rehypePlugins`を追加することで、カスタム構文や動作をサポートできます。詳しくは、Astroドキュメントの[「Markdownプラグイン」](https://docs.astro.build/ja/guides/markdown-content/#markdown-plugins)を参照してください。
+
+## Markdoc
+
+Starlightは、実験的な[Astro Markdoc統合](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)とStarlight Markdocプリセットを使用して、Markdocでのコンテンツ作成をサポートしています。
+
+### Markdocで新しいプロジェクトを作成する
+
+`create astro`を使用して、Markdocが事前設定された新しいStarlightプロジェクトを開始します。
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+</Tabs>
+
+### 既存のプロジェクトにMarkdocを追加する
+
+既にStarlightサイトがあり、Markdocを追加したい場合は、以下の手順に従ってください。
+
+<Steps>
+
+1.  AstroのMarkdoc統合を追加します。
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Starlight Markdocプリセットをインストールします。
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  `markdoc.config.mjs`にMarkdoc設定ファイルを作成し、Starlight Markdocプリセットを使用します。
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+    	extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+Markdocの構文と機能についてさらに学ぶには、[Markdocのドキュメント](https://markdoc.dev/docs/syntax)または[Astro Markdoc統合ガイド](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)を参照してください。
+
+### Markdocプリセットの設定
+
+`starlightMarkdoc()`プリセットは、以下の設定オプションを受け付けます。
+
+#### `headingLinks`
+
+**type:** `boolean`  
+**default:** `true`
+
+見出しにクリック可能なアンカーリンクを付けてレンダリングするかどうかを制御します。MarkdownおよびMDXファイルに適用される[`markdown.headingLinks`](/ja/reference/configuration/#markdown)オプションと同等です。
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// デフォルトの見出しアンカーリンクのサポートを無効にする
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

@@ -1,0 +1,152 @@
+---
+title: Overriding Components
+description: Learn how to override Starlight’s built-in components to add custom elements to your documentation site’s UI.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Starlight’s default UI and configuration options are designed to be flexible and work for a range of content. Much of Starlight's default appearance can be customized with [CSS](/guides/css-and-tailwind/) and [configuration options](/guides/customization/).
+
+When you need more than what’s possible out of the box, Starlight supports building your own custom components to extend or override (completely replace) its default components.
+
+## When to override
+
+Overriding Starlight’s default components can be useful when:
+
+- You want to change how a part of Starlight’s UI looks in a way not possible with [custom CSS](/guides/css-and-tailwind/).
+- You want to change how a part of Starlight’s UI behaves.
+- You want to add some additional UI alongside Starlight’s existing UI.
+
+## How to override
+
+<Steps>
+
+1. Choose the Starlight component you want to override.
+   You can find a full list of components in the [Overrides Reference](/reference/overrides/).
+
+   :::tip
+   Not sure which component you need to override? Use the [interactive Starlight Overrides Map](https://starlight-overrides-map.netlify.app/) to discover the names of Starlight's UI components.
+   :::
+
+   This example will override Starlight’s [`SocialIcons`](/reference/overrides/#socialicons) component in the page nav bar.
+
+2. Create an Astro component to replace the Starlight component with.
+   This example renders a contact link.
+
+   ```astro
+   ---
+   // src/components/EmailLink.astro
+
+   const email = 'houston@example.com';
+   ---
+
+   <a href=`mailto:${email}`>E-mail Me</a>
+   ```
+
+3. Tell Starlight to use your custom component in the [`components`](/reference/configuration/#components) configuration option in `astro.config.mjs`:
+
+   ```js {9-12}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'My Docs with Overrides',
+   			components: {
+   				// Override the default `SocialIcons` component.
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+## Reuse a built-in component
+
+You can build with Starlight’s default UI components just as you would with your own: importing and rendering them in your own custom components. This allows you to keep all of Starlight's basic UI within your design, while adding extra UI alongside them.
+
+The example below shows a custom component that renders an e-mail link along with the default `SocialIcons` component:
+
+```astro {3,7}
+---
+// src/components/EmailLink.astro
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
+---
+
+<a href="mailto:houston@example.com">E-mail Me</a>
+<Default><slot /></Default>
+```
+
+When rendering a built-in component inside a custom component add a [`<slot />`](https://docs.astro.build/en/basics/astro-components/#slots) inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
+
+If you are reusing the [`PageFrame`](/reference/overrides/#pageframe) or [`TwoColumnContent`](/reference/overrides/#twocolumncontent) components which contain [named slots](https://docs.astro.build/en/basics/astro-components/#named-slots), you also need to [transfer](https://docs.astro.build/en/basics/astro-components/#transferring-slots) these slots as well.
+
+The example below shows a custom component that reuses the `TwoColumnContent` component which contains an additional `right-sidebar` named slot that needs to be transferred:
+
+```astro {8}
+---
+// src/components/CustomContent.astro
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
+
+## Use page data
+
+When overriding a Starlight component, you can access the global [`starlightRoute` object](/guides/route-data/) containing all the data for the current page.
+This allows you to use these values to control how your component template renders.
+
+In the following example, a replacement [`PageTitle`](/reference/overrides/#pagetitle) component displays the current page’s title as set in the content’s frontmatter:
+
+```astro {4} "{title}"
+---
+// src/components/Title.astro
+
+const { title } = Astro.locals.starlightRoute.entry.data;
+---
+
+<h1 id="_top">{title}</h1>
+
+<style>
+	h1 {
+		font-family: 'Comic Sans';
+	}
+</style>
+```
+
+Learn more about all the available properties in the [Route Data Reference](/reference/route-data/).
+
+### Only override on specific pages
+
+Component overrides apply to all pages. However, you can conditionally render using values from `starlightRoute` to determine when to show your custom UI, when to show Starlight’s default UI, or even when to show something entirely different.
+
+In the following example, a component overriding Starlight's [`Footer`](/reference/overrides/#footer-1) displays "Built with Starlight 🌟" on the homepage only, and otherwise shows the default footer on all other pages:
+
+```astro
+---
+// src/components/ConditionalFooter.astro
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const isHomepage = Astro.locals.starlightRoute.id === '';
+---
+
+{
+	isHomepage ? (
+		<footer>Built with Starlight 🌟</footer>
+	) : (
+		<Default>
+			<slot />
+		</Default>
+	)
+}
+```
+
+Learn more about conditional rendering in [Astro’s Template Syntax guide](https://docs.astro.build/en/basics/astro-syntax/#dynamic-html).

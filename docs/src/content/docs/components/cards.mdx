@@ -1,0 +1,108 @@
+---
+title: Cards
+description: Learn how to use cards in Starlight to display content in a box.
+sidebar:
+  order: 2
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+To display content in a box matching Starlight’s styles, use the `<Card>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Card slot="preview" title="Moons" icon="moon">
+	Io, Europa, Ganymede
+</Card>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Card } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+Display a card using the `<Card>` component and provide a [`title`](#title) for the card.
+
+<Preview>
+
+```mdx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Check this out">Interesting content you want to highlight.</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% card title="Check this out" %}
+Interesting content you want to highlight.
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Check this out">
+	Interesting content you want to highlight.
+</Card>
+
+</Preview>
+
+### Add icons to cards
+
+Include an icon in a card using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
+
+<Preview>
+
+```mdx 'icon="star"'
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Stars" icon="star">
+	Sirius, Vega, Betelgeuse
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+{% card title="Stars" icon="star" %}
+Sirius, Vega, Betelgeuse
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Stars" icon="star">
+	Sirius, Vega, Betelgeuse
+</Card>
+
+</Preview>
+
+### Group cards
+
+Display multiple cards side-by-side when there’s enough space by grouping them using the [`<CardGrid>`](/components/card-grids/) component.
+See the [“Group cards”](/components/card-grids/#group-cards) guide for an example.
+
+## `<Card>` Props
+
+**Implementation:** [`Card.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Card.astro)
+
+The `<Card>` component accepts the following props:
+
+### `title`
+
+**required**  
+**type:** `string`
+
+The title of the card to display.
+
+### `icon`
+
+**type:** `string`
+
+A card can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).

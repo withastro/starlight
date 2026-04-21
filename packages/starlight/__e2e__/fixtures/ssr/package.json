@@ -1,0 +1,10 @@
+{
+  "name": "@e2e/ssr",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@astrojs/node": "^10.0.0",
+    "@astrojs/starlight": "workspace:*",
+    "astro": "^6.0.1"
+  }
+}

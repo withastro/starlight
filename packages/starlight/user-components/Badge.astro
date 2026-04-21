@@ -1,0 +1,148 @@
+---
+import { BadgeComponentSchema, type BadgeComponentProps } from '../schemas/badge';
+import { parseWithFriendlyErrors } from '../utils/error-map';
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = BadgeComponentProps & HTMLAttributes<'span'>;
+
+const {
+	text,
+	variant,
+	size,
+	class: customClass,
+	...attrs
+} = parseWithFriendlyErrors(
+	BadgeComponentSchema,
+	Astro.props,
+	'Invalid prop passed to the `<Badge/>` component.'
+);
+
+/**
+ * The fragment around the element is used as a workaround to avoid a trailing whitespace in the output.
+ * @see https://github.com/withastro/compiler/issues/1003
+ */
+---
+
+<><span class:list={['sl-badge', variant, size, customClass]} {...attrs}>{text}</span></>
+
+<style>
+	@layer starlight.components {
+		:global(:root) {
+			--sl-badge-default-border: var(--sl-color-accent);
+			--sl-badge-default-bg: var(--sl-color-accent-low);
+			--sl-badge-default-text: #fff;
+
+			--sl-badge-note-border: var(--sl-color-blue);
+			--sl-badge-note-bg: var(--sl-color-blue-low);
+			--sl-badge-note-text: #fff;
+
+			--sl-badge-danger-border: var(--sl-color-red);
+			--sl-badge-danger-bg: var(--sl-color-red-low);
+			--sl-badge-danger-text: #fff;
+
+			--sl-badge-success-border: var(--sl-color-green);
+			--sl-badge-success-bg: var(--sl-color-green-low);
+			--sl-badge-success-text: #fff;
+
+			--sl-badge-caution-border: var(--sl-color-orange);
+			--sl-badge-caution-bg: var(--sl-color-orange-low);
+			--sl-badge-caution-text: #fff;
+
+			--sl-badge-tip-border: var(--sl-color-purple);
+			--sl-badge-tip-bg: var(--sl-color-purple-low);
+			--sl-badge-tip-text: #fff;
+		}
+
+		:global([data-theme='light']:root) {
+			--sl-badge-default-bg: var(--sl-color-accent-high);
+			--sl-badge-note-bg: var(--sl-color-blue-high);
+			--sl-badge-danger-bg: var(--sl-color-red-high);
+			--sl-badge-success-bg: var(--sl-color-green-high);
+			--sl-badge-caution-bg: var(--sl-color-orange-high);
+			--sl-badge-tip-bg: var(--sl-color-purple-high);
+		}
+
+		.sl-badge {
+			display: inline-block;
+			border: 1px solid var(--sl-color-border-badge);
+			border-radius: 0.25rem;
+			font-family: var(--sl-font-system-mono);
+			line-height: normal;
+			color: var(--sl-color-text-badge);
+			background-color: var(--sl-color-bg-badge);
+			overflow-wrap: anywhere;
+		}
+
+		/* Sidebar overrides */
+		:global(.sidebar-content) .sl-badge {
+			line-height: 1;
+			font-size: var(--sl-text-xs);
+			padding: 0.125rem 0.375rem;
+		}
+
+		/* outline variant */
+		:global(.sidebar-content a[aria-current='page']) > .sl-badge {
+			--sl-color-bg-badge: transparent;
+			--sl-color-border-badge: currentColor;
+			color: inherit;
+		}
+
+		/* Color variants */
+		.default {
+			--sl-color-bg-badge: var(--sl-badge-default-bg);
+			--sl-color-border-badge: var(--sl-badge-default-border);
+			--sl-color-text-badge: var(--sl-badge-default-text);
+		}
+
+		.note {
+			--sl-color-bg-badge: var(--sl-badge-note-bg);
+			--sl-color-border-badge: var(--sl-badge-note-border);
+			--sl-color-text-badge: var(--sl-badge-note-text);
+		}
+
+		.danger {
+			--sl-color-bg-badge: var(--sl-badge-danger-bg);
+			--sl-color-border-badge: var(--sl-badge-danger-border);
+			--sl-color-text-badge: var(--sl-badge-danger-text);
+		}
+
+		.success {
+			--sl-color-bg-badge: var(--sl-badge-success-bg);
+			--sl-color-border-badge: var(--sl-badge-success-border);
+			--sl-color-text-badge: var(--sl-badge-success-text);
+		}
+
+		.tip {
+			--sl-color-bg-badge: var(--sl-badge-tip-bg);
+			--sl-color-border-badge: var(--sl-badge-tip-border);
+			--sl-color-text-badge: var(--sl-badge-tip-text);
+		}
+
+		.caution {
+			--sl-color-bg-badge: var(--sl-badge-caution-bg);
+			--sl-color-border-badge: var(--sl-badge-caution-border);
+			--sl-color-text-badge: var(--sl-badge-caution-text);
+		}
+
+		/* Size variants */
+		.small {
+			font-size: var(--sl-text-xs);
+			padding: 0.125rem 0.25rem;
+		}
+
+		.medium {
+			font-size: var(--sl-text-sm);
+			padding: 0.175rem 0.35rem;
+		}
+
+		.large {
+			font-size: var(--sl-text-base);
+			padding: 0.225rem 0.45rem;
+		}
+
+		/* Badge in headings */
+		:global(.sl-markdown-content :is(h1, h2, h3, h4, h5, h6)) .sl-badge {
+			vertical-align: middle;
+		}
+	}
+</style>
