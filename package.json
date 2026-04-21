@@ -28,7 +28,7 @@
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.39.1"
   },
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.33.0",
   "size-limit": [
     {
       "name": "/index.html",
@@ -51,14 +51,5 @@
       "limit": "16.75 kB",
       "gzip": true
     }
-  ],
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search",
-        "playwright",
-        "search-insights"
-      ]
-    }
-  }
+  ]
 }
