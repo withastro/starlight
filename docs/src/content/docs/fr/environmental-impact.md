@@ -91,19 +91,19 @@ Ces tests avec le [Website Carbon Calculator][wcc] comparent des pages similaire
 
 | Framework                   | CO₂ par page visitée | Notation |
 | --------------------------- | -------------------- | :------: |
-| [Starlight][sl-carbon]      | 0.01g                |   A+     |
-| [VitePress][vp-carbon]      | 0.04g                |   A+     |
-| [Read the Docs][rtd-carbon] | 0.04g                |   A      |
-| [docsify][dy-carbon]        | 0.04g                |   A      |
-| [Sphinx][sx-carbon]         | 0.04g                |   A      |
-| [mdBook][md-carbon]         | 0.05g                |   A      |
-| [MkDocs][mk-carbon]         | 0.08g                |   A      |
-| [Fumadocs][fs-carbon]       | 0.08g                |   B      |
-| [Docusaurus][ds-carbon]     | 0.09g                |   B      |
-| [Nextra][nx-carbon]         | 0.10g                |   B      |
-| [Docus][dc-carbon]          | 0.11g                |   B      |
-| [GitBook][gb-carbon]        | 0.28g                |   E      |
-| [Mintlify][mt-carbon]       | 0.64g                |   F      |
+| [Starlight][sl-carbon]      | 0.01g                |    A+    |
+| [VitePress][vp-carbon]      | 0.04g                |    A+    |
+| [Read the Docs][rtd-carbon] | 0.04g                |    A     |
+| [docsify][dy-carbon]        | 0.04g                |    A     |
+| [Sphinx][sx-carbon]         | 0.04g                |    A     |
+| [mdBook][md-carbon]         | 0.05g                |    A     |
+| [MkDocs][mk-carbon]         | 0.08g                |    A     |
+| [Fumadocs][fs-carbon]       | 0.08g                |    B     |
+| [Docusaurus][ds-carbon]     | 0.09g                |    B     |
+| [Nextra][nx-carbon]         | 0.10g                |    B     |
+| [Docus][dc-carbon]          | 0.11g                |    B     |
+| [GitBook][gb-carbon]        | 0.28g                |    E     |
+| [Mintlify][mt-carbon]       | 0.64g                |    F     |
 
 <small>Données collectées le 8 avril 2026. Cliquez sur un lien pour voir les chiffres actualisés.</small>
 
