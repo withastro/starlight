@@ -91,6 +91,14 @@ export function getHead(
 				},
 			});
 		}
+		headDefaults.push({
+			tag: 'link',
+			attrs: {
+				rel: 'alternate',
+				hreflang: 'x-default',
+				href: localizedUrl(canonical, config.defaultLocale.locale, project.trailingSlash).href,
+			},
+		});
 	}
 
 	// Link to sitemap, but only when `site` is set.

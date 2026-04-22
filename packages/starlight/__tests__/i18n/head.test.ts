@@ -27,3 +27,19 @@ test('includes links to language alternates', () => {
 		});
 	}
 });
+
+test('includes link to default language', () => {
+	const route = routes[0]!;
+	const { head } = generateRouteData({
+		props: { ...route, headings: [] },
+		context: getRouteDataTestContext(),
+	});
+	expect(head).toContainEqual({
+		tag: 'link',
+		attrs: {
+			rel: 'alternate',
+			href: `https://example.com/en/`,
+			hreflang: 'x-default',
+		},
+	});
+});
