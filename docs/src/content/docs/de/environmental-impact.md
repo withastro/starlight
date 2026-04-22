@@ -103,7 +103,7 @@ Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seite
 | [Docusaurus][ds-carbon]     | 0,09 g               |    B      |
 | [Nextra][nx-carbon]         | 0,10 g               |    B      |
 | [Docus][dc-carbon]          | 0,11 g               |    B      |
-| [GitBook][gb-carbon]        | 0,44 g               |    E      |
+| [GitBook][gb-carbon]        | 0,44 g               |    F      |
 | [Mintlify][mt-carbon]       | 0,73 g               |    F      |
 
 <small>Daten erhoben am 21. April 2026. Klicke auf einen Link, um aktuelle Zahlen zu sehen.</small>
