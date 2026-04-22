@@ -93,18 +93,18 @@ Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seite
 | --------------------------- | -------------------- | :-------: |
 | [Starlight][sl-carbon]      | 0,01 g               |    A+     |
 | [VitePress][vp-carbon]      | 0,04 g               |    A+     |
-| [Read the Docs][rtd-carbon] | 0,04 g               |    A      |
-| [docsify][dy-carbon]        | 0,04 g               |    A      |
-| [Sphinx][sx-carbon]         | 0,04 g               |    A      |
-| [mdBook][md-carbon]         | 0,05 g               |    A      |
-| [Vocs][vs-carbon]           | 0,05 g               |    A      |
-| [MkDocs][mk-carbon]         | 0,08 g               |    A      |
-| [Fumadocs][fs-carbon]       | 0,09 g               |    B      |
-| [Docusaurus][ds-carbon]     | 0,09 g               |    B      |
-| [Nextra][nx-carbon]         | 0,10 g               |    B      |
-| [Docus][dc-carbon]          | 0,11 g               |    B      |
-| [GitBook][gb-carbon]        | 0,44 g               |    F      |
-| [Mintlify][mt-carbon]       | 0,73 g               |    F      |
+| [Read the Docs][rtd-carbon] | 0,04 g               |     A     |
+| [docsify][dy-carbon]        | 0,04 g               |     A     |
+| [Sphinx][sx-carbon]         | 0,04 g               |     A     |
+| [mdBook][md-carbon]         | 0,05 g               |     A     |
+| [Vocs][vs-carbon]           | 0,05 g               |     A     |
+| [MkDocs][mk-carbon]         | 0,08 g               |     A     |
+| [Fumadocs][fs-carbon]       | 0,09 g               |     B     |
+| [Docusaurus][ds-carbon]     | 0,09 g               |     B     |
+| [Nextra][nx-carbon]         | 0,10 g               |     B     |
+| [Docus][dc-carbon]          | 0,11 g               |     B     |
+| [GitBook][gb-carbon]        | 0,44 g               |     F     |
+| [Mintlify][mt-carbon]       | 0,73 g               |     F     |
 
 <small>Daten erhoben am 21. April 2026. Klicke auf einen Link, um aktuelle Zahlen zu sehen.</small>
 
