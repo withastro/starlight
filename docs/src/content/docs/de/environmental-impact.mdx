@@ -89,39 +89,16 @@ Wenn du dich für einen Hoster entscheidest, der erneuerbare Energien einsetzt, 
 Bist du neugierig, wie andere Dokumentations-Frameworks im Vergleich abschneiden?
 Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seiten, die mit verschiedenen Tools erstellt wurden.
 
-| Framework                   | CO₂ pro Seitenaufruf | Bewertung |
-| --------------------------- | -------------------- | :-------: |
-| [Starlight][sl-carbon]      | 0,01 g               |    A+     |
-| [VitePress][vp-carbon]      | 0,04 g               |    A+     |
-| [Read the Docs][rtd-carbon] | 0,04 g               |     A     |
-| [docsify][dy-carbon]        | 0,04 g               |     A     |
-| [Sphinx][sx-carbon]         | 0,04 g               |     A     |
-| [mdBook][md-carbon]         | 0,05 g               |     A     |
-| [Vocs][vs-carbon]           | 0,05 g               |     A     |
-| [MkDocs][mk-carbon]         | 0,08 g               |     A     |
-| [Fumadocs][fs-carbon]       | 0,09 g               |     B     |
-| [Docusaurus][ds-carbon]     | 0,09 g               |     B     |
-| [Nextra][nx-carbon]         | 0,10 g               |     B     |
-| [Docus][dc-carbon]          | 0,11 g               |     B     |
-| [GitBook][gb-carbon]        | 0,44 g               |     F     |
-| [Mintlify][mt-carbon]       | 0,73 g               |     F     |
+import CarbonComparison from '../../../components/carbon-comparison.astro';
 
-<small>Daten erhoben am 21. April 2026. Klicke auf einen Link, um aktuelle Zahlen zu sehen.</small>
-
-[sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
-[vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
-[sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
-[mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
-[md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
-[vs-carbon]: https://www.websitecarbon.com/website/vocs-dev/
-[nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
-[dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
-[ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
-[rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
-[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
+<CarbonComparison
+	labels={{
+		framework: 'Framework',
+		co2: 'CO₂ pro Seitenaufruf',
+		rating: 'Bewertung',
+		note: 'Daten erhoben am {{date}}. Klicke auf einen Link, um aktuelle Zahlen zu sehen.',
+	}}
+/>
 
 ## Weitere Ressourcen
 
@@ -142,6 +119,7 @@ Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seite
 
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
+[sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [http]: https://httparchive.org/reports/state-of-the-web
 [assets]: https://docs.astro.build/de/guides/images/
 [islands]: https://docs.astro.build/de/concepts/islands/
