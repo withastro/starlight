@@ -45,6 +45,10 @@
 		margin-top: 0.5rem;
 	}
 
+	.starlight-aside__content:empty {
+		display: none;
+	}
+
 	.starlight-aside__content a {
 		color: var(--sl-color-asides-text-accent);
 	}
