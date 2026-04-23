@@ -219,7 +219,7 @@ importers:
         specifier: ^23.11.5
         version: 23.11.5
       js-yaml:
-        specifier: ^4.1.0
+        specifier: ^4.1.1
         version: 4.1.1
       klona:
         specifier: ^2.0.6
