@@ -1,7 +1,7 @@
 import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdown-remark';
 import { expect, test } from 'vitest';
-import type { StarlightUserConfig } from '../../utils/user-config';
-import { starlightRehypePlugins } from '../../integrations/remark-rehype';
+import type { StarlightUserConfig } from '../../src/utils/user-config';
+import { starlightRehypePlugins } from '../../src/integrations/remark-rehype';
 import { createRemarkRehypePluginTestOptions } from './utils';
 
 const starlightConfig = {

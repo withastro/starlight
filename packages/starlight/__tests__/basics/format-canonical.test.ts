@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { formatCanonical, type FormatCanonicalOptions } from '../../utils/canonical';
+import { formatCanonical, type FormatCanonicalOptions } from '../../src/utils/canonical';
 
 describe.each<{
 	options: FormatCanonicalOptions;

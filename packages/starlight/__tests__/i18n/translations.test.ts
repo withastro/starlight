@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import translations from '../../translations';
-import { useTranslations } from '../../utils/translations';
+import translations from '../../src/translations';
+import { useTranslations } from '../../src/utils/translations';
 
 describe('built-in translations', () => {
 	test('includes English', () => {

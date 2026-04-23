@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { afterEach, expect, test, vi } from 'vitest';
 import * as pagefind from 'pagefind';
-import { starlightPagefind } from '../../integrations/pagefind';
+import { starlightPagefind } from '../../src/integrations/pagefind';
 import { TestAstroIntegrationLogger } from '../test-plugin-utils';
 
 vi.mock('pagefind');

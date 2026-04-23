@@ -11,7 +11,7 @@ import { deleteRepo, parseMapping, setupRepo } from './utils/seti';
  * ready to be consumed by Starlight.
  *
  * @see {@link file://./config.ts} for the configuration used by this script.
- * @see {@link file://../starlight/user-components/file-tree-icons.ts} for the generated file.
+ * @see {@link file://./../starlight/src/user-components/file-tree-icons.ts} for the generated file.
  * @see {@link https://opentype.js.org/glyph-inspector.html} for a font glyph inspector.
  */
 

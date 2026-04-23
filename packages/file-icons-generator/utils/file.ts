@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { starlight } from '../config';
-import type { Definitions } from '../../starlight/user-components/rehype-file-tree';
+import type { Definitions } from '../../starlight/src/user-components/rehype-file-tree';
 
 const copyrightNotice = `/**
 * Based on https://github.com/elviswolcott/seti-icons which
@@ -48,6 +48,10 @@ ${copyrightNotice}
 export const definitions: Definitions = ${JSON.stringify(definitions)};
 
 export const FileIcons = ${JSON.stringify(svgPaths)};
+
+export type FileIcon = ${Object.keys(svgPaths)
+		.map((name) => `'${name}'`)
+		.join(' | ')};
 `;
 
 	const filePath = path.join('..', 'starlight', starlight.output);
