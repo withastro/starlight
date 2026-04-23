@@ -193,6 +193,9 @@ function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
 	}
 	// Firefox does not support `textInfo` or `getTextInfo` yet so we fallback to a well-known list
 	// of right-to-left languages.
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore — This is a type error with newer versions of TypeScript’s DOM types.
+	// TODO: remove or switch to @ts-expect-error in #3572
 	return wellKnownRTL.includes(locale.language) ? 'rtl' : 'ltr';
 }
 
