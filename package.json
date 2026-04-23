@@ -16,17 +16,17 @@
     "@astrojs/check": "^0.9.7",
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.31.0",
-    "@eslint/js": "^9.33.0",
+    "@eslint/js": "^9.39.4",
     "@size-limit/file": "^11.1.6",
     "astro": "^6.1.9",
-    "eslint": "^9.33.0",
+    "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^16.3.0",
+    "globals": "^16.5.0",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "size-limit": "^11.1.6",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.39.1"
+    "typescript-eslint": "^8.59.0"
   },
   "packageManager": "pnpm@10.33.0",
   "size-limit": [
