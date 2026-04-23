@@ -69,8 +69,8 @@ importers:
         specifier: ^6.1.9
         version: 6.1.9(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.3)(typescript@5.6.3)(yaml@2.8.3)
       culori:
-        specifier: ^4.0.1
-        version: 4.0.1
+        specifier: ^4.0.2
+        version: 4.0.2
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -1909,8 +1909,8 @@ packages:
   cssom@0.5.0:
     resolution: {integrity: sha512-iKuQcq+NdHqlAcwUY0o/HL69XQrUaQdMjmStJ8JFmUaiiQErlhrmuigkg/CU4E2J0IyUKUrMAgl36TvN67MqTw==}
 
-  culori@4.0.1:
-    resolution: {integrity: sha512-LSnjA6HuIUOlkfKVbzi2OlToZE8OjFi667JWN9qNymXVXzGDmvuP60SSgC+e92sd7B7158f7Fy3Mb6rXS5EDPw==}
+  culori@4.0.2:
+    resolution: {integrity: sha512-1+BhOB8ahCn4O0cep0Sh2l9KCOfOdY+BXJnKMHFFzDEouSr/el18QwXEMRlOj9UY5nCeA8UN3a/82rUWRBeyBw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   dataloader@1.4.0:
@@ -5905,7 +5905,7 @@ snapshots:
 
   cssom@0.5.0: {}
 
-  culori@4.0.1: {}
+  culori@4.0.2: {}
 
   dataloader@1.4.0: {}
 
