@@ -21,7 +21,7 @@
     "astro": "^6.1.9",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^16.5.0",
+    "globals": "^17.5.0",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "size-limit": "^12.1.0",
