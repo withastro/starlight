@@ -55,7 +55,7 @@
     "@playwright/test": "^1.57.0",
     "@types/node": "^22.19.3",
     "@vitest/coverage-v8": "^4.1.0",
-    "astro": "^6.0.1",
+    "astro": "^6.1.9",
     "linkedom": "^0.18.4",
     "vitest": "^4.1.0"
   },
