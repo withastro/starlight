@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["./src/*"]
     }
   }
 }
