@@ -340,7 +340,7 @@ importers:
   packages/tailwind:
     devDependencies:
       lightningcss:
-        specifier: ^1.29.1
+        specifier: ^1.32.0
         version: 1.32.0
       tailwindcss:
         specifier: ^4.2.4
