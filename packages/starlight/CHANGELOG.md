@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.38.4
+
+### Patch Changes
+
+- [#3828](https://github.com/withastro/starlight/pull/3828) [`342038b`](https://github.com/withastro/starlight/commit/342038b60b35c0e8cd4489e6a3ee16902445cfce) Thanks [@MangelMaxime](https://github.com/MangelMaxime)! - Fixes aside styling when used without any content
+
+- [#3853](https://github.com/withastro/starlight/pull/3853) [`563e11b`](https://github.com/withastro/starlight/commit/563e11b71f5c23d0ca982f7e061ade0796101ffb) Thanks [@delucis](https://github.com/delucis)! - Fixes a type-checking issue for users on newer versions of TypeScript
+
 ## 0.38.3
 
 ### Patch Changes
