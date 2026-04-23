@@ -22,7 +22,7 @@
     "@types/culori": "^2.1.1",
     "astro": "^6.1.9",
     "culori": "^4.0.1",
-    "sharp": "^0.34.2"
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
