@@ -23,9 +23,9 @@
     "test:coverage": "pnpm test"
   },
   "devDependencies": {
-    "lightningcss": "^1.29.1",
-    "tailwindcss": "^4.0.7",
-    "vitest": "^4.1.0"
+    "lightningcss": "^1.32.0",
+    "tailwindcss": "^4.2.4",
+    "vitest": "^4.1.5"
   },
   "peerDependencies": {
     "@astrojs/starlight": ">=0.38.0",

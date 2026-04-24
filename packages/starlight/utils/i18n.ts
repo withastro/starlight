@@ -187,8 +187,9 @@ function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return locale.textInfo.direction;
 	} else if ('getTextInfo' in locale) {
-		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore - `getTextInfo` is not typed in older versions of TypeScript but is available in some browsers and newer versions of Node.
+		// TODO: remove or switch to @ts-expect-error in #3572
 		return locale.getTextInfo().direction;
 	}
 	// Firefox does not support `textInfo` or `getTextInfo` yet so we fallback to a well-known list
@@ -196,7 +197,7 @@ function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore — This is a type error with newer versions of TypeScript’s DOM types.
 	// TODO: remove or switch to @ts-expect-error in #3572
-	return wellKnownRTL.includes(locale.language) ? 'rtl' : 'ltr';
+	return wellKnownRTL.includes((locale as Intl.Locale).language) ? 'rtl' : 'ltr';
 }
 
 /**
