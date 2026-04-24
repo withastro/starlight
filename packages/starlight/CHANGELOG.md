@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.38.5
+
+### Patch Changes
+
+- [#3854](https://github.com/withastro/starlight/pull/3854) [`ccf6000`](https://github.com/withastro/starlight/commit/ccf6000549c580796a8a8730637074c25e3ccc44) Thanks [@delucis](https://github.com/delucis)! - Updates internal dependencies
+
 ## 0.38.4
 
 ### Patch Changes
