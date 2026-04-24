@@ -72,11 +72,11 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 
 		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
 		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace) as ReturnType<I18nT['all']>;
-		// Since i18next 25.10.4 the `ExistsFunction` type has a signature including a predicate. We
-		// need the explicit return type to help TS narrow and infer the type correctly.
+		// Since i18next 25.10.4 the `ExistsFunction` type has a signature including a predicate that
+		// TS cannot preserve when composing a new function to add default options.
 		// See: https://github.com/i18next/i18next/issues/2425
-		t.exists = (key, options): key is keyof object =>
-			i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options });
+		t.exists = ((key, options) =>
+			i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options })) as ExistsFunction;
 		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 
 		return t;
