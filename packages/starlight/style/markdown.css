@@ -36,8 +36,6 @@
 	> :is(
 		:last-child:not(
 				li,
-				ul,
-				ol,
 				a,
 				strong,
 				em,
