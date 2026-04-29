@@ -36,6 +36,8 @@
 	> :is(
 		:last-child:not(
 				li,
+				ul,
+				ol,
 				a,
 				strong,
 				em,
@@ -52,8 +54,18 @@
 			 * need to style the last non-script element (`:not(script)`) that doesn't have a subsequent
 			 * sibling that is not a script (`:not(:has(~ :not(script)))`).
 			 */
-		:not(script):has(~ script:last-child):not(:has(~ :not(script)))
+		:not(script):has(~ script:last-child):not(:has(~ :not(script))),
 	) {
+		margin-bottom: 1.25rem;
+	}
+
+	/* Apply a margin to a list element if it's in an li with other non-inline elements. */
+	.sl-markdown-content
+	li:has(
+		> :not(a, strong, em, del, span, input, code, br) + :not(li, a, strong, em, del, span, input, code, br)
+	)
+	:is(ol,ul):last-child
+	{
 		margin-bottom: 1.25rem;
 	}
 
