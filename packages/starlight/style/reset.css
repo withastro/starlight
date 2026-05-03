@@ -28,6 +28,21 @@
 		background-color: var(--sl-color-bg);
 	}
 
+	[lang]:where(:lang(zh, ja)) {
+		text-autospace: normal;
+	}
+
+	[lang]:where(:not(:lang(zh, ja))) {
+		text-autospace: initial;
+	}
+
+	pre,
+	code,
+	samp,
+	kbd {
+		text-autospace: no-autospace;
+	}
+	
 	input,
 	button,
 	textarea,
