@@ -2,3 +2,18 @@ packages:
   - 'packages/**/*'
   - 'examples/**/*'
   - 'docs'
+
+# Link up monorepo packages instead of downloading them from npm
+preferWorkspacePackages: true
+linkWorkspacePackages: true
+
+# Run scripts in a bash-like emulation for better cross-platform support
+shellEmulator: true
+
+# Avoid installing unnecessary peer dependencies
+autoInstallPeers: false
+peerDependencyRules:
+  ignoreMissing:
+    - '@algolia/client-search'
+    - 'playwright'
+    - 'search-insights'

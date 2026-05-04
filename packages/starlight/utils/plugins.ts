@@ -199,6 +199,8 @@ const baseStarlightPluginSchema = z.object({
 type StarlightConfigUpdate = Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>;
 type StarlightI18nTFactory = Awaited<ReturnType<typeof createTranslationSystemFromFs>>;
 
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion --
+	 The configSetupHookSchema casts `z.any()` to provide types but this rule can’t understand that. */
 const configSetupHookSchema = z
 	.function({
 		input: [
