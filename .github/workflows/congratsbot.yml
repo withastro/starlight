@@ -7,7 +7,7 @@ on:
 jobs:
   congrats:
     if: ${{ github.repository_owner == 'withastro' && github.event.head_commit.message != '[ci] format' }}
-    uses: withastro/automation/.github/workflows/congratsbot.yml@497c9268ad4267c842a8f6c4d830ad0182d6f6b3 # main
+    uses: withastro/automation/.github/workflows/congratsbot.yml@e27ec6d5f4ce0aa9baf2d2071aaaf78ed6237a74 # main
     with:
       EMOJIS: '🎉,🎊,🧑‍🚀,🥳,🙌,🚀,🤩,☄️,💫,<:starlight:1107431075543797802>,<:houston_pride:1130504824673284107>'
       COAUTHOR_TEMPLATES: >
