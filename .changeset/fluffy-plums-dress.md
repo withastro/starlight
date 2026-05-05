@@ -1,5 +1,5 @@
 ---
-'@astrojs/starlight': patch
+'@astrojs/starlight': minor
 ---
 
-list elements are now given a bottom margin when they are within another list item element
+Makes spacing of items in nested lists more consistent
