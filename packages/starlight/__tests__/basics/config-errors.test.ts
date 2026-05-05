@@ -196,11 +196,11 @@ test('errors with bad nested sidebar config', () => {
 		parseStarlightConfigWithFriendlyErrors({
 			title: 'Test',
 			sidebar: [
-				// @ts-expect-error - Testing invalid config
 				{
 					label: 'Example',
 					items: [
 						{ label: 'Nested Example 1', link: '/' },
+						// @ts-expect-error - Testing invalid config
 						{ label: 'Nested Example 2', link: true },
 					],
 				},
