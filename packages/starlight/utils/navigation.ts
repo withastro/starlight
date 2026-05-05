@@ -39,6 +39,8 @@ import type { StarlightConfig } from './user-config';
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');
 
+const rootAutogenerate: SidebarAutogenerateRouteData = { directory: '' };
+
 const neverPathFormatter = createPathFormatter({ trailingSlash: 'never' });
 
 const docsCollectionPathFromRoot = getCollectionPathFromRoot('docs', project);
@@ -72,7 +74,6 @@ function isDir(data: Record<string, unknown>): data is Dir {
 /** Convert an item in a user’s sidebar config to a sidebar entry. */
 function configItemToEntry(
 	item: SidebarItem,
-	currentPathname: string,
 	locale: string | undefined,
 	routes: Route[],
 	isParentCollapsed = false
@@ -80,7 +81,7 @@ function configItemToEntry(
 	if ('link' in item) {
 		return linkFromSidebarLinkItem(item, locale);
 	} else if ('autogenerate' in item) {
-		return entriesFromAutogenerateConfig(item, locale, routes, currentPathname, isParentCollapsed);
+		return entriesFromAutogenerateConfig(item, locale, routes, isParentCollapsed);
 	} else if ('slug' in item) {
 		return linkFromInternalSidebarLinkItem(item, locale);
 	} else {
@@ -88,9 +89,7 @@ function configItemToEntry(
 		return {
 			type: 'group',
 			label,
-			entries: item.items.flatMap((i) =>
-				configItemToEntry(i, currentPathname, locale, routes, item.collapsed)
-			),
+			entries: item.items.flatMap((i) => configItemToEntry(i, locale, routes, item.collapsed)),
 			collapsed: item.collapsed,
 			badge: getSidebarBadge(item.badge, locale, label),
 		};
@@ -102,7 +101,6 @@ function entriesFromAutogenerateConfig(
 	item: AutoSidebarEntries,
 	locale: string | undefined,
 	routes: Route[],
-	currentPathname: string,
 	isParentCollapsed: boolean
 ): (SidebarAutoLink | SidebarGroup)[] {
 	const { attrs, collapsed, directory } = item.autogenerate;
@@ -118,14 +116,7 @@ function entriesFromAutogenerateConfig(
 		);
 	});
 	const tree = treeify(dirDocs, locale, localeDir);
-	return sidebarFromDir(
-		tree,
-		currentPathname,
-		locale,
-		collapsed ?? isParentCollapsed,
-		attrs,
-		autogenerate
-	);
+	return sidebarFromDir(tree, { collapsed: collapsed ?? isParentCollapsed, attrs }, autogenerate);
 }
 
 /** Create a link entry from a manual link item in user config. */
@@ -323,28 +314,22 @@ function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
 	});
 }
 
+interface SidebarDirOptions {
+	collapsed: boolean;
+	attrs: LinkHTMLAttributes | undefined;
+}
+
+interface SidebarDirContext extends SidebarDirOptions {
+	fullPath: string;
+	dirName: string;
+	autogenerate: SidebarAutogenerateRouteData;
+}
+
 /** Create a group entry for a given content collection directory. */
-function groupFromDir(
-	dir: Dir,
-	fullPath: string,
-	dirName: string,
-	currentPathname: string,
-	locale: string | undefined,
-	collapsed: boolean,
-	attrs: LinkHTMLAttributes | undefined,
-	autogenerate: SidebarAutogenerateRouteData
-): SidebarAutoGroup {
+function groupFromDir(dir: Dir, context: SidebarDirContext): SidebarAutoGroup {
+	const { fullPath, dirName, collapsed, autogenerate } = context;
 	const entries = sortDirEntries(Object.entries(dir)).map(([key, dirOrRoute]) =>
-		dirToItem(
-			dirOrRoute,
-			`${fullPath}/${key}`,
-			key,
-			currentPathname,
-			locale,
-			collapsed,
-			attrs,
-			autogenerate
-		)
+		dirToItem(dirOrRoute, { ...context, fullPath: `${fullPath}/${key}`, dirName: key })
 	);
 	return {
 		type: 'group',
@@ -359,48 +344,22 @@ function groupFromDir(
 /** Create a sidebar entry for a directory or content entry. */
 function dirToItem(
 	dirOrRoute: Dir[string],
-	fullPath: string,
-	dirName: string,
-	currentPathname: string,
-	locale: string | undefined,
-	collapsed: boolean,
-	attrs: LinkHTMLAttributes | undefined,
-	autogenerate: SidebarAutogenerateRouteData
+	context: SidebarDirContext
 ): SidebarAutoGroup | SidebarAutoLink {
+	const { attrs, autogenerate } = context;
 	return isDir(dirOrRoute)
-		? groupFromDir(
-				dirOrRoute,
-				fullPath,
-				dirName,
-				currentPathname,
-				locale,
-				collapsed,
-				attrs,
-				autogenerate
-			)
+		? groupFromDir(dirOrRoute, context)
 		: linkFromRoute(dirOrRoute, attrs, autogenerate);
 }
 
 /** Create a sidebar entry for a given content directory. */
 function sidebarFromDir(
 	tree: Dir,
-	currentPathname: string,
-	locale: string | undefined,
-	collapsed: boolean,
-	attrs?: LinkHTMLAttributes,
-	autogenerate?: SidebarAutogenerateRouteData
+	options: SidebarDirOptions,
+	autogenerate: SidebarAutogenerateRouteData = rootAutogenerate
 ) {
 	return sortDirEntries(Object.entries(tree)).map(([key, dirOrRoute]) =>
-		dirToItem(
-			dirOrRoute,
-			key,
-			key,
-			currentPathname,
-			locale,
-			collapsed,
-			attrs,
-			autogenerate ?? { directory: '' }
-		)
+		dirToItem(dirOrRoute, { ...options, fullPath: key, dirName: key, autogenerate })
 	);
 }
 
@@ -423,7 +382,7 @@ const lastCurrentEntryByLocale = new Map<string | undefined, SidebarLink>();
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
 	let intermediateSidebar = intermediateSidebars.get(locale);
 	if (!intermediateSidebar) {
-		intermediateSidebar = getIntermediateSidebarFromConfig(config.sidebar, pathname, locale);
+		intermediateSidebar = getIntermediateSidebarFromConfig(config.sidebar, locale);
 		intermediateSidebars.set(locale, intermediateSidebar);
 	}
 	setIntermediateSidebarCurrentEntry(intermediateSidebar, pathname, locale);
@@ -436,24 +395,23 @@ export function getSidebarFromConfig(
 	pathname: string,
 	locale: string | undefined
 ): SidebarEntry[] {
-	const sidebar = getIntermediateSidebarFromConfig(sidebarConfig, pathname, locale);
+	const sidebar = getIntermediateSidebarFromConfig(sidebarConfig, locale);
 	const currentEntry = getSidebarCurrentEntry(sidebar, pathname);
 	if (currentEntry) currentEntry.isCurrent = true;
 	return sidebar;
 }
 
-/** Get the intermediate sidebar for the current page using the specified sidebar config. */
+/** Get the intermediate sidebar for a locale using the specified sidebar config. */
 function getIntermediateSidebarFromConfig(
 	sidebarConfig: StarlightConfig['sidebar'],
-	pathname: string,
 	locale: string | undefined
 ): SidebarEntry[] {
 	const routes = getLocaleRoutes(locale);
 	if (sidebarConfig) {
-		return sidebarConfig.flatMap((group) => configItemToEntry(group, pathname, locale, routes));
+		return sidebarConfig.flatMap((group) => configItemToEntry(group, locale, routes));
 	} else {
 		const tree = treeify(routes, locale, locale || '');
-		return sidebarFromDir(tree, pathname, locale, false);
+		return sidebarFromDir(tree, { collapsed: false, attrs: undefined });
 	}
 }
 
