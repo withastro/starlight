@@ -19,14 +19,14 @@
     "@eslint/js": "^10.0.1",
     "@size-limit/file": "^12.1.0",
     "astro": "^6.2.2",
-    "eslint": "^10.2.1",
+    "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.5.0",
+    "globals": "^17.6.0",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "size-limit": "^12.1.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.0"
+    "typescript-eslint": "^8.59.2"
   },
   "packageManager": "pnpm@10.33.3",
   "size-limit": [
