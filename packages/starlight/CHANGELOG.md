@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- [#3854](https://github.com/withastro/starlight/pull/3854) [`ccf6000`](https://github.com/withastro/starlight/commit/ccf6000549c580796a8a8730637074c25e3ccc44) Thanks [@delucis](https://github.com/delucis)! - Updates internal dependencies
+- [#3854](https://github.com/withastro/starlight/pull/3854) [`ccf6000`](https://github.com/withastro/starlight/commit/ccf6000549c580796a8a8730637074c25e3ccc44), [#3877](https://github.com/withastro/starlight/pull/3877) [`47451bc`](https://github.com/withastro/starlight/commit/47451bc56d84ed19bee73e3d4dbb58d28951ef38) Thanks [@delucis](https://github.com/delucis)! - Updates internal dependencies
 
 ## 0.38.4
 
