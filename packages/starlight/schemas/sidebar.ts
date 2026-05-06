@@ -80,6 +80,7 @@ const AutoSidebarEntriesSchema = z
 	.superRefine((config, ctx) => {
 		if (!('label' in config)) return;
 
+		// TODO: Remove this error message in a future release once most users have migrated
 		ctx.addIssue({
 			code: 'custom',
 			message:
