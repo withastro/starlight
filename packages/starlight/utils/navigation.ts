@@ -75,13 +75,12 @@ function isDir(data: Record<string, unknown>): data is Dir {
 function configItemToEntry(
 	item: SidebarItem,
 	locale: string | undefined,
-	routes: Route[],
-	isParentCollapsed = false
+	routes: Route[]
 ): SidebarEntry | SidebarEntry[] {
 	if ('link' in item) {
 		return linkFromSidebarLinkItem(item, locale);
 	} else if ('autogenerate' in item) {
-		return entriesFromAutogenerateConfig(item, locale, routes, isParentCollapsed);
+		return entriesFromAutogenerateConfig(item, locale, routes);
 	} else if ('slug' in item) {
 		return linkFromInternalSidebarLinkItem(item, locale);
 	} else {
@@ -89,7 +88,7 @@ function configItemToEntry(
 		return {
 			type: 'group',
 			label,
-			entries: item.items.flatMap((i) => configItemToEntry(i, locale, routes, item.collapsed)),
+			entries: item.items.flatMap((i) => configItemToEntry(i, locale, routes)),
 			collapsed: item.collapsed,
 			badge: getSidebarBadge(item.badge, locale, label),
 		};
@@ -100,8 +99,7 @@ function configItemToEntry(
 function entriesFromAutogenerateConfig(
 	item: AutoSidebarEntries,
 	locale: string | undefined,
-	routes: Route[],
-	isParentCollapsed: boolean
+	routes: Route[]
 ): (SidebarAutoLink | SidebarGroup)[] {
 	const { attrs, collapsed, directory } = item.autogenerate;
 	const localeDir = locale ? locale + '/' + directory : directory;
@@ -116,7 +114,7 @@ function entriesFromAutogenerateConfig(
 		);
 	});
 	const tree = treeify(dirDocs, locale, localeDir);
-	return sidebarFromDir(tree, { collapsed: collapsed ?? isParentCollapsed, attrs }, autogenerate);
+	return sidebarFromDir(tree, { collapsed: collapsed ?? false, attrs }, autogenerate);
 }
 
 /** Create a link entry from a manual link item in user config. */

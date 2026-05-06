@@ -116,7 +116,7 @@ describe('getSidebar', () => {
 			          "directory": "reference",
 			        },
 			        "badge": undefined,
-			        "collapsed": true,
+			        "collapsed": false,
 			        "entries": [
 			          {
 			            "attrs": {},
