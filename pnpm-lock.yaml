@@ -91,7 +91,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.38.5
+        specifier: ^0.39.0
         version: link:../../packages/starlight
       astro:
         specifier: ^6.2.2
@@ -106,7 +106,7 @@ importers:
         specifier: ^1.0.4
         version: 1.0.4(astro@6.2.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3))
       '@astrojs/starlight':
-        specifier: ^0.38.5
+        specifier: ^0.39.0
         version: link:../../packages/starlight
       '@astrojs/starlight-markdoc':
         specifier: ^0.6.0
@@ -121,7 +121,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.38.5
+        specifier: ^0.39.0
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^5.0.0
