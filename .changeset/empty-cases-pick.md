@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Make sure to enable `text-autospace` even in non-Firefox browsers
+Fixes CSS selector for `text-autospace` styles in Chromium browsers
