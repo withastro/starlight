@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.39.2
+
+### Patch Changes
+
+- [#3890](https://github.com/withastro/starlight/pull/3890) [`2d05e18`](https://github.com/withastro/starlight/commit/2d05e1802ac81f1db1220fc7a2c775e0c0bba9bc) Thanks [@tats-u](https://github.com/tats-u)! - Fixes CSS selector for `text-autospace` styles in Chromium browsers
+
 ## 0.39.1
 
 ### Patch Changes
