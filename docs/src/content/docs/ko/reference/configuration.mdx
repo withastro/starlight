@@ -99,16 +99,16 @@ starlight({
 
 사이트의 사이드바 탐색 항목을 구성합니다.
 
-사이드바는 링크의 배열과 링크 그룹입니다.
-`slug`를 사용하는 항목을 제외하고, 각 항목은 `label`과 함께 다음 속성 중 하나를 반드시 포함해야합니다.
+사이드바는 링크, 링크 그룹, 그리고 자동으로 생성된 항목의 배열입니다.
+사이드바 항목은 다음 속성 중 하나를 사용하여 정의됩니다.
 
-- `link` — 특정 URL에 대한 단일 링크(예: `'/home'` 또는 `'https://example.com'`).
+- `link` — `'/home'` 또는 `'https://example.com'`과 같이 특정 URL로 연결되는 단일 링크입니다. 링크에는 `label`도 있어야 합니다.
 
-- `slug` — 내부 페이지에 대한 참조 (예: `'guides/getting-started'`).
+- `slug` — `'guides/getting-started'`와 같이 내부 페이지에 대한 참조입니다. 기본적으로 연결된 페이지의 제목이 라벨로 사용됩니다.
 
-- `items` — 더 많은 사이드바 링크와 하위 그룹을 포함하는 배열
+- `items` — 더 많은 사이드바 링크, 하위 그룹, 자동 생성 항목을 포함하는 배열입니다. 그룹에는 `label`도 있어야 합니다.
 
-- `autogenerate` — 링크 그룹을 자동으로 생성하기 위해 문서의 디렉터리를 지정하는 객체
+- `autogenerate` — 링크와 하위 그룹을 자동으로 생성할 문서 디렉터리를 지정하는 객체입니다. 자동 생성 항목은 그룹의 `items` 배열에 배치할 수 있습니다.
 
 내부 링크는 `slug` 속성이 있는 객체 대신 문자열로 지정할 수도 있습니다.
 
@@ -132,7 +132,7 @@ starlight({
 		// 'reference' 디렉터리의 모든 페이지에 연결되는 그룹
 		{
 			label: '참조',
-			autogenerate: { directory: 'reference' },
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 	],
 });
@@ -146,9 +146,9 @@ starlight({
 
 링크 그룹은 기본적으로 펼쳐져 있습니다. 그룹의 `collapsed` 속성을 `true`로 설정하여 이 동작을 변경할 수 있습니다.
 
-자동 생성된 하위 그룹은 기본적으로 상위 그룹의 `collapsed` 속성을 따릅니다. 이를 변경하려면 `autogenerate.collapsed` 속성을 설정하세요.
+자동 생성된 하위 그룹도 기본적으로 펼쳐져 있습니다. `autogenerate.collapsed` 속성을 설정하여 이를 최소화할 수 있습니다.
 
-```js {5,13}
+```js {5,15}
 sidebar: [
   // 최소화된 링크 그룹
   {
@@ -159,10 +159,14 @@ sidebar: [
   // 최소화된 자동 생성 하위 그룹을 포함하는 펼쳐진 그룹
   {
     label: '참조',
-    autogenerate: {
-      directory: 'reference',
-      collapsed: true,
-    },
+    items: [
+      {
+        autogenerate: {
+          directory: 'reference',
+          collapsed: true,
+        },
+      },
+    ],
   },
 ],
 ```
@@ -220,17 +224,15 @@ type SidebarItem =
 					items: SidebarItem[];
 					collapsed?: boolean;
 			  }
-			| {
-					// 자동으로 생성된 링크 그룹
-					label: string;
-					autogenerate: {
-						directory: string;
-						collapsed?: boolean;
-						attrs?: Record<string, string | number | boolean | undefined>;
-					};
-					collapsed?: boolean;
-			  }
-	  ));
+	  ))
+	| {
+			// 자동 생성된 링크 및 하위 그룹
+			autogenerate: {
+				directory: string;
+				collapsed?: boolean;
+				attrs?: Record<string, string | number | boolean | undefined>;
+			};
+	  };
 ```
 
 #### `BadgeConfig`

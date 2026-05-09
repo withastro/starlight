@@ -28,11 +28,12 @@
 		background-color: var(--sl-color-bg);
 	}
 
-	[lang]:where(:lang(zh, ja)) {
+	/* :lang(zh, ja) has not been supported by non-Firefox browsers at the time of writing (2026-05) */
+	[lang]:where(:lang(zh), :lang(ja)) {
 		text-autospace: normal;
 	}
 
-	[lang]:where(:not(:lang(zh, ja))) {
+	[lang]:where(:not(:lang(zh), :lang(ja))) {
 		text-autospace: initial;
 	}
 
