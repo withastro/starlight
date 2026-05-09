@@ -100,9 +100,102 @@ Pour en savoir plus sur le format de cet objet, consultez la [référence du typ
 
 ### `sidebar`
 
-**Type :** `SidebarEntry[]`
+**Type :** <code>Array&lt;<a href="#type-sidebarlink">SidebarLink</a> | <a href="#type-sidebargroup">SidebarGroup</a>&gt;</code>
 
 Les entrées de la barre latérale de navigation du site pour cette page.
+Chaque entrée est soit un lien de barre latérale, soit un groupe de barre latérale.
+
+#### Type `SidebarLink`
+
+Les entrées de lien de la barre latérale représentent un lien affiché dans la barre latérale et possèdent les propriétés suivantes :
+
+##### `type`
+
+**Type :** `'link'`
+
+Le type identifiant cette entrée comme un lien de barre latérale.
+
+##### `label`
+
+**Type :** `string`
+
+Le texte du lien.
+
+##### `href`
+
+**Type :** `string`
+
+L'URL vers laquelle le lien pointe.
+
+##### `isCurrent`
+
+**Type :** `boolean`
+
+`true` si le lien pointe vers la page actuelle.
+
+##### `attrs`
+
+**Type :** `Record<string, string | number | boolean | undefined>`
+
+Attributs HTML ajoutés à l'élément `<a>` rendu.
+
+##### `badge`
+
+**Type :** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Configuration du badge à afficher à côté du texte du lien, le cas échéant.
+Consultez la [référence des props du composant `<Badge>`](/fr/components/badges/#props-de-badge) pour plus de détails.
+
+##### `autogenerate`
+
+**Type :** `{ directory: string } | undefined`
+
+Pour les liens créés à partir d'une [entrée de barre latérale générée automatiquement](/fr/guides/sidebar/#liens-générés-automatiquement), `directory` correspond à la valeur configurée pour [`autogenerate.directory`](/fr/reference/configuration/#sidebar).
+
+Lorsque la [barre latérale (`sidebar`)](/fr/reference/configuration/#sidebar) n'est pas configurée, Starlight génère des entrées pour toutes les pages de documentation et utilise une chaîne de caractères vide (`''`) comme valeur pour `directory`.
+
+#### Type `SidebarGroup`
+
+Les entrées de groupe de la barre latérale représentent un groupe de liens affichés dans la barre latérale et possèdent les propriétés suivantes :
+
+##### `type`
+
+**Type :** `'group'`
+
+Le type identifiant cette entrée comme un groupe de barre latérale.
+
+##### `label`
+
+**Type :** `string`
+
+Le texte du groupe.
+
+##### `entries`
+
+**Type :** <code>Array&lt;<a href="#type-sidebarlink">SidebarLink</a> | <a href="#type-sidebargroup">SidebarGroup</a>&gt;</code>
+
+Les entrées de barre latérale imbriquées dans ce groupe, qui peuvent être des liens ou des groupes.
+
+##### `collapsed`
+
+**Type :** `boolean`
+
+Indique si le groupe est rétracté par défaut.
+
+##### `badge`
+
+**Type :** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Configuration du badge à afficher à côté du texte du groupe, le cas échéant.
+Consultez la [référence des props du composant `<Badge>`](/fr/components/badges/#props-de-badge) pour plus de détails.
+
+##### `autogenerate`
+
+**Type :** `{ directory: string } | undefined`
+
+Pour les groupes créés à partir d'une [entrée de barre latérale générée automatiquement](/fr/guides/sidebar/#liens-générés-automatiquement), `directory` correspond à la valeur configurée pour [`autogenerate.directory`](/fr/reference/configuration/#sidebar).
+
+Lorsque la [barre latérale (`sidebar`)](/fr/reference/configuration/#sidebar) n'est pas configurée, Starlight génère des entrées pour toutes les pages de documentation et utilise une chaîne de caractères vide (`''`) comme valeur pour `directory`.
 
 ### `hasSidebar`
 
