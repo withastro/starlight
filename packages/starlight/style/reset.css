@@ -28,7 +28,7 @@
 		background-color: var(--sl-color-bg);
 	}
 
-	/* :lang(zh, ja) has not been supported by non-Firefox browsers at the time of writing (2026-05) */
+	/* :lang(zh, ja) has not been supported by Chromium-based browsers at the time of writing (2026-05) */
 	[lang]:where(:lang(zh), :lang(ja)) {
 		text-autospace: normal;
 	}
