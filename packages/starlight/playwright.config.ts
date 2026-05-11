@@ -17,5 +17,4 @@ export default defineConfig({
 	],
 	testMatch: '__e2e__/*.test.ts',
 	timeout: 40 * 1_000,
-	workers: 1,
 });
