@@ -4,6 +4,7 @@ const isCI = !!process.env['CI'];
 
 export default defineConfig({
 	forbidOnly: isCI,
+	fullyParallel: true,
 	projects: [
 		{
 			name: 'Chrome Stable',
@@ -15,6 +16,7 @@ export default defineConfig({
 			},
 		},
 	],
+	reporter: [['./__a11y__/reporter.ts']],
 	testMatch: '__a11y__/*.test.ts',
 	// The timeout for the accessibility tests only.
 	timeout: 180 * 1_000,
@@ -28,5 +30,4 @@ export default defineConfig({
 			url: 'http://localhost:4321',
 		},
 	],
-	workers: 1,
 });
