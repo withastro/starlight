@@ -20,4 +20,6 @@ export class TestAstroIntegrationLogger {
 	warn = () => undefined;
 	error = () => undefined;
 	debug = () => undefined;
+	flush = () => undefined;
+	close = () => undefined;
 }
