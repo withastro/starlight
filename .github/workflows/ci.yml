@@ -95,7 +95,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
-      - run: pnpm i
+      - run: pnpm i --filter @astrojs/starlight --filter "@e2e/*"
       - name: Test packages (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: pnpm -r test:e2e:chrome
