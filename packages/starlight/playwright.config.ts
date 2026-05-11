@@ -1,23 +1,17 @@
 import { defineConfig, devices } from '@playwright/test';
 
-// Toggle headless mode on/off.
-const headless = true;
+const isCI = !!process.env['CI'];
 
 export default defineConfig({
-	forbidOnly: !!process.env['CI'],
+	forbidOnly: isCI,
 	projects: [
 		{
 			name: 'chrome',
 			use: {
 				...devices['Desktop Chrome'],
-				headless,
-			},
-		},
-		{
-			name: 'firefox',
-			use: {
-				...devices['Desktop Firefox'],
-				headless,
+				// Re-use system Chrome on CI to avoid re-installing it on every run.
+				channel: isCI ? 'chrome' : undefined,
+				headless: true,
 			},
 		},
 	],

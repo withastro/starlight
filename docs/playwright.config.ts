@@ -1,12 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const isCI = !!process.env['CI'];
+
 export default defineConfig({
-	forbidOnly: !!process.env['CI'],
+	forbidOnly: isCI,
 	projects: [
 		{
 			name: 'Chrome Stable',
 			use: {
 				...devices['Desktop Chrome'],
+				// Re-use system Chrome on CI to avoid re-installing it on every run.
+				channel: isCI ? 'chrome' : undefined,
 				headless: true,
 			},
 		},
@@ -17,7 +21,7 @@ export default defineConfig({
 	webServer: [
 		{
 			command: 'pnpm run build && pnpm run preview',
-			reuseExistingServer: !process.env['CI'],
+			reuseExistingServer: !isCI,
 			stdout: 'pipe',
 			// The timeout of the single build step ran before the accessibility tests.
 			timeout: 120 * 1_000,
