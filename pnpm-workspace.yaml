@@ -3,6 +3,11 @@ packages:
   - 'examples/**/*'
   - 'docs'
 
+# https://github.com/withastro/starlight/issues/3875
+allowBuilds:
+  esbuild: false # https://github.com/evanw/esbuild/issues/4085#issuecomment-2696009329
+  sharp: false # https://sharp.pixelplumbing.com/install/: "When using pnpm, add sharp to ignoredBuiltDependencies to silence warnings."
+
 # Link up monorepo packages instead of downloading them from npm
 preferWorkspacePackages: true
 linkWorkspacePackages: true
