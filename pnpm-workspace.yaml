@@ -22,3 +22,6 @@ peerDependencyRules:
     - '@algolia/client-search'
     - 'playwright'
     - 'search-insights'
+
+# Prevent installing packages published in the last 3 days
+minimumReleaseAge: 4320
