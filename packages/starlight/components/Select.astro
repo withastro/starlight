@@ -78,6 +78,25 @@ interface Props {
 			color: var(--sl-color-gray-1);
 		}
 
+		/*
+		 * Firefox on Windows renders native select dropdowns with incorrect
+		 * colors in dark mode — option backgrounds appear white and
+		 * checked/hovered text is invisible. Explicitly set colors for the
+		 * dark theme to ensure legibility.
+		 * See: https://github.com/withastro/starlight/issues/3426
+		 */
+		:global([data-theme='dark']) select,
+		:global([data-theme='dark']) select option,
+		:global([data-theme='dark']) select option:checked {
+			background-color: var(--sl-color-gray-6);
+			color: var(--sl-color-text);
+		}
+
+		:global([data-theme='dark']) select option:hover {
+			background-color: var(--sl-color-accent-high);
+			color: var(--sl-color-text-invert);
+		}
+
 		@media (min-width: 50rem) {
 			select {
 				font-size: var(--sl-text-sm);
