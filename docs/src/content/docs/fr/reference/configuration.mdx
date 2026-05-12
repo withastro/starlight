@@ -99,16 +99,16 @@ Avec cette configuration, une page `/introduction` aurait un lien d'édition poi
 
 Configure les éléments de navigation de la barre latérale de votre site.
 
-Une barre latérale est un tableau de liens et de groupes de liens.
-À l'exception des éléments utilisant `slug`, chaque élément doit comporter un `label` et l'une des propriétés suivantes :
+Une barre latérale est un tableau de liens, de groupes de liens et d'entrées générées automatiquement.
+Les éléments de la barre latérale sont définis en utilisant l'une des propriétés suivantes :
 
-- `link` — un lien vers une URL spécifique, comme `'/home'` ou `'https://example.com'`.
+- `link` — un lien vers une URL spécifique, par exemple `'/home'` ou `'https://example.com'`. Un lien doit également avoir une étiquette (`label`).
 
-- `slug` — une référence à une page interne, par exemple `'guides/getting-started'`.
+- `slug` — une référence à une page interne, par exemple `'guides/getting-started'`. Le titre de la page liée sera utilisé comme étiquette par défaut.
 
-- `items` — un tableau contenant plus de liens et des sous-groupes.
+- `items` — un tableau contenant d'autres liens, sous-groupes et entrées générées automatiquement pour la barre latérale. Un groupe doit également avoir une étiquette (`label`).
 
-- `autogenerate` — un objet spécifiant un répertoire de votre documentation à partir duquel générer automatiquement un groupe de liens.
+- `autogenerate` — un objet spécifiant un répertoire de votre documentation à partir duquel générer automatiquement des liens et des sous-groupes. Les entrées générées automatiquement peuvent être placées dans le tableau `items` d'un groupe.
 
 Les liens internes peuvent également être spécifiés sous forme de chaîne de caractères au lieu d'un objet avec une propriété `slug`.
 
@@ -132,7 +132,7 @@ starlight({
 		// Un groupe liant toutes les pages présentes dans le répertoire reference.
 		{
 			label: 'Référence',
-			autogenerate: { directory: 'reference' },
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 	],
 });
@@ -147,9 +147,9 @@ Par exemple, une page générée à partir de `astro.md` apparaîtrait au-dessus
 
 Les groupes de liens sont développés par défaut. Vous pouvez modifier ce comportement en définissant la propriété `collapsed` d'un groupe sur `true`.
 
-Les sous-groupes générés automatiquement respectent la propriété `collapsed` de leur groupe parent par défaut. Définissez la propriété `autogenerate.collapsed` pour remplacer ce comportement.
+Les sous-groupes générés automatiquement sont également développés par défaut. Définissez la propriété `autogenerate.collapsed` pour les rétracter.
 
-```js {5,13}
+```js {5,15}
 sidebar: [
   // Un groupe rétractable de liens.
   {
@@ -160,10 +160,14 @@ sidebar: [
   // Un groupe développé contenant des sous-groupes générés automatiquement rétractés.
   {
     label: 'Référence',
-    autogenerate: {
-      directory: 'reference',
-      collapsed: true,
-    },
+    items: [
+      {
+        autogenerate: {
+          directory: 'reference',
+          collapsed: true,
+        },
+      },
+    ],
   },
 ],
 ```
@@ -221,17 +225,15 @@ type SidebarItem =
 					items: SidebarItem[];
 					collapsed?: boolean;
 			  }
-			| {
-					// Groupe de liens généré automatiquement
-					label: string;
-					autogenerate: {
-						directory: string;
-						collapsed?: boolean;
-						attrs?: Record<string, string | number | boolean | undefined>;
-					};
-					collapsed?: boolean;
-			  }
-	  ));
+	  ))
+	| {
+			// Liens et sous-groupes générés automatiquement
+			autogenerate: {
+				directory: string;
+				collapsed?: boolean;
+				attrs?: Record<string, string | number | boolean | undefined>;
+			};
+	  };
 ```
 
 #### `BadgeConfig`

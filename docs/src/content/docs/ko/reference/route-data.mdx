@@ -100,9 +100,102 @@ entry: {
 
 ### `sidebar`
 
-**타입:** `SidebarEntry[]`
+**타입:** <code>Array&lt;<a href="#sidebarlink-타입">SidebarLink</a> | <a href="#sidebargroup-타입">SidebarGroup</a>&gt;</code>
 
 페이지에 대한 사이트 탐색 사이드바 엔트리입니다.
+각 엔트리는 사이드바 링크 또는 사이드바 그룹입니다.
+
+#### `SidebarLink` 타입
+
+사이드바 링크 엔트리는 사이드바에 렌더링된 링크를 나타내며 다음과 같은 속성을 가집니다.
+
+##### `type`
+
+**타입:** `'link'`
+
+이 엔트리를 사이드바 링크로 식별하는 타입입니다.
+
+##### `label`
+
+**타입:** `string`
+
+링크의 텍스트입니다.
+
+##### `href`
+
+**타입:** `string`
+
+링크가 가리키는 URL입니다.
+
+##### `isCurrent`
+
+**타입:** `boolean`
+
+링크가 현재 페이지를 가리키는 경우 `true`입니다.
+
+##### `attrs`
+
+**타입:** `Record<string, string | number | boolean | undefined>`
+
+렌더링된 `<a>` 요소에 추가된 HTML 속성입니다.
+
+##### `badge`
+
+**타입:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+링크 레이블 옆에 렌더링할 배지 설정입니다(있는 경우).
+자세한 내용은 [`<Badge>` 컴포넌트 속성 참조](/ko/components/badges/#badge-속성)를 확인하세요.
+
+##### `autogenerate`
+
+**타입:** `{ directory: string } | undefined`
+
+[자동 생성된 사이드바 엔트리](/ko/guides/sidebar/#자동-생성-링크)에서 생성된 링크의 경우, `directory`는 설정된 [`autogenerate.directory`](/ko/reference/configuration/#sidebar) 값과 일치합니다.
+
+[`sidebar`](/ko/reference/configuration/#sidebar)가 설정되지 않은 경우, Starlight는 모든 문서 페이지에 대한 엔트리를 생성하고 `directory` 값으로 빈 문자열(`''`)을 사용합니다.
+
+#### `SidebarGroup` 타입
+
+사이드바 그룹 엔트리는 사이드바에 렌더링된 링크 그룹을 나타내며 다음과 같은 속성을 가집니다.
+
+##### `type`
+
+**타입:** `'group'`
+
+이 엔트리를 사이드바 그룹으로 식별하는 타입입니다.
+
+##### `label`
+
+**타입:** `string`
+
+그룹의 텍스트입니다.
+
+##### `entries`
+
+**타입:** <code>Array&lt;<a href="#sidebarlink-타입">SidebarLink</a> | <a href="#sidebargroup-타입">SidebarGroup</a>&gt;</code>
+
+이 그룹 내의 중첩된 사이드바 엔트리입니다. 링크 또는 그룹일 수 있습니다.
+
+##### `collapsed`
+
+**타입:** `boolean`
+
+그룹이 기본적으로 접혀 있는지 여부입니다.
+
+##### `badge`
+
+**타입:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+그룹 레이블 옆에 렌더링할 배지 설정입니다(있는 경우).
+자세한 내용은 [`<Badge>` 컴포넌트 속성 참조](/ko/components/badges/#badge-속성)를 확인하세요.
+
+##### `autogenerate`
+
+**타입:** `{ directory: string } | undefined`
+
+[자동 생성된 사이드바 엔트리](/ko/guides/sidebar/#자동-생성-링크)에서 생성된 그룹의 경우, `directory`는 설정된 [`autogenerate.directory`](/ko/reference/configuration/#sidebar) 값과 일치합니다.
+
+[`sidebar`](/ko/reference/configuration/#sidebar)가 설정되지 않은 경우, Starlight는 모든 문서 페이지에 대한 엔트리를 생성하고 `directory` 값으로 빈 문자열(`''`)을 사용합니다.
 
 ### `hasSidebar`
 
