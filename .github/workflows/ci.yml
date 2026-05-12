@@ -51,6 +51,9 @@ jobs:
               - '!docs/src/content/docs/**'
             packages:
               - 'packages/**'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
             ci:
               - '.github/workflows/ci.yml'
 
