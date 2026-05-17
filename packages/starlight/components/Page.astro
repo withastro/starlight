@@ -92,30 +92,39 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 					lang={starlightRoute.entryMeta.lang}
 					dir={starlightRoute.entryMeta.dir}
 				>
-					{/* TODO: Revisit how this logic flows. */}
 					<Banner />
 					{
-						starlightRoute.entry.data.hero ? (
+						starlightRoute.entry.data.template === 'blank' ? (
 							<ContentPanel>
-								<Hero />
-								<MarkdownContent>
-									<slot />
-								</MarkdownContent>
-								<Footer />
+								<slot />
 							</ContentPanel>
 						) : (
 							<>
 								<ContentPanel>
-									<PageTitle />
-									{starlightRoute.entry.data.draft && <DraftContentNotice />}
-									{starlightRoute.isFallback && <FallbackContentNotice />}
+									{starlightRoute.entry.data.hero ? (
+										<>
+											<Hero />
+											<MarkdownContent>
+												<slot />
+											</MarkdownContent>
+											<Footer />
+										</>
+									) : (
+										<>
+											<PageTitle />
+											{starlightRoute.entry.data.draft && <DraftContentNotice />}
+											{starlightRoute.isFallback && <FallbackContentNotice />}
+										</>
+									)}
 								</ContentPanel>
-								<ContentPanel>
-									<MarkdownContent>
-										<slot />
-									</MarkdownContent>
-									<Footer />
-								</ContentPanel>
+								{starlightRoute.entry.data.hero ? null : (
+									<ContentPanel>
+										<MarkdownContent>
+											<slot />
+										</MarkdownContent>
+										<Footer />
+									</ContentPanel>
+								)}
 							</>
 						)
 					}
