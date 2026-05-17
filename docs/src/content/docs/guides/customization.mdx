@@ -111,10 +111,11 @@ Learn how to [add a sitemap link to `robots.txt`](https://docs.astro.build/en/gu
 
 ## Page layout
 
-By default, Starlight pages use a layout with a global navigation sidebar and a table of contents that shows the current page headings.
+By default, Starlight pages use a layout with a global navigation sidebar and a table of contents that shows the current page headings. This layout is ideal for documentation sites with lots of content to explore.
 
-You can apply a wider page layout without sidebars by setting [`template: splash`](/reference/frontmatter/#template) in a page’s frontmatter.
-This works particularly well for landing pages and you can see it in action on the [homepage of this site](/).
+Starlight also offers two additional page templates that can help you create a more customized experience for your readers.
+
+The `splash` template is a wider layout that removes the sidebars. This works particularly well for landing pages and you can see it in action on the [homepage of this site](/). You can apply a wider page layout without sidebars by setting [`template: splash`](/reference/frontmatter/#template) in a page’s frontmatter.
 
 ```md {5}
 ---
@@ -124,6 +125,21 @@ title: My Landing Page
 template: splash
 ---
 ```
+
+The `blank` template minimizes the page layout to just the top header and main content area, giving you a blank canvas to work with. This is ideal for pages where you want to create a completely custom design or layout. Use the `blank` template by setting [`template: blank`](/reference/frontmatter/#template) in frontmatter:
+
+```md {5}
+---
+# src/content/docs/index.md
+
+title: My Custom Page
+template: blank
+---
+```
+
+:::note
+With the `blank` template, you are responsible for adding any navigation or other elements you want on the page, so it’s best suited for advanced users who are comfortable working with Astro and Starlight’s components.
+:::
 
 ## Table of contents
 
