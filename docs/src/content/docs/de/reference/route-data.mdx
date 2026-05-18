@@ -102,9 +102,102 @@ Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](
 
 ### `sidebar`
 
-**Typ:** `SidebarEntry[]`
+**Typ:** <code>Array&lt;<a href="#sidebarlink-typ">SidebarLink</a> | <a href="#sidebargroup-typ">SidebarGroup</a>&gt;</code>
 
 Seitennavigations&shy;einträge für diese Seite.
+Jeder Eintrag ist entweder ein Seitenleisten-Link oder eine Seitenleisten-Gruppe.
+
+#### `SidebarLink`-Typ
+
+Einträge für Seitenleisten-Links sind Links, die in der Seitenleiste angezeigt werden, und weisen folgende Eigenschaften auf:
+
+##### `type`
+
+**Typ:** `'link'`
+
+Der Typ, der diesen Eintrag als Seitenleisten-Link kennzeichnet.
+
+##### `label`
+
+**Typ:** `string`
+
+Die Bezeichnung des Links.
+
+##### `href`
+
+**Typ:** `string`
+
+Die URL, auf die der Link verweist.
+
+##### `isCurrent`
+
+**Typ:** `boolean`
+
+`true`, wenn der Link auf die aktuelle Seite verweist.
+
+##### `attrs`
+
+**Typ:** `Record<string, string | number | boolean | undefined>`
+
+HTML-Attribute, die dem gerenderten `<a>`-Element hinzugefügt wurden.
+
+##### `badge`
+
+**Typ:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Konfiguration des Abzeichens, das gegebenenfalls neben der Link-Bezeichnung angezeigt wird.
+Weitere Informationen findest du in der [Referenz zu den Eigenschaften der `<Badge>`-Komponente](/de/components/badges/#badge-eigenschaften).
+
+##### `autogenerate`
+
+**Typ:** `{ directory: string } | undefined`
+
+Bei Links, die aus einem [automatisch generierten Seitenleisten-Eintrag](/de/guides/sidebar/#automatisch-generierte-links) erstellt wurden, entspricht `directory` dem unter [`autogenerate.directory`](/de/reference/configuration/#sidebar) konfigurierten Wert.
+
+Wenn die [`sidebar`](/de/reference/configuration/#sidebar) nicht konfiguriert ist, generiert Starlight Einträge für alle Dokumentationsseiten und verwendet eine leere Zeichenfolge (`''`) als Wert für `directory`.
+
+#### `SidebarGroup`-Typ
+
+Einträge in der Seitenleistengruppe stellen eine Gruppe von Links dar, die in der Seitenleiste angezeigt werden, und weisen folgende Eigenschaften auf:
+
+##### `type`
+
+**Typ:** `'group'`
+
+Der Typ, der diesen Eintrag als Seitenleistengruppe kennzeichnet.
+
+##### `label`
+
+**Typ:** `string`
+
+Die Bezeichnung der Gruppe.
+
+##### `entries`
+
+**Typ:** <code>Array&lt;<a href="#sidebarlink-typ">SidebarLink</a> | <a href="#sidebargroup-typ">SidebarGroup</a>&gt;</code>
+
+Die verschachtelten Einträge in der Seitenleiste innerhalb dieser Gruppe, bei denen es sich entweder um Links oder um Gruppen handeln kann.
+
+##### `collapsed`
+
+**Typ:** `boolean`
+
+Ob die Gruppe standardmäßig ausgeblendet ist.
+
+##### `badge`
+
+**Typ:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Konfiguration des Abzeichens, das gegebenfalls neben der Gruppenbezeichnung angezeigt werden soll.
+Weitere Informationen findest du in der [Referenz zu den Eigenschaften der `<Badge>`-Komponente](/de/components/badges/#badge-eigenschaften).
+
+##### `autogenerate`
+
+**Typ:** `{ directory: string } | undefined`
+
+Bei Gruppen, die aus einem [automatisch generierten Seitenleisten-Eintrag](/de/guides/sidebar/#automatisch-generierte-links) erstellt wurden, entspricht `directory` dem konfigurierten Wert für [`autogenerate.directory`](/de/reference/configuration/#sidebar).
+
+Wenn die [`sidebar`](/de/reference/configuration/#sidebar) nicht konfiguriert ist, generiert Starlight Einträge für alle Dokumentationsseiten und verwendet eine leere Zeichenfolge (`''`) als Wert für `directory`.
 
 ### `hasSidebar`
 
