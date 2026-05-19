@@ -193,7 +193,7 @@ Dies ist hilfreich, wenn du nicht jedes Element der Seitenleiste manuell in eine
 
 Standardmäßig werden die Seiten in alphabetischer Reihenfolge nach der Datei [`id`](/de/reference/route-data/#id) sortiert.
 
-Füge automatisch generierte Links hinzu, indem du ein Objekt mit der Eigenschaften `autogenerate` verwendest. 
+Füge automatisch generierte Links hinzu, indem du ein Objekt mit der Eigenschaften `autogenerate` verwendest.
 In der Konfiguration von `autogenerate` muss das `directory` angegeben werden, das für die Einträge in der Seitenleiste verwendet werden soll.
 Zum Beispiel wird mit der folgenden Konfiguration:
 
@@ -477,10 +477,13 @@ Und der folgenden Dateistruktur:
 
 Die folgende Seitenleiste mit allen automatisch generierten Links in Kursivschrift erstellt:
 
-
 <SidebarPreview
 	config={[
-		{ label: 'Kiel des Schiffes', link: '', attrs: { style: 'font-style: italic' } },
+		{
+			label: 'Kiel des Schiffes',
+			link: '',
+			attrs: { style: 'font-style: italic' },
+		},
 		{ label: 'Zentaur', link: '', attrs: { style: 'font-style: italic' } },
 		{
 			label: 'seasonal',
@@ -670,7 +673,7 @@ starlight({
 				{
 					autogenerate: {
 						directory: 'constellations',
-						// Standardmäßig werden automatisch 
+						// Standardmäßig werden automatisch
 						// generierte Untergruppen ausgeblendet.
 						collapsed: true,
 					},
