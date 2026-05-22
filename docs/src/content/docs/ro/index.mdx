@@ -1,0 +1,173 @@
+---
+title: Starlight 🌟 Creează site-uri de documentație cu Astro
+head:
+  - tag: title
+    content: Starlight 🌟 Creează site-uri de documentație cu Astro
+description: Starlight te ajută să creezi site-uri de documentație frumoase și performante cu Astro.
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  title: Fă-ți documentația să strălucească cu Starlight
+  tagline: Tot ce ai nevoie pentru a construi un site de documentație stelar. Rapid, accesibil și ușor de folosit.
+  image:
+    file: ~/assets/hero-star.webp
+  actions:
+    - text: Începe
+      icon: right-arrow
+      link: /ro/getting-started/
+    - text: Vezi pe GitHub
+      icon: external
+      variant: minimal
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '~/components/about-astro.astro';
+import TestimonialGrid from '~/components/testimonial-grid.astro';
+import Testimonial from '~/components/testimonial.astro';
+
+<CardGrid stagger>
+	<Card title="Documentație care încântă" icon="open-book">
+		Include: navigare pe site, căutare, internaționalizare, SEO, tipografie ușor
+		de citit, evidențiere de cod, mod întunecat și multe altele.
+	</Card>
+	<Card title="Construit cu Astro" icon="rocket">
+		Folosește toată puterea și performanța oferite de Astro. Extinde Starlight
+		cu integrările și bibliotecile tale Astro preferate.
+	</Card>
+	<Card title="Markdown, Markdoc și MDX" icon="document">
+		Alege limbajul tău de marcare preferat. Starlight îți oferă validare
+		integrată pentru frontmatter, cu siguranța tipurilor din TypeScript.
+	</Card>
+	<Card title="Adu propriile componente UI" icon="puzzle">
+		Starlight vine ca o soluție completă pentru documentație, independentă de
+		framework. Îl poți extinde cu React, Vue, Svelte, Solid și multe altele.
+	</Card>
+</CardGrid>
+
+<TestimonialGrid title="Ce spun oamenii">
+  <Testimonial
+    name="Rachel"
+    handle="rachelnabors"
+    cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
+  >
+    Echipa Astro a EVOLUAT modul în care pot fi făcute documentațiile și poți avea totul gata din cutie cu proiectul lor Starlight.
+  </Testimonial>
+  <Testimonial
+    name="Flavio"
+    handle="flaviocopes"
+    cite="https://twitter.com/flaviocopes/status/1738237658717905108"
+  >
+    Kitul oficial de pornire Starlight de la Astro este un instrument cu adevărat incredibil pentru a construi un site de documentație.
+  </Testimonial>
+  <Testimonial
+    name="Tomek"
+    handle="sulco"
+    cite="https://twitter.com/sulco/status/1735610348730802342"
+  >
+    Starlight este exemplul nostru preferat de DX excelent: viteza, confortul și
+    atenția la detalii sunt inspiraționale. Se ocupă de partea tehnică și de
+    aspect, ca tu să te poți concentra pe conținutul tău 👍
+
+    Echipa StackBlitz îl adoră!
+
+  </Testimonial>
+  <Testimonial
+    name="Roberto"
+    handle="RmeetsH"
+    cite="https://twitter.com/RmeetsH/status/1735783992018760090"
+  >
+    Starlight a schimbat complet jocul pentru mine, permițându-mi să mă
+    concentrez pe crearea de conținut.
+
+    Designul său intuitiv nu doar îmi simplifică fluxul de lucru, ci și reduce
+    timpul de onboarding pentru dezvoltatorii open source.
+
+  </Testimonial>
+  <Testimonial
+    name="Joel"
+    handle="jhooks"
+    cite="https://twitter.com/jhooks/status/1727405160547418405"
+  >
+    Am petrecut mai mult timp cu Starlight pentru documentația Course Builder și
+    până acum a fost excelent. Are multe detalii bine gândite și mă pot
+    concentra pe scris în Markdown, nu pe ajustarea site-ului.
+  </Testimonial>
+  <Testimonial
+    name="Rick"
+    handle="rick_viscomi"
+    cite="https://twitter.com/rick_viscomi/status/1665867447910510593"
+  >
+    Am început să mă joc cu Starlight. Trebuie să spun că sunt foarte impresionat
+    de performanța oferită implicit.
+
+    💯💯💯💯
+
+  </Testimonial>
+  <Testimonial
+    name="Nicolas"
+    handle="beaussan"
+    cite="https://twitter.com/beaussan/status/1735625189583466893"
+  >
+    Starlight este cea mai bună cale de a începe cu documentația: puterea și
+    viteza lui Astro, împreună cu instrumentele din Starlight, fac o combinație
+    perfectă.
+
+    Este alegerea mea de ceva vreme și continui să îl iubesc!
+
+  </Testimonial>
+  <Testimonial
+    name="Sylwia"
+    handle="SylwiaVargas"
+    cite="https://x.com/SylwiaVargas/status/1726556825741578286"
+  >
+    Am folosit Starlight la ultimul meu job și mi-a plăcut enorm. Componente
+    excelente, design intuitiv și o comunitate foarte receptivă.
+  </Testimonial>
+  <Testimonial
+    name="Lou Cyx"
+    handle="loucyx"
+    cite="https://elk.zone/m.webtoo.ls/@loucyx@mastodon.social/111587380021362284"
+  >
+    Documentația site-ului meu monorepo arată mai bine ca niciodată datorită
+    Starlight. Este extrem de ușor de folosit fără să pierzi nimic din puterea
+    lui Astro. Mulțumesc pentru munca depusă!
+  </Testimonial>
+  <Testimonial
+    name="BowTiedWebReaper"
+    handle="BowTiedWebReapr"
+    cite="https://twitter.com/BowTiedWebReapr/status/1735633399501697517"
+  >
+    Starlight este unealta mea preferată pentru documentație. A făcut foarte
+    simplă adăugarea documentației în site-ul meu Astro existent.
+  </Testimonial>
+  <Testimonial
+    name="Jeff"
+    handle="J_Everhart383"
+    cite="https://twitter.com/J_Everhart383/status/1691900590048292908"
+  >
+    Refac documentația pentru platforma WPEngine Atlas. Crede-mă când spun că
+    Starlight are tot ce îți trebuie pentru o platformă de documentație de nota
+    10.
+  </Testimonial>
+  <Testimonial
+    name="Chloe"
+    handle="solelychloe"
+    cite="https://twitter.com/solelychloe/status/1695115277602628082"
+  >
+    Încearcă Starlight!
+
+    Îl folosesc pentru câteva dintre site-urile mele și este grozav.
+
+  </Testimonial>
+</TestimonialGrid>
+
+<AboutAstro title="Susținut de">
+Astro este frameworkul web all-in-one proiectat pentru viteză.
+Preia conținutul de oriunde și publică-l oriunde, totul bazat pe componentele
+și bibliotecile tale UI preferate.
+
+[Află mai multe despre Astro](https://astro.build/)
+
+</AboutAstro>
