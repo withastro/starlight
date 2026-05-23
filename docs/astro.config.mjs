@@ -115,7 +115,7 @@ export default defineConfig({
 							label: 'Accessibility Statement',
 							slug: 'accessibility-statement',
 							translations: {
-								de: 'Zugangserklärung',
+								de: 'Erklärung zur Barrierefreiheit',
 								es: 'Declaración de accesibilidad',
 								ja: 'アクセシビリティステートメント',
 								fr: "Déclaration d'accessibilité",
