@@ -9,10 +9,10 @@ At Starlight, we believe that documentation should be accessible to everyone, re
 
 Starlight takes the following measures to ensure accessibility:
 
-- Include accessibility throughout our development process
-- Review accessibility in pull requests and code reviews
-- Maintain issues labeled [`a11y`][a11y-issues] to track accessibility work
-- Welcome and act on community accessibility feedback and audits
+- Include accessibility throughout our development process.
+- Review accessibility in pull requests and code reviews.
+- Maintain issues labeled [`a11y`][a11y-issues] to track accessibility work.
+- Welcome and act on community accessibility feedback and audits.
 
 ## Conformance status
 
@@ -46,21 +46,21 @@ These technologies are used in combination with modern browsers and assistive te
 
 Starlight includes the following accessibility features by default:
 
-- **Skip link** to bypass navigation and jump to main content
-- **Logical heading hierarchy** for screen reader navigation
-- **Landmark regions** (`<nav>`, `<main>`, `<aside>`) for assistive technology navigation
-- **Full keyboard navigation** for all interactive elements
-- **Arrow key, Home, and End key support** for tab components
-- **Escape key** closes modals and menus with proper focus management
-- **Keyboard shortcuts** for search (`Ctrl` + `K` or `⌘` + `K`)
-- **Color contrast** meeting WCAG AA requirements
-- **Dark and light themes** with user preference support
-- **Responsive design** adapting to different viewport sizes
-- **Visible focus indicators** for keyboard navigation
-- **ARIA attributes** throughout components
-- **Screen reader labels** for interactive elements
-- **Language attributes** for proper pronunciation
-- **Semantic HTML** for meaningful structure
+- Skip link to bypass navigation and jump to main content
+- Logical heading hierarchy for screen reader navigation
+- Landmark regions (`<nav>`, `<main>`, `<aside>`) for assistive technology navigation
+- Full keyboard navigation for all interactive elements
+- Arrow key, Home, and End key support for tab components
+- Escape key closes modals and menus with proper focus management
+- Keyboard shortcuts for search (<kbd><kbd>Ctrl</kbd>+<kbd>K</kbd></kbd> or <kbd><kbd>Command</kbd>+<kbd>K</kbd></kbd>)
+- Color contrast meeting WCAG AA requirements
+- Dark and light themes with user preference support
+- Responsive design adapting to different viewport sizes
+- Visible focus indicators for keyboard navigation
+- ARIA attributes throughout components
+- Screen reader labels for interactive elements
+- Language attributes for proper pronunciation
+- Semantic HTML for meaningful structure
 
 ## Limitations and alternatives
 
