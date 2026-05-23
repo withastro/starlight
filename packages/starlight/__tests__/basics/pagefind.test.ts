@@ -1,7 +1,8 @@
 import { fileURLToPath } from 'node:url';
-import { afterEach, expect, test, vi } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 import * as pagefind from 'pagefind';
 import { starlightPagefind } from '../../integrations/pagefind';
+import { PagefindConfigSchema } from '../../schemas/pagefind';
 import { TestAstroIntegrationLogger } from '../test-plugin-utils';
 
 vi.mock('pagefind');
@@ -66,4 +67,53 @@ test('logs Pagefind errors and closes Pagefind', async () => {
 	expect(logger.error).toHaveBeenCalledWith(`Pagefind error: ${errorMessage}`);
 
 	expect(pagefind.close).toHaveBeenCalled();
+});
+
+describe('PagefindConfigSchema ranking weights', () => {
+	const schema = PagefindConfigSchema();
+
+	// Regression coverage for https://github.com/withastro/starlight/issues/3912 —
+	// the schema previously omitted `diacriticSimilarity` (Pagefind v1.2.0) and
+	// `metaWeights` (Pagefind v1.4.0), so those options were silently stripped
+	// during validation and never reached Pagefind.
+
+	test('accepts diacriticSimilarity as a non-negative number', () => {
+		const config = schema.parse({ ranking: { diacriticSimilarity: 0.5 } });
+		expect(config.ranking.diacriticSimilarity).toBe(0.5);
+
+		const zero = schema.parse({ ranking: { diacriticSimilarity: 0 } });
+		expect(zero.ranking.diacriticSimilarity).toBe(0);
+	});
+
+	test('accepts metaWeights as a record of string to number', () => {
+		const config = schema.parse({ ranking: { metaWeights: { title: 5, description: 2 } } });
+		expect(config.ranking.metaWeights).toEqual({ title: 5, description: 2 });
+	});
+
+	test('preserves defaults for existing ranking fields when only new fields are set', () => {
+		const config = schema.parse({ ranking: { diacriticSimilarity: 1 } });
+		expect(config.ranking.pageLength).toBe(0.1);
+		expect(config.ranking.termFrequency).toBe(0.1);
+		expect(config.ranking.termSaturation).toBe(2);
+		expect(config.ranking.termSimilarity).toBe(9);
+		expect(config.ranking.diacriticSimilarity).toBe(1);
+	});
+
+	test('rejects diacriticSimilarity below 0', () => {
+		const result = schema.safeParse({ ranking: { diacriticSimilarity: -1 } });
+		expect(result.success).toBe(false);
+	});
+
+	test('rejects metaWeights with non-number values', () => {
+		const result = schema.safeParse({ ranking: { metaWeights: { title: 'high' } } });
+		expect(result.success).toBe(false);
+	});
+
+	test('still strips unknown ranking keys', () => {
+		const config = schema.parse({
+			ranking: { diacriticSimilarity: 0.5, unknownKey: 42 },
+		} as Parameters<typeof schema.parse>[0]);
+		expect('unknownKey' in config.ranking).toBe(false);
+		expect(config.ranking.diacriticSimilarity).toBe(0.5);
+	});
 });

@@ -34,6 +34,26 @@ const pagefindRankingWeightsSchema = z.object({
 	 * @see https://pagefind.app/docs/ranking/#configuring-term-similarity
 	 */
 	termSimilarity: z.number().min(0).default(9),
+	/**
+	 * Set Pagefind’s `diacriticSimilarity` ranking option.
+	 *
+	 * Values must be greater than or equal to `0`. When unset, Pagefind applies
+	 * its built-in default.
+	 *
+	 * Available in Pagefind v1.2.0 or later.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-diacritic-similarity
+	 */
+	diacriticSimilarity: z.number().min(0).optional(),
+	/**
+	 * Set Pagefind’s `metaWeights` ranking option to boost matches in specific
+	 * metadata fields (for example, `title` or `description`).
+	 *
+	 * Available in Pagefind v1.4.0 or later.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-metadata-weights
+	 */
+	metaWeights: z.record(z.string(), z.number()).optional(),
 });
 const pagefindIndexOptionsSchema = z.object({
 	/**
