@@ -63,7 +63,7 @@ Cache-Control: public, max-age=604800, immutable
 Встроенные видео, такие как YouTube и Vimeo, можно улучшить, ожидая [взаимодействие пользователя для загрузки видео][lazy-video].
 Пакеты, такие как [`astro-embed`][embed], могут помочь с часто используемыми сервисами.
 
-:::tip
+:::tip[А вы знали?]
 Разбор и компиляция JavaScript являются одной из самых ресурсоемких задач, которые браузерам приходится выполнять.
 По сравнению с отображением изображения JPEG того же размера, [обработка JavaScript может занять более чем в 30 раз больше времени][cost-of-js].
 :::
@@ -89,37 +89,16 @@ Cache-Control: public, max-age=604800, immutable
 Хотите сравнивить другие фреймворки для документации?
 Эти тесты с использованием [Website Carbon Calculator][wcc] сравнивают аналогичные страницы, созданные с помощью разных инструментов.
 
-| Фреймворк                   | CO₂ на каждое посещение стр. | Рейтинг |
-| --------------------------- | ---------------------------- | :-----: |
-| [Starlight][sl-carbon]      | 0.01g                        |   A+    |
-| [Sphinx][sx-carbon]         | 0.01g                        |   A+    |
-| [Read the Docs][rtd-carbon] | 0.03g                        |   A+    |
-| [VitePress][vp-carbon]      | 0.04g                        |    A    |
-| [docsify][dy-carbon]        | 0.05g                        |    A    |
-| [mdBook][md-carbon]         | 0.05g                        |    A    |
-| [Nextra][nx-carbon]         | 0.05g                        |    A    |
-| [MkDocs][mk-carbon]         | 0.07g                        |    A    |
-| [Fumadocs][fs-carbon]       | 0.07g                        |    A    |
-| [Docusaurus][ds-carbon]     | 0.10g                        |    B    |
-| [Docus][dc-carbon]          | 0.11g                        |    B    |
-| [GitBook][gb-carbon]        | 0.42g                        |    F    |
-| [Mintlify][mt-carbon]       | 0.48g                        |    F    |
+import CarbonComparison from '../../../components/carbon-comparison.astro';
 
-<small>Данные собраны 7 августа 2025 года. Нажмите на ссылку для просмотра актуальной информации.</small>
-
-[sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
-[vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
-[sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
-[mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
-[md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
-[nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
-[dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
-[ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
-[rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
-[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
+<CarbonComparison
+  labels={{
+    framework: 'Фреймворк',
+    co2: 'CO₂ на каждое посещение страницы',
+    rating: 'Рейтинг',
+    note: 'Данные собраны {{date}}. Нажмите на ссылку, чтобы увидеть актуальные данные.',
+  }}
+/>
 
 ## Дополнительные ресурсы
 
@@ -140,6 +119,7 @@ Cache-Control: public, max-age=604800, immutable
 
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
+[sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [http]: https://httparchive.org/reports/state-of-the-web
 [assets]: https://docs.astro.build/ru/guides/images/
 [islands]: https://docs.astro.build/ru/concepts/islands/
