@@ -12,7 +12,7 @@ concurrency:
 jobs:
   format:
     if: github.repository_owner == 'withastro'
-    uses: withastro/automation/.github/workflows/format.yml@3754a7413d23dfc52b1791a7c048ae78d27ac9d3 # main
+    uses: withastro/automation/.github/workflows/format.yml@290b37409535e2a496482b5bf0e4f5f2e4803f84 # main
     with:
       command: "format"
     secrets: inherit
