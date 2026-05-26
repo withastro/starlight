@@ -17,24 +17,33 @@ import Icon from '../user-components/Icon.astro';
 <script>
 	class StarlightMenuButton extends HTMLElement {
 		btn = this.querySelector('button')!;
+		mobileMql = matchMedia('(min-width: 50em)');
 
 		constructor() {
 			super();
 			// Toggle `aria-expanded` state when a user clicks the button.
 			this.btn.addEventListener('click', () => this.toggleExpanded());
 
-			// Close the menu when a user presses the escape key, and trap focus
-			// inside the menu while it is expanded.
+			// Close the menu when a user presses the escape key.
 			const parentNav = this.closest('nav');
 			if (parentNav) {
 				parentNav.addEventListener('keyup', (e) => this.closeOnEscape(e));
-				parentNav.addEventListener('keydown', (e) => this.trapTabFocus(e, parentNav));
 			}
+
+			// Collapse the menu (which also clears `inert`) when the viewport
+			// grows past the mobile breakpoint so users on rotating or resizing
+			// devices are not locked out of the page content.
+			this.mobileMql.addEventListener('change', (e) => {
+				if (e.matches && this.getAttribute('aria-expanded') === 'true') {
+					this.setExpanded(false);
+				}
+			});
 		}
 
 		setExpanded(expanded: boolean) {
 			this.setAttribute('aria-expanded', String(expanded));
 			document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
+			this.syncInert();
 		}
 
 		toggleExpanded() {
@@ -48,26 +57,14 @@ import Icon from '../user-components/Icon.astro';
 			}
 		}
 
-		// Wrap Tab navigation within the surrounding `<nav>` while the mobile
-		// menu is expanded so keyboard focus cannot escape to the page below.
-		trapTabFocus(e: KeyboardEvent, parentNav: HTMLElement) {
-			if (e.code !== 'Tab') return;
-			if (!document.body.hasAttribute('data-mobile-menu-expanded')) return;
-			const focusables = Array.from(
-				parentNav.querySelectorAll<HTMLElement>(
-					'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-				)
-			).filter((el) => el.offsetParent !== null);
-			if (focusables.length === 0) return;
-			const first = focusables[0]!;
-			const last = focusables[focusables.length - 1]!;
-			const active = document.activeElement;
-			if (e.shiftKey && active === first) {
-				e.preventDefault();
-				last.focus();
-			} else if (!e.shiftKey && active === last) {
-				e.preventDefault();
-				first.focus();
+		// Mark the main content and skip link `inert` while the mobile menu is
+		// expanded so the browser keeps keyboard focus inside the header and
+		// sidebar without relying on a hand-maintained list of focusable selectors.
+		syncInert() {
+			const active =
+				!this.mobileMql.matches && document.body.hasAttribute('data-mobile-menu-expanded');
+			for (const selector of ['.main-frame', '.sl-skip-link']) {
+				document.querySelector<HTMLElement>(selector)?.toggleAttribute('inert', active);
 			}
 		}
 	}

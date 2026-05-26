@@ -2,17 +2,17 @@
 import { PAGE_TITLE_ID } from '../constants';
 ---
 
-<a href={`#${PAGE_TITLE_ID}`}>{Astro.locals.t('skipLink.label')}</a>
+<a class="sl-skip-link" href={`#${PAGE_TITLE_ID}`}>{Astro.locals.t('skipLink.label')}</a>
 
 <style>
 	@layer starlight.core {
-		a {
+		.sl-skip-link {
 			clip: rect(0, 0, 0, 0);
 			position: fixed;
 			top: 0.75rem;
 			inset-inline-start: 0.75rem;
 		}
-		a:focus {
+		.sl-skip-link:focus {
 			clip: unset;
 			z-index: var(--sl-z-index-skiplink);
 			display: block;
