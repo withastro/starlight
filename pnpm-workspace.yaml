@@ -3,6 +3,18 @@ packages:
   - 'examples/**/*'
   - 'docs'
 
+# Local development: link Starlight against the in-progress astro repo at ../astro.
+# Drop or comment out when working against published Astro releases. Absolute paths
+# are intentional — pnpm resolves `link:` overrides relative to each importing
+# project, so a `../astro/...` form breaks for non-root packages (e.g. markdoc).
+overrides:
+  astro: link:/home/erika/Projects/astro/packages/astro
+  '@astrojs/internal-helpers': link:/home/erika/Projects/astro/packages/internal-helpers
+  '@astrojs/markdown-remark': link:/home/erika/Projects/astro/packages/markdown/remark
+  '@astrojs/markdown-satteri': link:/home/erika/Projects/astro/packages/markdown/satteri
+  '@astrojs/mdx': link:/home/erika/Projects/astro/packages/integrations/mdx
+  '@astrojs/sitemap': link:/home/erika/Projects/astro/packages/integrations/sitemap
+
 # https://github.com/withastro/starlight/issues/3875
 allowBuilds:
   esbuild: false # https://github.com/evanw/esbuild/issues/4085#issuecomment-2696009329

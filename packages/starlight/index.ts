@@ -15,6 +15,7 @@ import {
 	starlightRemarkPlugins,
 	type RemarkRehypePluginOptions,
 } from './integrations/remark-rehype';
+import { starlightSatteriPlugins } from './integrations/satteri';
 import { starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
@@ -105,9 +106,39 @@ export default function StarlightIntegration(
 					integrations.push(mdx({ optimize: true }));
 				}
 
-				// Add Starlight directives restoration integration at the end of the list so that remark
-				// plugins injected by Starlight plugins through Astro integrations can handle text and
-				// leaf directives before they are transformed back to their original form.
+				const remarkRehypeOptions: RemarkRehypePluginOptions = {
+					starlightConfig,
+					astroConfig: config,
+					useTranslations,
+					absolutePathToLang,
+				};
+
+				// Sätteri exposes plugin arrays on `processor.options`; unified consumes
+				// `markdown.{remark,rehype}Plugins`. Astro warns if both are set against a
+				// non-unified processor, so don't double-push.
+				const processor = config.markdown?.processor;
+				const isSatteriProcessor = processor?.name === 'satteri';
+				if (isSatteriProcessor) {
+					// MDX's satteri pipeline inherits from the same processor, so one push covers .md and .mdx.
+					const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(remarkRehypeOptions);
+					const opts = processor.options as {
+						mdastPlugins: unknown[];
+						hastPlugins: unknown[];
+					};
+					opts.mdastPlugins.push(...mdastPlugins);
+					opts.hastPlugins.push(...hastPlugins);
+				} else if (processor && processor.name !== 'unified') {
+					logger.warn(
+						`The configured \`markdown.processor\` ("${processor.name}") is not supported by Starlight. ` +
+							"Starlight's Markdown transforms (asides, heading anchor links, RTL code support) won't run on your content. " +
+							'Switch to `unified()` from `@astrojs/markdown-remark` or `satteri()` from `@astrojs/markdown-satteri`.'
+					);
+				}
+
+				// Add Starlight directives restoration integration at the end of the list so that
+				// remark/mdast plugins injected by Starlight plugins through Astro integrations can
+				// handle text and leaf directives before they are transformed back to their original
+				// form.
 				integrations.push(starlightDirectivesRestorationIntegration());
 
 				// Add integrations immediately after Starlight in the config array.
@@ -116,13 +147,6 @@ export default function StarlightIntegration(
 				// This ensures users can add integrations before/after Starlight and we respect that order.
 				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
 				config.integrations.splice(selfIndex + 1, 0, ...integrations);
-
-				const remarkRehypeOptions: RemarkRehypePluginOptions = {
-					starlightConfig,
-					astroConfig: config,
-					useTranslations,
-					absolutePathToLang,
-				};
 
 				// TODO: refactor once there is a reliable way to detect non-Node.js compatible
 				// environments, rather than relying on the presence of specific adapters/integrations.
@@ -169,10 +193,12 @@ export default function StarlightIntegration(
 									},
 								},
 					},
-					markdown: {
-						remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],
-						rehypePlugins: [...starlightRehypePlugins(remarkRehypeOptions)],
-					},
+					markdown: isSatteriProcessor
+						? {}
+						: {
+								remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],
+								rehypePlugins: [...starlightRehypePlugins(remarkRehypeOptions)],
+							},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },

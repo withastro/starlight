@@ -1,8 +1,8 @@
-import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdown-remark';
+import { createMarkdownProcessor, type MarkdownRenderer } from '@astrojs/markdown-remark';
 import { expect, test } from 'vitest';
 import type { StarlightUserConfig } from '../../utils/user-config';
 import { starlightRehypePlugins } from '../../integrations/remark-rehype';
-import { createRemarkRehypePluginTestOptions } from './utils';
+import { createPluginTestOptions, docFileURL } from '../test-utils';
 
 const starlightConfig = {
 	title: 'Anchor Links Tests',
@@ -12,16 +12,16 @@ const starlightConfig = {
 
 const processor = await createMarkdownProcessor({
 	rehypePlugins: [
-		...starlightRehypePlugins(await createRemarkRehypePluginTestOptions(starlightConfig)),
+		...starlightRehypePlugins(await createPluginTestOptions(starlightConfig)),
 	],
 });
 
 function renderMarkdown(
 	content: string,
-	options: { fileURL?: URL; processor?: MarkdownProcessor } = {}
+	options: { fileURL?: URL; processor?: MarkdownRenderer } = {}
 ) {
 	return (options.processor ?? processor).render(content, {
-		fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url),
+		fileURL: options.fileURL ?? docFileURL(),
 	});
 }
 
@@ -58,7 +58,7 @@ test('localizes accessible label for the current language', async () => {
 		`
 ## Some text
 `,
-		{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
+		{ fileURL: docFileURL('fr/index.md') }
 	);
 	expect(res.code).includes(
 		'<span class="sr-only" data-pagefind-ignore="">Section intitulée « Some text »</span>'

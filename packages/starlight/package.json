@@ -48,14 +48,22 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
+    "@astrojs/markdown-satteri": "^0.1.0",
     "astro": "^6.0.0"
   },
+  "peerDependenciesMeta": {
+    "@astrojs/markdown-satteri": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@astrojs/markdown-satteri": "^0.1.0",
     "@playwright/test": "^1.59.1",
     "@types/node": "^22.19.17",
     "@vitest/coverage-v8": "^4.1.5",
     "astro": "^6.3.1",
     "linkedom": "^0.18.12",
+    "satteri": "^0.6.3",
     "vitest": "^4.1.5"
   },
   "dependencies": {
@@ -67,6 +75,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/mdast": "^4.0.4",
     "astro-expressive-code": "^0.42.0",
+    "github-slugger": "^2.0.0",
     "bcp-47": "^2.1.0",
     "hast-util-from-html": "^2.0.3",
     "hast-util-select": "^6.0.4",

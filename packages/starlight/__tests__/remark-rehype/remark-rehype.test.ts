@@ -1,11 +1,11 @@
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { expect, test } from 'vitest';
 import { starlightRehypePlugins, starlightRemarkPlugins } from '../../integrations/remark-rehype';
-import { createRemarkRehypePluginTestOptions } from './utils';
+import { createPluginTestOptions } from '../test-utils';
 
 test('does not run Starlight remark plugins on documents without a file path', async () => {
 	const processor = await createMarkdownProcessor({
-		remarkPlugins: [...starlightRemarkPlugins(await createRemarkRehypePluginTestOptions())],
+		remarkPlugins: [...starlightRemarkPlugins(await createPluginTestOptions())],
 	});
 
 	const res = await processor.render(
@@ -26,7 +26,7 @@ Some text
 
 test('does not run Starlight rehype plugins on documents without a file path', async () => {
 	const processor = await createMarkdownProcessor({
-		rehypePlugins: [...starlightRehypePlugins(await createRemarkRehypePluginTestOptions())],
+		rehypePlugins: [...starlightRehypePlugins(await createPluginTestOptions())],
 	});
 
 	const res = await processor.render(

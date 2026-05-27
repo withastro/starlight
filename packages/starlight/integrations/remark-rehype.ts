@@ -70,7 +70,7 @@ function rehypePlugins(options: RemarkRehypePluginOptions): RehypePlugin {
  * `starlightConfig.markdown.processedDirs` option that can be used with the
  * `shouldTransformFile()` utility to determine if a file should be transformed by a plugin or not.
  */
-function getRemarkRehypePaths(options: RemarkRehypePluginOptions): string[] {
+export function getRemarkRehypePaths(options: RemarkRehypePluginOptions): string[] {
 	const paths = [normalizePath(resolveCollectionPath('docs', options.astroConfig.srcDir))];
 
 	for (const processedDir of options.starlightConfig.markdown.processedDirs) {
@@ -90,10 +90,14 @@ function shouldTransformFile(file: VFile, remarkRehypePaths: string[]) {
 	// In that case, we skip the file.
 	if (!file?.path) return false;
 
-	const normalizedPath = normalizePath(file.path);
+	return shouldTransformPath(file.path, remarkRehypePaths);
+}
 
-	// If the document is not part of the allowed remark/rehype paths, skip it.
-	return remarkRehypePaths.some((path) => normalizedPath.startsWith(path));
+/** Path-string variant of {@link shouldTransformFile} for callers without a VFile. */
+export function shouldTransformPath(path: string | undefined, remarkRehypePaths: string[]) {
+	if (!path) return false;
+	const normalizedPath = normalizePath(path);
+	return remarkRehypePaths.some((p) => normalizedPath.startsWith(p));
 }
 
 /**

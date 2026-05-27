@@ -2,16 +2,16 @@ import { rehype } from 'rehype';
 import { VFile } from 'vfile';
 import { expect, test } from 'vitest';
 import { starlightRehypePlugins } from '../../integrations/remark-rehype';
-import { createRemarkRehypePluginTestOptions } from './utils';
+import { createPluginTestOptions, docFileURL } from '../test-utils';
 
 const processor = rehype()
 	.data('settings', { fragment: true })
-	.use(starlightRehypePlugins(await createRemarkRehypePluginTestOptions()));
+	.use(starlightRehypePlugins(await createPluginTestOptions()));
 
 function renderMarkdown(content: string, options: { fileURL?: URL } = {}) {
 	return processor.process(
 		new VFile({
-			path: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url),
+			path: options.fileURL ?? docFileURL(),
 			value: content,
 		})
 	);
