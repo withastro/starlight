@@ -42,7 +42,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 
 #### Developing locally
 
-**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v16 or higher) and [pnpm](https://pnpm.io/) (v8.2 or higher). Make sure you have these installed before following these steps.
+**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v22.13.0 or higher) and [pnpm](https://pnpm.io/) (using the version specified by the `packageManager` field in `package.json`). Make sure you have these installed before following these steps.
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
 
