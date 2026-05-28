@@ -1,8 +1,13 @@
-import Slugger from 'github-slugger';
+import { satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
 import type { Paragraph } from 'mdast';
 import { directiveToMarkdown } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
-import type { HastPluginDefinition, MdastPluginDefinition } from 'satteri';
+import type {
+	HastPluginDefinition,
+	HastPluginInput,
+	MdastPluginInput,
+	MdastPluginDefinition,
+} from 'satteri';
 import { asideIconPathAttrs, type AsideVariant } from './aside-icons';
 import {
 	getRemarkRehypePaths,
@@ -15,16 +20,20 @@ import type { StarlightIcon } from '../types';
 
 /** Sätteri mdast/hast plugins applied to Starlight content. */
 export function starlightSatteriPlugins(options: RemarkRehypePluginOptions): {
-	mdastPlugins: MdastPluginDefinition[];
-	hastPlugins: HastPluginDefinition[];
+	mdastPlugins: MdastPluginInput[];
+	hastPlugins: HastPluginInput[];
 } {
 	const allowedPaths = getRemarkRehypePaths(options);
 	return {
 		mdastPlugins: [satteriAsidesPlugin(options, allowedPaths)],
 		hastPlugins: [
 			satteriRtlCodeSupportPlugin(allowedPaths),
+			// Run Astro's heading-id pass ahead of our autolink so ids exist by the
+			// time we read them. Astro pushes its own copy after user plugins; that
+			// later pass is idempotent thanks to its `existingId` check. The factory
+			// wrapper gives each document a fresh slugger.
 			...(options.starlightConfig.markdown.headingLinks
-				? [satteriAutolinkHeadingsPlugin(options, allowedPaths)]
+				? [() => satteriHeadingIdsPlugin(), satteriAutolinkHeadingsPlugin(options, allowedPaths)]
 				: []),
 		],
 	};
@@ -90,16 +99,18 @@ function satteriAsidesPlugin(
 				children.shift();
 			}
 
-			let svgChildren: ReturnType<typeof paragraphElement>[] = asideIconPathAttrs[variant].map((attrs) =>
-				paragraphElement('path', attrs)
-			);
-
 			const customIconName = node.attributes?.['icon'];
+			let innerSvgHtml: string;
 			if (customIconName) {
 				const icon = Icons[customIconName as StarlightIcon];
 				if (!icon) throwInvalidAsideIconError(customIconName);
-				svgChildren = parseInlineSvg(icon);
+				innerSvgHtml = icon;
+			} else {
+				innerSvgHtml = asideIconPathAttrs[variant]
+					.map((attrs) => `<path${attrsToHtml(attrs)}/>`)
+					.join('');
 			}
+			const iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon">${innerSvgHtml}</svg>`;
 
 			return paragraphElement(
 				'aside',
@@ -108,24 +119,10 @@ function satteriAsidesPlugin(
 					class: `starlight-aside starlight-aside--${variant}`,
 				},
 				[
-					paragraphElement(
-						'p',
-						{ class: 'starlight-aside__title', 'aria-hidden': 'true' },
-						[
-							paragraphElement(
-								'svg',
-								{
-									viewBox: '0 0 24 24',
-									width: 16,
-									height: 16,
-									fill: 'currentColor',
-									class: 'starlight-aside__icon',
-								},
-								svgChildren
-							),
-							...titleNode,
-						]
-					),
+					paragraphElement('p', { class: 'starlight-aside__title', 'aria-hidden': 'true' }, [
+						{ type: 'html', value: iconSvg },
+						...titleNode,
+					]),
 					paragraphElement('div', { class: 'starlight-aside__content' }, children),
 				]
 			);
@@ -133,27 +130,12 @@ function satteriAsidesPlugin(
 	};
 }
 
-/** Parse inline-SVG `Icons` markup into `paragraphElement` form without pulling in `parse5`. */
-function parseInlineSvg(svg: string): ReturnType<typeof paragraphElement>[] {
-	const result: ReturnType<typeof paragraphElement>[] = [];
-	const tagRegex = /<([a-zA-Z][a-zA-Z0-9-]*)([^>]*?)\/?>/g;
-	let match: RegExpExecArray | null;
-	while ((match = tagRegex.exec(svg)) !== null) {
-		const tagName = match[1]!;
-		const attrs = parseSvgAttributes(match[2] ?? '');
-		result.push(paragraphElement(tagName, attrs));
+function attrsToHtml(attrs: Record<string, string>): string {
+	let out = '';
+	for (const [key, value] of Object.entries(attrs)) {
+		out += ` ${key}="${value.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"`;
 	}
-	return result;
-}
-
-function parseSvgAttributes(input: string): Record<string, string> {
-	const attrs: Record<string, string> = {};
-	const attrRegex = /([a-zA-Z-]+)\s*=\s*"([^"]*)"/g;
-	let match: RegExpExecArray | null;
-	while ((match = attrRegex.exec(input)) !== null) {
-		attrs[match[1]!] = match[2]!;
-	}
-	return attrs;
+	return out;
 }
 
 /** Strip the trailing POSIX newline `mdast-util-to-markdown` always appends. */
@@ -187,16 +169,11 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 	};
 }
 
-/**
- * Wrap headings in a flex container with a trailing anchor link. Assigns the
- * heading id ourselves so Sätteri's built-in heading-id pass (which runs after
- * user hast plugins) preserves it via its `existingId` check.
- */
+/** Wrap headings in a flex container with a trailing anchor link. */
 function satteriAutolinkHeadingsPlugin(
 	options: RemarkRehypePluginOptions,
 	allowedPaths: string[]
 ): HastPluginDefinition {
-	const sluggerByFile = new Map<string, Slugger>();
 	return {
 		name: 'starlight-autolink-headings',
 		element: {
@@ -204,21 +181,10 @@ function satteriAutolinkHeadingsPlugin(
 			visit(node, ctx) {
 				if (!shouldTransformPath(ctx.filename, allowedPaths)) return;
 
-				const title = ctx.textContent(node);
-				const existingId = node.properties?.['id'];
-				let id: string;
-				if (typeof existingId === 'string' && existingId) {
-					id = existingId;
-				} else {
-					let slugger = sluggerByFile.get(ctx.filename);
-					if (!slugger) {
-						slugger = new Slugger();
-						sluggerByFile.set(ctx.filename, slugger);
-					}
-					id = slugger.slug(title);
-					ctx.setProperty(node, 'id', id);
-				}
+				const id = node.properties?.['id'];
+				if (typeof id !== 'string' || !id) return;
 
+				const title = ctx.textContent(node);
 				const t = options.useTranslations(options.absolutePathToLang(ctx.filename));
 				const accessibleLabel = t('heading.anchorLabel', {
 					title,
