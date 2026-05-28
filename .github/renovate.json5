@@ -46,11 +46,5 @@
 			matchFileNames: ['.github/workflows/ci.yml'],
 			allowedVersions: '/^22\\./',
 		},
-		{
-			description: 'Disable minimum release age for withastro/automation digest updates',
-			matchManagers: ['github-actions'],
-			matchPackageNames: ['withastro/automation'],
-			minimumReleaseAge: null,
-		},
 	],
 }
