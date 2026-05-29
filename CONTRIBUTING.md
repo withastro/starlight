@@ -42,7 +42,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 
 #### Developing locally
 
-**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v16 or higher) and [pnpm](https://pnpm.io/) (v8.2 or higher). Make sure you have these installed before following these steps.
+**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v22.13.0 or higher) and [pnpm](https://pnpm.io/) (using the version specified by the `packageManager` field in `package.json`). Make sure you have these installed before following these steps.
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
 
@@ -252,7 +252,6 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 - Add your language to the `locales` config in `docs/astro.config.mjs`
 - Add your language to the `locales` config in `docs/lunaria.config.json`
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
-- Add your language to the `config.sitemap.exclude` option in `docs/__a11y__/test-utils.ts`
 - Create the first translated page for your language.
   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
 - Open a pull request on GitHub to add your changes to Starlight!
