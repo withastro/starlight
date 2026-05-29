@@ -15,7 +15,6 @@ import {
 	starlightRemarkPlugins,
 	type RemarkRehypePluginOptions,
 } from './integrations/remark-rehype';
-import { starlightSatteriPlugins } from './integrations/satteri';
 import { starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
@@ -113,13 +112,14 @@ export default function StarlightIntegration(
 					absolutePathToLang,
 				};
 
-				// Sätteri exposes plugin arrays on `processor.options`; unified consumes
-				// `markdown.{remark,rehype}Plugins`. Astro warns if both are set against a
-				// non-unified processor, so don't double-push.
+				// Astro 6.4+ exposes plugin arrays on `config.markdown.processor.options`; on
+				// older versions the field is absent and we fall back to the (now-deprecated)
+				// `markdown.{remark,rehype}Plugins` config below.
 				const processor = config.markdown?.processor;
-				const isSatteriProcessor = processor?.name === 'satteri';
-				if (isSatteriProcessor) {
+				if (processor?.name === 'satteri') {
 					// MDX's satteri pipeline inherits from the same processor, so one push covers .md and .mdx.
+					// Loaded lazily so `@astrojs/markdown-satteri` stays a truly optional peer dep.
+					const { starlightSatteriPlugins } = await import('./integrations/satteri');
 					const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(remarkRehypeOptions);
 					const opts = processor.options as {
 						mdastPlugins: unknown[];
@@ -127,7 +127,14 @@ export default function StarlightIntegration(
 					};
 					opts.mdastPlugins.push(...mdastPlugins);
 					opts.hastPlugins.push(...hastPlugins);
-				} else if (processor && processor.name !== 'unified') {
+				} else if (processor?.name === 'unified') {
+					const opts = processor.options as {
+						remarkPlugins: unknown[];
+						rehypePlugins: unknown[];
+					};
+					opts.remarkPlugins.push(...starlightRemarkPlugins(remarkRehypeOptions));
+					opts.rehypePlugins.push(...starlightRehypePlugins(remarkRehypeOptions));
+				} else if (processor) {
 					logger.warn(
 						`The configured \`markdown.processor\` ("${processor.name}") is not supported by Starlight. ` +
 							"Starlight's Markdown transforms (asides, heading anchor links, RTL code support) won't run on your content. " +
@@ -193,7 +200,7 @@ export default function StarlightIntegration(
 									},
 								},
 					},
-					markdown: isSatteriProcessor
+					markdown: processor
 						? {}
 						: {
 								remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],

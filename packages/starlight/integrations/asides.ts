@@ -20,7 +20,6 @@ import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
 import { throwInvalidAsideIconError } from './asides-error';
 import { asideIconPathAttrs } from './aside-icons';
-import { satteriDirectivesRestoration } from './satteri';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -242,14 +241,21 @@ export function starlightDirectivesRestorationIntegration(): AstroIntegration {
 	return {
 		name: 'starlight-directives-restoration',
 		hooks: {
-			'astro:config:setup': ({ config, updateConfig }) => {
+			'astro:config:setup': async ({ config, updateConfig }) => {
 				const processor = config.markdown?.processor;
 				if (processor?.name === 'satteri') {
-					// Sätteri ignores `markdown.remarkPlugins`; mutate `processor.options` instead.
+					// Loaded lazily so `@astrojs/markdown-satteri` stays a truly optional peer dep.
+					const { satteriDirectivesRestoration } = await import('./satteri.ts');
 					const opts = processor.options as { mdastPlugins: unknown[] };
 					opts.mdastPlugins.push(satteriDirectivesRestoration());
 					return;
 				}
+				if (processor?.name === 'unified') {
+					const opts = processor.options as { remarkPlugins: unknown[] };
+					opts.remarkPlugins.push(remarkDirectivesRestoration);
+					return;
+				}
+				// Astro 6.0–6.3: no `processor` field, register through the legacy key.
 				updateConfig({
 					markdown: {
 						remarkPlugins: [remarkDirectivesRestoration],
