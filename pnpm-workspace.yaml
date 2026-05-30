@@ -25,10 +25,9 @@ peerDependencyRules:
 
 # Prevent installing packages published in the last 3 days
 minimumReleaseAge: 4320
-# Astro 6.4 + Sätteri 0.2 just shipped; allow them through the freshness gate.
-# `@astrojs/internal-helpers` is included because its registry metadata is
-# missing the `time` field, which otherwise trips an ERR_PNPM_MISSING_TIME.
 minimumReleaseAgeExclude:
   - astro
   - '@astrojs/internal-helpers'
   - '@astrojs/markdown-satteri'
+  - '@astrojs/mdx'
+  - '@astrojs/markdown-remark'
