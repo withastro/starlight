@@ -70,7 +70,7 @@ Composant utilisé à l'intérieur de [`<PageFrame>`](#pageframe) qui est respon
 #### `TwoColumnContent`
 
 **Composant par défaut :** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
-**Slot nommé :** `right-sidebar`
+**Slot nommé :** `end-sidebar`
 
 Composant de mise en page enveloppant le contenu principal de la page et la barre latérale de droite (table des matières).
 L'implémentation par défaut prend en charge le changement entre une mise en page à une seule colonne pour petits écrans et une mise en page à deux colonnes pour écrans plus larges.

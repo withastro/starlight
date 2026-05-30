@@ -85,7 +85,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 
 [명명된 슬롯](https://docs.astro.build/ko/basics/astro-components/#명명된-슬롯)이 포함된 [`PageFrame`](/ko/reference/overrides/#pageframe) 또는 [`TwoColumnContent`](/ko/reference/overrides/#twocolumncontent) 컴포넌트를 재사용하는 경우 이러한 슬롯도 [전송](https://docs.astro.build/ko/basics/astro-components/#슬롯-전송)해야 합니다.
 
-아래 예시는 `TwoColumnContent` 컴포넌트를 재사용하는 사용자 정의 컴포넌트를 보여줍니다. 이 컴포넌트는 `right-sidebar`라는 이름의 추가 슬롯을 포함하여 전송합니다.
+아래 예시는 `TwoColumnContent` 컴포넌트를 재사용하는 사용자 정의 컴포넌트를 보여줍니다. 이 컴포넌트는 `end-sidebar`라는 이름의 추가 슬롯을 포함하여 전송합니다.
 
 ```astro {8}
 ---
@@ -95,7 +95,7 @@ import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 
 <Default>
 	<slot />
-	<slot name="right-sidebar" slot="right-sidebar" />
+	<slot name="end-sidebar" slot="end-sidebar" />
 </Default>
 ```
 

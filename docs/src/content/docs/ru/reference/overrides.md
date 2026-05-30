@@ -70,7 +70,7 @@ tableOfContents:
 #### `TwoColumnContent`
 
 **Стандартный компонент:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
-**Именованный слот:** `right-sidebar`
+**Именованный слот:** `end-sidebar`
 
 Компонент макета оборачивается вокруг колонки с основным содержанием и правой боковой панели (оглавление).
 Реализация по умолчанию управляет переключением между одноколоночным макетом с малой областью просмотра и двухколоночным макетом с большей областью просмотра.

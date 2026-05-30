@@ -74,7 +74,7 @@ Diese Komponente wird innerhalb von [`<PageFrame>`](#pageframe) gerendert und is
 #### `TwoColumnContent`
 
 **Standardkomponente:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
-**Benannter Slot:** `right-sidebar`
+**Benannter Slot:** `end-sidebar`
 
 Dies ist die Layout-Komponente, welche die Hauptinhaltsspalte und die rechte Seitenleiste (Inhaltsverzeichnis) beinhaltet.
 Die Standard&shy;implementierung behandelt den Wechsel zwischen einem einspaltigen Layout mit kleinem Sichtfeld und einem zweispaltigen Layout mit größerem Sichtfeld.

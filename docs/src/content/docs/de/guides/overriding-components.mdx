@@ -85,7 +85,7 @@ Wenn du eine eingebaute Komponente innerhalb einer benutzerdefinierten Komponent
 
 Wenn du die Komponenten [`PageFrame`](/de/reference/overrides/#pageframe) oder [`TwoColumnContent`](/de/reference/overrides/#twocolumncontent) wiederverwendst, die [benannte Slots](https://docs.astro.build/de/basics/astro-components/#benannte-slots) enthalten, musst du auch diese Slots [übertragen](https://docs.astro.build/de/basics/astro-components/#slots-weitergeben).
 
-Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die die Komponente `TwoColumnContent` wiederverwendet. Diese integrierte Komponente enthält einen zusätzlichen benannten Slot, nämlich `right-sidebar`, welcher übertragen werden muss:
+Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die die Komponente `TwoColumnContent` wiederverwendet. Diese integrierte Komponente enthält einen zusätzlichen benannten Slot, nämlich `end-sidebar`, welcher übertragen werden muss:
 
 ```astro {8}
 ---
@@ -95,7 +95,7 @@ import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 
 <Default>
 	<slot />
-	<slot name="right-sidebar" slot="right-sidebar" />
+	<slot name="end-sidebar" slot="end-sidebar" />
 </Default>
 ```
 

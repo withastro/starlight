@@ -86,7 +86,7 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 			{starlightRoute.hasSidebar && <Sidebar slot="sidebar" />}
 			<script src="../components-internals/SidebarPersistState"></script>
 			<TwoColumnContent>
-				<PageSidebar slot="right-sidebar" />
+				<PageSidebar slot="end-sidebar" />
 				<main
 					{...mainDataAttributes}
 					lang={starlightRoute.entryMeta.lang}

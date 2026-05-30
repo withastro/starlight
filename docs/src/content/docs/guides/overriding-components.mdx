@@ -85,7 +85,7 @@ When rendering a built-in component inside a custom component add a [`<slot />`]
 
 If you are reusing the [`PageFrame`](/reference/overrides/#pageframe) or [`TwoColumnContent`](/reference/overrides/#twocolumncontent) components which contain [named slots](https://docs.astro.build/en/basics/astro-components/#named-slots), you also need to [transfer](https://docs.astro.build/en/basics/astro-components/#transferring-slots) these slots as well.
 
-The example below shows a custom component that reuses the `TwoColumnContent` component which contains an additional `right-sidebar` named slot that needs to be transferred:
+The example below shows a custom component that reuses the `TwoColumnContent` component which contains an additional `end-sidebar` named slot that needs to be transferred:
 
 ```astro {8}
 ---
@@ -95,7 +95,7 @@ import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 
 <Default>
 	<slot />
-	<slot name="right-sidebar" slot="right-sidebar" />
+	<slot name="end-sidebar" slot="end-sidebar" />
 </Default>
 ```
 

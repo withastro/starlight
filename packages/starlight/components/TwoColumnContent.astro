@@ -1,9 +1,9 @@
 <div class="lg:sl-flex">
 	{
 		Astro.locals.starlightRoute.toc && (
-			<aside class="right-sidebar-container print:hidden">
-				<div class="right-sidebar">
-					<slot name="right-sidebar" />
+			<aside class="end-sidebar-container print:hidden">
+				<div class="end-sidebar">
+					<slot name="end-sidebar" />
 				</div>
 			</aside>
 		)
@@ -18,7 +18,7 @@
 		}
 
 		@media (min-width: 72rem) {
-			.right-sidebar-container {
+			.end-sidebar-container {
 				order: 2;
 				position: relative;
 				width: calc(
@@ -26,7 +26,7 @@
 				);
 			}
 
-			.right-sidebar {
+			.end-sidebar {
 				position: fixed;
 				top: 0;
 				border-inline-start: 1px solid var(--sl-color-hairline);

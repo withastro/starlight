@@ -85,7 +85,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 
 如果你要复用包含 [命名插槽](https://docs.astro.build/zh-cn/basics/astro-components/#命名插槽) 的 [`PageFrame`](/zh-cn/reference/overrides/#pageframe) 或 [`TwoColumnContent`](/zh-cn/reference/overrides/#twocolumncontent) 组件，你还需要 [传递](https://docs.astro.build/zh-cn/basics/astro-components/#传递插槽) 这些插槽。
 
-下面的示例展示了一个自定义组件，它复用了 `TwoColumnContent` 组件，该组件需要传递一个额外的 `right-sidebar` 命名插槽：
+下面的示例展示了一个自定义组件，它复用了 `TwoColumnContent` 组件，该组件需要传递一个额外的 `end-sidebar` 命名插槽：
 
 ```astro {8}
 ---
@@ -95,7 +95,7 @@ import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 
 <Default>
 	<slot />
-	<slot name="right-sidebar" slot="right-sidebar" />
+	<slot name="end-sidebar" slot="end-sidebar" />
 </Default>
 ```
 

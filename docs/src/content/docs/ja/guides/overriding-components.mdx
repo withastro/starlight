@@ -83,7 +83,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 
 [名前付きスロット](https://docs.astro.build/ja/basics/astro-components/#名前付きスロット)を含む[`PageFrame`](/ja/reference/overrides/#pageframe)や[`TwoColumnContent`](/ja/reference/overrides/#twocolumncontent)コンポーネントを再利用する場合は、これらのスロットを[受け渡す](https://docs.astro.build/ja/basics/astro-components/#スロットの受け渡し)必要があります。
 
-以下の例は、受け渡しが必要な`right-sidebar`という名前付きスロットを含む`TwoColumnContent`コンポーネントを再利用するカスタムコンポーネントです。
+以下の例は、受け渡しが必要な`end-sidebar`という名前付きスロットを含む`TwoColumnContent`コンポーネントを再利用するカスタムコンポーネントです。
 
 ```astro {8}
 ---
@@ -93,7 +93,7 @@ import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 
 <Default>
 	<slot />
-	<slot name="right-sidebar" slot="right-sidebar" />
+	<slot name="end-sidebar" slot="end-sidebar" />
 </Default>
 ```
 

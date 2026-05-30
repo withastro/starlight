@@ -70,7 +70,7 @@ Component rendered inside [`<PageFrame>`](#pageframe) that is responsible for to
 #### `TwoColumnContent`
 
 **Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
-**Named slot:** `right-sidebar`
+**Named slot:** `end-sidebar`
 
 Layout component wrapped around the main content column and right sidebar (table of contents).
 The default implementation handles the switch between a single-column, small-viewport layout and a two-column, larger-viewport layout.

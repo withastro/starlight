@@ -85,7 +85,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 
 Если вы повторно используете компоненты [`PageFrame`](/ru/reference/overrides/#pageframe) или [`TwoColumnContent`](/ru/reference/overrides/#twocolumncontent), содержащие [именованные слоты](https://docs.astro.build/ru/basics/astro-components/#именованые-слоты), вам также необходимо [перенести](https://docs.astro.build/ru/basics/astro-components/#перенос-слотов) эти слоты.
 
-Ниже показан пользовательский компонент, который повторно использует компонент `TwoColumnContent`, содержащий дополнительный именованный слот `right-sidebar`, нуждающийся в переносе:
+Ниже показан пользовательский компонент, который повторно использует компонент `TwoColumnContent`, содержащий дополнительный именованный слот `end-sidebar`, нуждающийся в переносе:
 
 ```astro {8}
 ---
@@ -95,7 +95,7 @@ import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 
 <Default>
 	<slot />
-	<slot name="right-sidebar" slot="right-sidebar" />
+	<slot name="end-sidebar" slot="end-sidebar" />
 </Default>
 ```
 
