@@ -3,7 +3,7 @@ import { toString } from 'hast-util-to-string';
 import { h } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
-import type { RemarkRehypePluginOptions } from './remark-rehype';
+import type { MarkdownProcessorPluginOptions } from './markdown-process';
 
 const AnchorLinkIcon = h(
 	'span',
@@ -24,7 +24,7 @@ const AnchorLinkIcon = h(
 export default function rehypeAutolinkHeadings({
 	absolutePathToLang,
 	useTranslations,
-}: RemarkRehypePluginOptions) {
+}: MarkdownProcessorPluginOptions) {
 	const transformer: Transformer<Root> = (tree, file) => {
 		const pageLang = absolutePathToLang(file.path);
 		const t = useTranslations(pageLang);

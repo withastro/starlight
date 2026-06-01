@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { isSatteriProcessor, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
 import type { Properties } from 'hast';
 import type { Paragraph } from 'mdast';
@@ -11,10 +12,10 @@ import type {
 } from 'satteri';
 import { asideIconPathAttrs, isAsideVariant } from './aside-icons';
 import {
-	getRemarkRehypePaths,
+	getMarkdownProcessorPaths,
 	shouldTransformPath,
-	type RemarkRehypePluginOptions,
-} from './remark-rehype';
+	type MarkdownProcessorPluginOptions,
+} from './markdown-process';
 import { Icons } from '../components-internals/Icons';
 import { throwInvalidAsideIconError } from './asides-error';
 import type { StarlightIcon } from '../types';
@@ -23,20 +24,24 @@ import type { StarlightIcon } from '../types';
 // lazy import that loads the optional `@astrojs/markdown-satteri` peer dependency.
 export { isSatteriProcessor };
 
+/**
+ * Sätteri exposes a node's source path as a URL pathname (so e.g. spaces arrive as `%20`). Decode it
+ * back to a real filesystem path so it matches the paths Starlight compares against.
+ */
+function satteriFilenameToPath(filename: string): string {
+	return filename ? fileURLToPath(`file://${filename}`) : '';
+}
+
 /** Sätteri mdast/hast plugins applied to Starlight content. */
-export function starlightSatteriPlugins(options: RemarkRehypePluginOptions): {
+export function starlightSatteriPlugins(options: MarkdownProcessorPluginOptions): {
 	mdastPlugins: MdastPluginInput[];
 	hastPlugins: HastPluginInput[];
 } {
-	const allowedPaths = getRemarkRehypePaths(options);
+	const allowedPaths = getMarkdownProcessorPaths(options);
 	return {
 		mdastPlugins: [satteriAsidesPlugin(options, allowedPaths)],
 		hastPlugins: [
 			satteriRtlCodeSupportPlugin(allowedPaths),
-			// Run Astro's heading-id pass ahead of our autolink so ids exist by the
-			// time we read them. Astro pushes its own copy after user plugins; that
-			// later pass is idempotent thanks to its `existingId` check. The factory
-			// wrapper gives each document a fresh slugger.
 			...(options.starlightConfig.markdown.headingLinks
 				? [() => satteriHeadingIdsPlugin(), satteriAutolinkHeadingsPlugin(options, allowedPaths)]
 				: []),
@@ -44,18 +49,29 @@ export function starlightSatteriPlugins(options: RemarkRehypePluginOptions): {
 	};
 }
 
-/** Restore unhandled text/leaf directives to their source Markdown form. */
+/**
+ * Recover directives Starlight didn't claim so user content isn't dropped: text/leaf directives are
+ * restored to their source Markdown, and container directives are emitted as a plain `<div>` (Sätteri
+ * otherwise discards unhandled container directives, where the unified pipeline renders them as a div).
+ */
 export function satteriDirectivesRestoration(): MdastPluginDefinition {
 	return {
 		name: 'starlight-directives-restoration',
 		textDirective(node) {
+			// Leave directives another plugin already handled (i.e. set `data` on) untouched.
+			if (node.data !== undefined) return;
 			return { type: 'text', value: serializeDirective(node) };
 		},
 		leafDirective(node) {
+			if (node.data !== undefined) return;
 			return {
 				type: 'paragraph',
 				children: [{ type: 'text', value: serializeDirective(node) }],
 			};
+		},
+		containerDirective(node) {
+			if (node.data !== undefined) return;
+			return paragraphElement('div', {}, [...node.children]);
 		},
 	};
 }
@@ -75,17 +91,18 @@ function paragraphElement(
 
 /** Convert `:::variant` directive blocks into styled asides. */
 function satteriAsidesPlugin(
-	options: RemarkRehypePluginOptions,
+	options: MarkdownProcessorPluginOptions,
 	allowedPaths: string[]
 ): MdastPluginDefinition {
 	return {
 		name: 'starlight-asides',
 		containerDirective(node, ctx) {
-			if (!shouldTransformPath(ctx.filename, allowedPaths)) return;
+			const filename = satteriFilenameToPath(ctx.filename);
+			if (!shouldTransformPath(filename, allowedPaths)) return;
 			if (!isAsideVariant(node.name)) return;
 
 			const variant = node.name;
-			const t = options.useTranslations(options.absolutePathToLang(ctx.filename));
+			const t = options.useTranslations(options.absolutePathToLang(filename));
 
 			let title = t(`aside.${variant}`);
 			let titleNode: unknown[] = [{ type: 'text', value: title }];
@@ -152,7 +169,7 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['pre'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(ctx.filename, allowedPaths)) return;
+					if (!shouldTransformPath(satteriFilenameToPath(ctx.filename), allowedPaths)) return;
 					if (node.properties && 'dir' in node.properties) return;
 					ctx.setProperty(node, 'dir', 'ltr');
 				},
@@ -160,18 +177,37 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['code'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(ctx.filename, allowedPaths)) return;
+					if (!shouldTransformPath(satteriFilenameToPath(ctx.filename), allowedPaths)) return;
 					if (node.properties && 'dir' in node.properties) return;
 					ctx.setProperty(node, 'dir', 'auto');
 				},
 			},
 		],
+		// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
+		// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
+		raw(node, ctx) {
+			if (!shouldTransformPath(satteriFilenameToPath(ctx.filename), allowedPaths)) return undefined;
+			const value = ltrRawPre(node.value);
+			if (value === null) return undefined;
+			return { type: 'raw', value };
+		},
 	};
 }
 
-/** Wrap headings in a flex container with a trailing anchor link. */
+const rawPreOpenTag = /<pre(?=[\s>])[^>]*>/;
+
+/**
+ * Add `dir="ltr"` to the opening tag of a raw `<pre>` HTML string, unless it already declares a
+ * `dir`. Returns `null` when the value isn’t a `<pre>`, leaving unrelated raw HTML untouched.
+ */
+function ltrRawPre(value: string): string | null {
+	const openTag = value.match(rawPreOpenTag)?.[0];
+	if (!openTag || /\sdir\s*=/.test(openTag)) return null;
+	return value.replace(openTag, () => `<pre dir="ltr"${openTag.slice(4)}`);
+}
+
 function satteriAutolinkHeadingsPlugin(
-	options: RemarkRehypePluginOptions,
+	options: MarkdownProcessorPluginOptions,
 	allowedPaths: string[]
 ): HastPluginDefinition {
 	return {
@@ -179,13 +215,14 @@ function satteriAutolinkHeadingsPlugin(
 		element: {
 			filter: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 			visit(node, ctx) {
-				if (!shouldTransformPath(ctx.filename, allowedPaths)) return;
+				const filename = satteriFilenameToPath(ctx.filename);
+				if (!shouldTransformPath(filename, allowedPaths)) return;
 
 				const id = node.properties?.['id'];
 				if (typeof id !== 'string' || !id) return;
 
 				const title = ctx.textContent(node);
-				const t = options.useTranslations(options.absolutePathToLang(ctx.filename));
+				const t = options.useTranslations(options.absolutePathToLang(filename));
 				const accessibleLabel = t('heading.anchorLabel', {
 					title,
 					interpolation: { escapeValue: false },

@@ -14,13 +14,19 @@ import { toString } from 'mdast-util-to-string';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import { isUnifiedProcessor } from '@astrojs/markdown-remark';
-import type { RemarkRehypePluginOptions } from './remark-rehype';
+import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import type { StarlightIcon } from '../types';
 import { Icons } from '../components-internals/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
 import { throwInvalidAsideIconError } from './asides-error';
 import { asideIconPathAttrs, isAsideVariant, type AsideVariant } from './aside-icons';
+
+// As in `index.ts`: started at module evaluation so this relative module resolves while Astro's
+// config module runner is still alive. A dynamic `import()` from inside the hook below would fail
+// with "Vite module runner has been closed". When `@astrojs/markdown-satteri` is absent, the import
+// rejects and Sätteri support is simply unavailable.
+const satteriIntegration = import('./satteri').catch(() => null);
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -126,7 +132,7 @@ function makeSvgChildNodes(children: Result['children']): P[] {
  * </aside>
  * ```
  */
-export function remarkAsides(options: RemarkRehypePluginOptions): Plugin<[], Root> {
+export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[], Root> {
 	const iconPaths: Record<AsideVariant, ReturnType<typeof s>[]> = {
 		note: asideIconPathAttrs.note.map((attrs) => s('path', attrs)),
 		tip: asideIconPathAttrs.tip.map((attrs) => s('path', attrs)),
@@ -240,12 +246,9 @@ export function starlightDirectivesRestorationIntegration(): AstroIntegration {
 		hooks: {
 			'astro:config:setup': async ({ config, updateConfig }) => {
 				const processor = config.markdown?.processor;
-				if (processor?.name === 'satteri') {
-					// Loaded lazily so `@astrojs/markdown-satteri` stays a truly optional peer dep.
-					const { isSatteriProcessor, satteriDirectivesRestoration } = await import('./satteri');
-					if (isSatteriProcessor(processor)) {
-						processor.options.mdastPlugins.push(satteriDirectivesRestoration());
-					}
+				const satteri = await satteriIntegration;
+				if (processor?.name === 'satteri' && satteri?.isSatteriProcessor(processor)) {
+					processor.options.mdastPlugins.push(satteri.satteriDirectivesRestoration());
 					return;
 				}
 				if (processor && isUnifiedProcessor(processor)) {
