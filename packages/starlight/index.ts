@@ -7,6 +7,7 @@
 /// <reference path="./i18n.d.ts" />
 /// <reference path="./virtual.d.ts" />
 
+import { isUnifiedProcessor } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
@@ -112,28 +113,22 @@ export default function StarlightIntegration(
 					absolutePathToLang,
 				};
 
-				// Astro 6.4+ exposes plugin arrays on `config.markdown.processor.options`; on
-				// older versions the field is absent and we fall back to the (now-deprecated)
-				// `markdown.{remark,rehype}Plugins` config below.
+				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`), and we
+				// push our plugins onto its options. On 6.0–6.3 the field is absent, so we fall back to
+				// the (now-deprecated) `markdown.{remark,rehype}Plugins` config below.
 				const processor = config.markdown?.processor;
 				if (processor?.name === 'satteri') {
-					// MDX's satteri pipeline inherits from the same processor, so one push covers .md and .mdx.
-					// Loaded lazily so `@astrojs/markdown-satteri` stays a truly optional peer dep.
-					const { starlightSatteriPlugins } = await import('./integrations/satteri');
-					const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(remarkRehypeOptions);
-					const opts = processor.options as {
-						mdastPlugins: unknown[];
-						hastPlugins: unknown[];
-					};
-					opts.mdastPlugins.push(...mdastPlugins);
-					opts.hastPlugins.push(...hastPlugins);
-				} else if (processor?.name === 'unified') {
-					const opts = processor.options as {
-						remarkPlugins: unknown[];
-						rehypePlugins: unknown[];
-					};
-					opts.remarkPlugins.push(...starlightRemarkPlugins(remarkRehypeOptions));
-					opts.rehypePlugins.push(...starlightRehypePlugins(remarkRehypeOptions));
+					const { isSatteriProcessor, starlightSatteriPlugins } = await import(
+						'./integrations/satteri'
+					);
+					if (isSatteriProcessor(processor)) {
+						const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(remarkRehypeOptions);
+						processor.options.mdastPlugins.push(...mdastPlugins);
+						processor.options.hastPlugins.push(...hastPlugins);
+					}
+				} else if (processor && isUnifiedProcessor(processor)) {
+					processor.options.remarkPlugins.push(...starlightRemarkPlugins(remarkRehypeOptions));
+					processor.options.rehypePlugins.push(...starlightRehypePlugins(remarkRehypeOptions));
 				} else if (processor) {
 					logger.warn(
 						`The configured \`markdown.processor\` ("${processor.name}") is not supported by Starlight. ` +

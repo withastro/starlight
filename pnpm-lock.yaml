@@ -24,7 +24,7 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0(size-limit@12.1.0(jiti@2.6.1))
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
       eslint:
         specifier: ^10.3.0
@@ -66,7 +66,7 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
       culori:
         specifier: ^4.0.2
@@ -94,7 +94,7 @@ importers:
         specifier: ^0.39.2
         version: link:../../packages/starlight
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
       sharp:
         specifier: ^0.34.5
@@ -112,7 +112,7 @@ importers:
         specifier: ^0.6.0
         version: link:../../packages/markdoc
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
       sharp:
         specifier: ^0.34.5
@@ -130,7 +130,7 @@ importers:
         specifier: ^4.2.4
         version: 4.2.4(vite@7.3.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.3))
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
       sharp:
         specifier: ^0.34.5
@@ -177,7 +177,7 @@ importers:
   packages/starlight:
     dependencies:
       '@astrojs/markdown-remark':
-        specifier: ^7.1.1
+        specifier: ^7.2.0
         version: 7.2.0
       '@astrojs/mdx':
         specifier: ^6.0.1
@@ -292,7 +292,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/custom src-dir:
@@ -301,7 +301,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/git:
@@ -310,7 +310,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/legacy-collections-backwards-compat:
@@ -319,7 +319,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/ssr:
@@ -331,7 +331,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^6.3.1
+        specifier: ^6.4.0
         version: 6.4.2(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(yaml@2.8.3)
 
   packages/tailwind:

@@ -1,5 +1,10 @@
-/** Built-in aside icon `<path>` attributes, shared by `./asides.ts` and `./satteri.ts`. */
-export type AsideVariant = 'note' | 'tip' | 'caution' | 'danger';
+export const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
+export type AsideVariant = (typeof asideVariants)[number];
+
+const asideVariantSet = new Set<string>(asideVariants);
+export function isAsideVariant(value: string): value is AsideVariant {
+	return asideVariantSet.has(value);
+}
 
 export const asideIconPathAttrs = {
 	// Information icon

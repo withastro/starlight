@@ -1,4 +1,5 @@
-import { satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
+import { isSatteriProcessor, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
+import type { Properties } from 'hast';
 import type { Paragraph } from 'mdast';
 import { directiveToMarkdown } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
@@ -8,7 +9,7 @@ import type {
 	MdastPluginInput,
 	MdastPluginDefinition,
 } from 'satteri';
-import { asideIconPathAttrs, type AsideVariant } from './aside-icons';
+import { asideIconPathAttrs, isAsideVariant } from './aside-icons';
 import {
 	getRemarkRehypePaths,
 	shouldTransformPath,
@@ -17,6 +18,10 @@ import {
 import { Icons } from '../components-internals/Icons';
 import { throwInvalidAsideIconError } from './asides-error';
 import type { StarlightIcon } from '../types';
+
+// Re-exported so callers can narrow `markdown.processor` to a Sätteri processor through the same
+// lazy import that loads the optional `@astrojs/markdown-satteri` peer dependency.
+export { isSatteriProcessor };
 
 /** Sätteri mdast/hast plugins applied to Starlight content. */
 export function starlightSatteriPlugins(options: RemarkRehypePluginOptions): {
@@ -55,18 +60,15 @@ export function satteriDirectivesRestoration(): MdastPluginDefinition {
 	};
 }
 
-const ASIDE_VARIANTS = new Set<string>(['note', 'tip', 'caution', 'danger']);
-const isAsideVariant = (s: string): s is AsideVariant => ASIDE_VARIANTS.has(s);
-
 /** mdast paragraph carrying `data.hName`/`data.hProperties` for mdast→hast emission. */
 function paragraphElement(
 	tagName: string,
-	properties: Record<string, unknown>,
+	properties: Properties,
 	children: unknown[] = []
 ): Paragraph {
 	return {
 		type: 'paragraph',
-		data: { hName: tagName, hProperties: properties as unknown as Record<string, never> },
+		data: { hName: tagName, hProperties: properties },
 		children: children as Paragraph['children'],
 	};
 }
@@ -138,13 +140,11 @@ function attrsToHtml(attrs: Record<string, string>): string {
 	return out;
 }
 
-/** Strip the trailing POSIX newline `mdast-util-to-markdown` always appends. */
 function serializeDirective(node: Parameters<typeof toMarkdown>[0]): string {
 	const md = toMarkdown(node, { extensions: [directiveToMarkdown()] });
 	return md.at(-1) === '\n' ? md.slice(0, -1) : md;
 }
 
-/** Adds `dir` to `<code>`/`<pre>` lacking one. */
 function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefinition {
 	return {
 		name: 'starlight-rtl-code-support',

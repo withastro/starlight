@@ -13,13 +13,14 @@ import { toMarkdown } from 'mdast-util-to-markdown';
 import { toString } from 'mdast-util-to-string';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
+import { isUnifiedProcessor } from '@astrojs/markdown-remark';
 import type { RemarkRehypePluginOptions } from './remark-rehype';
 import type { StarlightIcon } from '../types';
 import { Icons } from '../components-internals/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
 import { throwInvalidAsideIconError } from './asides-error';
-import { asideIconPathAttrs } from './aside-icons';
+import { asideIconPathAttrs, isAsideVariant, type AsideVariant } from './aside-icons';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -126,11 +127,7 @@ function makeSvgChildNodes(children: Result['children']): P[] {
  * ```
  */
 export function remarkAsides(options: RemarkRehypePluginOptions): Plugin<[], Root> {
-	type Variant = 'note' | 'tip' | 'caution' | 'danger';
-	const variants = new Set(['note', 'tip', 'caution', 'danger']);
-	const isAsideVariant = (s: string): s is Variant => variants.has(s);
-
-	const iconPaths: Record<Variant, ReturnType<typeof s>[]> = {
+	const iconPaths: Record<AsideVariant, ReturnType<typeof s>[]> = {
 		note: asideIconPathAttrs.note.map((attrs) => s('path', attrs)),
 		tip: asideIconPathAttrs.tip.map((attrs) => s('path', attrs)),
 		caution: asideIconPathAttrs.caution.map((attrs) => s('path', attrs)),
@@ -245,14 +242,14 @@ export function starlightDirectivesRestorationIntegration(): AstroIntegration {
 				const processor = config.markdown?.processor;
 				if (processor?.name === 'satteri') {
 					// Loaded lazily so `@astrojs/markdown-satteri` stays a truly optional peer dep.
-					const { satteriDirectivesRestoration } = await import('./satteri.ts');
-					const opts = processor.options as { mdastPlugins: unknown[] };
-					opts.mdastPlugins.push(satteriDirectivesRestoration());
+					const { isSatteriProcessor, satteriDirectivesRestoration } = await import('./satteri');
+					if (isSatteriProcessor(processor)) {
+						processor.options.mdastPlugins.push(satteriDirectivesRestoration());
+					}
 					return;
 				}
-				if (processor?.name === 'unified') {
-					const opts = processor.options as { remarkPlugins: unknown[] };
-					opts.remarkPlugins.push(remarkDirectivesRestoration);
+				if (processor && isUnifiedProcessor(processor)) {
+					processor.options.remarkPlugins.push(remarkDirectivesRestoration);
 					return;
 				}
 				// Astro 6.0–6.3: no `processor` field, register through the legacy key.

@@ -1,7 +1,7 @@
 import type { MarkdownRenderer } from '@astrojs/markdown-remark';
 import { expect, test } from 'vitest';
 import type { StarlightUserConfig } from '../../utils/user-config';
-import { docFileURL } from '../test-utils';
+import { docFileURL, nonDocFileURL } from '../test-utils';
 import { createStarlightSatteriProcessor } from './utils';
 
 const starlightConfig = {
@@ -57,6 +57,14 @@ test('disables wrapping when `headingLinks: false`', async () => {
 		markdown: { headingLinks: false },
 	});
 	const res = await renderMarkdown(`\n## Some text\n`, { processor: off });
+	expect(res.code).not.includes('sl-heading-wrapper');
+	expect(res.code).not.includes('sl-anchor-link');
+});
+
+test('skips files outside the docs collection', async () => {
+	const res = await renderMarkdown(`\n## Some text\n`, {
+		fileURL: nonDocFileURL(),
+	});
 	expect(res.code).not.includes('sl-heading-wrapper');
 	expect(res.code).not.includes('sl-anchor-link');
 });

@@ -47,9 +47,25 @@ test('does not override an existing `dir` attribute', async () => {
 	expect(res.code).not.includes('dir="auto"');
 });
 
-test('skips files outside the docs collection', async () => {
+test('does not override an existing `dir` on fenced code blocks', async () => {
+	const res = await renderMarkdown('<pre dir="rtl"><code>manual</code></pre>', {
+		processor: plainProcessor,
+	});
+	expect(res.code).includes('dir="rtl"');
+	expect(res.code).not.includes('dir="ltr"');
+});
+
+test('skips inline code in files outside the docs collection', async () => {
 	const res = await renderMarkdown(`Inline \`code\``, {
 		fileURL: nonDocFileURL(),
 	});
 	expect(res.code).not.includes('dir="auto"');
+});
+
+test('skips fenced code blocks in files outside the docs collection', async () => {
+	const res = await renderMarkdown('```\nconsole.log("test")\n```', {
+		fileURL: nonDocFileURL(),
+		processor: plainProcessor,
+	});
+	expect(res.code).not.includes('dir="ltr"');
 });
