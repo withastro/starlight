@@ -50,20 +50,15 @@ describeEachProcessor(
 			expect(res.code).includes(`</svg>Custom <code dir="auto">code</code> Label</p>`);
 		});
 
-		// Sätteri doesn't parse emphasis/strong inside a directive label `[…]` (it does parse inline
-		// code), so it renders the markers verbatim. See `satteri-upstream-plan.md`, Issue 6.
-		test.skipIf(name === 'satteri').each(types)(
-			'%s renders doubly-nested Markdown in a custom label',
-			async (type) => {
-				const res = await ctx().render(
-					`\n:::${type}[Custom **strong with _emphasis_** Label]\nSome text\n:::\n`
-				);
-				expect(res.code).includes(`aria-label="Custom strong with emphasis Label"`);
-				expect(res.code).includes(
-					`</svg>Custom <strong>strong with <em>emphasis</em></strong> Label</p>`
-				);
-			}
-		);
+		test.each(types)('%s renders doubly-nested Markdown in a custom label', async (type) => {
+			const res = await ctx().render(
+				`\n:::${type}[Custom **strong with _emphasis_** Label]\nSome text\n:::\n`
+			);
+			expect(res.code).includes(`aria-label="Custom strong with emphasis Label"`);
+			expect(res.code).includes(
+				`</svg>Custom <strong>strong with <em>emphasis</em></strong> Label</p>`
+			);
+		});
 
 		test.each(types)('%s renders a custom icon', async (type) => {
 			const res = await ctx().render(`\n:::${type}{icon="heart"}\nSome text\n:::\n`);
@@ -109,10 +104,7 @@ describeEachProcessor(
 			expect(res.code).includes('<div><p>Some text</p></div>');
 		});
 
-		// Sätteri leaks the closing `:::` fence into the output when a container directive ends with an
-		// HTML block (here `</details>`), so the children are mis-parsed. See `satteri-upstream-plan.md`,
-		// Issue 7.
-		test.skipIf(name === 'satteri')('handles complex children', async () => {
+		test('handles complex children', async () => {
 			const res = await ctx().render(
 				`\n:::note\nParagraph [link](/href/).\n\n![alt](/img.jpg)\n\n<details>\n<summary>See more</summary>\n\nMore.\n\n</details>\n:::\n`
 			);
@@ -165,17 +157,14 @@ describeEachProcessor(
 			expect(res.code.trim()).not.toMatch(/\n/);
 		});
 
-		// Nested asides require transforming a directive whose subtree contains another directive. The
-		// unified `visit`-based plugin handles this; Sätteri's batched per-node mutations cannot yet
-		// (see `satteri-upstream-plan.md`, Issue 1 — "patch targets node N inside a removed subtree").
-		test.skipIf(name === 'satteri')('nested asides', async () => {
+		test('nested asides', async () => {
 			const res = await ctx().render(
 				`\n::::note\nNote contents.\n\n:::tip\nNested tip.\n:::\n\n::::\n`
 			);
 			await expect(res.code).toMatchFileSnapshot(ctx().snapshot('nested-asides.html'));
 		});
 
-		test.skipIf(name === 'satteri')('nested asides with custom titles', async () => {
+		test('nested asides with custom titles', async () => {
 			const res = await ctx().render(
 				`\n:::::caution[Caution with a custom title]\nNested caution.\n\n::::note\nNested note.\n\n:::tip[Tip with a custom title]\nNested tip.\n:::\n\n::::\n\n:::::\n`
 			);

@@ -25,11 +25,11 @@ import type { StarlightIcon } from '../types';
 export { isSatteriProcessor };
 
 /**
- * Sätteri exposes a node's source path as a URL pathname (so e.g. spaces arrive as `%20`). Decode it
- * back to a real filesystem path so it matches the paths Starlight compares against.
+ * Sätteri exposes a node's source location as a `URL` (`ctx.fileURL`); convert it to a filesystem
+ * path so it matches the paths Starlight compares against.
  */
-function satteriFilenameToPath(filename: string): string {
-	return filename ? fileURLToPath(`file://${filename}`) : '';
+function satteriFileURLToPath(fileURL: URL | undefined): string {
+	return fileURL ? fileURLToPath(fileURL) : '';
 }
 
 /** Sätteri mdast/hast plugins applied to Starlight content. */
@@ -97,7 +97,7 @@ function satteriAsidesPlugin(
 	return {
 		name: 'starlight-asides',
 		containerDirective(node, ctx) {
-			const filename = satteriFilenameToPath(ctx.filename);
+			const filename = satteriFileURLToPath(ctx.fileURL);
 			if (!shouldTransformPath(filename, allowedPaths)) return;
 			if (!isAsideVariant(node.name)) return;
 
@@ -169,7 +169,7 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['pre'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(satteriFilenameToPath(ctx.filename), allowedPaths)) return;
+					if (!shouldTransformPath(satteriFileURLToPath(ctx.fileURL), allowedPaths)) return;
 					if (node.properties && 'dir' in node.properties) return;
 					ctx.setProperty(node, 'dir', 'ltr');
 				},
@@ -177,7 +177,7 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['code'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(satteriFilenameToPath(ctx.filename), allowedPaths)) return;
+					if (!shouldTransformPath(satteriFileURLToPath(ctx.fileURL), allowedPaths)) return;
 					if (node.properties && 'dir' in node.properties) return;
 					ctx.setProperty(node, 'dir', 'auto');
 				},
@@ -186,7 +186,7 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 		// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
 		// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
 		raw(node, ctx) {
-			if (!shouldTransformPath(satteriFilenameToPath(ctx.filename), allowedPaths)) return undefined;
+			if (!shouldTransformPath(satteriFileURLToPath(ctx.fileURL), allowedPaths)) return undefined;
 			const value = ltrRawPre(node.value);
 			if (value === null) return undefined;
 			return { type: 'raw', value };
@@ -215,7 +215,7 @@ function satteriAutolinkHeadingsPlugin(
 		element: {
 			filter: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 			visit(node, ctx) {
-				const filename = satteriFilenameToPath(ctx.filename);
+				const filename = satteriFileURLToPath(ctx.fileURL);
 				if (!shouldTransformPath(filename, allowedPaths)) return;
 
 				const id = node.properties?.['id'];
