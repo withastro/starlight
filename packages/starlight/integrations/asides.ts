@@ -1,6 +1,5 @@
 /// <reference types="mdast-util-directive" />
 
-import type { AstroIntegration } from 'astro';
 import { h as _h, s as _s, type Properties, type Result } from 'hastscript';
 import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
@@ -13,7 +12,6 @@ import { toMarkdown } from 'mdast-util-to-markdown';
 import { toString } from 'mdast-util-to-string';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import { isUnifiedProcessor } from '@astrojs/markdown-remark';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import type { StarlightIcon } from '../types';
 import { Icons } from '../components-internals/Icons';
@@ -21,9 +19,6 @@ import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
 import { throwInvalidAsideIconError } from './asides-error';
 import { asideIconPathAttrs, isAsideVariant, type AsideVariant } from './aside-icons';
-
-// Started at module evaluation, for the reasons explained in `index.ts`.
-const satteriIntegration = import('./satteri').catch(() => null);
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -230,35 +225,5 @@ export function remarkDirectivesRestoration() {
 				return;
 			}
 		});
-	};
-}
-
-/**
- * Run directive-restoration last so plugins added by Starlight plugins (via their
- * own Astro integrations) get to handle text/leaf directives first.
- */
-export function starlightDirectivesRestorationIntegration(): AstroIntegration {
-	return {
-		name: 'starlight-directives-restoration',
-		hooks: {
-			'astro:config:setup': async ({ config, updateConfig }) => {
-				const processor = config.markdown?.processor;
-				const satteri = await satteriIntegration;
-				if (processor?.name === 'satteri' && satteri?.isSatteriProcessor(processor)) {
-					processor.options.mdastPlugins.push(satteri.satteriDirectivesRestoration());
-					return;
-				}
-				if (processor && isUnifiedProcessor(processor)) {
-					processor.options.remarkPlugins.push(remarkDirectivesRestoration);
-					return;
-				}
-				// Astro 6.0–6.3: no `processor` field, register through the legacy key.
-				updateConfig({
-					markdown: {
-						remarkPlugins: [remarkDirectivesRestoration],
-					},
-				});
-			},
-		},
 	};
 }

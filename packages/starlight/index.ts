@@ -7,13 +7,16 @@
 /// <reference path="./i18n.d.ts" />
 /// <reference path="./virtual.d.ts" />
 
-import { isUnifiedProcessor } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
 import { starlightRehypePlugins, starlightRemarkPlugins } from './integrations/remark-rehype';
 import type { MarkdownProcessorPluginOptions } from './integrations/markdown-process';
-import { starlightDirectivesRestorationIntegration } from './integrations/asides';
+import {
+	applyStarlightMarkdownPlugins,
+	satteriIntegration,
+	starlightDirectivesRestorationIntegration,
+} from './integrations/markdown-plugins';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
 import { starlightSitemap } from './integrations/sitemap';
@@ -27,13 +30,6 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
-
-// `@astrojs/markdown-satteri` is an optional peer dependency, so its integration is loaded lazily.
-// The import is started here, at module evaluation, while Astro's config module runner is still
-// alive — a dynamic `import()` of this relative module from inside `astro:config:setup` fails with
-// "Vite module runner has been closed". When the optional dependency is absent, the import rejects
-// and Sätteri support is simply unavailable.
-const satteriIntegration = import('./integrations/satteri').catch(() => null);
 
 export default function StarlightIntegration(
 	userOpts: StarlightUserConfigWithPlugins
@@ -120,26 +116,13 @@ export default function StarlightIntegration(
 				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`), and we
 				// push our plugins onto its options. On 6.0–6.3 the field is absent, so we fall back to
 				// the (now-deprecated) `markdown.{remark,rehype}Plugins` config below.
-				const processor = config.markdown?.processor;
 				const satteri = await satteriIntegration;
-				if (processor?.name === 'satteri' && satteri?.isSatteriProcessor(processor)) {
-					// Starlight's asides are built on container directives, which Sätteri disables by
-					// default, so enable the feature on the user's processor.
-					processor.options.features.directive = true;
-					const { mdastPlugins, hastPlugins } =
-						satteri.starlightSatteriPlugins(markdownProcessorOptions);
-					processor.options.mdastPlugins.push(...mdastPlugins);
-					processor.options.hastPlugins.push(...hastPlugins);
-				} else if (processor && isUnifiedProcessor(processor)) {
-					processor.options.remarkPlugins.push(...starlightRemarkPlugins(markdownProcessorOptions));
-					processor.options.rehypePlugins.push(...starlightRehypePlugins(markdownProcessorOptions));
-				} else if (processor) {
-					logger.warn(
-						`The configured \`markdown.processor\` ("${processor.name}") is not supported by Starlight. ` +
-							"Starlight's Markdown transforms (asides, heading anchor links, RTL code support) won't run on your content. " +
-							'Switch to `unified()` from `@astrojs/markdown-remark` or `satteri()` from `@astrojs/markdown-satteri`.'
-					);
-				}
+				const usesProcessor = applyStarlightMarkdownPlugins(
+					config.markdown?.processor,
+					markdownProcessorOptions,
+					satteri,
+					logger
+				);
 
 				// Add Starlight directives restoration integration at the end of the list so that
 				// remark/mdast plugins injected by Starlight plugins through Astro integrations can
@@ -199,7 +182,7 @@ export default function StarlightIntegration(
 									},
 								},
 					},
-					markdown: processor
+					markdown: usesProcessor
 						? {}
 						: {
 								remarkPlugins: [...starlightRemarkPlugins(markdownProcessorOptions)],

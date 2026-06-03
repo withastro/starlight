@@ -89,7 +89,8 @@ function satteriAsidesPlugin(
 			if (!isAsideVariant(node.name)) return;
 
 			const variant = node.name;
-			const filename = ctx.fileURL ? fileURLToPath(ctx.fileURL) : 'unknown';
+			// `shouldTransformPath` above already returned for a missing `fileURL`.
+			const filename = fileURLToPath(ctx.fileURL!);
 			const t = options.useTranslations(options.absolutePathToLang(filename));
 
 			let title = t(`aside.${variant}`);
@@ -209,7 +210,8 @@ function satteriAutolinkHeadingsPlugin(
 				if (typeof id !== 'string' || !id) return;
 
 				const title = ctx.textContent(node);
-				const filename = ctx.fileURL ? fileURLToPath(ctx.fileURL) : 'unknown';
+				// `shouldTransformPath` above already returned for a missing `fileURL`.
+				const filename = fileURLToPath(ctx.fileURL!);
 				const t = options.useTranslations(options.absolutePathToLang(filename));
 				const accessibleLabel = t('heading.anchorLabel', {
 					title,

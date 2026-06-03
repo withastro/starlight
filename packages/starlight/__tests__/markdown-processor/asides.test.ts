@@ -7,7 +7,7 @@ import { starlightRemarkPlugins } from '../../integrations/remark-rehype';
 import type { StarlightUserConfig } from '../../utils/user-config';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
 import { createPluginTestOptions, docFileURL } from '../test-utils';
-import { createStarlightMarkdownProcessor, describeEachProcessor } from './utils';
+import { createStarlightMarkdownProcessor, describeEachProcessor, nonDocFileURL } from './utils';
 
 const starlightConfig = {
 	title: 'Asides Tests',
@@ -102,6 +102,11 @@ describeEachProcessor(
 			const res = await ctx().render(`\n:::unknown\nSome text\n:::\n`);
 			expect(res.code).not.includes('starlight-aside');
 			expect(res.code).includes('<div><p>Some text</p></div>');
+		});
+
+		test('skips files outside the docs collection', async () => {
+			const res = await ctx().render(`\n:::note\nSome text\n:::\n`, { fileURL: nonDocFileURL() });
+			expect(res.code).not.includes('starlight-aside');
 		});
 
 		test('handles complex children', async () => {
