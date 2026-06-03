@@ -510,12 +510,7 @@ Définissez `pagefind` avec un objet pour configurer le client de recherche Page
 
 ```ts
 interface PagefindOptions {
-	ranking?: {
-		pageLength?: number;
-		termFrequency?: number;
-		termSaturation?: number;
-		termSimilarity?: number;
-	};
+	ranking?: PagefindRankingOptions;
 	indexWeight?: number;
 	mergeIndex?: Array<{
 		bundlePath: string;
@@ -524,13 +519,17 @@ interface PagefindOptions {
 		baseUrl?: string;
 		mergeFilter?: Record<string, string | string[]>;
 		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
+		ranking?: PagefindRankingOptions;
 	}>;
+}
+
+interface PagefindRankingOptions {
+	pageLength?: number;
+	termFrequency?: number;
+	termSaturation?: number;
+	termSimilarity?: number;
+	diacriticSimilarity?: number;
+	metaWeights?: Record<string, number>;
 }
 ```
 
