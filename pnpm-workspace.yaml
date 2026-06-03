@@ -24,8 +24,7 @@ peerDependencyRules:
     - 'search-insights'
 
 # Prevent installing packages published in the last 3 days
-# TEMP: disabled to install the Sätteri 0.7.0 preview packages (astro#16955); restore before commit.
-# minimumReleaseAge: 4320
+minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - astro
   - '@astrojs/internal-helpers'
