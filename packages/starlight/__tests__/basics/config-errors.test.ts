@@ -69,6 +69,7 @@ test('parses bare minimum valid config successfully', () => {
 		  },
 		  "pagefind": {
 		    "ranking": {
+		      "diacriticSimilarity": 0.8,
 		      "pageLength": 0.1,
 		      "termFrequency": 0.1,
 		      "termSaturation": 2,

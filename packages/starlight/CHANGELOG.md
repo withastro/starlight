@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.39.3
+
+### Patch Changes
+
+- [#3910](https://github.com/withastro/starlight/pull/3910) [`dddf405`](https://github.com/withastro/starlight/commit/dddf40510a304d4ff1f137b12c07f0dafdd9c198) Thanks [@andreialba](https://github.com/andreialba)! - Improves Romanian UI translations
+
+- [#3924](https://github.com/withastro/starlight/pull/3924) [`02f2ce1`](https://github.com/withastro/starlight/commit/02f2ce1ea2c2d814fdd2ecdd609d35109479d8cd) Thanks [@BouRock](https://github.com/BouRock)! - Improves Turkish UI translations
+
+- [#3928](https://github.com/withastro/starlight/pull/3928) [`11a7ed2`](https://github.com/withastro/starlight/commit/11a7ed2d6ce14f131b3678f3fc13e1b16a273312) Thanks [@delucis](https://github.com/delucis)! - Updates Pagefind to v1.5 and adds support for Pagefind’s new [`diacriticSimilarity`](https://pagefind.app/docs/ranking/#configuring-diacritic-similarity) and [`metaWeights`](https://pagefind.app/docs/ranking/#configuring-metadata-weights) advanced ranking options
+
+- [#3927](https://github.com/withastro/starlight/pull/3927) [`e944870`](https://github.com/withastro/starlight/commit/e94487041f5e22b5dc89ed8247c2bb0c737f891f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Refactors internal file path handling for Starlight content collections.
+
 ## 0.39.2
 
 ### Patch Changes
