@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { isSatteriProcessor, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
-import type { Properties } from 'hast';
+import type { Element, Properties } from 'hast';
 import type { Paragraph } from 'mdast';
 import { directiveToMarkdown } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
@@ -10,6 +10,7 @@ import type {
 	MdastPluginInput,
 	MdastPluginDefinition,
 } from 'satteri';
+import { anchorLinkIconPath } from './anchor-icon';
 import { asideIconPathAttrs, isAsideVariant } from './aside-icons';
 import {
 	getMarkdownProcessorPaths,
@@ -151,36 +152,55 @@ function serializeDirective(node: Parameters<typeof toMarkdown>[0]): string {
 	return md.at(-1) === '\n' ? md.slice(0, -1) : md;
 }
 
-function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefinition {
-	return {
-		name: 'starlight-rtl-code-support',
-		element: [
-			{
-				filter: ['pre'],
-				visit(node, ctx) {
-					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-					if (node.properties && 'dir' in node.properties) return;
-					ctx.setProperty(node, 'dir', 'ltr');
+function satteriRtlCodeSupportPlugin(allowedPaths: string[]): () => HastPluginDefinition {
+	return () => {
+		// HACK: Sätteri currently does not expose a way to either know the parent of a node, or skipping a subtree visit. To work around this, we manually track the source spans of `<pre>` elements and skip applying `dir="auto"` to `<code>` elements inside those spans. This is: bad, because it means that it won't work for nodes without positions (e.g. generated nodes), but it's as good as it gets right now.
+		const preSpans: Array<[number, number]> = [];
+		return {
+			name: 'starlight-rtl-code-support',
+			element: [
+				{
+					filter: ['pre'],
+					visit(node, ctx) {
+						if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
+						const span = nodeSpan(node);
+						if (span) preSpans.push(span);
+						if (node.properties && 'dir' in node.properties) return;
+						ctx.setProperty(node, 'dir', 'ltr');
+					},
 				},
-			},
-			{
-				filter: ['code'],
-				visit(node, ctx) {
-					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-					if (node.properties && 'dir' in node.properties) return;
-					ctx.setProperty(node, 'dir', 'auto');
+				{
+					filter: ['code'],
+					visit(node, ctx) {
+						if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
+						if (isInsideSpan(nodeSpan(node), preSpans)) return;
+						if (node.properties && 'dir' in node.properties) return;
+						ctx.setProperty(node, 'dir', 'auto');
+					},
 				},
+			],
+			// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
+			// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
+			raw(node, ctx) {
+				if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
+				const value = ltrRawPre(node.value);
+				if (value === null) return undefined;
+				return { type: 'raw', value };
 			},
-		],
-		// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
-		// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
-		raw(node, ctx) {
-			if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
-			const value = ltrRawPre(node.value);
-			if (value === null) return undefined;
-			return { type: 'raw', value };
-		},
+		};
 	};
+}
+
+/** The source byte span of a node, or `null` when it carries no position (e.g. a generated node). */
+function nodeSpan(node: { position?: Element['position'] }): [number, number] | null {
+	const start = node.position?.start.offset;
+	const end = node.position?.end.offset;
+	return typeof start === 'number' && typeof end === 'number' ? [start, end] : null;
+}
+
+function isInsideSpan(span: [number, number] | null, spans: Array<[number, number]>): boolean {
+	if (!span) return false;
+	return spans.some(([start, end]) => span[0] >= start && span[1] <= end);
 }
 
 const rawPreOpenTag = /<pre(?=[\s>])[^>]*>/;
@@ -244,7 +264,7 @@ function satteriAutolinkHeadingsPlugin(
 													tagName: 'path',
 													properties: {
 														fill: 'currentcolor',
-														d: 'm12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z',
+														d: anchorLinkIconPath,
 													},
 													children: [],
 												},

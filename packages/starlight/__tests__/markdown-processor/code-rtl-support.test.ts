@@ -2,6 +2,9 @@ import type { MarkdownRenderer } from '@astrojs/markdown-remark';
 import { beforeAll, expect, test } from 'vitest';
 import { createStarlightMarkdownProcessor, describeEachProcessor, nonDocFileURL } from './utils';
 
+// These tests render through the bare Markdown processors, where fenced code blocks are highlighted
+// by Astro's built-in Shiki highlighter (hence the `astro-code` class). Starlight normally swaps in
+// Expressive Code, but that runs as a separate integration and is out of scope here.
 describeEachProcessor('code RTL support', (ctx, name) => {
 	// A processor with syntax highlighting disabled, so a fenced block stays a `<pre>` element our
 	// hast pass can see, instead of being replaced by Shiki's raw HTML output.
@@ -15,20 +18,25 @@ describeEachProcessor('code RTL support', (ctx, name) => {
 		expect(res.code).includes('<code dir="auto">inline code</code>');
 	});
 
-	test('applies `dir="ltr"` to Shiki-highlighted fenced code blocks', async () => {
+	test('applies `dir="ltr"` to Astro Shiki-highlighted fenced code blocks', async () => {
 		const res = await ctx().render('```js\nconsole.log("test")\n```');
 		expect(res.code).includes('dir="ltr"');
 		expect(res.code).includes('astro-code');
+		// The `<code>` inside the highlighted `<pre>` inherits its `dir`, it is not set to `auto`.
+		expect(res.code).not.includes('dir="auto"');
 	});
 
 	test('applies `dir="ltr"` to fenced code blocks when Shiki is off', async () => {
 		const res = await ctx().render('```\nconsole.log("test")\n```', { processor: plain });
 		expect(res.code).includes('<pre dir="ltr">');
+		// The `<code>` inside the `<pre>` is skipped so it inherits the block's `dir="ltr"`.
+		expect(res.code).includes('<code>');
+		expect(res.code).not.includes('dir="auto"');
 	});
 
 	test('does not override an existing `dir` on inline code', async () => {
 		const res = await ctx().render(`<code dir="rtl">manual</code>`);
-		expect(res.code).includes('dir="rtl"');
+		expect(res.code).includes('<code dir="rtl">manual</code>');
 		expect(res.code).not.includes('dir="auto"');
 	});
 
@@ -36,7 +44,8 @@ describeEachProcessor('code RTL support', (ctx, name) => {
 		const res = await ctx().render('<pre dir="rtl"><code>manual</code></pre>', {
 			processor: plain,
 		});
-		expect(res.code).includes('dir="rtl"');
+		expect(res.code).includes('<pre dir="rtl">');
+		expect(res.code).includes('<code>');
 		expect(res.code).not.includes('dir="ltr"');
 	});
 

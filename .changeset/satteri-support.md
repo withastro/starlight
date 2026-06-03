@@ -18,3 +18,13 @@ export default defineConfig({
   },
 });
 ```
+
+Note that Expressive Code is not yet compatible with the Sätteri processor. To opt into Sätteri for now, set [`expressiveCode: false`](https://starlight.astro.build/reference/configuration/#expressivecode) in your Starlight config to render code blocks with Astro's built-in Shiki highlighter.
+
+⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now v6.4.0.
+
+Please update Starlight and Astro together:
+
+```sh
+npx @astrojs/upgrade
+```

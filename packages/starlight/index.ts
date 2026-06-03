@@ -91,6 +91,23 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
+				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`); on
+				// 6.0–6.3 the field is absent. Resolve it and the optional Sätteri integration up front so
+				// we can reject unsupported combinations before wiring up the integrations below.
+				const processor = config.markdown?.processor;
+				const satteri = await satteriIntegration;
+				const usesSatteri = !!(processor && satteri?.isSatteriProcessor(processor));
+
+				// Expressive Code does not support the Sätteri processor yet, so it would silently leave
+				// code blocks to Astro's built-in Shiki highlighter. Fail with an actionable error until
+				// `astro-expressive-code` adds support.
+				if (usesSatteri && starlightConfig.expressiveCode !== false) {
+					throw new AstroError(
+						'Expressive Code is not yet compatible with the Sätteri Markdown processor.',
+						"Set `expressiveCode: false` in your Starlight config to render code blocks with Astro's built-in Shiki highlighter, or remove `markdown.processor` to use the default `unified()` processor.\n"
+					);
+				}
+
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
@@ -113,12 +130,10 @@ export default function StarlightIntegration(
 					absolutePathToLang,
 				};
 
-				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`), and we
-				// push our plugins onto its options. On 6.0–6.3 the field is absent, so we fall back to
-				// the (now-deprecated) `markdown.{remark,rehype}Plugins` config below.
-				const satteri = await satteriIntegration;
+				// We push our plugins onto the processor's options. On Astro 6.0–6.3 there is no processor,
+				// so we fall back to the (now-deprecated) `markdown.{remark,rehype}Plugins` config below.
 				const usesProcessor = applyStarlightMarkdownPlugins(
-					config.markdown?.processor,
+					processor,
 					markdownProcessorOptions,
 					satteri,
 					logger

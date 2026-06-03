@@ -4,11 +4,7 @@ import { remarkDirectivesRestoration } from './asides';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import { starlightRehypePlugins, starlightRemarkPlugins } from './remark-rehype';
 
-// `@astrojs/markdown-satteri` is an optional peer dependency, so its integration is loaded lazily.
-// The import is started here, at module evaluation, while Astro's config module runner is still
-// alive — a dynamic `import()` of this relative module from inside `astro:config:setup` fails with
-// "Vite module runner has been closed". When the optional dependency is absent, the import rejects
-// and Sätteri support is simply unavailable.
+// For some reason, trying to `await import("./satteri")` in the integration module causes a Vite error about the module runner being closed. This shape works, not sure why!
 export const satteriIntegration = import('./satteri').catch(() => null);
 
 type SatteriIntegration = Awaited<typeof satteriIntegration>;
@@ -26,7 +22,7 @@ export function applyStarlightMarkdownPlugins(
 	logger: Pick<AstroIntegrationLogger, 'warn'>
 ): boolean {
 	if (!processor) return false;
-	if (processor.name === 'satteri' && satteri?.isSatteriProcessor(processor)) {
+	if (satteri?.isSatteriProcessor(processor)) {
 		// Starlight's asides are built on container directives, which Sätteri disables by default.
 		processor.options.features.directive = true;
 		const { mdastPlugins, hastPlugins } = satteri.starlightSatteriPlugins(options);
@@ -54,7 +50,7 @@ export function registerDirectivesRestoration(
 	processor: MarkdownProcessor | undefined,
 	satteri: SatteriIntegration
 ): boolean {
-	if (processor?.name === 'satteri' && satteri?.isSatteriProcessor(processor)) {
+	if (processor && satteri?.isSatteriProcessor(processor)) {
 		processor.options.mdastPlugins.push(satteri.satteriDirectivesRestoration());
 		return true;
 	}
