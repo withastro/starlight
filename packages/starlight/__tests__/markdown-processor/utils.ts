@@ -15,7 +15,6 @@ import { createPluginTestOptions, docFileURL } from '../test-utils';
 export const processorNames = ['unified', 'satteri'] as const;
 export type ProcessorName = (typeof processorNames)[number];
 
-/** Build a Markdown processor wired up with Starlight's plugin set for the given engine. */
 export async function createStarlightMarkdownProcessor(
 	name: ProcessorName,
 	config?: StarlightUserConfig,

@@ -32,11 +32,12 @@ export function getMarkdownProcessorPaths(options: MarkdownProcessorPluginOption
 
 /**
  * Determines if a file should be transformed by a Markdown plugin, e.g. files without a known path
- * or files that are not part of the allowed paths are skipped.
+ * or files that are not part of the allowed paths are skipped. Accepts a path string (as the unified
+ * pipeline exposes via `VFile`) or a `URL` (as Sätteri exposes via `ctx.fileURL`).
  */
-export function shouldTransformPath(path: string | undefined, allowedPaths: string[]) {
+export function shouldTransformPath(path: string | URL | undefined, allowedPaths: string[]) {
 	if (!path) return false;
-	const normalizedPath = normalizePath(path);
+	const normalizedPath = normalizePath(path instanceof URL ? fileURLToPath(path) : path);
 	return allowedPaths.some((p) => normalizedPath.startsWith(p));
 }
 

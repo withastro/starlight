@@ -24,15 +24,6 @@ import type { StarlightIcon } from '../types';
 // lazy import that loads the optional `@astrojs/markdown-satteri` peer dependency.
 export { isSatteriProcessor };
 
-/**
- * Sätteri exposes a node's source location as a `URL` (`ctx.fileURL`); convert it to a filesystem
- * path so it matches the paths Starlight compares against.
- */
-function satteriFileURLToPath(fileURL: URL | undefined): string {
-	return fileURL ? fileURLToPath(fileURL) : '';
-}
-
-/** Sätteri mdast/hast plugins applied to Starlight content. */
 export function starlightSatteriPlugins(options: MarkdownProcessorPluginOptions): {
 	mdastPlugins: MdastPluginInput[];
 	hastPlugins: HastPluginInput[];
@@ -50,9 +41,7 @@ export function starlightSatteriPlugins(options: MarkdownProcessorPluginOptions)
 }
 
 /**
- * Recover directives Starlight didn't claim so user content isn't dropped: text/leaf directives are
- * restored to their source Markdown, and container directives are emitted as a plain `<div>` (Sätteri
- * otherwise discards unhandled container directives, where the unified pipeline renders them as a div).
+ * Recover directives Starlight didn't claim so user content isn't dropped
  */
 export function satteriDirectivesRestoration(): MdastPluginDefinition {
 	return {
@@ -76,7 +65,6 @@ export function satteriDirectivesRestoration(): MdastPluginDefinition {
 	};
 }
 
-/** mdast paragraph carrying `data.hName`/`data.hProperties` for mdast→hast emission. */
 function paragraphElement(
 	tagName: string,
 	properties: Properties,
@@ -97,11 +85,11 @@ function satteriAsidesPlugin(
 	return {
 		name: 'starlight-asides',
 		containerDirective(node, ctx) {
-			const filename = satteriFileURLToPath(ctx.fileURL);
-			if (!shouldTransformPath(filename, allowedPaths)) return;
+			if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
 			if (!isAsideVariant(node.name)) return;
 
 			const variant = node.name;
+			const filename = ctx.fileURL ? fileURLToPath(ctx.fileURL) : 'unknown';
 			const t = options.useTranslations(options.absolutePathToLang(filename));
 
 			let title = t(`aside.${variant}`);
@@ -169,7 +157,7 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['pre'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(satteriFileURLToPath(ctx.fileURL), allowedPaths)) return;
+					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
 					if (node.properties && 'dir' in node.properties) return;
 					ctx.setProperty(node, 'dir', 'ltr');
 				},
@@ -177,7 +165,7 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['code'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(satteriFileURLToPath(ctx.fileURL), allowedPaths)) return;
+					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
 					if (node.properties && 'dir' in node.properties) return;
 					ctx.setProperty(node, 'dir', 'auto');
 				},
@@ -186,7 +174,7 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 		// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
 		// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
 		raw(node, ctx) {
-			if (!shouldTransformPath(satteriFileURLToPath(ctx.fileURL), allowedPaths)) return undefined;
+			if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
 			const value = ltrRawPre(node.value);
 			if (value === null) return undefined;
 			return { type: 'raw', value };
@@ -215,13 +203,13 @@ function satteriAutolinkHeadingsPlugin(
 		element: {
 			filter: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 			visit(node, ctx) {
-				const filename = satteriFileURLToPath(ctx.fileURL);
-				if (!shouldTransformPath(filename, allowedPaths)) return;
+				if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
 
 				const id = node.properties?.['id'];
 				if (typeof id !== 'string' || !id) return;
 
 				const title = ctx.textContent(node);
+				const filename = ctx.fileURL ? fileURLToPath(ctx.fileURL) : 'unknown';
 				const t = options.useTranslations(options.absolutePathToLang(filename));
 				const accessibleLabel = t('heading.anchorLabel', {
 					title,

@@ -22,10 +22,7 @@ import type { Element } from 'hast';
 import { throwInvalidAsideIconError } from './asides-error';
 import { asideIconPathAttrs, isAsideVariant, type AsideVariant } from './aside-icons';
 
-// As in `index.ts`: started at module evaluation so this relative module resolves while Astro's
-// config module runner is still alive. A dynamic `import()` from inside the hook below would fail
-// with "Vite module runner has been closed". When `@astrojs/markdown-satteri` is absent, the import
-// rejects and Sätteri support is simply unavailable.
+// Started at module evaluation, for the reasons explained in `index.ts`.
 const satteriIntegration = import('./satteri').catch(() => null);
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
