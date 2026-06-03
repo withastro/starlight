@@ -1,8 +1,11 @@
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
+import type { MdastPluginDefinition } from 'satteri';
 import { describe, expect, test, vi } from 'vitest';
 import { remarkDirectivesRestoration } from '../../integrations/asides';
+import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../integrations/satteri';
 import { starlightRemarkPlugins } from '../../integrations/remark-rehype';
 import type { StarlightUserConfig } from '../../utils/user-config';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
@@ -191,9 +194,7 @@ describeEachProcessor(
 	{ config: starlightConfig }
 );
 
-// The mechanisms below are specific to the unified remark pipeline (custom remark plugins injected by
-// Starlight plugins through Astro integrations); Sätteri exposes a different plugin model.
-describe('asides directive restoration (unified-specific)', () => {
+describe('asides directive restoration (unified)', () => {
 	test('lets a remark plugin handle text and leaf directives before restoration', async () => {
 		const processor = await createMarkdownProcessor({
 			remarkPlugins: [
@@ -247,6 +248,60 @@ describe('asides directive restoration (unified-specific)', () => {
 		});
 		expect(res.code).toMatchInlineSnapshot(
 			`"<p>This method is available in the <span class="api">thing</span> API.</p>"`
+		);
+	});
+});
+
+describe('asides directive restoration (Sätteri)', () => {
+	async function createSatteriProcessor(...extraMdastPlugins: MdastPluginDefinition[]) {
+		const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(
+			await createPluginTestOptions(starlightConfig)
+		);
+		return createSatteriMarkdownProcessor({
+			mdastPlugins: [...mdastPlugins, ...extraMdastPlugins, satteriDirectivesRestoration()],
+			hastPlugins,
+			// Starlight's asides rely on container directives, which Sätteri disables by default.
+			features: { directive: true },
+		});
+	}
+
+	test('lets an mdast plugin handle text directives before restoration', async () => {
+		const processor = await createSatteriProcessor({
+			name: 'custom',
+			textDirective(node) {
+				if (node.name === 'abbr') return { type: 'text', value: 'TEXT FROM MDAST PLUGIN' };
+				return;
+			},
+		});
+
+		const res = await processor.render(
+			`This is a:test of a sentence with a :abbr[SL]{name="Starlight"} directive handled by another mdast plugin and some other text:name[content]{key=val} directives not handled by any plugin.`,
+			{ fileURL: docFileURL() }
+		);
+		expect(res.code).toMatchInlineSnapshot(`
+			"<p>This is a:test of a sentence with a TEXT FROM MDAST PLUGIN directive handled by another mdast plugin and some other text:name[content]{key="val"} directives not handled by any plugin.</p>
+			"
+		`);
+	});
+
+	test('does not transform back directive nodes that carry data', async () => {
+		const processor = await createSatteriProcessor({
+			name: 'custom',
+			textDirective(node, ctx) {
+				if (node.name !== 'api') return;
+				ctx.setProperty(node, 'data', { hName: 'span', hProperties: { class: 'api' } });
+				return;
+			},
+		});
+
+		const res = await processor.render(`This method is available in the :api[thing] API.`, {
+			fileURL: docFileURL(),
+		});
+		expect(res.code).toMatchInlineSnapshot(
+			`
+			"<p>This method is available in the <span class="api">thing</span> API.</p>
+			"
+		`
 		);
 	});
 });
