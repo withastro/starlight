@@ -34,6 +34,17 @@ describeEachProcessor('code RTL support', (ctx, name) => {
 		expect(res.code).not.includes('dir="auto"');
 	});
 
+	test('handles `dir="ltr"` on raw `<pre>` HTML per processor', async () => {
+		const res = await ctx().render('<pre><code>manual</code></pre>', { processor: plain });
+
+		// Since Astro's Sätteri implementation for Shiki returns raw nodes, it, by accident, applies `dir="ltr"` to raw `<pre>` blocks even if they're not coming from a plugin generating HAST.
+		if (name === 'satteri') {
+			expect(res.code).includes('<pre dir="ltr"><code>manual</code></pre>');
+		} else {
+			expect(res.code).includes('<pre><code>manual</code></pre>');
+		}
+	});
+
 	test('does not override an existing `dir` on inline code', async () => {
 		const res = await ctx().render(`<code dir="rtl">manual</code>`);
 		expect(res.code).includes('<code dir="rtl">manual</code>');
