@@ -154,7 +154,11 @@ function serializeDirective(node: Parameters<typeof toMarkdown>[0]): string {
 
 function satteriRtlCodeSupportPlugin(allowedPaths: string[]): () => HastPluginDefinition {
 	return () => {
-		// HACK: Sätteri currently does not expose a way to either know the parent of a node, or skipping a subtree visit. To work around this, we manually track the source spans of `<pre>` elements and skip applying `dir="auto"` to `<code>` elements inside those spans. This is: bad, because it means that it won't work for nodes without positions (e.g. generated nodes), but it's as good as it gets right now.
+		// HACK: Sätteri currently does not expose a way to either know the parent of a node, or
+		// skipping a subtree visit. To work around this, we manually track the source spans of `<pre>`
+		// elements and skip applying `dir="auto"` to `<code>` elements inside those spans. This is:
+		// bad, because it means that it won't work for nodes without positions (e.g. generated nodes),
+		// but it's as good as it gets right now.
 		const preSpans: Array<[number, number]> = [];
 		return {
 			name: 'starlight-rtl-code-support',

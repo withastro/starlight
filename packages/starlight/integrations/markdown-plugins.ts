@@ -4,7 +4,8 @@ import { remarkDirectivesRestoration } from './asides';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import { starlightRehypePlugins, starlightRemarkPlugins } from './remark-rehype';
 
-// For some reason, trying to `await import("./satteri")` in the integration module causes a Vite error about the module runner being closed. This shape works, not sure why!
+// For some reason, trying to `await import("./satteri")` in the integration module causes a Vite
+// error about the module runner being closed. This shape works, not sure why!
 export const satteriIntegration = import('./satteri').catch(() => null);
 
 type SatteriIntegration = Awaited<typeof satteriIntegration>;
