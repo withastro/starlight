@@ -101,6 +101,7 @@ export default function StarlightIntegration(
 				// Expressive Code does not support the Sätteri processor yet, so it would silently leave
 				// code blocks to Astro's built-in Shiki highlighter. Fail with an actionable error until
 				// `astro-expressive-code` adds support.
+				// https://github.com/expressive-code/expressive-code/pull/445
 				if (usesSatteri && starlightConfig.expressiveCode !== false) {
 					throw new AstroError(
 						'Expressive Code is not yet compatible with the Sätteri Markdown processor.',
