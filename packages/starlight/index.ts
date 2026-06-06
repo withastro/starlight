@@ -10,7 +10,6 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
-import { starlightRehypePlugins, starlightRemarkPlugins } from './integrations/remark-rehype';
 import type { MarkdownProcessorPluginOptions } from './integrations/markdown-process';
 import {
 	applyStarlightMarkdownPlugins,
@@ -91,10 +90,10 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
-				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`); on
-				// 6.0–6.3 the field is absent. Resolve it and the optional Sätteri integration up front so
-				// we can reject unsupported combinations before wiring up the integrations below.
-				const processor = config.markdown?.processor;
+				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`). Resolve
+				// it and the optional Sätteri integration up front so we can reject unsupported
+				// usage before wiring up the integrations below.
+				const processor = config.markdown.processor;
 				const satteri = await satteriIntegration;
 				const usesSatteri = !!(processor && satteri?.isSatteriProcessor(processor));
 
@@ -129,14 +128,8 @@ export default function StarlightIntegration(
 					absolutePathToLang,
 				};
 
-				// We push our plugins onto the processor's options. On Astro 6.0–6.3 there is no processor,
-				// so we fall back to the (now-deprecated) `markdown.{remark,rehype}Plugins` config below.
-				const usesProcessor = applyStarlightMarkdownPlugins(
-					processor,
-					markdownProcessorOptions,
-					satteri,
-					logger
-				);
+				// We push our plugins onto the processor's options.
+				applyStarlightMarkdownPlugins(processor, markdownProcessorOptions, satteri, logger);
 
 				// Add Starlight directives restoration integration at the end of the list so that
 				// remark/mdast plugins injected by Starlight plugins through Astro integrations can
@@ -196,12 +189,6 @@ export default function StarlightIntegration(
 									},
 								},
 					},
-					markdown: usesProcessor
-						? {}
-						: {
-								remarkPlugins: [...starlightRemarkPlugins(markdownProcessorOptions)],
-								rehypePlugins: [...starlightRehypePlugins(markdownProcessorOptions)],
-							},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },

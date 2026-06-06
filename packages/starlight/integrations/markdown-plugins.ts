@@ -13,16 +13,14 @@ type MarkdownProcessor = NonNullable<AstroConfig['markdown']['processor']>;
 
 /**
  * Registers Starlight's Markdown transforms on the Astro 6.4+ `markdown.processor`, picking the
- * plugin set for the configured engine. Returns `false` when no processor is configured (Astro
- * 6.0–6.3) so the caller falls back to the legacy `markdown.{remark,rehype}Plugins` keys.
+ * plugin set for the configured engine.
  */
 export function applyStarlightMarkdownPlugins(
-	processor: MarkdownProcessor | undefined,
+	processor: MarkdownProcessor,
 	options: MarkdownProcessorPluginOptions,
 	satteri: SatteriIntegration,
 	logger: Pick<AstroIntegrationLogger, 'warn'>
-): boolean {
-	if (!processor) return false;
+) {
 	if (satteri?.isSatteriProcessor(processor)) {
 		// Starlight's asides are built on container directives, which Sätteri disables by default.
 		processor.options.features.directive = true;
@@ -39,27 +37,18 @@ export function applyStarlightMarkdownPlugins(
 				'Switch to `unified()` from `@astrojs/markdown-remark` or `satteri()` from `@astrojs/markdown-satteri`.'
 		);
 	}
-	return true;
 }
 
-/**
- * Registers the directive-restoration plugin on the Astro 6.4+ `markdown.processor`. Returns `false`
- * when there is no processor to register it on (Astro 6.0–6.3, or an unsupported processor) so the
- * caller can fall back to the legacy `markdown.remarkPlugins` key.
- */
+/** Registers the directive-restoration plugin on the Astro 6.4+ `markdown.processor`. */
 export function registerDirectivesRestoration(
-	processor: MarkdownProcessor | undefined,
+	processor: MarkdownProcessor,
 	satteri: SatteriIntegration
-): boolean {
-	if (processor && satteri?.isSatteriProcessor(processor)) {
+) {
+	if (satteri?.isSatteriProcessor(processor)) {
 		processor.options.mdastPlugins.push(satteri.satteriDirectivesRestoration());
-		return true;
-	}
-	if (processor && isUnifiedProcessor(processor)) {
+	} else if (isUnifiedProcessor(processor)) {
 		processor.options.remarkPlugins.push(remarkDirectivesRestoration);
-		return true;
 	}
-	return false;
 }
 
 /**
@@ -70,15 +59,9 @@ export function starlightDirectivesRestorationIntegration(): AstroIntegration {
 	return {
 		name: 'starlight-directives-restoration',
 		hooks: {
-			'astro:config:setup': async ({ config, updateConfig }) => {
+			'astro:config:setup': async ({ config }) => {
 				const satteri = await satteriIntegration;
-				if (registerDirectivesRestoration(config.markdown?.processor, satteri)) return;
-				// Astro 6.0–6.3: no `processor` field, register through the legacy key.
-				updateConfig({
-					markdown: {
-						remarkPlugins: [remarkDirectivesRestoration],
-					},
-				});
+				registerDirectivesRestoration(config.markdown?.processor, satteri);
 			},
 		},
 	};
