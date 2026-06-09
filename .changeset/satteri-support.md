@@ -19,7 +19,7 @@ export default defineConfig({
 });
 ```
 
-⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now v6.4.0.
+⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now v6.4.5.
 
 Please update Starlight and Astro together:
 
