@@ -4,22 +4,23 @@ import { remarkDirectivesRestoration } from './asides';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import { starlightRehypePlugins, starlightRemarkPlugins } from './remark-rehype';
 
-let satteriIntegration: Promise<SatteriIntegration> | undefined;
+// For some reason, trying to `await import("./satteri")` in the integration module causes a Vite
+// error about the module runner being closed. This shape works, not sure why!
+export const satteriIntegration = import('./satteri').catch(() => null);
 
-type SatteriIntegration = typeof import('./satteri') | null;
+type SatteriIntegration = Awaited<typeof satteriIntegration>;
 type MarkdownProcessor = NonNullable<AstroConfig['markdown']['processor']>;
 
 /**
  * Registers Starlight's Markdown transforms on the Astro 6.4+ `markdown.processor`, picking the
  * plugin set for the configured engine.
  */
-export async function applyStarlightMarkdownPlugins(
+export function applyStarlightMarkdownPlugins(
 	processor: MarkdownProcessor,
 	options: MarkdownProcessorPluginOptions,
+	satteri: SatteriIntegration,
 	logger: Pick<AstroIntegrationLogger, 'warn'>
 ) {
-	const satteri = await getSatteriIntegration(processor);
-
 	if (satteri?.isSatteriProcessor(processor)) {
 		// Starlight's asides are built on container directives, which Sätteri disables by default.
 		processor.options.features.directive = true;
@@ -39,9 +40,10 @@ export async function applyStarlightMarkdownPlugins(
 }
 
 /** Registers the directive-restoration plugin on the Astro 6.4+ `markdown.processor`. */
-export async function registerDirectivesRestoration(processor: MarkdownProcessor) {
-	const satteri = await getSatteriIntegration(processor);
-
+export function registerDirectivesRestoration(
+	processor: MarkdownProcessor,
+	satteri: SatteriIntegration
+) {
 	if (satteri?.isSatteriProcessor(processor)) {
 		processor.options.mdastPlugins.push(satteri.satteriDirectivesRestoration());
 	} else if (isUnifiedProcessor(processor)) {
@@ -58,13 +60,9 @@ export function starlightDirectivesRestorationIntegration(): AstroIntegration {
 		name: 'starlight-directives-restoration',
 		hooks: {
 			'astro:config:setup': async ({ config }) => {
-				await registerDirectivesRestoration(config.markdown?.processor);
+				const satteri = await satteriIntegration;
+				registerDirectivesRestoration(config.markdown?.processor, satteri);
 			},
 		},
 	};
-}
-
-function getSatteriIntegration(processor: MarkdownProcessor) {
-	if (processor.name !== 'satteri') return null;
-	return (satteriIntegration ??= import('./satteri'));
 }

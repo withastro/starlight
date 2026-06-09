@@ -6,6 +6,7 @@ import {
 	applyStarlightMarkdownPlugins,
 	registerDirectivesRestoration,
 } from '../../integrations/markdown-plugins';
+import * as satteriIntegration from '../../integrations/satteri';
 import { createPluginTestOptions } from '../test-utils';
 
 type Processor = Parameters<typeof applyStarlightMarkdownPlugins>[0];
@@ -17,7 +18,12 @@ describe('applyStarlightMarkdownPlugins', () => {
 		const processor = satteri();
 		const logger = { warn: vi.fn() };
 
-		await applyStarlightMarkdownPlugins(processor, await createPluginTestOptions(), logger);
+		applyStarlightMarkdownPlugins(
+			processor,
+			await createPluginTestOptions(),
+			satteriIntegration,
+			logger
+		);
 
 		expect(processor.options.features.directive).toBe(true);
 		expect(processor.options.mdastPlugins.length).toBeGreaterThan(0);
@@ -29,7 +35,12 @@ describe('applyStarlightMarkdownPlugins', () => {
 		const processor = unified();
 		const logger = { warn: vi.fn() };
 
-		await applyStarlightMarkdownPlugins(processor, await createPluginTestOptions(), logger);
+		applyStarlightMarkdownPlugins(
+			processor,
+			await createPluginTestOptions(),
+			satteriIntegration,
+			logger
+		);
 
 		expect(processor.options.remarkPlugins.length).toBeGreaterThan(0);
 		expect(processor.options.rehypePlugins.length).toBeGreaterThan(0);
@@ -39,9 +50,10 @@ describe('applyStarlightMarkdownPlugins', () => {
 	test('warns for an unsupported or unavailable processor', async () => {
 		const logger = { warn: vi.fn() };
 
-		await applyStarlightMarkdownPlugins(
+		applyStarlightMarkdownPlugins(
 			unsupportedProcessor,
 			await createPluginTestOptions(),
+			satteriIntegration,
 			logger
 		);
 
@@ -51,17 +63,17 @@ describe('applyStarlightMarkdownPlugins', () => {
 });
 
 describe('registerDirectivesRestoration', () => {
-	test('registers the mdast restoration plugin on a Sätteri processor', async () => {
+	test('registers the mdast restoration plugin on a Sätteri processor', () => {
 		const processor = satteri();
-		await registerDirectivesRestoration(processor);
+		registerDirectivesRestoration(processor, satteriIntegration);
 		expect(processor.options.mdastPlugins.map((plugin) => plugin.name)).toContain(
 			'starlight-directives-restoration'
 		);
 	});
 
-	test('registers the remark restoration plugin on a unified processor', async () => {
+	test('registers the remark restoration plugin on a unified processor', () => {
 		const processor = unified();
-		await registerDirectivesRestoration(processor);
+		registerDirectivesRestoration(processor, satteriIntegration);
 		expect(processor.options.remarkPlugins).toContain(remarkDirectivesRestoration);
 	});
 });
