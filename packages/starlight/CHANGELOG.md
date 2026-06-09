@@ -1,5 +1,40 @@
 # @astrojs/starlight
 
+## 0.40.0
+
+### Minor Changes
+
+- [#3923](https://github.com/withastro/starlight/pull/3923) [`edf2e6b`](https://github.com/withastro/starlight/commit/edf2e6bf46b2a0809eb4d5877eb817b224b50af4) Thanks [@Princesseuh](https://github.com/Princesseuh)! - Adds support for Astro 6.4 and the new Sätteri Markdown processor.
+
+  It is now possible to opt into using [Astro's 6.4 Sätteri Markdown processor](https://astro.build/blog/astro-640/#faster-markdown-builds-with-s%C3%A4tteri) by installing the `@astrojs/markdown-satteri` package and configuring it in your `astro.config.mjs` file:
+
+  ```js
+  // astro.config.mjs
+
+  import { defineConfig } from 'astro/config';
+  import { satteri } from '@astrojs/markdown-satteri';
+
+  export default defineConfig({
+    markdown: {
+      processor: satteri(),
+    },
+  });
+  ```
+
+  ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now v6.4.5.
+
+  Please update Starlight and Astro together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+  _Community Starlight plugins and Astro integrations may also need to be manually updated to work with Sätteri. If you encounter any issues, please reach out to the plugin or integration author to see if it is a known issue or if an updated version is being worked on._
+
+### Patch Changes
+
+- [#3923](https://github.com/withastro/starlight/pull/3923) [`edf2e6b`](https://github.com/withastro/starlight/commit/edf2e6bf46b2a0809eb4d5877eb817b224b50af4) Thanks [@Princesseuh](https://github.com/Princesseuh)! - Updates Expressive Code to version 0.43.1.
+
 ## 0.39.3
 
 ### Patch Changes
