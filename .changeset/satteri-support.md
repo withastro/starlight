@@ -4,7 +4,7 @@
 
 Adds support for Astro 6.4 and the new Sätteri Markdown processor.
 
-It is now possible to opt-into using [Astro's 6.4 Sätteri Markdown processor](https://astro.build/blog/astro-640/#faster-markdown-builds-with-s%C3%A4tteri) by installing the `@astrojs/markdown-satteri` package and configuring it in your `astro.config.mjs` file:
+It is now possible to opt into using [Astro's 6.4 Sätteri Markdown processor](https://astro.build/blog/astro-640/#faster-markdown-builds-with-s%C3%A4tteri) by installing the `@astrojs/markdown-satteri` package and configuring it in your `astro.config.mjs` file:
 
 ```js
 // astro.config.mjs
