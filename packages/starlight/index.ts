@@ -95,16 +95,6 @@ export default function StarlightIntegration(
 				// usage before wiring up the integrations below.
 				const processor = config.markdown.processor;
 				const satteri = await satteriIntegration;
-				const usesSatteri = !!(processor && satteri?.isSatteriProcessor(processor));
-
-				// Sätteri is not yet supported due to Expressive Code not being compatible with it yet.
-				// https://github.com/expressive-code/expressive-code/pull/445
-				if (usesSatteri) {
-					throw new AstroError(
-						'The Sätteri Markdown processor is not yet compatible with Starlight.',
-						'Remove `markdown.processor` to use the default `unified()` processor.\n'
-					);
-				}
 
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
