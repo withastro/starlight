@@ -27,10 +27,6 @@ peerDependencyRules:
 minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - astro
-  - '@astrojs/internal-helpers'
-  - '@astrojs/markdown-satteri'
-  - '@astrojs/mdx'
-  - '@astrojs/markdown-remark'
   - satteri
   - '@bruits/*'
   - 'astro-expressive-code'
