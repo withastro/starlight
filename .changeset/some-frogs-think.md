@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Updates Expressive Code to version 0.43.0.
+Updates Expressive Code to version 0.43.1.
