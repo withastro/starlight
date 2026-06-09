@@ -63,7 +63,7 @@
     "@vitest/coverage-v8": "^4.1.5",
     "astro": "^6.4.0",
     "linkedom": "^0.18.12",
-    "satteri": "^0.8.0",
+    "satteri": "^0.8.1",
     "vitest": "^4.1.5"
   },
   "dependencies": {
