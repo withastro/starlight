@@ -1,7 +1,7 @@
 import type { Root } from 'hast';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 import type { Transformer } from 'unified';
-import type { RemarkRehypePluginOptions } from './remark-rehype';
+import type { MarkdownProcessorPluginOptions } from './markdown-process';
 
 /**
  * rehype plugin that adds `dir` attributes to `<code>` and `<pre>`
@@ -17,7 +17,7 @@ import type { RemarkRehypePluginOptions } from './remark-rehype';
  * - `<code>` is often LTR, but could also be RTL. `dir="auto"` ensures the bidirectional
  *   algorithm treats the contents of `<code>` in isolation and gives its best guess.
  */
-export function rehypeRtlCodeSupport(_options: RemarkRehypePluginOptions) {
+export function rehypeRtlCodeSupport(_options: MarkdownProcessorPluginOptions) {
 	const transformer: Transformer<Root> = (tree) => {
 		visit(tree, 'element', (el) => {
 			if (el.tagName === 'pre' || el.tagName === 'code') {
