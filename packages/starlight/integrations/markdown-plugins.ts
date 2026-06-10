@@ -5,9 +5,10 @@ import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import { starlightRehypePlugins, starlightRemarkPlugins } from './remark-rehype';
 
 // This file is imported by the Starlight integration that is used in Astro configuration files.
-// Astro loads its configuration using a temporary Vite module runner and closes it before running
-// integration hooks. If this dynamic import is started later from an integration hook, Vite tries
-// to resolve it through that closed runner and throw "Vite module runner has been closed".
+// When using Starlight, Astro loads its configuration using a temporary Vite module runner and
+// closes it before running integration hooks. If this dynamic import is started later from an
+// integration hook, Vite tries to resolve it through that closed runner and throw "Vite module
+// runner has been closed".
 // We start loading `./satteri` at the top level so Vite waits for it to resolve or fail while the
 // config runner is still running. This keeps the Sätteri integration optional as when
 // `@astrojs/markdown-satteri` is not installed, importing `./satteri` rejects and we resolve to it
