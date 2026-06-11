@@ -90,9 +90,8 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
-				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`). Resolve
-				// it and the optional Sätteri integration up front so we can reject unsupported
-				// usage before wiring up the integrations below.
+				// Resolve the configured processor and the optional Sätteri integration up front before
+				// wiring up the integrations below.
 				const processor = config.markdown.processor;
 				const satteri = await satteriIntegration;
 

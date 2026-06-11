@@ -11,10 +11,7 @@ export const satteriIntegration = import('./satteri').catch(() => null);
 type SatteriIntegration = Awaited<typeof satteriIntegration>;
 type MarkdownProcessor = NonNullable<AstroConfig['markdown']['processor']>;
 
-/**
- * Registers Starlight's Markdown transforms on the Astro 6.4+ `markdown.processor`, picking the
- * plugin set for the configured engine.
- */
+/** Registers Starlight's Markdown transforms, picking the plugin set for the configured engine. */
 export function applyStarlightMarkdownPlugins(
 	processor: MarkdownProcessor,
 	options: MarkdownProcessorPluginOptions,
@@ -39,7 +36,7 @@ export function applyStarlightMarkdownPlugins(
 	}
 }
 
-/** Registers the directive-restoration plugin on the Astro 6.4+ `markdown.processor`. */
+/** Registers the directive-restoration plugin. */
 export function registerDirectivesRestoration(
 	processor: MarkdownProcessor,
 	satteri: SatteriIntegration
