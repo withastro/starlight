@@ -4,8 +4,15 @@ import { remarkDirectivesRestoration } from './asides';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import { starlightRehypePlugins, starlightRemarkPlugins } from './remark-rehype';
 
-// For some reason, trying to `await import("./satteri")` in the integration module causes a Vite
-// error about the module runner being closed. This shape works, not sure why!
+// This file is imported by the Starlight integration that is used in Astro configuration files.
+// When using Starlight, Astro loads its configuration using a temporary Vite module runner and
+// closes it before running integration hooks. If this dynamic import is started later from an
+// integration hook, Vite tries to resolve it through that closed runner and throw "Vite module
+// runner has been closed".
+// We start loading `./satteri` at the top level so Vite waits for it to resolve or fail while the
+// config runner is still running. This keeps the Sätteri integration optional as when
+// `@astrojs/markdown-satteri` is not installed, importing `./satteri` rejects and we resolve to it
+// `null`, which is later used to detect if Sätteri support is available or not.
 export const satteriIntegration = import('./satteri').catch(() => null);
 
 type SatteriIntegration = Awaited<typeof satteriIntegration>;
