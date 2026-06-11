@@ -352,14 +352,18 @@ test.describe('components', () => {
 			const starlight = await getProdServer();
 
 			await starlight.goto('/anchor-heading');
-			const markdownContent = page.locator('.sl-markdown-content');
-			const markdownHtml = await markdownContent.innerHTML();
+			const markdownHeadings = await page
+				.locator('.sl-markdown-content .sl-heading-wrapper')
+				.evaluateAll((headings) => headings.map((heading) => heading.outerHTML));
 
 			await starlight.goto('/anchor-heading-component');
-			const componentContent = page.locator('.sl-markdown-content');
-			const componentHtml = await componentContent.innerHTML();
+			const componentHeadings = await page
+				.locator('.sl-markdown-content .sl-heading-wrapper')
+				.evaluateAll((headings) => headings.map((heading) => heading.outerHTML));
 
-			expect(markdownHtml).toEqual(componentHtml);
+			// The Astro's Rust compiler may add insignificant whitespace between siblings so we compare
+			// heading wrappers individually rather than the entire content.
+			expect(markdownHeadings).toEqual(componentHeadings);
 		});
 
 		test('does not render headings anchor links for individual Markdown pages and entries not part of the `docs` collection', async ({
