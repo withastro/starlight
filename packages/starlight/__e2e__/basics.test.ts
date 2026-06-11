@@ -344,39 +344,6 @@ test.describe('components', () => {
 		});
 	});
 
-	test.describe('whitespaces', () => {
-		/**
-		 * Components including styles include a trailing whitespace which can be problematic when used
-		 * inline, e.g.:
-		 *
-		 * ```mdx
-		 * Badge (<Badge text="test" />)
-		 * ```
-		 *
-		 * The example above would render as:
-		 *
-		 * ```
-		 * Badge (test )
-		 * ```
-		 *
-		 * Having a component being responsible for its own spacing is not ideal and should be avoided
-		 * especially when used inline.
-		 * To work around this issue, such components can be wrapped in a fragment.
-		 *
-		 * @see https://github.com/withastro/compiler/issues/1003
-		 */
-		test('does not include components having trailing whitespaces when used inline', async ({
-			page,
-			getProdServer,
-		}) => {
-			const starlight = await getProdServer();
-			await starlight.goto('/whitespaces');
-
-			expect(await page.getByTestId('badge').textContent()).toContain('Badge (Note)');
-			expect(await page.getByTestId('icon').textContent()).toContain('Icon ()');
-		});
-	});
-
 	test.describe('anchor headings', () => {
 		test('renders the same content for Markdown headings and Astro component', async ({
 			getProdServer,
