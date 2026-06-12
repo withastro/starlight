@@ -2,6 +2,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { AstroConfig } from 'astro';
 import { resolveCollectionPath } from '../utils/collection-fs';
+import { ensureTrailingSlash } from '../utils/path';
 import type { HookParameters, StarlightConfig } from '../types';
 
 /**
@@ -21,10 +22,12 @@ export interface MarkdownProcessorPluginOptions {
  * utility to determine if a file should be transformed by a plugin or not.
  */
 export function getMarkdownProcessorPaths(options: MarkdownProcessorPluginOptions): string[] {
-	const paths = [normalizePath(resolveCollectionPath('docs', options.astroConfig.srcDir))];
+	const paths = [normalizeDirectoryPath(resolveCollectionPath('docs', options.astroConfig.srcDir))];
 
 	for (const processedDir of options.starlightConfig.markdown.processedDirs) {
-		paths.push(normalizePath(resolve(fileURLToPath(options.astroConfig.root), processedDir)));
+		paths.push(
+			normalizeDirectoryPath(resolve(fileURLToPath(options.astroConfig.root), processedDir))
+		);
 	}
 
 	return paths;
@@ -49,4 +52,13 @@ export function shouldTransformPath(path: string | URL | undefined, allowedPaths
 const backSlashRegex = /\\/g;
 function normalizePath(path: string) {
 	return path.replace(backSlashRegex, '/');
+}
+
+/**
+ * Allowed paths are directory prefixes compared with `startsWith()` in {@link shouldTransformPath},
+ * so we ensure they have a trailing slash to avoid matching sibling directories with the same
+ * prefix.
+ */
+function normalizeDirectoryPath(path: string) {
+	return ensureTrailingSlash(normalizePath(path));
 }
