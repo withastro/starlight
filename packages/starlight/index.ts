@@ -20,6 +20,7 @@ import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
+import { vitePluginStarlightLazyBarrelOptimization } from './integrations/vite-lazy-barrel-optimization';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import {
 	injectPluginTranslationsTypes,
@@ -144,6 +145,7 @@ export default function StarlightIntegration(
 					vite: {
 						plugins: [
 							vitePluginStarlightCssLayerOrder(),
+							vitePluginStarlightLazyBarrelOptimization(),
 							vitePluginStarlightUserConfig(
 								{ command, isNodeCompatibleEnv },
 								starlightConfig,
