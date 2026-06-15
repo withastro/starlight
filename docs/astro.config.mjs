@@ -21,6 +21,7 @@ export const locales = {
 	hi: { label: 'हिंदी', lang: 'hi' },
 	da: { label: 'Dansk', lang: 'da' },
 	uk: { label: 'Українська', lang: 'uk' },
+	fa: { label: 'فارسی', lang: 'fa-IR', dir: /** @type {'rtl'} */ ('rtl') },
 };
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
@@ -87,6 +88,7 @@ export default defineConfig({
 						ru: 'Первые шаги',
 						hi: 'यहाँ से शुरू करे',
 						uk: 'Почніть звідси',
+						fa: 'از اینجا آغاز کنید',
 					},
 					items: [
 						'getting-started',
@@ -109,6 +111,7 @@ export default defineConfig({
 								ru: 'Влияние на окружающую среду',
 								hi: 'पर्यावरणीय प्रभाव',
 								uk: 'Вплив на довкілля',
+								fa: 'تأثیرات محیطی',
 							},
 						},
 					],
@@ -130,6 +133,7 @@ export default defineConfig({
 						ru: 'Руководства',
 						hi: 'गाइड',
 						uk: 'Ґайди',
+						fa: 'راهنماها',
 					},
 					items: [{ autogenerate: { directory: 'guides' } }],
 				},
@@ -143,6 +147,7 @@ export default defineConfig({
 						ja: 'コンポーネント',
 						'zh-CN': '组件',
 						uk: 'Компоненти',
+						fa: 'مؤلفه‌ها',
 					},
 					items: [{ autogenerate: { directory: 'components' } }],
 				},
@@ -162,6 +167,7 @@ export default defineConfig({
 						ru: 'Справочник',
 						hi: 'संदर्भ',
 						uk: 'Довідник',
+						fa: 'مرجع',
 					},
 					items: [{ autogenerate: { directory: 'reference' } }],
 				},
@@ -177,6 +183,7 @@ export default defineConfig({
 						ru: 'Ресурсы',
 						ko: '리소스',
 						uk: 'Ресурси',
+						fa: 'منابع',
 					},
 					items: [{ autogenerate: { directory: 'resources' } }],
 				},
