@@ -35,3 +35,6 @@ minimumReleaseAgeExclude:
   - '@expressive-code/*'
   # TODO(HiDeoo) Added for beta testing, re-evaluate after the beta phase
   - '@astrojs/markdown-satteri'
+  - '@astrojs/mdx'
+  - '@astrojs/node'
+  - '@astrojs/markdoc'
