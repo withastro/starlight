@@ -1,7 +1,7 @@
 import type { Root } from 'hast';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 import type { Transformer } from 'unified';
-import type { MarkdownProcessorPluginOptions } from './markdown-process';
+import type { MarkdownProcessorPluginOptions } from './markdown-processor';
 
 /**
  * rehype plugin that adds `dir` attributes to `<code>` and `<pre>`

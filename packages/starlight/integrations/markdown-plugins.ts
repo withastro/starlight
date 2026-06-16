@@ -1,6 +1,6 @@
 import { isSatteriProcessor } from '@astrojs/markdown-satteri';
 import type { AstroConfig, AstroIntegration, AstroIntegrationLogger } from 'astro';
-import type { MarkdownProcessorPluginOptions } from './markdown-process';
+import type { MarkdownProcessorPluginOptions } from './markdown-processor';
 import { satteriDirectivesRestoration, starlightSatteriPlugins } from './satteri';
 
 // This file is imported by the Starlight integration that is used in Astro configuration files.

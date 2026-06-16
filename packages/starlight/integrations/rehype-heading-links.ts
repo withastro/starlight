@@ -4,7 +4,7 @@ import { h } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 import { anchorLinkIconPath } from './anchor-icon';
-import type { MarkdownProcessorPluginOptions } from './markdown-process';
+import type { MarkdownProcessorPluginOptions } from './markdown-processor';
 
 const AnchorLinkIcon = h(
 	'span',

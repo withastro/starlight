@@ -16,7 +16,7 @@ import {
 	getMarkdownProcessorPaths,
 	shouldTransformPath,
 	type MarkdownProcessorPluginOptions,
-} from './markdown-process';
+} from './markdown-processor';
 import { Icons } from '../components-internals/Icons';
 import { throwInvalidAsideIconError } from './asides-error';
 import type { StarlightIcon } from '../types';

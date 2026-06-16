@@ -10,7 +10,7 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
-import type { MarkdownProcessorPluginOptions } from './integrations/markdown-process';
+import type { MarkdownProcessorPluginOptions } from './integrations/markdown-processor';
 import {
 	applyStarlightMarkdownPlugins,
 	starlightDirectivesRestorationIntegration,

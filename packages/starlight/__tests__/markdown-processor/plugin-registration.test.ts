@@ -1,7 +1,7 @@
 import { unified } from '@astrojs/markdown-remark';
 import { satteri } from '@astrojs/markdown-satteri';
 import { describe, expect, test, vi } from 'vitest';
-import { remarkDirectivesRestoration } from '../../integrations/asides';
+import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
 import {
 	applyStarlightMarkdownPlugins,
 	registerDirectivesRestoration,
