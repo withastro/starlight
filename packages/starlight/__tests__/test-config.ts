@@ -2,7 +2,7 @@
 
 import type { AstroConfig } from 'astro';
 import { getViteConfig } from 'astro/config';
-import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
+import { vitePluginStarlightVirtualModules } from '../integrations/vite-virtual-modules';
 import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
 import { createTestPluginContext } from './test-plugin-utils';
 import { vitePluginStarlightCssLayerOrder } from '../integrations/vite-layer-order';
@@ -29,7 +29,7 @@ export async function defineVitestConfig(
 	return getViteConfig({
 		plugins: [
 			vitePluginStarlightCssLayerOrder(),
-			vitePluginStarlightUserConfig(
+			vitePluginStarlightVirtualModules(
 				{ command, isNodeCompatibleEnv: true },
 				starlightConfig,
 				{
