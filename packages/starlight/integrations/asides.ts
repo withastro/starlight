@@ -60,6 +60,8 @@ function transformUnhandledDirective(
 	index: number,
 	parent: Parent
 ) {
+	// TODO(HiDeoo) Should be fixed once https://github.com/bruits/satteri/pull/97 is released and we
+	// update satteri.
 	let markdown = toMarkdown(node, { extensions: [directiveToMarkdown()] });
 	/**
 	 * `mdast-util-to-markdown` assumes that the tree represents a complete document (as it's an AST

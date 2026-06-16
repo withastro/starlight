@@ -13,8 +13,8 @@ import { AstroError } from 'astro/errors';
 import type { MarkdownProcessorPluginOptions } from './integrations/markdown-process';
 import {
 	applyStarlightMarkdownPlugins,
-	satteriIntegration,
 	starlightDirectivesRestorationIntegration,
+	unifiedIntegration,
 } from './integrations/markdown-plugins';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
@@ -91,10 +91,10 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
-				// Resolve the configured processor and the optional Sätteri integration up front before
+				// Resolve the configured processor and the optional Unified integration up front before
 				// wiring up the integrations below.
 				const processor = config.markdown.processor;
-				const satteri = await satteriIntegration;
+				const unified = await unifiedIntegration;
 
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
@@ -119,7 +119,7 @@ export default function StarlightIntegration(
 				};
 
 				// We push our plugins onto the processor's options.
-				applyStarlightMarkdownPlugins(processor, markdownProcessorOptions, satteri, logger);
+				applyStarlightMarkdownPlugins(processor, markdownProcessorOptions, unified, logger);
 
 				// Add Starlight directives restoration integration at the end of the list so that
 				// remark/mdast plugins injected by Starlight plugins through Astro integrations can
