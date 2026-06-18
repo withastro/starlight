@@ -13,12 +13,9 @@ import { toString } from 'mdast-util-to-string';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
-import type { StarlightIcon } from '../types';
-import { Icons } from '../components-internals/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
-import { throwInvalidAsideIconError } from './asides-error';
-import { asideIconPathAttrs, isAsideVariant, type AsideVariant } from './aside-icons';
+import { getAsideIcon, isAsideVariant } from './aside-icons';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -125,13 +122,6 @@ function makeSvgChildNodes(children: Result['children']): P[] {
  * ```
  */
 export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[], Root> {
-	const iconPaths: Record<AsideVariant, ReturnType<typeof s>[]> = {
-		note: asideIconPathAttrs.note.map((attrs) => s('path', attrs)),
-		tip: asideIconPathAttrs.tip.map((attrs) => s('path', attrs)),
-		caution: asideIconPathAttrs.caution.map((attrs) => s('path', attrs)),
-		danger: asideIconPathAttrs.danger.map((attrs) => s('path', attrs)),
-	};
-
 	const transformer: Transformer<Root> = (tree, file) => {
 		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
@@ -165,18 +155,12 @@ export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[]
 				node.children.splice(0, 1);
 			}
 
-			let iconPath = iconPaths[variant];
-
-			if (attributes?.['icon']) {
-				const iconName = attributes['icon'] as StarlightIcon;
-				const icon = Icons[iconName];
-				if (!icon) throwInvalidAsideIconError(iconName);
-				// Omit the root node and return only the first child which is the SVG element.
-				const iconHastTree = fromHtml(`<svg>${icon}</svg>`, { fragment: true, space: 'svg' })
-					.children[0] as Element;
-				// Render all SVG child nodes.
-				iconPath = makeSvgChildNodes(iconHastTree.children);
-			}
+			const icon = getAsideIcon(variant, attributes?.['icon']);
+			// Omit the root node and return only the first child which is the SVG element.
+			const iconHastTree = fromHtml(`<svg>${icon}</svg>`, { fragment: true, space: 'svg' })
+				.children[0] as Element;
+			// Render all SVG child nodes.
+			const iconPath = makeSvgChildNodes(iconHastTree.children);
 
 			const aside = h(
 				'aside',

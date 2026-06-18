@@ -11,15 +11,12 @@ import type {
 	MdastPluginDefinition,
 } from 'satteri';
 import { anchorLinkIconPath } from './anchor-icon';
-import { asideIconPathAttrs, isAsideVariant } from './aside-icons';
+import { getAsideIcon, isAsideVariant } from './aside-icons';
 import {
 	getMarkdownProcessorPaths,
 	shouldTransformPath,
 	type MarkdownProcessorPluginOptions,
 } from './markdown-process';
-import { Icons } from '../components-internals/Icons';
-import { throwInvalidAsideIconError } from './asides-error';
-import type { StarlightIcon } from '../types';
 
 // Re-exported so callers can narrow `markdown.processor` to a Sätteri processor through the same
 // lazy import that loads the optional `@astrojs/markdown-satteri` peer dependency.
@@ -108,18 +105,8 @@ function satteriAsidesPlugin(
 				children.shift();
 			}
 
-			const customIconName = node.attributes?.['icon'];
-			let innerSvgHtml: string;
-			if (customIconName) {
-				const icon = Icons[customIconName as StarlightIcon];
-				if (!icon) throwInvalidAsideIconError(customIconName);
-				innerSvgHtml = icon;
-			} else {
-				innerSvgHtml = asideIconPathAttrs[variant]
-					.map((attrs) => `<path${attrsToHtml(attrs)}/>`)
-					.join('');
-			}
-			const iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon">${innerSvgHtml}</svg>`;
+			const icon = getAsideIcon(variant, node.attributes?.['icon']);
+			const iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon">${icon}</svg>`;
 
 			return paragraphElement(
 				'aside',
@@ -137,14 +124,6 @@ function satteriAsidesPlugin(
 			);
 		},
 	};
-}
-
-function attrsToHtml(attrs: Record<string, string>): string {
-	let out = '';
-	for (const [key, value] of Object.entries(attrs)) {
-		out += ` ${key}="${value.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"`;
-	}
-	return out;
 }
 
 function serializeDirective(node: Parameters<typeof toMarkdown>[0]): string {
