@@ -1,6 +1,6 @@
 /// <reference types="mdast-util-directive" />
 
-import { h as _h, s as _s, type Properties, type Result } from 'hastscript';
+import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
 	type Directives,
@@ -13,8 +13,8 @@ import { toString } from 'mdast-util-to-string';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
-import { fromHtml } from 'hast-util-from-html';
-import type { Element } from 'hast';
+import { parseIconChildren } from './markdown-icon';
+import type { ElementContent } from 'hast';
 import { getAsideIcon, isAsideVariant } from './aside-utils';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -82,7 +82,7 @@ function transformUnhandledDirective(
 }
 
 /** Hacky function that generates the children of an mdast SVG tree. */
-function makeSvgChildNodes(children: Result['children']): P[] {
+function makeSvgChildNodes(children: ElementContent[]): P[] {
 	const nodes: P[] = [];
 	for (const child of children) {
 		if (child.type !== 'element') continue;
@@ -156,11 +156,7 @@ export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[]
 			}
 
 			const icon = getAsideIcon(variant, attributes?.['icon']);
-			// Omit the root node and return only the first child which is the SVG element.
-			const iconHastTree = fromHtml(`<svg>${icon}</svg>`, { fragment: true, space: 'svg' })
-				.children[0] as Element;
-			// Render all SVG child nodes.
-			const iconPath = makeSvgChildNodes(iconHastTree.children);
+			const iconPath = makeSvgChildNodes(parseIconChildren(icon));
 
 			const aside = h(
 				'aside',

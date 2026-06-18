@@ -10,7 +10,7 @@ import type {
 	MdastPluginInput,
 	MdastPluginDefinition,
 } from 'satteri';
-import { anchorLinkIconPath } from './anchor-icon';
+import { headingLinkIconChildren } from './markdown-icon';
 import { getAsideIcon, isAsideVariant } from './aside-utils';
 import {
 	getMarkdownProcessorPaths,
@@ -240,18 +240,13 @@ function satteriAutolinkHeadingsPlugin(
 										{
 											type: 'element',
 											tagName: 'svg',
-											properties: { width: '16', height: '16', viewBox: '0 0 24 24' },
-											children: [
-												{
-													type: 'element',
-													tagName: 'path',
-													properties: {
-														fill: 'currentcolor',
-														d: anchorLinkIconPath,
-													},
-													children: [],
-												},
-											],
+											properties: {
+												width: '16',
+												height: '16',
+												viewBox: '0 0 24 24',
+												fill: 'currentColor',
+											},
+											children: headingLinkIconChildren,
 										},
 									],
 								},
