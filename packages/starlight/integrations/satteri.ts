@@ -11,7 +11,7 @@ import type {
 	MdastPluginDefinition,
 } from 'satteri';
 import { anchorLinkIconPath } from './anchor-icon';
-import { getAsideIcon, isAsideVariant } from './aside-icons';
+import { getAsideIcon, isAsideVariant } from './aside-utils';
 import {
 	getMarkdownProcessorPaths,
 	shouldTransformPath,

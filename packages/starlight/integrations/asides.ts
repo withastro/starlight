@@ -15,7 +15,7 @@ import { visit } from 'unist-util-visit';
 import type { MarkdownProcessorPluginOptions } from './markdown-process';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
-import { getAsideIcon, isAsideVariant } from './aside-icons';
+import { getAsideIcon, isAsideVariant } from './aside-utils';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
