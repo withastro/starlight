@@ -62,20 +62,20 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 <script is:inline>
 {
 	const onPageLoad = () => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
 		if (!shortcut.style.display) {
 			// Avoid running twice for the initial load
 			return;
 		}
-		const openBtn = document.querySelector('button[data-open-modal]');
-		const shortcut = openBtn?.querySelector('kbd');
-		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
 		const platformKey = shortcut.querySelector('kbd');
 		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
 			platformKey.textContent = '⌘';
 			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
 		}
 		shortcut.style.display = '';
-	});
+	};
 
 	onPageLoad(); // For regular page loads
 	document.addEventListener("astro:page-load", onPageLoad); // For Astro's View Transition system
