@@ -82,6 +82,6 @@ This statement was created in January 2026 and last reviewed in June 2026 using 
 
 [wcag]: https://www.w3.org/WAI/standards-guidelines/wcag/
 [wai-generator]: https://www.w3.org/WAI/planning/statements/generator/
-[a11y-issues]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3Aa11y
+[a11y-issues]: https://github.com/withastro/starlight/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22%F0%9F%A4%A9%20a11y%22
 [new-issue]: https://github.com/withastro/starlight/issues/new?template=---02-docs-issue.yml
 [discord]: https://astro.build/chat
