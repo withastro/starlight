@@ -18,7 +18,7 @@ Starlight takes the following measures to ensure accessibility:
 
 The [Web Content Accessibility Guidelines (WCAG)][wcag] defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA.
 
-Starlight is partially conformant with WCAG 2.2 level AA. Partially conformant means that some parts of the content do not fully conform to the accessibility standard.
+Starlight strives to meet WCAG 2.2 Level AA where possible. We do not currently make a formal conformance claim.
 
 ## Feedback
 
@@ -42,23 +42,23 @@ Accessibility of Starlight relies on the following technologies:
 
 These technologies are used in combination with modern browsers and assistive technologies to provide an accessible experience.
 
-### Accessibility features
+### Accessibility-supporting features
 
-Starlight includes the following accessibility features by default:
+Starlight includes the following accessibility-supporting features by default:
 
 - Skip link to bypass navigation and jump to main content
 - Logical heading hierarchy for screen reader navigation
 - Landmark regions (`<nav>`, `<main>`, `<aside>`) for assistive technology navigation
-- Full keyboard navigation for all interactive elements
-- Arrow key, Home, and End key support for tab components
-- Escape key closes modals and menus with proper focus management
+- Keyboard-accessible navigation for Starlight-provided interactive elements
+- Arrow key, Home, and End key interaction for tab components
+- Escape key support for modals and menus with focus management
 - Keyboard shortcuts for search (<kbd><kbd>Ctrl</kbd>+<kbd>K</kbd></kbd> or <kbd><kbd>Command</kbd>+<kbd>K</kbd></kbd>)
-- Color contrast meeting WCAG AA requirements
+- Color contrast targets based on WCAG AA requirements
 - Dark and light themes with user preference support
 - Responsive design adapting to different viewport sizes
 - Visible focus indicators for keyboard navigation
-- ARIA attributes throughout components
-- Screen reader labels for interactive elements
+- ARIA attributes where needed in interactive components
+- Screen reader labels for non-text controls
 - Language attributes for proper pronunciation
 - Semantic HTML for meaningful structure
 
@@ -78,7 +78,7 @@ Starlight assesses accessibility through the following approaches:
 
 ---
 
-This statement was created on January 2026 using the [W3C Accessibility Statement Generator Tool][wai-generator].
+This statement was created in January 2026 and last reviewed in June 2026 using the [W3C Accessibility Statement Generator Tool][wai-generator].
 
 [wcag]: https://www.w3.org/WAI/standards-guidelines/wcag/
 [wai-generator]: https://www.w3.org/WAI/planning/statements/generator/
