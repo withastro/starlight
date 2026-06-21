@@ -547,7 +547,7 @@ Starlightは、リストやテーブルなど、その他のMarkdown記法をす
 
 ## 高度なMarkdownとMDXの設定
 
-Starlightは、remarkとrehypeをベースとした、AstroのMarkdown・MDXレンダラーを使用しています。Astroの設定ファイルに`remarkPlugins`または`rehypePlugins`を追加することで、カスタム構文や動作をサポートできます。詳しくは、Astroドキュメントの[「Markdownプラグイン」](https://docs.astro.build/ja/guides/markdown-content/#markdown-plugins)を参照してください。
+Starlightは、Astroの[`markdown.processor`](https://docs.astro.build/ja/reference/configuration-reference/#markdownprocessor)設定を使用してMarkdownとMDXをレンダリングします。設定したプロセッサーにプラグインやオプションを渡すことで、カスタムの構文や動作をサポートできます。詳しくは、Astroドキュメントの[「Markdownプラグイン」](https://docs.astro.build/ja/guides/markdown-content/#markdownプラグイン)を参照してください。
 
 ## Markdoc
 
