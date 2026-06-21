@@ -98,15 +98,15 @@ starlight({
 
 サイトのサイドバーのナビゲーション項目を設定します。
 
-サイドバーはリンクとリンクのグループの配列です。`slug`を使用する場合を除き、各項目は`label`と以下のプロパティのいずれかが必要です。
+サイドバーはリンク、リンクのグループ、および自動生成されたエントリの配列です。サイドバー項目は、以下のプロパティのいずれかを使用して定義します。
 
-- `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。
+- `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。リンクには`label`も必要です。
 
-- `slug` — たとえば`'guides/getting-started'`など、内部ページへの参照。
+- `slug` — たとえば`'guides/getting-started'`など、内部ページへの参照。デフォルトでは、リンク先のページのタイトルがラベルとして使用されます。
 
-- `items` — サイドバーの複数のリンクとサブグループを含む配列。
+- `items` — サイドバーの複数のリンク、サブグループ、および自動生成されたエントリを含む配列。グループには`label`も必要です。
 
-- `autogenerate` — リンクのグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。
+- `autogenerate` — リンクとサブグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。自動生成されたエントリは、グループの`items`配列内に配置できます。
 
 内部リンクは、`slug`プロパティをもつオブジェクトの代わりに文字列として指定することもできます。
 
@@ -130,7 +130,7 @@ starlight({
 		// referenceディレクトリのすべてのページにリンクするグループ。
 		{
 			label: 'リファレンス',
-			autogenerate: { directory: 'reference' },
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 	],
 });
@@ -144,9 +144,9 @@ starlight({
 
 リンクのグループはデフォルトで展開されます。`collapsed`プロパティを`true`に設定して、この動作を変更できます。
 
-自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
+自動生成されたサブグループもデフォルトで展開されます。`autogenerate.collapsed`プロパティを設定して、これらを折りたたむことができます。
 
-```js {5,13}
+```js {5,15}
 sidebar: [
   // 折りたたまれたリンクのグループ。
   {
@@ -157,10 +157,14 @@ sidebar: [
   // 自動生成される折りたたまれたサブグループを含む展開されたグループ。
   {
     label: '参照',
-    autogenerate: {
-      directory: 'reference',
-      collapsed: true,
-    },
+    items: [
+      {
+        autogenerate: {
+          directory: 'reference',
+          collapsed: true,
+        },
+      },
+    ],
   },
 ],
 ```
@@ -218,17 +222,15 @@ type SidebarItem =
 					items: SidebarItem[];
 					collapsed?: boolean;
 			  }
-			| {
-					// 自動生成されたリンクのグループ
-					label: string;
-					autogenerate: {
-						directory: string;
-						collapsed?: boolean;
-						attrs?: Record<string, string | number | boolean | undefined>;
-					};
-					collapsed?: boolean;
-			  }
-	  ));
+	  ))
+	| {
+			// 自動生成されたリンクとサブグループ
+			autogenerate: {
+				directory: string;
+				collapsed?: boolean;
+				attrs?: Record<string, string | number | boolean | undefined>;
+			};
+	  };
 ```
 
 #### `BadgeConfig`
