@@ -173,39 +173,39 @@ yarn create astro --template starlight/tailwind
 
 3. 替换由 Astro 生成的 `src/styles/global.css` 文件的内容，以与 Starlight 兼容：
 
-    ```css
-    /* src/styles/global.css */
-    @layer base, starlight, theme, components, utilities;
+   ```css
+   /* src/styles/global.css */
+   @layer base, starlight, theme, components, utilities;
 
-    @import '@astrojs/starlight-tailwind';
-    @import 'tailwindcss/theme.css' layer(theme);
-    @import 'tailwindcss/utilities.css' layer(utilities);
-    ```
+   @import '@astrojs/starlight-tailwind';
+   @import 'tailwindcss/theme.css' layer(theme);
+   @import 'tailwindcss/utilities.css' layer(utilities);
+   ```
 
-	这个 Tailwind 主题配置定义了 Starlight 的[层叠层](#层叠层)顺序，导入了 Starlight 的 Tailwind 补充 CSS，并导入了 Tailwind 的主题和工具样式。
-    如果你的项目需要额外的 Tailwind 配置，请查看[“使用多个 Tailwind 配置”](#使用多个-tailwind-配置)一节。
+   这个 Tailwind 主题配置定义了 Starlight 的[层叠层](#层叠层)顺序，导入了 Starlight 的 Tailwind 补充 CSS，并导入了 Tailwind 的主题和工具样式。
+   如果你的项目需要额外的 Tailwind 配置，请查看[“使用多个 Tailwind 配置”](#使用多个-tailwind-配置)一节。
 
 4. 更新 Starlight 配置，将 Tailwind CSS 文件添加为 `customCss` 数组中的第一项：
 
-    ```js ins={11-12}
-    // astro.config.mjs
-    import { defineConfig } from 'astro/config';
-    import starlight from '@astrojs/starlight';
-    import tailwindcss from '@tailwindcss/vite';
+   ```js ins={11-12}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import tailwindcss from '@tailwindcss/vite';
 
-    export default defineConfig({
-    	integrations: [
-    		starlight({
-    			title: '使用了 Tailwind 的文档',
-    			customCss: [
-    				// 你的 Tailwind 基础样式的路径：
-    				'./src/styles/global.css',
-    			],
-    		}),
-    	],
-    	vite: { plugins: [tailwindcss()] },
-    });
-    ```
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: '使用了 Tailwind 的文档',
+   			customCss: [
+   				// 你的 Tailwind 基础样式的路径：
+   				'./src/styles/global.css',
+   			],
+   		}),
+   	],
+   	vite: { plugins: [tailwindcss()] },
+   });
+   ```
 
 </Steps>
 
