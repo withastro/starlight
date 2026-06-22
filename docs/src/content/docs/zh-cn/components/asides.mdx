@@ -132,6 +132,36 @@ import { Aside } from '@astrojs/starlight/components';
 
 </Preview>
 
+### 使用自定义图标
+
+通过将 [`icon`](#icon) 属性设置为 [Starlight 内置图标之一](/reference/icons/#所有图标) 的名称，以覆盖默认的旁白图标。
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	*带有* 自定义图标的提示。
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+*带有* 自定义图标的提示。
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	*带有* 自定义图标的提示。
+</Aside>
+
+</Preview>
+
 ## `<Aside>` 的属性
 
 **实现：** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
@@ -148,7 +178,7 @@ import { Aside } from '@astrojs/starlight/components';
 - `note` 旁白（默认）为蓝色，并带有一个信息的图标。
 - `tip` 旁白为紫色，并带有一个火箭的图标。
 - `caution` 旁白为黄色，并带有一个三角警示图标。
-- `danger` 旁白为红色。并带有一个八边形警示图标。
+- `danger` 旁白为红色，并带有一个八边形警示图标。
 
 ### `title`
 
@@ -156,3 +186,9 @@ import { Aside } from '@astrojs/starlight/components';
 
 要显示的旁白的标题。
 如果未设置 `title`，则将使用当前旁白的 `type` 作为默认标题。
+
+### `icon`
+
+**类型：** [`StarlightIcon`](/reference/icons/#starlighticon-类型)
+
+旁白可以包含一个 `icon` 属性，设置为 [Starlight 内置图标之一](/reference/icons/#所有图标) 的名称。
