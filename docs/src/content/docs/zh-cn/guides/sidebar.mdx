@@ -45,7 +45,7 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 	]}
 />
 
-在 [自动生成的分组](#自动生成的分组) 章节了解更多关于自动生成侧边栏的内容。
+在 [自动生成的链接](#自动生成的链接) 章节了解更多关于自动生成侧边栏的内容。
 
 ## 添加链接和链接分组
 
@@ -186,14 +186,14 @@ starlight({
 	]}
 />
 
-### 自动生成的分组
+### 自动生成的链接
 
-Starlight 可以根据文档目录在侧边栏中自动生成一个分组。
+Starlight 可以根据文档目录在侧边栏中自动生成链接。
 当你不想手动输入分组中的每个侧边栏项目时，这很有用。
 
 默认情况下，页面按照文件 [`id`](/zh-cn/reference/route-data/#id) 的字母顺序排序。
 
-使用具有 `autogenerate` 属性的对象添加自动生成的分组。
+使用具有 `autogenerate` 属性的对象添加自动生成的链接。
 `autogenerate` 的配置必须指定用于侧边栏条目的 `directory`。
 例如，使用以下配置：
 
@@ -202,8 +202,8 @@ starlight({
 	sidebar: [
 		{
 			label: '星座',
-			// 自动生成一个链接分组，用于 '星座' 目录。
-			autogenerate: { directory: 'constellations' },
+			// 自动为 'constellations' 目录生成链接。
+			items: [{ autogenerate: { directory: 'constellations' } }],
 		},
 	],
 });
@@ -264,7 +264,7 @@ sidebar:
 ---
 ```
 
-一个包含上面 frontmatter 的页面的自动生成分组将会生成以下侧边栏：
+一个包含上面 frontmatter 的页面的自动生成的链接组将会生成以下侧边栏：
 
 <SidebarPreview
 	config={[
@@ -284,12 +284,12 @@ sidebar:
 />
 
 :::note
-`sidebar` frontmatter 配置仅用于自动生成分组中的链接和使用 `slug` 属性定义的文档链接。它并不适用于使用 `link` 属性定义的链接。
+`sidebar` frontmatter 配置仅用于自动生成的链接和使用 `slug` 属性定义的文档链接。它并不适用于使用 `link` 属性定义的链接。
 :::
 
 ## 徽章
 
-链接、分组、自动生成的分组都可以包含一个 `badge` 属性，以在它们的标签旁边显示徽章。
+链接和分组都可以包含一个 `badge` 属性，以在它们的标签旁边显示徽章。
 
 ```js {9,16}
 starlight({
@@ -440,7 +440,7 @@ starlight({
 
 ### 为自动生成的链接自定义 HTML 属性
 
-通过在 `autogenerate` 配置中定义 `attrs` 属性，为所有[自动生成的分组](#自动生成的分组)自定义 HTML 属性。
+通过在 `autogenerate` 配置中定义 `attrs` 属性，为所有[自动生成的链接](#自动生成的链接)自定义 HTML 属性。
 单个页面可以使用 [`sidebar.attrs` frontmatter 字段](/zh-cn/reference/frontmatter/#attrs) 指定自定义属性，这些属性将与 `autogenerate.attrs` 配置合并。
 
 例如，使用以下配置：
@@ -658,7 +658,7 @@ starlight({
 	]}
 />
 
-[自动生成的子组](#自动生成的分组) 也可以通过将 `autogenerate.collapsed` 属性设置为 `true` 来默认折叠。
+[自动生成的子组](#自动生成的链接) 也可以通过将 `autogenerate.collapsed` 属性设置为 `true` 来默认折叠。
 
 ```js {9-10}
 starlight({

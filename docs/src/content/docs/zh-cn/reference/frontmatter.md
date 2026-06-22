@@ -33,7 +33,7 @@ description: 了解更多关于此项目的信息。
 
 **类型：** `string`
 
-覆盖页面的slug。有关更多详细信息，请参阅 Astro文档中的 [ "定义自定义 ID"](https://docs.astro.build/zh-cn/guides/content-collections/#定义自定义-id) 部分。
+覆盖页面的 slug。有关更多详细信息，请参阅 Astro 文档中的 [“定义自定义 ID”](https://docs.astro.build/zh-cn/guides/content-collections/#定义自定义-id) 部分。
 
 ### `editUrl`
 
@@ -45,7 +45,7 @@ description: 了解更多关于此项目的信息。
 
 **类型：** [`HeadConfig[]`](/zh-cn/reference/configuration/#headconfig)
 
-你可以使用 `<head>` frontmatter 字段向页面的`<head>`添加其他标签。这意味着你可以将自定义样式、元数据或其他标签添加到单个页面。类似于[全局 `head` 选项](/zh-cn/reference/configuration/#head)。
+你可以使用 `head` frontmatter 字段向页面的 `<head>` 添加其他标签。这意味着你可以将自定义样式、元数据或其他标签添加到单个页面。类似于[全局 `head` 选项](/zh-cn/reference/configuration/#head)。
 
 ```md
 ---
@@ -62,7 +62,8 @@ head:
 
 **类型：** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
-覆盖[全局 `tableOfContents` 配置](/zh-cn/reference/configuration/#tableofcontents)。自定义要包含的标题级别，或设置为 `false` 以在此页面上隐藏目录。
+覆盖[全局 `tableOfContents` 配置](/zh-cn/reference/configuration/#tableofcontents)。
+自定义要包含的标题级别，或设置为 `false` 以在此页面上隐藏目录。
 
 ```md
 ---
@@ -109,7 +110,7 @@ hero:
   tagline: 把你的东西带到月球上，眨眼间又回来。
   image:
     alt: 一个闪闪发光、色彩鲜艳的标志
-    file: ../../assets/logo.png
+    file: ~/assets/logo.png
   actions:
     - text: 告诉我更多
       link: /getting-started/
@@ -131,8 +132,8 @@ hero:
 hero:
   image:
     alt: 一个闪闪发光、色彩鲜艳的 logo
-    dark: ../../assets/logo-dark.png
-    light: ../../assets/logo-light.png
+    dark: ~/assets/logo-dark.png
+    light: ~/assets/logo-light.png
 ---
 ```
 
@@ -187,7 +188,7 @@ interface HeroConfig {
 title: 带有横幅的页面
 banner:
   content: |
-    我们刚刚发布了一下非常酷的东西！
+    我们刚刚发布了一个非常酷的东西！
     <a href="https://example.com">点击查看！</a>
 ---
 ```
@@ -282,7 +283,8 @@ draft: true
 ---
 ```
 
-因为草稿页面并不包含在构建输出中，所以你无法使用 [slug](/zh-cn/guides/sidebar/#内部链接) 直接将草稿页面添加到网页中。目录中用于 [自动生成侧边栏](/zh-cn/guides/sidebar/#自动生成的分组) 的草稿页面在生产版本中自动排除。
+因为草稿页面并不包含在构建输出中，所以你无法使用 [slug](/zh-cn/guides/sidebar/#内部链接) 直接将草稿页面添加到站点的侧边栏配置中。
+目录中用于 [自动生成侧边栏链接](/zh-cn/guides/sidebar/#自动生成的链接) 的草稿页面在生产版本中自动排除。
 
 ### `sidebar`
 
@@ -384,6 +386,7 @@ sidebar:
 **类型：** `Record<string, string | number | boolean | undefined>`
 
 给自动生成的侧边栏分组的链接添加的 HTML 属性。
+如果在该页面所属的自动生成分组上设置了 [`autogenerate.attrs`](/zh-cn/guides/sidebar/#为自动生成的链接自定义-html-属性)，frontmatter 的属性将与分组属性合并。
 
 ```md
 ---
@@ -427,7 +430,8 @@ export const collections = {
 
 ```ts {10-15}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
@@ -450,7 +454,8 @@ export const collections = {
 
 ```ts {10-15}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
