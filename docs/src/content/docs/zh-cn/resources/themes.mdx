@@ -18,13 +18,15 @@ import ThemeGrid from '~/components/theme-grid.astro';
 
 安装由社区构建的主题，快速自定义网站的外观和风格。
 
+在下方预览所有主题列表，或者到 [Starlight Themes 演示网站](https://starlight-themes.netlify.app/) 交互式试玩。
+
 <ThemeGrid
 	labels={{
 		/** 主题切换按钮的无障碍标签。 */
 		legend: '预览',
 		/** 深色配色方案变体的无障碍标签。 */
 		dark: '深色',
-		/** 浅色主题变体的无障碍标签。 */
+		/** 浅色配色方案变体的无障碍标签。 */
 		light: '浅色',
 	}}
 	themes={[
@@ -36,7 +38,7 @@ import ThemeGrid from '~/components/theme-grid.astro';
 			previews: { light: 'rapide-light.png', dark: 'rapide-dark.png' },
 		},
 		{
-			title: 'Starlight Obsidian Theme',
+			title: 'Starlight Obsidian',
 			description: 'Starlight 主题，灵感来源于 Obsidian Publish 网站的风格。',
 			href: 'https://fevol.github.io/starlight-theme-obsidian/',
 			previews: { light: 'obsidian-light.png', dark: 'obsidian-dark.png' },
@@ -72,10 +74,78 @@ import ThemeGrid from '~/components/theme-grid.astro';
 			previews: { light: 'nova-light.png', dark: 'nova-dark.png' },
 		},
 		{
-			title: 'Starlight NextJS Theme',
-			description: 'Starlight 主题，灵感来源于 NextJS 文档。',
-			href: 'https://starlight-nextjs-theme.trueberryless.org/',
+			title: 'Starlight Next.js',
+			description: 'Starlight 主题，灵感来源于 Next.js 文档。',
+			href: 'https://starlight-theme-next.trueberryless.org/',
 			previews: { light: 'nextjs-light.png', dark: 'nextjs-dark.png' },
+		},
+		{
+			title: 'Starlight Galaxy',
+			description:
+				'一个专为发布文档和教育内容量身定制的 Astro Starlight 主题。',
+			href: 'https://frostybee.github.io/starlight-theme-galaxy/',
+			previews: { light: 'galaxy-light.png', dark: 'galaxy-dark.png' },
+		},
+		{
+			title: 'Starlight Page',
+			description:
+				'一个直观、现代的 Starlight 主题，带有流畅的出现动画。',
+			href: 'https://pelagornis-page.netlify.app/',
+			previews: { light: 'page-light.png', dark: 'page-dark.png' },
+		},
+		{
+			title: 'Starlight Gruvbox',
+			description: '复古风格的 Starlight 主题',
+			href: 'https://starlight-theme-gruvbox.otterlord.dev/',
+			previews: { light: 'gruvbox-light.png', dark: 'gruvbox-dark.png' },
+		},
+		{
+			title: 'Starlight Six',
+			description:
+				'Six Technology 打造的简洁现代 Astro.js Starlight 主题',
+			href: 'https://six-tech.github.io/Six.StarlightTheme/',
+			previews: { light: 'six-light.png', dark: 'six-dark.png' },
+		},
+		{
+			title: 'Starlight Vintage',
+			description:
+				'Starlight 主题，深受经典 Astro 文档永恒设计的启发。',
+			href: 'https://starlight-theme-vintage.netlify.app/',
+			previews: { light: 'vintage-light.png', dark: 'vintage-dark.png' },
+		},
+		{
+			title: 'Starlight Rosé Pine',
+			description: 'Soho 风格的 Starlight 主题。',
+			href: 'https://starlight-theme-rose-pine.trueberryless.org/',
+			previews: { light: 'rose-pine-light.png', dark: 'rose-pine-dark.png' },
+		},
+		{
+			title: 'Starlight Nord',
+			description:
+				'极地北蓝风格的 Starlight 主题，灵感来源于 Arctic Ice Studio 的 Nord 主题',
+			href: 'https://kazettique.github.io/starlight-theme-nord/',
+			previews: { light: 'nord-light.png', dark: 'nord-dark.png' },
+		},
+		{
+			title: 'Starlight Terminal',
+			description:
+				'一个结合现代与复古元素的自定义 Astro Starlight 主题。',
+			href: 'https://madlinux7.github.io/starlight-theme-terminal/',
+			previews: { light: 'terminal-light.png', dark: 'terminal-dark.png' },
+		},
+		{
+			title: 'Starlight Celestia',
+			description:
+				'一个简洁现代的主题，拥有无缝侧边栏和温暖的点缀色。',
+			href: 'https://starlight-theme-celestia.devxy.codefloe.page/',
+			previews: { light: 'celestia-light.png', dark: 'celestia-dark.png' },
+		},
+		{
+			title: 'Starlight Lucode',
+			description:
+				'一个锐利、精致的产品文档主题，灵感来源于 shadcn/ui。',
+			href: 'https://lucas-labs.github.io/lucode-starlight-theme/',
+			previews: { light: 'lucode-light.png', dark: 'lucode-dark.png' },
 		},
 	]}
 />
