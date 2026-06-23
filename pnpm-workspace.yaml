@@ -31,3 +31,4 @@ minimumReleaseAgeExclude:
   - '@astrojs/mdx'
   - '@astrojs/node'
   - '@astrojs/markdoc'
+  - '@bruits/*'
