@@ -1,5 +1,17 @@
 # @astrojs/starlight-markdoc
 
+## 0.7.0
+
+### Minor Changes
+
+- [#3951](https://github.com/withastro/starlight/pull/3951) [`1202dd4`](https://github.com/withastro/starlight/commit/1202dd4c3efd517bdfe213eaf84262e439485e45) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.41.0
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 0.6.0
 
 ### Minor Changes
