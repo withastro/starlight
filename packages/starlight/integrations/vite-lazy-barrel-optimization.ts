@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url';
 import type { ViteUserConfig } from 'astro';
 
 // https://vite.dev/guide/api-plugin#hook-filters
-const componentsBarrelIdFilter = /components\.ts(?:\?.*)?$/;
+const componentsBarrelIdFilter = /[\\/]components\.ts(?:\?.*)?$/;
 
 const backSlashRegex = /\\/g;
 const queryStringRegex = /\?.*$/;
