@@ -27,13 +27,6 @@ peerDependencyRules:
 minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - astro
-  - satteri
-  - '@bruits/*'
-  - 'astro-expressive-code'
-  - 'rehype-expressive-code'
-  - 'expressive-code'
-  - '@expressive-code/*'
-  # TODO(HiDeoo) Added for beta testing, re-evaluate after the beta phase
   - '@astrojs/markdown-satteri'
   - '@astrojs/mdx'
   - '@astrojs/node'
