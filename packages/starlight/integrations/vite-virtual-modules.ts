@@ -17,7 +17,7 @@ function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 }
 
 /** Vite plugin that exposes Starlight user config and project context via virtual modules. */
-export function vitePluginStarlightUserConfig(
+export function vitePluginStarlightVirtualModules(
 	{
 		command,
 		isNodeCompatibleEnv,
