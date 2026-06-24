@@ -110,7 +110,6 @@ how we do it.
 	.sl-markdown-content .sl-anchor-icon > svg {
 		display: inline;
 		width: var(--sl-anchor-icon-size);
-		margin-top: 0;
 		/* Center the link icon SVG vertically in the line. */
 		vertical-align: top;
 		transform: translateY(
