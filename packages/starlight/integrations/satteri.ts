@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url';
-import { isSatteriProcessor, satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
+import { satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
 import type { Element, Properties } from 'hast';
 import type { Paragraph } from 'mdast';
 import { directiveToMarkdown } from 'mdast-util-directive';
@@ -16,11 +16,7 @@ import {
 	getMarkdownProcessorPaths,
 	shouldTransformPath,
 	type MarkdownProcessorPluginOptions,
-} from './markdown-process';
-
-// Re-exported so callers can narrow `markdown.processor` to a Sätteri processor through the same
-// lazy import that loads the optional `@astrojs/markdown-satteri` peer dependency.
-export { isSatteriProcessor };
+} from './markdown-processor';
 
 export function starlightSatteriPlugins(options: MarkdownProcessorPluginOptions): {
 	mdastPlugins: MdastPluginInput[];

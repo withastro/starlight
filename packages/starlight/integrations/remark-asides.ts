@@ -12,7 +12,7 @@ import { toMarkdown } from 'mdast-util-to-markdown';
 import { toString } from 'mdast-util-to-string';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { MarkdownProcessorPluginOptions } from './markdown-process';
+import type { MarkdownProcessorPluginOptions } from './markdown-processor';
 import { parseIconChildren } from './markdown-icon';
 import type { ElementContent } from 'hast';
 import { getAsideIcon, isAsideVariant } from './aside-utils';

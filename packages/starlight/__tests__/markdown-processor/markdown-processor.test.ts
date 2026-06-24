@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import {
 	getMarkdownProcessorPaths,
 	shouldTransformPath,
-} from '../../integrations/markdown-process';
+} from '../../integrations/markdown-processor';
 import { createPluginTestOptions } from '../test-utils';
 
 const root = new URL('file:///path/to/project/');

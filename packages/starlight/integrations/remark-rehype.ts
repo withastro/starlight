@@ -1,17 +1,22 @@
-import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import { isUnifiedProcessor, rehypeHeadingIds } from '@astrojs/markdown-remark';
 import type { Root as RehypeRoot } from 'hast';
 import type { Root as RemarkRoot } from 'mdast';
 import remarkDirective from 'remark-directive';
 import type { Plugin } from 'unified';
 import type { VFile } from 'vfile';
-import { remarkAsides } from './asides';
-import { rehypeRtlCodeSupport } from './code-rtl-support';
-import rehypeAutolinkHeadings from './heading-links';
+import { remarkAsides, remarkDirectivesRestoration } from './remark-asides';
+import { rehypeRtlCodeSupport } from './rehype-code-rtl-support';
+import rehypeAutolinkHeadings from './rehype-heading-links';
 import {
 	getMarkdownProcessorPaths,
 	shouldTransformPath,
 	type MarkdownProcessorPluginOptions,
-} from './markdown-process';
+} from './markdown-processor';
+
+// Re-exported so callers can narrow `markdown.processor` to the Unified processor and use the
+// remark directive-restoration plugin through the same lazy import that loads the optional
+// `@astrojs/markdown-remark` peer dependency.
+export { isUnifiedProcessor, remarkDirectivesRestoration };
 
 /** List of remark plugins to apply. */
 export function starlightRemarkPlugins(options: MarkdownProcessorPluginOptions): RemarkPlugin[] {

@@ -10,17 +10,18 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
-import type { MarkdownProcessorPluginOptions } from './integrations/markdown-process';
+import type { MarkdownProcessorPluginOptions } from './integrations/markdown-processor';
 import {
 	applyStarlightMarkdownPlugins,
-	satteriIntegration,
 	starlightDirectivesRestorationIntegration,
+	unifiedIntegration,
 } from './integrations/markdown-plugins';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
-import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
+import { vitePluginStarlightLazyBarrelOptimization } from './integrations/vite-lazy-barrel-optimization';
+import { vitePluginStarlightVirtualModules } from './integrations/vite-virtual-modules';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -90,11 +91,10 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
-				// Astro 6.4+ always sets `config.markdown.processor` (defaulting to `unified()`). Resolve
-				// it and the optional Sätteri integration up front so we can reject unsupported
-				// usage before wiring up the integrations below.
+				// Resolve the configured processor and the optional Unified integration up front before
+				// wiring up the integrations below.
 				const processor = config.markdown.processor;
-				const satteri = await satteriIntegration;
+				const unified = await unifiedIntegration;
 
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
@@ -119,7 +119,7 @@ export default function StarlightIntegration(
 				};
 
 				// We push our plugins onto the processor's options.
-				applyStarlightMarkdownPlugins(processor, markdownProcessorOptions, satteri, logger);
+				applyStarlightMarkdownPlugins(processor, markdownProcessorOptions, unified, logger);
 
 				// Add Starlight directives restoration integration at the end of the list so that
 				// remark/mdast plugins injected by Starlight plugins through Astro integrations can
@@ -145,7 +145,8 @@ export default function StarlightIntegration(
 					vite: {
 						plugins: [
 							vitePluginStarlightCssLayerOrder(),
-							vitePluginStarlightUserConfig(
+							vitePluginStarlightLazyBarrelOptimization(),
+							vitePluginStarlightVirtualModules(
 								{ command, isNodeCompatibleEnv },
 								starlightConfig,
 								config,
