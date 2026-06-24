@@ -15,7 +15,7 @@ import { visit } from 'unist-util-visit';
 import type { MarkdownProcessorPluginOptions } from './markdown-processor';
 import { parseIconChildren } from './markdown-icon';
 import type { ElementContent } from 'hast';
-import { getAsideIcon, isAsideVariant } from './aside-utils';
+import { getAsideIcon, isAsideVariant, type AsideVariant } from './aside-utils';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -122,6 +122,13 @@ function makeSvgChildNodes(children: ElementContent[]): P[] {
  * ```
  */
 export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[], Root> {
+	const iconPaths: Record<AsideVariant, ReturnType<typeof parseIconChildren>> = {
+		note: parseIconChildren(getAsideIcon('note')),
+		tip: parseIconChildren(getAsideIcon('tip')),
+		caution: parseIconChildren(getAsideIcon('caution')),
+		danger: parseIconChildren(getAsideIcon('danger')),
+	};
+
 	const transformer: Transformer<Root> = (tree, file) => {
 		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
@@ -155,8 +162,11 @@ export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[]
 				node.children.splice(0, 1);
 			}
 
-			const icon = getAsideIcon(variant, attributes?.['icon']);
-			const iconPath = makeSvgChildNodes(parseIconChildren(icon));
+			const iconPath = makeSvgChildNodes(
+				attributes?.['icon']
+					? parseIconChildren(getAsideIcon(variant, attributes?.['icon']))
+					: iconPaths[variant]
+			);
 
 			const aside = h(
 				'aside',
