@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.41.1
+
+### Patch Changes
+
+- [#3967](https://github.com/withastro/starlight/pull/3967) [`72e63dc`](https://github.com/withastro/starlight/commit/72e63dc694d27a8cfef025b7dee7aad5879f5ce4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 2 new icons: `link` and `link-alt`.
+
+- [#3988](https://github.com/withastro/starlight/pull/3988) [`ac55cfa`](https://github.com/withastro/starlight/commit/ac55cfab41c869a605fbc5a1b4d4b8e718718141) Thanks [@delucis](https://github.com/delucis)! - Fixes a dependency resolution issue introduced in Starlight v0.41
+
+- [#3967](https://github.com/withastro/starlight/pull/3967) [`72e63dc`](https://github.com/withastro/starlight/commit/72e63dc694d27a8cfef025b7dee7aad5879f5ce4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Optimizes the icons of Markdown asides.
+
 ## 0.41.0
 
 ### Minor Changes
