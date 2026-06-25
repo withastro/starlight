@@ -32,3 +32,8 @@ minimumReleaseAgeExclude:
   - '@astrojs/node'
   - '@astrojs/markdoc'
   - '@bruits/*'
+  - satteri
+  - '@expressive-code/*'
+  - 'expressive-code'
+  - 'astro-expressive-code'
+  - 'rehype-expressive-code'
