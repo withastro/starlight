@@ -7,7 +7,7 @@ import sanitize from 'ultrahtml/transformers/sanitize';
 // global Markdown option disabled.
 import '../style/anchor-links.css';
 import { AstroError } from 'astro/errors';
-import { anchorLinkIconPath } from '../integrations/anchor-icon';
+import { headingLinkIconSvgChildrenHtml } from '../integrations/markdown-icon';
 
 const headingLevels = [1, 2, 3, 4, 5, 6, '1', '2', '3', '4', '5', '6'] as const;
 interface Props extends HTMLAttributes<'h1'> {
@@ -43,11 +43,8 @@ const accessibleLabel = Astro.locals.t('heading.anchorLabel', {
 <div class={`sl-heading-wrapper level-h${level}`}
 	><HeadingElement {id} {...attrs} set:html={headingHTML} /><a class="sl-anchor-link" href={`#${id}`}
 		><span aria-hidden="true" class="sl-anchor-icon"
-			><svg width="16" height="16" viewBox="0 0 24 24"
-				><path
-					fill="currentcolor"
-					d={anchorLinkIconPath}
-				></path></svg
+			><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" set:html={headingLinkIconSvgChildrenHtml}
+				></svg
 			></span
 		><span class="sr-only" data-pagefind-ignore="" set:text={accessibleLabel} /></a
 	></div
