@@ -22,6 +22,7 @@ jobs:
       pull-requests: read
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
+      docs_fa: ${{ steps.filter.outputs.docs_fa }}
       docs_ja: ${{ steps.filter.outputs.docs_ja }}
       docs_en: ${{ steps.filter.outputs.docs_en }}
       docs_not_content: ${{ steps.filter.outputs.docs_not_content }}
@@ -37,6 +38,8 @@ jobs:
           filters: |
             docs:
               - 'docs/**'
+            docs_fa:
+              - 'docs/src/content/docs/fa/**'
             docs_ja:
               - 'docs/src/content/docs/ja/**'
             docs_en:
@@ -129,7 +132,13 @@ jobs:
   a11y:
     name: Check for accessibility issues
     needs: changes
-    if: ${{ needs.changes.outputs.docs_not_content == 'true' || needs.changes.outputs.docs_ja == 'true' || needs.changes.outputs.docs_en == 'true' || needs.changes.outputs.ci == 'true' || needs.changes.outputs.packages == 'true' }}
+    if: >
+      needs.changes.outputs.docs_not_content == 'true' ||
+      needs.changes.outputs.docs_fa == 'true' ||
+      needs.changes.outputs.docs_ja == 'true' ||
+      needs.changes.outputs.docs_en == 'true' ||
+      needs.changes.outputs.ci == 'true' || 
+      needs.changes.outputs.packages == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

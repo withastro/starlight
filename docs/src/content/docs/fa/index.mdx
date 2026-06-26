@@ -1,0 +1,157 @@
+---
+title: Starlight 🌟 ساخت ‌وبگاه‌های مستندات با Astro
+head:
+  - tag: title
+    content: Starlight 🌟 ساخت ‌وبگاه‌های مستندات با Astro
+description: استارلایت به شما کمک می‌کند وب‌گاه‌های مستندات زیبا، سریع و با عملکرد بالا را با Astro بسازید.
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  title: مستندات خود را با Starlight درخشان کنید
+  tagline: هر آنچه برای ساخت یک وبگاه مستندات حرفه‌ای نیاز دارید؛ سریع، در دسترس و آسان برای استفاده.
+  image:
+    file: ~/assets/hero-star.webp
+  actions:
+    - text: آغاز کنید
+      icon: left-arrow
+      link: /fa/getting-started/
+    - text: مشاهده در گیت‌هاب
+      icon: external
+      variant: minimal
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '~/components/about-astro.astro';
+import TestimonialGrid from '~/components/testimonial-grid.astro';
+import Testimonial from '~/components/testimonial.astro';
+
+<CardGrid stagger>
+	<Card title="مستنداتی لذت‌بخش" icon="open-book">
+		شامل پیمایش وبگاه، جست‌و‌جو، چندزبانه‌سازی، سئو، نویسه‌نگاری،  
+		نمایش کد، حالت تیره و امکانات بیشتر.
+	</Card>
+	<Card title="قدرت‌گرفته از Astro" icon="rocket">
+		از تمام قدرت و عملکرد Astro بهره ببرید. استارلایت را با  
+		یکپارچه‌سازی‌ها و کتابخانه‌های محبوب Astro گسترش دهید.
+	</Card>
+	<Card title="مارک‌داون، Markdoc و MDX" icon="document">
+		از زبان نشانه‌گذاری مورد علاقه خود استفاده کنید.  
+		استارلایت اعتبارسنجی Frontmatter را همراه با ایمنی نوع تایپ‌اسکریپت به‌صورت داخلی فراهم می‌کند.
+	</Card>
+	<Card title="مؤلفه‌های رابط کاربری خودتان" icon="puzzle">
+		استارلایت یک راهکار کامل برای مستندسازی است که به فریم‌ورک خاصی وابسته نیست.  
+    آن را با React، Vue، Svelte، Solid و دیگر فناوری‌ها گسترش دهید.
+	</Card>
+</CardGrid>
+
+<TestimonialGrid title="دیدگاه کاربران">
+  <Testimonial
+    name="Rachel"
+    handle="rachelnabors"
+    cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
+  >
+    تیم Astro شیوه ساخت و ارائه مستندات را متحول کرده، با پروژه Starlight می‌توانید تمام این قابلیت‌ها را بدون نیاز به تنظیمات اضافی و به‌صورت آماده در اختیار داشته باشید.
+  </Testimonial>
+  <Testimonial
+    name="Flavio"
+    handle="flaviocopes"
+    cite="https://twitter.com/flaviocopes/status/1738237658717905108"
+  >
+    Starlight، جعبه آغازین رسمی Astro، واقعا ابزاری شگفت‌انگیز برای ساخت یک وبگاه مستندات است.
+  </Testimonial>
+  <Testimonial
+    name="Tomek"
+    handle="sulco"
+    cite="https://twitter.com/sulco/status/1735610348730802342"
+  >
+    Starlight برای ما نمونه‌ای ایده‌آل از یک تجربه توسعه‌دهنده (DX) عالی است؛ سرعت، سهولت استفاده و توجه به جزئیات آن واقعاً الهام‌بخش است. این ابزار هم جنبه‌های فنی و هم ظاهر سایت را مدیریت می‌کند تا شما بتوانید تمام تمرکز خود را روی محتوایتان بگذارید 👏
+
+تیم StackBlitz واقعا عاشق آن است!
+
+  </Testimonial>
+  <Testimonial
+    name="Roberto"
+    handle="RmeetsH"
+    cite="https://twitter.com/RmeetsH/status/1735783992018760090"
+  >
+    Starlight برای من یک نقطه عطف واقعی بوده است و این امکان را فراهم کرده تا روی تولید محتوا تمرکز کنم.
+
+    طراحی شهودی آن نه تنها روند کاری مرا ساده‌تر و روان‌تر کرده، بلکه زمان مورد نیاز برای آشنایی و شروع کار توسعه‌دهندگان متن‌باز با پروژه را کاهش داده است.
+
+  </Testimonial>
+  <Testimonial
+    name="Joel"
+    handle="jhooks"
+    cite="https://twitter.com/jhooks/status/1727405160547418405"
+  >
+    مدتی با Starlight برای مستندات Course Builder کار کردم و تا اینجا تجربه فوق‌العاده‌ای بوده است. جزئیات و امکانات کاربردی زیادی دارد و باعث می‌شود روی نوشتن محتوا در # مارک‌داون تمرکز کنم، نه درگیر شدن با تنظیمات و ریزه‌کاری‌های وبگاه.
+  </Testimonial>
+  <Testimonial
+    name="Rick"
+    handle="rick_viscomi"
+    cite="https://twitter.com/rick_viscomi/status/1665867447910510593"
+  >
+    شروع کردم به کار کردن با Starlight و باید بگویم که عملکرد آن در همان حالت پیش‌فرض واقعاً مرا تحت تأثیر قرار داد.
+
+    💯💯💯💯
+
+  </Testimonial>
+  <Testimonial
+    name="Nicolas"
+    handle="beaussan"
+    cite="https://twitter.com/beaussan/status/1735625189583466893"
+  >
+    Starlight بهترین راه برای شروع مستندسازی است. ترکیب قدرت و سرعت Astro با ابزارهایی که Starlight ارائه می‌دهد، یک ترکیب بی‌نقص و فوق‌العاده را به وجود آورده است.
+
+    مدتی است که انتخاب اول من بوده و هرچه بیشتر از آن استفاده می‌کنم، بیشتر به آن علاقه‌مند می‌شوم!
+
+  </Testimonial>
+  <Testimonial
+    name="Sylwia"
+    handle="SylwiaVargas"
+    cite="https://x.com/SylwiaVargas/status/1726556825741578286"
+  >
+    در شغل قبلی‌ام از Starlight استفاده می‌کردم و واقعاً عاشقش شدم. مؤلفه‌های عالی، طراحی شهودی و اجتماع‌ای بسیار پاسخ‌گو دارد. هر زمان کسی به چیزی نیاز داشت، یا خیلی زود آن قابلیت را اضافه می‌کردند یا راه‌حلی جایگزین ارائه می‌دادند. تجربه‌ای بسیار لذت‌بخش بود.
+  </Testimonial>
+  <Testimonial
+    name="Lou Cyx"
+    handle="loucyx"
+    cite="https://elk.zone/m.webtoo.ls/@loucyx@mastodon.social/111587380021362284"
+  >
+    به لطف Starlight، مستندات وبگاه مونوریپوی من بهتر از همیشه به نظر می‌رسند. استفاده از آن فوق‌العاده آسان است، بدون اینکه هیچ‌یک از پتانسیل و قابلیت‌های Astro را از دست بدهید. از تمام زحماتی که برای توسعه آن کشیده‌اید سپاسگزارم!
+  </Testimonial>
+  <Testimonial
+    name="BowTiedWebReaper"
+    handle="BowTiedWebReapr"
+    cite="https://twitter.com/BowTiedWebReapr/status/1735633399501697517"
+  >
+    Starlight ابزار اصلی من برای مستندسازی است. این ابزار اضافه کردن مستندات به وبگاه Astro فعلی من را بسیار آسان کرد، بدون اینکه مجبور باشم برای استفاده از یک ابزار دیگر، مستندات را روی یک زیردامنه جداگانه قرار دهم.
+  </Testimonial>
+  <Testimonial
+    name="Jeff"
+    handle="J_Everhart383"
+    cite="https://twitter.com/J_Everhart383/status/1691900590048292908"
+  >
+    در حال بازسازی مستندات سکوی WPEngine Atlas بودم. باور کنید وقتی می‌گویم Starlight هر چیزی را که برای ساخت یک سکوی مستندات درجه‌یک و حرفه‌ای نیاز دارید در اختیارتان قرار می‌دهد 🙌
+  </Testimonial>
+  <Testimonial
+    name="Chloe"
+    handle="solelychloe"
+    cite="https://twitter.com/solelychloe/status/1695115277602628082"
+  >
+    حتما Starlight را امتحان کنید!
+
+    من در چندین وبگاه از آن استفاده می‌کنم و واقعا عالی است.
+
+  </Testimonial>
+</TestimonialGrid>
+
+<AboutAstro title="ارائه شده توسط">
+Astro یک فریم‌ورک جامع وب است که با تمرکز بر سرعت طراحی شده است.
+محتوای خود را از هر منبعی دریافت کنید و در هر جایی منتشر کنید؛ همه این‌ها با استفاده از مؤلفه‌ها و کتابخانه‌های موردعلاقه شما.  
+
+[آشنایی با Astro](https://astro.build/)
+
+</AboutAstro>
