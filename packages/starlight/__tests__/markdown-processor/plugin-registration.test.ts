@@ -1,12 +1,12 @@
 import { unified } from '@astrojs/markdown-remark';
 import { satteri } from '@astrojs/markdown-satteri';
 import { describe, expect, test, vi } from 'vitest';
-import { remarkDirectivesRestoration } from '../../integrations/asides';
+import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
 import {
 	applyStarlightMarkdownPlugins,
 	registerDirectivesRestoration,
 } from '../../integrations/markdown-plugins';
-import * as satteriIntegration from '../../integrations/satteri';
+import * as unifiedIntegration from '../../integrations/remark-rehype';
 import { createPluginTestOptions } from '../test-utils';
 
 type Processor = Parameters<typeof applyStarlightMarkdownPlugins>[0];
@@ -21,7 +21,7 @@ describe('applyStarlightMarkdownPlugins', () => {
 		applyStarlightMarkdownPlugins(
 			processor,
 			await createPluginTestOptions(),
-			satteriIntegration,
+			unifiedIntegration,
 			logger
 		);
 
@@ -38,7 +38,7 @@ describe('applyStarlightMarkdownPlugins', () => {
 		applyStarlightMarkdownPlugins(
 			processor,
 			await createPluginTestOptions(),
-			satteriIntegration,
+			unifiedIntegration,
 			logger
 		);
 
@@ -53,7 +53,7 @@ describe('applyStarlightMarkdownPlugins', () => {
 		applyStarlightMarkdownPlugins(
 			unsupportedProcessor,
 			await createPluginTestOptions(),
-			satteriIntegration,
+			unifiedIntegration,
 			logger
 		);
 
@@ -65,7 +65,7 @@ describe('applyStarlightMarkdownPlugins', () => {
 describe('registerDirectivesRestoration', () => {
 	test('registers the mdast restoration plugin on a Sätteri processor', () => {
 		const processor = satteri();
-		registerDirectivesRestoration(processor, satteriIntegration);
+		registerDirectivesRestoration(processor, unifiedIntegration);
 		expect(processor.options.mdastPlugins.map((plugin) => plugin.name)).toContain(
 			'starlight-directives-restoration'
 		);
@@ -73,7 +73,7 @@ describe('registerDirectivesRestoration', () => {
 
 	test('registers the remark restoration plugin on a unified processor', () => {
 		const processor = unified();
-		registerDirectivesRestoration(processor, satteriIntegration);
+		registerDirectivesRestoration(processor, unifiedIntegration);
 		expect(processor.options.remarkPlugins).toContain(remarkDirectivesRestoration);
 	});
 });

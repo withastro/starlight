@@ -27,9 +27,16 @@ peerDependencyRules:
 minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - astro
-  - satteri
+  - '@astrojs/markdown-satteri'
+  - '@astrojs/mdx'
+  - '@astrojs/node'
+  - '@astrojs/markdoc'
   - '@bruits/*'
+  - satteri
+  - '@expressive-code/*'
+  - 'expressive-code'
   - 'astro-expressive-code'
   - 'rehype-expressive-code'
-  - 'expressive-code'
-  - '@expressive-code/*'
+  - 'starlight-links-validator'
+  - '@napi-rs/wasm-runtime'
+  - '@tybys/wasm-util'

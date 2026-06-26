@@ -1,7 +1,7 @@
 import { createMarkdownProcessor, type MarkdownRenderer } from '@astrojs/markdown-remark';
 import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
 import { beforeAll, describe } from 'vitest';
-import { remarkDirectivesRestoration } from '../../integrations/asides';
+import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
 import { starlightRehypePlugins, starlightRemarkPlugins } from '../../integrations/remark-rehype';
 import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../integrations/satteri';
 import type { StarlightUserConfig } from '../../utils/user-config';

@@ -1,60 +1,56 @@
-import { isUnifiedProcessor } from '@astrojs/markdown-remark';
+import { isSatteriProcessor } from '@astrojs/markdown-satteri';
 import type { AstroConfig, AstroIntegration, AstroIntegrationLogger } from 'astro';
-import { remarkDirectivesRestoration } from './asides';
-import type { MarkdownProcessorPluginOptions } from './markdown-process';
-import { starlightRehypePlugins, starlightRemarkPlugins } from './remark-rehype';
+import type { MarkdownProcessorPluginOptions } from './markdown-processor';
+import { satteriDirectivesRestoration, starlightSatteriPlugins } from './satteri';
 
 // This file is imported by the Starlight integration that is used in Astro configuration files.
 // When using Starlight, Astro loads its configuration using a temporary Vite module runner and
 // closes it before running integration hooks. If this dynamic import is started later from an
 // integration hook, Vite tries to resolve it through that closed runner and throw "Vite module
 // runner has been closed".
-// We start loading `./satteri` at the top level so Vite waits for it to resolve or fail while the
-// config runner is still running. This keeps the Sätteri integration optional as when
-// `@astrojs/markdown-satteri` is not installed, importing `./satteri` rejects and we resolve to it
-// `null`, which is later used to detect if Sätteri support is available or not.
-export const satteriIntegration = import('./satteri').catch(() => null);
+// We start loading `./remark-rehype` at the top level so Vite waits for it to resolve or fail
+// while the config runner is still running. This keeps the Unified integration optional as when
+// `@astrojs/markdown-remark` is not installed, importing `./remark-rehype` rejects and we resolve
+// it to `null`, which is later used to detect if Unified support is available or not.
+export const unifiedIntegration = import('./remark-rehype').catch(() => null);
 
-type SatteriIntegration = Awaited<typeof satteriIntegration>;
+type UnifiedIntegration = Awaited<typeof unifiedIntegration>;
 type MarkdownProcessor = NonNullable<AstroConfig['markdown']['processor']>;
 
-/**
- * Registers Starlight's Markdown transforms on the Astro 6.4+ `markdown.processor`, picking the
- * plugin set for the configured engine.
- */
+/** Registers Starlight's Markdown transforms, picking the plugin set for the configured engine. */
 export function applyStarlightMarkdownPlugins(
 	processor: MarkdownProcessor,
 	options: MarkdownProcessorPluginOptions,
-	satteri: SatteriIntegration,
+	unified: UnifiedIntegration,
 	logger: Pick<AstroIntegrationLogger, 'warn'>
 ) {
-	if (satteri?.isSatteriProcessor(processor)) {
+	if (isSatteriProcessor(processor)) {
 		// Starlight's asides are built on container directives, which Sätteri disables by default.
 		processor.options.features.directive = true;
-		const { mdastPlugins, hastPlugins } = satteri.starlightSatteriPlugins(options);
+		const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(options);
 		processor.options.mdastPlugins.push(...mdastPlugins);
 		processor.options.hastPlugins.push(...hastPlugins);
-	} else if (isUnifiedProcessor(processor)) {
-		processor.options.remarkPlugins.push(...starlightRemarkPlugins(options));
-		processor.options.rehypePlugins.push(...starlightRehypePlugins(options));
+	} else if (unified?.isUnifiedProcessor(processor)) {
+		processor.options.remarkPlugins.push(...unified.starlightRemarkPlugins(options));
+		processor.options.rehypePlugins.push(...unified.starlightRehypePlugins(options));
 	} else {
 		logger.warn(
 			`The configured \`markdown.processor\` ("${processor.name}") is not supported by Starlight. ` +
 				"Starlight's Markdown transforms (asides, heading anchor links, RTL code support) won't run on your content. " +
-				'Switch to `unified()` from `@astrojs/markdown-remark` or `satteri()` from `@astrojs/markdown-satteri`.'
+				'Switch to `satteri()` from `@astrojs/markdown-satteri` or `unified()` from `@astrojs/markdown-remark`.'
 		);
 	}
 }
 
-/** Registers the directive-restoration plugin on the Astro 6.4+ `markdown.processor`. */
+/** Registers the directive-restoration plugin. */
 export function registerDirectivesRestoration(
 	processor: MarkdownProcessor,
-	satteri: SatteriIntegration
+	unified: UnifiedIntegration
 ) {
-	if (satteri?.isSatteriProcessor(processor)) {
-		processor.options.mdastPlugins.push(satteri.satteriDirectivesRestoration());
-	} else if (isUnifiedProcessor(processor)) {
-		processor.options.remarkPlugins.push(remarkDirectivesRestoration);
+	if (isSatteriProcessor(processor)) {
+		processor.options.mdastPlugins.push(satteriDirectivesRestoration());
+	} else if (unified?.isUnifiedProcessor(processor)) {
+		processor.options.remarkPlugins.push(unified.remarkDirectivesRestoration);
 	}
 }
 
@@ -67,8 +63,8 @@ export function starlightDirectivesRestorationIntegration(): AstroIntegration {
 		name: 'starlight-directives-restoration',
 		hooks: {
 			'astro:config:setup': async ({ config }) => {
-				const satteri = await satteriIntegration;
-				registerDirectivesRestoration(config.markdown?.processor, satteri);
+				const unified = await unifiedIntegration;
+				registerDirectivesRestoration(config.markdown?.processor, unified);
 			},
 		},
 	};

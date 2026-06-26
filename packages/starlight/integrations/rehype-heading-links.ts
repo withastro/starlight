@@ -1,18 +1,18 @@
 import type { Nodes, Root } from 'hast';
 import { toString } from 'hast-util-to-string';
-import { h } from 'hastscript';
+import { h, s } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
-import { anchorLinkIconPath } from './anchor-icon';
-import type { MarkdownProcessorPluginOptions } from './markdown-process';
+import { headingLinkIconChildren } from './markdown-icon';
+import type { MarkdownProcessorPluginOptions } from './markdown-processor';
 
 const AnchorLinkIcon = h(
 	'span',
 	{ ariaHidden: 'true', class: 'sl-anchor-icon' },
-	h(
+	s(
 		'svg',
-		{ width: 16, height: 16, viewBox: '0 0 24 24' },
-		h('path', { fill: 'currentcolor', d: anchorLinkIconPath })
+		{ width: 16, height: 16, viewBox: '0 0 24 24', fill: 'currentColor' },
+		headingLinkIconChildren
 	)
 );
 

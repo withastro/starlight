@@ -5,7 +5,7 @@ import type { RouteDataContext } from '../utils/routing/data';
 import { vi } from 'vitest';
 import type { StarlightUserConfig } from '../types';
 import { StarlightConfigSchema } from '../utils/user-config';
-import type { MarkdownProcessorPluginOptions } from '../integrations/markdown-process';
+import type { MarkdownProcessorPluginOptions } from '../integrations/markdown-processor';
 import { createTranslationSystemFromFs } from '../utils/translations-fs';
 import { absolutePathToLang } from '../integrations/shared/absolutePathToLang';
 import { getCollectionPosixPath } from '../utils/collection-fs';
