@@ -1,6 +1,6 @@
 /// <reference types="mdast-util-directive" />
 
-import { h as _h, s as _s, type Properties, type Result } from 'hastscript';
+import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
 	type Directives,
@@ -13,12 +13,9 @@ import { toString } from 'mdast-util-to-string';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { MarkdownProcessorPluginOptions } from './markdown-processor';
-import type { StarlightIcon } from '../types';
-import { Icons } from '../components-internals/Icons';
-import { fromHtml } from 'hast-util-from-html';
-import type { Element } from 'hast';
-import { throwInvalidAsideIconError } from './asides-error';
-import { asideIconPathAttrs, isAsideVariant, type AsideVariant } from './aside-icons';
+import { parseIconChildren } from './markdown-icon';
+import type { ElementContent } from 'hast';
+import { getAsideIcon, isAsideVariant, type AsideVariant } from './aside-utils';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -85,7 +82,7 @@ function transformUnhandledDirective(
 }
 
 /** Hacky function that generates the children of an mdast SVG tree. */
-function makeSvgChildNodes(children: Result['children']): P[] {
+function makeSvgChildNodes(children: ElementContent[]): P[] {
 	const nodes: P[] = [];
 	for (const child of children) {
 		if (child.type !== 'element') continue;
@@ -125,11 +122,11 @@ function makeSvgChildNodes(children: Result['children']): P[] {
  * ```
  */
 export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[], Root> {
-	const iconPaths: Record<AsideVariant, ReturnType<typeof s>[]> = {
-		note: asideIconPathAttrs.note.map((attrs) => s('path', attrs)),
-		tip: asideIconPathAttrs.tip.map((attrs) => s('path', attrs)),
-		caution: asideIconPathAttrs.caution.map((attrs) => s('path', attrs)),
-		danger: asideIconPathAttrs.danger.map((attrs) => s('path', attrs)),
+	const iconPaths: Record<AsideVariant, ReturnType<typeof parseIconChildren>> = {
+		note: parseIconChildren(getAsideIcon('note')),
+		tip: parseIconChildren(getAsideIcon('tip')),
+		caution: parseIconChildren(getAsideIcon('caution')),
+		danger: parseIconChildren(getAsideIcon('danger')),
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
@@ -165,18 +162,11 @@ export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[]
 				node.children.splice(0, 1);
 			}
 
-			let iconPath = iconPaths[variant];
-
-			if (attributes?.['icon']) {
-				const iconName = attributes['icon'] as StarlightIcon;
-				const icon = Icons[iconName];
-				if (!icon) throwInvalidAsideIconError(iconName);
-				// Omit the root node and return only the first child which is the SVG element.
-				const iconHastTree = fromHtml(`<svg>${icon}</svg>`, { fragment: true, space: 'svg' })
-					.children[0] as Element;
-				// Render all SVG child nodes.
-				iconPath = makeSvgChildNodes(iconHastTree.children);
-			}
+			const iconPath = makeSvgChildNodes(
+				attributes?.['icon']
+					? parseIconChildren(getAsideIcon(variant, attributes?.['icon']))
+					: iconPaths[variant]
+			);
 
 			const aside = h(
 				'aside',
