@@ -21,7 +21,7 @@ export const locales = {
 	hi: { label: 'हिंदी', lang: 'hi' },
 	da: { label: 'Dansk', lang: 'da' },
 	uk: { label: 'Українська', lang: 'uk' },
-	fa: { label: 'فارسی', lang: 'fa-IR', dir: /** @type {'rtl'} */ ('rtl') },
+	fa: { label: 'فارسی', lang: 'fa', dir: /** @type {'rtl'} */ ('rtl') },
 };
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
