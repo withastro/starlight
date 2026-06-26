@@ -41,6 +41,7 @@ const config: Config = {
 		locales: {
 			// N.B. If adding more locales here, also update the changed files filters in
 			// `.github/workflows/ci.yml` to ensure tests run when files for those locales change.
+			fa: ['guides/project-structure', 'reference/overrides'],
 			ja: ['guides/route-data', 'reference/frontmatter'],
 		},
 	},
