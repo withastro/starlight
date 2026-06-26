@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
+/** @satisfies {import('@astrojs/starlight/types').StarlightUserConfig['locales']} */
 export const locales = {
 	root: { label: 'English', lang: 'en' },
 	de: { label: 'Deutsch', lang: 'de' },
@@ -21,7 +22,7 @@ export const locales = {
 	hi: { label: 'हिंदी', lang: 'hi' },
 	da: { label: 'Dansk', lang: 'da' },
 	uk: { label: 'Українська', lang: 'uk' },
-	fa: { label: 'فارسی', lang: 'fa', dir: /** @type {'rtl'} */ ('rtl') },
+	fa: { label: 'فارسی', lang: 'fa', dir: 'rtl' },
 };
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
