@@ -10,14 +10,7 @@ import prettierConfig from 'eslint-config-prettier';
 export default defineConfig(
 	// Ignore hidden files and directories, `*.d.ts` files (as most recommendations are mostly for
 	// users rather than libraries), types testing files, example directories, and build directories.
-	globalIgnores([
-		'**/.*',
-		'**/*.d.ts',
-		'**/*.test-d.ts',
-		'**/examples/',
-		'**/dist/',
-		'**/build/',
-	]),
+	globalIgnores(['**/.*', '**/*.d.ts', '**/*.test-d.ts', '**/examples/', '**/dist/', '**/build/']),
 
 	// Setup Node.js globals from `globalThis` (does not include CommonJS arguments).
 	{
