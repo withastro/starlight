@@ -17,7 +17,6 @@ export default defineConfig(
 		'**/examples/',
 		'**/dist/',
 		'**/build/',
-		'**/examples/',
 	]),
 
 	// Setup Node.js globals from `globalThis` (does not include CommonJS arguments).
