@@ -29,6 +29,6 @@
     "@playwright/test": "^1.59.1",
     "axe-playwright": "^2.2.2",
     "sitemapper": "^4.1.5",
-    "starlight-links-validator": "^0.25.1"
+    "starlight-links-validator": "^0.25.2"
   }
 }
