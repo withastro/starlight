@@ -1,0 +1,10 @@
+# Existing privileged PR automation is intentionally isolated to these workflows:
+# they do not checkout pull request head code, and they only comment or set status.
+rules:
+  dangerous-triggers:
+    ignore:
+      - lunaria.yml
+      - welcome-bot.yml
+  secrets-inherit:
+    ignore:
+      - format.yml
