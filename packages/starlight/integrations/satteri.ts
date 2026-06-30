@@ -103,6 +103,15 @@ function satteriAsidesPlugin(
 
 			const icon = getAsideIcon(variant, node.attributes?.['icon']);
 			const iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon">${icon}</svg>`;
+			// Markdown and MDX require different AST shapes for raw HTML content.
+			// TODO: replace endsWith check with an official Sätteri API once available.
+			const iconNode = ctx.fileURL?.pathname.endsWith('.mdx')
+				? {
+						type: 'mdxJsxTextElement',
+						name: 'Fragment',
+						attributes: [{ type: 'mdxJsxAttribute', name: 'set:html', value: iconSvg }],
+					}
+				: { type: 'html', value: iconSvg };
 
 			return paragraphElement(
 				'aside',
@@ -112,7 +121,7 @@ function satteriAsidesPlugin(
 				},
 				[
 					paragraphElement('p', { class: 'starlight-aside__title', 'aria-hidden': 'true' }, [
-						{ type: 'html', value: iconSvg },
+						iconNode,
 						...titleNode,
 					]),
 					paragraphElement('div', { class: 'starlight-aside__content' }, children),
