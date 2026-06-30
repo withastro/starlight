@@ -12,6 +12,19 @@ Learn more in the [Guide to Overriding Components](/guides/overriding-components
 
 ## Components
 
+### Page
+
+#### `Page`
+
+**Default component:** [`Page.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Page.astro)
+
+Parent component for all page HTML, including `<head>` and `<body>`.
+
+:::caution
+Overriding this component removes **all** of Starlight’s default rendering behaviour.
+Use it only if you intend to use Starlight as a “headless” data framework and implement your own frontend.
+:::
+
 ### Head
 
 These components are rendered inside each page’s `<head>` element.

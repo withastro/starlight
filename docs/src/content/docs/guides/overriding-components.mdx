@@ -150,3 +150,47 @@ const isHomepage = Astro.locals.starlightRoute.id === '';
 ```
 
 Learn more about conditional rendering in [Astro’s Template Syntax guide](https://docs.astro.build/en/basics/astro-syntax/#dynamic-html).
+
+## Override the whole page
+
+You can completely replace Starlight’s UI and bring your own frontend implementation by overriding the `Page` component:
+
+```js {4}
+starlight({
+	title: 'My Docs with Custom Frontend',
+	components: {
+		Page: './src/MyPage.astro',
+	},
+}),
+```
+
+Your page component can then take full control of the page HTML while using Starlight’s [data model](/guides/route-data/) and routing logic.
+A page override removes all of Starlight’s built-in templating and CSS, giving you total control over the output.
+
+You can also choose to conditionally render Starlight’s built-in page component if you only want to use your custom UI for some pages.
+This works the same way as [conditional overrides for other components](#only-override-on-specific-pages):
+
+```astro title="src/MyPage.astro"
+---
+import DefaultPage from '@astrojs/starlight/components/Page.astro';
+
+const isHomepage = Astro.locals.starlightRoute.id === '';
+---
+
+{!isHomepage ? (
+	// Render a default docs page
+	<DefaultPage><slot/></DefaultPage>
+) : (
+	// Render a fully custom page
+	<html>
+		<head>
+			<!--...-->
+		</head>
+		<body>
+			<!--...-->
+			<slot />
+			<!--...-->
+		</body>
+	</html>
+)}
+```
