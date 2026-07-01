@@ -23,7 +23,9 @@
 				position: relative;
 				width: max(
 					var(--sl-sidebar-width),
-					calc(var(--sl-sidebar-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2)
+					calc(
+						var(--sl-sidebar-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+					)
 				);
 			}
 
@@ -48,7 +50,9 @@
 				order: 1;
 				width: min(
 					calc(100% - var(--sl-sidebar-width)),
-					calc(var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2)
+					calc(
+						var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+					)
 				);
 			}
 		}
