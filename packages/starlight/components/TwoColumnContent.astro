@@ -21,8 +21,9 @@
 			.right-sidebar-container {
 				order: 2;
 				position: relative;
-				width: calc(
-					var(--sl-sidebar-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+				width: max(
+					var(--sl-sidebar-width),
+					calc(var(--sl-sidebar-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2)
 				);
 			}
 
@@ -45,8 +46,9 @@
 				--sl-content-margin-inline: auto 0;
 
 				order: 1;
-				width: calc(
-					var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+				width: min(
+					calc(100% - var(--sl-sidebar-width)),
+					calc(var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2)
 				);
 			}
 		}
