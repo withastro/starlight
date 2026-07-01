@@ -1461,7 +1461,7 @@
 
 - [#2156](https://github.com/withastro/starlight/pull/2156) [`904ad47`](https://github.com/withastro/starlight/commit/904ad47ea9588c0b1d8c583f3f04e4ae199474d9) Thanks [@delucis](https://github.com/delucis)! - Fixes builds for projects with a space in their pathname
 
-- [#2137](https://github.com/withastro/starlight/pull/2137) [`703903b`](https://github.com/withastro/starlight/commit/703903bb782c3fabd3fe914e40494c00f12ec945) Thanks [@cevdetardaharan](https://github.com/cevdetardaharan)! - Removes `twitter:title` and `twitter:description` meta tags from `<head>`
+- [#2137](https://github.com/withastro/starlight/pull/2137) [`703903b`](https://github.com/withastro/starlight/commit/703903bb782c3fabd3fe914e40494c00f12ec945) Thanks [@cevdetta](https://github.com/cevdetta)! - Removes `twitter:title` and `twitter:description` meta tags from `<head>`
 
 ## 0.25.2
 
