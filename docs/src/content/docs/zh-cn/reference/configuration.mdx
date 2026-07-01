@@ -21,7 +21,7 @@ export default defineConfig({
 });
 ```
 
-你可以将以下选项传递给`starlight`集成。
+你可以将以下选项传递给 `starlight` 集成。
 
 ### `title` (必填)
 
@@ -73,7 +73,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 ### `tableOfContents`
 
 **类型：** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**默认值：** `{ minHeadingLevel: 2, maxHeadingLevel: 3; }`
+**默认值：** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 配置每个页面右侧显示的目录。默认情况下，`<h2>` 和 `<h3>` 标题将包含在此目录中。
 
@@ -81,7 +81,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 **类型：** `{ baseUrl: string }`
 
-通过设置你要使用的 base URL 来启用 “编辑此页” 链接。最终链接将是`editLink.baseUrl` +当前页面路径。例如，要启用在 GitHub 上编辑`withastro/starlight` 仓库中的页面：
+通过设置你要使用的 base URL 来启用 “编辑此页” 链接。最终链接将是 `editLink.baseUrl` + 当前页面路径。例如，要启用在 GitHub 上编辑 `withastro/starlight` 仓库中的页面：
 
 ```js
 starlight({
@@ -99,16 +99,16 @@ starlight({
 
 配置你的网站的侧边栏导航项目。
 
-侧边栏是包含链接和链接组的数组。
-除了使用 `slug` 的项目之外，每个项目都必须具有 `label` 和以下属性之一：
+侧边栏是一个由链接、链接组和自动生成条目组成的数组。
+侧边栏条目通过以下属性之一来定义：
 
-- `link` — 指向特定 URL 的单个链接，例如 `'/home'` 或 `'https://example.com'`。
+- `link` — 指向特定 URL 的单个链接，例如 `'/home'` 或 `'https://example.com'`。链接还必须具有 `label`。
 
-- `slug` — 指向一个内部页面的引用， 例如 `'guides/getting-started'`。
+- `slug` — 指向一个内部页面的引用，例如 `'guides/getting-started'`。链接页面的标题将默认用作标签。
 
-- `items` — 包含更多侧边栏链接和子组的数组。
+- `items` — 包含更多侧边栏链接、子组和自动生成条目的数组。分组还必须具有 `label`。
 
-- `autogenerate` — 指定要从中自动生成一组链接的文档目录的对象。
+- `autogenerate` — 一个用于指定文档目录以自动生成链接和子组的对象。自动生成的条目可以放置在分组的 `items` 数组中。
 
 内部链接也可以被指定为字符串，而不是带有 `slug` 属性的对象。
 
@@ -132,7 +132,7 @@ starlight({
 		// 一个链接到参考目录中所有页面的组。
 		{
 			label: 'Reference',
-			autogenerate: { directory: 'reference' },
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 	],
 });
@@ -140,13 +140,14 @@ starlight({
 
 #### 排序
 
-自动生成的侧边栏组按文档名字母顺序排序。例如，从 `astro.md` 生成的页面将显示在 `starlight.md`页面上方。
+自动生成的侧边栏组按文档名字母顺序排序。
+例如，从 `astro.md` 生成的页面将显示在 `starlight.md`页面上方。
 
 #### 折叠组
 
 默认情况下，链接组是展开的。你可以通过将组的 `collapsed` 属性设置为 `true` 来更改此行为。
 
-自动生成的子组默认情况下会遵守其父组的 `collapsed` 属性。设置 `autogenerate.collapsed` 属性以覆盖此行为。
+自动生成的子组默认也是展开的。设置 `autogenerate.collapsed` 属性以折叠它们。
 
 ```js {5,13}
 sidebar: [
@@ -159,10 +160,14 @@ sidebar: [
   // 一个展开的组，其中包含折叠的自动生成的子组。
   {
     label: 'Reference',
-    autogenerate: {
-      directory: 'reference',
-      collapsed: true,
-    },
+    items: [
+      {
+        autogenerate: {
+          directory: 'reference',
+          collapsed: true,
+        },
+      },
+    ],
   },
 ],
 ```
@@ -220,13 +225,15 @@ type SidebarItem =
 					items: SidebarItem[];
 					collapsed?: boolean;
 			  }
-			| {
-					// 自动生成的链接组
-					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
-					collapsed?: boolean;
-			  }
-	  ));
+	  ))
+	| {
+			// 自动生成的链接和子组
+			autogenerate: {
+				directory: string;
+				collapsed?: boolean;
+				attrs?: Record<string, string | number | boolean | undefined>;
+			};
+	  };
 ```
 
 #### `BadgeConfig`
@@ -306,7 +313,7 @@ interface LocaleConfig {
 
 **类型：** `'ltr' | 'rtl'`
 
-这种语言的写作方向; `"ltr"`表示从左到右（默认值）或`"rtl"`表示从右到左。
+这种语言的写作方向；`"ltr"` 表示从左到右（默认值）或 `"rtl"` 表示从右到左。
 
 #### root locale
 
@@ -373,8 +380,8 @@ starlight({
 
 ### `markdown`
 
-**类型：** `{ headingLinks?: boolean }`  
-**默认值：** `{ headingLinks: true }`
+**类型：** `{ headingLinks?: boolean; processedDirs?: string[] }`  
+**默认值：** `{ headingLinks: true, processedDirs: [] }`
 
 配置 Starlight 的 Markdown 处理。
 
@@ -394,6 +401,27 @@ starlight({
 }),
 ```
 
+#### `processedDirs`
+
+**类型：** `string[]`  
+**默认值：** `[]`
+
+定义应该由 Starlight 的 Markdown 管道处理文件的额外目录。
+默认情况下，仅处理使用 Starlight 的 [`docsLoader()`](#docsloader) 加载的 Markdown 和 MDX 内容。
+支持相对于项目根目录的本地目录，例如 `'./src/data/comments/'`。
+
+Starlight 的处理内容包括对[可点击标题锚点链接](#headinglinks)、[旁白 Markdown 指令语法](/zh-cn/guides/authoring-content/#旁白)以及代码块的 RTL 支持。
+如果你正在通过 `<StarlightPage>` 组件在[自定义页面](/zh-cn/guides/pages/#自定义页面)中通过自定义内容集合渲染内容，并希望 Starlight 的 Markdown 处理也应用于该内容，那么这个选项非常有用。
+
+```js
+starlight({
+	markdown: {
+		// 处理位于 `src/data/reviews/` 目录中 `reviews` 内容集合的 Markdown 文件。
+		processedDirs: ['./src/data/reviews/'],
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **类型：** `StarlightExpressiveCodeOptions | boolean`  
@@ -402,7 +430,8 @@ starlight({
 Starlight 使用 [Expressive Code](https://expressive-code.com) 来渲染代码块，并添加对代码示例的高亮支持，向代码块添加文件名等。
 请参阅 [“代码块”指南](/zh-cn/guides/authoring-content/#代码块) 以了解如何在你的 Markdown 和 MDX 内容中使用 Expressive Code 语法。
 
-你可以通过在 Starlight 的 `expressiveCode` 选项中设置任何标准的 [Expressive Code 配置选项](https://expressive-code.com/reference/configuration/) 以及一些特定于 Starlight 的属性。比如，设置 Expressive Code 的 `styleOverrides` 选项来覆盖默认的 CSS。这样就可以自定义代码块，比如给你的代码块添加圆角：
+你可以通过在 Starlight 的 `expressiveCode` 选项中设置任何标准的 [Expressive Code 配置选项](https://expressive-code.com/reference/configuration/) 以及一些特定于 Starlight 的属性。
+比如，设置 Expressive Code 的 `styleOverrides` 选项来覆盖默认的 CSS。这样就可以自定义代码块，比如给你的代码块添加圆角：
 
 ```js ins={2-4}
 starlight({
@@ -427,7 +456,8 @@ starlight({
 **类型：** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
 **默认值：** `['starlight-dark', 'starlight-light']`
 
-设置用于代码块样式的主题。有关支持的主题格式的详细信息，请参阅 [Expressive Code `themes` 文档](https://expressive-code.com/guides/themes/)。
+设置用于代码块样式的主题。
+有关支持的主题格式的详细信息，请参阅 [Expressive Code `themes` 文档](https://expressive-code.com/guides/themes/)。
 
 Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/sdras/night-owl-vscode-theme) 的深色和浅色变体。
 
@@ -465,7 +495,8 @@ Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/s
 
 配置 Starlight 的默认站点搜索 provider [Pagefind](https://pagefind.app/)。
 
-将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。这也将隐藏默认的搜索 UI。
+将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。
+这也将隐藏默认的搜索 UI。
 
 当 [`prerender`](#prerender) 选项设置为 `false` 时，无法启用 Pagefind。
 
@@ -478,12 +509,7 @@ Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/s
 
 ```ts
 interface PagefindOptions {
-	ranking?: {
-		pageLength?: number;
-		termFrequency?: number;
-		termSaturation?: number;
-		termSimilarity?: number;
-	};
+	ranking?: PagefindRankingOptions;
 	indexWeight?: number;
 	mergeIndex?: Array<{
 		bundlePath: string;
@@ -492,13 +518,17 @@ interface PagefindOptions {
 		baseUrl?: string;
 		mergeFilter?: Record<string, string | string[]>;
 		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
+		ranking?: PagefindRankingOptions;
 	}>;
+}
+
+interface PagefindRankingOptions {
+	pageLength?: number;
+	termFrequency?: number;
+	termSaturation?: number;
+	termSimilarity?: number;
+	diacriticSimilarity?: number;
+	metaWeights?: Record<string, number>;
 }
 ```
 
@@ -535,7 +565,8 @@ starlight({
 });
 ```
 
-在 `head` 中的条目会直接转换为 HTML 元素，并不会经过 Astro 的 [脚本](https://docs.astro.build/zh-cn/guides/client-side-scripts/#脚本处理) 或 [样式](https://docs.astro.build/zh-cn/guides/styling/#在-astro-进行设计) 处理。如果你需要导入本地资源，如脚本、样式或图片，请[重写 Head 组件](/zh-cn/guides/overriding-components/#复用内置组件)。
+在 `head` 中的条目会直接转换为 HTML 元素，并不会经过 Astro 的 [脚本](https://docs.astro.build/zh-cn/guides/client-side-scripts/#脚本处理) 或 [样式](https://docs.astro.build/zh-cn/guides/styling/#在-astro-进行设计) 处理。
+如果你需要导入本地资源，如脚本、样式或图片，请[重写 Head 组件](/zh-cn/guides/overriding-components/#复用内置组件)。
 
 #### `HeadConfig`
 
@@ -668,3 +699,118 @@ starlight({
 	credits: true,
 });
 ```
+
+## 配置内容集合
+
+Starlight 使用 Astro [内容集合](https://docs.astro.build/zh-cn/guides/content-collections/) 来加载你的内容。
+Starlight 的内容加载器和 schema 帮助按要求配置集合。
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// 可选：i18n 集合用于在多语言站点中翻译 UI
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### Loaders
+
+Starlight 从 `@astrojs/starlight/loaders` 模块导出以下 [Astro 加载器](https://docs.astro.build/zh-cn/reference/content-loader-reference/)，以简化配置内容集合。
+
+#### `docsLoader()`
+
+`docsLoader()` 从 `src/content/docs/` 目录加载本地的 Markdown、MDX 和 Markdoc 文件。
+以下划线 (`_`) 开头的文件名将被忽略。
+
+##### 导入
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### 选项
+
+###### `generateId()`
+
+**类型：** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+默认情况下，使用 `docsLoader()` 生成的页面会通过一个 sluggifier 处理你的文件名，该工具会删除特殊字符并将文件名转换为小写。
+如果你想覆盖此默认行为，请提供你自己的自定义 `generateId()` 函数。
+
+例如，这可以用于保留那些会被删除的特殊字符。
+默认情况下，`Example.File.md` 将位于 `/examplefile`。
+如果你希望它位于 `/Example.File`，可以通过定义一个自定义的 `generateId()` 函数来实现：
+
+```js
+docsLoader({
+	// 删除 `.md` 或 `.mdx` 扩展名，但不处理文件名。
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+参阅 [Astro 文档中的 `generateId()`](https://docs.astro.build/zh-cn/reference/content-loader-reference/#generateid) 了解更多详情。
+
+#### `i18nLoader()`
+
+`i18nLoader()` 从 `src/content/i18n/` 目录加载本地的 JSON 和 YAML 文件。
+以下划线 (`_`) 开头的文件名将被忽略。
+
+##### 导入
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### 选项
+
+当前没有可用于配置 `i18nLoader()` 的选项。
+
+### Schemas
+
+Starlight 从 `@astrojs/starlight/schema` 模块提供以下[内容集合 schema](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式schema)。
+这些 schema 必须用于 Starlight 依赖的 `docs` 和 `i18n` 集合。
+
+#### `docsSchema()`
+
+`docsSchema()` 解析 `docs` 集合中所有内容的 frontmatter。
+
+##### 导入
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### 选项
+
+###### `extend`
+
+**类型：** Zod schema 或返回 Zod schema 的函数  
+**默认值：** `z.object({})`
+
+使用额外的字段扩展 Starlight 的 frontmatter schema。
+参阅 [“自定义 frontmatter schema”](/zh-cn/reference/frontmatter/#自定义-frontmatter-schema) 了解更多使用 `extend` 选项的详细信息。
+
+#### `i18nSchema()`
+
+`i18nSchema()` 解析 `i18n` 集合中的所有数据文件。
+
+##### 导入
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### 选项
+
+###### `extend`
+
+**类型：** Zod 对象  
+**默认值：** `z.object({})`
+
+使用额外的字段扩展 Starlight 的 i18n schema。
+参阅 [“扩展翻译 schema”](/zh-cn/guides/i18n/#拓展翻译-schema) 了解更多使用 `extend` 选项的详细信息。
