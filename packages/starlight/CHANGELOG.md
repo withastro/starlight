@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.41.2
+
+### Patch Changes
+
+- [#4008](https://github.com/withastro/starlight/pull/4008) [`58a3520`](https://github.com/withastro/starlight/commit/58a352097016ffbd98716688e4f2dfb97e5a6f44) Thanks [@FrancoKaddour](https://github.com/FrancoKaddour)! - Fixes the table of contents overflowing the right edge of the viewport when a custom `--sl-content-width` value exceeds available space
+
+- [#4015](https://github.com/withastro/starlight/pull/4015) [`bdbfffc`](https://github.com/withastro/starlight/commit/bdbfffc044dbf119e5085c3e67722494ae3c85c6) Thanks [@delucis](https://github.com/delucis)! - Fixes an issue where aside icons were rendered incorrectly in projects where Astro’s MDX integration had optimization disabled
+
 ## 0.41.1
 
 ### Patch Changes
