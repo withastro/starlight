@@ -16,6 +16,11 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard
+		href="https://www.feelback.dev/blog/new-astro-starlight-integration/"
+		title="FeelBack"
+		description="为你的文档页面添加用户反馈系统。"
+	/>
+	<LinkCard
 		href="https://devm.io/open-source/starlight-astro"
 		title="使用 Starlight 生成静态站点"
 		description="“在设计组件时，没有太大或太小的想法”——对 Starlight 负责人 Chris Swithinbank 的采访"
@@ -49,6 +54,11 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		href="https://starlight-changelog.netlify.app/"
 		title="Starlight Changelog"
 		description="在一个精美的页面上查看 @astrojs/starlight 包的所有发布版本。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/contributing-to-starlight"
+		title="为 Starlight 做贡献"
+		description="我在为 Starlight 这类开源项目贡献代码时的个人经验和建议。"
 	/>
 </CardGrid>
 
@@ -95,9 +105,9 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		description="开始使用 Starlight 文档"
 	/>
 	<LinkCard
-		href="https://events-3bg.pages.dev/jotter/starlight/guide/"
+		href="https://events-3bg.pages.dev/jotter/starlight/"
 		title="启用视图过渡"
-		description="通过 Bag of Tricks 的视图过渡支持，获得 SPA 一样的观感"
+		description="添加对视图过渡、客户端路由和类似 SPA 导航的支持到你的 Starlight 文档网站。"
 	/>
 	<LinkCard
 		href="https://jamcomments.com/posts/structured-data-with-starlight"
@@ -109,6 +119,66 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		title="Starlight 示例"
 		description="这是一组 StackBlitz 嵌入示例，展示了在 Starlight 文档网站中各种实用的操作方法。"
 	/>
+	<LinkCard
+		href="https://hideoo.dev/notebooks/starlight-plugins-by-example"
+		title="Starlight 插件实例讲解"
+		description="关于 Starlight 插件及构建它们时使用的常见模式的一系列笔记和示例。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-progress-indicator/"
+		title="添加阅读进度指示器"
+		description="了解如何为你的 Starlight 网站添加水平阅读进度条。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-sidebar-whitespace/"
+		title="为你的 Starlight 侧边栏应用自定义样式"
+		description="使用少量 CSS 即可调整 Starlight 侧边栏的字体、颜色等样式。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-dropdown-and-list-together/"
+		title="移动端使用下拉菜单，桌面端使用列表的 Starlight 主题"
+		description="结合两个插件，在桌面和移动设备上均获得最佳体验。"
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-autogenerate-whole-sidebar/"
+		title="使用中间件处理 Starlight 侧边栏"
+		description="使用路由中间件控制侧边栏排序和分组标签，灵感来自 Nuxt Content 的约定。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-custom-social-links"
+		title="为 Starlight 添加自定义图标的社交链接"
+		description="了解如何在 Starlight 网站 header 中使用自定义图标作为社交链接。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-paste-images-with-visual-studio-code"
+		title="在 Visual Studio Code 中将图像粘贴到 Starlight 页面"
+		description="改善你的 Starlight 文档工作流程：使用 Visual Studio Code 将图像粘贴到文档页面。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-add-diagrams-using-d2"
+		title="使用 D2 为你的 Starlight 文档添加图表"
+		description="了解如何使用 D2 为你的 Starlight 文档添加图表。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-og-images-cloudinary-astro-sdk"
+		title="使用 Cloudinary Astro SDK 为 Starlight 生成 Open Graph 图像"
+		description="了解如何使用 Cloudinary Astro SDK 为你的 Starlight 文档网站生成 Open Graph 图像。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-list-recent-github-releases"
+		title="使用 Astro Content Layer API 在 Starlight 中列出最近的 GitHub 发布"
+		description="了解如何使用 Astro Content Layer API 在 Starlight 项目中列出最近的 GitHub 发布。"
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-sitewide-banner"
+		title="为 Starlight 添加全站横幅"
+		description="了解如何利用 Starlight 内置的逐页横幅功能创建全站横幅。"
+	/>
+	<LinkCard
+		href="https://lirantal.com/blog/customizing-astro-starlight-sidebar-gated-content-auth"
+		title="为认证门控内容自定义 Astro Starlight 侧边栏"
+		description="使用 Clerk 和 SSR 根据用户登录状态动态隐藏或显示 Starlight 侧边栏章节，保护你的课程资料。"
+	/>
 </CardGrid>
 
 ## 视频内容
@@ -117,7 +187,7 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 import YouTubeGrid from '~/components/youtube-grid.astro';
 
-### Astro 视频
+### 官方视频
 
 <YouTubeGrid
 	videos={[
@@ -127,9 +197,10 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 			description: '观看 Starlight 官方发布视频',
 		},
 		{
-			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
-			title: '🌟 1分钟内启动',
-			description: '观看 Ben 在不到一分钟的时间内推出新的 Starlight 网站！',
+			href: 'https://www.youtube.com/watch?v=j8K-ESJF814',
+			title: 'Starlight 一周年！',
+			description:
+			  'Sarah 谈论 Astro 社区构建的文档主题',
 		},
 	]}
 />
@@ -138,6 +209,11 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 
 <YouTubeGrid
 	videos={[
+		{
+			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+			title: '🌟 1分钟内启动',
+			description: '观看 Ben 在不到一分钟的时间内推出新的 Starlight 网站！',
+		},
 		{
 			href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
 			title: '使用 Starlight 和 Astro 构建文档',
@@ -167,8 +243,7 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 		},
 		{
 			href: 'https://www.youtube.com/watch?v=Q1E4Gkt63ko',
-			title:
-				'与 Chris Swithinbank 一起试试联动 Astro Starlight 和 emoji-blast ',
+			title: '与 Chris Swithinbank 一起试试联动 Astro Starlight 和 emoji-blast',
 			description:
 				'Astro Starlight 框架的开发者 Chris 引导我完成了一个全新的 emoji-blast 网站。 🌟 🎇',
 		},
