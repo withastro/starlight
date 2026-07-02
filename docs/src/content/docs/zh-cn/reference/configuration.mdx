@@ -149,7 +149,7 @@ starlight({
 
 自动生成的子组默认也是展开的。设置 `autogenerate.collapsed` 属性以折叠它们。
 
-```js {5,13}
+```js {5,15}
 sidebar: [
   // 一个折叠的链接组。
   {
@@ -718,7 +718,7 @@ export const collections = {
 };
 ```
 
-### Loaders
+### 加载器
 
 Starlight 从 `@astrojs/starlight/loaders` 模块导出以下 [Astro 加载器](https://docs.astro.build/zh-cn/reference/content-loader-reference/)，以简化配置内容集合。
 
@@ -770,7 +770,7 @@ import { i18nLoader } from '@astrojs/starlight/loaders';
 
 当前没有可用于配置 `i18nLoader()` 的选项。
 
-### Schemas
+### 模式
 
 Starlight 从 `@astrojs/starlight/schema` 模块提供以下[内容集合 schema](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式schema)。
 这些 schema 必须用于 Starlight 依赖的 `docs` 和 `i18n` 集合。
