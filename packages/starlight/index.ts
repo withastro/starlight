@@ -10,17 +10,18 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
+import type { MarkdownProcessorPluginOptions } from './integrations/markdown-processor';
 import {
-	starlightRehypePlugins,
-	starlightRemarkPlugins,
-	type RemarkRehypePluginOptions,
-} from './integrations/remark-rehype';
-import { starlightDirectivesRestorationIntegration } from './integrations/asides';
+	applyStarlightMarkdownPlugins,
+	starlightDirectivesRestorationIntegration,
+	unifiedIntegration,
+} from './integrations/markdown-plugins';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
-import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
+import { vitePluginStarlightLazyBarrelOptimization } from './integrations/vite-lazy-barrel-optimization';
+import { vitePluginStarlightVirtualModules } from './integrations/vite-virtual-modules';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -90,6 +91,11 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
+				// Resolve the configured processor and the optional Unified integration up front before
+				// wiring up the integrations below.
+				const processor = config.markdown.processor;
+				const unified = await unifiedIntegration;
+
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
@@ -105,9 +111,20 @@ export default function StarlightIntegration(
 					integrations.push(mdx({ optimize: true }));
 				}
 
-				// Add Starlight directives restoration integration at the end of the list so that remark
-				// plugins injected by Starlight plugins through Astro integrations can handle text and
-				// leaf directives before they are transformed back to their original form.
+				const markdownProcessorOptions: MarkdownProcessorPluginOptions = {
+					starlightConfig,
+					astroConfig: config,
+					useTranslations,
+					absolutePathToLang,
+				};
+
+				// We push our plugins onto the processor's options.
+				applyStarlightMarkdownPlugins(processor, markdownProcessorOptions, unified, logger);
+
+				// Add Starlight directives restoration integration at the end of the list so that
+				// remark/mdast plugins injected by Starlight plugins through Astro integrations can
+				// handle text and leaf directives before they are transformed back to their original
+				// form.
 				integrations.push(starlightDirectivesRestorationIntegration());
 
 				// Add integrations immediately after Starlight in the config array.
@@ -116,13 +133,6 @@ export default function StarlightIntegration(
 				// This ensures users can add integrations before/after Starlight and we respect that order.
 				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
 				config.integrations.splice(selfIndex + 1, 0, ...integrations);
-
-				const remarkRehypeOptions: RemarkRehypePluginOptions = {
-					starlightConfig,
-					astroConfig: config,
-					useTranslations,
-					absolutePathToLang,
-				};
 
 				// TODO: refactor once there is a reliable way to detect non-Node.js compatible
 				// environments, rather than relying on the presence of specific adapters/integrations.
@@ -135,7 +145,8 @@ export default function StarlightIntegration(
 					vite: {
 						plugins: [
 							vitePluginStarlightCssLayerOrder(),
-							vitePluginStarlightUserConfig(
+							vitePluginStarlightLazyBarrelOptimization(),
+							vitePluginStarlightVirtualModules(
 								{ command, isNodeCompatibleEnv },
 								starlightConfig,
 								config,
@@ -168,10 +179,6 @@ export default function StarlightIntegration(
 										],
 									},
 								},
-					},
-					markdown: {
-						remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],
-						rehypePlugins: [...starlightRehypePlugins(remarkRehypeOptions)],
 					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.

@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 
 const indexWeightSchema = z.number().nonnegative().optional();
+
 const pagefindRankingWeightsSchema = z.object({
 	/**
 	 * Set Pagefind’s `pageLength` ranking option.
@@ -34,7 +35,24 @@ const pagefindRankingWeightsSchema = z.object({
 	 * @see https://pagefind.app/docs/ranking/#configuring-term-similarity
 	 */
 	termSimilarity: z.number().min(0).default(9),
+	/**
+	 * Set Pagefind’s `diacriticSimilarity` ranking option.
+	 *
+	 * The default value is `0.8` and values must be greater than or equal to `0`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-diacritic-similarity
+	 */
+	diacriticSimilarity: z.number().min(0).default(0.8),
+	/**
+	 * Set Pagefind’s `metaWeights` ranking option.
+	 *
+	 * This is a map of metadata keys to their corresponding weights, with a default value of `{ title: 5 }`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-metadata-weights
+	 */
+	metaWeights: z.record(z.string(), z.number().min(0)).optional(),
 });
+
 const pagefindIndexOptionsSchema = z.object({
 	/**
 	 * Overrides the URL path that Pagefind uses to load its search bundle

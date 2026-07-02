@@ -21,14 +21,14 @@
     "@astrojs/starlight": "workspace:*",
     "@lunariajs/core": "^0.1.1",
     "@types/culori": "^4.0.1",
-    "astro": "^6.3.1",
+    "astro": "^7.0.2",
     "culori": "^4.0.2",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@playwright/test": "^1.59.1",
+    "@playwright/test": "^1.61.1",
     "axe-playwright": "^2.2.2",
     "sitemapper": "^4.1.5",
-    "starlight-links-validator": "^0.23.0"
+    "starlight-links-validator": "^0.25.2"
   }
 }

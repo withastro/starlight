@@ -29,10 +29,22 @@
 			enabled: false,
 		},
 		{
-			description: 'Disable Node.js version updates with actions/setup-node',
+			description: 'Group Node.js workflow updates',
+			matchManagers: ['github-actions'],
 			matchDepNames: ['node'],
 			matchDepTypes: ['uses-with'],
-			enabled: false,
+			groupName: 'node.js',
+			// Allows Node.js PRs roughly every two weeks only.
+			schedule: ['* * 1,15 * *'],
+		},
+		{
+			description: 'Keep CI workflow on the latest patch of the minimum Node.js major supported by Astro',
+			matchManagers: ['github-actions'],
+			matchDepNames: ['node'],
+			matchDepTypes: ['uses-with'],
+			groupName: 'node.js',
+			matchFileNames: ['.github/workflows/ci.yml'],
+			allowedVersions: '/^22\\./',
 		},
 	],
 }
