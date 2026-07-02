@@ -452,7 +452,7 @@ export const collections = {
 
 要利用 [Astro `image()` 辅助函数](https://docs.astro.build/zh-cn/guides/images/#内容集合中的图像)，请使用返回 schema 扩展的函数：
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
