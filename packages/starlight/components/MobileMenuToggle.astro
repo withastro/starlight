@@ -28,6 +28,9 @@ import Icon from '../user-components/Icon.astro';
 			if (parentNav) {
 				parentNav.addEventListener('keyup', (e) => this.closeOnEscape(e));
 			}
+
+			// Trap focus within the sidebar when the mobile menu is open.
+			document.addEventListener('keydown', (e) => this.handleKeyDown(e));
 		}
 
 		setExpanded(expanded: boolean) {
@@ -43,6 +46,38 @@ import Icon from '../user-components/Icon.astro';
 			if (e.code === 'Escape') {
 				this.setExpanded(false);
 				this.btn.focus();
+			}
+		}
+
+		private getSidebarFocusables(): HTMLElement[] {
+			const sidebar = document.getElementById('starlight__sidebar');
+			if (!sidebar) return [this.btn];
+			return [
+				this.btn,
+				...Array.from(
+					sidebar.querySelectorAll<HTMLElement>(
+						'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+					),
+				),
+			];
+		}
+
+		private handleKeyDown(e: KeyboardEvent) {
+			if (e.key !== 'Tab' || this.getAttribute('aria-expanded') !== 'true') return;
+			// On desktop the button is hidden via CSS; skip trapping so regular
+			// keyboard navigation is unaffected on wider viewports.
+			if (getComputedStyle(this.btn).display === 'none') return;
+
+			const focusables = this.getSidebarFocusables();
+			const first = focusables[0]!;
+			const last = focusables[focusables.length - 1]!;
+
+			if (e.shiftKey && document.activeElement === first) {
+				e.preventDefault();
+				last.focus();
+			} else if (!e.shiftKey && document.activeElement === last) {
+				e.preventDefault();
+				first.focus();
 			}
 		}
 	}
