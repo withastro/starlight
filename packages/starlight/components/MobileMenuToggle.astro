@@ -29,18 +29,17 @@ import Icon from '../user-components/Icon.astro';
 				parentNav.addEventListener('keyup', (e) => this.closeOnEscape(e));
 			}
 
-			// Collapse the menu (which also clears `inert`) when the viewport
-			// grows past the mobile breakpoint so users on rotating or resizing
-			// devices are not locked out of the page content.
-			matchMedia('(min-width: 50em)').addEventListener('change', (e) => {
-				this.setExpanded(e.matches);
-			});
+			// Reset menu state when the viewport toggles between mobile and desktop sizes.
+			matchMedia('(min-width: 50em)').addEventListener('change', () => this.setExpanded(false));
 		}
 
 		setExpanded(expanded: boolean) {
 			this.setAttribute('aria-expanded', String(expanded));
 			document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
-			this.syncInert(expanded);
+			// Trap keyboard focus inside the header and menu when the menu is expanded.
+			document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
+				el.toggleAttribute('inert', expanded);
+			});
 		}
 
 		toggleExpanded() {
@@ -52,15 +51,6 @@ import Icon from '../user-components/Icon.astro';
 				this.setExpanded(false);
 				this.btn.focus();
 			}
-		}
-
-		// Mark the main content and skip link `inert` while the mobile menu is
-		// expanded so the browser keeps keyboard focus inside the header and
-		// sidebar without relying on a hand-maintained list of focusable selectors.
-		syncInert(active: boolean) {
-			document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
-				el.toggleAttribute('inert', active);
-			});
 		}
 	}
 
