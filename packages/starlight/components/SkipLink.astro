@@ -6,13 +6,13 @@ import { PAGE_TITLE_ID } from '../constants';
 
 <style>
 	@layer starlight.core {
-		.sl-skip-link {
+		a {
 			clip: rect(0, 0, 0, 0);
 			position: fixed;
 			top: 0.75rem;
 			inset-inline-start: 0.75rem;
 		}
-		.sl-skip-link:focus {
+		a:focus {
 			clip: unset;
 			z-index: var(--sl-z-index-skiplink);
 			display: block;
