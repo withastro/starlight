@@ -3,7 +3,8 @@ title: 路由数据参考
 description: Starlight 的路由数据对象的完整参考文档。
 ---
 
-Starlight 的路由数据对象包含有关当前页面的信息。请在 [“路由数据”指南](/zh-cn/guides/route-data/) 中了解更多关于 Starlight 的数据模型如何工作的信息。
+Starlight 的路由数据对象包含有关当前页面的信息。
+请在 [“路由数据”指南](/zh-cn/guides/route-data/) 中了解更多关于 Starlight 的数据模型如何工作的信息。
 
 在 Astro 组件中，从 `Astro.locals.starlightRoute` 访问路由数据：
 
@@ -58,21 +59,14 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 **类型：** `string`
 
-网站标题的 `href` 属性值，链接回主页，例如 `/`。对于多语言站点，这将包括当前区域设置，例如 `/en/` 或 `/zh-cn/`。
-
-### `slug`
-
-**类型：** `string`
-
-该页面的 slug 由内容文件名生成。
-
-此属性已弃用，并将在 Starlight 的未来版本中删除。通过使用 [Starlight 的 `docsLoader`](/zh-cn/manual-setup/#配置内容集合) 迁移到新的内容层 API，并使用 [`id`](#id) 属性代替。
+网站标题的 `href` 属性值，链接回主页，例如 `/`。
+对于多语言站点，这将包括当前区域设置，例如 `/en/` 或 `/zh-cn/`。
 
 ### `id`
 
 **类型：** `string`
 
-此页面的 slug，或者如果使用 [`legacy.collections`](https://docs.astro.build/zh-cn/reference/legacy-flags/#集合) 标志，则基于内容文件名的此页面的唯一 ID。
+此页面的 slug。
 
 ### `isFallback`
 
@@ -102,13 +96,106 @@ entry: {
 }
 ```
 
-在 [Astro的集合条目类型参考](https://docs.astro.build/zh-cn/reference/modules/astro-content/#collectionentry) 中了解更多关于此对象结构的信息。
+在 [Astro 的集合条目类型参考](https://docs.astro.build/zh-cn/reference/modules/astro-content/#collectionentry) 中了解更多关于此对象结构的信息。
 
 ### `sidebar`
 
-**类型：** `SidebarEntry[]`
+**类型：** <code>Array&lt;<a href="#sidebarlink-类型">SidebarLink</a> | <a href="#sidebargroup-类型">SidebarGroup</a>&gt;</code>
 
 此页面的网站导航侧边栏条目。
+每个条目要么是侧边栏链接，要么是侧边栏分组。
+
+#### `SidebarLink` 类型
+
+侧边栏链接条目代表在侧边栏中渲染的链接，具有以下属性：
+
+##### `type`
+
+**类型：** `'link'`
+
+用于将此条目标识为侧边栏链接的类型。
+
+##### `label`
+
+**类型：** `string`
+
+链接的文本。
+
+##### `href`
+
+**类型：** `string`
+
+链接指向的 URL。
+
+##### `isCurrent`
+
+**类型：** `boolean`
+
+如果链接指向当前页面，则为 `true`。
+
+##### `attrs`
+
+**类型：** `Record<string, string | number | boolean | undefined>`
+
+添加到渲染的 `<a>` 元素的 HTML 属性。
+
+##### `badge`
+
+**类型：** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+在链接标签旁边渲染的徽章配置（如果有）。
+详细信息请参阅 [`<Badge>` 组件属性参考](/zh-cn/components/badges/#badge-的属性)。
+
+##### `autogenerate`
+
+**类型：** `{ directory: string } | undefined`
+
+对于由[自动生成的侧边栏条目](/zh-cn/guides/sidebar/#自动生成的链接)创建的链接，`directory` 与配置的 [`autogenerate.directory`](/zh-cn/reference/configuration/#sidebar) 值匹配。
+
+当未配置 [`sidebar`](/zh-cn/reference/configuration/#sidebar) 时，Starlight 会为所有文档页面生成条目，并使用空字符串 (`''`) 作为 `directory` 值。
+
+#### `SidebarGroup` 类型
+
+侧边栏分组条目代表在侧边栏中渲染的链接组，具有以下属性：
+
+##### `type`
+
+**类型：** `'group'`
+
+用于将此条目标识为侧边栏分组的类型。
+
+##### `label`
+
+**类型：** `string`
+
+分组的文本。
+
+##### `entries`
+
+**类型：** <code>Array&lt;<a href="#sidebarlink-类型">SidebarLink</a> | <a href="#sidebargroup-类型">SidebarGroup</a>&gt;</code>
+
+此分组内的嵌套侧边栏条目，可以是链接或分组。
+
+##### `collapsed`
+
+**类型：** `boolean`
+
+分组是否默认折叠。
+
+##### `badge`
+
+**类型：** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+在分组标签旁边渲染的徽章配置（如果有）。
+详细信息请参阅 [`<Badge>` 组件属性参考](/zh-cn/components/badges/#badge-的属性)。
+
+##### `autogenerate`
+
+**类型：** `{ directory: string } | undefined`
+
+对于由[自动生成的侧边栏条目](/zh-cn/guides/sidebar/#自动生成的链接)创建的分组，`directory` 与配置的 [`autogenerate.directory`](/zh-cn/reference/configuration/#sidebar) 值匹配。
+
+当未配置 [`sidebar`](/zh-cn/reference/configuration/#sidebar) 时，Starlight 会为所有文档页面生成条目，并使用空字符串 (`''`) 作为 `directory` 值。
 
 ### `hasSidebar`
 
@@ -132,7 +219,8 @@ entry: {
 
 **类型：** `{ depth: number; slug: string; text: string }[]`
 
-从当前页面提取的所有 Markdown 标题的数组。如果要构建一个遵循 Starlight 配置选项的目录组件，请使用 [`toc`](#toc)
+从当前页面提取的所有 Markdown 标题的数组。
+如果要构建一个遵循 Starlight 配置选项的目录组件，请使用 [`toc`](#toc)。
 
 ### `lastUpdated`
 
@@ -150,7 +238,8 @@ JavaScript `Date` 对象，表示启用时此页面上次更新的时间。
 
 **类型：** [`HeadConfig[]`](/zh-cn/reference/configuration/#headconfig)
 
-包含在当前页面 `<head>` 中的所有标签的数组。包括重要的标签，如 `<title>` 和 `<meta charset="utf-8">`。
+包含在当前页面 `<head>` 中的所有标签的数组。
+包括重要的标签，如 `<title>` 和 `<meta charset="utf-8">`。
 
 ## 工具函数
 
