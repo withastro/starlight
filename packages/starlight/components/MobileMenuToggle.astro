@@ -17,7 +17,6 @@ import Icon from '../user-components/Icon.astro';
 <script>
 	class StarlightMenuButton extends HTMLElement {
 		btn = this.querySelector('button')!;
-		mobileMql = matchMedia('(min-width: 50em)');
 
 		constructor() {
 			super();
@@ -33,17 +32,15 @@ import Icon from '../user-components/Icon.astro';
 			// Collapse the menu (which also clears `inert`) when the viewport
 			// grows past the mobile breakpoint so users on rotating or resizing
 			// devices are not locked out of the page content.
-			this.mobileMql.addEventListener('change', (e) => {
-				if (e.matches && this.getAttribute('aria-expanded') === 'true') {
-					this.setExpanded(false);
-				}
+			matchMedia('(min-width: 50em)').addEventListener('change', (e) => {
+				this.setExpanded(e.matches);
 			});
 		}
 
 		setExpanded(expanded: boolean) {
 			this.setAttribute('aria-expanded', String(expanded));
 			document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
-			this.syncInert();
+			this.syncInert(expanded);
 		}
 
 		toggleExpanded() {
@@ -60,12 +57,10 @@ import Icon from '../user-components/Icon.astro';
 		// Mark the main content and skip link `inert` while the mobile menu is
 		// expanded so the browser keeps keyboard focus inside the header and
 		// sidebar without relying on a hand-maintained list of focusable selectors.
-		syncInert() {
-			const active =
-				!this.mobileMql.matches && document.body.hasAttribute('data-mobile-menu-expanded');
-			for (const selector of ['.main-frame', '.sl-skip-link']) {
-				document.querySelector<HTMLElement>(selector)?.toggleAttribute('inert', active);
-			}
+		syncInert(active: boolean) {
+			document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
+				el.toggleAttribute('inert', active);
+			});
 		}
 	}
 
