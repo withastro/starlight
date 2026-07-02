@@ -428,7 +428,7 @@ export const collections = {
 
 在下面的示例中，我们为 `description` 提供了一个更严格的类型，使其成为必填项，并添加了一个新的可选的 `category` 字段：
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
