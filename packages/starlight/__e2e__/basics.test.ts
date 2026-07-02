@@ -796,6 +796,13 @@ test.describe('mobile menu focus trap', () => {
 		// Tabbing at the end of the mobile menu moves focus out of the viewport, so there should no
 		// longer be any focused element.
 		await expect(currentFocus).toHaveCount(0);
+
+		// Close the mobile menu.
+		await mobileMenuButton.click();
+
+		// The focus trap should be released and tabbing will focus the mobile table of contents button.
+		await page.keyboard.press('Tab');
+		await expect(currentFocus).toHaveText(/On this page/);
 	});
 
 	test('releases focus trap when the viewport resizes', async ({ page, getProdServer }) => {
