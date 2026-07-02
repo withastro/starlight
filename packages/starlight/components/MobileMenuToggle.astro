@@ -28,11 +28,18 @@ import Icon from '../user-components/Icon.astro';
 			if (parentNav) {
 				parentNav.addEventListener('keyup', (e) => this.closeOnEscape(e));
 			}
+
+			// Reset menu state when the viewport toggles between mobile and desktop sizes.
+			matchMedia('(min-width: 50em)').addEventListener('change', () => this.setExpanded(false));
 		}
 
 		setExpanded(expanded: boolean) {
 			this.setAttribute('aria-expanded', String(expanded));
 			document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
+			// Trap keyboard focus inside the header and menu when the menu is expanded.
+			document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
+				el.toggleAttribute('inert', expanded);
+			});
 		}
 
 		toggleExpanded() {
