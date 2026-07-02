@@ -781,7 +781,7 @@ test.describe('mobile menu focus trap', () => {
 		const currentFocus = page.locator('*:focus');
 
 		// Open the mobile menu.
-		const mobileMenuButton = page.getByLabel('Menu');
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
 		await mobileMenuButton.click();
 		await expect(currentFocus).toHaveCount(1);
 
@@ -812,7 +812,7 @@ test.describe('mobile menu focus trap', () => {
 		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
 
 		// Open the mobile menu.
-		const mobileMenuButton = page.getByLabel('Menu');
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
 		await mobileMenuButton.click();
 		await expect(currentFocus).toHaveAccessibleName('Menu');
 
