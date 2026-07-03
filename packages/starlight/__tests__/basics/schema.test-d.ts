@@ -66,6 +66,7 @@ describe('docs schema', () => {
 			image: () => ({}) as any,
 		});
 		const parsed = schema.parse({});
+		expectTypeOf(parsed).toExtend<PartialDocsSchemaOutput>();
 		expectTypeOf(parsed.sidebar.custom).toBeNumber();
 	});
 });
