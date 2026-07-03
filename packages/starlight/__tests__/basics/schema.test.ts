@@ -292,6 +292,8 @@ describe('docsSchema', () => {
 			  "head": [],
 			  "pagefind": true,
 			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
 			    "custom": 42,
 			  },
 			  "template": "doc",
