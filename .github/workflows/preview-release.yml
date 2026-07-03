@@ -1,5 +1,4 @@
 name: Preview Release
-permissions: {}
 
 on:
   pull_request:
@@ -11,14 +10,17 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   preview:
     name: Preview Release
     if: ${{ github.repository_owner == 'withastro' && github.event.label.name == 'pr-preview' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: write
+      contents: read # checkout repository
+      pull-requests: write # remove pr-preview label (gh CLI) and comment on PR with preview links (pkg-pr-new)
+      id-token: write # authenticate with npm using OIDC trusted publishing provenance
     steps:
       - name: Checkout Repo
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -71,9 +73,9 @@ jobs:
       # We remove the preview label before publishing so that the label is always removed even if
       # publishing fails, so we can retry by only adding the label again.
       - name: Remove Preview Label
-        uses: actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1.3.0
-        with:
-          labels: pr-preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label pr-preview
 
       - name: Publish preview packages
         env:

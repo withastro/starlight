@@ -1,12 +1,15 @@
 name: 'Pull Request Labeler'
+
 on:
   - pull_request_target
+
+permissions: {}
 
 jobs:
   triage:
     permissions:
-      contents: read
-      pull-requests: write
+      contents: read # checkout repository
+      pull-requests: write # attach labels to the PR (actions/labeler)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/labeler@f27b608878404679385c85cfa523b85ccb86e213 # v6.1.0

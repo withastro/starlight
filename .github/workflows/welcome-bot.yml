@@ -5,13 +5,14 @@ on:
     branches: [main]
     types: [opened]
 
-permissions:
-  pull-requests: write
+permissions: {}
 
 jobs:
   welcome:
     name: Welcome First-Time Contributors
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # comment on the PR (action-first-interaction)
     steps:
       - uses: zephyrproject-rtos/action-first-interaction@58853996b1ac504b8e0f6964301f369d2bb22e5c
         with:

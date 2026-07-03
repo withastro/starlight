@@ -8,15 +8,15 @@ on:
     paths:
       - 'docs/**'
 
-# Allow this job to clone the repository and comment on the pull request
-permissions:
-  contents: read
-  pull-requests: write
+permissions: {}
 
 jobs:
   lunaria-overview:
     name: Generate Lunaria Overview
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # checkout repository
+      pull-requests: write # post PR comment (yanthomasdev/lunaria-action)
 
     steps:
       - name: Checkout
@@ -25,6 +25,7 @@ jobs:
           # Necessary for Lunaria to work properly
           # Makes the action clone the entire git history
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup PNPM
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
