@@ -3,6 +3,49 @@ import { docsSchema, i18nSchema } from '../schema';
 import type { StarlightDocsCollectionEntry } from '../utils/routing/types';
 import type { RouteDataContext } from '../utils/routing/data';
 import { vi } from 'vitest';
+import type { StarlightUserConfig } from '../types';
+import { StarlightConfigSchema } from '../utils/user-config';
+import type { MarkdownProcessorPluginOptions } from '../integrations/markdown-processor';
+import { createTranslationSystemFromFs } from '../utils/translations-fs';
+import { absolutePathToLang } from '../integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from '../utils/collection-fs';
+
+/** Build the options bag Starlight's plugin factories take. Used by both the remark and Sätteri pipelines. */
+export async function createPluginTestOptions(
+	starlightUserConfig?: StarlightUserConfig
+): Promise<MarkdownProcessorPluginOptions> {
+	const starlightConfig = StarlightConfigSchema.parse(
+		starlightUserConfig ?? { title: 'Plugin Tests' }
+	);
+
+	const astroConfig = {
+		root: new URL(import.meta.url),
+		srcDir: new URL('./_src/', import.meta.url),
+	};
+
+	return {
+		starlightConfig,
+		astroConfig,
+		useTranslations: await createTranslationSystemFromFs(starlightConfig, {
+			srcDir: astroConfig.srcDir,
+		}),
+		absolutePathToLang: (path: string) =>
+			absolutePathToLang(path, {
+				docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
+				starlightConfig,
+			}),
+	};
+}
+
+/** URL of a Markdown source inside the synthetic docs collection used by plugin tests. */
+export function docFileURL(slug = 'index.md'): URL {
+	return new URL(`./_src/content/docs/${slug}`, import.meta.url);
+}
+
+/** URL of a Markdown source outside the docs collection, for path-filter tests. */
+export function nonDocFileURL(slug = 'index.md'): URL {
+	return new URL(`./_src/elsewhere/${slug}`, import.meta.url);
+}
 
 const frontmatterSchema = docsSchema()({
 	image: () =>

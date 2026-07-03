@@ -1,5 +1,92 @@
 # @astrojs/starlight
 
+## 0.41.2
+
+### Patch Changes
+
+- [#4008](https://github.com/withastro/starlight/pull/4008) [`58a3520`](https://github.com/withastro/starlight/commit/58a352097016ffbd98716688e4f2dfb97e5a6f44) Thanks [@FrancoKaddour](https://github.com/FrancoKaddour)! - Fixes the table of contents overflowing the right edge of the viewport when a custom `--sl-content-width` value exceeds available space
+
+- [#4015](https://github.com/withastro/starlight/pull/4015) [`bdbfffc`](https://github.com/withastro/starlight/commit/bdbfffc044dbf119e5085c3e67722494ae3c85c6) Thanks [@delucis](https://github.com/delucis)! - Fixes an issue where aside icons were rendered incorrectly in projects where Astro’s MDX integration had optimization disabled
+
+## 0.41.1
+
+### Patch Changes
+
+- [#3967](https://github.com/withastro/starlight/pull/3967) [`72e63dc`](https://github.com/withastro/starlight/commit/72e63dc694d27a8cfef025b7dee7aad5879f5ce4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 2 new icons: `link` and `link-alt`.
+
+- [#3988](https://github.com/withastro/starlight/pull/3988) [`ac55cfa`](https://github.com/withastro/starlight/commit/ac55cfab41c869a605fbc5a1b4d4b8e718718141) Thanks [@delucis](https://github.com/delucis)! - Fixes a dependency resolution issue introduced in Starlight v0.41
+
+- [#3967](https://github.com/withastro/starlight/pull/3967) [`72e63dc`](https://github.com/withastro/starlight/commit/72e63dc694d27a8cfef025b7dee7aad5879f5ce4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Optimizes the icons of Markdown asides.
+
+## 0.41.0
+
+### Minor Changes
+
+- [#3951](https://github.com/withastro/starlight/pull/3951) [`1202dd4`](https://github.com/withastro/starlight/commit/1202dd4c3efd517bdfe213eaf84262e439485e45) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for Astro v7, drops support for Astro v6.
+
+  #### Upgrade Astro and dependencies
+
+  ⚠️ **BREAKING CHANGE:** Astro v6 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v7/) and any other official integrations at the same time as updating Starlight:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+  _Community Starlight plugins and Astro integrations may also need to be manually updated to work with Astro v7. If you encounter any issues, please reach out to the plugin or integration author to see if it is a known issue or if an updated version is being worked on._
+
+  ⚠️ **BREAKING CHANGE:** This release drops official support for Chromium-based browsers prior to version 111 (released 07 March 2023) and Safari-based browsers prior to version 16.4 (released 27 March 2023). You can find a list of currently supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+111%2C+Edge+%3E%3D+111%2C+Firefox+%3E%3D+121%2C+Safari+%3E%3D+16.4%2C+iOS+%3E%3D+16.4%2C+not+op_mini+all).
+
+### Patch Changes
+
+- [#3953](https://github.com/withastro/starlight/pull/3953) [`a935d33`](https://github.com/withastro/starlight/commit/a935d334c193fb452f72453ea1bf38807d415077) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes Starlight Markdown processing being potentially applied to files that should not be processed.
+
+## 0.40.0
+
+### Minor Changes
+
+- [#3923](https://github.com/withastro/starlight/pull/3923) [`edf2e6b`](https://github.com/withastro/starlight/commit/edf2e6bf46b2a0809eb4d5877eb817b224b50af4) Thanks [@Princesseuh](https://github.com/Princesseuh)! - Adds support for Astro 6.4 and the new Sätteri Markdown processor.
+
+  It is now possible to opt into using [Astro's 6.4 Sätteri Markdown processor](https://astro.build/blog/astro-640/#faster-markdown-builds-with-s%C3%A4tteri) by installing the `@astrojs/markdown-satteri` package and configuring it in your `astro.config.mjs` file:
+
+  ```js
+  // astro.config.mjs
+
+  import { defineConfig } from 'astro/config';
+  import { satteri } from '@astrojs/markdown-satteri';
+
+  export default defineConfig({
+    markdown: {
+      processor: satteri(),
+    },
+  });
+  ```
+
+  ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now v6.4.5.
+
+  Please update Starlight and Astro together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+  _Community Starlight plugins and Astro integrations may also need to be manually updated to work with Sätteri. If you encounter any issues, please reach out to the plugin or integration author to see if it is a known issue or if an updated version is being worked on._
+
+### Patch Changes
+
+- [#3923](https://github.com/withastro/starlight/pull/3923) [`edf2e6b`](https://github.com/withastro/starlight/commit/edf2e6bf46b2a0809eb4d5877eb817b224b50af4) Thanks [@Princesseuh](https://github.com/Princesseuh)! - Updates Expressive Code to version 0.43.1.
+
+## 0.39.3
+
+### Patch Changes
+
+- [#3910](https://github.com/withastro/starlight/pull/3910) [`dddf405`](https://github.com/withastro/starlight/commit/dddf40510a304d4ff1f137b12c07f0dafdd9c198) Thanks [@andreialba](https://github.com/andreialba)! - Improves Romanian UI translations
+
+- [#3924](https://github.com/withastro/starlight/pull/3924) [`02f2ce1`](https://github.com/withastro/starlight/commit/02f2ce1ea2c2d814fdd2ecdd609d35109479d8cd) Thanks [@BouRock](https://github.com/BouRock)! - Improves Turkish UI translations
+
+- [#3928](https://github.com/withastro/starlight/pull/3928) [`11a7ed2`](https://github.com/withastro/starlight/commit/11a7ed2d6ce14f131b3678f3fc13e1b16a273312) Thanks [@delucis](https://github.com/delucis)! - Updates Pagefind to v1.5 and adds support for Pagefind’s new [`diacriticSimilarity`](https://pagefind.app/docs/ranking/#configuring-diacritic-similarity) and [`metaWeights`](https://pagefind.app/docs/ranking/#configuring-metadata-weights) advanced ranking options
+
+- [#3927](https://github.com/withastro/starlight/pull/3927) [`e944870`](https://github.com/withastro/starlight/commit/e94487041f5e22b5dc89ed8247c2bb0c737f891f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Refactors internal file path handling for Starlight content collections.
+
 ## 0.39.2
 
 ### Patch Changes

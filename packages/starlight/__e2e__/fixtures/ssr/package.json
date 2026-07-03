@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@astrojs/node": "^10.1.0",
+    "@astrojs/node": "^11.0.0",
     "@astrojs/starlight": "workspace:*",
-    "astro": "^6.3.1"
+    "astro": "^7.0.2"
   }
 }
