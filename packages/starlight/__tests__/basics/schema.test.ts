@@ -243,6 +243,8 @@ describe('docsSchema', () => {
 			  "hero": {
 			    "actions": [
 			      {
+			        "link": "",
+			        "text": "",
 			        "variant": "custom",
 			      },
 			    ],
