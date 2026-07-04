@@ -1,8 +1,10 @@
 import { describe, expect, test } from 'vitest';
+import { docsSchema } from '../../schema';
 import { FaviconSchema } from '../../schemas/favicon';
 import { TitleTransformConfigSchema } from '../../schemas/site-title';
 import { HeadConfigSchema, type HeadUserConfig } from '../../schemas/head';
 import { parseWithFriendlyErrors } from '../../utils/error-map';
+import { z } from 'astro/zod';
 
 describe('FaviconSchema', () => {
 	test('returns the proper href and type attributes', () => {
@@ -169,5 +171,136 @@ describe('HeadConfigSchema', () => {
 					"
 			`);
 		});
+	});
+});
+
+describe('docsSchema', () => {
+	test('basic frontmatter should parse to expected shape', () => {
+		const schema = docsSchema()({ image: () => ({}) as never });
+		const parsed = schema.parse({ title: 'Test Title' });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test('docs schema can be extended to make property required', () => {
+		const schema = docsSchema({ extend: z.object({ description: z.string() }) })({
+			image: () => ({}) as never,
+		});
+		expect(() => schema.parse({ title: 'Test Title' })).toThrowErrorMatchingInlineSnapshot(`
+			[ZodError: [
+			  {
+			    "expected": "string",
+			    "code": "invalid_type",
+			    "path": [
+			      "description"
+			    ],
+			    "message": "Invalid input: expected string, received undefined"
+			  }
+			]]
+		`);
+	});
+
+	test('an existing enum can be extended', () => {
+		const schema = docsSchema({
+			extend: z.object({
+				template: z.enum(['doc', 'splash', 'custom']),
+				hero: z
+					.object({
+						actions: z
+							.array(
+								z.object({ variant: z.enum(['primary', 'secondary', 'custom']).default('primary') })
+							)
+							.default([]),
+					})
+					.optional(),
+			}),
+		})({
+			image: () => ({}) as never,
+		});
+
+		const parsed = schema.parse({
+			title: 'Test Title',
+			template: 'custom',
+			hero: { actions: [{ variant: 'custom', text: '', link: '' }] },
+		});
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "hero": {
+			    "actions": [
+			      {
+			        "link": "",
+			        "text": "",
+			        "variant": "custom",
+			      },
+			    ],
+			  },
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "custom",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test('docs schema can be extended to add a new property', () => {
+		const schema = docsSchema({ extend: z.object({ custom: z.string() }) })({
+			image: () => ({}) as never,
+		});
+		const parsed = schema.parse({ title: 'Test Title', custom: 'Custom Value' });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "custom": "Custom Value",
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test('docs schema can be extended to add a property to a nested object', () => {
+		const schema = docsSchema({ extend: z.object({ sidebar: z.object({ custom: z.number() }) }) })({
+			image: () => ({}) as never,
+		});
+		const parsed = schema.parse({ title: 'Test Title', sidebar: { custom: 42 } });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			    "custom": 42,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
 	});
 });
