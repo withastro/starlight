@@ -295,12 +295,39 @@ describe('docsSchema', () => {
 			  "pagefind": true,
 			  "sidebar": {
 			    "attrs": {},
-			    "hidden": false,
 			    "custom": 42,
+			    "hidden": false,
 			  },
 			  "template": "doc",
 			  "title": "Test Title",
 			}
 		`);
+	});
+
+	test('docs schema preserves user-defined refinements when extending a nested object', () => {
+		const schema = docsSchema({
+			extend: z.object({
+				sidebar: z
+					.object({ custom: z.number() })
+					.refine(({ custom }) => custom > 0, 'custom must be positive'),
+			}),
+		})({
+			image: () => ({}) as never,
+		});
+
+		expect(() => schema.parse({ title: 'Test Title', sidebar: { custom: 42 } })).not.toThrow();
+
+		expect(() => schema.parse({ title: 'Test Title', sidebar: { custom: -1 } }))
+			.toThrowErrorMatchingInlineSnapshot(`
+		[ZodError: [
+		  {
+		    "code": "custom",
+		    "path": [
+		      "sidebar"
+		    ],
+		    "message": "custom must be positive"
+		  }
+		]]
+	`);
 	});
 });

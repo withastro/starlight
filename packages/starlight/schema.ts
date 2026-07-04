@@ -119,7 +119,69 @@ type BaseSchema<T extends z.ZodRawShape = z.ZodRawShape> = z.ZodObject<T>;
 /** Type that extends Starlight’s default schema with an optional, user-defined schema. */
 type ExtendedSchema<T extends BaseSchema = never> = [T] extends [never]
 	? DefaultSchema
-	: z.ZodObject<Omit<DefaultSchema['shape'], keyof T['shape']> & T['shape']>;
+	: MergedSchema<DefaultSchema, T>;
+
+/** Type-level equivalent of {@link mergeWithDefaultSchema}. */
+type MergedSchema<Default extends z.core.$ZodType, User extends z.core.$ZodType> =
+	// Preserve user-defined `optional()` and merge the wrapped schema.
+	User extends z.ZodOptional<infer WrappedSchema extends z.core.$ZodType>
+		? z.ZodOptional<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+		: // Preserve user-defined `nullable()` and merge the wrapped schema.
+			User extends z.ZodNullable<infer WrappedSchema extends z.core.$ZodType>
+			? z.ZodNullable<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+			: // Preserve user-defined `default()` and merge the wrapped schema.
+				User extends z.ZodDefault<infer WrappedSchema extends z.core.$ZodType>
+				? z.ZodDefault<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+				: // Preserve user-defined `prefault()` and merge the wrapped schema.
+					User extends z.ZodPrefault<infer WrappedSchema extends z.core.$ZodType>
+					? z.ZodPrefault<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+					: UnwrappedSchema<Default> extends z.ZodObject<infer DefaultShape>
+						? User extends z.ZodObject<infer UserShape, infer UserConfig>
+							? // If both schemas are objects, merge their shapes recursively.
+								z.ZodObject<MergedShape<DefaultShape, UserShape>, UserConfig>
+							: // If only the default schema is an object, override it with the user schema.
+								User
+						: UnwrappedSchema<Default> extends z.ZodArray<
+									infer DefaultItemSchema extends z.core.$ZodType
+							  >
+							? User extends z.ZodArray<infer UserItemSchema extends z.core.$ZodType>
+								? // If both schemas are arrays, merge their item schemas recursively.
+									z.ZodArray<MergedSchema<DefaultItemSchema, UserItemSchema>>
+								: // If only the default schema is an array, override it with the user schema.
+									User
+							: // Otherwise, override the default schema with the user schema.
+								User;
+
+/** Type-level equivalent of {@link unwrapSchema}. */
+type UnwrappedSchema<T extends z.core.$ZodType> =
+	T extends z.ZodOptional<infer Wrapped extends z.core.$ZodType>
+		? UnwrappedSchema<Wrapped>
+		: T extends z.ZodNullable<infer Wrapped extends z.core.$ZodType>
+			? UnwrappedSchema<Wrapped>
+			: T extends z.ZodDefault<infer Wrapped extends z.core.$ZodType>
+				? UnwrappedSchema<Wrapped>
+				: T extends z.ZodPrefault<infer Wrapped extends z.core.$ZodType>
+					? UnwrappedSchema<Wrapped>
+					: T;
+
+/**
+ * Merged Zod object shapes, preserving default properties, adding user-only properties, and
+ * recursively merging shared properties.
+ */
+type MergedShape<Default extends z.ZodRawShape, User extends z.ZodRawShape> = {
+	// We iterate over all properties in both the default and user-defined schemas.
+	[Key in keyof Default | keyof User]: Key extends keyof User
+		? Key extends keyof Default
+			? // If both shapes define the property, we merge both property schemas.
+				MergedSchema<Default[Key], User[Key]>
+			: // If only the user shape defines the property, we use the user-defined schema.
+				User[Key]
+		: Key extends keyof Default
+			? // If only the default shape defines the property, we use the default schema.
+				Default[Key]
+			: // Unreachable case, but we need to satisfy TypeScript.
+				never;
+};
 
 interface DocsSchemaOpts<T extends BaseSchema> {
 	/**
@@ -158,8 +220,92 @@ export function docsSchema<T extends BaseSchema = never>(
 
 		return (
 			UserSchema
-				? StarlightFrontmatterSchema(context).extend(UserSchema.shape)
+				? mergeWithDefaultSchema(StarlightFrontmatterSchema(context), UserSchema)
 				: StarlightFrontmatterSchema(context)
 		) as ExtendedSchema<T>;
 	};
+}
+
+function mergeWithDefaultSchema(defaultSchema: z.ZodType, userSchema: z.ZodType): z.ZodType {
+	// We unwrap the default schema to find the schema underneath and merge it with the user schema.
+	const unwrappedDefaultSchema = unwrapSchema(defaultSchema);
+
+	// If the user schema is a wrapped schema, e.g. by `z.optional()`, `z.nullable()`, or
+	// `z.default()`, we preserve such modifiers by cloning the wrapper and replacing the wrapped
+	// schema with the merge result.
+	if (isWrappedSchema(userSchema)) {
+		return userSchema.clone({
+			...userSchema._zod.def,
+			innerType: mergeWithDefaultSchema(unwrappedDefaultSchema, userSchema._zod.def.innerType),
+		} as Parameters<typeof userSchema.clone>[0]);
+	}
+
+	// We merge object schemas property-by-property so users can extend nested objects without
+	// replacing built-in ones.
+	if (isZodObject(unwrappedDefaultSchema) && isZodObject(userSchema)) {
+		const shape: z.core.$ZodLooseShape = { ...unwrappedDefaultSchema.shape };
+
+		for (const key of Object.keys(userSchema.shape)) {
+			const userFieldSchema = userSchema.shape[key] as z.ZodType;
+			const defaultFieldSchema = shape[key] as z.ZodType | undefined;
+
+			// If the property exists in the default schema, we merge it recursively. If not, we add it
+			// as-is.
+			shape[key] = defaultFieldSchema
+				? mergeWithDefaultSchema(defaultFieldSchema, userFieldSchema)
+				: userFieldSchema;
+		}
+
+		// We use `safeExtend()` to build the merged object schema while preserving user-defined refinements.
+		return userSchema.safeExtend(shape);
+	}
+
+	// We merge array item schemas so users can extend arrays of objects without replacing built-in
+	// object properties and clone the user array schema to preserve refinements.
+	if (isZodArray(unwrappedDefaultSchema) && isZodArray(userSchema)) {
+		return userSchema.clone({
+			...userSchema._zod.def,
+			element: mergeWithDefaultSchema(unwrappedDefaultSchema.element, userSchema.element),
+		});
+	}
+
+	// Otherwise, we use the user schema as-is.
+	return userSchema;
+}
+
+/**
+ * Unwrap any Zod schema that wraps other schemas, such as `z.optional()`, `z.nullable()`,
+ * `z.default()`, etc. until we reach the innermost schema.
+ */
+function unwrapSchema(schema: z.ZodType): z.ZodType {
+	let current = schema;
+
+	while (isWrappedSchema(current)) {
+		current = current._zod.def.innerType;
+	}
+
+	return current;
+}
+
+/**
+ * Check if a schema wraps another schema which can happen when using modifiers like
+ * `z.optional()`, `z.nullable()`, `z.default()`, etc.
+ */
+function isWrappedSchema(schema: z.ZodType): schema is z.ZodType & {
+	_zod: { def: z.ZodType['_zod']['def'] & { innerType: z.ZodType } };
+} {
+	return (
+		schema._zod.def.type === 'optional' ||
+		schema._zod.def.type === 'nullable' ||
+		schema._zod.def.type === 'default' ||
+		schema._zod.def.type === 'prefault'
+	);
+}
+
+function isZodObject(schema: z.ZodType): schema is z.ZodObject<z.ZodRawShape> {
+	return schema._zod.def.type === 'object';
+}
+
+function isZodArray(schema: z.ZodType): schema is z.ZodArray<z.ZodType> {
+	return schema._zod.def.type === 'array';
 }

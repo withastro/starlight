@@ -45,6 +45,8 @@ describe('docs schema', () => {
 		});
 		const parsed = schema.parse({});
 		expectTypeOf(parsed.template).toEqualTypeOf<'doc' | 'splash' | 'custom'>();
+		expectTypeOf(parsed.hero!.actions[0]!.text).toBeString();
+		expectTypeOf(parsed.hero!.actions[0]!.link).toBeString();
 		expectTypeOf(parsed.hero!.actions[0]!.variant).toEqualTypeOf<
 			'primary' | 'secondary' | 'custom'
 		>();
