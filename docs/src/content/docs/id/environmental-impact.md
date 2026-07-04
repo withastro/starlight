@@ -120,7 +120,6 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [WebPageTest Carbon Control](https://www.webpagetest.org/carbon-control/)
-- [Ecoping](https://ecoping.earth/)
 
 ### Articles and presentasi
 
