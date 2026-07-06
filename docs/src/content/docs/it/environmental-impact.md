@@ -125,7 +125,6 @@ Questi test eseguiti con [Website Carbon Calculator][wcc] confrontano pagine sim
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [WebPageTest Carbon Control](https://www.webpagetest.org/carbon-control/)
-- [Ecoping](https://ecoping.earth/)
 
 ### Articoli e discussioni
 
