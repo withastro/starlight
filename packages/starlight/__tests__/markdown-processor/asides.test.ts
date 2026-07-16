@@ -2,13 +2,17 @@ import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
+import { getCollectionPosixPath } from '../../utils/collection-fs';
 import type { MdastPluginDefinition } from 'satteri';
 import { describe, expect, test, vi } from 'vitest';
 import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
 import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../integrations/satteri';
-import { starlightRemarkPlugins } from '../../integrations/remark-rehype';
+import { starlightRehypePlugins, starlightRemarkPlugins } from '../../integrations/remark-rehype';
 import type { StarlightUserConfig } from '../../utils/user-config';
-import { BuiltInDefaultLocale } from '../../utils/i18n';
+import { StarlightConfigSchema } from '../../utils/user-config';
+import { BuiltInDefaultLocale, processI18nConfig } from '../../utils/i18n';
+import { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { absolutePathToLang } from '../../integrations/shared/absolutePathToLang';
 import { createPluginTestOptions, docFileURL } from '../test-utils';
 import { createStarlightMarkdownProcessor, describeEachProcessor, nonDocFileURL } from './utils';
 
@@ -19,6 +23,51 @@ const starlightConfig = {
 } satisfies StarlightUserConfig;
 
 const types = ['note', 'tip', 'caution', 'danger'] as const;
+
+async function createProcessorWithAstroI18n(name: 'unified' | 'satteri') {
+	const { starlightConfig } = processI18nConfig(
+		StarlightConfigSchema.parse({ title: 'Astro i18n' }),
+		{
+			defaultLocale: 'id',
+			locales: ['id'],
+			routing: {
+				prefixDefaultLocale: false,
+				redirectToDefaultLocale: false,
+				fallbackType: 'redirect',
+			},
+		}
+	);
+	const astroConfig = {
+		root: new URL('../', import.meta.url),
+		srcDir: new URL('../_src/', import.meta.url),
+	};
+	const options = {
+		starlightConfig,
+		astroConfig,
+		useTranslations: await createTranslationSystemFromFs(starlightConfig, {
+			srcDir: astroConfig.srcDir,
+		}),
+		absolutePathToLang: (path: string) =>
+			absolutePathToLang(path, {
+				docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
+				starlightConfig,
+			}),
+	};
+
+	if (name === 'satteri') {
+		const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(options);
+		return createSatteriMarkdownProcessor({
+			mdastPlugins: [...mdastPlugins, satteriDirectivesRestoration()],
+			hastPlugins,
+			features: { directive: true },
+		});
+	}
+
+	return createMarkdownProcessor({
+		remarkPlugins: [...starlightRemarkPlugins(options), remarkDirectivesRestoration],
+		rehypePlugins: [...starlightRehypePlugins(options)],
+	});
+}
 
 describeEachProcessor(
 	'asides',
@@ -141,6 +190,13 @@ describeEachProcessor(
 			});
 			const res = await ctx().render(':::note\nTest\n:::', { processor });
 			expect(res.code).includes('aria-label="Note"');
+		});
+
+		test('uses the default locale from Astro i18n config for aside labels', async () => {
+			const processor = await createProcessorWithAstroI18n(name);
+			const res = await ctx().render(':::note\nTest\n:::', { processor });
+			expect(res.code).includes('aria-label="Catatan"');
+			expect(res.code).includes('</svg>Catatan</p>');
 		});
 
 		test('transforms unhandled text directives back to their source', async () => {
