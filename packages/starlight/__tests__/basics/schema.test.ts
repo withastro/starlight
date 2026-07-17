@@ -282,6 +282,48 @@ describe('docsSchema', () => {
 		`);
 	});
 
+	test(`docs schema can be extended to override existing property`, () => {
+		const schema = docsSchema({
+			extend: z.object({
+				hero: z
+					.object({
+						actions: z.array(z.object({ icon: z.string() })).default([]),
+					})
+					.optional(),
+			}),
+		})({
+			image: () => ({}) as never,
+		});
+		const parsed = schema.parse({
+			title: 'Test Title',
+			hero: { actions: [{ text: '', link: '', icon: 'icon-x' }] },
+		});
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "hero": {
+			    "actions": [
+			      {
+			        "icon": "icon-x",
+			        "link": "",
+			        "text": "",
+			        "variant": "primary",
+			      },
+			    ],
+			  },
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
 	test('docs schema can be extended to add a property to a nested object', () => {
 		const schema = docsSchema({ extend: z.object({ sidebar: z.object({ custom: z.number() }) }) })({
 			image: () => ({}) as never,
