@@ -6,7 +6,7 @@ import { FrontmatterTableOfContentsSchema } from './schemas/tableOfContents';
 import { BadgeConfigSchema } from './schemas/badge';
 import { HeroSchema } from './schemas/hero';
 import { SidebarLinkItemHTMLAttributesSchema } from './schemas/sidebar';
-import { mergeWithDefaultSchema, type MergedSchema } from './utils/schema';
+import { mergeWithDefaultSchema, type MergedSchema } from './utils/zodDeepMerge';
 export { i18nSchema } from './schemas/i18n';
 
 /** Default content collection schema for Starlight’s `docs` collection. */
