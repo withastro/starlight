@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Replace "and" in "docsSchema" with "extend" to support the modifying of ZodEnum.
+Fixes support for modifying Zod enums when passing an [`extend` option](https://starlight.astro.build/reference/frontmatter/#extend) to Starlight’s `docsSchema()`
