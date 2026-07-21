@@ -50,5 +50,10 @@ export default defineVitestConfig({
 			label: 'API (deprecated)',
 			items: [{ autogenerate: { directory: '/Deprecated API/' } }],
 		},
+		// A link using the `mailto:` protocol.
+		{
+			label: 'E-mail me',
+			link: 'mailto:me@example.com',
+		},
 	],
 });
