@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.41.3
+
+### Patch Changes
+
+- [#3911](https://github.com/withastro/starlight/pull/3911) [`1686ecc`](https://github.com/withastro/starlight/commit/1686ecce3fd2da2aa9973faba2dc585abebb93a3) Thanks [@timothyjordan](https://github.com/timothyjordan)! - Keeps keyboard focus inside the mobile menu while it is open, preventing focus moving to hidden interactive elements in page content.
+
 ## 0.41.2
 
 ### Patch Changes
