@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.41.4
+
+### Patch Changes
+
+- [#3936](https://github.com/withastro/starlight/pull/3936) [`712eedd`](https://github.com/withastro/starlight/commit/712eedd8e0d28329feb361edc392438f37ba2095) Thanks [@miichom](https://github.com/miichom)! - Fixes support for modifying Zod enums when passing an [`extend` option](https://starlight.astro.build/reference/frontmatter/#extend) to Starlight’s `docsSchema()`
+
+- [#4092](https://github.com/withastro/starlight/pull/4092) [`0896b91`](https://github.com/withastro/starlight/commit/0896b91607325b9d8494eb665cd1716a40025a5a) Thanks [@delucis](https://github.com/delucis)! - Fixes support for links containing a protocol like `mailto:` in the sidebar
+
+- [#4088](https://github.com/withastro/starlight/pull/4088) [`4486ba4`](https://github.com/withastro/starlight/commit/4486ba432afe9e206f0b05651de24a9c25bdf6dd) Thanks [@delucis](https://github.com/delucis)! - Simplifies Starlight’s client-side sidebar state persistence script slightly
+
 ## 0.41.3
 
 ### Patch Changes
