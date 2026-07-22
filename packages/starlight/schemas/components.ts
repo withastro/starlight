@@ -3,6 +3,17 @@ import { z } from 'astro/zod';
 export function ComponentConfigSchema() {
 	return z
 		.object({
+			/**
+			 * Parent component for all page HTML, including `<head>` and `<body>`.
+			 *
+			 * **⚠️ CAUTION:** Overriding this component removes **all** of Starlight’s default rendering
+			 * behaviour. Use it only if you intend to use Starlight as a “headless” data framework and
+			 * implement your own frontend.
+			 *
+			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Page.astro `Page` default implementation}
+			 */
+			Page: z.string().default('@astrojs/starlight/components/Page.astro'),
+
 			/*
 			HEAD ----------------------------------------------------------------------------------------
 			*/
