@@ -37,9 +37,9 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 
 		/**
 		 * Set the layout style for this page.
-		 * Can be `'doc'` (the default) or `'splash'` for a wider layout without any sidebars.
+		 * Can be `'doc'` (the default), `'splash'` for a wider layout without any sidebars, or `'blank'` for a completely blank layout.
 		 */
-		template: z.enum(['doc', 'splash']).default('doc'),
+		template: z.enum(['doc', 'splash', 'blank']).default('doc'),
 
 		/** Display a hero section on this page. */
 		hero: HeroSchema(context).optional(),

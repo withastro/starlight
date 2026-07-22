@@ -98,4 +98,6 @@ export interface StarlightRouteData extends Route {
 	Content?: RenderResult['Content'];
 	/** Array of tags to include in the `<head>` of the current page. */
 	head: HeadConfig;
+	/** Template to use for the rendered page, doc, splash or blank. */
+	template: 'blank' | 'splash' | 'doc';
 }

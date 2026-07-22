@@ -85,12 +85,13 @@ tableOfContents: false
 
 ### `template`
 
-**type:** `'doc' | 'splash'`  
+**type:** `'doc' | 'splash' | 'blank'`  
 **default:** `'doc'`
 
 Set the layout template for this page.
 Pages use the `'doc'` layout by default.
 Set to `'splash'` to use a wider layout without any sidebars designed for landing pages.
+Set to `'blank'` to have full control over the content panel of the page.
 
 ### `hero`
 
