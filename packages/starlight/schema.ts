@@ -6,6 +6,7 @@ import { FrontmatterTableOfContentsSchema } from './schemas/tableOfContents';
 import { BadgeConfigSchema } from './schemas/badge';
 import { HeroSchema } from './schemas/hero';
 import { SidebarLinkItemHTMLAttributesSchema } from './schemas/sidebar';
+import { deepMergeSchemas, type DeepMergedSchema } from './utils/zodDeepMerge';
 export { i18nSchema } from './schemas/i18n';
 
 /** Default content collection schema for Starlight’s `docs` collection. */
@@ -114,14 +115,12 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 type DefaultSchema = ReturnType<typeof StarlightFrontmatterSchema>;
 
 /** Base subset of Zod types that we support passing to the `extend` option. */
-type BaseSchema = z.core.$ZodType;
+type BaseSchema<T extends z.ZodRawShape = z.ZodRawShape> = z.ZodObject<T>;
 
 /** Type that extends Starlight’s default schema with an optional, user-defined schema. */
 type ExtendedSchema<T extends BaseSchema = never> = [T] extends [never]
 	? DefaultSchema
-	: T extends BaseSchema
-		? z.ZodIntersection<DefaultSchema, T>
-		: DefaultSchema;
+	: DeepMergedSchema<DefaultSchema, T>;
 
 interface DocsSchemaOpts<T extends BaseSchema> {
 	/**
@@ -160,7 +159,7 @@ export function docsSchema<T extends BaseSchema = never>(
 
 		return (
 			UserSchema
-				? StarlightFrontmatterSchema(context).and(UserSchema)
+				? deepMergeSchemas(StarlightFrontmatterSchema(context), UserSchema)
 				: StarlightFrontmatterSchema(context)
 		) as ExtendedSchema<T>;
 	};
