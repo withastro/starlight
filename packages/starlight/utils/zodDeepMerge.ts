@@ -1,24 +1,24 @@
 import type { z } from 'astro/zod';
 
 /** Type-level equivalent of {@link mergeWithDefaultSchema}. */
-export type MergedSchema<Default extends z.core.$ZodType, User extends z.core.$ZodType> =
+export type DeepMergedSchema<Default extends z.core.$ZodType, User extends z.core.$ZodType> =
 	User extends z.ZodOptional<infer WrappedSchema extends z.core.$ZodType>
-		? z.ZodOptional<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+		? z.ZodOptional<DeepMergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
 		: User extends z.ZodNullable<infer WrappedSchema extends z.core.$ZodType>
-			? z.ZodNullable<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+			? z.ZodNullable<DeepMergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
 			: User extends z.ZodDefault<infer WrappedSchema extends z.core.$ZodType>
-				? z.ZodDefault<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+				? z.ZodDefault<DeepMergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
 				: User extends z.ZodPrefault<infer WrappedSchema extends z.core.$ZodType>
-					? z.ZodPrefault<MergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
+					? z.ZodPrefault<DeepMergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
 					: UnwrappedSchema<Default> extends z.ZodObject<infer DefaultShape>
 						? User extends z.ZodObject<infer UserShape, infer UserConfig>
-							? z.ZodObject<MergedShape<DefaultShape, UserShape>, UserConfig>
+							? z.ZodObject<DeepMergedShape<DefaultShape, UserShape>, UserConfig>
 							: User
 						: UnwrappedSchema<Default> extends z.ZodArray<
 									infer DefaultItemSchema extends z.core.$ZodType
 							  >
 							? User extends z.ZodArray<infer UserItemSchema extends z.core.$ZodType>
-								? z.ZodArray<MergedSchema<DefaultItemSchema, UserItemSchema>>
+								? z.ZodArray<DeepMergedSchema<DefaultItemSchema, UserItemSchema>>
 								: User
 							: User;
 
@@ -38,23 +38,23 @@ type UnwrappedSchema<T extends z.core.$ZodType> =
  * Merged Zod object shapes, preserving default properties, adding user-only properties, and
  * recursively merging shared properties.
  */
-type MergedShape<Default extends z.ZodRawShape, User extends z.ZodRawShape> = {
+type DeepMergedShape<Default extends z.ZodRawShape, User extends z.ZodRawShape> = {
 	[Key in keyof Default | keyof User]: Key extends keyof User
 		? Key extends keyof Default
-			? MergedSchema<Default[Key], User[Key]>
+			? DeepMergedSchema<Default[Key], User[Key]>
 			: User[Key]
 		: Key extends keyof Default
 			? Default[Key]
 			: never;
 };
 
-export function mergeWithDefaultSchema(defaultSchema: z.ZodType, userSchema: z.ZodType): z.ZodType {
+export function deepMergeSchemas(defaultSchema: z.ZodType, userSchema: z.ZodType): z.ZodType {
 	const unwrappedDefaultSchema = unwrapSchema(defaultSchema);
 
 	if (isWrappedSchema(userSchema)) {
 		return userSchema.clone({
 			...userSchema._zod.def,
-			innerType: mergeWithDefaultSchema(unwrappedDefaultSchema, userSchema._zod.def.innerType),
+			innerType: deepMergeSchemas(unwrappedDefaultSchema, userSchema._zod.def.innerType),
 		} as Parameters<typeof userSchema.clone>[0]);
 	}
 
@@ -66,7 +66,7 @@ export function mergeWithDefaultSchema(defaultSchema: z.ZodType, userSchema: z.Z
 			const defaultFieldSchema = shape[key] as z.ZodType | undefined;
 
 			shape[key] = defaultFieldSchema
-				? mergeWithDefaultSchema(defaultFieldSchema, userFieldSchema)
+				? deepMergeSchemas(defaultFieldSchema, userFieldSchema)
 				: userFieldSchema;
 		}
 
@@ -76,7 +76,7 @@ export function mergeWithDefaultSchema(defaultSchema: z.ZodType, userSchema: z.Z
 	if (isZodArray(unwrappedDefaultSchema) && isZodArray(userSchema)) {
 		return userSchema.clone({
 			...userSchema._zod.def,
-			element: mergeWithDefaultSchema(unwrappedDefaultSchema.element, userSchema.element),
+			element: deepMergeSchemas(unwrappedDefaultSchema.element, userSchema.element),
 		});
 	}
 
