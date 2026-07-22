@@ -260,6 +260,16 @@ export const StarlightMarkdocPreset = {
 					type: String,
 					required: true,
 				},
+				icon: {
+					type: String,
+					required: false,
+				},
+				iconPlacement: {
+					type: String,
+					required: false,
+					default: 'end',
+					matches: ['start', 'end'],
+				},
 			},
 		},
 		steps: {
