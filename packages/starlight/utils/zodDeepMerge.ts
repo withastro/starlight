@@ -10,17 +10,19 @@ export type DeepMergedSchema<Default extends z.core.$ZodType, User extends z.cor
 				? z.ZodDefault<DeepMergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
 				: User extends z.ZodPrefault<infer WrappedSchema extends z.core.$ZodType>
 					? z.ZodPrefault<DeepMergedSchema<UnwrappedSchema<Default>, WrappedSchema>>
-					: UnwrappedSchema<Default> extends z.ZodObject<infer DefaultShape>
-						? User extends z.ZodObject<infer UserShape, infer UserConfig>
-							? z.ZodObject<DeepMergedShape<DefaultShape, UserShape>, UserConfig>
-							: User
-						: UnwrappedSchema<Default> extends z.ZodArray<
-									infer DefaultItemSchema extends z.core.$ZodType
-							  >
-							? User extends z.ZodArray<infer UserItemSchema extends z.core.$ZodType>
-								? z.ZodArray<DeepMergedSchema<DefaultItemSchema, UserItemSchema>>
+					: User extends z.ZodUnion<infer Users extends readonly z.core.$ZodType[]>
+						? z.ZodUnion<DeepMergedUnionMembers<UnwrappedSchema<Default>, Users>>
+						: UnwrappedSchema<Default> extends z.ZodObject<infer DefaultShape>
+							? User extends z.ZodObject<infer UserShape, infer UserConfig>
+								? z.ZodObject<DeepMergedShape<DefaultShape, UserShape>, UserConfig>
 								: User
-							: User;
+							: UnwrappedSchema<Default> extends z.ZodArray<
+										infer DefaultItemSchema extends z.core.$ZodType
+								  >
+								? User extends z.ZodArray<infer UserItemSchema extends z.core.$ZodType>
+									? z.ZodArray<DeepMergedSchema<DefaultItemSchema, UserItemSchema>>
+									: User
+								: User;
 
 /** Type-level equivalent of {@link unwrapSchema}. */
 type UnwrappedSchema<T extends z.core.$ZodType> =
@@ -48,6 +50,16 @@ type DeepMergedShape<Default extends z.ZodRawShape, User extends z.ZodRawShape> 
 			: never;
 };
 
+/** Merged union schemas where each union member is deep-merged with the default schema. */
+type DeepMergedUnionMembers<
+	Default extends z.core.$ZodType,
+	Users extends readonly z.core.$ZodType[],
+> = {
+	[Key in keyof Users]: Users[Key] extends z.core.$ZodType
+		? DeepMergedSchema<Default, Users[Key]>
+		: Users[Key];
+};
+
 export function deepMergeSchemas(defaultSchema: z.ZodType, userSchema: z.ZodType): z.ZodType {
 	const unwrappedDefaultSchema = unwrapSchema(defaultSchema);
 
@@ -56,6 +68,13 @@ export function deepMergeSchemas(defaultSchema: z.ZodType, userSchema: z.ZodType
 			...userSchema._zod.def,
 			innerType: deepMergeSchemas(unwrappedDefaultSchema, userSchema._zod.def.innerType),
 		} as Parameters<typeof userSchema.clone>[0]);
+	}
+
+	if (isZodUnion(userSchema)) {
+		return userSchema.clone({
+			...userSchema._zod.def,
+			options: userSchema.options.map((schema) => deepMergeSchemas(unwrappedDefaultSchema, schema)),
+		});
 	}
 
 	if (isZodObject(unwrappedDefaultSchema) && isZodObject(userSchema)) {
@@ -118,4 +137,8 @@ function isZodObject(schema: z.ZodType): schema is z.ZodObject<z.ZodRawShape> {
 
 function isZodArray(schema: z.ZodType): schema is z.ZodArray<z.ZodType> {
 	return schema._zod.def.type === 'array';
+}
+
+function isZodUnion(schema: z.ZodType): schema is z.ZodUnion<readonly z.ZodType[]> {
+	return schema._zod.def.type === 'union';
 }
