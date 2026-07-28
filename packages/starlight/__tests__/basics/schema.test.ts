@@ -372,4 +372,77 @@ describe('docsSchema', () => {
 		]]
 	`);
 	});
+
+	test('docs schema can be extended with a union of objects', () => {
+		const baseSchema = z.object({ type: z.literal('base').optional().default('base') });
+		const extendedSchema = baseSchema.extend({ type: z.literal('extended'), name: z.string() });
+
+		const schema = docsSchema({ extend: z.union([baseSchema, extendedSchema]) })({
+			image: () => ({}) as never,
+		});
+
+		const parsedBase = schema.parse({ title: 'Base' });
+		expect(parsedBase).toMatchInlineSnapshot(`
+        {
+          "draft": false,
+          "editUrl": true,
+          "head": [],
+          "pagefind": true,
+          "sidebar": {
+            "attrs": {},
+            "hidden": false,
+          },
+          "template": "doc",
+          "title": "Base",
+          "type": "base",
+        }
+  `);
+
+		const parsedExtended = schema.parse({ title: 'Extended', type: 'extended', name: 'test' });
+		expect(parsedExtended).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "name": "test",
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Extended",
+			  "type": "extended",
+			}
+		`);
+	});
+
+	test('docs schema can be extended with a discriminated union of objects', () => {
+		const schema = docsSchema({
+			extend: z.discriminatedUnion('type', [
+				z.object({ type: z.literal('base') }),
+				z.object({ type: z.literal('extended'), name: z.string() }),
+			]),
+		})({
+			image: () => ({}) as never,
+		});
+
+		const parsed = schema.parse({ title: 'Extended', type: 'extended', name: 'test' });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "name": "test",
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Extended",
+			  "type": "extended",
+			}
+		`);
+	});
 });

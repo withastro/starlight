@@ -71,4 +71,17 @@ describe('docs schema', () => {
 		expectTypeOf(parsed).toExtend<PartialDocsSchemaOutput>();
 		expectTypeOf(parsed.sidebar.custom).toBeNumber();
 	});
+
+	test('docs schema should parse to expected shape when extending with a union of objects', () => {
+		const baseSchema = z.object({ type: z.literal('base').optional().default('base') });
+		const extendedSchema = baseSchema.extend({ type: z.literal('extended'), name: z.string() });
+
+		const schema = docsSchema({ extend: z.union([baseSchema, extendedSchema]) })({
+			image: () => ({}) as any,
+		});
+		const parsed = schema.parse({});
+
+		expectTypeOf(parsed.type).toEqualTypeOf<'base' | 'extended'>();
+		if (parsed.type === 'extended') expectTypeOf(parsed.name).toBeString();
+	});
 });

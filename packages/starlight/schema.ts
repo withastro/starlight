@@ -115,7 +115,8 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 type DefaultSchema = ReturnType<typeof StarlightFrontmatterSchema>;
 
 /** Base subset of Zod types that we support passing to the `extend` option. */
-type BaseSchema<T extends z.ZodRawShape = z.ZodRawShape> = z.ZodObject<T>;
+type BaseObjectSchema = z.ZodObject<z.ZodRawShape, z.core.$ZodObjectConfig>;
+type BaseSchema = BaseObjectSchema | z.ZodUnion<readonly BaseObjectSchema[]>;
 
 /** Type that extends Starlight’s default schema with an optional, user-defined schema. */
 type ExtendedSchema<T extends BaseSchema = never> = [T] extends [never]
