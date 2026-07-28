@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.41.5
+
+### Patch Changes
+
+- [#4095](https://github.com/withastro/starlight/pull/4095) [`bb06434`](https://github.com/withastro/starlight/commit/bb06434a1bc199b59f9d7953d0e41c6c287b1aa2) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression when using a union to [extend](https://starlight.astro.build/reference/frontmatter/#extend) Starlight’s `docsSchema()`.
+
 ## 0.41.4
 
 ### Patch Changes
