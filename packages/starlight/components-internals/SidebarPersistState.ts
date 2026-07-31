@@ -69,4 +69,3 @@ target?.addEventListener('click', (event) => {
 addEventListener('visibilitychange', () => {
 	if (document.visibilityState === 'hidden') updateState();
 });
-addEventListener('pageHide', updateState);

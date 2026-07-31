@@ -772,6 +772,75 @@ test.describe('ToC highlighting', () => {
 	});
 });
 
+test.describe('mobile menu focus trap', () => {
+	test('traps focus within the mobile menu when open', async ({ page, getProdServer }) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 375, height: 667 });
+		await starlight.goto('/headings');
+
+		const currentFocus = page.locator('*:focus');
+
+		// Open the mobile menu.
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
+		await mobileMenuButton.click();
+		await expect(currentFocus).toHaveCount(1);
+
+		// Focus the theme selector, which is the last focusable element in the mobile menu.
+		const themeSelector = page.getByRole('navigation', { name: 'Main' }).getByLabel('Select theme');
+		await themeSelector.focus();
+		await expect(currentFocus).toHaveCount(1);
+
+		// Tab out of the menu.
+		await page.keyboard.press('Tab');
+
+		// Tabbing at the end of the mobile menu moves focus out of the viewport, so there should no
+		// longer be any focused element.
+		await expect(currentFocus).toHaveCount(0);
+
+		// Close the mobile menu.
+		await mobileMenuButton.click();
+
+		// The focus trap should be released and tabbing will focus the mobile table of contents button.
+		await page.keyboard.press('Tab');
+		await expect(currentFocus).toHaveText(/On this page/);
+	});
+
+	test('releases focus trap when the viewport resizes', async ({ page, getProdServer }) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 375, height: 667 });
+		await starlight.goto('/anchor-heading');
+
+		const currentFocus = page.locator('*:focus');
+		const anchorLinkAccessibleName = 'Section titled “An anchor heading”';
+		const anchorHeadingLink = page.getByRole('link', { name: anchorLinkAccessibleName });
+
+		// Focus the anchor heading link to check it is focusable.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+
+		// Open the mobile menu.
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
+		await mobileMenuButton.click();
+		await expect(currentFocus).toHaveAccessibleName('Menu');
+
+		// Try to focus the anchor heading which should be prevented by the focus trap,
+		// keeping focus where it is.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveAccessibleName('Menu');
+
+		// Resize the viewport to a wider size, which should release the focus trap.
+		await page.setViewportSize({ width: 1280, height: 720 });
+
+		// The anchor heading link should be focusable again.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+
+		// Resizing back to a smaller viewport should not re-enable the focus trap.
+		await page.setViewportSize({ width: 375, height: 667 });
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+	});
+});
+
 /**
  * Loads the given `path` in a window of the specified `width` and `height` and checks that the
  * Starlight table of contents is highlighting an item with contents matching `pattern`.

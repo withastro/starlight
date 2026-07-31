@@ -2,7 +2,7 @@
 import { PAGE_TITLE_ID } from '../constants';
 ---
 
-<a href={`#${PAGE_TITLE_ID}`}>{Astro.locals.t('skipLink.label')}</a>
+<a class="sl-skip-link" href={`#${PAGE_TITLE_ID}`}>{Astro.locals.t('skipLink.label')}</a>
 
 <style>
 	@layer starlight.core {

@@ -157,6 +157,14 @@ describe('getSidebar', () => {
 			    "label": "API (deprecated)",
 			    "type": "group",
 			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
+			    "href": "mailto:me@example.com",
+			    "isCurrent": false,
+			    "label": "E-mail me",
+			    "type": "link",
+			  },
 			]
 		`);
 	});

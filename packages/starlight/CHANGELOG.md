@@ -1,5 +1,35 @@
 # @astrojs/starlight
 
+## 0.41.5
+
+### Patch Changes
+
+- [#4095](https://github.com/withastro/starlight/pull/4095) [`bb06434`](https://github.com/withastro/starlight/commit/bb06434a1bc199b59f9d7953d0e41c6c287b1aa2) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression when using a union to [extend](https://starlight.astro.build/reference/frontmatter/#extend) Starlight’s `docsSchema()`.
+
+## 0.41.4
+
+### Patch Changes
+
+- [#3936](https://github.com/withastro/starlight/pull/3936) [`712eedd`](https://github.com/withastro/starlight/commit/712eedd8e0d28329feb361edc392438f37ba2095) Thanks [@miichom](https://github.com/miichom)! - Fixes support for modifying Zod enums when passing an [`extend` option](https://starlight.astro.build/reference/frontmatter/#extend) to Starlight’s `docsSchema()`
+
+- [#4092](https://github.com/withastro/starlight/pull/4092) [`0896b91`](https://github.com/withastro/starlight/commit/0896b91607325b9d8494eb665cd1716a40025a5a) Thanks [@delucis](https://github.com/delucis)! - Fixes support for links containing a protocol like `mailto:` in the sidebar
+
+- [#4088](https://github.com/withastro/starlight/pull/4088) [`4486ba4`](https://github.com/withastro/starlight/commit/4486ba432afe9e206f0b05651de24a9c25bdf6dd) Thanks [@delucis](https://github.com/delucis)! - Simplifies Starlight’s client-side sidebar state persistence script slightly
+
+## 0.41.3
+
+### Patch Changes
+
+- [#3911](https://github.com/withastro/starlight/pull/3911) [`1686ecc`](https://github.com/withastro/starlight/commit/1686ecce3fd2da2aa9973faba2dc585abebb93a3) Thanks [@timothyjordan](https://github.com/timothyjordan)! - Keeps keyboard focus inside the mobile menu while it is open, preventing focus moving to hidden interactive elements in page content.
+
+## 0.41.2
+
+### Patch Changes
+
+- [#4008](https://github.com/withastro/starlight/pull/4008) [`58a3520`](https://github.com/withastro/starlight/commit/58a352097016ffbd98716688e4f2dfb97e5a6f44) Thanks [@FrancoKaddour](https://github.com/FrancoKaddour)! - Fixes the table of contents overflowing the right edge of the viewport when a custom `--sl-content-width` value exceeds available space
+
+- [#4015](https://github.com/withastro/starlight/pull/4015) [`bdbfffc`](https://github.com/withastro/starlight/commit/bdbfffc044dbf119e5085c3e67722494ae3c85c6) Thanks [@delucis](https://github.com/delucis)! - Fixes an issue where aside icons were rendered incorrectly in projects where Astro’s MDX integration had optimization disabled
+
 ## 0.41.1
 
 ### Patch Changes

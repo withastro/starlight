@@ -33,7 +33,7 @@ import type {
 	SidebarAutogenerateRouteData,
 } from './routing/types';
 import { localeToLang, localizedFilePath, slugToPathname } from './slugs';
-import { isAbsoluteUrl } from './url';
+import { hasProtocol } from './url';
 import type { StarlightConfig } from './user-config';
 
 const DirKey = Symbol('DirKey');
@@ -120,7 +120,7 @@ function entriesFromAutogenerateConfig(
 /** Create a link entry from a manual link item in user config. */
 function linkFromSidebarLinkItem(item: SidebarLinkItem, locale: string | undefined) {
 	let href = item.link;
-	if (!isAbsoluteUrl(href)) {
+	if (!hasProtocol(href)) {
 		href = ensureLeadingSlash(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
@@ -188,7 +188,7 @@ function makeSidebarLink(
 	opts: MakeLinkOptions & { autogenerate: SidebarAutogenerateRouteData }
 ): SidebarAutoLink;
 function makeSidebarLink({ attrs, badge, href, label, autogenerate }: MakeLinkOptions) {
-	if (!isAbsoluteUrl(href)) {
+	if (!hasProtocol(href)) {
 		href = formatPath(href);
 	}
 	return makeLink({ label, href, badge, attrs, autogenerate });

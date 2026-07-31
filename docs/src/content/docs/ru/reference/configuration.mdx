@@ -265,9 +265,9 @@ export default defineConfig({
 			// Устанавливаем русский язык в качестве языка по умолчанию для этого сайта.
 			defaultLocale: 'ru',
 			locales: {
-				// Английская документация в `src/content/docs/en/`
-				en: {
-					label: 'English',
+				// Русская документация в `src/content/docs/ru/`
+				ru: {
+					label: 'Русский',
 				},
 				// Китайская документация в `src/content/docs/zh-cn/`
 				'zh-cn': {
@@ -278,10 +278,6 @@ export default defineConfig({
 				ar: {
 					label: 'العربية',
 					dir: 'rtl',
-				},
-				// Русская документация в `src/content/docs/ru/`
-				ru: {
-					label: 'Русский',
 				},
 			},
 		}),
@@ -514,12 +510,7 @@ Pagefind не может быть включен, если для парамет
 
 ```ts
 interface PagefindOptions {
-	ranking?: {
-		pageLength?: number;
-		termFrequency?: number;
-		termSaturation?: number;
-		termSimilarity?: number;
-	};
+	ranking?: PagefindRankingOptions;
 	indexWeight?: number;
 	mergeIndex?: Array<{
 		bundlePath: string;
@@ -528,13 +519,17 @@ interface PagefindOptions {
 		baseUrl?: string;
 		mergeFilter?: Record<string, string | string[]>;
 		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
+		ranking?: PagefindRankingOptions;
 	}>;
+}
+
+interface PagefindRankingOptions {
+	pageLength?: number;
+	termFrequency?: number;
+	termSaturation?: number;
+	termSimilarity?: number;
+	diacriticSimilarity?: number;
+	metaWeights?: Record<string, number>;
 }
 ```
 

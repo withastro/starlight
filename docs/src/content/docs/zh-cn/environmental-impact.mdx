@@ -33,7 +33,7 @@ Starlight 使用 Astro 的 [优化的资源支持][assets] 来优化 Markdown �
 缓存用于控制浏览器存储和重用已下载数据的时间。
 良好的缓存策略确保用户在内容更改时尽快获得新内容，但也避免了在内容未更改时反复下载相同的内容。
 
-最常见的配置缓存的方法是使用 [`Cache-Control` HTTP headers][cache]。
+最常见的配置缓存的方法是使用 [`Cache-Control` HTTP header][cache]。
 使用 Starlight 时，你可以为 `/_astro/` 目录中的所有内容设置长时间缓存。
 该目录包含可以安全永久缓存的 CSS、JavaScript 和其他捆绑的资源，从而减少不必要的下载：
 
@@ -87,39 +87,18 @@ Cache-Control: public, max-age=604800, immutable
 ## 比较
 
 好奇和其他文档框架相比如何？
-下面使用 [Website Carbon Calculator][wcc] 的测试比较了使用不同工具构建的类似页面。
+这些使用 [Website Carbon Calculator][wcc] 进行的测试比较了使用不同工具构建的类似页面。
 
-| 框架                        | 每页访问量产生的 CO₂ | 评级 |
-| --------------------------- | -------------------- | :--: |
-| [Starlight][sl-carbon]      | 0.01g                |  A+  |
-| [Read the Docs][rtd-carbon] | 0.07g                |  A+  |
-| [Sphinx][sx-carbon]         | 0.07g                |  A+  |
-| [VitePress][vp-carbon]      | 0.07g                |  A+  |
-| [Docus][dc-carbon]          | 0.10g                |  A   |
-| [docsify][dy-carbon]        | 0.11g                |  A   |
-| [mdBook][md-carbon]         | 0.13g                |  A   |
-| [MkDocs][mk-carbon]         | 0.15g                |  A   |
-| [Fumadocs][fs-carbon]       | 0.16g                |  A   |
-| [Nextra][nx-carbon]         | 0.16g                |  A   |
-| [Docusaurus][ds-carbon]     | 0.25g                |  B   |
-| [Mintlify][mt-carbon]       | 0.99g                |  F   |
-| [GitBook][gb-carbon]        | 1.19g                |  F   |
+import CarbonComparison from '../../../components/carbon-comparison.astro';
 
-<small>数据收集于 2025 年 4 月 12 日。点击链接查看最新数据。</small>
-
-[sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
-[vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
-[sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
-[mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
-[md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
-[nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-vercel-app-docs-ui/
-[dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
-[ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
-[rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
-[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
+<CarbonComparison
+	labels={{
+		framework: '框架',
+		co2: '每页访问量产生的 CO₂',
+		rating: '评级',
+		note: '数据收集于 {{date}}。点击链接查看最新数据。',
+	}}
+/>
 
 ## 更多资源
 
@@ -129,7 +108,6 @@ Cache-Control: public, max-age=604800, immutable
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [WebPageTest Carbon Control](https://www.webpagetest.org/carbon-control/)
-- [Ecoping](https://ecoping.earth/)
 
 ### 文章和演讲
 
@@ -140,6 +118,7 @@ Cache-Control: public, max-age=604800, immutable
 
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
+[sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [http]: https://httparchive.org/reports/state-of-the-web
 [assets]: https://docs.astro.build/zh-cn/guides/images/
 [islands]: https://docs.astro.build/zh-cn/concepts/islands/
