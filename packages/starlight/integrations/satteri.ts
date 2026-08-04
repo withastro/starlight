@@ -136,39 +136,37 @@ function serializeDirective(node: Parameters<typeof toMarkdown>[0]): string {
 	return md.at(-1) === '\n' ? md.slice(0, -1) : md;
 }
 
-function satteriRtlCodeSupportPlugin(allowedPaths: string[]): () => HastPluginDefinition {
-	return () => {
-		return {
-			name: 'starlight-rtl-code-support',
-			element: [
-				{
-					filter: ['pre'],
-					visit(node, ctx) {
-						if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-						if (node.properties && 'dir' in node.properties) return;
-						ctx.setProperty(node, 'dir', 'ltr');
-					},
+function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefinition {
+	return {
+		name: 'starlight-rtl-code-support',
+		element: [
+			{
+				filter: ['pre'],
+				visit(node, ctx) {
+					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
+					if (node.properties && 'dir' in node.properties) return;
+					ctx.setProperty(node, 'dir', 'ltr');
 				},
-				{
-					filter: ['code'],
-					visit(node, ctx) {
-						if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-						const parent = ctx.parent(node);
-						if (parent?.type === 'element' && parent.tagName === 'pre') return;
-						if (node.properties && 'dir' in node.properties) return;
-						ctx.setProperty(node, 'dir', 'auto');
-					},
-				},
-			],
-			// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
-			// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
-			raw(node, ctx) {
-				if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
-				const value = ltrRawPre(node.value);
-				if (value === null) return undefined;
-				return { type: 'raw', value };
 			},
-		};
+			{
+				filter: ['code'],
+				visit(node, ctx) {
+					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
+					const parent = ctx.parent(node);
+					if (parent?.type === 'element' && parent.tagName === 'pre') return;
+					if (node.properties && 'dir' in node.properties) return;
+					ctx.setProperty(node, 'dir', 'auto');
+				},
+			},
+		],
+		// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
+		// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
+		raw(node, ctx) {
+			if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
+			const value = ltrRawPre(node.value);
+			if (value === null) return undefined;
+			return { type: 'raw', value };
+		},
 	};
 }
 
