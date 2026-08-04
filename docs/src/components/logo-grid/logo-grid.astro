@@ -1,0 +1,95 @@
+---
+import type { SvgComponent } from 'astro/types';
+
+interface Props {
+	title: string;
+}
+
+const svgs = import.meta.glob<SvgComponent>('./logos/*.svg', { eager: true, import: 'default' });
+
+const logos = {
+	openai: { label: 'OpenAI', h: 48 },
+	github: { label: 'GitHub', h: 40 },
+	netlify: { label: 'Netlify', h: 80 },
+	microsoft: { label: 'Microsoft', h: 50 },
+	wpengine: { label: 'WPEngine', h: 45 },
+	sentry: { label: 'Sentry', h: 44 },
+	supabase: { label: 'Supabase', h: 50 },
+	roblox: { label: 'Roblox', h: 35 },
+	warp: { label: 'Warp', h: 45 },
+	system76: { label: 'System76', h: 58 },
+	vlt: { label: 'Vlt', h: 40 },
+	framework: { label: 'Framework', h: 35 },
+	stackblitz: { label: 'StackBlitz', h: 44 },
+	crowdin: { label: 'Crowdin', h: 48 },
+	bentley: { label: 'Bentley', h: 40 },
+	valtown: { label: 'val town', h: 35 },
+	zulip: { label: 'Zulip', h: 40 },
+	honeybadger: { label: 'HoneyBadger', h: 50 },
+	freecodecamp: { label: 'freeCodeCamp', h: 34 },
+	biome: { label: 'Biome', h: 40 },
+	knip: { label: 'Knip', h: 38 },
+	bombshell: { label: 'Bombshell', h: 48 },
+};
+---
+
+<div class="logo-grid-wrapper not-content" data-pagefind-ignore>
+	<h2 class="logo-grid-title">{Astro.props.title}</h2>
+	<div class="logo-grid">
+		{
+			Object.entries(logos).map(([key, { label, h }]) => {
+				const Logo = svgs[`./logos/${key}.svg`];
+				if (!Logo) {
+					throw new Error(
+						`${key}.svg not found. Make sure the file exists in the logos directory.`
+					);
+				}
+				return <Logo aria-label={label} style={{ '--h': h }} />;
+			})
+		}
+	</div>
+</div>
+
+<style>
+	.logo-grid-wrapper {
+		margin-block: 7rem 2.5rem;
+	}
+	.logo-grid-title {
+		text-align: center;
+		font-size: var(--sl-text-h4);
+		font-weight: 600;
+		color: var(--sl-color-white);
+		line-height: var(--sl-line-height-headings);
+	}
+
+	.logo-grid {
+		/* Row height, matches the tallest logo height. */
+		--row-h: 80;
+		/* Scaling factor for logo heights and other dimensions. */
+		--scale: 0.45;
+
+		margin-top: calc(3rem * var(--scale));
+
+		display: flex;
+		gap: calc(1rem * var(--scale)) calc(3rem * var(--scale));
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	:global([data-theme='light']) .logo-grid {
+		color: var(--sl-color-gray-3);
+	}
+
+	.logo-grid > * {
+		height: calc(var(--h, 50) * var(--scale) * 1px);
+		/* Add margin to top and bottom of logos to make up the space to the row height. This keeps each
+    row in the grid of an equal height, giving a smoother vertical rhythm. */
+		margin-block: calc((var(--row-h, 80) - var(--h, 50)) * var(--scale) * 1px / 2);
+		width: auto;
+	}
+
+	@media (min-width: 50rem) {
+		.logo-grid {
+			--scale: 0.66;
+		}
+	}
+</style>

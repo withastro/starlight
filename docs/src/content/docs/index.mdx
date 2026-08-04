@@ -32,6 +32,7 @@ import { CardGrid, Card } from '@astrojs/starlight/components';
 import AboutAstro from '~/components/about-astro.astro';
 import TestimonialGrid from '~/components/testimonial-grid.astro';
 import Testimonial from '~/components/testimonial.astro';
+import LogoGrid from '~/components/logo-grid/logo-grid.astro';
 
 <CardGrid stagger>
 	<Card title="Documentation that delights" icon="open-book">
@@ -51,6 +52,8 @@ import Testimonial from '~/components/testimonial.astro';
 		React, Vue, Svelte, Solid, and more.
 	</Card>
 </CardGrid>
+
+<LogoGrid title="Trusted by teams, big and small" />
 
 <TestimonialGrid title="What people are saying">
   <Testimonial
