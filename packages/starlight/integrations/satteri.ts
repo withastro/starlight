@@ -1,12 +1,13 @@
 import { fileURLToPath } from 'node:url';
 import { satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
-import type { Properties } from 'hast';
+import type { Parents, Properties } from 'hast';
 import type { Paragraph } from 'mdast';
 import { directiveToMarkdown } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import type {
 	HastPluginDefinition,
 	HastPluginInput,
+	HastVisitorContext,
 	MdastPluginInput,
 	MdastPluginDefinition,
 } from 'satteri';
@@ -151,11 +152,13 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['code'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-					const parent = ctx.parent(node);
-					if (parent?.type === 'element' && parent.tagName === 'pre') return;
-					if (node.properties && 'dir' in node.properties) return;
-					ctx.setProperty(node, 'dir', 'auto');
+					if (
+						shouldTransformPath(ctx.fileURL, allowedPaths) &&
+						!(node.properties && 'dir' in node.properties) &&
+						!hasPreParent(node, ctx)
+					) {
+						ctx.setProperty(node, 'dir', 'auto');
+					}
 				},
 			},
 		],
@@ -168,6 +171,18 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			return { type: 'raw', value };
 		},
 	};
+}
+
+/**
+ * Check if any parent of `child` is a `<pre>` element by walking up the tree.
+ */
+function hasPreParent(child: Readonly<Parents> | undefined, ctx: HastVisitorContext): boolean {
+	while (child) {
+		const parent: Readonly<Parents> | undefined = ctx.parent(child);
+		if (parent?.type === 'element' && parent.tagName === 'pre') return true;
+		child = parent;
+	}
+	return false;
 }
 
 const rawPreOpenTag = /<pre(?=[\s>])[^>]*>/;
