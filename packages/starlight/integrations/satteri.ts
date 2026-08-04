@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
-import type { Element, Properties } from 'hast';
+import type { Properties } from 'hast';
 import type { Paragraph } from 'mdast';
 import { directiveToMarkdown } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
