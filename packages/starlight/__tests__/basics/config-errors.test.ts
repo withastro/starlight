@@ -30,6 +30,7 @@ test('parses bare minimum valid config successfully', () => {
 		    "MobileMenuFooter": "@astrojs/starlight/components/MobileMenuFooter.astro",
 		    "MobileMenuToggle": "@astrojs/starlight/components/MobileMenuToggle.astro",
 		    "MobileTableOfContents": "@astrojs/starlight/components/MobileTableOfContents.astro",
+		    "Page": "@astrojs/starlight/components/Page.astro",
 		    "PageFrame": "@astrojs/starlight/components/PageFrame.astro",
 		    "PageSidebar": "@astrojs/starlight/components/PageSidebar.astro",
 		    "PageTitle": "@astrojs/starlight/components/PageTitle.astro",

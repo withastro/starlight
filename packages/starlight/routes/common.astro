@@ -1,6 +1,6 @@
 ---
 import { render } from 'astro:content';
-import Page from '../components/Page.astro';
+import Page from 'virtual:starlight/components/Page';
 import { getRoute, useRouteData } from '../utils/routing/data';
 import { attachRouteDataAndRunMiddleware } from '../utils/routing/middleware';
 
