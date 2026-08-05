@@ -52,7 +52,7 @@ const logos = {
 
 <style>
 	.logo-grid-wrapper {
-		margin-block: 7rem 2.5rem;
+		margin-block: 5rem;
 	}
 	.logo-grid-title {
 		text-align: center;
@@ -66,14 +66,25 @@ const logos = {
 		/* Row height, matches the tallest logo height. */
 		--row-h: 80;
 		/* Scaling factor for logo heights and other dimensions. */
-		--scale: 0.45;
+		--scale: 0.4;
+		/* The maximum number of rows to display. */
+		--max-rows: 7;
 
 		margin-top: calc(3rem * var(--scale));
 
+		/* Lay out logos in a centred flex container */
 		display: flex;
 		gap: calc(1rem * var(--scale)) calc(3rem * var(--scale));
 		justify-content: center;
 		flex-wrap: wrap;
+
+		/** Constrain the maximum height of the logo grid. */
+		--max-h: calc(var(--max-rows) * var(--row-h) * var(--scale) * 1px);
+		max-height: var(--max-h);
+		overflow: clip;
+		/* Fade out lower rows to hint that there are more logos when some are cut off. */
+		mask-image: linear-gradient(#fff, #fff 33%, #fff0);
+		mask-size: 100% var(--max-h);
 	}
 	:global([data-theme='light']) .logo-grid {
 		color: var(--sl-color-gray-3);
@@ -87,9 +98,15 @@ const logos = {
 		width: auto;
 	}
 
+	@media (min-width: 30rem) {
+		.logo-grid {
+			--scale: 0.45;
+			--max-rows: 100;
+		}
+	}
 	@media (min-width: 50rem) {
 		.logo-grid {
-			--scale: 0.66;
+			--scale: 0.55;
 		}
 	}
 </style>
