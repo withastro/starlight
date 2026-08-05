@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.41.7
+
+### Patch Changes
+
+- [#4114](https://github.com/withastro/starlight/pull/4114) [`3e486fb`](https://github.com/withastro/starlight/commit/3e486fba2015589c55aa452746eb17b407a4716e) Thanks [@delucis](https://github.com/delucis)! - Fixes processing of code examples in RTL languages when using Astro’s Sätteri Markdown processor
+
 ## 0.41.6
 
 ### Patch Changes
