@@ -4,9 +4,13 @@ on:
   push:
     branches: [main]
 
+permissions: {}
+
 jobs:
   congrats:
     if: ${{ github.repository_owner == 'withastro' && github.event.head_commit.message != '[ci] format' }}
+    permissions:
+      contents: read # checkout repository
     uses: withastro/automation/.github/workflows/congratsbot.yml@8a5969576beae8ae7bdce64167a95237878f4901 # v1.0.1
     with:
       EMOJIS: '🎉,🎊,🧑‍🚀,🥳,🙌,🚀,🤩,☄️,💫,<:starlight:1107431075543797802>,<:houston_pride:1130504824673284107>'

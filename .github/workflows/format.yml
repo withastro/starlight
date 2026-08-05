@@ -5,13 +5,18 @@ on:
     branches:
       - main
 
+# Automatically cancel in-progress actions on the same branch
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   format:
     if: github.repository_owner == 'withastro'
+    permissions:
+      contents: write # code formatting commit
     uses: withastro/automation/.github/workflows/format.yml@8a5969576beae8ae7bdce64167a95237878f4901 # v1.0.1
     with:
       command: "format"
