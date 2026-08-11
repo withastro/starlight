@@ -184,6 +184,9 @@ export default function StarlightIntegration(
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
 					i18n: astroI18nConfig,
+					experimental: {
+						incrementalBuild: true,
+					},
 				});
 			},
 
