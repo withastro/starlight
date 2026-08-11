@@ -24,8 +24,8 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0(size-limit@12.1.0(jiti@2.6.1))
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       eslint:
         specifier: ^10.3.0
         version: 10.3.0(jiti@2.6.1)
@@ -69,8 +69,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       culori:
         specifier: ^4.0.2
         version: 4.0.2
@@ -89,7 +89,7 @@ importers:
         version: 4.1.5
       starlight-links-validator:
         specifier: ^0.25.2
-        version: 0.25.2(@astrojs/starlight@packages+starlight)(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
+        version: 0.25.2(@astrojs/starlight@packages+starlight)(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
 
   examples/basics:
     dependencies:
@@ -97,8 +97,8 @@ importers:
         specifier: ^0.41.7
         version: link:../../packages/starlight
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       sharp:
         specifier: ^0.35.3
         version: 0.35.3(@types/node@24.12.4)
@@ -107,7 +107,7 @@ importers:
     dependencies:
       '@astrojs/markdoc':
         specifier: ^2.0.6
-        version: 2.0.6(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
+        version: 2.0.6(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
       '@astrojs/starlight':
         specifier: ^0.41.7
         version: link:../../packages/starlight
@@ -115,8 +115,8 @@ importers:
         specifier: ^0.7.0
         version: link:../../packages/markdoc
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       sharp:
         specifier: ^0.35.3
         version: 0.35.3(@types/node@24.12.4)
@@ -133,8 +133,8 @@ importers:
         specifier: ^4.2.4
         version: 4.2.4(vite@8.2.0(@types/node@24.12.4)(esbuild@0.28.0)(jiti@2.6.1)(yaml@2.8.3))
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       sharp:
         specifier: ^0.35.3
         version: 0.35.3(@types/node@24.12.4)
@@ -169,7 +169,7 @@ importers:
     devDependencies:
       '@astrojs/markdoc':
         specifier: ^2.0.6
-        version: 2.0.6(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
+        version: 2.0.6(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../starlight
@@ -184,7 +184,7 @@ importers:
         version: 0.3.5
       '@astrojs/mdx':
         specifier: ^7.0.5
-        version: 7.0.5(@astrojs/markdown-satteri@0.3.5)(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3))
+        version: 7.0.5(@astrojs/markdown-satteri@0.3.5)(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3))
       '@astrojs/sitemap':
         specifier: ^3.7.3
         version: 3.7.3
@@ -202,7 +202,7 @@ importers:
         version: 4.0.4
       astro-expressive-code:
         specifier: ^0.44.0
-        version: 0.44.0(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3))
+        version: 0.44.0(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3))
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -280,8 +280,8 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5(vitest@4.1.5)
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)
       linkedom:
         specifier: ^0.18.12
         version: 0.18.12
@@ -295,8 +295,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/custom src-dir:
     dependencies:
@@ -304,8 +304,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/git:
     dependencies:
@@ -313,8 +313,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/legacy-collections-backwards-compat:
     dependencies:
@@ -322,8 +322,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/no-mdx-optimization:
     dependencies:
@@ -331,20 +331,20 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
 
   packages/starlight/__e2e__/fixtures/ssr:
     dependencies:
       '@astrojs/node':
         specifier: ^11.0.0
-        version: 11.0.0(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
+        version: 11.0.0(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
-        version: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+        specifier: ^7.2.0
+        version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
 
   packages/tailwind:
     devDependencies:
@@ -1393,15 +1393,6 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
-  '@rollup/pluginutils@5.3.0':
-    resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-
   '@shikijs/core@4.0.2':
     resolution: {integrity: sha512-hxT0YF4ExEqB8G/qFdtJvpmHXBYJ2lWW7qTHDarVkIudPFE6iCIrqdgWxGn5s+ppkGXI0aEGlibI0PAyzP3zlw==}
     engines: {node: '>=20'}
@@ -1846,8 +1837,8 @@ packages:
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0 || ^6.0.0-beta || ^7.0.0
 
-  astro@7.1.6:
-    resolution: {integrity: sha512-83x9rYbHazMaZkYrAFRVZXSQx2moFkz0F7cjTDUF3GWfS0a3p2vZXG1ZdhV86rStHApQCodBJW+XTD37xISIrQ==}
+  astro@7.2.0:
+    resolution: {integrity: sha512-lLTYzx3fOvCmtwD3JVBLQcbORbIOW1/j0R+3IvJx/XKwMGrk7mFnF0BYSOeRiNw1qHUR5mdA6+hRnyvyDfqrWQ==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     peerDependencies:
@@ -2257,9 +2248,6 @@ packages:
 
   estree-util-visit@2.0.0:
     resolution: {integrity: sha512-m5KgiH85xAhhW8Wta0vShLcUvOsh3LLPI2YVwcbio1l7E09NTLL1EyMZFM1OyWowoH0skScNbhOPl4kcBgzTww==}
-
-  estree-walker@2.0.2:
-    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
   estree-walker@3.0.3:
     resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
@@ -4414,12 +4402,12 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@astrojs/markdoc@2.0.6(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))':
+  '@astrojs/markdoc@2.0.6(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))':
     dependencies:
       '@astrojs/internal-helpers': 0.10.2
       '@astrojs/prism': 4.0.2
       '@markdoc/markdoc': 0.5.4
-      astro: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+      astro: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       esbuild: 0.28.0
       github-slugger: 2.0.0
       htmlparser2: 12.0.0
@@ -4457,13 +4445,13 @@ snapshots:
       hast-util-from-html: 2.0.3
       satteri: 0.9.3
 
-  '@astrojs/mdx@7.0.5(@astrojs/markdown-satteri@0.3.5)(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3))':
+  '@astrojs/mdx@7.0.5(@astrojs/markdown-satteri@0.3.5)(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3))':
     dependencies:
       '@astrojs/internal-helpers': 0.10.2
       '@astrojs/markdown-remark': 7.2.2
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)
+      astro: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)
       es-module-lexer: 2.0.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -4479,10 +4467,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/node@11.0.0(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))':
+  '@astrojs/node@11.0.0(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3))':
     dependencies:
       '@astrojs/internal-helpers': 0.10.0
-      astro: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+      astro: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       send: 1.2.1
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -5286,12 +5274,6 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
-  '@rollup/pluginutils@5.3.0':
-    dependencies:
-      '@types/estree': 1.0.8
-      estree-walker: 2.0.2
-      picomatch: 4.0.5
-
   '@shikijs/core@4.0.2':
     dependencies:
       '@shikijs/primitive': 4.0.2
@@ -5788,13 +5770,13 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-expressive-code@0.44.0(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)):
+  astro-expressive-code@0.44.0(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)):
     dependencies:
-      astro: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)
+      astro: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3)
       rehype-expressive-code: 0.44.0
       url-extras: 0.1.0
 
-  astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3):
+  astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@22.19.17)(jiti@2.6.1)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler-rs': 0.3.2(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)
       '@astrojs/internal-helpers': 0.10.2
@@ -5803,7 +5785,6 @@ snapshots:
       '@capsizecss/unpack': 4.0.0
       '@clack/prompts': 1.4.0
       '@oslojs/encoding': 1.1.0
-      '@rollup/pluginutils': 5.3.0
       am-i-vibing: 0.4.0
       aria-query: 5.3.2
       axobject-query: 4.1.0
@@ -5877,7 +5858,6 @@ snapshots:
       - ioredis
       - jiti
       - less
-      - rollup
       - sass
       - sass-embedded
       - stylus
@@ -5887,7 +5867,7 @@ snapshots:
       - uploadthing
       - yaml
 
-  astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3):
+  astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler-rs': 0.3.2(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)
       '@astrojs/internal-helpers': 0.10.2
@@ -5896,7 +5876,6 @@ snapshots:
       '@capsizecss/unpack': 4.0.0
       '@clack/prompts': 1.4.0
       '@oslojs/encoding': 1.1.0
-      '@rollup/pluginutils': 5.3.0
       am-i-vibing: 0.4.0
       aria-query: 5.3.2
       axobject-query: 4.1.0
@@ -5970,7 +5949,6 @@ snapshots:
       - ioredis
       - jiti
       - less
-      - rollup
       - sass
       - sass-embedded
       - stylus
@@ -6390,8 +6368,6 @@ snapshots:
     dependencies:
       '@types/estree-jsx': 1.0.5
       '@types/unist': 3.0.3
-
-  estree-walker@2.0.2: {}
 
   estree-walker@3.0.3:
     dependencies:
@@ -8222,12 +8198,12 @@ snapshots:
 
   stackback@0.0.2: {}
 
-  starlight-links-validator@0.25.2(@astrojs/starlight@packages+starlight)(astro@7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)):
+  starlight-links-validator@0.25.2(@astrojs/starlight@packages+starlight)(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)):
     dependencies:
       '@astrojs/markdown-satteri': 0.3.5
       '@astrojs/starlight': link:packages/starlight
       '@types/picomatch': 4.0.2
-      astro: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
+      astro: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.8.3)
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.3
       is-absolute-url: 5.0.0
