@@ -99,6 +99,7 @@ function getPaths(): Path[] {
 	return routes.map((route) => ({
 		params: { slug: slugToParam(route.id) },
 		props: route,
+		cacheKey: String(route.entry.digest),
 	}));
 }
 export const paths = getPaths();
