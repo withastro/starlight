@@ -10,21 +10,20 @@ import Icon from '../user-components/Icon.astro';
 
 <script>
 	// The mobile menu uses the popover API to open and close without JavaScript. We enhance this
-	// behaviour with focus trapping and a body scroll lock while the menu is open.
+	// behaviour with focus trapping while the menu is open.
 
 	// Reset menu state when the viewport toggles between mobile and desktop sizes.
-	matchMedia('(min-width: 50em)').addEventListener('change', () => setExpanded(false));
+	matchMedia('(min-width: 50em)').addEventListener('change', () => trapFocus(false));
 
 	// Update the menu state when the sidebar popover is toggled.
 	document
 		.getElementById('starlight__sidebar')
-		?.addEventListener('beforetoggle', ({ newState }) => setExpanded(newState === 'open'));
+		?.addEventListener('beforetoggle', ({ newState }) => trapFocus(newState === 'open'));
 
-	function setExpanded(expanded: boolean) {
-		document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
-		// Trap keyboard focus inside the header and menu when the menu is expanded.
+	/** Trap keyboard focus inside the header and menu when the menu is expanded. */
+	function trapFocus(shouldTrap: boolean) {
 		document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
-			el.toggleAttribute('inert', expanded);
+			el.toggleAttribute('inert', shouldTrap);
 		});
 	}
 </script>
@@ -73,12 +72,12 @@ import Icon from '../user-components/Icon.astro';
 
 <style is:global>
 	@layer starlight.core {
-		[data-mobile-menu-expanded] {
+		body:has(#starlight__sidebar:popover-open) {
 			overflow: hidden;
 		}
 
 		@media (min-width: 50rem) {
-			[data-mobile-menu-expanded] {
+			body:has(#starlight__sidebar:popover-open) {
 				overflow: auto;
 			}
 		}
