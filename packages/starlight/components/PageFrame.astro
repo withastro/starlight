@@ -10,7 +10,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 		hasSidebar && (
 			<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle />
-				<div id="starlight__sidebar" class="sidebar-pane">
+				<div popover id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content sl-flex">
 						<slot name="sidebar" />
 					</div>
@@ -48,7 +48,11 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 		}
 
 		.sidebar-pane {
-			visibility: var(--sl-sidebar-visibility, hidden);
+			/* By default, user agents apply some opinionated styles to popovers, which we don’t want. */
+			border: unset;
+			padding: unset;
+			height: unset;
+
 			position: fixed;
 			z-index: var(--sl-z-index-menu);
 			inset-block: var(--sl-nav-height) 0;
@@ -57,10 +61,6 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			background-color: var(--sl-color-black);
 			overflow-y: auto;
 			scrollbar-gutter: stable;
-		}
-
-		:global([aria-expanded='true']) ~ .sidebar-pane {
-			--sl-sidebar-visibility: visible;
 		}
 
 		.sidebar-content {
@@ -88,7 +88,8 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 				padding-inline-end: var(--sl-nav-pad-x);
 			}
 			.sidebar-pane {
-				--sl-sidebar-visibility: visible;
+				/* Make the sidebar visible on larger screens instead of deferring to popover state. */
+				display: block;
 				width: var(--sl-sidebar-width);
 				background-color: var(--sl-color-bg-sidebar);
 				border-inline-end: 1px solid var(--sl-color-hairline-shade);
