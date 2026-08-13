@@ -18,7 +18,7 @@ import Icon from '../user-components/Icon.astro';
 	// Update the menu state when the sidebar popover is toggled.
 	document
 		.getElementById('starlight__sidebar')
-		?.addEventListener('toggle', ({ newState }) => setExpanded(newState === 'open'));
+		?.addEventListener('beforetoggle', ({ newState }) => setExpanded(newState === 'open'));
 
 	function setExpanded(expanded: boolean) {
 		document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
