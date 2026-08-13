@@ -34,7 +34,13 @@
     {
       "name": "/index.html",
       "path": "examples/basics/dist/index.html",
-      "limit": "8 kB",
+      "limit": "7 kB",
+      "gzip": true
+    },
+    {
+      "name": "/guides/example/index.html",
+      "path": "examples/basics/dist/guides/example/index.html",
+      "limit": "7 kB",
       "gzip": true
     },
     {
