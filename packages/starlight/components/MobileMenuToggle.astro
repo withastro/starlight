@@ -15,8 +15,8 @@ import Icon from '../user-components/Icon.astro';
 		constructor() {
 			super();
 
-			// Reset menu state when the viewport toggles between mobile and desktop sizes.
-			matchMedia('(min-width: 50em)').addEventListener('change', () => this.trapFocus(false));
+			// Close the menu when the viewport is resized between mobile and desktop sizes.
+			matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
 
 			// Update the menu state when the sidebar popover is toggled.
 			this.addEventListener('beforetoggle', ({ newState }) => this.trapFocus(newState === 'open'));
