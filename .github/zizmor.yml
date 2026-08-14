@@ -5,6 +5,3 @@ rules:
     ignore:
       - lunaria.yml
       - welcome-bot.yml
-  secrets-inherit:
-    ignore:
-      - format.yml
