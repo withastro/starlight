@@ -1,7 +1,7 @@
 name: WelcomeBot
 
 on:
-  pull_request_target:
+  pull_request_target: # zizmor: ignore[dangerous-triggers] comment on the PR; safe because we only checkout base branch
     branches: [main]
     types: [opened]
 

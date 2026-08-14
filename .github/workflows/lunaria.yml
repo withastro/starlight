@@ -2,7 +2,7 @@ name: Lunaria
 
 on:
   # Trigger the workflow every time a pull request is opened or synchronized at the target `main` branch
-  pull_request_target:
+  pull_request_target: # zizmor: ignore[dangerous-triggers] lunaria needs to comment on the PR; safe because we only checkout base branch
     types: [opened, synchronize]
     branches: [main]
     paths:
