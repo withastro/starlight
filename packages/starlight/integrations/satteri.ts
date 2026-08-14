@@ -1,12 +1,13 @@
 import { fileURLToPath } from 'node:url';
 import { satteriHeadingIdsPlugin } from '@astrojs/markdown-satteri';
-import type { Element, Properties } from 'hast';
+import type { Parents, Properties } from 'hast';
 import type { Paragraph } from 'mdast';
 import { directiveToMarkdown } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import type {
 	HastPluginDefinition,
 	HastPluginInput,
+	HastVisitorContext,
 	MdastPluginInput,
 	MdastPluginDefinition,
 } from 'satteri';
@@ -136,59 +137,52 @@ function serializeDirective(node: Parameters<typeof toMarkdown>[0]): string {
 	return md.at(-1) === '\n' ? md.slice(0, -1) : md;
 }
 
-function satteriRtlCodeSupportPlugin(allowedPaths: string[]): () => HastPluginDefinition {
-	return () => {
-		// HACK: Sätteri currently does not expose a way to either know the parent of a node, or
-		// skipping a subtree visit. To work around this, we manually track the source spans of `<pre>`
-		// elements and skip applying `dir="auto"` to `<code>` elements inside those spans. This is:
-		// bad, because it means that it won't work for nodes without positions (e.g. generated nodes),
-		// but it's as good as it gets right now.
-		const preSpans: Array<[number, number]> = [];
-		return {
-			name: 'starlight-rtl-code-support',
-			element: [
-				{
-					filter: ['pre'],
-					visit(node, ctx) {
-						if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-						const span = nodeSpan(node);
-						if (span) preSpans.push(span);
-						if (node.properties && 'dir' in node.properties) return;
-						ctx.setProperty(node, 'dir', 'ltr');
-					},
+function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefinition {
+	return {
+		name: 'starlight-rtl-code-support',
+		element: [
+			{
+				filter: ['pre'],
+				visit(node, ctx) {
+					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
+					if (node.properties && 'dir' in node.properties) return;
+					ctx.setProperty(node, 'dir', 'ltr');
 				},
-				{
-					filter: ['code'],
-					visit(node, ctx) {
-						if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-						if (isInsideSpan(nodeSpan(node), preSpans)) return;
-						if (node.properties && 'dir' in node.properties) return;
-						ctx.setProperty(node, 'dir', 'auto');
-					},
-				},
-			],
-			// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
-			// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
-			raw(node, ctx) {
-				if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
-				const value = ltrRawPre(node.value);
-				if (value === null) return undefined;
-				return { type: 'raw', value };
 			},
-		};
+			{
+				filter: ['code'],
+				visit(node, ctx) {
+					if (
+						shouldTransformPath(ctx.fileURL, allowedPaths) &&
+						!(node.properties && 'dir' in node.properties) &&
+						!hasPreParent(node, ctx)
+					) {
+						ctx.setProperty(node, 'dir', 'auto');
+					}
+				},
+			},
+		],
+		// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
+		// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
+		raw(node, ctx) {
+			if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
+			const value = ltrRawPre(node.value);
+			if (value === null) return undefined;
+			return { type: 'raw', value };
+		},
 	};
 }
 
-/** The source byte span of a node, or `null` when it carries no position (e.g. a generated node). */
-function nodeSpan(node: { position?: Element['position'] }): [number, number] | null {
-	const start = node.position?.start.offset;
-	const end = node.position?.end.offset;
-	return typeof start === 'number' && typeof end === 'number' ? [start, end] : null;
-}
-
-function isInsideSpan(span: [number, number] | null, spans: Array<[number, number]>): boolean {
-	if (!span) return false;
-	return spans.some(([start, end]) => span[0] >= start && span[1] <= end);
+/**
+ * Check if any parent of `child` is a `<pre>` element by walking up the tree.
+ */
+function hasPreParent(child: Readonly<Parents> | undefined, ctx: HastVisitorContext): boolean {
+	while (child) {
+		const parent: Readonly<Parents> | undefined = ctx.parent(child);
+		if (parent?.type === 'element' && parent.tagName === 'pre') return true;
+		child = parent;
+	}
+	return false;
 }
 
 const rawPreOpenTag = /<pre(?=[\s>])[^>]*>/;

@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.41.7
+
+### Patch Changes
+
+- [#4114](https://github.com/withastro/starlight/pull/4114) [`3e486fb`](https://github.com/withastro/starlight/commit/3e486fba2015589c55aa452746eb17b407a4716e) Thanks [@delucis](https://github.com/delucis)! - Fixes processing of code examples in RTL languages when using Astro’s Sätteri Markdown processor
+
+## 0.41.6
+
+### Patch Changes
+
+- [#4102](https://github.com/withastro/starlight/pull/4102) [`f1dddc0`](https://github.com/withastro/starlight/commit/f1dddc057dc2b52092058f39679a5790b9cf0a38) Thanks [@delucis](https://github.com/delucis)! - Adds 1 new icon: `forgejo`
+
 ## 0.41.5
 
 ### Patch Changes
