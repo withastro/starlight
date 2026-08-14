@@ -19,7 +19,7 @@ import Icon from '../user-components/Icon.astro';
 			matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
 
 			// Update the menu state when the sidebar popover is toggled.
-			this.addEventListener('beforetoggle', ({ newState }) => this.trapFocus(newState === 'open'));
+			this.addEventListener('toggle', ({ newState }) => this.trapFocus(newState === 'open'));
 		}
 		/** Trap keyboard focus inside the header and menu when the menu is expanded. */
 		trapFocus(shouldTrap: boolean) {

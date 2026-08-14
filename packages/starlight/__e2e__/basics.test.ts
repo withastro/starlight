@@ -779,11 +779,13 @@ test.describe('mobile menu focus trap', () => {
 		await starlight.goto('/headings');
 
 		const currentFocus = page.locator('*:focus');
+		const mainFrame = page.locator('.main-frame');
 
 		// Open the mobile menu.
 		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
 		await mobileMenuButton.click();
 		await expect(currentFocus).toHaveCount(1);
+		await expect(mainFrame).toHaveAttribute('inert', '');
 
 		// Focus the theme selector, which is the last focusable element in the mobile menu.
 		const themeSelector = page.getByRole('navigation', { name: 'Main' }).getByLabel('Select theme');
@@ -801,6 +803,7 @@ test.describe('mobile menu focus trap', () => {
 		await mobileMenuButton.click();
 
 		// The focus trap should be released and tabbing will focus the mobile table of contents button.
+		await expect(mainFrame).not.toHaveAttribute('inert', '');
 		await page.keyboard.press('Tab');
 		await expect(currentFocus).toHaveText(/On this page/);
 	});
@@ -811,6 +814,7 @@ test.describe('mobile menu focus trap', () => {
 		await starlight.goto('/anchor-heading');
 
 		const currentFocus = page.locator('*:focus');
+		const mainFrame = page.locator('.main-frame');
 		const anchorLinkAccessibleName = 'Section titled “An anchor heading”';
 		const anchorHeadingLink = page.getByRole('link', { name: anchorLinkAccessibleName });
 
@@ -822,6 +826,7 @@ test.describe('mobile menu focus trap', () => {
 		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
 		await mobileMenuButton.click();
 		await expect(currentFocus).toHaveAccessibleName('Menu');
+		await expect(mainFrame).toHaveAttribute('inert', '');
 
 		// Try to focus the anchor heading which should be prevented by the focus trap,
 		// keeping focus where it is.
@@ -832,10 +837,12 @@ test.describe('mobile menu focus trap', () => {
 		await page.setViewportSize({ width: 1280, height: 720 });
 
 		// The anchor heading link should be focusable again.
+		await expect(mainFrame).not.toHaveAttribute('inert', '');
 		await anchorHeadingLink.focus();
 		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
 
 		// Resizing back to a smaller viewport should not re-enable the focus trap.
+		await expect(mainFrame).not.toHaveAttribute('inert', '');
 		await page.setViewportSize({ width: 375, height: 667 });
 		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
 	});
