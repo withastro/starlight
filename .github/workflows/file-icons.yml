@@ -13,7 +13,7 @@ jobs:
     if: github.repository_owner == 'withastro'
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
       pull-requests: write # open the automated pull request (peter-evans/create-pull-request)
     steps:
       - name: Checkout Repo

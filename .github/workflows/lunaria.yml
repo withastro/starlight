@@ -15,7 +15,7 @@ jobs:
     name: Generate Lunaria Overview
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
       pull-requests: write # post PR comment (yanthomasdev/lunaria-action)
 
     steps:

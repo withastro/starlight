@@ -21,7 +21,7 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
       pull-requests: read # evaluate changed files against PR diffs (dorny/paths-filter)
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
@@ -70,7 +70,7 @@ jobs:
     if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -94,7 +94,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     permissions:
-      contents: read # checkout repository
+      contents: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -112,7 +112,7 @@ jobs:
     name: Run type checks
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -133,7 +133,7 @@ jobs:
     name: Lint code
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -162,7 +162,7 @@ jobs:
       needs.changes.outputs.packages == 'true'
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -191,7 +191,7 @@ jobs:
     if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' || needs.changes.outputs.docs_not_content == 'true' }}
     runs-on: windows-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -212,7 +212,7 @@ jobs:
     if: ${{ needs.changes.outputs.docs == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: read # checkout repository
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
