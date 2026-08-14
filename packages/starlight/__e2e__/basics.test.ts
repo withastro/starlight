@@ -842,8 +842,9 @@ test.describe('mobile menu focus trap', () => {
 		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
 
 		// Resizing back to a smaller viewport should not re-enable the focus trap.
-		await expect(mainFrame).not.toHaveAttribute('inert', '');
 		await page.setViewportSize({ width: 375, height: 667 });
+		await expect(mainFrame).not.toHaveAttribute('inert', '');
+		await expect(page.locator('.sidebar-pane:popover-open')).toHaveCount(0);
 		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
 	});
 });
