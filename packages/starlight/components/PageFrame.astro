@@ -10,11 +10,11 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 		hasSidebar && (
 			<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle />
-				<div popover id="starlight__sidebar" class="sidebar-pane">
+				<sl-sidebar-pane popover="" id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content sl-flex">
 						<slot name="sidebar" />
 					</div>
-				</div>
+				</sl-sidebar-pane>
 			</nav>
 		)
 	}

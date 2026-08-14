@@ -11,21 +11,25 @@ import Icon from '../user-components/Icon.astro';
 <script>
 	// The mobile menu uses the popover API to open and close without JavaScript. We enhance this
 	// behaviour with focus trapping while the menu is open.
+	class StarlightSidebarPane extends HTMLElement {
+		constructor() {
+			super();
 
-	// Reset menu state when the viewport toggles between mobile and desktop sizes.
-	matchMedia('(min-width: 50em)').addEventListener('change', () => trapFocus(false));
+			// Reset menu state when the viewport toggles between mobile and desktop sizes.
+			matchMedia('(min-width: 50em)').addEventListener('change', () => this.trapFocus(false));
 
-	// Update the menu state when the sidebar popover is toggled.
-	document
-		.getElementById('starlight__sidebar')
-		?.addEventListener('beforetoggle', ({ newState }) => trapFocus(newState === 'open'));
-
-	/** Trap keyboard focus inside the header and menu when the menu is expanded. */
-	function trapFocus(shouldTrap: boolean) {
-		document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
-			el.toggleAttribute('inert', shouldTrap);
-		});
+			// Update the menu state when the sidebar popover is toggled.
+			this.addEventListener('beforetoggle', ({ newState }) => this.trapFocus(newState === 'open'));
+		}
+		/** Trap keyboard focus inside the header and menu when the menu is expanded. */
+		trapFocus(shouldTrap: boolean) {
+			document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
+				el.toggleAttribute('inert', shouldTrap);
+			});
+		}
 	}
+
+	customElements.define('sl-sidebar-pane', StarlightSidebarPane);
 </script>
 
 <style>
