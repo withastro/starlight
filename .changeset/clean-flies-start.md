@@ -14,7 +14,7 @@ In the following example, custom styles for the menu button are updated for the 
   color: var(--sl-color-text);
 }
 
-- [aria-expanded='true'] starlight-menu-button button {
+- starlight-menu-button[aria-expanded='true'] button {
 + .sl-menu-button:has(~ :popover-open) {
   color: var(--sl-color-text-accent-high);
 }
