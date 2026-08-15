@@ -1,6 +1,9 @@
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { expect, test } from 'vitest';
-import { starlightRehypePlugins, starlightRemarkPlugins } from '../../src/integrations/remark-rehype';
+import {
+	starlightRehypePlugins,
+	starlightRemarkPlugins,
+} from '../../src/integrations/remark-rehype';
 import { createPluginTestOptions } from '../test-utils';
 
 test('does not run Starlight remark plugins on documents without a file path', async () => {

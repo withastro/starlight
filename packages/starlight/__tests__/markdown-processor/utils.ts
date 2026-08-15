@@ -2,8 +2,14 @@ import { createMarkdownProcessor, type MarkdownRenderer } from '@astrojs/markdow
 import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
 import { beforeAll, describe } from 'vitest';
 import { remarkDirectivesRestoration } from '../../src/integrations/remark-asides';
-import { starlightRehypePlugins, starlightRemarkPlugins } from '../../src/integrations/remark-rehype';
-import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../src/integrations/satteri';
+import {
+	starlightRehypePlugins,
+	starlightRemarkPlugins,
+} from '../../src/integrations/remark-rehype';
+import {
+	satteriDirectivesRestoration,
+	starlightSatteriPlugins,
+} from '../../src/integrations/satteri';
 import type { StarlightUserConfig } from '../../src/utils/user-config';
 import { createPluginTestOptions, docFileURL } from '../test-utils';
 

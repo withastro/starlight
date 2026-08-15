@@ -5,7 +5,10 @@ import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
 import type { MdastPluginDefinition } from 'satteri';
 import { describe, expect, test, vi } from 'vitest';
 import { remarkDirectivesRestoration } from '../../src/integrations/remark-asides';
-import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../src/integrations/satteri';
+import {
+	satteriDirectivesRestoration,
+	starlightSatteriPlugins,
+} from '../../src/integrations/satteri';
 import { starlightRemarkPlugins } from '../../src/integrations/remark-rehype';
 import type { StarlightUserConfig } from '../../src/utils/user-config';
 import { BuiltInDefaultLocale } from '../../src/utils/i18n';
