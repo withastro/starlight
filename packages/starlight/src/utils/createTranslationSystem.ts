@@ -73,7 +73,11 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 
 		const t = i18n.getFixedT(lang, i18nextNamespace) as I18nT;
 		t.all = () => i18n.getResourceBundle(lang, i18nextNamespace) as ReturnType<I18nT['all']>;
-		t.exists = (key, options) => i18n.exists(key, { lng: lang, ns: i18nextNamespace, ...options });
+		// Since i18next 25.10.4 the `ExistsFunction` type has a signature including a predicate that
+		// TS cannot preserve when composing a new function to add default options.
+		// See: https://github.com/i18next/i18next/issues/2425
+		t.exists = ((key, options) =>
+			i18n.exists(key, { lng: lang, ns: i18nextNamespace, ...options })) as ExistsFunction;
 		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 
 		return t;

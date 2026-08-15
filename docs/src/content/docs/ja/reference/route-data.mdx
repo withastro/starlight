@@ -1,6 +1,6 @@
 ---
 title: ルートデータ
-description: Starlightのルートデータオブジェクトに関する完全なリファレンスドキュメントです。
+description: Starlightのルートデータオブジェクトに関する完全なリファレンスドキュメント。
 ---
 
 Starlightのルートデータオブジェクトには、現在のページに関する情報が含まれています。Starlightのデータモデルがどのように機能するかについては、[「ルートデータ」ガイド](/ja/guides/route-data/) を参照してください。
@@ -96,9 +96,100 @@ entry: {
 
 ### `sidebar`
 
-**型:** `SidebarEntry[]`
+**型:** <code>Array&lt;<a href="#sidebarlink型">SidebarLink</a> | <a href="#sidebargroup型">SidebarGroup</a>&gt;</code>
 
 ページのサイトナビゲーション用サイドバーのエントリー。
+各エントリーは、サイドバーリンクまたはサイドバーグループのいずれかです。
+
+#### `SidebarLink`型
+
+サイドバーリンクのエントリーは、サイドバーに表示されるリンクを表わし、以下のプロパティをもちます。
+
+##### `type`
+
+**型:** `'link'`
+
+このエントリーがサイドバーリンクであることを示す型。
+
+##### `label`
+
+**型:** `string`
+
+リンクのテキスト。
+
+##### `href`
+
+**型:** `string`
+
+リンクが指すURL。
+
+##### `isCurrent`
+
+**型:** `boolean`
+
+リンクが現在のページを指している場合は`true`となります。
+
+##### `attrs`
+
+**型:** `Record<string, string | number | boolean | undefined>`
+
+レンダリングされる`<a>`要素に追加されるHTML属性。
+
+##### `badge`
+
+**型:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+リンクラベルの隣に表示するバッジの設定（存在する場合）。詳細については、[`<Badge>`コンポーネントPropsのリファレンス](/ja/components/badges/#badge-プロパティ)を参照してください。
+
+##### `autogenerate`
+
+**型:** `{ directory: string } | undefined`
+
+[自動生成されたサイドバーエントリー](/ja/guides/sidebar/#自動生成されるリンク)から作成されたリンクの場合、`directory`は設定された[`autogenerate.directory`](/ja/reference/configuration/#sidebar)の値と一致します。
+
+[`sidebar`](/ja/reference/configuration/#sidebar)が設定されていない場合、Starlightはすべてのドキュメントページのエントリーを生成し、`directory`の値として空文字列（`''`）を使用します。
+
+#### `SidebarGroup`型
+
+サイドバーグループのエントリーは、サイドバーに表示されるリンクのグループを表わし、以下のプロパティをもちます。
+
+##### `type`
+
+**型:** `'group'`
+
+このエントリーがサイドバーグループであることを示す型。
+
+##### `label`
+
+**型:** `string`
+
+グループのテキスト。
+
+##### `entries`
+
+**型:** <code>Array&lt;<a href="#sidebarlink型">SidebarLink</a> | <a href="#sidebargroup型">SidebarGroup</a>&gt;</code>
+
+このグループ内にネストされたサイドバーエントリー。リンクまたはグループのいずれかです。
+
+##### `collapsed`
+
+**型:** `boolean`
+
+グループがデフォルトで折りたたまれているかどうか。
+
+##### `badge`
+
+**型:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+グループラベルの隣に表示するバッジの設定（存在する場合）。詳細については、[`<Badge>`コンポーネントPropsのリファレンス](/ja/components/badges/#badge-プロパティ)を参照してください。
+
+##### `autogenerate`
+
+**型:** `{ directory: string } | undefined`
+
+[自動生成されたサイドバーエントリー](/ja/guides/sidebar/#自動生成されるリンク)から作成されたグループの場合、`directory`は設定された[`autogenerate.directory`](/ja/reference/configuration/#sidebar)の値と一致します。
+
+[`sidebar`](/ja/reference/configuration/#sidebar)が設定されていない場合、Starlightはすべてのドキュメントページのエントリーを生成し、`directory`の値として空文字列（`''`）を使用します。
 
 ### `hasSidebar`
 

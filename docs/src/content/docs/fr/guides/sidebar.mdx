@@ -45,7 +45,7 @@ La barre latérale suivante sera automatiquement générée :
 	]}
 />
 
-Pour en savoir plus sur les barres latérales générées automatiquement, consultez la section sur les [groupes générés automatiquement](#groupes-générés-automatiquement).
+Pour en savoir plus sur les barres latérales générées automatiquement, consultez la section sur les [liens générés automatiquement](#liens-générés-automatiquement).
 
 ## Ajouter des liens et des groupes de liens
 
@@ -143,7 +143,7 @@ Ajoutez des liens ou des sous-groupes au tableau `items`.
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// Un groupe de liens avec le label "Constellations".
+		// Un groupe de liens avec le label « Constellations ».
 		{
 			label: 'Constellations',
 			items: [
@@ -186,22 +186,24 @@ La configuration ci-dessus génère la barre latérale suivante :
 	]}
 />
 
-### Groupes générés automatiquement
+### Liens générés automatiquement
 
-Starlight peut générer automatiquement un groupe dans votre barre latérale en fonction d'un répertoire de votre documentation.
+Starlight peut générer automatiquement des liens dans votre barre latérale en fonction d'un répertoire de votre documentation.
 Cela est utile lorsque vous ne souhaitez pas entrer manuellement chaque élément de la barre latérale dans un groupe.
 
 Par défaut, les pages sont triées par ordre alphabétique selon l'[`id`](/fr/reference/route-data/#id) du fichier.
 
-Ajoutez un groupe généré automatiquement en utilisant un objet avec les propriétés `label` et `autogenerate`. La configuration de `autogenerate` doit spécifier le répertoire à utiliser pour les entrées de la barre latérale avec la propriété `directory`. Par exemple, avec la configuration suivante :
+Ajoutez des liens générés automatiquement en utilisant un objet avec la propriété `autogenerate`.
+La configuration de `autogenerate` doit spécifier le répertoire (`directory`) à utiliser pour les entrées de la barre latérale.
+Par exemple, avec la configuration suivante :
 
 ```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
 			label: 'Constellations',
-			// Génère automatiquement un groupe de liens pour le répertoire "constellations".
-			autogenerate: { directory: 'constellations' },
+			// Générer automatiquement des liens pour le répertoire 'constellations'.
+			items: [{ autogenerate: { directory: 'constellations' } }],
 		},
 	],
 });
@@ -263,7 +265,7 @@ sidebar:
 ---
 ```
 
-Un groupe généré automatiquement incluant une page avec le frontmatter ci-dessus générera la barre latérale suivante :
+Un groupe avec des liens générés automatiquement incluant une page avec le frontmatter ci-dessus générera la barre latérale suivante :
 
 <SidebarPreview
 	config={[
@@ -283,13 +285,12 @@ Un groupe généré automatiquement incluant une page avec le frontmatter ci-des
 />
 
 :::note
-La configuration du frontmatter `sidebar` est seulement utilisée pour les liens dans des groupes générés automatiquement et les liens de documentation définis avec la propriété `slug`.
-Elle ne s'applique pas aux liens définis avec la propriété `link`.
+La configuration de `sidebar` dans le frontmatter est uniquement utilisée pour les liens générés automatiquement et les liens de documentation définis avec la propriété `slug`. Elle ne s'applique pas aux liens définis avec la propriété `link`.
 :::
 
 ## Badges
 
-Les liens, groupes et groupes générés automatiquement peuvent inclure une propriété `badge` pour afficher un badge à côté de leurs étiquettes.
+Les liens et les groupes peuvent également inclure une propriété `badge` pour afficher un badge à côté de leur étiquette.
 
 ```js {9,16}
 starlight({
@@ -297,18 +298,18 @@ starlight({
 		{
 			label: 'Étoiles',
 			items: [
-				// Un lien avec un badge "Supergéante".
+				// Un lien avec un badge « Supergéante ».
 				{
 					slug: 'etoiles/persei',
 					badge: 'Supergéante',
 				},
 			],
 		},
-		// Un groupe généré automatiquement avec un badge "Obsolète".
+		// Un groupe avec un badge « Obsolète ».
 		{
 			label: 'Lunes',
 			badge: 'Obsolète',
-			autogenerate: { directory: 'lunes' },
+			items: [{ autogenerate: { directory: 'lunes' } }],
 		},
 	],
 });
@@ -364,7 +365,7 @@ starlight({
 		{
 			label: 'Étoiles',
 			items: [
-				// Un lien avec un badge "Ébauche" jaune.
+				// Un lien avec un badge « Ébauche » jaune.
 				{
 					slug: 'etoiles/sirius',
 					badge: { text: 'Ébauche', variant: 'caution' },
@@ -440,20 +441,19 @@ La configuration ci-dessus génère la barre latérale suivante :
 
 ### Attributs HTML personnalisés pour les liens générés automatiquement
 
-Personnalisez les attributs HTML de tous les liens dans des [groupes générés automatiquement](#groupes-générés-automatiquement) en définissant la propriété `attrs` dans la configuration `autogenerate`.
+Personnalisez les attributs HTML de tous les [liens générés automatiquement](#liens-générés-automatiquement) en définissant la propriété `attrs` dans la configuration `autogenerate`.
 Différentes pages peuvent individuellement spécifier des attributs personnalisés en utilisant le [champ `sidebar.attrs` du frontmatter](/fr/reference/frontmatter/#attrs) qui sera fusionné avec la configuration `autogenerate.attrs`.
 
 Par exemple, avec la configuration suivante :
 
-```js {9}
+```js {8}
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
 			autogenerate: {
-				// Génère automatiquement un groupe de liens pour le répertoire "constellations".
+				// Génère automatiquement des liens pour le répertoire 'constellations'.
 				directory: 'constellations',
-				// Met en italique tous les labels de liens dans ce groupe.
+				// Met en italique toutes les étiquettes de liens générés automatiquement.
 				attrs: { style: 'font-style: italic' },
 			},
 		},
@@ -480,24 +480,15 @@ La barre latérale suivante sera générée avec tous les liens générés autom
 
 <SidebarPreview
 	config={[
+		{ label: 'Carène', link: '', attrs: { style: 'font-style: italic' } },
+		{ label: 'Centaure', link: '', attrs: { style: 'font-style: italic' } },
 		{
-			label: 'Constellations',
+			label: 'saisonnieres',
 			items: [
-				{ label: 'Carène', link: '', attrs: { style: 'font-style: italic' } },
 				{
-					label: 'Centaure',
+					label: 'Andromède',
 					link: '',
 					attrs: { style: 'font-style: italic' },
-				},
-				{
-					label: 'saisonnieres',
-					items: [
-						{
-							label: 'Andromède',
-							link: '',
-							attrs: { style: 'font-style: italic' },
-						},
-					],
 				},
 			],
 		},
@@ -668,53 +659,22 @@ La configuration ci-dessus génère la barre latérale suivante :
 	]}
 />
 
-Les [groupes générés automatiquement](#groupes-générés-automatiquement) respectent la valeur `collapsed` de leur groupe parent :
+Les [sous-groupes générés automatiquement](#liens-générés-automatiquement) peuvent également être rétractés par défaut en définissant la propriété `autogenerate.collapsed` avec `true`.
 
-```js {5-7}
+```js {9-10}
 starlight({
 	sidebar: [
 		{
 			label: 'Constellations',
-			// Rétracte le groupe et ses sous-groupes générés automatiquement
-			// par défaut.
-			collapsed: true,
-			autogenerate: { directory: 'constellations' },
-		},
-	],
-});
-```
-
-La configuration ci-dessus génère la barre latérale suivante :
-
-<SidebarPreview
-	config={[
-		{
-			label: 'Constellations',
-			collapsed: true,
 			items: [
-				{ label: 'Carène', link: '' },
-				{ label: 'Centaure', link: '' },
 				{
-					label: 'saisonnieres',
-					collapsed: true,
-					items: [{ label: 'Andromède', link: '' }],
+					autogenerate: {
+						directory: 'constellations',
+						// Rétracte les sous-groupes générés automatiquement par défaut.
+						collapsed: true,
+					},
 				},
 			],
-		},
-	]}
-/>
-
-Ce comportement peut être remplacé en définissant la propriété `autogenerate.collapsed`.
-
-```js {5-7} "collapsed: true"
-starlight({
-	sidebar: [
-		{
-			label: 'Constellations',
-			// Ne rétracte pas le groupe "Constellations" mais rétracte ses
-			// sous-groupes générés automatiquement.
-			collapsed: false,
-			autogenerate: { directory: 'constellations', collapsed: true },
 		},
 	],
 });

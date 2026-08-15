@@ -94,6 +94,22 @@ interface PagefindRankingUserConfig {
 	 * @see https://pagefind.app/docs/ranking/#configuring-term-similarity
 	 */
 	termSimilarity?: number | undefined;
+	/**
+	 * Set Pagefind’s `diacriticSimilarity` ranking option.
+	 *
+	 * The default value is `0.8` and values must be greater than or equal to `0`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-diacritic-similarity
+	 */
+	diacriticSimilarity?: number | undefined;
+	/**
+	 * Set Pagefind’s `metaWeights` ranking option.
+	 *
+	 * This is a map of metadata keys to their corresponding weights, with a default value of `{ title: 5 }`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-metadata-weights
+	 */
+	metaWeights?: Record<string, number> | undefined;
 }
 
 const indexWeightSchema = z.number().nonnegative().optional();
@@ -102,7 +118,10 @@ const pagefindRankingWeightsSchema = z.object({
 	termFrequency: z.number().min(0).max(1).default(0.1),
 	termSaturation: z.number().min(0).max(2).default(2),
 	termSimilarity: z.number().min(0).default(9),
+	diacriticSimilarity: z.number().min(0).default(0.8),
+	metaWeights: z.record(z.string(), z.number().min(0)).optional(),
 });
+
 const pagefindIndexOptionsSchema = z.object({
 	basePath: z.string().optional(),
 	baseUrl: z.string().optional(),

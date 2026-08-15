@@ -82,7 +82,9 @@ export interface StarlightUserConfig {
 	locales?:
 		| Prettify<
 				{
-					root?: Prettify<LocaleUserConfig & { lang: NonNullable<LocaleUserConfig['lang']> }>;
+					root?:
+						| Prettify<LocaleUserConfig & { lang: NonNullable<LocaleUserConfig['lang']> }>
+						| undefined;
 				} & Record<string, LocaleUserConfig>
 		  >
 		| undefined;

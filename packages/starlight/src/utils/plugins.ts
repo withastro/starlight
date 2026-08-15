@@ -188,7 +188,7 @@ const astroIntegrationSchema = z.object({
 
 interface RouteMiddlewareUserConfig {
 	entrypoint: string;
-	order?: 'pre' | 'post' | 'default';
+	order?: 'pre' | 'post' | 'default' | undefined;
 }
 
 const routeMiddlewareConfigSchema = z.object({
@@ -348,6 +348,8 @@ type ConfigSetupHookUserConfig =
 	  }) => void | Promise<void>)
 	| undefined;
 
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion --
+	 The configSetupHookSchema casts `z.any()` to provide types but this rule can’t understand that. */
 const configSetupHookSchema = z
 	.function({
 		input: [

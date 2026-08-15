@@ -284,7 +284,7 @@ draft: true
 ```
 
 Puisque les ébauches ne sont pas incluses lors d'un déploiement, vous ne pouvez pas ajouter des ébauches directement à la configuration de la barre latérale de navigation de votre site en utilisant des [slugs](/fr/guides/sidebar/#liens-internes).
-Les ébauches situées dans des répertoires utilisés dans des [groupes de barre latérale générés automatiquement](/fr/guides/sidebar/#groupes-générés-automatiquement) sont automatiquement exclues des déploiements en production.
+Les ébauches situées dans des répertoires utilisés pour les [liens de barre latérale générés automatiquement](/fr/guides/sidebar/#liens-générés-automatiquement) sont automatiquement exclues des déploiements en production.
 
 ### `sidebar`
 

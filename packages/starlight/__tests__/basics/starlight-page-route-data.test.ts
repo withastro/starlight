@@ -116,6 +116,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		[
 		  {
 		    "attrs": {},
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "href": "/",
 		    "isCurrent": false,
@@ -124,6 +127,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		  },
 		  {
 		    "attrs": {},
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "href": "/getting-started/",
 		    "isCurrent": true,
@@ -131,11 +137,17 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "type": "link",
 		  },
 		  {
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "collapsed": false,
 		    "entries": [
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/authoring-content/",
 		        "isCurrent": false,
@@ -144,6 +156,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		      },
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
@@ -155,11 +170,17 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "type": "group",
 		  },
 		  {
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "collapsed": false,
 		    "entries": [
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "",
+		        },
 		        "badge": undefined,
 		        "href": "/reference/frontmatter/",
 		        "isCurrent": false,
@@ -190,7 +211,7 @@ test('uses provided sidebar if any', async () => {
 				},
 				{
 					label: 'Guides',
-					autogenerate: { directory: 'guides' },
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 				'reference/frontmatter',
 			],
@@ -224,6 +245,9 @@ test('uses provided sidebar if any', async () => {
 		    "entries": [
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "guides",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/authoring-content/",
 		        "isCurrent": false,
@@ -232,6 +256,9 @@ test('uses provided sidebar if any', async () => {
 		      },
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "guides",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/project-structure/",
 		        "isCurrent": false,

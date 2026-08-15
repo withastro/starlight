@@ -14,7 +14,11 @@ export interface LocaleData {
 	locale: string | undefined;
 }
 
-export interface SidebarLink {
+export interface SidebarAutogenerateRouteData {
+	directory: string;
+}
+
+export interface SidebarManualLink {
 	type: 'link';
 	label: string;
 	href: string;
@@ -23,7 +27,11 @@ export interface SidebarLink {
 	attrs: LinkHTMLAttributes;
 }
 
-export interface SidebarGroup {
+export interface SidebarAutoLink extends SidebarManualLink {
+	autogenerate: SidebarAutogenerateRouteData;
+}
+
+export interface SidebarManualGroup {
 	type: 'group';
 	label: string;
 	entries: (SidebarLink | SidebarGroup)[];
@@ -31,6 +39,12 @@ export interface SidebarGroup {
 	badge: Badge | undefined;
 }
 
+export interface SidebarAutoGroup extends SidebarManualGroup {
+	autogenerate: SidebarAutogenerateRouteData;
+}
+
+export type SidebarLink = SidebarManualLink | SidebarAutoLink;
+export type SidebarGroup = SidebarManualGroup | SidebarAutoGroup;
 export type SidebarEntry = SidebarLink | SidebarGroup;
 
 export interface PaginationLinks {

@@ -5,9 +5,13 @@ export default defineConfig({
 		projects: ['__tests__/*/vitest.config.ts'],
 		coverage: {
 			reportsDirectory: './__coverage__',
-			include: ['src/**/*.ts'],
+			include: ['**.ts', 'src/*.ts'],
 			exclude: [
 				'**/__tests__/**',
+				'**/__e2e__/**',
+				'playwright.config.*',
+				'tsdown.config.*',
+				'**/vitest.*',
 				/**
 				 * TODO: re-exclude these 2 files once the issue preventing us from excluding only these
 				 * files at the project root in Vitest 4 is fixed and update thresholds accordingly.

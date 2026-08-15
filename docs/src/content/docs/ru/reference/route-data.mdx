@@ -100,9 +100,102 @@ entry: {
 
 ### `sidebar`
 
-**Тип:** `SidebarEntry[]`
+**Тип:** <code>Array&lt;<a href="#sidebarlink-type">SidebarLink</a> | <a href="#sidebargroup-type">SidebarGroup</a>&gt;</code>
 
 Элементы боковой панели навигации сайта для этой страницы.
+Каждая запись представляет собой либо ссылку боковой панели, либо группу боковой панели.
+
+#### Тип `SidebarLink`
+
+Записи ссылок боковой панели представляют собой ссылку, отображаемую в боковой панели, и имеют следующие свойства:
+
+##### `type`
+
+**Тип:** `'link'`
+
+Тип, определяющий эту запись как ссылку боковой панели.
+
+##### `label`
+
+**Тип:** `string`
+
+Текст ссылки.
+
+##### `href`
+
+**Тип:** `string`
+
+URL, на который указывает ссылка.
+
+##### `isCurrent`
+
+**Тип:** `boolean`
+
+`true`, если ссылка ведёт на текущую страницу.
+
+##### `attrs`
+
+**Тип:** `Record<string, string | number | boolean | undefined>`
+
+HTML-атрибуты, добавляемые к отображаемому элементу `<a>`.
+
+##### `badge`
+
+**Тип:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Настройка значка, отображаемого рядом с меткой ссылки (если есть).  
+Подробнее см. в [справочнике по пропсам компонента `<Badge>`](/ru/components/badges/#параметры-badge).
+
+##### `autogenerate`
+
+**Тип:** `{ directory: string } | undefined`
+
+Для ссылок, созданных из [автогенерируемой записи боковой панели](/ru/guides/sidebar/#автогенерируемые-ссылки), `directory` соответствует настроенному значению [`autogenerate.directory`](/ru/reference/configuration/#sidebar).
+
+Если конфигурация [`sidebar`](/ru/reference/configuration/#sidebar) не задана, Starlight генерирует записи для всех страниц документации и использует пустую строку (`''`) в качестве значения `directory`.
+
+#### Тип `SidebarGroup`
+
+Записи групп боковой панели представляют собой группу ссылок, отображаемую в боковой панели, и имеют следующие свойства:
+
+##### `type`
+
+**Тип:** `'group'`
+
+Тип, определяющий эту запись как группу боковой панели.
+
+##### `label`
+
+**Тип:** `string`
+
+Текст группы.
+
+##### `entries`
+
+**Тип:** <code>Array&lt;<a href="#sidebarlink-type">SidebarLink</a> | <a href="#sidebargroup-type">SidebarGroup</a>&gt;</code>
+
+Вложенные записи боковой панели внутри этой группы (могут быть ссылками или группами).
+
+##### `collapsed`
+
+**Тип:** `boolean`
+
+Сворачивается ли группа по умолчанию.
+
+##### `badge`
+
+**Тип:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Настройка значка, отображаемого рядом с меткой группы (если есть).  
+Подробнее см. в [справочнике по пропсам компонента `<Badge>`](/ru/components/badges/#параметры-badge).
+
+##### `autogenerate`
+
+**Тип:** `{ directory: string } | undefined`
+
+Для групп, созданных из [автогенерируемой записи боковой панели](/ru/guides/sidebar/#автогенерируемые-ссылки), `directory` соответствует настроенному значению [`autogenerate.directory`](/ru/reference/configuration/#sidebar).
+
+Если конфигурация [`sidebar`](/ru/reference/configuration/#sidebar) не задана, Starlight генерирует записи для всех страниц документации и использует пустую строку (`''`) в качестве значения `directory`.
 
 ### `hasSidebar`
 

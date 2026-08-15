@@ -14,28 +14,35 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@astrojs/check": "^0.9.7",
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.9",
-    "@eslint/js": "^9.33.0",
-    "@size-limit/file": "^11.1.6",
-    "astro": "^6.0.1",
-    "eslint": "^9.33.0",
+    "@astrojs/check": "^0.9.10",
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.31.0",
+    "@eslint/js": "^10.0.1",
+    "@size-limit/file": "^12.1.0",
+    "astro": "^7.1.6",
+    "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^16.3.0",
+    "globals": "^17.6.0",
+    "pkg-pr-new": "^0.0.86",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "^0.14.1",
-    "size-limit": "^11.1.6",
+    "size-limit": "^12.1.0",
     "tsdown": "^0.16.2",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.39.1"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.2"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@11.1.1",
   "size-limit": [
     {
       "name": "/index.html",
       "path": "examples/basics/dist/index.html",
-      "limit": "8 kB",
+      "limit": "7 kB",
+      "gzip": true
+    },
+    {
+      "name": "/guides/example/index.html",
+      "path": "examples/basics/dist/guides/example/index.html",
+      "limit": "7 kB",
       "gzip": true
     },
     {

@@ -23,6 +23,9 @@ describe('getSidebar', () => {
 			[
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/en/",
 			    "isCurrent": true,
@@ -31,6 +34,9 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/en/404/",
 			    "isCurrent": false,
@@ -38,11 +44,17 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/en/guides/authoring-content/",
 			        "isCurrent": false,
@@ -62,6 +74,9 @@ describe('getSidebar', () => {
 			[
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/fr/",
 			    "isCurrent": true,
@@ -70,6 +85,9 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/fr/404/",
 			    "isCurrent": false,
@@ -77,11 +95,17 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/fr/guides/authoring-content/",
 			        "isCurrent": false,
@@ -93,11 +117,17 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/fr/référence/bénéfice/",
 			        "isCurrent": false,
@@ -106,6 +136,9 @@ describe('getSidebar', () => {
 			      },
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/fr/référence/bricolage/",
 			        "isCurrent": false,
@@ -117,11 +150,17 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/fr/route/décoder/",
 			        "isCurrent": false,
@@ -130,6 +169,9 @@ describe('getSidebar', () => {
 			      },
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/fr/route/distribuer/",
 			        "isCurrent": false,

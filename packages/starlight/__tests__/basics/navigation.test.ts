@@ -20,6 +20,9 @@ describe('getSidebar', () => {
 			[
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -28,6 +31,9 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -35,11 +41,17 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/getting-started/intro/",
 			        "isCurrent": false,
@@ -51,11 +63,17 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
@@ -64,6 +82,9 @@ describe('getSidebar', () => {
 			      },
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/guides/project-structure/",
 			        "isCurrent": false,
@@ -98,6 +119,9 @@ describe('getSidebar', () => {
 			[
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": true,
@@ -155,6 +179,9 @@ describe('flattenSidebar', () => {
 			[
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -163,6 +190,9 @@ describe('flattenSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -171,6 +201,9 @@ describe('flattenSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/getting-started/intro/",
 			    "isCurrent": false,
@@ -179,6 +212,9 @@ describe('flattenSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
@@ -187,6 +223,9 @@ describe('flattenSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/guides/project-structure/",
 			    "isCurrent": false,
@@ -206,6 +245,9 @@ describe('getPrevNextLinks', () => {
 			{
 			  "next": {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/getting-started/intro/",
 			    "isCurrent": false,
@@ -214,6 +256,9 @@ describe('getPrevNextLinks', () => {
 			  },
 			  "prev": {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": false,

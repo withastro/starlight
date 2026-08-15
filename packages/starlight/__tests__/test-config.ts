@@ -2,7 +2,7 @@
 
 import type { AstroConfig } from 'astro';
 import { getViteConfig } from 'astro/config';
-import { vitePluginStarlightUserConfig } from '../src/integrations/virtual-user-config';
+import { vitePluginStarlightVirtualModules } from '../src/integrations/vite-virtual-modules';
 import { runPlugins, type StarlightUserConfigWithPlugins } from '../src/utils/plugins';
 import { createTestPluginContext } from './test-plugin-utils';
 import { vitePluginStarlightCssLayerOrder } from '../src/integrations/vite-layer-order';
@@ -29,7 +29,7 @@ export async function defineVitestConfig(
 	return getViteConfig({
 		plugins: [
 			vitePluginStarlightCssLayerOrder(),
-			vitePluginStarlightUserConfig(
+			vitePluginStarlightVirtualModules(
 				{ command, isNodeCompatibleEnv: true },
 				starlightConfig,
 				{
@@ -43,7 +43,7 @@ export async function defineVitestConfig(
 			),
 		],
 		test: {
-			snapshotSerializers: ['./snapshot-serializer-astro-error.ts'],
+			snapshotSerializers: ['../snapshot-serializer-astro-error.ts'],
 		},
 	});
 }

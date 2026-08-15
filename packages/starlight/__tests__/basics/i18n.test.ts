@@ -274,7 +274,6 @@ describe('getLocaleDir', () => {
 
 	test('uses `getTextInfo()` when `textInfo` is not available', () => {
 		vi.spyOn(global.Intl, 'Locale').mockImplementation(function () {
-			// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
 			this.getTextInfo = () => ({ direction: 'rtl' });
 		});
 

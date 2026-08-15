@@ -1,6 +1,7 @@
 // @ts-check
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
+import { preventNodeBuiltinDependencyPlugin } from './src/noNodeModule';
 
 export default defineConfig({
 	integrations: [
@@ -10,4 +11,7 @@ export default defineConfig({
 			markdown: { processedDirs: ['./src/content/comments/'] },
 		}),
 	],
+	vite: {
+		plugins: [preventNodeBuiltinDependencyPlugin()],
+	},
 });
