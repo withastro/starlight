@@ -236,11 +236,10 @@ export const BuiltInIcons = {
 // The icon names type is hand-written rather than using `keyof typeof Icons` as the latter is an
 // inferred type which would cause TypeScript to inline the resulting union type in many places
 // when emitting declaration files. Most of the time, this is not a big deal, but with such a large
-// union, which is also used in a Zod object schema (which with Zod v3 would duplicate the union
-// type 3 times), this causes a massive increase in emitted file size.
+// union, which is also used in some Zod object schemas, this causes a massive increase in emitted
+// file size.
 //
 // @see https://github.com/microsoft/TypeScript/issues/37151#issuecomment-756232934
-// @see https://github.com/colinhacks/zod/issues/4227
 //
 // To avoid any possible divergence between the actual icon names and this type, we have type tests
 // in place that will fail if they ever get out of sync.
