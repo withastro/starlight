@@ -311,8 +311,8 @@ Starlight 플러그인 컨텍스트에서 [`useTranslations()`](/ko/reference/pl
 
 ```json title="src/content/i18n/en.json"
 {
-	"link.astro": "Astro documentation",
-	"link.astro.custom": "Astro documentation for {{feature}}"
+	"link.astro": "Astro 문서",
+	"link.astro.custom": "{{feature}}에 대한 Astro 문서"
 }
 ```
 
@@ -323,7 +323,7 @@ Starlight 플러그인 컨텍스트에서 [`useTranslations()`](/ko/reference/pl
 <a href="https://docs.astro.build/">
 	{Astro.locals.t('link.astro')}
 </a>
-<!-- 렌더링: <a href="...">Astro documentation</a> -->
+<!-- 렌더링: <a href="...">Astro 문서</a> -->
 ```
 
 두 번째 UI 문자열은 `{{feature}}` 자리 표시자에 i18next의 [보간 구문](https://www.i18next.com/translation-function/interpolation)을 사용합니다.
@@ -331,10 +331,10 @@ Starlight 플러그인 컨텍스트에서 [`useTranslations()`](/ko/reference/pl
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/en/guides/actions/">
-	{Astro.locals.t('link.astro.custom', { feature: 'Astro Actions' })}
+<a href="https://docs.astro.build/ko/guides/actions/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro 액션' })}
 </a>
-<!-- 렌더링: <a href="...">Astro documentation for Astro Actions</a> -->
+<!-- 렌더링: <a href="...">Astro 액션에 대한 Astro 문서</a> -->
 ```
 
 보간, 서식 지정 등과 함께 `t()` 함수를 사용하는 방법에 대한 자세한 내용은 [i18next 문서](https://www.i18next.com/overview/api#t)를 참조하세요.
