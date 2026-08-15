@@ -72,6 +72,8 @@ jobs:
           node-version: 22.23.1
           cache: 'pnpm'
       - run: pnpm i
+      - name: Build packages
+        run: pnpm build
       - name: Test packages
         run: pnpm -r test:coverage
 
