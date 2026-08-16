@@ -1,8 +1,6 @@
 import fs from 'node:fs/promises';
 import { defineConfig } from 'tsdown';
 
-const outDir = 'dist';
-
 export default defineConfig({
 	checks: { pluginTimings: false },
 	copy: ['src/components.ts', 'src/style', { from: 'src/**/*.astro', flatten: false }],
@@ -16,7 +14,6 @@ export default defineConfig({
 		// https://github.com/withastro/astro/blob/c4c99aa7a5e8e45ada0efa4fda6e6fb96f334663/packages/astro/package.json#L55
 		'!src/components.ts',
 	],
-	outDir,
 	plugins: [rawImportPlugin()],
 	publint: { strict: true },
 	unbundle: true,

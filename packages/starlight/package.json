@@ -58,7 +58,6 @@
     "@vitest/coverage-v8": "^4.1.5",
     "astro": "^7.1.6",
     "linkedom": "^0.18.12",
-    "publint": "^0.3.23",
     "vitest": "^4.1.5"
   },
   "dependencies": {

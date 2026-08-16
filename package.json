@@ -26,6 +26,7 @@
     "pkg-pr-new": "^0.0.86",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "^0.14.1",
+    "publint": "^0.3.23",
     "size-limit": "^12.1.0",
     "tsdown": "^0.22.14",
     "typescript": "^6.0.3",
