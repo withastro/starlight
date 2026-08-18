@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:dist": "node build-dist.mjs",
     "preview": "astro preview",
     "linkcheck": "CHECK_LINKS=true pnpm build",
     "astro": "astro",
