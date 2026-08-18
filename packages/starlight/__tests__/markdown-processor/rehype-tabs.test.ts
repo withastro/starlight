@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { fromHtml } from 'hast-util-from-html';
 import { selectAll } from 'hast-util-select';
 import { rehype } from 'rehype';
-import { processPanels, TabItemTagname } from '../../user-components/rehype-tabs';
+import { processPanels, TabItemTagname } from '../../src/user-components/rehype-tabs';
 
 const processor = rehype().data('settings', { fragment: true });
 
