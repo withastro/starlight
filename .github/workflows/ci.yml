@@ -76,6 +76,8 @@ jobs:
         run: pnpm build
       - name: Test packages
         run: pnpm -r test:coverage
+      - name: Test built packages
+        run: pnpm -r test:dist:ci
 
   e2e-test:
     name: 'Run E2E tests (${{ matrix.os }})'
@@ -139,7 +141,7 @@ jobs:
       needs.changes.outputs.docs_fa == 'true' ||
       needs.changes.outputs.docs_ja == 'true' ||
       needs.changes.outputs.docs_en == 'true' ||
-      needs.changes.outputs.ci == 'true' || 
+      needs.changes.outputs.ci == 'true' ||
       needs.changes.outputs.packages == 'true'
     runs-on: ubuntu-latest
     steps:

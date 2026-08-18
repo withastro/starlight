@@ -6,6 +6,8 @@
     "build": "tsdown",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:dist": "pnpm build && pnpm test:dist:ci",
+    "test:dist:ci": "vitest run -c vitest.dist.config.ts",
     "test:e2e": "playwright install --with-deps chromium && playwright test",
     "test:e2e:ci": "playwright test"
   },
