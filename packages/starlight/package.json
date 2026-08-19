@@ -3,8 +3,8 @@
   "version": "0.41.7",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
+    "test:coverage": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run --coverage",
     "test:e2e": "playwright install --with-deps chromium && playwright test",
     "test:e2e:ci": "playwright test"
   },
