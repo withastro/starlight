@@ -2,14 +2,14 @@ import { expect, test } from 'vitest';
 import { toHtml } from 'hast-util-to-html';
 import { selectAll } from 'hast-util-select';
 import { htmlToHast } from 'satteri';
-import { processPanels, TabItemTagname } from '../../user-components/rehype-tabs';
+import { processPanels, TabItemTagname } from '../../user-components/tabs-processor';
 
 const TabItem = ({ label, slot, icon }: { label: string; slot: string; icon?: string }) => {
 	const iconAttr = icon ? ` data-icon="${icon}"` : '';
 	return `<${TabItemTagname} data-label="${label}"${iconAttr}>${slot}</${TabItemTagname}>`;
 };
 
-/** Get an array of HTML strings, one for each `<div role="tabpanel">` created by rehype-tabs for each tab item. */
+/** Get an array of HTML strings, one for each `<div role="tabpanel">` created by tabs-processor for each tab item. */
 const extractTabPanels = (html: string) => {
 	const tree = htmlToHast(html, { fragment: true });
 	const tabPanels = selectAll('div[role="tabpanel"]', tree);

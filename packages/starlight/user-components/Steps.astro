@@ -1,5 +1,5 @@
 ---
-import { processSteps } from './rehype-steps';
+import { processSteps } from './steps-processor';
 
 const content = await Astro.slots.render('default');
 const { html } = processSteps(content);

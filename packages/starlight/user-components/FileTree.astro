@@ -1,5 +1,5 @@
 ---
-import { processFileTree } from './rehype-file-tree';
+import { processFileTree } from './file-tree-processor';
 
 const fileTreeHtml = await Astro.slots.render('default');
 const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'));
