@@ -7,8 +7,6 @@ interface Props {
 }
 
 const { syncKey } = Astro.props;
-const panelHtml = await Astro.slots.render('default');
-const { html, panels } = processPanels(panelHtml);
 
 /**
  * Synced tabs are persisted across page using `localStorage`. The script used to restore the
@@ -37,6 +35,15 @@ if (isSynced) {
 	// @ts-expect-error - See above
 	Astro.locals[didRenderSyncedTabsRestoreScriptSymbol] = true
 }
+
+// Track how many <Tabs> have been rendered on the current page.
+const tabInstanceCountSymbol = Symbol.for('starlight:tab-instance-count');
+const tabInstanceCount
+// @ts-expect-error - Untyped as it’s a local and private API, see above.
+	= Astro.locals[tabInstanceCountSymbol] = ((Astro.locals[tabInstanceCountSymbol]) ?? 0) + 1;
+
+const panelHtml = await Astro.slots.render('default');
+const { html, panels } = processPanels(panelHtml, tabInstanceCount);
 ---
 
 {/* Inlined to avoid a flash of invalid active tab. */}

@@ -19,14 +19,14 @@ const extractTabPanels = (html: string) => {
 };
 
 test('empty component returns no html or panels', () => {
-	const { panels, html } = processPanels('');
+	const { panels, html } = processPanels('', 1);
 	expect(html).toEqual('');
 	expect(panels).toEqual([]);
 });
 
 test('non-tab-item content is passed unchanged', () => {
 	const input = '<p>Random paragraph</p>';
-	const { panels, html } = processPanels(input);
+	const { panels, html } = processPanels(input, 1);
 	expect(html).toEqual(input);
 	expect(panels).toEqual([]);
 });
@@ -35,7 +35,7 @@ test('tab items are processed', () => {
 	const label = 'Test';
 	const slot = '<p>Random paragraph</p>';
 	const input = TabItem({ label, slot });
-	const { panels, html } = processPanels(input);
+	const { panels, html } = processPanels(input, 0);
 
 	expect(html).toMatchInlineSnapshot(
 		`"<div id="tab-panel-0" aria-labelledby="tab-0" role="tabpanel" tabindex="0"><p>Random paragraph</p></div>"`
@@ -50,7 +50,7 @@ test('tab items are processed', () => {
 test('only first item is not hidden', () => {
 	const labels = ['One', 'Two', 'Three'];
 	const input = labels.map((label) => TabItem({ label, slot: `<div>${label}</div>` })).join('');
-	const { panels, html } = processPanels(input);
+	const { panels, html } = processPanels(input, 1);
 
 	expect(panels).toHaveLength(3);
 	expect(html).toMatchInlineSnapshot(
@@ -70,7 +70,7 @@ test('only first item is not hidden', () => {
 test('applies incrementing ID and aria-labelledby to each tab item', () => {
 	const labels = ['One', 'Two', 'Three'];
 	const input = labels.map((label) => TabItem({ label, slot: `<div>${label}</div>` })).join('');
-	const { panels, html } = processPanels(input);
+	const { panels, html } = processPanels(input, 1);
 
 	// IDs are incremented globally to ensure they are unique, so we need to extract from the panel data.
 	const firstTabIdMatches = panels?.[0]?.tabId.match(/^tab-(\d)+$/);
@@ -91,7 +91,7 @@ test('applies tabindex="0" to tab items without focusable content', () => {
 			slot: `<div><p><span><input type="text"></span></p></div>`,
 		}),
 	].join('');
-	const { html } = processPanels(input);
+	const { html } = processPanels(input, 7);
 	expect(html).toMatchInlineSnapshot(
 		`"<div id="tab-panel-7" aria-labelledby="tab-7" role="tabpanel"><div><a href="/home/">Home</a></div></div><div id="tab-panel-8" aria-labelledby="tab-8" role="tabpanel" tabindex="0" hidden><div>Plain text</div></div><div id="tab-panel-9" aria-labelledby="tab-9" role="tabpanel" hidden><div><p><span><input type="text"></span></p></div></div>"`
 	);
@@ -104,7 +104,7 @@ test('applies tabindex="0" to tab items without focusable content', () => {
 test('processes a tab item icon', () => {
 	const icon = 'star';
 	const input = TabItem({ label: 'Test', slot: '<p>Random paragraph</p>', icon });
-	const { panels, html } = processPanels(input);
+	const { panels, html } = processPanels(input, 10);
 
 	expect(html).toMatchInlineSnapshot(
 		`"<div id="tab-panel-10" aria-labelledby="tab-10" role="tabpanel" tabindex="0"><p>Random paragraph</p></div>"`
