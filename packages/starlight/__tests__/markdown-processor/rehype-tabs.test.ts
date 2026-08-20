@@ -38,12 +38,12 @@ test('tab items are processed', () => {
 	const { panels, html } = processPanels(input, 0);
 
 	expect(html).toMatchInlineSnapshot(
-		`"<div id="tab-panel-0" aria-labelledby="tab-0" role="tabpanel" tabindex="0"><p>Random paragraph</p></div>"`
+		`"<div id="tab-panel-0-0" aria-labelledby="tab-0-0" role="tabpanel" tabindex="0"><p>Random paragraph</p></div>"`
 	);
 	expect(panels).toHaveLength(1);
 	expect(panels?.[0]?.label).toBe(label);
-	expect(panels?.[0]?.panelId).toMatchInlineSnapshot('"tab-panel-0"');
-	expect(panels?.[0]?.tabId).toMatchInlineSnapshot('"tab-0"');
+	expect(panels?.[0]?.panelId).toMatchInlineSnapshot(`"tab-panel-0-0"`);
+	expect(panels?.[0]?.tabId).toMatchInlineSnapshot(`"tab-0-0"`);
 	expect(panels?.[0]?.icon).not.toBeDefined();
 });
 
@@ -54,14 +54,14 @@ test('only first item is not hidden', () => {
 
 	expect(panels).toHaveLength(3);
 	expect(html).toMatchInlineSnapshot(
-		`"<div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0"><div>One</div></div><div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="0" hidden><div>Two</div></div><div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel" tabindex="0" hidden><div>Three</div></div>"`
+		`"<div id="tab-panel-1-0" aria-labelledby="tab-1-0" role="tabpanel" tabindex="0"><div>One</div></div><div id="tab-panel-1-1" aria-labelledby="tab-1-1" role="tabpanel" tabindex="0" hidden><div>Two</div></div><div id="tab-panel-1-2" aria-labelledby="tab-1-2" role="tabpanel" tabindex="0" hidden><div>Three</div></div>"`
 	);
 	const tabPanels = extractTabPanels(html);
 	expect(tabPanels).toMatchInlineSnapshot(`
 		[
-		  "<div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0"><div>One</div></div>",
-		  "<div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="0" hidden><div>Two</div></div>",
-		  "<div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel" tabindex="0" hidden><div>Three</div></div>",
+		  "<div id="tab-panel-1-0" aria-labelledby="tab-1-0" role="tabpanel" tabindex="0"><div>One</div></div>",
+		  "<div id="tab-panel-1-1" aria-labelledby="tab-1-1" role="tabpanel" tabindex="0" hidden><div>Two</div></div>",
+		  "<div id="tab-panel-1-2" aria-labelledby="tab-1-2" role="tabpanel" tabindex="0" hidden><div>Three</div></div>",
 		]
 	`);
 	expect(tabPanels.map((tabPanel) => tabPanel.includes('hidden'))).toEqual([false, true, true]);
@@ -73,12 +73,12 @@ test('applies incrementing ID and aria-labelledby to each tab item', () => {
 	const { panels, html } = processPanels(input, 1);
 
 	// IDs are incremented globally to ensure they are unique, so we need to extract from the panel data.
-	const firstTabIdMatches = panels?.[0]?.tabId.match(/^tab-(\d)+$/);
+	const firstTabIdMatches = panels?.[0]?.tabId.match(/^tab-1-(\d)+$/);
 	const firstTabId = parseInt(firstTabIdMatches![1]!, 10);
 
 	extractTabPanels(html).forEach((tabPanel, index) => {
-		expect(tabPanel).includes(`id="tab-panel-${firstTabId + index}"`);
-		expect(tabPanel).includes(`aria-labelledby="tab-${firstTabId + index}"`);
+		expect(tabPanel).includes(`id="tab-panel-1-${firstTabId + index}"`);
+		expect(tabPanel).includes(`aria-labelledby="tab-1-${firstTabId + index}"`);
 	});
 });
 
@@ -93,7 +93,7 @@ test('applies tabindex="0" to tab items without focusable content', () => {
 	].join('');
 	const { html } = processPanels(input, 7);
 	expect(html).toMatchInlineSnapshot(
-		`"<div id="tab-panel-7" aria-labelledby="tab-7" role="tabpanel"><div><a href="/home/">Home</a></div></div><div id="tab-panel-8" aria-labelledby="tab-8" role="tabpanel" tabindex="0" hidden><div>Plain text</div></div><div id="tab-panel-9" aria-labelledby="tab-9" role="tabpanel" hidden><div><p><span><input type="text"></span></p></div></div>"`
+		`"<div id="tab-panel-7-0" aria-labelledby="tab-7-0" role="tabpanel"><div><a href="/home/">Home</a></div></div><div id="tab-panel-7-1" aria-labelledby="tab-7-1" role="tabpanel" tabindex="0" hidden><div>Plain text</div></div><div id="tab-panel-7-2" aria-labelledby="tab-7-2" role="tabpanel" hidden><div><p><span><input type="text"></span></p></div></div>"`
 	);
 	const tabPanels = extractTabPanels(html);
 	expect(tabPanels[0]).not.includes('tabindex="0"');
@@ -107,7 +107,7 @@ test('processes a tab item icon', () => {
 	const { panels, html } = processPanels(input, 10);
 
 	expect(html).toMatchInlineSnapshot(
-		`"<div id="tab-panel-10" aria-labelledby="tab-10" role="tabpanel" tabindex="0"><p>Random paragraph</p></div>"`
+		`"<div id="tab-panel-10-0" aria-labelledby="tab-10-0" role="tabpanel" tabindex="0"><p>Random paragraph</p></div>"`
 	);
 	expect(panels).toHaveLength(1);
 	expect(panels?.[0]?.icon).toBe(icon);

@@ -52,10 +52,13 @@ const tabsProcessor = rehype()
 		return (tree: Element, file) => {
 			file.data.panels = [];
 			let isFirst = true;
-			let count = file.data.index!;
+			let count = 0;
 			const getIDs = () => {
 				const id = count++;
-				return { panelId: 'tab-panel-' + id, tabId: 'tab-' + id };
+				return {
+					panelId: `tab-panel-${file.data.index}-${id}`,
+					tabId: `tab-${file.data.index}-${id}`,
+				};
 			};
 			visit(tree, 'element', (node) => {
 				if (node.tagName !== TabItemTagname || !node.properties) {
