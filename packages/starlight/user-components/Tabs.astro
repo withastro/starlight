@@ -8,39 +8,45 @@ interface Props {
 
 const { syncKey } = Astro.props;
 
-/**
- * Synced tabs are persisted across page using `localStorage`. The script used to restore the
- * active tab for a given sync key has a few requirements:
- *
- * - The script should only be included when at least one set of synced tabs is present on the page.
- * - The script should be inlined to avoid a flash of invalid active tab.
- * - The script should only be included once per page.
- *
- * To do so, we keep track of whether the script has been rendered using a variable stored using
- * `Astro.locals` which will be reset for each new page. The value is tracked using an untyped
- * symbol on purpose to avoid Starlight users to get autocomplete for it and avoid potential
- * clashes with user-defined variables.
- *
- * The restore script defines a custom element `starlight-tabs-restore` that will be included in
- * each set of synced tabs to restore the active tab based on the persisted value using the
- * `connectedCallback` lifecycle method. To ensure this callback can access all tabs and panels for
- * the current set of tabs, the script should be rendered before the tabs themselves.
- */
-const isSynced = syncKey !== undefined;
+// Some tab functionality has to be co-ordinated across multiple instances for each page. To do
+// this, we keep track of page-level state in symbol-keyed variables in `Astro.locals`, which is a
+// fresh object for each new page. The keys are not typed globally to avoid Starlight users
+// getting autocomplete for them and using symbols reduces the risk of potential clashes with
+// user-defined variables.
+//
+// We store data for:
+// 
+// - The number of tabs rendered on the current page, so that each set can have unique IDs.
+//
+// - Synced tabs, which are persisted across pages using `localStorage`. The script used to restore
+// the active tab for a given sync key has a few requirements:
+//   - The script should only be included when at least one set of synced tabs is present on the page.
+//   - The script should be inlined to avoid a flash of invalid active tab.
+//   - The script should only be included once per page.
+//
+//   The restore script defines a custom element `starlight-tabs-restore` that will be included in
+//   each set of synced tabs to restore the active tab based on the persisted value using the
+//   `connectedCallback` lifecycle method. To ensure this callback can access all tabs and panels for
+//   the current set of tabs, the script should be rendered before the tabs themselves.
+
 const didRenderSyncedTabsRestoreScriptSymbol = Symbol.for('starlight:did-render-synced-tabs-restore-script');
-// @ts-expect-error - See above
-const shouldRenderSyncedTabsRestoreScript = isSynced && Astro.locals[didRenderSyncedTabsRestoreScriptSymbol] !== true;
+const tabInstanceCountSymbol = Symbol.for('starlight:tab-instance-count');
+
+const locals = Astro.locals as App.Locals & {
+	[didRenderSyncedTabsRestoreScriptSymbol]?: boolean;
+	[tabInstanceCountSymbol]?: number;
+};
+
+const isSynced = syncKey !== undefined;
+const shouldRenderSyncedTabsRestoreScript =
+	isSynced && locals[didRenderSyncedTabsRestoreScriptSymbol] !== true;
 
 if (isSynced) {
-	// @ts-expect-error - See above
-	Astro.locals[didRenderSyncedTabsRestoreScriptSymbol] = true
+	locals[didRenderSyncedTabsRestoreScriptSymbol] = true;
 }
 
-// Track how many <Tabs> have been rendered on the current page.
-const tabInstanceCountSymbol = Symbol.for('starlight:tab-instance-count');
-const tabInstanceCount
-// @ts-expect-error - Untyped as it’s a local and private API, see above.
-	= Astro.locals[tabInstanceCountSymbol] = ((Astro.locals[tabInstanceCountSymbol]) ?? 0) + 1;
+locals[tabInstanceCountSymbol] ??= 0;
+const tabInstanceCount = locals[tabInstanceCountSymbol]++;
 
 const panelHtml = await Astro.slots.render('default');
 const { html, panels } = processPanels(panelHtml, tabInstanceCount);
