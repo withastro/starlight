@@ -10,6 +10,7 @@ import type {
 	MdastPluginDefinition,
 	MdastPluginEntry,
 	HastPluginEntry,
+	SourceFormat,
 } from 'satteri';
 import { headingLinkIconChildren } from './markdown-icon';
 import { getAsideIcon, isAsideVariant } from './aside-utils';
@@ -24,13 +25,35 @@ export function starlightSatteriPlugins(options: MarkdownProcessorPluginOptions)
 	hastPlugins: HastPluginEntry[];
 } {
 	const allowedPaths = getMarkdownProcessorPaths(options);
+
 	return {
-		mdastPlugins: [satteriAsidesPlugin(options, allowedPaths)],
+		mdastPlugins: [
+			({ fileURL, sourceFormat }) => {
+				if (!shouldTransformPath(fileURL, allowedPaths)) return;
+
+				// `shouldTransformPath` above already returned for a missing `fileURL`.
+				const lang = options.absolutePathToLang(fileURLToPath(fileURL!));
+				const t = options.useTranslations(lang);
+
+				return satteriAsidesPlugin(t, sourceFormat);
+			},
+		],
 		hastPlugins: [
-			satteriRtlCodeSupportPlugin(allowedPaths),
-			...(options.starlightConfig.markdown.headingLinks
-				? [() => satteriHeadingIdsPlugin(), satteriAutolinkHeadingsPlugin(options, allowedPaths)]
-				: []),
+			({ fileURL }) => {
+				if (!shouldTransformPath(fileURL, allowedPaths)) return;
+
+				const plugins = [satteriRtlCodeSupportPlugin()];
+
+				if (options.starlightConfig.markdown.headingLinks) {
+					// `shouldTransformPath` above already returned for a missing `fileURL`.
+					const lang = options.absolutePathToLang(fileURLToPath(fileURL!));
+					const t = options.useTranslations(lang);
+
+					plugins.push(satteriHeadingIdsPlugin(), satteriAutolinkHeadingsPlugin(t));
+				}
+
+				return plugins;
+			},
 		],
 	};
 }
@@ -73,20 +96,13 @@ function paragraphElement(
 }
 
 /** Convert `:::variant` directive blocks into styled asides. */
-function satteriAsidesPlugin(
-	options: MarkdownProcessorPluginOptions,
-	allowedPaths: string[]
-): MdastPluginDefinition {
+function satteriAsidesPlugin(t: I18nT, sourceFormat: SourceFormat): MdastPluginDefinition {
 	return {
 		name: 'starlight-asides',
 		containerDirective(node, ctx) {
-			if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
 			if (!isAsideVariant(node.name)) return;
 
 			const variant = node.name;
-			// `shouldTransformPath` above already returned for a missing `fileURL`.
-			const filename = fileURLToPath(ctx.fileURL!);
-			const t = options.useTranslations(options.absolutePathToLang(filename));
 
 			let title = t(`aside.${variant}`);
 			let titleNode: unknown[] = [{ type: 'text', value: title }];
@@ -105,14 +121,14 @@ function satteriAsidesPlugin(
 			const icon = getAsideIcon(variant, node.attributes?.['icon']);
 			const iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon">${icon}</svg>`;
 			// Markdown and MDX require different AST shapes for raw HTML content.
-			// TODO: replace endsWith check with an official Sätteri API once available.
-			const iconNode = ctx.fileURL?.pathname.endsWith('.mdx')
-				? {
-						type: 'mdxJsxTextElement',
-						name: 'Fragment',
-						attributes: [{ type: 'mdxJsxAttribute', name: 'set:html', value: iconSvg }],
-					}
-				: { type: 'html', value: iconSvg };
+			const iconNode =
+				sourceFormat === 'mdx'
+					? {
+							type: 'mdxJsxTextElement',
+							name: 'Fragment',
+							attributes: [{ type: 'mdxJsxAttribute', name: 'set:html', value: iconSvg }],
+						}
+					: { type: 'html', value: iconSvg };
 
 			return paragraphElement(
 				'aside',
@@ -137,14 +153,13 @@ function serializeDirective(node: Parameters<typeof toMarkdown>[0]): string {
 	return md.at(-1) === '\n' ? md.slice(0, -1) : md;
 }
 
-function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefinition {
+function satteriRtlCodeSupportPlugin(): HastPluginDefinition {
 	return {
 		name: 'starlight-rtl-code-support',
 		element: [
 			{
 				filter: ['pre'],
 				visit(node, ctx) {
-					if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
 					if (node.properties && 'dir' in node.properties) return;
 					ctx.setProperty(node, 'dir', 'ltr');
 				},
@@ -152,24 +167,12 @@ function satteriRtlCodeSupportPlugin(allowedPaths: string[]): HastPluginDefiniti
 			{
 				filter: ['code'],
 				visit(node, ctx) {
-					if (
-						shouldTransformPath(ctx.fileURL, allowedPaths) &&
-						!(node.properties && 'dir' in node.properties) &&
-						!hasPreParent(node, ctx)
-					) {
+					if (!(node.properties && 'dir' in node.properties) && !hasPreParent(node, ctx)) {
 						ctx.setProperty(node, 'dir', 'auto');
 					}
 				},
 			},
 		],
-		// Shiki runs ahead of us and replaces the highlighted `<pre>` element with a raw HTML
-		// node, so the `pre` element visitor above never sees it. Patch the raw markup instead.
-		raw(node, ctx) {
-			if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return undefined;
-			const value = ltrRawPre(node.value);
-			if (value === null) return undefined;
-			return { type: 'raw', value };
-		},
 	};
 }
 
@@ -185,36 +188,16 @@ function hasPreParent(child: Readonly<Parents> | undefined, ctx: HastVisitorCont
 	return false;
 }
 
-const rawPreOpenTag = /<pre(?=[\s>])[^>]*>/;
-
-/**
- * Add `dir="ltr"` to the opening tag of a raw `<pre>` HTML string, unless it already declares a
- * `dir`. Returns `null` when the value isn’t a `<pre>`, leaving unrelated raw HTML untouched.
- */
-function ltrRawPre(value: string): string | null {
-	const openTag = value.match(rawPreOpenTag)?.[0];
-	if (!openTag || /\sdir\s*=/.test(openTag)) return null;
-	return value.replace(openTag, () => `<pre dir="ltr"${openTag.slice(4)}`);
-}
-
-function satteriAutolinkHeadingsPlugin(
-	options: MarkdownProcessorPluginOptions,
-	allowedPaths: string[]
-): HastPluginDefinition {
+function satteriAutolinkHeadingsPlugin(t: I18nT): HastPluginDefinition {
 	return {
 		name: 'starlight-autolink-headings',
 		element: {
 			filter: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 			visit(node, ctx) {
-				if (!shouldTransformPath(ctx.fileURL, allowedPaths)) return;
-
 				const id = node.properties?.['id'];
 				if (typeof id !== 'string' || !id) return;
 
 				const title = ctx.textContent(node);
-				// `shouldTransformPath` above already returned for a missing `fileURL`.
-				const filename = fileURLToPath(ctx.fileURL!);
-				const t = options.useTranslations(options.absolutePathToLang(filename));
 				const accessibleLabel = t('heading.anchorLabel', {
 					title,
 					interpolation: { escapeValue: false },
@@ -263,3 +246,5 @@ function satteriAutolinkHeadingsPlugin(
 		},
 	};
 }
+
+type I18nT = ReturnType<MarkdownProcessorPluginOptions['useTranslations']>;
