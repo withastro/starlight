@@ -1,19 +1,13 @@
 import { AstroError } from 'astro/errors';
-import type { Element, ElementContent, Text } from 'hast';
+import type { Element, Root, RootContent, Text } from 'hast';
 import { type Child, h, s } from 'hastscript';
 import { select } from 'hast-util-select';
-import { fromHtml } from 'hast-util-from-html';
+import { toHtml } from 'hast-util-to-html';
 import { toString } from 'hast-util-to-string';
-import { rehype } from 'rehype';
+import { htmlToHast } from 'satteri';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 import { Icons, type StarlightIcon } from '../components-internals/Icons';
 import { definitions } from './file-tree-icons';
-
-declare module 'vfile' {
-	interface DataMap {
-		directoryLabel: string;
-	}
-}
 
 const folderIcon = makeSVGIcon(Icons['seti:folder']);
 const defaultFileIcon = makeSVGIcon(Icons['seti:default']);
@@ -26,114 +20,105 @@ const defaultFileIcon = makeSVGIcon(Icons['seti:default']);
  * @returns The processed HTML for the file tree.
  */
 export function processFileTree(html: string, directoryLabel: string) {
-	const file = fileTreeProcessor.processSync({ data: { directoryLabel }, value: html });
+	const tree = htmlToHast(html, { fragment: true }) as Root;
 
-	return file.toString();
-}
+	validateFileTree(tree);
 
-/** Rehype processor to extract file tree data and turn each entry into its associated markup. */
-const fileTreeProcessor = rehype()
-	.data('settings', { fragment: true })
-	.use(function fileTree() {
-		return (tree: Element, file) => {
-			const { directoryLabel } = file.data;
+	visit(tree, 'element', (node) => {
+		// Strip nodes that only contain newlines.
+		node.children = node.children.filter(
+			(child) => child.type === 'comment' || child.type !== 'text' || !/^\n+$/.test(child.value)
+		);
 
-			validateFileTree(tree);
+		// Skip over non-list items.
+		if (node.tagName !== 'li') return CONTINUE;
 
-			visit(tree, 'element', (node) => {
-				// Strip nodes that only contain newlines.
-				node.children = node.children.filter(
-					(child) => child.type === 'comment' || child.type !== 'text' || !/^\n+$/.test(child.value)
-				);
+		const [firstChild, ...otherChildren] = node.children;
 
-				// Skip over non-list items.
-				if (node.tagName !== 'li') return CONTINUE;
+		// Keep track of comments associated with the current file or directory.
+		const comment: Child[] = [];
 
-				const [firstChild, ...otherChildren] = node.children;
+		// Extract text comment that follows the file name, e.g. `README.md This is a comment`
+		if (firstChild?.type === 'text') {
+			const [filename, ...fragments] = firstChild.value.split(' ');
+			firstChild.value = filename || '';
+			const textComment = fragments.join(' ').trim();
+			if (textComment.length > 0) {
+				comment.push(fragments.join(' '));
+			}
+		}
 
-				// Keep track of comments associated with the current file or directory.
-				const comment: Child[] = [];
+		// Comments may not always be entirely part of the first child text node,
+		// e.g. `README.md This is an __important__ comment` where the `__important__` and `comment`
+		// nodes would also be children of the list item node.
+		const subTreeIndex = otherChildren.findIndex(
+			(child) => child.type === 'element' && child.tagName === 'ul'
+		);
+		const commentNodes =
+			subTreeIndex > -1 ? otherChildren.slice(0, subTreeIndex) : [...otherChildren];
+		otherChildren.splice(0, subTreeIndex > -1 ? subTreeIndex : otherChildren.length);
+		comment.push(...commentNodes);
 
-				// Extract text comment that follows the file name, e.g. `README.md This is a comment`
-				if (firstChild?.type === 'text') {
-					const [filename, ...fragments] = firstChild.value.split(' ');
-					firstChild.value = filename || '';
-					const textComment = fragments.join(' ').trim();
-					if (textComment.length > 0) {
-						comment.push(fragments.join(' '));
-					}
-				}
+		const firstChildTextContent = firstChild ? toString(firstChild) : '';
 
-				// Comments may not always be entirely part of the first child text node,
-				// e.g. `README.md This is an __important__ comment` where the `__important__` and `comment`
-				// nodes would also be children of the list item node.
-				const subTreeIndex = otherChildren.findIndex(
-					(child) => child.type === 'element' && child.tagName === 'ul'
-				);
-				const commentNodes =
-					subTreeIndex > -1 ? otherChildren.slice(0, subTreeIndex) : [...otherChildren];
-				otherChildren.splice(0, subTreeIndex > -1 ? subTreeIndex : otherChildren.length);
-				comment.push(...commentNodes);
+		// Decide a node is a directory if it ends in a `/` or contains another list.
+		const isDirectory =
+			/\/\s*$/.test(firstChildTextContent) ||
+			otherChildren.some((child) => child.type === 'element' && child.tagName === 'ul');
+		// A placeholder is a node that only contains 3 dots or an ellipsis.
+		const isPlaceholder = /^\s*(\.{3}|…)\s*$/.test(firstChildTextContent);
+		// A node is highlighted if its first child is bold text, e.g. `**README.md**`.
+		const isHighlighted = firstChild?.type === 'element' && firstChild.tagName === 'strong';
 
-				const firstChildTextContent = firstChild ? toString(firstChild) : '';
+		// Create an icon for the file or directory (placeholder do not have icons).
+		const icon = h('span', isDirectory ? folderIcon : getFileIcon(firstChildTextContent));
+		if (isDirectory) {
+			// Add a screen reader only label for directories before the icon so that it is announced
+			// as such before reading the directory name.
+			icon.children.unshift(h('span', { class: 'sr-only' }, directoryLabel));
+		}
 
-				// Decide a node is a directory if it ends in a `/` or contains another list.
-				const isDirectory =
-					/\/\s*$/.test(firstChildTextContent) ||
-					otherChildren.some((child) => child.type === 'element' && child.tagName === 'ul');
-				// A placeholder is a node that only contains 3 dots or an ellipsis.
-				const isPlaceholder = /^\s*(\.{3}|…)\s*$/.test(firstChildTextContent);
-				// A node is highlighted if its first child is bold text, e.g. `**README.md**`.
-				const isHighlighted = firstChild?.type === 'element' && firstChild.tagName === 'strong';
+		// Add classes and data attributes to the list item node.
+		node.properties.class = isDirectory ? 'directory' : 'file';
+		if (isPlaceholder) node.properties.class += ' empty';
 
-				// Create an icon for the file or directory (placeholder do not have icons).
-				const icon = h('span', isDirectory ? folderIcon : getFileIcon(firstChildTextContent));
-				if (isDirectory) {
-					// Add a screen reader only label for directories before the icon so that it is announced
-					// as such before reading the directory name.
-					icon.children.unshift(h('span', { class: 'sr-only' }, directoryLabel));
-				}
+		// Create the tree entry node that contains the icon, file name and comment which will end up
+		// as the list item’s children.
+		const treeEntryChildren: Child[] = [
+			h('span', { class: isHighlighted ? 'highlight' : '' }, [
+				isPlaceholder ? null : icon,
+				firstChild,
+			]),
+		];
 
-				// Add classes and data attributes to the list item node.
-				node.properties.class = isDirectory ? 'directory' : 'file';
-				if (isPlaceholder) node.properties.class += ' empty';
+		if (comment.length > 0) {
+			treeEntryChildren.push(makeText(' '), h('span', { class: 'comment' }, ...comment));
+		}
 
-				// Create the tree entry node that contains the icon, file name and comment which will end up
-				// as the list item’s children.
-				const treeEntryChildren: Child[] = [
-					h('span', { class: isHighlighted ? 'highlight' : '' }, [
-						isPlaceholder ? null : icon,
-						firstChild,
-					]),
-				];
+		const treeEntry = h('span', { class: 'tree-entry' }, ...treeEntryChildren);
 
-				if (comment.length > 0) {
-					treeEntryChildren.push(makeText(' '), h('span', { class: 'comment' }, ...comment));
-				}
+		if (isDirectory) {
+			const hasContents = otherChildren.length > 0;
 
-				const treeEntry = h('span', { class: 'tree-entry' }, ...treeEntryChildren);
+			node.children = [
+				h('details', { open: hasContents }, [
+					h('summary', treeEntry),
+					...(hasContents ? otherChildren : [h('ul', h('li', '…'))]),
+				]),
+			];
 
-				if (isDirectory) {
-					const hasContents = otherChildren.length > 0;
+			// Continue down the tree.
+			return CONTINUE;
+		}
 
-					node.children = [
-						h('details', { open: hasContents }, [
-							h('summary', treeEntry),
-							...(hasContents ? otherChildren : [h('ul', h('li', '…'))]),
-						]),
-					];
+		node.children = [treeEntry, ...otherChildren];
 
-					// Continue down the tree.
-					return CONTINUE;
-				}
-
-				node.children = [treeEntry, ...otherChildren];
-
-				// Files can’t contain further files or directories, so skip iterating children.
-				return SKIP;
-			});
-		};
+		// Files can’t contain further files or directories, so skip iterating children.
+		return SKIP;
 	});
+
+	return toHtml(tree);
+}
 
 /** Make a text node with the pass string as its contents. */
 function makeText(value = ''): Text {
@@ -151,7 +136,7 @@ function makeSVGIcon(svgString: string) {
 			'aria-hidden': 'true',
 			viewBox: '0 0 24 24',
 		},
-		fromHtml(svgString, { fragment: true })
+		(htmlToHast(svgString, { fragment: true, space: 'svg' }) as Root).children
 	);
 }
 
@@ -199,7 +184,7 @@ function getFileIconTypeFromExtension(fileName: string) {
 }
 
 /** Validate that the user provided HTML for a file tree is valid. */
-function validateFileTree(tree: Element) {
+function validateFileTree(tree: Root) {
 	const rootElements = tree.children.filter(isElementNode);
 	const [rootElement] = rootElements;
 
@@ -232,7 +217,7 @@ function validateFileTree(tree: Element) {
 	}
 }
 
-function isElementNode(node: ElementContent): node is Element {
+function isElementNode(node: RootContent): node is Element {
 	return node.type === 'element';
 }
 

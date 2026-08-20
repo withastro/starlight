@@ -1,10 +1,8 @@
 import { expect, test } from 'vitest';
-import { fromHtml } from 'hast-util-from-html';
+import { toHtml } from 'hast-util-to-html';
 import { selectAll } from 'hast-util-select';
-import { rehype } from 'rehype';
+import { htmlToHast } from 'satteri';
 import { processPanels, TabItemTagname } from '../../user-components/rehype-tabs';
-
-const processor = rehype().data('settings', { fragment: true });
 
 const TabItem = ({ label, slot, icon }: { label: string; slot: string; icon?: string }) => {
 	const iconAttr = icon ? ` data-icon="${icon}"` : '';
@@ -13,9 +11,9 @@ const TabItem = ({ label, slot, icon }: { label: string; slot: string; icon?: st
 
 /** Get an array of HTML strings, one for each `<div role="tabpanel">` created by rehype-tabs for each tab item. */
 const extractTabPanels = (html: string) => {
-	const tree = fromHtml(html, { fragment: true });
+	const tree = htmlToHast(html, { fragment: true });
 	const tabPanels = selectAll('div[role="tabpanel"]', tree);
-	return tabPanels.map((tabPanel) => processor.stringify({ type: 'root', children: [tabPanel] }));
+	return tabPanels.map((tabPanel) => toHtml(tabPanel));
 };
 
 test('empty component returns no html or panels', () => {

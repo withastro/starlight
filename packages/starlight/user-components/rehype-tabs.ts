@@ -1,6 +1,6 @@
-import type { Element } from 'hast';
 import { select } from 'hast-util-select';
-import { rehype } from 'rehype';
+import { toHtml } from 'hast-util-to-html';
+import { htmlToHast } from 'satteri';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 import type { StarlightIcon } from '../components-internals/Icons';
 
@@ -9,12 +9,6 @@ interface Panel {
 	tabId: string;
 	label: string;
 	icon?: StarlightIcon;
-}
-
-declare module 'vfile' {
-	interface DataMap {
-		panels: Panel[];
-	}
 }
 
 export const TabItemTagname = 'starlight-tab-item';
@@ -46,71 +40,61 @@ const getIDs = () => {
 };
 
 /**
- * Rehype processor to extract tab panel data and turn each
- * `<starlight-tab-item>` into a `<div>` with the necessary
- * attributes.
- */
-const tabsProcessor = rehype()
-	.data('settings', { fragment: true })
-	.use(function tabs() {
-		return (tree: Element, file) => {
-			file.data.panels = [];
-			let isFirst = true;
-			visit(tree, 'element', (node) => {
-				if (node.tagName !== TabItemTagname || !node.properties) {
-					return CONTINUE;
-				}
-
-				const { dataLabel, dataIcon } = node.properties;
-				const ids = getIDs();
-				const panel: Panel = {
-					...ids,
-					label: String(dataLabel),
-				};
-				if (dataIcon) panel.icon = String(dataIcon) as StarlightIcon;
-				file.data.panels?.push(panel);
-
-				// Remove `<TabItem>` props
-				delete node.properties.dataLabel;
-				delete node.properties.dataIcon;
-				// Turn into `<div>` with required attributes
-				node.tagName = 'div';
-				node.properties.id = ids.panelId;
-				node.properties['aria-labelledby'] = ids.tabId;
-				node.properties.role = 'tabpanel';
-
-				const focusableChild = select(focusableElementSelectors, node);
-				// If the panel does not contain any focusable elements, include it in
-				// the tab sequence of the page.
-				if (!focusableChild) {
-					node.properties.tabindex = 0;
-				}
-
-				// Hide all panels except the first
-				// TODO: make initially visible tab configurable
-				if (isFirst) {
-					isFirst = false;
-				} else {
-					node.properties.hidden = true;
-				}
-
-				// Skip over the tab panel’s children.
-				return SKIP;
-			});
-		};
-	});
-
-/**
  * Process tab panel items to extract data for the tab links and format
  * each tab panel correctly.
  * @param html Inner HTML passed to the `<Tabs>` component.
  */
 export const processPanels = (html: string) => {
-	const file = tabsProcessor.processSync({ value: html });
+	const tree = htmlToHast(html, { fragment: true });
+	const panels: Panel[] = [];
+	let isFirst = true;
+
+	visit(tree, 'element', (node) => {
+		if (node.tagName !== TabItemTagname || !node.properties) {
+			return CONTINUE;
+		}
+
+		const { dataLabel, dataIcon } = node.properties;
+		const ids = getIDs();
+		const panel: Panel = {
+			...ids,
+			label: String(dataLabel),
+		};
+		if (dataIcon) panel.icon = String(dataIcon) as StarlightIcon;
+		panels.push(panel);
+
+		// Remove `<TabItem>` props
+		delete node.properties.dataLabel;
+		delete node.properties.dataIcon;
+		// Turn into `<div>` with required attributes
+		node.tagName = 'div';
+		node.properties.id = ids.panelId;
+		node.properties['aria-labelledby'] = ids.tabId;
+		node.properties.role = 'tabpanel';
+
+		const focusableChild = select(focusableElementSelectors, node);
+		// If the panel does not contain any focusable elements, include it in
+		// the tab sequence of the page.
+		if (!focusableChild) {
+			node.properties.tabindex = 0;
+		}
+
+		// Hide all panels except the first
+		// TODO: make initially visible tab configurable
+		if (isFirst) {
+			isFirst = false;
+		} else {
+			node.properties.hidden = true;
+		}
+
+		// Skip over the tab panel’s children.
+		return SKIP;
+	});
+
 	return {
 		/** Data for each tab panel. */
-		panels: file.data.panels,
+		panels,
 		/** Processed HTML for the tab panels. */
-		html: file.toString(),
+		html: toHtml(tree),
 	};
 };
