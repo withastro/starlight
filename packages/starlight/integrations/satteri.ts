@@ -6,10 +6,10 @@ import { directiveToMarkdown } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import type {
 	HastPluginDefinition,
-	HastPluginInput,
 	HastVisitorContext,
-	MdastPluginInput,
 	MdastPluginDefinition,
+	MdastPluginEntry,
+	HastPluginEntry,
 } from 'satteri';
 import { headingLinkIconChildren } from './markdown-icon';
 import { getAsideIcon, isAsideVariant } from './aside-utils';
@@ -20,8 +20,8 @@ import {
 } from './markdown-processor';
 
 export function starlightSatteriPlugins(options: MarkdownProcessorPluginOptions): {
-	mdastPlugins: MdastPluginInput[];
-	hastPlugins: HastPluginInput[];
+	mdastPlugins: MdastPluginEntry[];
+	hastPlugins: HastPluginEntry[];
 } {
 	const allowedPaths = getMarkdownProcessorPaths(options);
 	return {
