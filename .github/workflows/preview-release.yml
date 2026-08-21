@@ -74,8 +74,7 @@ jobs:
       - name: Remove Preview Label
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: gh pr edit $PR_NUMBER --remove-label pr-preview
+        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label pr-preview
         continue-on-error: true
 
       - name: Publish preview packages
