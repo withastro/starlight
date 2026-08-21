@@ -33,21 +33,24 @@ const focusableElementSelectors = [
 	.map((selector) => `${selector}:not([hidden]):not([tabindex="-1"])`)
 	.join(',');
 
-let count = 0;
-const getIDs = () => {
-	const id = count++;
-	return { panelId: 'tab-panel-' + id, tabId: 'tab-' + id };
-};
-
 /**
  * Process tab panel items to extract data for the tab links and format
  * each tab panel correctly.
  * @param html Inner HTML passed to the `<Tabs>` component.
+ * @param index The index of the `<Tabs>` component on the page.
  */
-export const processPanels = (html: string) => {
+export const processPanels = (html: string, index: number) => {
 	const tree = htmlToHast(html, { fragment: true });
 	const panels: Panel[] = [];
 	let isFirst = true;
+	let count = 0;
+	const getIDs = () => {
+		const id = count++;
+		return {
+			panelId: `tab-panel-${index}-${id}`,
+			tabId: `tab-${index}-${id}`,
+		};
+	};
 
 	visit(tree, 'element', (node) => {
 		if (node.tagName !== TabItemTagname || !node.properties) {
