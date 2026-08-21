@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read # evaluate changed files against PR diffs (dorny/paths-filter)
+      pull-requests: read
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
       docs_fa: ${{ steps.filter.outputs.docs_fa }}

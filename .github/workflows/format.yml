@@ -16,7 +16,7 @@ jobs:
   format:
     if: github.repository_owner == 'withastro'
     permissions:
-      contents: write # code formatting commit
+      contents: write
     uses: withastro/automation/.github/workflows/format.yml@8a5969576beae8ae7bdce64167a95237878f4901 # v1.0.1
     with:
       command: "format"

@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write # post PR comment (yanthomasdev/lunaria-action)
+      pull-requests: write
 
     steps:
       - name: Checkout

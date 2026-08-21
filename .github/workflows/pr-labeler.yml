@@ -9,7 +9,7 @@ jobs:
   triage:
     permissions:
       contents: read
-      pull-requests: write # attach labels to the PR (actions/labeler)
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/labeler@b8dd2d9be0f68b860e7dae5dae7d772984eacd6d # v6.2.0
