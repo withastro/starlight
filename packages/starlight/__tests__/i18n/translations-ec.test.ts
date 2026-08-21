@@ -1,6 +1,5 @@
 import { pluginFramesTexts } from 'astro-expressive-code';
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { getBlockLocale } from '../../integrations/expressive-code/preprocessor';
 import { addTranslations } from '../../integrations/expressive-code/translations';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 
@@ -105,79 +104,6 @@ describe('addTranslations', () => {
 		addTranslations(config, getUseTranslations(false));
 
 		expect(vi.mocked(pluginFramesTexts.overrideTexts)).not.toHaveBeenCalled();
-	});
-});
-
-describe('getBlockLocale', () => {
-	const [starlightConfig] = getStarlightConfigAndUseTranslations({
-		root: { label: 'English', lang: 'en' },
-		fr: { label: 'French', lang: 'fr' },
-	});
-
-	test('gets the root locale when an absolute file URL is passed', () => {
-		const locale = getBlockLocale({
-			starlightConfig,
-			docsPath: '/path/to/docs/',
-			file: {
-				path: '/path/to/docs/doc.md',
-				url: new URL('file:///path/to/docs/doc.md'),
-			},
-		});
-		expect(locale).toBe('en');
-	});
-
-	test('gets a non-root locale when an absolute file URL is passed', () => {
-		const locale = getBlockLocale({
-			starlightConfig,
-			docsPath: '/path/to/docs/',
-			file: {
-				path: '/path/to/docs/fr/doc.md',
-				url: new URL('file:///path/to/docs/fr/doc.md'),
-			},
-		});
-		expect(locale).toBe('fr');
-	});
-
-	test('gets the root locale when no file URL is passed', () => {
-		const locale = getBlockLocale({
-			starlightConfig,
-			docsPath: '/path/to/docs/',
-			file: { path: '/path/to/docs/doc.md' },
-		});
-		expect(locale).toBe('en');
-	});
-
-	test('gets a non-root locale when no file URL is passed', () => {
-		const locale = getBlockLocale({
-			starlightConfig,
-			docsPath: '/path/to/docs/',
-			file: { path: '/path/to/docs/fr/doc.md' },
-		});
-		expect(locale).toBe('fr');
-	});
-
-	test('gets the root locale for a file in the docs when Astro.url is passed', () => {
-		const locale = getBlockLocale({
-			starlightConfig,
-			docsPath: '/path/to/docs/',
-			file: {
-				path: 'doc.md',
-				url: new URL('https://example.com/doc.md'),
-			},
-		});
-		expect(locale).toBe('en');
-	});
-
-	test('gets a non-root locale for a file in the docs when Astro.url is passed', () => {
-		const locale = getBlockLocale({
-			starlightConfig,
-			docsPath: '/path/to/docs/',
-			file: {
-				path: 'fr/doc.md',
-				url: new URL('https://example.com/fr/doc.md'),
-			},
-		});
-		expect(locale).toBe('fr');
 	});
 });
 
