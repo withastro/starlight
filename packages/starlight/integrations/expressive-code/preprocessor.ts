@@ -105,22 +105,32 @@ export function getStarlightEcConfigPreprocessor({
 				},
 				...otherStyleOverrides,
 			},
-			getBlockLocale: ({ file }) => {
-				// When Expressive Code runs inside the `<Code>` component, it uses `Astro.url` to provide
-				// the file URL, so we can deduce the locale from that slug. This is different from the URL
-				// provided by Sätteri, which is a `file://` URL for the full absolute file path, so we
-				// ignore the `file.url` field for `file://` protocols so this branch only processes the
-				// `<Code>` component case.
-				if (file.url && file.url.protocol !== 'file:') {
-					const locale = slugToLocale(file.url.pathname.slice(1), starlightConfig);
-					return localeToLang(starlightConfig, locale);
-				}
-				// Note that EC cannot use the `absolutePathToLang` helper passed down to plugins as this callback
-				// is also called in the context of the `<Code>` component.
-				return absolutePathToLang(file.path, { docsPath, starlightConfig });
-			},
+			getBlockLocale: ({ file }) => getBlockLocale({ file, starlightConfig, docsPath }),
 			plugins,
 			...rest,
 		};
 	};
+}
+
+export function getBlockLocale({
+	file,
+	starlightConfig,
+	docsPath,
+}: {
+	file: { path: string; url?: URL | undefined };
+	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
+	docsPath: string;
+}): string | undefined {
+	// When Expressive Code runs inside the `<Code>` component, it uses `Astro.url` to provide
+	// the file URL, so we can deduce the locale from that slug. This is different from the URL
+	// provided by Sätteri, which is a `file://` URL for the full absolute file path, so we
+	// ignore the `file.url` field for `file://` protocols so this branch only processes the
+	// `<Code>` component case.
+	if (file.url && file.url.protocol !== 'file:') {
+		const locale = slugToLocale(file.url.pathname.slice(1), starlightConfig);
+		return localeToLang(starlightConfig, locale);
+	}
+	// Note that EC cannot use the `absolutePathToLang` helper passed down to plugins as this callback
+	// is also called in the context of the `<Code>` component.
+	return absolutePathToLang(file.path, { docsPath, starlightConfig });
 }
