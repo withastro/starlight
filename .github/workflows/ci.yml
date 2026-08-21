@@ -19,7 +19,6 @@ permissions: {}
 
 jobs:
   changes:
-    name: Check changed files
     runs-on: ubuntu-latest
     permissions:
       contents: read
