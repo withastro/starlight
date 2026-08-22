@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.41.7",
+  "version": "0.41.8",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
