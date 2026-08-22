@@ -2,60 +2,11 @@
 import Icon from '../user-components/Icon.astro';
 ---
 
-<starlight-menu-button class="print:hidden">
-	<button
-		aria-expanded="false"
-		aria-label={Astro.locals.t('menuButton.accessibleLabel')}
-		aria-controls="starlight__sidebar"
-		class="sl-flex md:sl-hidden"
-	>
-		<Icon name="bars" class="open-menu" />
-		<Icon name="close" class="close-menu" />
-	</button>
-</starlight-menu-button>
-
-<script>
-	class StarlightMenuButton extends HTMLElement {
-		btn = this.querySelector('button')!;
-
-		constructor() {
-			super();
-			// Toggle `aria-expanded` state when a user clicks the button.
-			this.btn.addEventListener('click', () => this.toggleExpanded());
-
-			// Close the menu when a user presses the escape key.
-			const parentNav = this.closest('nav');
-			if (parentNav) {
-				parentNav.addEventListener('keyup', (e) => this.closeOnEscape(e));
-			}
-
-			// Reset menu state when the viewport toggles between mobile and desktop sizes.
-			matchMedia('(min-width: 50em)').addEventListener('change', () => this.setExpanded(false));
-		}
-
-		setExpanded(expanded: boolean) {
-			this.setAttribute('aria-expanded', String(expanded));
-			document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
-			// Trap keyboard focus inside the header and menu when the menu is expanded.
-			document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
-				el.toggleAttribute('inert', expanded);
-			});
-		}
-
-		toggleExpanded() {
-			this.setExpanded(this.getAttribute('aria-expanded') !== 'true');
-		}
-
-		closeOnEscape(e: KeyboardEvent) {
-			if (e.code === 'Escape') {
-				this.setExpanded(false);
-				this.btn.focus();
-			}
-		}
-	}
-
-	customElements.define('starlight-menu-button', StarlightMenuButton);
-</script>
+<button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden">
+	<Icon name="bars" class="open-menu" />
+	<Icon name="close" class="close-menu" />
+	<span class="sr-only">{Astro.locals.t('menuButton.accessibleLabel')}</span>
+</button>
 
 <style>
 	@layer starlight.core {
@@ -75,16 +26,16 @@ import Icon from '../user-components/Icon.astro';
 			cursor: pointer;
 		}
 
-		[aria-expanded='true'] button {
+		button:has(~ :popover-open) {
 			background-color: var(--sl-color-gray-2);
 			box-shadow: none;
 		}
 
-		[aria-expanded='true'] button .open-menu {
+		button:has(~ :popover-open) .open-menu {
 			display: none;
 		}
 
-		:not([aria-expanded='true']) button .close-menu {
+		button:not(:has(~ :popover-open)) .close-menu {
 			display: none;
 		}
 
@@ -93,7 +44,7 @@ import Icon from '../user-components/Icon.astro';
 			color: var(--sl-color-white);
 		}
 
-		:global([data-theme='light']) [aria-expanded='true'] button {
+		:global([data-theme='light']) button:has(~ :popover-open) {
 			background-color: var(--sl-color-gray-5);
 		}
 	}
@@ -101,12 +52,12 @@ import Icon from '../user-components/Icon.astro';
 
 <style is:global>
 	@layer starlight.core {
-		[data-mobile-menu-expanded] {
+		body:has(#starlight__sidebar:popover-open) {
 			overflow: hidden;
 		}
 
 		@media (min-width: 50rem) {
-			[data-mobile-menu-expanded] {
+			body:has(#starlight__sidebar:popover-open) {
 				overflow: auto;
 			}
 		}
