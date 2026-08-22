@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.41.8
+
+### Patch Changes
+
+- [#4133](https://github.com/withastro/starlight/pull/4133) [`3944311`](https://github.com/withastro/starlight/commit/3944311bed46f956e12e79a8eb0c32084eeeaea6) Thanks [@delucis](https://github.com/delucis)! - Internal refactor: numbered `id` attributes in the `<Tabs>` component are now page-specific instead of using a global counter
+
 ## 0.41.7
 
 ### Patch Changes
