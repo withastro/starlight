@@ -51,18 +51,19 @@ export function generateRouteData({
 		siteTitle,
 		siteTitleHref: getSiteTitleHref(locale),
 		sidebar,
-		hasSidebar: entry.data.template !== 'splash',
+		hasSidebar: entry.data.template === 'doc',
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
 		head: getHead(props, context, siteTitle),
+		template: entry.data.template,
 	};
 }
 
 export function getToC({ entry, lang, headings }: PageProps) {
 	const tocConfig =
-		entry.data.template === 'splash'
+		entry.data.template === 'splash' || entry.data.template === 'blank'
 			? false
 			: entry.data.tableOfContents !== undefined
 				? entry.data.tableOfContents

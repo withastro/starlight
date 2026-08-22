@@ -154,7 +154,7 @@ export async function generateStarlightPageRouteData({
 		editUrl,
 		entry,
 		entryMeta,
-		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
+		hasSidebar: props.hasSidebar ?? entry.data.template === 'doc',
 		head: getHead(pageProps, context, siteTitle),
 		headings,
 		lastUpdated,
@@ -163,6 +163,7 @@ export async function generateStarlightPageRouteData({
 		siteTitle,
 		siteTitleHref: getSiteTitleHref(localeData.locale),
 		toc: getToC(pageProps),
+		template: entry.data.template,
 	};
 	return routeData;
 }
