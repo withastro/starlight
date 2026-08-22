@@ -2,7 +2,8 @@ import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
-import type { MdastPluginDefinition } from 'satteri';
+// TODO(HiDeoo) Cleanup import when https://github.com/withastro/astro/pull/17766 is released
+import type { HastPluginDefinition, MdastPluginDefinition } from 'satteri';
 import { describe, expect, test, vi } from 'vitest';
 import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
 import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../integrations/satteri';
@@ -258,8 +259,14 @@ describe('asides directive restoration (Sätteri)', () => {
 			await createPluginTestOptions(starlightConfig)
 		);
 		return createSatteriMarkdownProcessor({
-			mdastPlugins: [...mdastPlugins, ...extraMdastPlugins, satteriDirectivesRestoration()],
-			hastPlugins,
+			mdastPlugins: [
+				...mdastPlugins,
+				...extraMdastPlugins,
+				satteriDirectivesRestoration(),
+				// TODO(HiDeoo) Remove cast when https://github.com/withastro/astro/pull/17766 is released
+			] as MdastPluginDefinition[],
+			// TODO(HiDeoo) Remove cast when https://github.com/withastro/astro/pull/17766 is released
+			hastPlugins: hastPlugins as HastPluginDefinition[],
 			// Starlight's asides rely on container directives, which Sätteri disables by default.
 			features: { directive: true },
 		});
