@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Add WhatsApp icon
+Adds 1 new icon: `whatsApp`
