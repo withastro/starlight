@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { ExpressiveCodeTheme } from 'astro-expressive-code';
 import {
 	applyStarlightUiThemeColors,
 	preprocessThemes,
@@ -28,7 +29,7 @@ describe('applyStarlightUiThemeColors', () => {
 	test('applies the correct colors to a dark theme', () => {
 		const [darkTheme] = preprocessThemes(['starlight-dark']);
 
-		// @ts-expect-error - In theory preprocessThemes can return other shapes, but it’s fine in this case.
+		expect.assert.instanceOf(darkTheme, ExpressiveCodeTheme);
 		const result = applyStarlightUiThemeColors(darkTheme);
 		expect(result.colors['titleBar.activeBackground']).toBe('var(--sl-color-black)');
 		expect(result.colors['editorGroupHeader.tabsBorder']).toBe(
@@ -39,7 +40,7 @@ describe('applyStarlightUiThemeColors', () => {
 	test('applies the correct colors to a light theme', () => {
 		const [lightTheme] = preprocessThemes(['starlight-light']);
 
-		// @ts-expect-error - In theory preprocessThemes can return other shapes, but it’s fine in this case.
+		expect.assert.instanceOf(lightTheme, ExpressiveCodeTheme);
 		const result = applyStarlightUiThemeColors(lightTheme);
 		expect(result.colors['titleBar.activeBackground']).toBe('var(--sl-color-gray-6)');
 		expect(result.colors['editorGroupHeader.tabsBorder']).toBe(
