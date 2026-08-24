@@ -1,5 +1,6 @@
 import type { ExpressiveCodeTheme, StyleVariant } from 'astro-expressive-code';
 import { describe, expect, test, vi } from 'vitest';
+import type { StarlightExpressiveCodeOptions } from '../../integrations/expressive-code';
 import { getStarlightEcConfigPreprocessor } from '../../integrations/expressive-code/preprocessor';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 
@@ -173,17 +174,17 @@ describe('Expressive Code config', () => {
 			expect(customizedTheme?.name).toBe('custom-theme');
 		});
 
-		test('is a no-op if `customizeTheme()` function is not set and `applyStarlightUiThemeColors` is false', async () => {
-			const config = await preprocessEcConfig({ applyStarlightUiThemeColors: false });
+		test('is a no-op if `customizeTheme()` function is not set and `useStarlightUiThemeColors` is false', async () => {
+			const config = await preprocessEcConfig({ useStarlightUiThemeColors: false });
 			const theme = { name: 'my-theme', colors: {}, styleOverrides: {} } as ExpressiveCodeTheme;
 			const customizedTheme = config.customizeTheme?.(theme);
-			expect(customizedTheme).toBe(theme);
+			expect(customizedTheme).toStrictEqual({ name: 'my-theme', colors: {}, styleOverrides: {} });
 		});
 	});
 });
 
 /** Preprocess an Expressive Code config using the Starlight preprocessor. */
-async function preprocessEcConfig(ecConfig: unknown = {}) {
+async function preprocessEcConfig(ecConfig: StarlightExpressiveCodeOptions = {}) {
 	const [starlightConfig, useTranslations] = getStarlightConfigAndUseTranslations({
 		root: { label: 'English', lang: 'en' },
 		fr: { label: 'French', lang: 'fr' },
@@ -193,8 +194,11 @@ async function preprocessEcConfig(ecConfig: unknown = {}) {
 		starlightConfig,
 		useTranslations,
 	});
-	// @ts-expect-error — We’re skipping some properties of `astroConfig`.
-	return await configPreprocessor({ ecConfig, astroConfig: {} });
+	return await configPreprocessor({
+		ecConfig,
+		// @ts-expect-error — We’re skipping some properties of `astroConfig`.
+		astroConfig: {},
+	});
 }
 
 function getUseTranslations(exists: boolean = true) {
