@@ -1,8 +1,13 @@
+import { unified } from '@astrojs/markdown-remark';
+import { satteri } from '@astrojs/markdown-satteri';
 import type { ExpressiveCodeTheme, StyleVariant } from 'astro-expressive-code';
+import { astroExpressiveCode } from 'astro-expressive-code';
 import { describe, expect, test, vi } from 'vitest';
 import type { StarlightExpressiveCodeOptions } from '../../integrations/expressive-code';
 import { getStarlightEcConfigPreprocessor } from '../../integrations/expressive-code/preprocessor';
+import { getCollectionPosixPath } from '../../utils/collection-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import { createPluginTestOptions, docFileURL } from '../test-utils';
 
 describe('getStarlightEcConfigPreprocessor()', () => {
 	test('warns when using `useStarlightUiThemeColors` with a single theme', async () => {
@@ -179,6 +184,59 @@ describe('Expressive Code config', () => {
 			const theme = { name: 'my-theme', colors: {}, styleOverrides: {} } as ExpressiveCodeTheme;
 			const customizedTheme = config.customizeTheme?.(theme);
 			expect(customizedTheme).toStrictEqual({ name: 'my-theme', colors: {}, styleOverrides: {} });
+		});
+	});
+});
+
+describe('processors', () => {
+	const processors = [
+		{ name: 'Sätteri', create: () => satteri() },
+		{ name: 'Unified', create: () => unified() },
+	];
+
+	describe.for(processors)('$name', ({ create }) => {
+		test('localizes Expressive Code UI', async () => {
+			const userConfig: StarlightUserConfig = {
+				title: 'Expressive Code',
+				locales: {
+					root: { label: 'English', lang: 'en' },
+					fr: { label: 'French', lang: 'fr' },
+				},
+			};
+
+			const { astroConfig, useTranslations } = await createPluginTestOptions(userConfig);
+			const starlightConfig = StarlightConfigSchema.parse(userConfig);
+
+			const processor = create();
+
+			const ecIntegration = astroExpressiveCode({
+				customConfigPreprocessors: {
+					preprocessAstroIntegrationConfig: getStarlightEcConfigPreprocessor({
+						docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
+						starlightConfig,
+						useTranslations,
+					}),
+					preprocessComponentConfig: '',
+				},
+			});
+
+			await ecIntegration.hooks['astro:config:setup']({
+				config: {
+					root: astroConfig.root,
+					integrations: [ecIntegration],
+					markdown: { processor },
+				},
+				addWatchFile: () => {},
+				updateConfig: () => {},
+			});
+
+			const renderer = await processor.createRenderer({ syntaxHighlight: false });
+
+			const result = await renderer.render('```js\nconsole.log("bonjour")\n```', {
+				fileURL: docFileURL('fr/index.md'),
+			});
+
+			expect(result.code).toContain('title="Copier dans le presse-papiers"');
 		});
 	});
 });
