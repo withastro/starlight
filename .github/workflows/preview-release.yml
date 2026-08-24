@@ -75,7 +75,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh pr edit ${{ github.event.pull_request.number }} --remove-label pr-preview
-        continue-on-error: true
+        continue-on-error: true # if label removal fails (e.g. fork), continue publishing
 
       - name: Publish preview packages
         env:
