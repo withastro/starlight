@@ -34,7 +34,7 @@ describeEachProcessor('code RTL support', (ctx, name) => {
 		expect(res.code).not.includes('dir="auto"');
 	});
 
-	test('does nto apply `dir="ltr"` on raw `<pre>` HTML', async () => {
+	test('does not apply `dir="ltr"` on raw `<pre>` HTML', async () => {
 		const res = await ctx().render('<pre><code>manual</code></pre>', { processor: plain });
 
 		expect(res.code).includes('<pre><code>manual</code></pre>');
