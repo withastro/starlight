@@ -186,7 +186,7 @@ export default defineConfig({
 						uk: 'Ресурси',
 						fa: 'منابع',
 					},
-					items: [{ autogenerate: { directory: 'resources' } }],
+					items: [{ autogenerate: { directory: 'resources' } }, 'sponsor'],
 				},
 			],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
