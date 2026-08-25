@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import {
 	localeToLang,
-	localizedId,
+	localizedFilePath,
 	localizedSlug,
 	slugToLocaleData,
 	slugToParam,
@@ -75,9 +75,9 @@ describe('localeToLang', () => {
 	});
 });
 
-describe('localizedId', () => {
+describe('localizedFilePath', () => {
 	test('returns unchanged when no locales are set', () => {
-		expect(localizedId('test.md', undefined)).toBe('test.md');
+		expect(localizedFilePath('test.md', undefined)).toBe('test.md');
 	});
 });
 

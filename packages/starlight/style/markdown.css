@@ -31,31 +31,31 @@
 		overflow-wrap: anywhere;
 	}
 
+	/*
+	 * This complex selector manages spacing inside lists.
+	 *
+	 * - Finds all lists containing items with non-inline direct children (e.g.
+	 *   ul > li > p)
+	 * - Applies a bottom margin to the last non-inline child of each list item
+	 *   in this list
+	 *
+	 * This ensures that even if only one list item contains a block element
+	 * (most commonly a paragraph), siblings of that list item are spaced
+	 * consistently.
+	 */
 	.sl-markdown-content
-	li
-	> :is(
-		:last-child:not(
-				li,
-				ul,
-				ol,
-				a,
-				strong,
-				em,
-				del,
-				span,
-				input,
-				code,
-				br,
-				script,
-				:where(.not-content *)
-			),
-			/**
-			 * For list items ending with 1 or multiple script elements (`:has(~ script:last-child)`), we
-			 * need to style the last non-script element (`:not(script)`) that doesn't have a subsequent
-			 * sibling that is not a script (`:not(:has(~ :not(script)))`).
+	 :is(ol, ul):has(> li > :not(a, strong, em, del, span, input, code, br, script, ol, ul))
+	 > li
+	 > :is(
+			:last-child:not(a, strong, em, del, span, input, code, br, script, :where(.not-content *)),
+			/*
+			 * For list items ending with 1 or multiple script elements (`:has(~
+			 * script:last-child)`), we need to style the last non-script
+			 * element (`:not(script)`) that doesn't have a subsequent sibling
+			 * that is not a script (`:not(:has(~ :not(script)))`).
 			 */
-		:not(script):has(~ script:last-child):not(:has(~ :not(script)))
-	) {
+			:not(script):has(~ script:last-child):not(:has(~ :not(script)))
+	 ) {
 		margin-bottom: 1.25rem;
 	}
 

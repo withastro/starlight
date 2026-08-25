@@ -1,5 +1,17 @@
 # @astrojs/starlight-tailwind
 
+## 5.0.0
+
+### Major Changes
+
+- [#3644](https://github.com/withastro/starlight/pull/3644) [`0d2e7ed`](https://github.com/withastro/starlight/commit/0d2e7ed74a604b028fcab0c81b4c35c0c9365343) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.38.0
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 4.0.2
 
 ### Patch Changes

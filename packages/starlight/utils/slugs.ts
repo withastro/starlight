@@ -80,24 +80,23 @@ export function localizedSlug(slug: string, locale: string | undefined): string 
 }
 
 /**
- * Convert a legacy collection entry ID or filePath relative to the collection root to a different
- * locale.
- * For example, passing an ID of `en/home.md` and a locale of `fr` results in `fr/home.md`.
+ * Convert a file path relative to the collection root to a different locale.
+ * For example, passing a file path of `en/home.md` and a locale of `fr` results in `fr/home.md`.
  * An undefined locale is treated as the root locale, resulting in `home.md`.
- * @param id A collection entry ID
+ * @param filePath A collection entry file path relative to the collection root
  * @param locale The target locale
  * @example
- * localizedSlug('en/home.md', 'fr')       // => 'fr/home.md'
- * localizedSlug('en/home.md', undefined)  // => 'home.md'
+ * localizedFilePath('en/home.md', 'fr')       // => 'fr/home.md'
+ * localizedFilePath('en/home.md', undefined)  // => 'home.md'
  */
-export function localizedId(id: string, locale: string | undefined): string {
-	const idLocale = slugToLocale(id);
-	if (idLocale) {
-		return id.replace(idLocale + '/', locale ? locale + '/' : '');
+export function localizedFilePath(filePath: string, locale: string | undefined): string {
+	const filePathLocale = slugToLocale(filePath);
+	if (filePathLocale) {
+		return filePath.replace(filePathLocale + '/', locale ? locale + '/' : '');
 	} else if (locale) {
-		return locale + '/' + id;
+		return locale + '/' + filePath;
 	} else {
-		return id;
+		return filePath;
 	}
 }
 

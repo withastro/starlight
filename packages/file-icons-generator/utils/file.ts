@@ -1,8 +1,8 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { starlight } from '../config';
-import type { Definitions } from '../../starlight/user-components/rehype-file-tree';
+import { starlight } from '../config.ts';
+import type { Definitions } from '../../starlight/user-components/rehype-file-tree.ts';
 
 const copyrightNotice = `/**
 * Based on https://github.com/elviswolcott/seti-icons which

@@ -1,3 +1,6 @@
+import type { Server as HttpServer } from 'node:http';
+import type { Server as HttpsServer } from 'node:https';
+import type { AddressInfo } from 'node:net';
 import { fileURLToPath } from 'node:url';
 import { test as baseTest, type Page } from '@playwright/test';
 import { build, dev, preview } from 'astro';
@@ -37,7 +40,9 @@ export function testFactory(fixturePath: string) {
 			});
 		} else {
 			await build({ logLevel: 'error', root });
-			return await preview({ logLevel: 'error', root });
+			// Use an OS-assigned port instead of relying on Vite's port fallback because some adapters
+			// like `@astrojs/node` don't support the same behavior.
+			return await preview({ logLevel: 'error', root, server: { port: 0 } });
 		}
 	}
 
@@ -92,10 +97,48 @@ export class StarlightPage {
 
 	// Resolve a URL relative to the server used during a test run.
 	resolveUrl(url: string) {
-		const port = 'address' in this.server ? this.server.address.port : this.server.port;
+		const address =
+			'address' in this.server
+				? this.server.address
+				: // The server may contain a `server.server` property if it's using the `@astrojs/node`
+					// adapter but it's not exposed in the `PreviewServer` type.
+					// https://github.com/withastro/astro/blob/0f0a4ce1b28a6d6ec1658c7f59e0e68408935135/packages/integrations/node/src/standalone.ts#L104
+					isServerWithAddressInfo(this.server)
+					? this.server.server.address()
+					: undefined;
+
+		const port = isAddressInfo(address)
+			? address.port
+			: 'port' in this.server
+				? this.server.port
+				: undefined;
+
+		if (typeof port !== 'number') {
+			throw new Error('Failed to resolve test server address.');
+		}
 
 		return `http://localhost:${port}${url.replace(/^\/?/, '/')}`;
 	}
+}
+
+function isServerWithAddressInfo(server: Server): server is Server & ServerWithAddressInfo {
+	return (
+		'server' in server &&
+		typeof server.server === 'object' &&
+		server.server !== null &&
+		'address' in server.server &&
+		typeof server.server.address === 'function'
+	);
+}
+
+function isAddressInfo(
+	address: ReturnType<HttpServer['address']> | undefined
+): address is AddressInfo {
+	return !!address && typeof address !== 'string';
+}
+
+interface ServerWithAddressInfo {
+	server: HttpServer | HttpsServer;
 }
 
 type PreviewServer = Awaited<ReturnType<typeof preview>>;

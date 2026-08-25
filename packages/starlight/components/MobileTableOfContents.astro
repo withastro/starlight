@@ -1,6 +1,6 @@
 ---
 import Icon from '../user-components/Icon.astro';
-import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
+import TableOfContentsList from '../components-internals/TableOfContents/TableOfContentsList.astro';
 
 const { toc } = Astro.locals.starlightRoute;
 ---
@@ -109,7 +109,7 @@ const { toc } = Astro.locals.starlightRoute;
 </style>
 
 <script>
-	import { StarlightTOC } from './TableOfContents/starlight-toc';
+	import { StarlightTOC } from '../components-internals/TableOfContents/starlight-toc';
 
 	class MobileStarlightTOC extends StarlightTOC {
 		override set current(link: HTMLAnchorElement) {

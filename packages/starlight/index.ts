@@ -10,17 +10,18 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
+import type { MarkdownProcessorPluginOptions } from './integrations/markdown-processor';
 import {
-	starlightRehypePlugins,
-	starlightRemarkPlugins,
-	type RemarkRehypePluginOptions,
-} from './integrations/remark-rehype';
-import { starlightDirectivesRestorationIntegration } from './integrations/asides';
+	applyStarlightMarkdownPlugins,
+	starlightDirectivesRestorationIntegration,
+	unifiedIntegration,
+} from './integrations/markdown-plugins';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightPagefind } from './integrations/pagefind';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
-import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
+import { vitePluginStarlightLazyBarrelOptimization } from './integrations/vite-lazy-barrel-optimization';
+import { vitePluginStarlightVirtualModules } from './integrations/vite-virtual-modules';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -90,6 +91,11 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
+				// Resolve the configured processor and the optional Unified integration up front before
+				// wiring up the integrations below.
+				const processor = config.markdown.processor;
+				const unified = await unifiedIntegration;
+
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
@@ -105,9 +111,20 @@ export default function StarlightIntegration(
 					integrations.push(mdx({ optimize: true }));
 				}
 
-				// Add Starlight directives restoration integration at the end of the list so that remark
-				// plugins injected by Starlight plugins through Astro integrations can handle text and
-				// leaf directives before they are transformed back to their original form.
+				const markdownProcessorOptions: MarkdownProcessorPluginOptions = {
+					starlightConfig,
+					astroConfig: config,
+					useTranslations,
+					absolutePathToLang,
+				};
+
+				// We push our plugins onto the processor's options.
+				applyStarlightMarkdownPlugins(processor, markdownProcessorOptions, unified, logger);
+
+				// Add Starlight directives restoration integration at the end of the list so that
+				// remark/mdast plugins injected by Starlight plugins through Astro integrations can
+				// handle text and leaf directives before they are transformed back to their original
+				// form.
 				integrations.push(starlightDirectivesRestorationIntegration());
 
 				// Add integrations immediately after Starlight in the config array.
@@ -117,23 +134,51 @@ export default function StarlightIntegration(
 				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
 				config.integrations.splice(selfIndex + 1, 0, ...integrations);
 
-				const remarkRehypeOptions: RemarkRehypePluginOptions = {
-					starlightConfig,
-					astroConfig: config,
-					useTranslations,
-					absolutePathToLang,
-				};
+				// TODO: refactor once there is a reliable way to detect non-Node.js compatible
+				// environments, rather than relying on the presence of specific adapters/integrations.
+				const isCloudflareEnv =
+					config.adapter?.name === '@astrojs/cloudflare' ||
+					config.integrations.some(({ name }) => name === '@astrojs/cloudflare');
+				const isNodeCompatibleEnv = !isCloudflareEnv;
 
 				updateConfig({
 					vite: {
 						plugins: [
 							vitePluginStarlightCssLayerOrder(),
-							vitePluginStarlightUserConfig(command, starlightConfig, config, pluginTranslations),
+							vitePluginStarlightLazyBarrelOptimization(),
+							vitePluginStarlightVirtualModules(
+								{ command, isNodeCompatibleEnv },
+								starlightConfig,
+								config,
+								pluginTranslations
+							),
 						],
-					},
-					markdown: {
-						remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],
-						rehypePlugins: [...starlightRehypePlugins(remarkRehypeOptions)],
+						ssr: isNodeCompatibleEnv
+							? {}
+							: {
+									optimizeDeps: {
+										include: [
+											// Prebundle some dependencies for non-Node.js compatible environments to
+											// speed up dev server start time and prevent restarts.
+											'@astrojs/cloudflare/entrypoints/server',
+											'@astrojs/starlight>i18next',
+											'@astrojs/starlight>js-yaml',
+											'@astrojs/starlight>klona/lite',
+											// TODO: once Expressive Code is refactored/fixed, remove this workaround for
+											// Expressive Code relying on CJS dependencies like postcss not compatible
+											// with non-Node.js compatible environments like Cloudflare.
+											'@astrojs/starlight>astro-expressive-code/components',
+											'@astrojs/starlight>astro-expressive-code>hast-util-select',
+											'@astrojs/starlight>astro-expressive-code>rehype',
+											'@astrojs/starlight>astro-expressive-code>unist-util-visit',
+											'@astrojs/starlight>astro-expressive-code>rehype-format',
+											'@astrojs/starlight>astro-expressive-code>hastscript',
+											'@astrojs/starlight>astro-expressive-code>hast-util-from-html',
+											'@astrojs/starlight>astro-expressive-code>hast-util-to-string',
+											'@astrojs/starlight>astro-expressive-code>@expressive-code/core>postcss',
+										],
+									},
+								},
 					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.

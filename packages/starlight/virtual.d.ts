@@ -8,8 +8,12 @@ declare module 'virtual:starlight/plugin-translations' {
 	export default PluginTranslations;
 }
 
-// TODO: Move back to `virtual-internal.d.ts` when possible. For example, when dropping support for
-// legacy collections, `utils/translations.ts` would no longer need to import project context.
+// TODO: Technically, we could move back this module declaration to `virtual-internal.d.ts` when
+// `utils/translations.ts` no longer need to import project context. Altho, we should not aim for
+// such refactor right now as shipping Starlight in JavaScript rather than TypeScript will
+// entirely eliminate such issue and the need for private and public declaration files for virtual
+// modules.
+// @see https://github.com/withastro/starlight/pull/3572
 declare module 'virtual:starlight/project-context' {
 	const ProjectContext: {
 		root: string;
@@ -18,7 +22,6 @@ declare module 'virtual:starlight/project-context' {
 		build: {
 			format: import('astro').AstroConfig['build']['format'];
 		};
-		legacyCollections: boolean;
 	};
 	export default ProjectContext;
 }

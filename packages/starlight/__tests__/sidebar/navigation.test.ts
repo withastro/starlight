@@ -105,6 +105,9 @@ describe('getSidebar', () => {
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "reference",
+			        },
 			        "badge": undefined,
 			        "href": "/reference/configuration/",
 			        "isCurrent": false,
@@ -112,11 +115,17 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
+			        "autogenerate": {
+			          "directory": "reference",
+			        },
 			        "badge": undefined,
 			        "collapsed": false,
 			        "entries": [
 			          {
 			            "attrs": {},
+			            "autogenerate": {
+			              "directory": "reference",
+			            },
 			            "badge": undefined,
 			            "href": "/reference/frontmatter/",
 			            "isCurrent": false,
@@ -125,6 +134,9 @@ describe('getSidebar', () => {
 			          },
 			          {
 			            "attrs": {},
+			            "autogenerate": {
+			              "directory": "reference",
+			            },
 			            "badge": undefined,
 			            "href": "/reference/frontmatter/foo/",
 			            "isCurrent": false,
@@ -148,6 +160,9 @@ describe('getSidebar', () => {
 			          "class": "current",
 			          "data-version": "1",
 			        },
+			        "autogenerate": {
+			          "directory": "api/v1",
+			        },
 			        "badge": undefined,
 			        "href": "/api/v1/users/",
 			        "isCurrent": false,
@@ -164,6 +179,9 @@ describe('getSidebar', () => {
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "Deprecated API",
+			        },
 			        "badge": undefined,
 			        "href": "/deprecated-api/users/",
 			        "isCurrent": false,
@@ -173,6 +191,14 @@ describe('getSidebar', () => {
 			    ],
 			    "label": "API (deprecated)",
 			    "type": "group",
+			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
+			    "href": "mailto:me@example.com",
+			    "isCurrent": false,
+			    "label": "E-mail me",
+			    "type": "link",
 			  },
 			]
 		`);

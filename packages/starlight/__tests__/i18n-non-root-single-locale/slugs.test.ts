@@ -1,5 +1,10 @@
 import { describe, expect, test } from 'vitest';
-import { localeToLang, localizedId, localizedSlug, slugToLocaleData } from '../../utils/slugs';
+import {
+	localeToLang,
+	localizedFilePath,
+	localizedSlug,
+	slugToLocaleData,
+} from '../../utils/slugs';
 
 describe('slugToLocaleData', () => {
 	test('returns default "fr" locale', () => {
@@ -22,9 +27,9 @@ describe('localeToLang', () => {
 	});
 });
 
-describe('localizedId', () => {
+describe('localizedFilePath', () => {
 	test('returns unchanged for default locale', () => {
-		expect(localizedId('fr/test.md', 'fr')).toBe('fr/test.md');
+		expect(localizedFilePath('fr/test.md', 'fr')).toBe('fr/test.md');
 	});
 });
 

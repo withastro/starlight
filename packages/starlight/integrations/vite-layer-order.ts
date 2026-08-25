@@ -1,6 +1,11 @@
 import type { ViteUserConfig } from 'astro';
 import MagicString from 'magic-string';
 
+// https://vite.dev/guide/api-plugin#hook-filters
+const pluginTransformIdIncludeFilter = /\.astro$/;
+const pluginTransformIdExcludeFilter = /@astrojs\/starlight\/components\/StarlightPage\.astro$/;
+const pluginTransformCodeFilter = 'StarlightPage.astro';
+
 const starlightPageImportSource = '@astrojs/starlight/components/StarlightPage.astro';
 
 /**
@@ -16,49 +21,47 @@ export function vitePluginStarlightCssLayerOrder(): VitePlugin {
 	return {
 		name: 'vite-plugin-starlight-css-layer-order',
 		enforce: 'pre',
-		transform(code, id) {
-			if (
-				!id.endsWith('.astro') ||
-				id.endsWith(starlightPageImportSource) ||
-				code.indexOf('StarlightPage.astro') === -1
-			) {
-				return;
-			}
+		transform: {
+			filter: {
+				id: { include: pluginTransformIdIncludeFilter, exclude: pluginTransformIdExcludeFilter },
+				code: pluginTransformCodeFilter,
+			},
+			handler(code, id) {
+				let ast: ReturnType<typeof this.parse>;
 
-			let ast: ReturnType<typeof this.parse>;
+				try {
+					ast = this.parse(code);
+				} catch {
+					return;
+				}
 
-			try {
-				ast = this.parse(code);
-			} catch {
-				return;
-			}
+				let hasStarlightPageImport = false;
 
-			let hasStarlightPageImport = false;
+				for (const node of ast.body) {
+					if (node.type !== 'ImportDeclaration') continue;
+					if (node.source.value !== starlightPageImportSource) continue;
 
-			for (const node of ast.body) {
-				if (node.type !== 'ImportDeclaration') continue;
-				if (node.source.value !== starlightPageImportSource) continue;
+					const importDefaultSpecifier = node.specifiers.find(
+						(specifier) => specifier.type === 'ImportDefaultSpecifier'
+					);
+					if (!importDefaultSpecifier) continue;
 
-				const importDefaultSpecifier = node.specifiers.find(
-					(specifier) => specifier.type === 'ImportDefaultSpecifier'
-				);
-				if (!importDefaultSpecifier) continue;
+					hasStarlightPageImport = true;
+					break;
+				}
 
-				hasStarlightPageImport = true;
-				break;
-			}
+				if (!hasStarlightPageImport) return;
 
-			if (!hasStarlightPageImport) return;
+				// Format path to unix style path.
+				const filename = id.replace(/\\/g, '/');
+				const ms = new MagicString(code, { filename });
+				ms.prepend(`import "${starlightPageImportSource}";\n`);
 
-			// Format path to unix style path.
-			const filename = id.replace(/\\/g, '/');
-			const ms = new MagicString(code, { filename });
-			ms.prepend(`import "${starlightPageImportSource}";\n`);
-
-			return {
-				code: ms.toString(),
-				map: ms.generateMap({ hires: 'boundary' }),
-			};
+				return {
+					code: ms.toString(),
+					map: ms.generateMap({ hires: 'boundary' }),
+				};
+			},
 		},
 	};
 }

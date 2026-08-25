@@ -1,5 +1,10 @@
 import { describe, expect, test } from 'vitest';
-import { localeToLang, localizedId, localizedSlug, slugToLocaleData } from '../../utils/slugs';
+import {
+	localeToLang,
+	localizedFilePath,
+	localizedSlug,
+	slugToLocaleData,
+} from '../../utils/slugs';
 
 describe('slugToLocaleData', () => {
 	test('returns an undefined locale for root locale slugs', () => {
@@ -22,9 +27,9 @@ describe('localeToLang', () => {
 	});
 });
 
-describe('localizedId', () => {
+describe('localizedFilePath', () => {
 	test('returns unchanged for default locale', () => {
-		expect(localizedId('test.md', undefined)).toBe('test.md');
+		expect(localizedFilePath('test.md', undefined)).toBe('test.md');
 	});
 });
 

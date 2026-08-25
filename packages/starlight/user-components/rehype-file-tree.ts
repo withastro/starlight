@@ -6,7 +6,7 @@ import { fromHtml } from 'hast-util-from-html';
 import { toString } from 'hast-util-to-string';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import { Icons, type StarlightIcon } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components-internals/Icons';
 import { definitions } from './file-tree-icons';
 
 declare module 'vfile' {

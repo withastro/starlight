@@ -32,10 +32,9 @@ async function loadTranslations() {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore — may be a type error in projects without an i18n collection
 		(await getCollection('i18n')).map(({ id, data, filePath }) => {
-			const lang =
-				project.legacyCollections || !filePath
-					? id
-					: stripExtension(stripLeadingSlash(filePath.replace(i18nCollectionPathFromRoot, '')));
+			const lang = !filePath
+				? id
+				: stripExtension(stripLeadingSlash(filePath.replace(i18nCollectionPathFromRoot, '')));
 			return [lang, data] as const;
 		})
 	);

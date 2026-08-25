@@ -22,8 +22,7 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 
 	const translations = {
 		[defaultLocale]: buildResources(
-			builtinTranslations[defaultLocale],
-			builtinTranslations[stripLangRegion(defaultLocale)],
+			builtinTranslations[defaultLocale] || builtinTranslations[stripLangRegion(defaultLocale)],
 			pluginTranslations[defaultLocale],
 			userTranslations[defaultLocale]
 		),
@@ -73,7 +72,11 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 
 		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
 		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace) as ReturnType<I18nT['all']>;
-		t.exists = (key, options) => i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options });
+		// Since i18next 25.10.4 the `ExistsFunction` type has a signature including a predicate that
+		// TS cannot preserve when composing a new function to add default options.
+		// See: https://github.com/i18next/i18next/issues/2425
+		t.exists = ((key, options) =>
+			i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options })) as ExistsFunction;
 		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 
 		return t;
@@ -107,7 +110,7 @@ function localeToLang(
 type BuiltInStrings = (typeof builtinTranslations)['en'];
 
 /** Build an i18next resources dictionary by layering preferred translation sources. */
-function buildResources<T extends Record<string, string | undefined>>(
+function buildResources<T extends i18nSchemaOutput>(
 	...dictionaries: (T | BuiltInStrings | undefined)[]
 ): { [I18nextNamespace]: BuiltInStrings & T } {
 	const dictionary: Partial<BuiltInStrings> = {};

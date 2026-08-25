@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 
 const indexWeightSchema = z.number().nonnegative().optional();
+
 const pagefindRankingWeightsSchema = z.object({
 	/**
 	 * Set Pagefind’s `pageLength` ranking option.
@@ -34,7 +35,24 @@ const pagefindRankingWeightsSchema = z.object({
 	 * @see https://pagefind.app/docs/ranking/#configuring-term-similarity
 	 */
 	termSimilarity: z.number().min(0).default(9),
+	/**
+	 * Set Pagefind’s `diacriticSimilarity` ranking option.
+	 *
+	 * The default value is `0.8` and values must be greater than or equal to `0`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-diacritic-similarity
+	 */
+	diacriticSimilarity: z.number().min(0).default(0.8),
+	/**
+	 * Set Pagefind’s `metaWeights` ranking option.
+	 *
+	 * This is a map of metadata keys to their corresponding weights, with a default value of `{ title: 5 }`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-metadata-weights
+	 */
+	metaWeights: z.record(z.string(), z.number().min(0)).optional(),
 });
+
 const pagefindIndexOptionsSchema = z.object({
 	/**
 	 * Overrides the URL path that Pagefind uses to load its search bundle
@@ -57,7 +75,7 @@ const pagefindIndexOptionsSchema = z.object({
 	 *
 	 * @see https://pagefind.app/docs/multisite/#filtering-results-by-index
 	 */
-	mergeFilter: z.record(z.string(), z.string().or(z.array(z.string()).nonempty())).optional(),
+	mergeFilter: z.record(z.string(), z.string().or(z.tuple([z.string()], z.string()))).optional(),
 	/**
 	 * Language of this index.
 	 *
@@ -68,7 +86,7 @@ const pagefindIndexOptionsSchema = z.object({
 	 * Configure how search result rankings are calculated by Pagefind.
 	 */
 	// We apply a default value to merged indexes in order to share the same ranking for them and the current site when not set explicitly.
-	ranking: pagefindRankingWeightsSchema.default({}),
+	ranking: pagefindRankingWeightsSchema.prefault({}),
 });
 
 const pagefindSchema = z.object({
@@ -80,7 +98,7 @@ const pagefindSchema = z.object({
 	 */
 	indexWeight: indexWeightSchema,
 	/** Configure how search result rankings are calculated by Pagefind. */
-	ranking: pagefindRankingWeightsSchema.default({}),
+	ranking: pagefindRankingWeightsSchema.prefault({}),
 	/**
 	 * Configure how search indexes from different sites are merged by Pagefind.
 	 *
@@ -93,7 +111,8 @@ const pagefindSchema = z.object({
 			 *
 			 * @see https://github.com/CloudCannon/pagefind/blob/v1.3.0/pagefind_web_js/lib/coupled_search.ts#L549
 			 */
-			pagefindIndexOptionsSchema.extend({
+			z.object({
+				...pagefindIndexOptionsSchema.shape,
 				/**
 				 * Set Pagefind’s `bundlePath` mergeIndex option.
 				 *

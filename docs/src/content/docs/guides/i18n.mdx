@@ -259,7 +259,8 @@ In the following example, a new, optional `custom.label` key is added to the def
 
 ```diff lang="js"
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -331,10 +332,10 @@ The value for `feature` must be set in an options object passed as the second ar
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/en/guides/astro-db/">
-	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+<a href="https://docs.astro.build/en/guides/actions/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro Actions' })}
 </a>
-<!-- Renders: <a href="...">Astro documentation for Astro DB</a> -->
+<!-- Renders: <a href="...">Astro documentation for Astro Actions</a> -->
 ```
 
 See the [i18next documentation](https://www.i18next.com/overview/api#t) for more information on how to use the `t()` function with interpolation, formatting, and more.

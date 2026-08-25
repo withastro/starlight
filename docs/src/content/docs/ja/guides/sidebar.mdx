@@ -45,7 +45,7 @@ Starlightはデフォルトで、ドキュメントのファイルシステム�
 	]}
 />
 
-自動生成されるサイドバーについては、[自動生成されるグループ](#自動生成されるグループ)のセクションで詳しく説明します。
+自動生成されるサイドバーについては、[自動生成されるリンク](#自動生成されるリンク)のセクションで詳しく説明します。
 
 ## リンクとリンクグループを追加する
 
@@ -182,21 +182,21 @@ starlight({
 	]}
 />
 
-### 自動生成されるグループ
+### 自動生成されるリンク
 
-Starlightはドキュメントのディレクトリに基づいて、サイドバーのグループを自動的に生成できます。これはグループ内のサイドバー項目を手動で入力したくない場合に便利です。
+Starlightはドキュメントのディレクトリに基づいて、サイドバーのリンクを自動的に生成できます。これはグループ内のサイドバー項目を手動で入力したくない場合に便利です。
 
-デフォルトでは、ページはファイルの[`slug`](/ja/reference/route-data/#slug)に従ってアルファベット順に並べ替えられます。
+デフォルトでは、ページはファイルの[`id`](/ja/reference/route-data/#id)に従ってアルファベット順に並べ替えられます。
 
-`label`と`autogenerate`プロパティをもつオブジェクトを使用して、自動生成されるグループを追加します。`autogenerate`の設定には、サイドバーのエントリに使用する`directory`を指定する必要があります。たとえば、以下のように設定したとします。
+`autogenerate`プロパティをもつオブジェクトを使用して、自動生成されるリンクを追加します。`autogenerate`の設定には、サイドバーのエントリに使用する`directory`を指定する必要があります。たとえば、以下のように設定したとします。
 
 ```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
 			label: '星座',
-			// constellationsディレクトリのリンクグループを自動生成します。
-			autogenerate: { directory: 'constellations' },
+			// constellationsディレクトリのリンクを自動生成します。
+			items: [{ autogenerate: { directory: 'constellations' } }],
 		},
 	],
 });
@@ -243,6 +243,7 @@ starlight({
 
 ```md "sidebar:"
 ---
+# src/content/docs/example.md
 title: 私のページ
 sidebar:
   # このリンクのカスタムラベルを設定します
@@ -256,7 +257,7 @@ sidebar:
 ---
 ```
 
-上記のフロントマターを設定したページと一緒に自動生成されるグループは、以下のサイドバーを生成します。
+上記のフロントマターを設定したページを含む、自動生成されるリンクをもつグループは、以下のサイドバーを生成します。
 
 <SidebarPreview
 	config={[
@@ -276,12 +277,12 @@ sidebar:
 />
 
 :::note
-`sidebar`フロントマターの設定は、自動生成されるグループ内のリンクと`slug`プロパティで定義されたドキュメントリンクにのみ使用されます。`link`プロパティで定義されたリンクには適用されません。
+`sidebar`フロントマターの設定は、自動生成されるリンクと`slug`プロパティで定義されたドキュメントリンクにのみ使用されます。`link`プロパティで定義されたリンクには適用されません。
 :::
 
 ## バッジ
 
-リンク、グループ、自動生成されるグループには、ラベルの横にバッジを表示するための`badge`プロパティも含められます。
+リンクとグループには、ラベルの横にバッジを表示するための`badge`プロパティも含められます。
 
 ```js {9,16}
 starlight({
@@ -296,11 +297,11 @@ starlight({
 				},
 			],
 		},
-		// 「要更新」バッジ付きの自動生成されるグループ。
+		// 「要更新」バッジ付きのグループ。
 		{
 			label: '衛星',
 			badge: '要更新',
-			autogenerate: { directory: 'moons' },
+			items: [{ autogenerate: { directory: 'moons' } }],
 		},
 	],
 });
@@ -355,7 +356,7 @@ starlight({
 		{
 			label: '星',
 			items: [
-				// 「準備中」バッジ付きのリンク。
+				// 黄色の「準備中」バッジ付きのリンク。
 				{
 					slug: 'stars/sirius',
 					badge: { text: '準備中', variant: 'caution' },
@@ -431,19 +432,18 @@ starlight({
 
 ### 自動生成されるリンクのカスタムHTML属性
 
-`autogenerate`設定で`attrs`プロパティを定義することで、[自動生成されるグループ](#自動生成されるグループ)内のすべてのリンクのHTML属性をカスタマイズできます。個々のページでは[`sidebar.attrs`フロントマターフィールド](/ja/reference/frontmatter/#attrs)を使用してカスタム属性を指定でき、これは`autogenerate.attrs`設定とマージされます。
+`autogenerate`設定で`attrs`プロパティを定義することで、[自動生成されるリンク](#自動生成されるリンク)のすべてのHTML属性をカスタマイズできます。個々のページでは[`sidebar.attrs`フロントマターフィールド](/ja/reference/frontmatter/#attrs)を使用してカスタム属性を指定でき、これは`autogenerate.attrs`設定とマージされます。
 
 たとえば、以下の設定があるとします。
 
-```js {9}
+```js {8}
 starlight({
 	sidebar: [
 		{
-			label: '星座',
 			autogenerate: {
-				// 'constellations'ディレクトリのリンクグループを自動生成します。
+				// 'constellations'ディレクトリのリンクを自動生成します。
 				directory: 'constellations',
-				// このグループ内のすべてのリンクラベルを斜体にします。
+				// 自動生成されるすべてのリンクラベルを斜体にします。
 				attrs: { style: 'font-style: italic' },
 			},
 		},
@@ -470,28 +470,19 @@ starlight({
 
 <SidebarPreview
 	config={[
+		{ label: 'りゅうこつ座', link: '', attrs: { style: 'font-style: italic' } },
 		{
-			label: '星座',
+			label: 'ケンタウルス座',
+			link: '',
+			attrs: { style: 'font-style: italic' },
+		},
+		{
+			label: 'seasonal',
 			items: [
 				{
-					label: 'りゅうこつ座',
+					label: 'アンドロメダ座',
 					link: '',
 					attrs: { style: 'font-style: italic' },
-				},
-				{
-					label: 'ケンタウルス座',
-					link: '',
-					attrs: { style: 'font-style: italic' },
-				},
-				{
-					label: 'seasonal',
-					items: [
-						{
-							label: 'アンドロメダ座',
-							link: '',
-							attrs: { style: 'font-style: italic' },
-						},
-					],
 				},
 			],
 		},
@@ -659,51 +650,22 @@ starlight({
 	]}
 />
 
-[自動生成されるグループ](#自動生成されるグループ)は、親グループの`collapsed`値に従います。
+[自動生成されるサブグループ](#自動生成されるリンク)も、`autogenerate.collapsed`プロパティを`true`に設定することで、デフォルトで折りたためます。
 
-```js {5-6}
+```js {9-10}
 starlight({
 	sidebar: [
 		{
 			label: 'Constellations',
-			// デフォルトでグループと自動生成されるサブグループを折りたたみます。
-			collapsed: true,
-			autogenerate: { directory: 'constellations' },
-		},
-	],
-});
-```
-
-上の設定により、以下のサイドバーが生成されます。
-
-<SidebarPreview
-	config={[
-		{
-			label: '星座',
-			collapsed: true,
 			items: [
-				{ label: 'りゅうこつ座', link: '' },
-				{ label: 'ケンタウルス座', link: '' },
 				{
-					label: 'seasonal',
-					collapsed: true,
-					items: [{ label: 'アンドロメダ座', link: '' }],
+					autogenerate: {
+						directory: 'constellations',
+						// 自動生成されるサブグループをデフォルトで折りたたみます。
+						collapsed: true,
+					},
 				},
 			],
-		},
-	]}
-/>
-
-この動作は、`autogenerate.collapsed`プロパティを定義することで上書きできます。
-
-```js {5-7} "collapsed: true"
-starlight({
-	sidebar: [
-		{
-			label: '星座',
-			// 「星座」グループは折りたたみませんが、自動生成されるサブグループは折りたたみます。
-			collapsed: false,
-			autogenerate: { directory: 'constellations', collapsed: true },
 		},
 	],
 });

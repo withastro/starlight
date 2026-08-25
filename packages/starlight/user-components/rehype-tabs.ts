@@ -2,7 +2,8 @@ import type { Element } from 'hast';
 import { select } from 'hast-util-select';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import type { StarlightIcon } from '../components/Icons';
+import { VFile } from 'vfile';
+import type { StarlightIcon } from '../components-internals/Icons';
 
 interface Panel {
 	panelId: string;
@@ -14,6 +15,7 @@ interface Panel {
 declare module 'vfile' {
 	interface DataMap {
 		panels: Panel[];
+		index: number;
 	}
 }
 
@@ -39,12 +41,6 @@ const focusableElementSelectors = [
 	.map((selector) => `${selector}:not([hidden]):not([tabindex="-1"])`)
 	.join(',');
 
-let count = 0;
-const getIDs = () => {
-	const id = count++;
-	return { panelId: 'tab-panel-' + id, tabId: 'tab-' + id };
-};
-
 /**
  * Rehype processor to extract tab panel data and turn each
  * `<starlight-tab-item>` into a `<div>` with the necessary
@@ -56,6 +52,14 @@ const tabsProcessor = rehype()
 		return (tree: Element, file) => {
 			file.data.panels = [];
 			let isFirst = true;
+			let count = 0;
+			const getIDs = () => {
+				const id = count++;
+				return {
+					panelId: `tab-panel-${file.data.index}-${id}`,
+					tabId: `tab-${file.data.index}-${id}`,
+				};
+			};
 			visit(tree, 'element', (node) => {
 				if (node.tagName !== TabItemTagname || !node.properties) {
 					return CONTINUE;
@@ -104,9 +108,10 @@ const tabsProcessor = rehype()
  * Process tab panel items to extract data for the tab links and format
  * each tab panel correctly.
  * @param html Inner HTML passed to the `<Tabs>` component.
+ * @param index The index of the `<Tabs>` component on the page.
  */
-export const processPanels = (html: string) => {
-	const file = tabsProcessor.processSync({ value: html });
+export const processPanels = (html: string, index: number) => {
+	const file = tabsProcessor.processSync(new VFile({ value: html, data: { index } }));
 	return {
 		/** Data for each tab panel. */
 		panels: file.data.panels,

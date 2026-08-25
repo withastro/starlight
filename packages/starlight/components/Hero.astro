@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import DraftContentNotice from 'virtual:starlight/components/DraftContentNotice';
 import { PAGE_TITLE_ID } from '../constants';
 import LinkButton from '../user-components/LinkButton.astro';
 
@@ -44,6 +45,7 @@ if (image) {
 	<div class="sl-flex stack">
 		<div class="sl-flex copy">
 			<h1 id={PAGE_TITLE_ID} data-page-title set:html={title} />
+			{data.draft && <DraftContentNotice />}
 			{tagline && <div class="tagline" set:html={tagline} />}
 		</div>
 		{
@@ -67,6 +69,7 @@ if (image) {
 	@layer starlight.core {
 		.hero {
 			display: grid;
+			grid-template-columns: 100%;
 			align-items: center;
 			gap: 1rem;
 			padding-bottom: 1rem;

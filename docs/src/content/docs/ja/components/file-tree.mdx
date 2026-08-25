@@ -215,6 +215,46 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### 特殊文字をエスケープする
+
+ファイル名にアンダースコアやスペースなどの特殊文字が含まれる場合は、ファイル名をバッククォートで囲んでエスケープしてください。
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- `__init__.py`
+- `Hello world.txt`
+- **`READ ME FIRST.md`**
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- `__init__.py`
+- `Hello world.txt`
+- **`READ ME FIRST.md`**
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- `__init__.py`
+- `Hello world.txt`
+- **`READ ME FIRST.md`**
+
+</FileTree>
+
+</Preview>
+
 ## `<FileTree>` プロパティ
 
 **実装:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)

@@ -24,6 +24,9 @@ describe('getSidebar', () => {
 			[
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -32,6 +35,9 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -39,11 +45,17 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "autogenerate": {
+			      "directory": "",
+			    },
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
@@ -52,6 +64,9 @@ describe('getSidebar', () => {
 			      },
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "",
+			        },
 			        "badge": undefined,
 			        "href": "/guides/project-structure/",
 			        "isCurrent": false,

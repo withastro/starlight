@@ -35,10 +35,8 @@ test('adds data to route shape', async () => {
 		props: starlightPageProps,
 		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
-	// Starlight pages infer the slug from the URL.
-	expect(data.slug).toBe('test-slug');
 	// Starlight pages generate an ID based on their slug.
-	expect(data.id).toBeDefined();
+	expect(data.id).toBe('test-slug');
 	// Starlight pages cannot be fallbacks.
 	expect(data.isFallback).toBeUndefined();
 	// Starlight pages are not editable if no edit URL is passed.
@@ -118,6 +116,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		[
 		  {
 		    "attrs": {},
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "href": "/",
 		    "isCurrent": false,
@@ -126,6 +127,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		  },
 		  {
 		    "attrs": {},
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "href": "/getting-started/",
 		    "isCurrent": true,
@@ -133,11 +137,17 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "type": "link",
 		  },
 		  {
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "collapsed": false,
 		    "entries": [
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/authoring-content/",
 		        "isCurrent": false,
@@ -146,6 +156,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		      },
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
@@ -157,11 +170,17 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "type": "group",
 		  },
 		  {
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "collapsed": false,
 		    "entries": [
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "",
+		        },
 		        "badge": undefined,
 		        "href": "/reference/frontmatter/",
 		        "isCurrent": false,
@@ -192,7 +211,7 @@ test('uses provided sidebar if any', async () => {
 				},
 				{
 					label: 'Guides',
-					autogenerate: { directory: 'guides' },
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 				'reference/frontmatter',
 			],
@@ -226,6 +245,9 @@ test('uses provided sidebar if any', async () => {
 		    "entries": [
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "guides",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/authoring-content/",
 		        "isCurrent": false,
@@ -234,6 +256,9 @@ test('uses provided sidebar if any', async () => {
 		      },
 		      {
 		        "attrs": {},
+		        "autogenerate": {
+		          "directory": "guides",
+		        },
 		        "badge": undefined,
 		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
@@ -278,7 +303,7 @@ test('throws error if sidebar is malformated', async () => {
 			Invalid sidebar prop passed to the \`<StarlightPage/>\` component.
 		Hint:
 			**0**: Did not match union.
-			> Expected type \`{ link: string;  } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
+			> Expected type \`{ link: string } | { items: array } | { autogenerate: object } | { slug: string } | string\`
 			> Received \`{ "label": "Custom link 1", "href": "/test/1" }\`"
 	`);
 });

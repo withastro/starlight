@@ -1,6 +1,6 @@
 ---
 import type {
-	AutoSidebarGroup,
+	AutoSidebarEntries,
 	SidebarItem,
 	InternalSidebarLinkItem,
 } from '../../../packages/starlight/schemas/sidebar';
@@ -12,7 +12,7 @@ interface Props {
 	config: SidebarConfig;
 }
 
-type SidebarConfig = (Exclude<SidebarItem, AutoSidebarGroup | InternalSidebarLinkItem> & {
+type SidebarConfig = (Exclude<SidebarItem, AutoSidebarEntries | InternalSidebarLinkItem> & {
 	badge?: Badge;
 })[];
 

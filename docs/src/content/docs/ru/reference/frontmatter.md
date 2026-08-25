@@ -284,7 +284,7 @@ draft: true
 ```
 
 Поскольку черновики страниц не включаются в выходные данные сборки, вы не можете добавить черновики страниц напрямую в конфигурацию боковой панели вашего сайта, используя [слаги](/ru/guides/sidebar/#внутренние-ссылки).
-Черновики страниц в каталогах, используемых для [автоматически сгенерированных групп боковой панели](/ru/guides/sidebar/#автогенерируемые-группы), автоматически исключаются в продакшен-сборках.
+Черновики страниц в каталогах, используемых для [автоматически сгенерированных ссылок боковой панели](/ru/guides/sidebar/#автогенерируемые-ссылки), автоматически исключаются в продакшен-сборках.
 
 ### `sidebar`
 
@@ -428,9 +428,10 @@ export const collections = {
 
 В следующем примере мы задаем более строгий тип для `description`, чтобы сделать его обязательным, и добавляем новое необязательное поле `category`:
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
@@ -451,9 +452,10 @@ export const collections = {
 
 Чтобы воспользоваться преимуществами [хелпера `image()`](https://docs.astro.build/ru/guides/images/#images-in-content-collections), используйте функцию, которая возвращает расширение вашей схемы:
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 

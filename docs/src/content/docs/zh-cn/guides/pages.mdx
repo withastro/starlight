@@ -54,11 +54,10 @@ description: 这是我的 Starlight 网站中的一个页面
 ## 自定义页面
 
 对于高级用例，你可以通过创建 `src/pages/` 目录来添加自定义页面。
-`src/pages/` 目录使用 [Astro 的基于文件的路由](https://docs.astro.build/zh-cn/basics/astro-pages/#基于文件的路由)， 并支持 `.astro` 文件等其他页面格式。
-
+`src/pages/` 目录使用 [Astro 的基于文件的路由](https://docs.astro.build/zh-cn/basics/astro-pages/#基于文件的路由)，并支持 `.astro` 文件等其他页面格式。
 这对于需要完全自定义布局或从其他数据源生成页面的情况非常有用。
 
-举个例子，以下文件结构将在 `example.com/custom` 和 `example.com/archived` 生成页面：
+举个例子，该项目将 `src/content/docs/` 中的 Markdown 内容与 `src/pages/` 中的 Astro 和 HTML 路由混合在一起：
 
 <FileTree>
 
@@ -76,8 +75,7 @@ description: 这是我的 Starlight 网站中的一个页面
 
 ### 在自定义页面中使用 Starlight 的设计
 
-要在自定义页面中使用 Starlight 布局，请使用 [`<StarlightPage />` 组件](#starlightpage-组件)包装页面内容。
-
+要在自定义页面中使用 Starlight 布局，请使用 [`<StarlightPage>` 组件](#starlightpage-组件)包装页面内容。
 如果你正在动态生成内容但仍想使用 Starlight 的设计，这会很有帮助。
 
 要在标题中添加和 Starlight 的 Markdown 锚点链接样式一样的锚点链接，你可以在自定义页面中使用 [`<AnchorHeading>` 组件](#anchorheading-组件)。
@@ -152,7 +150,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 			items: [
 				{ label: '仙女座', link: '/andromeda/' },
 				{ label: '猎户座', link: '/orion/' },
-				{ label: '射手座', link: '/sagittarius/', badge: 'Stub' },
+				{ label: '小熊座', link: '/ursa-minor/', badge: 'Stub' },
 			],
 		},
 	]}

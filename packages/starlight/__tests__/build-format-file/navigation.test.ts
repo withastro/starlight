@@ -84,6 +84,9 @@ describe('getSidebar with build.format = "file"', () => {
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "reference",
+			        },
 			        "badge": undefined,
 			        "href": "/reference/configuration.html",
 			        "isCurrent": false,
@@ -92,6 +95,9 @@ describe('getSidebar with build.format = "file"', () => {
 			      },
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "reference",
+			        },
 			        "badge": undefined,
 			        "href": "/reference/frontmatter.html",
 			        "isCurrent": false,
@@ -108,6 +114,9 @@ describe('getSidebar with build.format = "file"', () => {
 			    "entries": [
 			      {
 			        "attrs": {},
+			        "autogenerate": {
+			          "directory": "api/v1",
+			        },
 			        "badge": undefined,
 			        "href": "/api/v1/users.html",
 			        "isCurrent": false,

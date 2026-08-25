@@ -2,3 +2,26 @@ packages:
   - 'packages/**/*'
   - 'examples/**/*'
   - 'docs'
+
+# https://github.com/withastro/starlight/issues/3875
+allowBuilds:
+  esbuild: false # https://github.com/evanw/esbuild/issues/4085#issuecomment-2696009329
+  sharp: false # https://sharp.pixelplumbing.com/install/: "When using pnpm, add sharp to ignoredBuiltDependencies to silence warnings."
+
+# Link up monorepo packages instead of downloading them from npm
+preferWorkspacePackages: true
+linkWorkspacePackages: true
+
+# Run scripts in a bash-like emulation for better cross-platform support
+shellEmulator: true
+
+# Avoid installing unnecessary peer dependencies
+autoInstallPeers: false
+peerDependencyRules:
+  ignoreMissing:
+    - '@algolia/client-search'
+    - 'playwright'
+    - 'search-insights'
+
+# Prevent installing packages published in the last 3 days
+minimumReleaseAge: 4320

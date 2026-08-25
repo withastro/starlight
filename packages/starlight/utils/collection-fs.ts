@@ -15,7 +15,6 @@ export function resolveCollectionPath(collection: StarlightCollection, srcDir: U
 }
 
 export function getCollectionPosixPath(collection: StarlightCollection, srcDir: URL) {
-	// TODO: when Astro minimum Node.js version is >= 20.13.0, refactor to use the `fileURLToPath`
-	// second optional argument to enforce POSIX paths by setting `windows: false`.
-	return fileURLToPath(getCollectionUrl(collection, srcDir)).replace(/\\/g, '/');
+	// Return POSIX path with leading slash even on Windows, e.g. `/C:/project/src/content/docs/`.
+	return fileURLToPath(getCollectionUrl(collection, srcDir), { windows: false });
 }

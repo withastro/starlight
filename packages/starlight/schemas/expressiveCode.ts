@@ -9,7 +9,4 @@ export const ExpressiveCodeSchema = () =>
 			),
 			z.boolean(),
 		])
-		.describe(
-			'Define how code blocks are rendered by passing options to Expressive Code, or disable the integration by passing `false`.'
-		)
 		.optional();

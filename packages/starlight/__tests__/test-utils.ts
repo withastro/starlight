@@ -1,9 +1,51 @@
 import { z } from 'astro/zod';
-import project from 'virtual:starlight/project-context';
 import { docsSchema, i18nSchema } from '../schema';
 import type { StarlightDocsCollectionEntry } from '../utils/routing/types';
 import type { RouteDataContext } from '../utils/routing/data';
 import { vi } from 'vitest';
+import type { StarlightUserConfig } from '../types';
+import { StarlightConfigSchema } from '../utils/user-config';
+import type { MarkdownProcessorPluginOptions } from '../integrations/markdown-processor';
+import { createTranslationSystemFromFs } from '../utils/translations-fs';
+import { absolutePathToLang } from '../integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from '../utils/collection-fs';
+
+/** Build the options bag Starlight's plugin factories take. Used by both the remark and Sätteri pipelines. */
+export async function createPluginTestOptions(
+	starlightUserConfig?: StarlightUserConfig
+): Promise<MarkdownProcessorPluginOptions> {
+	const starlightConfig = StarlightConfigSchema.parse(
+		starlightUserConfig ?? { title: 'Plugin Tests' }
+	);
+
+	const astroConfig = {
+		root: new URL(import.meta.url),
+		srcDir: new URL('./_src/', import.meta.url),
+	};
+
+	return {
+		starlightConfig,
+		astroConfig,
+		useTranslations: await createTranslationSystemFromFs(starlightConfig, {
+			srcDir: astroConfig.srcDir,
+		}),
+		absolutePathToLang: (path: string) =>
+			absolutePathToLang(path, {
+				docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
+				starlightConfig,
+			}),
+	};
+}
+
+/** URL of a Markdown source inside the synthetic docs collection used by plugin tests. */
+export function docFileURL(slug = 'index.md'): URL {
+	return new URL(`./_src/content/docs/${slug}`, import.meta.url);
+}
+
+/** URL of a Markdown source outside the docs collection, for path-filter tests. */
+export function nonDocFileURL(slug = 'index.md'): URL {
+	return new URL(`./_src/elsewhere/${slug}`, import.meta.url);
+}
 
 const frontmatterSchema = docsSchema()({
 	image: () =>
@@ -35,27 +77,20 @@ function mockDoc(
 		.replace(/\/index$/, '')
 		.toLowerCase();
 
-	const doc: StarlightDocsCollectionEntry = {
-		id: project.legacyCollections ? docsFilePath : slug,
+	return {
+		id: slug,
 		body,
 		collection: 'docs',
 		data: frontmatterSchema.parse(data),
+		filePath: `src/content/docs/${docsFilePath}`,
 	};
-
-	if (project.legacyCollections) {
-		doc.slug = slug;
-	} else {
-		doc.filePath = `src/content/docs/${docsFilePath}`;
-	}
-
-	return doc;
 }
 
 function mockDict(id: string, data: z.input<ReturnType<typeof i18nSchema>>) {
 	return {
-		id: project.legacyCollections ? id : id.toLocaleLowerCase(),
+		id: id.toLocaleLowerCase(),
 		data: i18nSchema().parse(data),
-		filePath: project.legacyCollections ? undefined : `src/content/i18n/${id}.yml`,
+		filePath: `src/content/i18n/${id}.yml`,
 	};
 }
 
@@ -88,16 +123,14 @@ export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof 
 
 	return {
 		collections: {
-			docs: content.defineCollection(
-				project.legacyCollections
-					? { schema: schemas.docsSchema(docsUserSchema) }
-					: { loader: loaders.docsLoader(), schema: schemas.docsSchema(docsUserSchema) }
-			),
-			i18n: content.defineCollection(
-				project.legacyCollections
-					? { type: 'data', schema: schemas.i18nSchema() }
-					: { loader: loaders.i18nLoader(), schema: schemas.i18nSchema() }
-			),
+			docs: content.defineCollection({
+				loader: loaders.docsLoader(),
+				schema: schemas.docsSchema(docsUserSchema),
+			}),
+			i18n: content.defineCollection({
+				loader: loaders.i18nLoader(),
+				schema: schemas.i18nSchema(),
+			}),
 		},
 	};
 }

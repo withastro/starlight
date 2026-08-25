@@ -344,39 +344,6 @@ test.describe('components', () => {
 		});
 	});
 
-	test.describe('whitespaces', () => {
-		/**
-		 * Components including styles include a trailing whitespace which can be problematic when used
-		 * inline, e.g.:
-		 *
-		 * ```mdx
-		 * Badge (<Badge text="test" />)
-		 * ```
-		 *
-		 * The example above would render as:
-		 *
-		 * ```
-		 * Badge (test )
-		 * ```
-		 *
-		 * Having a component being responsible for its own spacing is not ideal and should be avoided
-		 * especially when used inline.
-		 * To work around this issue, such components can be wrapped in a fragment.
-		 *
-		 * @see https://github.com/withastro/compiler/issues/1003
-		 */
-		test('does not include components having trailing whitespaces when used inline', async ({
-			page,
-			getProdServer,
-		}) => {
-			const starlight = await getProdServer();
-			await starlight.goto('/whitespaces');
-
-			expect(await page.getByTestId('badge').textContent()).toContain('Badge (Note)');
-			expect(await page.getByTestId('icon').textContent()).toContain('Icon ()');
-		});
-	});
-
 	test.describe('anchor headings', () => {
 		test('renders the same content for Markdown headings and Astro component', async ({
 			getProdServer,
@@ -385,14 +352,18 @@ test.describe('components', () => {
 			const starlight = await getProdServer();
 
 			await starlight.goto('/anchor-heading');
-			const markdownContent = page.locator('.sl-markdown-content');
-			const markdownHtml = await markdownContent.innerHTML();
+			const markdownHeadings = await page
+				.locator('.sl-markdown-content .sl-heading-wrapper')
+				.evaluateAll((headings) => headings.map((heading) => heading.outerHTML));
 
 			await starlight.goto('/anchor-heading-component');
-			const componentContent = page.locator('.sl-markdown-content');
-			const componentHtml = await componentContent.innerHTML();
+			const componentHeadings = await page
+				.locator('.sl-markdown-content .sl-heading-wrapper')
+				.evaluateAll((headings) => headings.map((heading) => heading.outerHTML));
 
-			expect(markdownHtml).toEqual(componentHtml);
+			// The Astro's Rust compiler may add insignificant whitespace between siblings so we compare
+			// heading wrappers individually rather than the entire content.
+			expect(markdownHeadings).toEqual(componentHeadings);
 		});
 
 		test('does not render headings anchor links for individual Markdown pages and entries not part of the `docs` collection', async ({
@@ -798,6 +769,75 @@ test.describe('ToC highlighting', () => {
 				pattern: /Heading 3/,
 			})
 		);
+	});
+});
+
+test.describe('mobile menu focus trap', () => {
+	test('traps focus within the mobile menu when open', async ({ page, getProdServer }) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 375, height: 667 });
+		await starlight.goto('/headings');
+
+		const currentFocus = page.locator('*:focus');
+
+		// Open the mobile menu.
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
+		await mobileMenuButton.click();
+		await expect(currentFocus).toHaveCount(1);
+
+		// Focus the theme selector, which is the last focusable element in the mobile menu.
+		const themeSelector = page.getByRole('navigation', { name: 'Main' }).getByLabel('Select theme');
+		await themeSelector.focus();
+		await expect(currentFocus).toHaveCount(1);
+
+		// Tab out of the menu.
+		await page.keyboard.press('Tab');
+
+		// Tabbing at the end of the mobile menu moves focus out of the viewport, so there should no
+		// longer be any focused element.
+		await expect(currentFocus).toHaveCount(0);
+
+		// Close the mobile menu.
+		await mobileMenuButton.click();
+
+		// The focus trap should be released and tabbing will focus the mobile table of contents button.
+		await page.keyboard.press('Tab');
+		await expect(currentFocus).toHaveText(/On this page/);
+	});
+
+	test('releases focus trap when the viewport resizes', async ({ page, getProdServer }) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 375, height: 667 });
+		await starlight.goto('/anchor-heading');
+
+		const currentFocus = page.locator('*:focus');
+		const anchorLinkAccessibleName = 'Section titled “An anchor heading”';
+		const anchorHeadingLink = page.getByRole('link', { name: anchorLinkAccessibleName });
+
+		// Focus the anchor heading link to check it is focusable.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+
+		// Open the mobile menu.
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
+		await mobileMenuButton.click();
+		await expect(currentFocus).toHaveAccessibleName('Menu');
+
+		// Try to focus the anchor heading which should be prevented by the focus trap,
+		// keeping focus where it is.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveAccessibleName('Menu');
+
+		// Resize the viewport to a wider size, which should release the focus trap.
+		await page.setViewportSize({ width: 1280, height: 720 });
+
+		// The anchor heading link should be focusable again.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+
+		// Resizing back to a smaller viewport should not re-enable the focus trap.
+		await page.setViewportSize({ width: 375, height: 667 });
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
 	});
 });
 
