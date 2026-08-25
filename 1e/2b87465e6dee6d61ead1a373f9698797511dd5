@@ -1,0 +1,19 @@
+packages/starlight/components/SidebarSublist.astro
+  s_885f1d1a81a544::t_04ce43bc6d5f48 2,10,14-31,55,70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "1e2b87465e6dee6d61ead1a373f9698797511dd5",
+  "prompts": {},
+  "sessions": {
+    "s_885f1d1a81a544": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc7caa133ffefmJCJdX8Y1ae4S",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "ematipico <estoppa@cloudflare.com>"
+    }
+  }
+}
