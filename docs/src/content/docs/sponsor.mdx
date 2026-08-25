@@ -11,41 +11,14 @@ description: // TODO
 
 :::
 
-import { CardGrid, Card, LinkCard } from '@astrojs/starlight/components';
+import { LinkCard } from '@astrojs/starlight/components';
+import Stats from '~/components/stats.astro';
 
 Trusted by Google, Microsoft, OpenAI, Cloudflare, and [more](https://github.com/withastro/starlight/network/dependents), Starlight is an entirely community-maintained and full-featured documentation theme for lightweight, performant, accessible, and eco-friendly documentation with a healthy ecosystem of [plugins](/resources/plugins/) and [themes](/resources/themes/).
 
 ## About Starlight
 
-<CardGrid>
-	<Card title="210K monthly downloads" icon="download">
-		[npm downloads](https://www.npmjs.com/package/@astrojs/starlight)
-	</Card>
-	<Card title="8K GitHub stars" icon="star">
-		[withastro/starlight](https://github.com/withastro/starlight/stargazers)
-	</Card>
-	<Card title="93% Core Web Vitals" icon="rocket">
-		[CWV
-		summary](https://httparchive.org/reports/techreport/tech?tech=Starlight,MkDocs,Sphinx,VitePress,Nextra,GitBook,Docusaurus,Docsify&geo=ALL&rank=ALL&page=1)
-	</Card>
-	<Card title="A+ carbon rating" icon="sun">
-		[website carbon
-		calculator](https://www.websitecarbon.com/website/starlight-astro-build-getting-started/)
-	</Card>
-	<Card title="308 contributors" icon="puzzle">
-		[withastro/starlight](https://github.com/withastro/starlight/graphs/contributors)
-	</Card>
-	<Card title="Something else" icon="heart">
-		…
-	</Card>
-</CardGrid>
-
-:::danger[TODO]
-
-- [ ] Custom components for stats, just using cards for now as a placeholder.
-- [ ] Stats could come from a data content collection, and be updated on a weekly or monthly basis in a GitHub action.
-
-:::
+<Stats />
 
 ## Community maintained
 
