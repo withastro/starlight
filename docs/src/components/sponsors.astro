@@ -1,0 +1,47 @@
+---
+interface Props {
+	title: string;
+	cta: string;
+}
+
+const { title, cta } = Astro.props;
+---
+
+<div class="sponsors-wrapper not-content">
+	<h2 class="sponsors-title">{title}</h2>
+	<div class="sponsors">
+		<slot />
+	</div>
+	<div class="sponsors-link">
+		<a href="/sponsor/">{cta}</a>
+	</div>
+</div>
+
+<style>
+	.sponsors-wrapper {
+		margin-block: 7rem 2.5rem !important;
+		font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
+	}
+	.sponsors-title {
+		text-align: center;
+		font-size: var(--sl-text-h3);
+		font-weight: 600;
+		color: var(--sl-color-white);
+		line-height: var(--sl-line-height-headings);
+	}
+	.sponsors {
+		margin-top: 2.5rem;
+		padding-inline-start: 0;
+	}
+	.sponsors-link {
+		margin-top: 1rem;
+		text-align: center;
+	}
+	.sponsors-link a {
+		color: var(--sl-color-text-accent);
+		text-underline-offset: 4px;
+	}
+	.sponsors-link a:hover {
+		color: var(--sl-color-white);
+	}
+</style>
