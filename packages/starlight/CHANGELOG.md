@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.41.9
+
+### Patch Changes
+
+- [#4145](https://github.com/withastro/starlight/pull/4145) [`1c90d69`](https://github.com/withastro/starlight/commit/1c90d69b424aedef096e12577e9e7ec96bed4efc) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `goodreads`
+
 ## 0.41.8
 
 ### Patch Changes
