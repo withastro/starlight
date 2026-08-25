@@ -1,0 +1,21 @@
+packages/starlight/components-internals/TableOfContents/starlight-toc.ts
+  s_885f1d1a81a544::t_edad4313dc69dd 4-11,17,26-35,37-45,49-50,113-149
+packages/starlight/components/MobileTableOfContents.astro
+  s_885f1d1a81a544::t_764214962ff315 115-116,123-127,135,138-144,146-155,157-165
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c7ac7a05afc77a30575697f658cbab120af56efa",
+  "prompts": {},
+  "sessions": {
+    "s_885f1d1a81a544": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc7caa133ffefmJCJdX8Y1ae4S",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "ematipico <estoppa@cloudflare.com>"
+    }
+  }
+}
