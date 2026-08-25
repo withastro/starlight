@@ -20,7 +20,7 @@ import {
 	stripExtension,
 	stripLeadingAndTrailingSlashes,
 } from './path';
-import { getLocaleRoutes, routes } from './routing';
+import { getLocaleRoutes, getRouteById } from './routing';
 import type {
 	SidebarGroup,
 	SidebarLink,
@@ -42,6 +42,7 @@ const SlugKey = Symbol('SlugKey');
 const rootAutogenerate: SidebarAutogenerateRouteData = { directory: '' };
 
 const neverPathFormatter = createPathFormatter({ trailingSlash: 'never' });
+const sidebarCollator = new Intl.Collator(localeToLang(undefined));
 
 const docsCollectionPathFromRoot = getCollectionPathFromRoot('docs', project);
 
@@ -142,7 +143,7 @@ function linkFromInternalSidebarLinkItem(
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
 	const slug = item.slug === 'index' ? '' : item.slug;
 	const localizedSlug = locale ? (slug ? locale + '/' + slug : locale) : slug;
-	const route = routes.find((entry) => localizedSlug === entry.id);
+	const route = getRouteById(localizedSlug);
 	if (!route) {
 		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
 		if (hasExternalSlashes) {
@@ -204,11 +205,6 @@ function makeLink({ attrs = {}, badge, autogenerate, ...opts }: MakeLinkOptions)
 		attrs,
 		...(autogenerate ? { autogenerate } : {}),
 	};
-}
-
-/** Test if two paths are equivalent even if formatted differently. */
-function pathsMatch(pathA: string, pathB: string) {
-	return neverPathFormatter(pathA) === neverPathFormatter(pathB);
 }
 
 /** Get the segments leading to a page. */
@@ -294,21 +290,26 @@ function linkFromRoute(
  * Directories have the weight of the lowest weighted route they contain.
  */
 function getOrder(routeOrDir: Route | Dir): number {
-	return isDir(routeOrDir)
+	const cachedOrder = orderByEntry.get(routeOrDir);
+	if (cachedOrder !== undefined) return cachedOrder;
+	const order = isDir(routeOrDir)
 		? Math.min(...Object.values(routeOrDir).flatMap(getOrder))
 		: // If no order value is found, set it to the largest number possible.
 			(routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE);
+	orderByEntry.set(routeOrDir, order);
+	return order;
 }
+
+const orderByEntry = new WeakMap<Dir | Route, number>();
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
 function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
-	const collator = new Intl.Collator(localeToLang(undefined));
 	return dir.sort(([_keyA, a], [_keyB, b]) => {
 		const [aOrder, bOrder] = [getOrder(a), getOrder(b)];
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? a[SlugKey] : a.id, isDir(b) ? b[SlugKey] : b.id);
+		return sidebarCollator.compare(isDir(a) ? a[SlugKey] : a.id, isDir(b) ? b[SlugKey] : b.id);
 	});
 }
 
@@ -435,18 +436,19 @@ function setIntermediateSidebarCurrentEntry(
 
 /** Finds the current page in a sidebar. */
 function getSidebarCurrentEntry(sidebar: SidebarEntry[], pathname: string): SidebarLink | null {
-	for (const entry of sidebar) {
-		if (entry.type === 'link' && pathsMatch(encodeURI(entry.href), pathname)) {
-			return entry;
+	let entriesByPath = sidebarEntriesByPath.get(sidebar);
+	if (!entriesByPath) {
+		entriesByPath = new Map();
+		for (const entry of flattenSidebar(sidebar)) {
+			const path = neverPathFormatter(encodeURI(entry.href));
+			if (!entriesByPath.has(path)) entriesByPath.set(path, entry);
 		}
-
-		if (entry.type === 'group') {
-			const currentEntry = getSidebarCurrentEntry(entry.entries, pathname);
-			if (currentEntry) return currentEntry;
-		}
+		sidebarEntriesByPath.set(sidebar, entriesByPath);
 	}
-	return null;
+	return entriesByPath.get(neverPathFormatter(pathname)) ?? null;
 }
+
+const sidebarEntriesByPath = new WeakMap<SidebarEntry[], Map<string, SidebarLink>>();
 
 /** Generates a deterministic string based on the content of the passed sidebar. */
 export function getSidebarHash(sidebar: SidebarEntry[]): string {
@@ -472,10 +474,16 @@ function recursivelyBuildSidebarIdentity(sidebar: SidebarEntry[]): string {
 
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */
 export function flattenSidebar(sidebar: SidebarEntry[]): SidebarLink[] {
-	return sidebar.flatMap((entry) =>
+	const cachedSidebar = flattenedSidebars.get(sidebar);
+	if (cachedSidebar) return cachedSidebar;
+	const flattenedSidebar = sidebar.flatMap((entry) =>
 		entry.type === 'group' ? flattenSidebar(entry.entries) : entry
 	);
+	flattenedSidebars.set(sidebar, flattenedSidebar);
+	return flattenedSidebar;
 }
+
+const flattenedSidebars = new WeakMap<SidebarEntry[], SidebarLink[]>();
 
 /** Get previous/next pages in the sidebar or the ones from the frontmatter if any. */
 export function getPrevNextLinks(

@@ -49,15 +49,12 @@ test('paths contain normalized slugs for path parameters', () => {
 	const expectedPaths: GetStaticPathsResult = [
 		{
 			params: { slug: '404' },
-			props: routes[0]!,
 		},
 		{
 			params: { slug: undefined },
-			props: routes[1]!,
 		},
 		{
 			params: { slug: 'guides/authoring-content' },
-			props: routes[2]!,
 		},
 	];
 
