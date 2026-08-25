@@ -27,9 +27,6 @@ peerDependencyRules:
 minimumReleaseAge: 4320
 # TODO(HiDeoo) Remove
 minimumReleaseAgeExclude:
-  - '@astrojs/internal-helpers@0.10.4'
-  - '@astrojs/markdown-remark@7.2.4'
-  - '@astrojs/markdown-satteri@0.3.7'
-  - '@bruits/*'
-  - 'astro@7.2.4'
-  - 'satteri@0.10.3'
+  - '@astrojs/markdown-satteri@0.3.8'
+  - '@astrojs/mdx@7.0.8'
+  - 'astro@7.2.5'
