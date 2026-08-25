@@ -31,26 +31,43 @@ function localizedPathname(locale: string | undefined): string {
 
 <script>
 	class StarlightLanguageSelect extends HTMLElement {
-		constructor() {
-			super();
+		private controller: AbortController | undefined;
+
+		connectedCallback() {
+			this.controller?.abort();
+			this.controller = new AbortController();
+			const { signal } = this.controller;
 			const select = this.querySelector('select');
 			if (select) {
-				select.addEventListener('change', (e) => {
-					if (e.currentTarget instanceof HTMLSelectElement) {
-						window.location.pathname = e.currentTarget.value;
-					}
-				});
-				window.addEventListener('pageshow', (event) => {
-					if (!event.persisted) return;
-					// If the page was loaded from a cache, the language select selected index might not be
-					// in sync with the current page.
-					const markupSelectedIndex =
-						select.querySelector<HTMLOptionElement>('option[selected]')?.index;
-					if (markupSelectedIndex !== select.selectedIndex) {
-						select.selectedIndex = markupSelectedIndex ?? 0;
-					}
-				});
+				select.addEventListener(
+					'change',
+					(e) => {
+						if (e.currentTarget instanceof HTMLSelectElement) {
+							window.location.pathname = e.currentTarget.value;
+						}
+					},
+					{ signal }
+				);
+				window.addEventListener(
+					'pageshow',
+					(event) => {
+						if (!event.persisted) return;
+						// If the page was loaded from a cache, the language select selected index might not be
+						// in sync with the current page.
+						const markupSelectedIndex =
+							select.querySelector<HTMLOptionElement>('option[selected]')?.index;
+						if (markupSelectedIndex !== select.selectedIndex) {
+							select.selectedIndex = markupSelectedIndex ?? 0;
+						}
+					},
+					{ signal }
+				);
 			}
+		}
+
+		disconnectedCallback() {
+			this.controller?.abort();
+			this.controller = undefined;
 		}
 	}
 	customElements.define('starlight-lang-select', StarlightLanguageSelect);
