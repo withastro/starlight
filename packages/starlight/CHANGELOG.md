@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.41.8
+
+### Patch Changes
+
+- [#4142](https://github.com/withastro/starlight/pull/4142) [`cacbc9f`](https://github.com/withastro/starlight/commit/cacbc9ff45c551c2f20c6b307800f7ff7ee07db2) Thanks [@alebelcor](https://github.com/alebelcor)! - Adds 1 new icon: `whatsApp`
+
+- [#4133](https://github.com/withastro/starlight/pull/4133) [`3944311`](https://github.com/withastro/starlight/commit/3944311bed46f956e12e79a8eb0c32084eeeaea6) Thanks [@delucis](https://github.com/delucis)! - Internal refactor: numbered `id` attributes in the `<Tabs>` component are now page-specific instead of using a global counter
+
+- [#4138](https://github.com/withastro/starlight/pull/4138) [`cd4b665`](https://github.com/withastro/starlight/commit/cd4b6655f3235220cded12f0567e0dad1bf5adac) Thanks [@delucis](https://github.com/delucis)! - Fixes localisation of code block UI elements when using the Sätteri Markdown processor
+
 ## 0.41.7
 
 ### Patch Changes
