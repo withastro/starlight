@@ -6,8 +6,6 @@ import { starlightRehypePlugins, starlightRemarkPlugins } from '../../integratio
 import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../integrations/satteri';
 import type { StarlightUserConfig } from '../../utils/user-config';
 import { createPluginTestOptions, docFileURL } from '../test-utils';
-// TODO(HiDeoo) Remove import when https://github.com/withastro/astro/pull/17766 is released
-import type { HastPluginDefinition, MdastPluginDefinition } from 'satteri';
 
 /**
  * The Markdown processors Starlight supports. The same Starlight transforms (asides, heading anchor
@@ -26,10 +24,8 @@ export async function createStarlightMarkdownProcessor(
 	if (name === 'satteri') {
 		const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(options);
 		return createSatteriMarkdownProcessor({
-			// TODO(HiDeoo) Remove cast when https://github.com/withastro/astro/pull/17766 is released
-			mdastPlugins: [...mdastPlugins, satteriDirectivesRestoration()] as MdastPluginDefinition[],
-			// TODO(HiDeoo) Remove cast when https://github.com/withastro/astro/pull/17766 is released
-			hastPlugins: hastPlugins as HastPluginDefinition[],
+			mdastPlugins: [...mdastPlugins, satteriDirectivesRestoration()],
+			hastPlugins,
 			// Starlight's asides rely on container directives, which Sätteri disables by default.
 			features: { directive: true },
 			...(syntaxHighlight === false ? { syntaxHighlight: false } : {}),

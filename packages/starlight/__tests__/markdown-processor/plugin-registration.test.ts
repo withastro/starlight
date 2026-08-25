@@ -66,8 +66,8 @@ describe('registerDirectivesRestoration', () => {
 	test('registers the mdast restoration plugin on a Sätteri processor', () => {
 		const processor = satteri();
 		registerDirectivesRestoration(processor, unifiedIntegration);
-		expect(processor.options.mdastPlugins.map((plugin) => plugin.name)).toContain(
-			'starlight-directives-restoration'
+		expect(processor.options.mdastPlugins).toContainEqual(
+			expect.objectContaining({ name: 'starlight-directives-restoration' })
 		);
 	});
 

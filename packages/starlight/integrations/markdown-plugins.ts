@@ -2,8 +2,6 @@ import { isSatteriProcessor } from '@astrojs/markdown-satteri';
 import type { AstroConfig, AstroIntegration, AstroIntegrationLogger } from 'astro';
 import type { MarkdownProcessorPluginOptions } from './markdown-processor';
 import { satteriDirectivesRestoration, starlightSatteriPlugins } from './satteri';
-// TODO(HiDeoo) Remove import when https://github.com/withastro/astro/pull/17766 is released
-import type { HastPluginEntry, MdastPluginEntry } from 'satteri';
 
 // This file is imported by the Starlight integration that is used in Astro configuration files.
 // When using Starlight, Astro loads its configuration using a temporary Vite module runner and
@@ -30,10 +28,8 @@ export function applyStarlightMarkdownPlugins(
 		// Starlight's asides are built on container directives, which Sätteri disables by default.
 		processor.options.features.directive = true;
 		const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(options);
-		// TODO(HiDeoo) Remove cast when https://github.com/withastro/astro/pull/17766 is released
-		(processor.options.mdastPlugins as MdastPluginEntry[]).push(...mdastPlugins);
-		// TODO(HiDeoo) Remove cast when https://github.com/withastro/astro/pull/17766 is released
-		(processor.options.hastPlugins as HastPluginEntry[]).push(...hastPlugins);
+		processor.options.mdastPlugins.push(...mdastPlugins);
+		processor.options.hastPlugins.push(...hastPlugins);
 	} else if (unified?.isUnifiedProcessor(processor)) {
 		processor.options.remarkPlugins.push(...unified.starlightRemarkPlugins(options));
 		processor.options.rehypePlugins.push(...unified.starlightRehypePlugins(options));
