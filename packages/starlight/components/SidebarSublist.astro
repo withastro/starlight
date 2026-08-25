@@ -1,6 +1,5 @@
 ---
-import { flattenSidebar } from '../utils/navigation';
-import type { SidebarEntry } from '../utils/routing/types';
+import type { SidebarEntry, SidebarGroup } from '../utils/routing/types';
 import Icon from '../user-components/Icon.astro';
 import Badge from '../user-components/Badge.astro';
 import SidebarRestorePoint from './SidebarRestorePoint.astro';
@@ -8,9 +7,28 @@ import SidebarRestorePoint from './SidebarRestorePoint.astro';
 interface Props {
 	sublist: SidebarEntry[];
 	nested?: boolean;
+	currentGroups?: Set<SidebarGroup>;
 }
 
 const { sublist, nested } = Astro.props;
+let { currentGroups } = Astro.props;
+if (!currentGroups) {
+	currentGroups = new Set();
+	findCurrentGroups(sublist, currentGroups);
+}
+
+function findCurrentGroups(entries: SidebarEntry[], groups: Set<SidebarGroup>): boolean {
+	let containsCurrent = false;
+	for (const entry of entries) {
+		if (entry.type === 'link') {
+			containsCurrent ||= entry.isCurrent;
+		} else if (findCurrentGroups(entry.entries, groups)) {
+			groups.add(entry);
+			containsCurrent = true;
+		}
+	}
+	return containsCurrent;
+}
 ---
 
 <ul class:list={{ 'top-level': !nested }}>
@@ -34,9 +52,7 @@ const { sublist, nested } = Astro.props;
 						)}
 					</a>
 				) : (
-					<details
-						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
-					>
+					<details open={currentGroups.has(entry) || !entry.collapsed}>
 						<summary>
 							<span class="group-label">
 								<span class="large">{entry.label}</span>
@@ -51,7 +67,7 @@ const { sublist, nested } = Astro.props;
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<SidebarRestorePoint />
-						<Astro.self sublist={entry.entries} nested />
+						<Astro.self sublist={entry.entries} currentGroups={currentGroups} nested />
 					</details>
 				)}
 			</li>
