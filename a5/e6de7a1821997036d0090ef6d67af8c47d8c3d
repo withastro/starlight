@@ -1,0 +1,21 @@
+packages/starlight/components-internals/SidebarPersistState.ts
+  s_885f1d1a81a544::t_ce1f5c102f2e6c 24-26,28-38,40-78,80
+packages/starlight/components/SidebarPersister.astro
+  s_885f1d1a81a544::t_ad577be27468ac 30,36-44,52,60-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "a5e6de7a1821997036d0090ef6d67af8c47d8c3d",
+  "prompts": {},
+  "sessions": {
+    "s_885f1d1a81a544": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc7caa133ffefmJCJdX8Y1ae4S",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "ematipico <estoppa@cloudflare.com>"
+    }
+  }
+}
