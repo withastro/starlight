@@ -242,7 +242,7 @@ jobs:
     name: Run zizmor
     needs: changes
     if: ${{ needs.changes.outputs.workflows == 'true' }}
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       security-events: write
