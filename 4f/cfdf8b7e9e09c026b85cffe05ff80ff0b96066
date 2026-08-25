@@ -1,0 +1,19 @@
+packages/starlight/utils/git.ts
+  s_885f1d1a81a544::t_b39e22ae11f0c9 14,16-23,68-79,90,109,112,116,127,129-133,144-159
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4fcfdf8b7e9e09c026b85cffe05ff80ff0b96066",
+  "prompts": {},
+  "sessions": {
+    "s_885f1d1a81a544": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc7caa133ffefmJCJdX8Y1ae4S",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "ematipico <estoppa@cloudflare.com>"
+    }
+  }
+}
