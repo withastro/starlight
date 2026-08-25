@@ -1,0 +1,19 @@
+packages/starlight/components/Search.astro
+  s_885f1d1a81a544::t_b5d410a00688d6 80-87,95,107,110-112,115-117,119-121,123,125-130,133-143,145-163,172-187,189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "12b05821fd6d1fdbbcf7cb75988b9ddb4602ab16",
+  "prompts": {},
+  "sessions": {
+    "s_885f1d1a81a544": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc7caa133ffefmJCJdX8Y1ae4S",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "ematipico <estoppa@cloudflare.com>"
+    }
+  }
+}
