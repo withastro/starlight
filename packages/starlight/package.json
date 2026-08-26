@@ -4,10 +4,10 @@
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "build": "tsdown",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
+    "test:coverage": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run --coverage",
     "test:dist": "pnpm build && pnpm test:dist:ci",
-    "test:dist:ci": "vitest run -c vitest.dist.config.ts",
+    "test:dist:ci": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run -c vitest.dist.config.ts",
     "test:e2e": "playwright install --with-deps chromium && playwright test",
     "test:e2e:ci": "playwright test"
   },
