@@ -19,6 +19,7 @@ export default async (env: Parameters<typeof testConfig>[0]) => {
 				include: ['__bench_fn__/*.bench.ts'],
 			},
 			fileParallelism: false,
+			hookTimeout: 600_000,
 		},
 	};
 };
