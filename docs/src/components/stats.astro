@@ -1,13 +1,11 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
 import type { StarlightIcon } from '@astrojs/starlight/types';
+import data from '../content/stats.json';
 
-// TODO(HiDeoo) I did not yet put a lot of effort into this component at this stage, but it's a
-// good enough placeholder for now.
-
-// TODO(HiDeoo) Stats could come from a data content collection, and be updated on a weekly basis
-// in a GitHub action but I did not do that yet and will wait once we know for sure we want to do
-// that.
+interface Props {
+	labels: Record<'downloads' | 'stars' | 'cwv' | 'carbon' | 'contributors' | 'note', string>;
+}
 
 interface Stat {
 	label: string;
@@ -18,27 +16,32 @@ interface Stat {
 	featured?: boolean;
 }
 
-// TODO(HiDeoo) udpate
+const { labels } = Astro.props;
+const { lang } = Astro.locals.starlightRoute.entryMeta;
+
+const formatQuantity = new Intl.NumberFormat(lang, { notation: 'compact' }).format;
+const formatPercent = new Intl.NumberFormat(lang, { style: 'percent' }).format;
+
 const stats: Stat[] = [
 	{
-		label: 'monthly downloads',
-		value: '2.8M',
+		label: labels.downloads,
+		value: formatQuantity(data.downloads),
 		source: 'npm',
 		href: 'https://www.npmjs.com/package/@astrojs/starlight',
 		icon: 'download',
 		featured: true,
 	},
 	{
-		label: 'GitHub stars',
-		value: '9.1K',
+		label: labels.stars,
+		value: formatQuantity(data.stars),
 		source: 'GitHub',
 		href: 'https://github.com/withastro/starlight/stargazers',
 		icon: 'star',
 		featured: true,
 	},
 	{
-		label: 'Core Web Vitals',
-		value: '94%',
+		label: labels.cwv,
+		value: formatPercent(data.cwv),
 		source: 'HTTP Archive',
 		href: 'https://httparchive.org/reports/techreport/tech?tech=Starlight,MkDocs,Sphinx,VitePress,Nextra,GitBook,Docusaurus,Docsify&geo=ALL&rank=ALL&page=1',
 		icon: {
@@ -46,8 +49,8 @@ const stats: Stat[] = [
 		},
 	},
 	{
-		label: 'carbon rating',
-		value: 'A+',
+		label: labels.carbon,
+		value: data.carbon,
 		source: 'Website Carbon',
 		href: 'https://www.websitecarbon.com/website/starlight-astro-build-getting-started/',
 		icon: {
@@ -55,8 +58,8 @@ const stats: Stat[] = [
 		},
 	},
 	{
-		label: 'contributors',
-		value: '350',
+		label: labels.contributors,
+		value: formatQuantity(data.contributors),
 		source: 'GitHub',
 		href: 'https://github.com/withastro/starlight/graphs/contributors',
 		icon: {
@@ -94,7 +97,14 @@ const stats: Stat[] = [
 		))
 	}
 </ul>
-<p class="stats-meta">Data collected on August 26, 2026.</p>
+<p class="stats-meta">
+	{
+		// @ts-expect-error — We’re using an unknown “key” to depend on i18next’s interpolation logic.
+		Astro.locals.t(labels.note, {
+			date: new Date(data.lastUpdated).toLocaleDateString(lang, { dateStyle: 'long' }),
+		})
+	}
+</p>
 
 <style>
 	.stats-grid {
