@@ -107,9 +107,10 @@ const stats: Stat[] = [
 	}
 
 	.stat {
-		display: flex;
+		display: grid;
 		flex-direction: column;
 		gap: 0.5rem;
+		grid-template-columns: 1fr auto;
 		line-height: 1.5;
 		padding: 1.5rem;
 		position: relative;
@@ -123,6 +124,7 @@ const stats: Stat[] = [
 		align-items: center;
 		display: flex;
 		gap: 1rem;
+		grid-column: 1 / -1;
 	}
 
 	.icon {
@@ -142,17 +144,18 @@ const stats: Stat[] = [
 	}
 
 	.label {
+		align-self: center;
 		color: var(--sl-color-gray-2);
 		font-size: var(--sl-text-lg);
-		margin-top: 0.25rem;
+		margin-top: 0;
 	}
 
 	.stat a {
-		align-self: flex-start;
+		align-self: center;
 		color: var(--sl-color-text-accent);
 		font-size: var(--sl-text-sm);
 		margin-top: auto;
-		/* padding-top: 0.5rem; */
+		margin-top: 0;
 		text-underline-offset: 4px;
 	}
 
@@ -165,7 +168,13 @@ const stats: Stat[] = [
 			grid-template-columns: repeat(6, minmax(0, 1fr));
 		}
 
+		.label {
+			align-self: auto;
+			margin-top: 0.25rem;
+		}
+
 		.stat {
+			display: flex;
 			grid-column: span 2;
 		}
 
@@ -192,6 +201,11 @@ const stats: Stat[] = [
 				position: absolute;
 				width: 1px;
 			}
+		}
+
+		.stat a {
+			align-self: flex-start;
+			margin-top: auto;
 		}
 
 		.stat-heading {
