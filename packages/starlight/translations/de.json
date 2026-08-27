@@ -24,9 +24,6 @@
   "aside.tip": "Tipp",
   "aside.caution": "Achtung",
   "aside.danger": "Gefahr",
-  "expressiveCode.terminalWindowFallbackTitle": "Terminal-Fenster",
-  "expressiveCode.copyButtonTooltip": "In Zwischenablage kopieren",
-  "expressiveCode.copyButtonCopied": "Kopiert!",
   "fileTree.directory": "Ordner",
   "builtWithStarlight.label": "Erstellt mit Starlight",
   "heading.anchorLabel": "Abschnitt betitelt „{{title}}“"
