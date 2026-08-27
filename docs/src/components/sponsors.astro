@@ -1,4 +1,6 @@
 ---
+import { LinkButton } from '@astrojs/starlight/components';
+
 interface Props {
 	title: string;
 	cta: string;
@@ -13,7 +15,7 @@ const { title, cta } = Astro.props;
 		<slot />
 	</div>
 	<div class="sponsors-link">
-		<a href="/sponsor/">{cta}</a>
+		<LinkButton href="/sponsor/" icon="heart">{cta}</LinkButton>
 	</div>
 </div>
 
@@ -36,12 +38,5 @@ const { title, cta } = Astro.props;
 	.sponsors-link {
 		margin-top: 1rem;
 		text-align: center;
-	}
-	.sponsors-link a {
-		color: var(--sl-color-text-accent);
-		text-underline-offset: 4px;
-	}
-	.sponsors-link a:hover {
-		color: var(--sl-color-white);
 	}
 </style>
