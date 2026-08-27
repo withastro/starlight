@@ -24,6 +24,9 @@
   "aside.tip": "提示",
   "aside.caution": "警告",
   "aside.danger": "危险",
+  "expressiveCode.terminalWindowFallbackTitle": "终端窗口",
+  "expressiveCode.copyButtonTooltip": "复制到剪贴板",
+  "expressiveCode.copyButtonCopied": "复制成功！",
   "fileTree.directory": "文件夹",
   "builtWithStarlight.label": "基于 Starlight 构建",
   "heading.anchorLabel": "Section titled “{{title}}”"
