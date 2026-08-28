@@ -78,7 +78,7 @@ Starlight assesses accessibility through the following approaches:
 
 ---
 
-This statement was created in January 2026 and last reviewed in June 2026 using the [W3C Accessibility Statement Generator Tool][wai-generator].
+This statement was created in September 2026 using the [W3C Accessibility Statement Generator Tool][wai-generator].
 
 [wcag]: https://www.w3.org/WAI/standards-guidelines/wcag/
 [wai-generator]: https://www.w3.org/WAI/planning/statements/generator/
