@@ -8,7 +8,7 @@
 
 - [#4156](https://github.com/withastro/starlight/pull/4156) [`57af92d`](https://github.com/withastro/starlight/commit/57af92d91f9a9d0936a06efb4387898aded62aa9) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `hypothesis`
 
-- [#4159](https://github.com/withastro/starlight/pull/4159) [`a0e0ba2`](https://github.com/withastro/starlight/commit/a0e0ba263c93bab214222b798b52a759fb799ba7) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `npmx`
+- [#4159](https://github.com/withastro/starlight/pull/4159) [`a0e0ba2`](https://github.com/withastro/starlight/commit/a0e0ba263c93bab214222b798b52a759fb799ba7) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds 1 new icon: `npmx`
 
 ## 0.41.9
 
