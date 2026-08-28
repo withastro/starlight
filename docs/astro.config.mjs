@@ -186,6 +186,12 @@ export default defineConfig({
 						uk: 'Ресурси',
 						fa: 'منابع',
 					},
+					// TODO(HiDeoo) Figure out if we really want a sidebar link to the sponsor page or use
+					// another approach.
+					// Some other approaches I considered:
+					//  - footer link (à la Astro)
+					//  - sidebar widget
+					//  - near the edit link on each page (but that might be too subtle)
 					items: [{ autogenerate: { directory: 'resources' } }, 'sponsor'],
 				},
 			],
