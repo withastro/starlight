@@ -7,6 +7,7 @@ import {
 	type StarlightConfig,
 	type StarlightUserConfig,
 } from '../utils/user-config';
+import { processI18nConfig } from './i18n';
 import type { UserI18nSchema } from './translations';
 import { createTranslationSystemFromFs } from './translations-fs';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../integrations/shared/absolutePathToLang';
@@ -25,10 +26,20 @@ export async function runPlugins(
 	// Validate the user-provided configuration.
 	let userConfig = starlightUserConfig;
 
-	let starlightConfig = parseWithFriendlyErrors(
-		StarlightConfigSchema,
-		userConfig,
-		'Invalid config passed to starlight integration'
+	/**
+	 * Merges any Astro i18n configuration into a Starlight configuration so that the locales
+	 * Starlight will actually use are known when creating the translation system and the
+	 * `absolutePathToLang()` helper below, and when passing the config down to plugins.
+	 */
+	const withAstroI18nConfig = (config: StarlightConfig) =>
+		processI18nConfig(config, context.config.i18n).starlightConfig;
+
+	let starlightConfig = withAstroI18nConfig(
+		parseWithFriendlyErrors(
+			StarlightConfigSchema,
+			userConfig,
+			'Invalid config passed to starlight integration'
+		)
 	);
 
 	// Validate the user-provided plugins configuration.
@@ -109,7 +120,7 @@ export async function runPlugins(
 
 				// If the updated config is valid, keep track of both the user config and parsed config.
 				userConfig = mergedUserConfig;
-				starlightConfig = mergedConfig;
+				starlightConfig = withAstroI18nConfig(mergedConfig);
 			},
 			addIntegration(integration) {
 				// Collect any Astro integrations added by the plugin.

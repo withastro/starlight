@@ -6,11 +6,18 @@ import type { MdastPluginDefinition } from 'satteri';
 import { describe, expect, test, vi } from 'vitest';
 import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
 import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../integrations/satteri';
-import { starlightRemarkPlugins } from '../../integrations/remark-rehype';
+import { starlightRehypePlugins, starlightRemarkPlugins } from '../../integrations/remark-rehype';
 import type { StarlightUserConfig } from '../../utils/user-config';
-import { BuiltInDefaultLocale } from '../../utils/i18n';
+import { BuiltInDefaultLocale, processI18nConfig } from '../../utils/i18n';
+import { runPlugins } from '../../utils/plugins';
+import { createTestPluginContext } from '../test-plugin-utils';
 import { createPluginTestOptions, docFileURL } from '../test-utils';
-import { createStarlightMarkdownProcessor, describeEachProcessor, nonDocFileURL } from './utils';
+import {
+	createStarlightMarkdownProcessor,
+	describeEachProcessor,
+	nonDocFileURL,
+	type ProcessorName,
+} from './utils';
 
 const starlightConfig = {
 	title: 'Asides Tests',
@@ -19,6 +26,47 @@ const starlightConfig = {
 } satisfies StarlightUserConfig;
 
 const types = ['note', 'tip', 'caution', 'danger'] as const;
+
+/**
+ * Builds a Markdown processor the same way the Starlight integration does for a project relying on
+ * Astro’s `i18n` configuration instead of Starlight’s own `locales` option.
+ */
+async function createAstroI18nMarkdownProcessor(name: ProcessorName) {
+	const srcDir = new URL('../_src/', import.meta.url);
+	const context = createTestPluginContext({
+		srcDir,
+		i18n: {
+			defaultLocale: 'id',
+			locales: ['id'],
+			routing: {
+				prefixDefaultLocale: false,
+				redirectToDefaultLocale: false,
+				fallbackType: 'redirect',
+			},
+		},
+	});
+	const pluginResult = await runPlugins({ title: 'Astro i18n Asides Tests' }, [], context);
+	const { starlightConfig } = processI18nConfig(pluginResult.starlightConfig, context.config.i18n);
+	const options = {
+		starlightConfig,
+		astroConfig: { root: new URL('../', import.meta.url), srcDir },
+		useTranslations: pluginResult.useTranslations,
+		absolutePathToLang: pluginResult.absolutePathToLang,
+	};
+
+	if (name === 'satteri') {
+		const { mdastPlugins, hastPlugins } = starlightSatteriPlugins(options);
+		return createSatteriMarkdownProcessor({
+			mdastPlugins: [...mdastPlugins, satteriDirectivesRestoration()],
+			hastPlugins,
+			features: { directive: true },
+		});
+	}
+	return createMarkdownProcessor({
+		remarkPlugins: [...starlightRemarkPlugins(options), remarkDirectivesRestoration],
+		rehypePlugins: [...starlightRehypePlugins(options)],
+	});
+}
 
 describeEachProcessor(
 	'asides',
@@ -141,6 +189,13 @@ describeEachProcessor(
 			});
 			const res = await ctx().render(':::note\nTest\n:::', { processor });
 			expect(res.code).includes('aria-label="Note"');
+		});
+
+		test('uses the locale from an Astro i18n config when Starlight has no locales config', async () => {
+			const processor = await createAstroI18nMarkdownProcessor(name);
+			const res = await ctx().render(':::note\nTest\n:::', { processor });
+			expect(res.code).includes('aria-label="Catatan"');
+			expect(res.code).includes('</svg>Catatan</p>');
 		});
 
 		test('transforms unhandled text directives back to their source', async () => {

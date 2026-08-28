@@ -1,12 +1,14 @@
-import type { AstroIntegrationLogger } from 'astro';
+import type { AstroConfig, AstroIntegrationLogger } from 'astro';
 import { type StarlightPluginContext } from '../utils/plugins';
 
-export function createTestPluginContext(): StarlightPluginContext {
+export function createTestPluginContext(
+	config?: Partial<Pick<AstroConfig, 'i18n' | 'srcDir'>>
+): StarlightPluginContext {
 	return {
 		command: 'dev',
 		// @ts-expect-error - we don't provide a full Astro config but only what is needed for the
 		// plugins to run.
-		config: { srcDir: new URL('./src/', import.meta.url), integrations: [] },
+		config: { srcDir: new URL('./src/', import.meta.url), integrations: [], ...config },
 		isRestart: false,
 		logger: new TestAstroIntegrationLogger(),
 	};
