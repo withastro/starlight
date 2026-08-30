@@ -24,6 +24,9 @@
   "aside.tip": "팁",
   "aside.caution": "주의",
   "aside.danger": "위험",
+  "expressiveCode.terminalWindowFallbackTitle": "터미널 창",
+  "expressiveCode.copyButtonTooltip": "클립보드로 복사",
+  "expressiveCode.copyButtonCopied": "복사 완료!",
   "fileTree.directory": "디렉터리",
   "builtWithStarlight.label": "이 웹사이트는 Starlight로 제작되었습니다.",
   "heading.anchorLabel": "섹션 제목: “{{title}}”"

@@ -24,6 +24,9 @@
   "aside.tip": "ヒント",
   "aside.caution": "注意",
   "aside.danger": "危険",
+  "expressiveCode.terminalWindowFallbackTitle": "ターミナルウィンドウ",
+  "expressiveCode.copyButtonTooltip": "クリップボードにコピー",
+  "expressiveCode.copyButtonCopied": "コピーしました！",
   "fileTree.directory": "ディレクトリ",
   "builtWithStarlight.label": "Starlightで作成",
   "heading.anchorLabel": "Section titled “{{title}}”"
