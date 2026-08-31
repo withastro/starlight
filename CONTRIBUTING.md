@@ -117,6 +117,13 @@ You should then be able to open <http://localhost:4321> and see your changes.
 > **Note**
 > Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
 
+To ensure the docs site builds successfully with the packaged version of Starlight:
+
+```sh
+cd docs
+pnpm build:dist
+```
+
 ### Check for broken links in the docs site
 
 When adding or translating content in the Starlight docs site, you can check all internal links are valid.
@@ -143,6 +150,13 @@ pnpm test
 ```
 
 This will run tests and then listen for changes, re-running tests when files change.
+
+To build Starlight and run the unit tests against its generated package output:
+
+```sh
+cd packages/starlight
+pnpm test:dist
+```
 
 #### Test environments
 
