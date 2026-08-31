@@ -27,13 +27,13 @@ export async function defineVitestConfig(
 	const trailingSlash = opts?.trailingSlash ?? 'ignore';
 	const command = opts?.command ?? 'dev';
 
-	const { runPlugins: testRunPlugins } = await loadTestModule('utils/plugins.mjs', { runPlugins });
+	const { runPlugins: testRunPlugins } = await loadTestModule('utils/plugins.js', { runPlugins });
 	const { vitePluginStarlightCssLayerOrder: testVitePluginStarlightCssLayerOrder } =
-		await loadTestModule('integrations/vite-layer-order.mjs', {
+		await loadTestModule('integrations/vite-layer-order.js', {
 			vitePluginStarlightCssLayerOrder,
 		});
 	const { vitePluginStarlightVirtualModules: testVitePluginStarlightVirtualModules } =
-		await loadTestModule('integrations/vite-virtual-modules.mjs', {
+		await loadTestModule('integrations/vite-virtual-modules.js', {
 			vitePluginStarlightVirtualModules,
 		});
 

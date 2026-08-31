@@ -14,6 +14,7 @@ export default defineConfig({
 		// https://github.com/withastro/astro/blob/c4c99aa7a5e8e45ada0efa4fda6e6fb96f334663/packages/astro/package.json#L55
 		'!src/components.ts',
 	],
+	fixedExtension: false,
 	plugins: [rawImportPlugin()],
 	publint: { strict: true },
 	unbundle: true,

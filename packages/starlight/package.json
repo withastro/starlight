@@ -99,46 +99,46 @@
   "publishConfig": {
     "exports": {
       ".": {
-        "types": "./dist/index.d.mts",
-        "import": "./dist/index.mjs"
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
       },
       "./locals": {
-        "types": "./dist/locals.d.mts",
-        "import": "./dist/locals.mjs"
+        "types": "./dist/locals.d.ts",
+        "import": "./dist/locals.js"
       },
       "./components": "./dist/components.ts",
       "./components/*": "./dist/components/*",
       "./internal": {
-        "types": "./dist/internal.d.mts",
-        "import": "./dist/internal.mjs"
+        "types": "./dist/internal.d.ts",
+        "import": "./dist/internal.js"
       },
       "./props": {
-        "types": "./dist/props.d.mts",
-        "import": "./dist/props.mjs"
+        "types": "./dist/props.d.ts",
+        "import": "./dist/props.js"
       },
       "./schema": {
-        "types": "./dist/schema.d.mts",
-        "import": "./dist/schema.mjs"
+        "types": "./dist/schema.d.ts",
+        "import": "./dist/schema.js"
       },
       "./loaders": {
-        "types": "./dist/loaders.d.mts",
-        "import": "./dist/loaders.mjs"
+        "types": "./dist/loaders.d.ts",
+        "import": "./dist/loaders.js"
       },
       "./route-data": {
-        "types": "./dist/route-data.d.mts",
-        "import": "./dist/route-data.mjs"
+        "types": "./dist/route-data.d.ts",
+        "import": "./dist/route-data.js"
       },
       "./types": {
-        "types": "./dist/types.d.mts",
-        "import": "./dist/types.mjs"
+        "types": "./dist/types.d.ts",
+        "import": "./dist/types.js"
       },
       "./expressive-code": {
-        "types": "./dist/expressive-code.d.mts",
-        "import": "./dist/expressive-code.mjs"
+        "types": "./dist/expressive-code.d.ts",
+        "import": "./dist/expressive-code.js"
       },
       "./expressive-code/hast": {
-        "types": "./dist/integrations/expressive-code/hast.d.mts",
-        "import": "./dist/integrations/expressive-code/hast.mjs"
+        "types": "./dist/integrations/expressive-code/hast.d.ts",
+        "import": "./dist/integrations/expressive-code/hast.js"
       },
       "./routes/*": "./dist/routes/*",
       "./style/markdown.css": "./dist/style/markdown.css"
