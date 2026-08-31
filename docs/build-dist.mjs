@@ -31,7 +31,7 @@ try {
 	shouldRestoreWorkspace = !process.env.CI && !process.env.NETLIFY;
 
 	// Install the tarball in the `docs/` directory without updating the `pnpm-lock.yaml` file.
-	runPnpm(docsDir, 'add', '--offline', '--lockfile=false', tarballPath);
+	runPnpm(docsDir, 'add', '--prefer-offline', '--lockfile=false', tarballPath);
 	// Build the documentation using the built version of Starlight.
 	runPnpm(docsDir, 'exec', 'astro', 'build');
 } finally {
