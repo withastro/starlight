@@ -24,6 +24,9 @@
   "aside.tip": "Consiglio",
   "aside.caution": "Attenzione",
   "aside.danger": "Pericolo",
+  "expressiveCode.terminalWindowFallbackTitle": "Finestra del terminale",
+  "expressiveCode.copyButtonTooltip": "Copia",
+  "expressiveCode.copyButtonCopied": "Copiato!",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "Built with Starlight",
   "heading.anchorLabel": "Sezione intitolata “{{title}}”"
