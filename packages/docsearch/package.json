@@ -38,13 +38,13 @@
   "publishConfig": {
     "exports": {
       ".": {
-        "types": "./dist/index.d.mts",
-        "import": "./dist/index.mjs"
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
       },
       "./DocSearch.astro": "./dist/DocSearch.astro",
       "./schema": {
-        "types": "./dist/schema.d.mts",
-        "import": "./dist/schema.mjs"
+        "types": "./dist/schema.d.ts",
+        "import": "./dist/schema.js"
       }
     }
   }
