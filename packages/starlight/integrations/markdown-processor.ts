@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { AstroConfig } from 'astro';
+import type { Properties } from 'hast';
 import { resolveCollectionPath } from '../utils/collection-fs';
 import { ensureTrailingSlash } from '../utils/path';
 import type { HookParameters, StarlightConfig } from '../types';
@@ -42,6 +43,15 @@ export function shouldTransformPath(path: string | URL | undefined, allowedPaths
 	if (!path) return false;
 	const normalizedPath = normalizePath(path instanceof URL ? fileURLToPath(path) : path);
 	return allowedPaths.some((p) => normalizedPath.startsWith(p));
+}
+
+/**
+ * Determines if a heading is visually hidden, e.g. the “Footnotes” heading GitHub Flavored Markdown
+ * generates for a footnotes section, which should not get an anchor link as the link would show up
+ * on its own with no visible heading next to it.
+ */
+export function isVisuallyHiddenHeading(properties: Properties | undefined) {
+	return Array.isArray(properties?.className) && properties.className.includes('sr-only');
 }
 
 /**

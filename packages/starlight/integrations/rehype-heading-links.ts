@@ -4,7 +4,7 @@ import { h, s } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 import { headingLinkIconChildren } from './markdown-icon';
-import type { MarkdownProcessorPluginOptions } from './markdown-processor';
+import { isVisuallyHiddenHeading, type MarkdownProcessorPluginOptions } from './markdown-processor';
 
 const AnchorLinkIcon = h(
 	'span',
@@ -28,7 +28,13 @@ export default function rehypeAutolinkHeadings({
 		const t = useTranslations(pageLang);
 
 		visit(tree, 'element', function (node, index, parent) {
-			if (!headingRank(node) || !node.properties.id || typeof index !== 'number' || !parent) {
+			if (
+				!headingRank(node) ||
+				!node.properties.id ||
+				isVisuallyHiddenHeading(node.properties) ||
+				typeof index !== 'number' ||
+				!parent
+			) {
 				return;
 			}
 

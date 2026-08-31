@@ -57,6 +57,13 @@ describeEachProcessor(
 			expect(res.code).not.includes('sl-anchor-link');
 		});
 
+		test('skips visually hidden headings', async () => {
+			const res = await ctx().render(`Some text[^1]\n\n[^1]: A footnote.\n`);
+			expect(res.code).includes('<h2 class="sr-only" id="footnote-label">Footnotes</h2>');
+			expect(res.code).not.includes('sl-heading-wrapper');
+			expect(res.code).not.includes('sl-anchor-link');
+		});
+
 		test('skips files outside the docs collection', async () => {
 			const res = await ctx().render(`\n## Some text\n`, { fileURL: nonDocFileURL() });
 			expect(res.code).not.includes('sl-heading-wrapper');

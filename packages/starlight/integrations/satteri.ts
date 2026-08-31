@@ -15,6 +15,7 @@ import { headingLinkIconChildren } from './markdown-icon';
 import { getAsideIcon, isAsideVariant } from './aside-utils';
 import {
 	getMarkdownProcessorPaths,
+	isVisuallyHiddenHeading,
 	shouldTransformPath,
 	type MarkdownProcessorPluginOptions,
 } from './markdown-processor';
@@ -210,6 +211,7 @@ function satteriAutolinkHeadingsPlugin(
 
 				const id = node.properties?.['id'];
 				if (typeof id !== 'string' || !id) return;
+				if (isVisuallyHiddenHeading(node.properties)) return;
 
 				const title = ctx.textContent(node);
 				// `shouldTransformPath` above already returned for a missing `fileURL`.
