@@ -333,7 +333,7 @@ Im obigen Beispiel wird eine Meldung protokolliert, die einen integrierten UI-St
 
 Rufe `absolutePathToLang()` mit einem absoluten Dateipfad auf, um die Sprache für diese Datei zu erhalten.
 
-Dies kann besonders nützlich sein, wenn du [remark oder rehype Plugins](https://docs.astro.build/de/guides/markdown-content/#markdown-plugins) hinzufügst, um Markdown- oder MDX-Dateien zu verarbeiten.
+Dies kann besonders nützlich sein, wenn du [remark oder rehype Plugins](https://docs.astro.build/de/guides/markdown-content/#markdown-processor-plugins) hinzufügst, um Markdown- oder MDX-Dateien zu verarbeiten.
 Das von diesen Plugins verwendete [virtuelle Dateiformat](https://github.com/vfile/vfile) enthält den [absoluten Pfad](https://github.com/vfile/vfile#filepath) der zu verarbeitenden Datei, der mit `absolutePathToLang()` verwendet werden kann, um die Sprache der Datei zu bestimmen.
 Die zurückgegebene Sprache kann mit dem Helfer [`useTranslations()`](#usetranslations) verwendet werden, um UI-Strings für diese Sprache zu erhalten.
 

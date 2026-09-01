@@ -12,7 +12,6 @@ validateLogoImports();
 
 interface Path extends GetStaticPathsItem {
 	params: { slug: string | undefined };
-	props: Route;
 }
 
 /**
@@ -61,10 +60,10 @@ function getRoutes(): Route[] {
 			if (!localeConfig) continue;
 			const locale = key === 'root' ? undefined : key;
 			const localeDocs = getLocaleDocs(locale);
+			const localeDocIds = new Set(localeDocs.map(({ id }) => id));
 			for (const fallback of defaultLocaleDocs) {
 				const id = localizedSlug(fallback.id, locale);
-				const doesNotNeedFallback = localeDocs.some((doc) => doc.id === id);
-				if (doesNotNeedFallback) continue;
+				if (localeDocIds.has(id)) continue;
 				routes.push({
 					entry: fallback,
 					id,
@@ -82,6 +81,12 @@ function getRoutes(): Route[] {
 }
 export const routes = getRoutes();
 
+const routesById = new Map(routes.map((route) => [route.id, route]));
+
+export function getRouteById(id: string): Route | undefined {
+	return routesById.get(id);
+}
+
 function getParamRouteMapping(): ReadonlyMap<string | undefined, Route> {
 	const map = new Map<string | undefined, Route>();
 	for (const route of routes) {
@@ -98,7 +103,6 @@ export function getRouteBySlugParam(slugParam: string | undefined): Route | unde
 function getPaths(): Path[] {
 	return routes.map((route) => ({
 		params: { slug: slugToParam(route.id) },
-		props: route,
 	}));
 }
 export const paths = getPaths();

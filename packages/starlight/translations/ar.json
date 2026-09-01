@@ -24,6 +24,9 @@
   "aside.tip": "نصيحة",
   "aside.caution": "تنبيه",
   "aside.danger": "تحذير",
+  "expressiveCode.terminalWindowFallbackTitle": "نافذة طرفيّة",
+  "expressiveCode.copyButtonTooltip": "نسخ إلى الحافظة",
+  "expressiveCode.copyButtonCopied": "تم النسخ!",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "طوِّر بواسطة Starlight",
   "heading.anchorLabel": "Section titled “{{title}}”"

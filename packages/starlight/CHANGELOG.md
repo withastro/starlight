@@ -1,5 +1,39 @@
 # @astrojs/starlight
 
+## 0.41.11
+
+### Patch Changes
+
+- [#4167](https://github.com/withastro/starlight/pull/4167) [`32a5e29`](https://github.com/withastro/starlight/commit/32a5e29127c13946ce746c36d7cb194f35d11952) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a layout issue and anchor links appearing for hidden headings, e.g. footnote headings, when `markdown.headingLinks` is enabled or the `<AnchorHeading>` component is used.
+
+- [#4148](https://github.com/withastro/starlight/pull/4148) [`cdfafd8`](https://github.com/withastro/starlight/commit/cdfafd8eedbbd6653cd6a1d3b1542b44ed1ba19e) Thanks [@ematipico](https://github.com/ematipico)! - Optimizes sidebar data generation logic to speed up sites with large sidebars
+
+## 0.41.10
+
+### Patch Changes
+
+- [#4160](https://github.com/withastro/starlight/pull/4160) [`88442c3`](https://github.com/withastro/starlight/commit/88442c333612058cb1b2c56ef689053a5994e31e) Thanks [@ArmandPhilippot](https://github.com/ArmandPhilippot)! - Adds the missing translations for Expressive Code in the following locales: `ar`, `hi`, `it`, `ja`, `ko`, `pt`, `zh-CN`, and `zh-TW`.
+
+- [#4156](https://github.com/withastro/starlight/pull/4156) [`57af92d`](https://github.com/withastro/starlight/commit/57af92d91f9a9d0936a06efb4387898aded62aa9) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `hypothesis`
+
+- [#4159](https://github.com/withastro/starlight/pull/4159) [`a0e0ba2`](https://github.com/withastro/starlight/commit/a0e0ba263c93bab214222b798b52a759fb799ba7) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds 1 new icon: `npmx`
+
+## 0.41.9
+
+### Patch Changes
+
+- [#4145](https://github.com/withastro/starlight/pull/4145) [`1c90d69`](https://github.com/withastro/starlight/commit/1c90d69b424aedef096e12577e9e7ec96bed4efc) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `goodreads`
+
+## 0.41.8
+
+### Patch Changes
+
+- [#4142](https://github.com/withastro/starlight/pull/4142) [`cacbc9f`](https://github.com/withastro/starlight/commit/cacbc9ff45c551c2f20c6b307800f7ff7ee07db2) Thanks [@alebelcor](https://github.com/alebelcor)! - Adds 1 new icon: `whatsApp`
+
+- [#4133](https://github.com/withastro/starlight/pull/4133) [`3944311`](https://github.com/withastro/starlight/commit/3944311bed46f956e12e79a8eb0c32084eeeaea6) Thanks [@delucis](https://github.com/delucis)! - Internal refactor: numbered `id` attributes in the `<Tabs>` component are now page-specific instead of using a global counter
+
+- [#4138](https://github.com/withastro/starlight/pull/4138) [`cd4b665`](https://github.com/withastro/starlight/commit/cd4b6655f3235220cded12f0567e0dad1bf5adac) Thanks [@delucis](https://github.com/delucis)! - Fixes localisation of code block UI elements when using the Sätteri Markdown processor
+
 ## 0.41.7
 
 ### Patch Changes
