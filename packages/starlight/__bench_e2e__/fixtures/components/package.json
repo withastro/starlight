@@ -1,9 +1,0 @@
-{
-  "name": "@bench/components",
-  "version": "0.0.0",
-  "private": true,
-  "dependencies": {
-    "@astrojs/starlight": "workspace:*",
-    "astro": "^7.1.6"
-  }
-}

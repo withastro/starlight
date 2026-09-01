@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: 22.23.1
           cache: pnpm
-      - run: pnpm i --filter @astrojs/starlight --filter @bench/components --filter @bench/large-sidebar --filter @bench/locales
+      - run: pnpm i --filter @astrojs/starlight
       - name: Run benchmarks
         uses: CodSpeedHQ/action@4296e51e7041e24dadb86d1d6e8b9320d223dbe8 # v5.0.3
         with:

@@ -5,8 +5,7 @@
   "scripts": {
     "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
     "test:coverage": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run --coverage",
-    "bench": "pnpm bench:functional && pnpm bench:e2e",
-    "bench:e2e": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest bench --run --config vitest.e2e.bench.config.ts __bench_e2e__/*.bench.ts",
+    "bench": "pnpm bench:functional",
     "bench:functional": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest bench --run --config vitest.functional.bench.config.ts __bench_fn__/*.bench.ts",
     "test:e2e": "playwright install --with-deps chromium && playwright test",
     "test:e2e:ci": "playwright test"

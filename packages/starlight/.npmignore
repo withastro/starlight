@@ -2,7 +2,6 @@
 __coverage__/
 __tests__/
 __e2e__/
-__bench_e2e__/
 __bench_fn__/
 vitest.*
 playwright.config.ts
