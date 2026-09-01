@@ -1,0 +1,21 @@
+packages/starlight/utils/navigation.ts
+  s_885f1d1a81a544::t_f733a712c15b3d 23,45,146,293-295,299-300,303-304,312,439-444,446,448,451-452,477-479,482-483,486-487
+packages/starlight/utils/routing/index.ts
+  s_885f1d1a81a544::t_95e20421813e6d 63,66,84-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4d6c80f5a7a96751fc87058f5300560de92ad52e",
+  "prompts": {},
+  "sessions": {
+    "s_885f1d1a81a544": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc7caa133ffefmJCJdX8Y1ae4S",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "ematipico <estoppa@cloudflare.com>"
+    }
+  }
+}
