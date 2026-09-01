@@ -3,6 +3,28 @@ title: Getting Started
 description: Learn how to start building your next documentation site with Starlight by Astro.
 ---
 
+:::danger[TODO(HiDeoo)]
+
+- Remove changes to this page.
+
+:::
+
+## Test
+
+This is a sentence with a footnote reference.[^1]
+
+[^1]: A reference.
+
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+
+<AnchorHeading level="2" id="test" hidden>
+	Test
+</AnchorHeading>
+
+This sentence is preceded by a `<AnchorHeading>` component with the `hidden` attribute.
+
+---
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Starlight is a full-featured documentation theme built on top of the [Astro](https://astro.build) framework.
