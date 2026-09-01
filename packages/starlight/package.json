@@ -1,10 +1,12 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.41.8",
+  "version": "0.41.10",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
     "test:coverage": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run --coverage",
+    "bench": "pnpm bench:functional",
+    "bench:functional": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest bench --run --config vitest.functional.bench.config.ts __bench_fn__/*.bench.ts",
     "test:e2e": "playwright install --with-deps chromium && playwright test",
     "test:e2e:ci": "playwright test"
   },
@@ -59,6 +61,7 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^7.2.2",
     "@playwright/test": "^1.61.1",
+    "@codspeed/vitest-plugin": "^5.7.1",
     "@types/node": "^22.19.17",
     "@vitest/coverage-v8": "^4.1.5",
     "astro": "^7.1.6",
