@@ -45,6 +45,11 @@ how we do it.
 		line-height: var(--sl-line-height-headings);
 	}
 
+	/* If the heading is hidden, remove the wrapper's box to avoid unwanted spacing. */
+	.sl-markdown-content .sl-heading-wrapper:has(> :first-child:is(.sr-only, [hidden])) {
+		display: contents;
+	}
+
 	/* We need to apply the same rule we use for heading spacing to the parent wrapper. */
 	.sl-markdown-content
 		:not(h1, h2, h3, h4, h5, h6, .sl-heading-wrapper)
@@ -75,7 +80,7 @@ how we do it.
 	/* ======================================================
    HEADING
    ====================================================== */
-	.sl-markdown-content .sl-heading-wrapper > :first-child {
+	.sl-markdown-content .sl-heading-wrapper > :first-child:not([hidden]) {
 		display: inline;
 		/* Apply end-of-line padding to the heading element. */
 		padding-inline-end: var(--sl-anchor-icon-space);
@@ -94,6 +99,13 @@ how we do it.
 		/* Prevent double clicks on the last word (or single word) of a heading to include an extra new
      line in Chrome and Safari. */
 		display: inline-flex;
+	}
+
+	/* Hide anchor links for headings that are hidden. */
+	.sl-markdown-content
+		.sl-heading-wrapper:has(> :first-child:is(.sr-only, [hidden]))
+		> .sl-anchor-link {
+		display: none;
 	}
 
 	/* Increase clickable area for anchor links with a pseudo element that doesn’t impact layout. */
