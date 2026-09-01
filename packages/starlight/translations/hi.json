@@ -24,6 +24,9 @@
   "aside.tip": "संकेत",
   "aside.caution": "सावधानी",
   "aside.danger": "खतरा",
+  "expressiveCode.terminalWindowFallbackTitle": "टर्मिनल विंडो",
+  "expressiveCode.copyButtonTooltip": "क्लिपबोर्ड पर कॉपी करें",
+  "expressiveCode.copyButtonCopied": "कॉपी हो गया!",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "Starlight द्वारा निर्मित",
   "heading.anchorLabel": "Section titled “{{title}}”"

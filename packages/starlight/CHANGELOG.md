@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.41.10
+
+### Patch Changes
+
+- [#4160](https://github.com/withastro/starlight/pull/4160) [`88442c3`](https://github.com/withastro/starlight/commit/88442c333612058cb1b2c56ef689053a5994e31e) Thanks [@ArmandPhilippot](https://github.com/ArmandPhilippot)! - Adds the missing translations for Expressive Code in the following locales: `ar`, `hi`, `it`, `ja`, `ko`, `pt`, `zh-CN`, and `zh-TW`.
+
+- [#4156](https://github.com/withastro/starlight/pull/4156) [`57af92d`](https://github.com/withastro/starlight/commit/57af92d91f9a9d0936a06efb4387898aded62aa9) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `hypothesis`
+
+- [#4159](https://github.com/withastro/starlight/pull/4159) [`a0e0ba2`](https://github.com/withastro/starlight/commit/a0e0ba263c93bab214222b798b52a759fb799ba7) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds 1 new icon: `npmx`
+
 ## 0.41.9
 
 ### Patch Changes
