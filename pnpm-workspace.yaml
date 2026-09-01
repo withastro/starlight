@@ -25,8 +25,3 @@ peerDependencyRules:
 
 # Prevent installing packages published in the last 3 days
 minimumReleaseAge: 4320
-# TODO(HiDeoo) Remove
-minimumReleaseAgeExclude:
-  - '@astrojs/markdown-satteri@0.3.8'
-  - '@astrojs/mdx@7.0.8'
-  - 'astro@7.2.5'
