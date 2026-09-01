@@ -1,0 +1,23 @@
+pnpm-lock.yaml
+  s_9a9e6af43fddef::t_8aeccac4e971bc 274-275,745-746,748-749,752,4709,4720,4722,4724,5585
+packages/starlight/package.json
+  s_9a9e6af43fddef::t_bc2e902c8c3da9 64
+pnpm-workspace.yaml
+  s_9a9e6af43fddef::t_73e79e7ab6f521 28-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "97743f6e4d5f3ca1b1941dbf82c0fcd537000907",
+  "prompts": {},
+  "sessions": {
+    "s_9a9e6af43fddef": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc66fcff2ffeTvP0j41z6PzNV2",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "ematipico <estoppa@cloudflare.com>"
+    }
+  }
+}
