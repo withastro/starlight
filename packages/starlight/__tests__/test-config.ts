@@ -13,7 +13,6 @@ export async function defineVitestConfig(
 		build?: Pick<AstroConfig['build'], 'format'>;
 		trailingSlash?: AstroConfig['trailingSlash'];
 		command?: 'dev' | 'build' | 'preview';
-		snapshotSerializers?: boolean;
 	}
 ) {
 	const root = new URL('./', import.meta.url);
@@ -44,9 +43,7 @@ export async function defineVitestConfig(
 			),
 		],
 		test: {
-			...(opts?.snapshotSerializers === false
-				? {}
-				: { snapshotSerializers: ['../snapshot-serializer-astro-error.ts'] }),
+			snapshotSerializers: ['../snapshot-serializer-astro-error.ts'],
 		},
 	});
 }

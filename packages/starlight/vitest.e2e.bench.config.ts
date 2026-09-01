@@ -3,11 +3,10 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	plugins: [codspeedPlugin()],
-	benchmark: {
-		include: ['__bench_e2e__/*.bench.ts'],
-	},
 	test: {
+		benchmark: {
+			include: ['__bench_e2e__/*.bench.ts'],
+		},
 		fileParallelism: false,
-		hookTimeout: 600_000,
 	},
 });
