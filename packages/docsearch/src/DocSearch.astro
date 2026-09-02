@@ -47,7 +47,8 @@ const docsearchTranslations: DocSearchTranslationProps = {
 					fill="none"
 					fill-rule="evenodd"
 					stroke-linecap="round"
-					stroke-linejoin="round"></path>
+					stroke-linejoin="round"
+				></path>
 			</svg>
 			<span class="DocSearch-Button-Placeholder">{Astro.locals.t('search.label')}</span>
 		</span>
@@ -81,8 +82,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 		display: none;
 	}
 
-	@media (min-width: 50rem) {
-		sl-doc-search {
+	@media (min-width: 50rem) {sl-doc-search {
 			width: 100%;
 		}
 
@@ -118,8 +118,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			-webkit-mask-size: 100%;
 			mask-size: 100%;
 			background-color: currentColor;
-		}
-	}
+		}}
 </style>
 
 <script>

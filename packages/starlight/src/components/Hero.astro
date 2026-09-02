@@ -31,15 +31,13 @@ if (image) {
 ---
 
 <div class="hero">
-	{
-		darkImage && (
-			<Image
-				src={darkImage}
-				{...imageAttrs}
-				class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
-			/>
-		)
-	}
+	{darkImage && (
+		<Image
+			src={darkImage}
+			{...imageAttrs}
+			class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
+		/>
+	)}
 	{lightImage && <Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />}
 	{rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />}
 	<div class="sl-flex stack">
@@ -48,26 +46,23 @@ if (image) {
 			{data.draft && <DraftContentNotice />}
 			{tagline && <div class="tagline" set:html={tagline} />}
 		</div>
-		{
-			actions.length > 0 && (
-				<div class="sl-flex actions">
-					{actions.map(
-						({ attrs: { class: className, ...attrs } = {}, icon, link: href, text, variant }) => (
-							<LinkButton {href} {variant} icon={icon?.name} class:list={[className]} {...attrs}>
-								{text}
-								{icon?.html && <Fragment set:html={icon.html} />}
-							</LinkButton>
-						)
-					)}
-				</div>
-			)
-		}
+		{actions.length > 0 && (
+			<div class="sl-flex actions">
+				{actions.map(
+					({ attrs: { class: className, ...attrs } = {}, icon, link: href, text, variant }) => (
+						<LinkButton {href} {variant} icon={icon?.name} class:list={[className]} {...attrs}>
+							{text}
+							{icon?.html && <Fragment set:html={icon.html} />}
+						</LinkButton>
+					)
+				)}
+			</div>
+		)}
 	</div>
 </div>
 
 <style>
-	@layer starlight.core {
-		.hero {
+	@layer starlight.core {.hero {
 			display: grid;
 			grid-template-columns: 100%;
 			align-items: center;
@@ -117,8 +112,7 @@ if (image) {
 			justify-content: center;
 		}
 
-		@media (min-width: 50rem) {
-			.hero {
+		@media (min-width: 50rem) {.hero {
 				grid-template-columns: 7fr 4fr;
 				gap: 3%;
 				padding-block: clamp(2.5rem, calc(1rem + 10vmin), 10rem);
@@ -140,7 +134,5 @@ if (image) {
 
 			.actions {
 				justify-content: flex-start;
-			}
-		}
-	}
+			}}}
 </style>

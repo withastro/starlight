@@ -21,8 +21,7 @@ const {
 <span class:list={['sl-badge', variant, size, customClass]} {...attrs}>{text}</span>
 
 <style>
-	@layer starlight.components {
-		:global(:root) {
+	@layer starlight.components {:global(:root) {
 			--sl-badge-default-border: var(--sl-color-accent);
 			--sl-badge-default-bg: var(--sl-color-accent-low);
 			--sl-badge-default-text: #fff;
@@ -138,6 +137,5 @@ const {
 		/* Badge in headings */
 		:global(.sl-markdown-content :is(h1, h2, h3, h4, h5, h6)) .sl-badge {
 			vertical-align: middle;
-		}
-	}
+		}}
 </style>

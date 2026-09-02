@@ -19,9 +19,7 @@ const src = (await avatar()).default;
 ---
 
 <li class="testimonial">
-	<blockquote class="quote" cite={cite}>
-		<slot />
-	</blockquote>
+	<blockquote class="quote" cite={cite}><slot /></blockquote>
 	<div class="footer">
 		<Image class="avatar" height="96" width="96" {src} alt="" />
 		<div>
@@ -37,11 +35,9 @@ const src = (await avatar()).default;
 		flex-direction: column;
 		gap: 1.5em;
 	}
-	@media (min-width: 50rem) {
-		.testimonial {
+	@media (min-width: 50rem) {.testimonial {
 			gap: 2em;
-		}
-	}
+		}}
 	.quote {
 		position: relative;
 		padding-inline-start: 1.5em;

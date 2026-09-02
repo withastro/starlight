@@ -8,9 +8,7 @@ const { title } = Astro.props;
 
 <div class="testimonial-wrapper not-content" data-pagefind-ignore>
 	<h2 class="testimonial-grid-title">{title}</h2>
-	<ul class="testimonial-grid">
-		<slot />
-	</ul>
+	<ul class="testimonial-grid"><slot /></ul>
 </div>
 
 <style>
@@ -31,9 +29,7 @@ const { title } = Astro.props;
 		gap: 5em;
 		padding-inline-start: 0;
 	}
-	@media (min-width: 50rem) {
-		.testimonial-grid {
+	@media (min-width: 50rem) {.testimonial-grid {
 			grid-template-columns: 1fr 1fr;
-		}
-	}
+		}}
 </style>

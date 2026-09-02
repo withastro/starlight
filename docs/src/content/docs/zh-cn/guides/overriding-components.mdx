@@ -78,7 +78,9 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">E-mail Me</a>
-<Default><slot /></Default>
+<Default>
+	<slot />
+</Default>
 ```
 
 在自定义组件中渲染内置组件时，在默认组件中添加一个 [`<slot />`](https://docs.astro.build/zh-cn/basics/astro-components/#插槽)。这样可以确保如果组件传入了任何子元素，Astro 就知道在哪里渲染它们。
@@ -138,15 +140,13 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
-{
-	isHomepage ? (
-		<footer>Built with Starlight 🌟</footer>
-	) : (
-		<Default>
-			<slot />
-		</Default>
-	)
-}
+{isHomepage ? (
+	<footer>Built with Starlight 🌟</footer>
+) : (
+	<Default>
+		<slot />
+	</Default>
+)}
 ```
 
 了解更多关于条件渲染的内容，请参阅 [Astro 模板语法指南](https://docs.astro.build/zh-cn/basics/astro-syntax/#动态-html)。

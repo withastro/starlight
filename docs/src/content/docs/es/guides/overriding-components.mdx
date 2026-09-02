@@ -78,7 +78,9 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">Escríbeme</a>
-<Default {...Astro.props}><slot /></Default>
+<Default {...Astro.props}>
+	<slot />
+</Default>
 ```
 
 Cuando renderizas un componente integrado dentro de un componente personalizado:
@@ -127,15 +129,13 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 const isHomepage = Astro.props.slug === '';
 ---
 
-{
-	isHomepage ? (
-		<footer>Construido con Starlight 🌟</footer>
-	) : (
-		<Default {...Astro.props}>
-			<slot />
-		</Default>
-	)
-}
+{isHomepage ? (
+	<footer>Construido con Starlight 🌟</footer>
+) : (
+	<Default {...Astro.props}>
+		<slot />
+	</Default>
+)}
 ```
 
 Aprende más sobre el renderizado condicional en la [Guía de Sintaxis de Astro](https://docs.astro.build/es/core-concepts/astro-syntax/#html-dinamico).

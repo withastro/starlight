@@ -4,18 +4,15 @@ import Icon from '../user-components/Icon.astro';
 const { editUrl } = Astro.locals.starlightRoute;
 ---
 
-{
-	editUrl && (
-		<a href={editUrl} class="sl-flex print:hidden">
-			<Icon name="pencil" size="1.2em" />
-			{Astro.locals.t('page.editLink')}
-		</a>
-	)
-}
+{editUrl && (
+	<a href={editUrl} class="sl-flex print:hidden">
+		<Icon name="pencil" size="1.2em" />
+		{Astro.locals.t('page.editLink')}
+	</a>
+)}
 
 <style>
-	@layer starlight.core {
-		a {
+	@layer starlight.core {a {
 			gap: 0.5rem;
 			align-items: center;
 			text-decoration: none;
@@ -23,6 +20,5 @@ const { editUrl } = Astro.locals.starlightRoute;
 		}
 		a:hover {
 			color: var(--sl-color-white);
-		}
-	}
+		}}
 </style>

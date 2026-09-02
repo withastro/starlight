@@ -31,34 +31,26 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 	<dialog style="padding:0" aria-label={Astro.locals.t('search.label')}>
 		<div class="dialog-frame sl-flex">
-			{
-				/* TODO: Make the layout of this button flexible to accommodate different word lengths. Currently hard-coded for English: “Cancel” */
-			}
+			{/* TODO: Make the layout of this button flexible to accommodate different word lengths. Currently hard-coded for English: “Cancel” */}
 			<button data-close-modal class="sl-flex md:sl-hidden">
 				{Astro.locals.t('search.cancelLabel')}
 			</button>
-			{
-				import.meta.env.DEV ? (
-					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
-						<p>{Astro.locals.t('search.devWarning')}</p>
-					</div>
-				) : (
-					<div class="search-container">
-						<div id="starlight__search" />
-					</div>
-				)
-			}
+			{import.meta.env.DEV ? (
+				<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
+					<p>{Astro.locals.t('search.devWarning')}</p>
+				</div>
+			) : (
+				<div class="search-container"><div id="starlight__search" /></div>
+			)}
 		</div>
 	</dialog>
 </site-search>
 
-{
-	/**
-	 * This is intentionally inlined to avoid briefly showing an invalid shortcut.
-	 * Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
-	 * user agent is spoofed by some browsers when opening the devtools.
-	 */
-}
+{/**
+ * This is intentionally inlined to avoid briefly showing an invalid shortcut.
+ * Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
+ * user agent is spoofed by some browsers when opening the devtools.
+ */}
 <script is:inline>
 	(() => {
 		const openBtn = document.querySelector('button[data-open-modal]');
@@ -162,8 +154,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </script>
 
 <style>
-	@layer starlight.core {
-		site-search {
+	@layer starlight.core {site-search {
 			display: contents;
 		}
 		button[data-open-modal] {
@@ -178,8 +169,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			font-size: var(--sl-text-xl);
 		}
 
-		@media (min-width: 50rem) {
-			button[data-open-modal] {
+		@media (min-width: 50rem) {button[data-open-modal] {
 				border: 1px solid var(--sl-color-gray-5);
 				border-radius: 0.5rem;
 				padding-inline-start: 0.75rem;
@@ -197,8 +187,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 			button[data-open-modal] > :last-child {
 				margin-inline-start: auto;
-			}
-		}
+			}}
 
 		button > kbd {
 			border-radius: 0.25rem;
@@ -269,8 +258,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			--pagefind-ui-tag: var(--sl-color-gray-6);
 		}
 
-		@media (min-width: 50rem) {
-			#starlight__search {
+		@media (min-width: 50rem) {#starlight__search {
 				--sl-search-cancel-space: 0px;
 			}
 
@@ -286,16 +274,13 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 			.dialog-frame {
 				padding: 1.5rem;
-			}
-		}
-	}
+			}}}
 </style>
 
 <style is:global>
 	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.core);
 
-	@layer starlight.core {
-		[data-search-modal-open] {
+	@layer starlight.core {[data-search-modal-open] {
 			overflow: hidden;
 		}
 
@@ -483,6 +468,5 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			background-color: var(--sl-color-black);
 			margin-top: 0;
 			padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
-		}
-	}
+		}}
 </style>

@@ -3,24 +3,17 @@ import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfCon
 import TableOfContents from 'virtual:starlight/components/TableOfContents';
 ---
 
-{
-	Astro.locals.starlightRoute.toc && (
-		<>
-			<div class="lg:sl-hidden">
-				<MobileTableOfContents />
-			</div>
-			<div class="right-sidebar-panel sl-hidden lg:sl-block">
-				<div class="sl-container">
-					<TableOfContents />
-				</div>
-			</div>
-		</>
-	)
-}
+{Astro.locals.starlightRoute.toc && (
+	<>
+		<div class="lg:sl-hidden"><MobileTableOfContents /></div>
+		<div class="right-sidebar-panel sl-hidden lg:sl-block">
+			<div class="sl-container"><TableOfContents /></div>
+		</div>
+	</>
+)}
 
 <style>
-	@layer starlight.core {
-		.right-sidebar-panel {
+	@layer starlight.core {.right-sidebar-panel {
 			padding: 1rem var(--sl-sidebar-pad-x);
 		}
 		.sl-container {
@@ -43,8 +36,7 @@ import TableOfContents from 'virtual:starlight/components/TableOfContents';
 		.right-sidebar-panel :global(:where(a):hover) {
 			color: var(--sl-color-white);
 		}
-		@media (min-width: 72rem) {
-			.sl-container {
+		@media (min-width: 72rem) {.sl-container {
 				max-width: calc(
 					(
 						(
@@ -53,7 +45,5 @@ import TableOfContents from 'virtual:starlight/components/TableOfContents';
 							) * 0.25 /* MAGIC NUMBER 🥲 */
 					)
 				);
-			}
-		}
-	}
+			}}}
 </style>

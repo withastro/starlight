@@ -5,8 +5,7 @@ import { PAGE_TITLE_ID } from '../constants';
 <a class="sl-skip-link" href={`#${PAGE_TITLE_ID}`}>{Astro.locals.t('skipLink.label')}</a>
 
 <style>
-	@layer starlight.core {
-		a {
+	@layer starlight.core {a {
 			clip: rect(0, 0, 0, 0);
 			position: fixed;
 			top: 0.75rem;
@@ -21,6 +20,5 @@ import { PAGE_TITLE_ID } from '../constants';
 			color: var(--sl-color-text-invert);
 			background-color: var(--sl-color-text-accent);
 			box-shadow: var(--sl-shadow-lg);
-		}
-	}
+		}}
 </style>

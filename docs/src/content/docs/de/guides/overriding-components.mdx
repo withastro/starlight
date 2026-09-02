@@ -78,7 +78,9 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">Schreib mir</a>
-<Default><slot /></Default>
+<Default>
+	<slot />
+</Default>
 ```
 
 Wenn du eine eingebaute Komponente innerhalb einer benutzerdefinierten Komponente renderst, füge ein [`<slot />`](https://docs.astro.build/de/basics/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden soll, wenn sie Kindelemente erhält.
@@ -138,15 +140,13 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
-{
-	isHomepage ? (
-		<footer>Verwendet Starlight 🌟</footer>
-	) : (
-		<Default>
-			<slot />
-		</Default>
-	)
-}
+{isHomepage ? (
+	<footer>Verwendet Starlight 🌟</footer>
+) : (
+	<Default>
+		<slot />
+	</Default>
+)}
 ```
 
 Weitere Informationen zum bedingten Rendering findest du im [Astro-Leitfaden zur Vorlagensyntax](https://docs.astro.build/de/basics/astro-syntax/#dynamisches-html).

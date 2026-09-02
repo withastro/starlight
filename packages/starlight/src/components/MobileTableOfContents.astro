@@ -5,30 +5,25 @@ import TableOfContentsList from '../components-internals/TableOfContents/TableOf
 const { toc } = Astro.locals.starlightRoute;
 ---
 
-{
-	toc && (
-		<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
-			<nav aria-labelledby="starlight__on-this-page--mobile">
-				<details id="starlight__mobile-toc">
-					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<span class="toggle sl-flex">
-							{Astro.locals.t('tableOfContents.onThisPage')}
-							<Icon name={'right-caret'} class="caret" size="1rem" />
-						</span>
-						<span class="display-current" />
-					</summary>
-					<div class="dropdown">
-						<TableOfContentsList toc={toc.items} isMobile />
-					</div>
-				</details>
-			</nav>
-		</mobile-starlight-toc>
-	)
-}
+{toc && (
+	<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+		<nav aria-labelledby="starlight__on-this-page--mobile">
+			<details id="starlight__mobile-toc">
+				<summary id="starlight__on-this-page--mobile" class="sl-flex">
+					<span class="toggle sl-flex">
+						{Astro.locals.t('tableOfContents.onThisPage')}
+						<Icon name={'right-caret'} class="caret" size="1rem" />
+					</span>
+					<span class="display-current" />
+				</summary>
+				<div class="dropdown"><TableOfContentsList toc={toc.items} isMobile /></div>
+			</details>
+		</nav>
+	</mobile-starlight-toc>
+)}
 
 <style>
-	@layer starlight.core {
-		nav {
+	@layer starlight.core {nav {
 			position: fixed;
 			z-index: var(--sl-z-index-toc);
 			top: calc(var(--sl-nav-height) - 1px);
@@ -36,11 +31,9 @@ const { toc } = Astro.locals.starlightRoute;
 			border-top: 1px solid var(--sl-color-gray-5);
 			background-color: var(--sl-color-bg-nav);
 		}
-		@media (min-width: 50rem) {
-			nav {
+		@media (min-width: 50rem) {nav {
 				inset-inline-start: var(--sl-content-inline-start, 0);
-			}
-		}
+			}}
 
 		summary {
 			gap: 0.5rem;
@@ -104,8 +97,7 @@ const { toc } = Astro.locals.starlightRoute;
 			background-color: var(--sl-color-black);
 			box-shadow: var(--sl-shadow-md);
 			overscroll-behavior: contain;
-		}
-	}
+		}}
 </style>
 
 <script>

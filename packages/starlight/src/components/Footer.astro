@@ -13,18 +13,15 @@ import { Icon } from '../components';
 	</div>
 	<Pagination />
 
-	{
-		config.credits && (
-			<a class="kudos sl-flex" href="https://starlight.astro.build">
-				<Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
-			</a>
-		)
-	}
+	{config.credits && (
+		<a class="kudos sl-flex" href="https://starlight.astro.build">
+			<Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
+		</a>
+	)}
 </footer>
 
 <style>
-	@layer starlight.core {
-		footer {
+	@layer starlight.core {footer {
 			flex-direction: column;
 			gap: 1.5rem;
 		}
@@ -50,12 +47,9 @@ import { Icon } from '../components';
 		}
 		.kudos:hover {
 			color: var(--sl-color-white);
-		}
-	}
+		}}
 
-	@layer starlight.components {
-		.kudos :global(svg) {
+	@layer starlight.components {.kudos :global(svg) {
 			color: var(--sl-color-orange);
-		}
-	}
+		}}
 </style>

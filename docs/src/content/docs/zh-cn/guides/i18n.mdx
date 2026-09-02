@@ -285,9 +285,7 @@ export const collections = {
 在 Astro 组件中，此 API 作为 [全局 `Astro` 对象](https://docs.astro.build/zh-cn/reference/api-reference/#locals) 的一部分提供，即 `Astro.locals.t`：
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 你还可以在 [端点](https://docs.astro.build/zh-cn/guides/endpoints/) 中使用 API，其中的 `locals` 对象可作为 [端点上下文](https://docs.astro.build/zh-cn/reference/api-reference/#locals) 的一部分使用：
@@ -319,9 +317,7 @@ export const GET = (context) => {
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- 渲染结果：<a href="...">Astro documentation</a> -->
 ```
 

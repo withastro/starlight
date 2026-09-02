@@ -92,11 +92,13 @@ import CustomComponent from './CustomComponent.astro';
 	<p>Это пользовательская страница с пользовательским компонентом:</p>
 	<CustomComponent />
 
-	<AnchorHeading level="2" id="learn-more">Узнать больше</AnchorHeading>
+	<AnchorHeading level="2" id="learn-more">
+		Узнать больше
+	</AnchorHeading>
 	<p>
-		<a href="https://starlight.astro.build/"
-			>Узнайте больше в документации Starlight</a
-		>
+		<a href="https://starlight.astro.build/">
+			Узнайте больше в документации Starlight
+		</a>
 	</p>
 </StarlightPage>
 ```
@@ -208,7 +210,9 @@ Starlight сгенерирует оглавление страницы из эт
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 ---
 
-<AnchorHeading level="2" id="sub-heading">Подзаголовок</AnchorHeading>
+<AnchorHeading level="2" id="sub-heading">
+	Подзаголовок
+</AnchorHeading>
 ```
 
 Он принимает следующие свойства, а также любые другие допустимые [глобальные HTML-атрибуты](https://developer.mozilla.org/ru/docs/Web/HTML/Reference/Global_attributes).

@@ -9,8 +9,7 @@ const { stagger = false } = Astro.props;
 <div class:list={['card-grid', { stagger }]}><slot /></div>
 
 <style>
-	@layer starlight.components {
-		.card-grid {
+	@layer starlight.components {.card-grid {
 			display: grid;
 			grid-template-columns: 100%;
 			gap: 1rem;
@@ -20,8 +19,7 @@ const { stagger = false } = Astro.props;
 			margin-top: 0 !important;
 		}
 
-		@media (min-width: 50rem) {
-			.card-grid {
+		@media (min-width: 50rem) {.card-grid {
 				grid-template-columns: 1fr 1fr;
 				gap: 1.5rem;
 			}
@@ -32,7 +30,5 @@ const { stagger = false } = Astro.props;
 
 			.stagger > :global(*):nth-child(2n) {
 				transform: translateY(var(--stagger-height));
-			}
-		}
-	}
+			}}}
 </style>

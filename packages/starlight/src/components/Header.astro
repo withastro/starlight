@@ -15,24 +15,17 @@ const shouldRenderSearch =
 ---
 
 <div class="header">
-	<div class="title-wrapper sl-flex">
-		<SiteTitle />
-	</div>
-	<div class="sl-flex print:hidden">
-		{shouldRenderSearch && <Search />}
-	</div>
+	<div class="title-wrapper sl-flex"><SiteTitle /></div>
+	<div class="sl-flex print:hidden">{shouldRenderSearch && <Search />}</div>
 	<div class="sl-hidden md:sl-flex print:hidden right-group">
-		<div class="sl-flex social-icons">
-			<SocialIcons />
-		</div>
+		<div class="sl-flex social-icons"><SocialIcons /></div>
 		<ThemeSelect />
 		<LanguageSelect />
 	</div>
 </div>
 
 <style>
-	@layer starlight.core {
-		.header {
+	@layer starlight.core {.header {
 			display: flex;
 			gap: var(--sl-nav-gap);
 			justify-content: space-between;
@@ -60,8 +53,7 @@ const shouldRenderSearch =
 			border-inline-end: 1px solid var(--sl-color-gray-5);
 		}
 
-		@media (min-width: 50rem) {
-			:global(:root[data-has-sidebar]) {
+		@media (min-width: 50rem) {:global(:root[data-has-sidebar]) {
 				--__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
 			}
 			:global(:root:not([data-has-toc])) {
@@ -88,7 +80,5 @@ const shouldRenderSearch =
 					/* 3 (right items): use the space that these need. */
 					auto;
 				align-content: center;
-			}
-		}
-	}
+			}}}
 </style>

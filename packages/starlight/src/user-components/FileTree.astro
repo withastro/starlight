@@ -8,8 +8,7 @@ const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'))
 <starlight-file-tree set:html={html} class="not-content" data-pagefind-ignore />
 
 <style>
-	@layer starlight.components {
-		starlight-file-tree {
+	@layer starlight.components {starlight-file-tree {
 			--x-space: 1.5rem;
 			--y-space: 0.125rem;
 			--y-pad: 0;
@@ -91,11 +90,9 @@ const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'))
 			max-width: calc(100% - 1rem);
 		}
 
-		@media (min-width: 30em) {
-			starlight-file-tree :global(.tree-entry) {
+		@media (min-width: 30em) {starlight-file-tree :global(.tree-entry) {
 				flex-wrap: nowrap;
-			}
-		}
+			}}
 
 		starlight-file-tree :global(.tree-entry > :first-child) {
 			flex-shrink: 0;
@@ -132,6 +129,5 @@ const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'))
 
 		starlight-file-tree :global(.highlight svg.tree-icon) {
 			fill: currentColor;
-		}
-	}
+		}}
 </style>
