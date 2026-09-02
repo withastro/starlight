@@ -5,11 +5,12 @@ export default defineConfig({
 		projects: ['__tests__/*/vitest.config.ts'],
 		coverage: {
 			reportsDirectory: './__coverage__',
-			include: ['**.ts'],
+			include: ['**.ts', 'src/*.ts'],
 			exclude: [
 				'**/__tests__/**',
 				'**/__e2e__/**',
 				'playwright.config.*',
+				'tsdown.config.*',
 				'**/vitest.*',
 				/**
 				 * TODO: re-exclude these 2 files once the issue preventing us from excluding only these
@@ -17,10 +18,10 @@ export default defineConfig({
 				 *
 				 * @see https://github.com/vitest-dev/vitest/issues/9395
 				 */
-				// 'components.ts',
-				// 'types.ts',
+				// 'src/components.ts',
+				// 'src/types.ts',
 				// Types-only export.
-				'props.ts',
+				'src/props.ts',
 				// Types declaration files.
 				'*.d.ts',
 				/**
@@ -30,7 +31,7 @@ export default defineConfig({
 				 * @see https://github.com/vitest-dev/vitest/issues/9395
 				 */
 				// Main integration entrypoint — don’t think we’re able to test this directly currently.
-				// 'index.ts',
+				// 'src/index.ts',
 			],
 			thresholds: {
 				lines: 87,

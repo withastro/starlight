@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.41.11
+
+### Patch Changes
+
+- [#4167](https://github.com/withastro/starlight/pull/4167) [`32a5e29`](https://github.com/withastro/starlight/commit/32a5e29127c13946ce746c36d7cb194f35d11952) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a layout issue and anchor links appearing for hidden headings, e.g. footnote headings, when `markdown.headingLinks` is enabled or the `<AnchorHeading>` component is used.
+
+- [#4148](https://github.com/withastro/starlight/pull/4148) [`cdfafd8`](https://github.com/withastro/starlight/commit/cdfafd8eedbbd6653cd6a1d3b1542b44ed1ba19e) Thanks [@ematipico](https://github.com/ematipico)! - Optimizes sidebar data generation logic to speed up sites with large sidebars
+
 ## 0.41.10
 
 ### Patch Changes

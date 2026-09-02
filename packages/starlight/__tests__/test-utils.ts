@@ -1,14 +1,14 @@
 import { z } from 'astro/zod';
-import { docsSchema, i18nSchema } from '../schema';
-import type { StarlightDocsCollectionEntry } from '../utils/routing/types';
-import type { RouteDataContext } from '../utils/routing/data';
+import { docsSchema, i18nSchema } from '../src/schema';
+import type { StarlightDocsCollectionEntry } from '../src/utils/routing/types';
+import type { RouteDataContext } from '../src/utils/routing/data';
 import { vi } from 'vitest';
-import type { StarlightUserConfig } from '../types';
-import { StarlightConfigSchema } from '../utils/user-config';
-import type { MarkdownProcessorPluginOptions } from '../integrations/markdown-processor';
-import { createTranslationSystemFromFs } from '../utils/translations-fs';
-import { absolutePathToLang } from '../integrations/shared/absolutePathToLang';
-import { getCollectionPosixPath } from '../utils/collection-fs';
+import type { StarlightUserConfig } from '../src/types';
+import { StarlightConfigSchema } from '../src/utils/user-config';
+import type { MarkdownProcessorPluginOptions } from '../src/integrations/markdown-processor';
+import { createTranslationSystemFromFs } from '../src/utils/translations-fs';
+import { absolutePathToLang } from '../src/integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from '../src/utils/collection-fs';
 
 /** Build the options bag Starlight's plugin factories take. Used by both the remark and Sätteri pipelines. */
 export async function createPluginTestOptions(
@@ -119,8 +119,8 @@ export async function mockedAstroContent({
 
 export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof docsSchema>[0]) {
 	const content = await vi.importActual<typeof import('astro:content')>('astro:content');
-	const schemas = await vi.importActual<typeof import('../schema')>('../schema');
-	const loaders = await vi.importActual<typeof import('../loaders')>('../loaders');
+	const schemas = await vi.importActual<typeof import('../src/schema')>('../src/schema');
+	const loaders = await vi.importActual<typeof import('../src/loaders')>('../src/loaders');
 
 	return {
 		collections: {

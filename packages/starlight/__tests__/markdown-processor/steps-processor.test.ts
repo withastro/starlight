@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { processSteps } from '../../user-components/steps-processor';
+import { processSteps } from '../../src/user-components/steps-processor';
 
 test('empty component throws an error', () => {
 	expect(() => processSteps('')).toThrowErrorMatchingInlineSnapshot(

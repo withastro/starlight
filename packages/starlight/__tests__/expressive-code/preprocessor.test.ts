@@ -3,10 +3,10 @@ import { satteri } from '@astrojs/markdown-satteri';
 import type { ExpressiveCodeTheme, StyleVariant } from 'astro-expressive-code';
 import { astroExpressiveCode } from 'astro-expressive-code';
 import { describe, expect, test, vi } from 'vitest';
-import type { StarlightExpressiveCodeOptions } from '../../integrations/expressive-code';
-import { getStarlightEcConfigPreprocessor } from '../../integrations/expressive-code/preprocessor';
-import { getCollectionPosixPath } from '../../utils/collection-fs';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import type { StarlightExpressiveCodeOptions } from '../../src/integrations/expressive-code';
+import { getStarlightEcConfigPreprocessor } from '../../src/integrations/expressive-code/preprocessor';
+import { getCollectionPosixPath } from '../../src/utils/collection-fs';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
 import { createPluginTestOptions, docFileURL } from '../test-utils';
 
 describe('getStarlightEcConfigPreprocessor()', () => {

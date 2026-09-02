@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { toHtml } from 'hast-util-to-html';
 import { selectAll } from 'hast-util-select';
 import { htmlToHast } from 'satteri';
-import { processPanels, TabItemTagname } from '../../user-components/tabs-processor';
+import { processPanels, TabItemTagname } from '../../src/user-components/tabs-processor';
 
 const TabItem = ({ label, slot, icon }: { label: string; slot: string; icon?: string }) => {
 	const iconAttr = icon ? ` data-icon="${icon}"` : '';

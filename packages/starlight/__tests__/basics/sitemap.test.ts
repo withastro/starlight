@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
-import { getSitemapConfig, starlightSitemap } from '../../integrations/sitemap';
-import type { StarlightConfig } from '../../types';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import { getSitemapConfig, starlightSitemap } from '../../src/integrations/sitemap';
+import type { StarlightConfig } from '../../src/types';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
 
 describe('starlightSitemap', () => {
 	test('returns @astrojs/sitemap integration', () => {
