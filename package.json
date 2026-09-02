@@ -17,7 +17,6 @@
     "@astrojs/check": "^0.9.10",
     "@changesets/changelog-github": "^1.0.0",
     "@changesets/cli": "^3.0.1",
-    "@codspeed/vitest-plugin": "6.0.0-beta.1",
     "@eslint/js": "^10.0.1",
     "@size-limit/file": "^12.1.0",
     "astro": "^7.2.10",
