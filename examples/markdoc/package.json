@@ -11,10 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/markdoc": "^2.0.6",
+    "@astrojs/markdoc": "^2.0.8",
     "@astrojs/starlight": "^0.41.11",
     "@astrojs/starlight-markdoc": "^0.7.0",
-    "astro": "^7.2.5",
+    "astro": "^7.2.10",
     "sharp": "^0.35.3"
   }
 }
