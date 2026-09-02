@@ -130,9 +130,7 @@ const isHomepage = Astro.props.slug === '';
 {isHomepage ? (
 	<footer>Construido con Starlight 🌟</footer>
 ) : (
-	<Default {...Astro.props}>
-		<slot />
-	</Default>
+	<Default {...Astro.props}><slot /></Default>
 )}
 ```
 

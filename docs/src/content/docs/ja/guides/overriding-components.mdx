@@ -138,9 +138,7 @@ const isHomepage = Astro.locals.starlightRoute.id === '';
 {isHomepage ? (
 	<footer>Starlightで作成 🌟</footer>
 ) : (
-	<Default>
-		<slot />
-	</Default>
+	<Default><slot /></Default>
 )}
 ```
 

@@ -20,7 +20,7 @@
       }
     },
     {
-      "files": ["*.astro"],
+      "files": ["*.astro", "*.md", "*.mdx"],
       "options": {
         "astroCompressHTML": "none"
       }

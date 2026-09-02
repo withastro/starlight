@@ -141,9 +141,7 @@ const isHomepage = Astro.locals.starlightRoute.id === '';
 {isHomepage ? (
 	<footer>Construit avec Starlight 🌟</footer>
 ) : (
-	<Default>
-		<slot />
-	</Default>
+	<Default><slot /></Default>
 )}
 ```
 
