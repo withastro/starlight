@@ -26,11 +26,12 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 			)}
 		</>
 	)}
-	<span class:list={{ 'sr-only': config.logo?.replacesTitle }} translate="no"> {siteTitle} </span>
+	<span class:list={{ 'sr-only': config.logo?.replacesTitle }} translate="no">{siteTitle}</span>
 </a>
 
 <style>
-	@layer starlight.core {.site-title {
+	@layer starlight.core {
+		.site-title {
 			align-items: center;
 			gap: var(--sl-nav-gap);
 			font-size: var(--sl-text-h4);
@@ -49,5 +50,6 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 			max-width: 100%;
 			object-fit: contain;
 			object-position: 0 50%;
-		}}
+		}
+	}
 </style>

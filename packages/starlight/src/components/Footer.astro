@@ -21,7 +21,8 @@ import { Icon } from '../components';
 </footer>
 
 <style>
-	@layer starlight.core {footer {
+	@layer starlight.core {
+		footer {
 			flex-direction: column;
 			gap: 1.5rem;
 		}
@@ -47,9 +48,12 @@ import { Icon } from '../components';
 		}
 		.kudos:hover {
 			color: var(--sl-color-white);
-		}}
+		}
+	}
 
-	@layer starlight.components {.kudos :global(svg) {
+	@layer starlight.components {
+		.kudos :global(svg) {
 			color: var(--sl-color-orange);
-		}}
+		}
+	}
 </style>

@@ -34,7 +34,8 @@ interface Props {
 </label>
 
 <style>
-	@layer starlight.core {label {
+	@layer starlight.core {
+		label {
 			--sl-label-icon-size: 0.875rem;
 			--sl-caret-size: 1.25rem;
 			--sl-inline-padding: 0.5rem;
@@ -75,11 +76,15 @@ interface Props {
 			color: var(--sl-color-gray-1);
 		}
 
-		@media (min-width: 50rem) {select {
+		@media (min-width: 50rem) {
+			select {
 				font-size: var(--sl-text-sm);
-			}}}
+			}
+		}
+	}
 
-	@layer starlight.components {.label-icon {
+	@layer starlight.components {
+		.label-icon {
 			font-size: var(--sl-label-icon-size);
 			inset-inline-start: 0;
 		}
@@ -87,5 +92,6 @@ interface Props {
 		.caret {
 			font-size: var(--sl-caret-size);
 			inset-inline-end: 0;
-		}}
+		}
+	}
 </style>

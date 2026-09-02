@@ -41,7 +41,7 @@ const { labels, themes } = Astro.props;
 		<strong aria-hidden="true">{labels.legend}</strong>
 		{(['dark', 'light'] as const).map((variant) => (
 			<label class:list={['sl-flex', variant]} for={`${variant}-input`}>
-				<span class="radio"> <Icon name="approve-check" /> </span>
+				<span class="radio"><Icon name="approve-check" /></span>
 				<span>{labels[variant]}</span>
 				<input
 					id={`${variant}-input`}
@@ -127,10 +127,12 @@ const { labels, themes } = Astro.props;
 		background-color: var(--sl-color-bg-nav);
 		box-shadow: var(--sl-shadow-md);
 	}
-	@media (min-width: 50rem) and (max-width: 72rem) {/* Medium-width screens need a custom value to avoid x-axis overflow. */
+	@media (min-width: 50rem) and (max-width: 72rem) {
+		/* Medium-width screens need a custom value to avoid x-axis overflow. */
 		fieldset {
 			margin-inline: -1rem;
-		}}
+		}
+	}
 
 	label {
 		align-items: center;

@@ -78,9 +78,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">Schreib mir</a>
-<Default>
-	<slot />
-</Default>
+<Default><slot /></Default>
 ```
 
 Wenn du eine eingebaute Komponente innerhalb einer benutzerdefinierten Komponente renderst, füge ein [`<slot />`](https://docs.astro.build/de/basics/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden soll, wenn sie Kindelemente erhält.

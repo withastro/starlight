@@ -56,7 +56,8 @@ const { sublist, nested } = Astro.props;
 </ul>
 
 <style>
-	@layer starlight.core {ul {
+	@layer starlight.core {
+		ul {
 			--sl-sidebar-item-padding-inline: 0.5rem;
 			list-style: none;
 			padding: 0;
@@ -134,7 +135,8 @@ const { sublist, nested } = Astro.props;
 			margin-inline-end: 0.25em;
 		}
 
-		@media (min-width: 50rem) {.top-level > li + li {
+		@media (min-width: 50rem) {
+			.top-level > li + li {
 				margin-top: 0.5rem;
 			}
 			.large {
@@ -142,5 +144,7 @@ const { sublist, nested } = Astro.props;
 			}
 			a {
 				font-size: var(--sl-text-sm);
-			}}}
+			}
+		}
+	}
 </style>

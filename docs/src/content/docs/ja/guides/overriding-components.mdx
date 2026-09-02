@@ -76,9 +76,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">メールしてね</a>
-<Default>
-	<slot />
-</Default>
+<Default><slot /></Default>
 ```
 
 カスタムコンポーネント内で組み込みコンポーネントをレンダリングする場合は、デフォルトコンポーネント内に[`<slot />`](https://docs.astro.build/ja/basics/astro-components/#スロット)を追加します。これにより、コンポーネントに子要素が渡された場合、Astroがそれらをどこにレンダリングするかを知ることができます。

@@ -30,7 +30,8 @@ const isRtl = dir === 'rtl';
 </div>
 
 <style>
-	@layer starlight.core {.pagination-links {
+	@layer starlight.core {
+		.pagination-links {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
 			gap: 1rem;
@@ -69,5 +70,6 @@ const isRtl = dir === 'rtl';
 
 		svg {
 			flex-shrink: 0;
-		}}
+		}
+	}
 </style>

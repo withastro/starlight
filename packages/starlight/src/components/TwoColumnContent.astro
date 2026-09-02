@@ -8,11 +8,13 @@
 </div>
 
 <style>
-	@layer starlight.core {.main-pane {
+	@layer starlight.core {
+		.main-pane {
 			isolation: isolate;
 		}
 
-		@media (min-width: 72rem) {.right-sidebar-container {
+		@media (min-width: 72rem) {
+			.right-sidebar-container {
 				order: 2;
 				position: relative;
 				width: max(
@@ -48,5 +50,7 @@
 						var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
 					)
 				);
-			}}}
+			}
+		}
+	}
 </style>

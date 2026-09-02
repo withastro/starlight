@@ -78,9 +78,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">Me contacter par courriel</a>
-<Default>
-	<slot />
-</Default>
+<Default><slot /></Default>
 ```
 
 Lorsque vous affichez un composant intégré dans un composant personnalisé, ajoutez un élément [`<slot />`](https://docs.astro.build/fr/basics/astro-components/#les-slots) à l'intérieur du composant par défaut. Cela permet de s'assurer que si le composant reçoit des éléments enfants, Astro sait où les afficher.

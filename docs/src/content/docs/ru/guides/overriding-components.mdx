@@ -78,9 +78,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com"> Связаться с нами по электронной почте </a>
-<Default>
-	<slot />
-</Default>
+<Default><slot /></Default>
 ```
 
 При рендеринге встроенного компонента внутри пользовательского компонента добавьте [`<slot />`](https://docs.astro.build/ru/basics/astro-components/#%D1%81%D0%BB%D0%BE%D1%82%D1%8B) внутрь компонента по умолчанию. Это гарантирует, что если компоненту переданы дочерние элементы, Astro будет знать, где их отобразить.

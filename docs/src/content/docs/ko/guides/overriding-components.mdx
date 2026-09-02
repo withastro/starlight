@@ -78,9 +78,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">메일 보내기</a>
-<Default>
-	<slot />
-</Default>
+<Default><slot /></Default>
 ```
 
 사용자 정의 컴포넌트 내부에 내장 컴포넌트를 렌더링할 때 기본 컴포넌트 내부에 [`<slot />`](https://docs.astro.build/ko/basics/astro-components/#슬롯)을 추가하세요. 이렇게 하면 컴포넌트에 자식 요소가 전달될 경우 Astro가 해당 요소를 렌더링할 위치를 알 수 있습니다.

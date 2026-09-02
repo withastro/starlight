@@ -6,6 +6,6 @@ import SidebarSublist from './SidebarSublist.astro';
 const { sidebar } = Astro.locals.starlightRoute;
 ---
 
-<SidebarPersister> <SidebarSublist sublist={sidebar} /> </SidebarPersister>
+<SidebarPersister><SidebarSublist sublist={sidebar} /></SidebarPersister>
 
 <div class="md:sl-hidden"><MobileMenuFooter /></div>

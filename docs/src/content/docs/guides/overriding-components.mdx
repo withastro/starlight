@@ -78,9 +78,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">E-mail Me</a>
-<Default>
-	<slot />
-</Default>
+<Default><slot /></Default>
 ```
 
 When rendering a built-in component inside a custom component add a [`<slot />`](https://docs.astro.build/en/basics/astro-components/#slots) inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.

@@ -9,7 +9,8 @@ import Icon from '../user-components/Icon.astro';
 </button>
 
 <style>
-	@layer starlight.core {button {
+	@layer starlight.core {
+		button {
 			position: fixed;
 			top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
 			inset-inline-end: var(--sl-nav-pad-x);
@@ -45,15 +46,19 @@ import Icon from '../user-components/Icon.astro';
 
 		:global([data-theme='light']) button:has(~ :popover-open) {
 			background-color: var(--sl-color-gray-5);
-		}}
+		}
+	}
 </style>
 
 <style is:global>
-	@layer starlight.core {body:has(#starlight__sidebar:popover-open) {
+	@layer starlight.core {
+		body:has(#starlight__sidebar:popover-open) {
 			overflow: hidden;
 		}
 
-		@media (min-width: 50rem) {body:has(#starlight__sidebar:popover-open) {
+		@media (min-width: 50rem) {
+			body:has(#starlight__sidebar:popover-open) {
 				overflow: auto;
-			}}}
+			}
+		}
 </style>

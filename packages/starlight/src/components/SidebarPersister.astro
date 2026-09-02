@@ -55,7 +55,9 @@ declare global {
 				);
 			} catch {}
 		})();
-	</script><slot />
+	</script>
+	
+	<slot />
 
 	<script is:inline aria-hidden="true">
 		(() => {
@@ -64,10 +66,13 @@ declare global {
 			scroller.scrollTop = window._starlightScrollRestore;
 			delete window._starlightScrollRestore;
 		})();
-	</script></sl-sidebar-state-persist>
+	</script>
+</sl-sidebar-state-persist>
 
 <style>
-	@layer starlight.core {sl-sidebar-state-persist {
+	@layer starlight.core {
+		sl-sidebar-state-persist {
 			display: contents;
-		}}
+		}
+	}
 </style>

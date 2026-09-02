@@ -78,9 +78,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">Escríbeme</a>
-<Default {...Astro.props}>
-	<slot />
-</Default>
+<Default {...Astro.props}><slot /></Default>
 ```
 
 Cuando renderizas un componente integrado dentro de un componente personalizado:

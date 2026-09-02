@@ -26,7 +26,8 @@ const {
 </a>
 
 <style>
-	@layer starlight.components {.sl-link-button {
+	@layer starlight.components {
+		.sl-link-button {
 			align-items: center;
 			border: 1px solid transparent;
 			border-radius: 999rem;
@@ -60,15 +61,18 @@ const {
 			flex-shrink: 0;
 		}
 
-		@media (min-width: 50rem) {.sl-link-button {
+		@media (min-width: 50rem) {
+			.sl-link-button {
 				font-size: var(--sl-text-base);
 				padding: 0.9375rem 1.25rem;
-			}}
+			}
+		}
 
 		:global(.sl-markdown-content) .sl-link-button {
 			margin-inline-end: 1rem;
 		}
 		:global(.sl-markdown-content) .sl-link-button:not(:where(p *)) {
 			margin-block: 1rem;
-		}}
+		}
+	}
 </style>

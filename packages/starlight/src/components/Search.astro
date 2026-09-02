@@ -154,7 +154,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </script>
 
 <style>
-	@layer starlight.core {site-search {
+	@layer starlight.core {
+		site-search {
 			display: contents;
 		}
 		button[data-open-modal] {
@@ -258,7 +259,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			--pagefind-ui-tag: var(--sl-color-gray-6);
 		}
 
-		@media (min-width: 50rem) {#starlight__search {
+		@media (min-width: 50rem) {
+			#starlight__search {
 				--sl-search-cancel-space: 0px;
 			}
 
@@ -274,13 +276,16 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 			.dialog-frame {
 				padding: 1.5rem;
-			}}}
+			}
+		}
+	}
 </style>
 
 <style is:global>
 	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.core);
 
-	@layer starlight.core {[data-search-modal-open] {
+	@layer starlight.core {
+		[data-search-modal-open] {
 			overflow: hidden;
 		}
 
@@ -468,5 +473,6 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			background-color: var(--sl-color-black);
 			margin-top: 0;
 			padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
-		}}
+		}
+	}
 </style>

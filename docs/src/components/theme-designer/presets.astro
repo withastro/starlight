@@ -29,7 +29,7 @@ const resolvedPresets = Object.entries(presets).map(([key, preset]) => {
 				'--dark-text': dark['accent-low'],
 				'--light-text': light.black,
 			}}
-		> {label} </button>
+		>{label}</button>
 	))}
 	<button data-random>{labels.random}<Icon name="random" size="1rem" /></button>
 </preset-picker>

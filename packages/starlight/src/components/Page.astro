@@ -65,12 +65,16 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 			main {
 				padding: var(--sl-main-pad);
 			}
-			@media (min-width: 50em) {[data-has-sidebar] {
+			@media (min-width: 50em) {
+				[data-has-sidebar] {
 					--sl-content-inline-start: var(--sl-sidebar-width);
-				}}
-			@media (min-width: 72em) {html {
+				}
+			}
+			@media (min-width: 72em) {
+				html {
 					scroll-padding-top: calc(1.5rem + var(--sl-nav-height));
-				}}
+				}
+			}
 		</style>
 		<ThemeProvider />
 		<link rel="stylesheet" href={printHref} media="print" />
@@ -80,7 +84,8 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 		<PageFrame>
 			<Header slot="header" />
 			{starlightRoute.hasSidebar && <Sidebar slot="sidebar" />}
-			<script src="../components-internals/SidebarPersistState"></script><TwoColumnContent>
+			<script src="../components-internals/SidebarPersistState"></script>
+			<TwoColumnContent>
 				<PageSidebar slot="right-sidebar" />
 				<main
 					{...mainDataAttributes}
@@ -92,7 +97,7 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 					{starlightRoute.entry.data.hero ? (
 						<ContentPanel>
 							<Hero />
-							<MarkdownContent> <slot /> </MarkdownContent>
+							<MarkdownContent><slot /></MarkdownContent>
 							<Footer />
 						</ContentPanel>
 					) : (
@@ -103,7 +108,7 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 								{starlightRoute.isFallback && <FallbackContentNotice />}
 							</ContentPanel>
 							<ContentPanel>
-								<MarkdownContent> <slot /> </MarkdownContent>
+								<MarkdownContent><slot /></MarkdownContent>
 								<Footer />
 							</ContentPanel>
 						</>

@@ -34,14 +34,15 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 				popover=""
 				id="starlight__sidebar"
 				class="sidebar-pane"
-			> <div class="sidebar-content sl-flex"><slot name="sidebar" /></div> </sl-sidebar-pane>
+			><div class="sidebar-content sl-flex"><slot name="sidebar" /></div></sl-sidebar-pane>
 		</nav>
 	)}
 	<div class="main-frame"><slot /></div>
 </div>
 
 <style>
-	@layer starlight.core {.page {
+	@layer starlight.core {
+		.page {
 			flex-direction: column;
 			min-height: 100vh;
 		}
@@ -90,17 +91,20 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			gap: 1rem;
 		}
 
-		@media (min-width: 50rem) {.sidebar-content::after {
+		@media (min-width: 50rem) {
+			.sidebar-content::after {
 				content: '';
 				padding-bottom: 1px;
-			}}
+			}
+		}
 
 		.main-frame {
 			padding-top: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height));
 			padding-inline-start: var(--sl-content-inline-start);
 		}
 
-		@media (min-width: 50rem) {:global([data-has-sidebar]) .header {
+		@media (min-width: 50rem) {
+			:global([data-has-sidebar]) .header {
 				padding-inline-end: var(--sl-nav-pad-x);
 			}
 			.sidebar-pane {
@@ -109,5 +113,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 				width: var(--sl-sidebar-width);
 				background-color: var(--sl-color-bg-sidebar);
 				border-inline-end: 1px solid var(--sl-color-hairline-shade);
-			}}}
+			}
+		}
+	}
 </style>

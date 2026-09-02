@@ -1,7 +1,8 @@
 <div class="content-panel"><div class="sl-container"><slot /></div></div>
 
 <style>
-	@layer starlight.core {.content-panel {
+	@layer starlight.core {
+		.content-panel {
 			padding: 1.5rem var(--sl-content-pad-x);
 		}
 		.content-panel + .content-panel {
@@ -15,7 +16,10 @@
 			margin-top: 1.5rem;
 		}
 
-		@media (min-width: 72rem) {.sl-container {
+		@media (min-width: 72rem) {
+			.sl-container {
 				margin-inline: var(--sl-content-margin-inline, auto);
-			}}}
+			}
+		}
+	}
 </style>
