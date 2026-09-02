@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.10
-        version: 0.9.10(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@6.0.3)
+        version: 0.9.10(prettier-plugin-astro@1.0.0-beta.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(prettier@3.3.3))(prettier@3.3.3)(typescript@6.0.3)
       '@changesets/changelog-github':
         specifier: ^1.0.0
         version: 1.0.0
@@ -42,8 +42,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       prettier-plugin-astro:
-        specifier: ^0.14.1
-        version: 0.14.1
+        specifier: 1.0.0-beta.1
+        version: 1.0.0-beta.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(prettier@3.3.3)
       publint:
         specifier: ^0.3.23
         version: 0.3.23
@@ -3610,9 +3610,11 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-astro@0.14.1:
-    resolution: {integrity: sha512-RiBETaaP9veVstE4vUwSIcdATj6dKmXljouXc/DDNwBSPTp8FRkLGDSGFClKsAFeeg+13SB0Z1JZvbD76bigJw==}
-    engines: {node: ^14.15.0 || >=16.0.0}
+  prettier-plugin-astro@1.0.0-beta.1:
+    resolution: {integrity: sha512-VcW0J7js5weFXY5JuiCosMz3/rK843I1jgRyaWyc1VRvPS8xICfmvbIiGzCVFXgjj4uU6B+KMM9L7CXH5o0lHA==}
+    engines: {node: '>=22.12.0'}
+    peerDependencies:
+      prettier: ^3.5.3
 
   prettier@3.3.3:
     resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
@@ -3803,8 +3805,9 @@ packages:
     resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
     engines: {node: '>=6'}
 
-  sass-formatter@0.7.6:
-    resolution: {integrity: sha512-hXdxU6PCkiV3XAiSnX+XLqz2ohHoEnVUlrd8LEVMAI80uB1+OTScIkH9n6qQwImZpTye1r1WG1rbGUteHNhoHg==}
+  sass-formatter@0.8.0:
+    resolution: {integrity: sha512-Nf4eMGE2O5vnJG7KPCRyksWS9gVKSYoUWtPeMXRRxwZSPVQhSGtL602xVYS65LvMkHmkvKa7xpauF0+/5pPwrg==}
+    hasBin: true
 
   satteri@0.10.5:
     resolution: {integrity: sha512-Ao1LKpAEa9Wdg0otgbVKViZHEq9ebdXe4DMrp3s9vQAU0HNIuHnFEuMuOcm0ZIXyV0Yzxj91NvhLpvXZJO/5ZQ==}
@@ -4607,9 +4610,9 @@ snapshots:
     dependencies:
       lite-youtube-embed: 0.3.4
 
-  '@astrojs/check@0.9.10(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@6.0.3)':
+  '@astrojs/check@0.9.10(prettier-plugin-astro@1.0.0-beta.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(prettier@3.3.3))(prettier@3.3.3)(typescript@6.0.3)':
     dependencies:
-      '@astrojs/language-server': 2.16.7(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@6.0.3)
+      '@astrojs/language-server': 2.16.7(prettier-plugin-astro@1.0.0-beta.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(prettier@3.3.3))(prettier@3.3.3)(typescript@6.0.3)
       chokidar: 4.0.3
       kleur: 4.1.5
       typescript: 6.0.3
@@ -4707,7 +4710,7 @@ snapshots:
       smol-toml: 1.6.1
       unified: 11.0.5
 
-  '@astrojs/language-server@2.16.7(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@6.0.3)':
+  '@astrojs/language-server@2.16.7(prettier-plugin-astro@1.0.0-beta.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(prettier@3.3.3))(prettier@3.3.3)(typescript@6.0.3)':
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/yaml2ts': 0.2.3
@@ -4729,7 +4732,7 @@ snapshots:
       vscode-uri: 3.1.0
     optionalDependencies:
       prettier: 3.3.3
-      prettier-plugin-astro: 0.14.1
+      prettier-plugin-astro: 1.0.0-beta.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(prettier@3.3.3)
     transitivePeerDependencies:
       - typescript
 
@@ -5926,7 +5929,7 @@ snapshots:
       obug: 2.1.4
       std-env: 4.0.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.5(@types/node@24.12.4)(@vitest/coverage-v8@4.1.5)(esbuild@0.28.0)(jiti@2.6.1)(yaml@2.9.0)
+      vitest: 4.1.5(@types/node@22.19.17)(@vitest/coverage-v8@4.1.5)(esbuild@0.28.0)(jiti@2.6.1)(yaml@2.9.0)
 
   '@vitest/expect@4.1.5':
     dependencies:
@@ -8234,11 +8237,14 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-astro@0.14.1:
+  prettier-plugin-astro@1.0.0-beta.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(prettier@3.3.3):
     dependencies:
-      '@astrojs/compiler': 2.13.1
+      '@astrojs/compiler-rs': 0.4.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
       prettier: 3.3.3
-      sass-formatter: 0.7.6
+      sass-formatter: 0.8.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   prettier@3.3.3: {}
 
@@ -8484,7 +8490,7 @@ snapshots:
     dependencies:
       mri: 1.2.0
 
-  sass-formatter@0.7.6:
+  sass-formatter@0.8.0:
     dependencies:
       suf-log: 2.5.3
 
