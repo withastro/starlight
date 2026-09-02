@@ -10,11 +10,33 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 		hasSidebar && (
 			<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle />
-				<div id="starlight__sidebar" class="sidebar-pane">
+				<script>
+					// The mobile menu uses the popover API to open and close without JavaScript. We enhance this
+					// behaviour with focus trapping while the menu is open.
+					class StarlightSidebarPane extends HTMLElement {
+						constructor() {
+							super();
+
+							// Close the menu when the viewport is resized between mobile and desktop sizes.
+							matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
+
+							// Update the menu state when the sidebar popover is toggled.
+							this.addEventListener('toggle', ({ newState }) => this.trapFocus(newState === 'open'));
+						}
+						/** Trap keyboard focus inside the header and menu when the menu is expanded. */
+						trapFocus(shouldTrap: boolean) {
+							document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
+								el.toggleAttribute('inert', shouldTrap);
+							});
+						}
+					}
+					customElements.define('sl-sidebar-pane', StarlightSidebarPane);
+				</script>
+				<sl-sidebar-pane popover="" id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content sl-flex">
 						<slot name="sidebar" />
 					</div>
-				</div>
+				</sl-sidebar-pane>
 			</nav>
 		)
 	}
@@ -48,7 +70,12 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 		}
 
 		.sidebar-pane {
-			visibility: var(--sl-sidebar-visibility, hidden);
+			/* By default, user agents apply some opinionated styles to popovers, which we don’t want. */
+			border: unset;
+			padding: unset;
+			height: unset;
+			color: unset;
+
 			position: fixed;
 			z-index: var(--sl-z-index-menu);
 			inset-block: var(--sl-nav-height) 0;
@@ -57,10 +84,6 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			background-color: var(--sl-color-black);
 			overflow-y: auto;
 			scrollbar-gutter: stable;
-		}
-
-		:global([aria-expanded='true']) ~ .sidebar-pane {
-			--sl-sidebar-visibility: visible;
 		}
 
 		.sidebar-content {
@@ -88,7 +111,8 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 				padding-inline-end: var(--sl-nav-pad-x);
 			}
 			.sidebar-pane {
-				--sl-sidebar-visibility: visible;
+				/* Make the sidebar visible on larger screens instead of deferring to popover state. */
+				display: block;
 				width: var(--sl-sidebar-width);
 				background-color: var(--sl-color-bg-sidebar);
 				border-inline-end: 1px solid var(--sl-color-hairline-shade);
