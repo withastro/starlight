@@ -3,8 +3,8 @@ import {
 	getAllNewestCommitDate,
 	getNewestCommitDate,
 	makeAPI as makeLiveGitAPI,
-} from '../../utils/git';
-import { makeAPI as makeInlineGitAPI } from '../../utils/gitInlined';
+} from '../../src/utils/git';
+import { makeAPI as makeInlineGitAPI } from '../../src/utils/gitInlined';
 import { makeTestRepo, type ISODate } from '../git-utils';
 
 describe('getNewestCommitDate', () => {

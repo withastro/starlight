@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
 import { YAMLException } from 'js-yaml';
 
 describe('createTranslationSystemFromFs', () => {

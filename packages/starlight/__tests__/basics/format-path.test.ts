@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { createPathFormatter } from '../../utils/createPathFormatter';
+import { createPathFormatter } from '../../src/utils/createPathFormatter';
 
 type FormatPathOptions = Parameters<typeof createPathFormatter>[0];
 const formatPath = (href: string, opts: FormatPathOptions) => createPathFormatter(opts)(href);
@@ -127,7 +127,7 @@ describe.each<{
 			// Set the base URL.
 			vi.stubEnv('BASE_URL', base);
 			// Re-import the module to re-create the path formatter.
-			const { createPathFormatter } = await import('../../utils/createPathFormatter');
+			const { createPathFormatter } = await import('../../src/utils/createPathFormatter');
 			const formatPathWithBase: typeof formatPath = (href, opts) => createPathFormatter(opts)(href);
 
 			expect(formatPathWithBase(path, options)).toBe(expected);
