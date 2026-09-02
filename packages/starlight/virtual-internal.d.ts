@@ -28,6 +28,10 @@ declare module 'virtual:starlight/pagefind-config' {
 	>;
 }
 
+declare module 'virtual:starlight/components/Page' {
+	const Page: typeof import('./components/Page.astro').default;
+	export default Page;
+}
 declare module 'virtual:starlight/components/Banner' {
 	const Banner: typeof import('./components/Banner.astro').default;
 	export default Banner;
