@@ -1,4 +1,4 @@
-import type { Definitions } from '../starlight/src/user-components/rehype-file-tree';
+import type { Definitions } from '../starlight/src/user-components/file-tree-processor';
 
 export const seti = {
 	/** The GitHub repository containing the Seti UI theme using the `username/repo` format. */

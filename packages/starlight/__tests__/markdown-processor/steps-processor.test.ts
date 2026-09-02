@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { processSteps } from '../../src/user-components/rehype-steps';
+import { processSteps } from '../../src/user-components/steps-processor';
 
 test('empty component throws an error', () => {
 	expect(() => processSteps('')).toThrowErrorMatchingInlineSnapshot(
@@ -63,7 +63,7 @@ test('component with multiple children throws an error', () => {
 });
 
 // This tests a workaround added for https://github.com/withastro/astro/issues/15627
-// See rehype-steps.ts for more details.
+// See steps-processor.ts for more details.
 test('component with top-level script child is processed successfully', () => {
 	const { html } = processSteps(
 		'<script type="module" src="/test-script.js"></script><ol><li>List item</li></ol>'

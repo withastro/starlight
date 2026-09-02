@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { processFileTree } from '../../src/user-components/rehype-file-tree';
+import { processFileTree } from '../../src/user-components/file-tree-processor';
 import { Icons, type StarlightIcon } from '../../src/components-internals/Icons';
 
 describe('validation', () => {
