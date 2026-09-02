@@ -336,7 +336,7 @@ export default {
 
 Вызовите `absolutePathToLang()` с абсолютным путём к файлу, чтобы получить язык для этого файла.
 
-Это может быть особенно полезно при добавлении [плагинов remark или rehype](https://docs.astro.build/ru/guides/markdown-content/#%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%D1%8B-markdown) для обработки файлов Markdown или MDX.
+Это может быть особенно полезно при добавлении [плагинов remark или rehype](https://docs.astro.build/ru/guides/markdown-content/#markdown-processor-plugins) для обработки файлов Markdown или MDX.
 Виртуальный формат файлов, используемый этими плагинами, включает [абсолютный путь](https://github.com/vfile/vfile#filepath) обрабатываемого файла, который можно использовать с `absolutePathToLang()`, чтобы определить язык файла.
 Возвращаемый язык можно использовать с хелпером [`useTranslations()`](#usetranslations) для получения строк интерфейса для этого языка.
 
