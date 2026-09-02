@@ -4,12 +4,13 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "pnpm --filter '@astrojs/*' build",
     "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
     "lint": "eslint . --max-warnings 0",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro .",
-    "typecheck": "astro check --minimumSeverity warning --noSync && pnpm --filter starlight-docs typecheck"
+    "typecheck": "astro check --minimumSeverity warning --noSync"
   },
   "license": "MIT",
   "devDependencies": {
@@ -25,7 +26,9 @@
     "pkg-pr-new": "^0.0.86",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "^0.14.1",
+    "publint": "^0.3.23",
     "size-limit": "^12.1.0",
+    "tsdown": "^0.22.14",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2"
   },

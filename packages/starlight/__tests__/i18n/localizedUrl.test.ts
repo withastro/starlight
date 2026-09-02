@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { localizedUrl } from '../../utils/localizedUrl';
+import { localizedUrl } from '../../src/utils/localizedUrl';
 
 describe('with `build.output: "directory"`', () => {
 	test('it has no effect if locale matches', () => {

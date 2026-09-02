@@ -3,7 +3,7 @@ import { ExpressiveCodeTheme } from 'astro-expressive-code';
 import {
 	applyStarlightUiThemeColors,
 	preprocessThemes,
-} from '../../integrations/expressive-code/theming';
+} from '../../src/integrations/expressive-code/theming';
 
 describe('preprocessThemes', () => {
 	test('returns the default theme objects when no options are provided', () => {
