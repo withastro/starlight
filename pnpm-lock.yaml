@@ -100,7 +100,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.41.11
+        specifier: ^0.42.0
         version: link:../../packages/starlight
       astro:
         specifier: ^7.2.10
@@ -115,7 +115,7 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8(astro@7.2.10(@astrojs/markdown-remark@7.3.0(supports-color@10.2.2))(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.9.0))
       '@astrojs/starlight':
-        specifier: ^0.41.11
+        specifier: ^0.42.0
         version: link:../../packages/starlight
       '@astrojs/starlight-markdoc':
         specifier: ^0.7.0
@@ -130,7 +130,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.41.11
+        specifier: ^0.42.0
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^5.0.0
