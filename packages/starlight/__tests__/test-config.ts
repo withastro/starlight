@@ -64,6 +64,7 @@ export async function defineVitestConfig(
 			),
 		],
 		test: {
+			fsModuleCache: true,
 			snapshotSerializers: ['../snapshot-serializer-astro-error.ts'],
 		},
 	});
