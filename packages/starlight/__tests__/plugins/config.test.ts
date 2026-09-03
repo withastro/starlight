@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import config from 'virtual:starlight/user-config';
-import { getSidebar } from '../../utils/navigation';
-import { runPlugins } from '../../utils/plugins';
+import { getSidebar } from '../../src/utils/navigation';
+import { runPlugins } from '../../src/utils/plugins';
 import { createTestPluginContext } from '../test-plugin-utils';
 import pkg from '../../package.json';
 

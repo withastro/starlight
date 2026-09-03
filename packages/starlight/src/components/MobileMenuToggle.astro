@@ -1,0 +1,65 @@
+---
+import Icon from '../user-components/Icon.astro';
+---
+
+<button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden">
+	<Icon name="bars" class="open-menu" />
+	<Icon name="close" class="close-menu" />
+	<span class="sr-only">{Astro.locals.t('menuButton.accessibleLabel')}</span>
+</button>
+
+<style>
+	@layer starlight.core {
+		button {
+			position: fixed;
+			top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+			inset-inline-end: var(--sl-nav-pad-x);
+			z-index: var(--sl-z-index-navbar);
+			border: 0;
+			border-radius: 50%;
+			width: var(--sl-menu-button-size);
+			height: var(--sl-menu-button-size);
+			padding: 0.5rem;
+			background-color: var(--sl-color-white);
+			color: var(--sl-color-black);
+			box-shadow: var(--sl-shadow-md);
+			cursor: pointer;
+		}
+
+		button:has(~ :popover-open) {
+			background-color: var(--sl-color-gray-2);
+			box-shadow: none;
+		}
+
+		button:has(~ :popover-open) .open-menu {
+			display: none;
+		}
+
+		button:not(:has(~ :popover-open)) .close-menu {
+			display: none;
+		}
+
+		:global([data-theme='light']) button {
+			background-color: var(--sl-color-black);
+			color: var(--sl-color-white);
+		}
+
+		:global([data-theme='light']) button:has(~ :popover-open) {
+			background-color: var(--sl-color-gray-5);
+		}
+	}
+</style>
+
+<style is:global>
+	@layer starlight.core {
+		body:has(#starlight__sidebar:popover-open) {
+			overflow: hidden;
+		}
+
+		@media (min-width: 50rem) {
+			body:has(#starlight__sidebar:popover-open) {
+				overflow: auto;
+			}
+		}
+	}
+</style>

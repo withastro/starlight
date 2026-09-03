@@ -1,11 +1,11 @@
 import type { ImageMetadata } from 'astro';
 import { expect, test, vi } from 'vitest';
-import { routes } from '../../utils/routing';
-import { generateRouteData } from '../../utils/routing/data';
+import { routes } from '../../src/utils/routing';
+import { generateRouteData } from '../../src/utils/routing/data';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
-} from '../../utils/starlight-page';
+} from '../../src/utils/starlight-page';
 import { getRouteDataTestContext } from '../test-utils';
 
 vi.mock('virtual:starlight/collection-config', async () =>

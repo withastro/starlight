@@ -117,6 +117,13 @@ You should then be able to open <http://localhost:4321> and see your changes.
 > **Note**
 > Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
 
+To ensure the docs site builds successfully with the packaged version of Starlight:
+
+```sh
+cd docs
+pnpm build:dist
+```
+
 ### Check for broken links in the docs site
 
 When adding or translating content in the Starlight docs site, you can check all internal links are valid.
@@ -143,6 +150,13 @@ pnpm test
 ```
 
 This will run tests and then listen for changes, re-running tests when files change.
+
+To build Starlight and run the unit tests against its generated package output:
+
+```sh
+cd packages/starlight
+pnpm test:dist
+```
 
 #### Test environments
 
@@ -228,7 +242,7 @@ Check out the dedicated [i18n contribution guidelines](https://contribute.docs.a
 
 Starlight’s UI comes with some built-in text elements. For example, the table of contents on a Starlight page has a heading of “On this page” and the theme picker shows “Light”, “Dark”, and “Auto” labels. Starlight aims to provide these in as many languages as possible.
 
-Help out by adding or updating translation files in [`packages/starlight/translations`](./packages/starlight/translations/).
+Help out by adding or updating translation files in [`packages/starlight/src/translations`](./packages/starlight/src/translations/).
 Each language’s JSON file follows the [translation structure described in Starlight’s docs](https://starlight.astro.build/guides/i18n/#translate-starlights-ui).
 
 📺 **Prefer a visual walkthrough?** [Watch an introduction to Starlight’s translation files.](https://scrimba.com/scrim/cpb44bt3)
@@ -261,21 +275,21 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 - Starlight is built as an Astro integration.
   Read the [Astro Integration API docs][api-docs] to learn more about how integrations work.
 
-  The Starlight integration is exported from [`packages/starlight/index.ts`](./packages/starlight/index.ts).
+  The Starlight integration is exported from [`packages/starlight/src/index.ts`](./packages/starlight/src/index.ts).
   It sets up Starlight’s routing logic, parses user config, and adds configuration to a Starlight user’s Astro project.
 
-- Most pages in a Starlight project are built using a single [`packages/starlight/index.astro`](./packages/starlight/index.astro) route.
+- Most pages in a Starlight project are built using a single [`packages/starlight/src/routes/common.astro`](./packages/starlight/src/routes/common.astro) route.
   If you’ve worked on an Astro site before, much of this should look familiar: it’s an Astro component and uses a number of other components to build a page based on user content.
 
 - Starlight consumes a user’s content from the `'docs'` [content collection](https://docs.astro.build/en/guides/content-collections/).
-  This allows us to specify the permissible frontmatter via [a Starlight-specific schema](./packages/starlight/schema.ts) and get predictable data while providing clear error messages if a user sets invalid frontmatter in a page.
+  This allows us to specify the permissible frontmatter via [a Starlight-specific schema](./packages/starlight/src/schema.ts) and get predictable data while providing clear error messages if a user sets invalid frontmatter in a page.
 
 - Components that require JavaScript for their functionality are all written without a UI framework, most often as custom elements.
   This helps keep Starlight lightweight and makes it easier for a user to choose to add components from a framework of their choice to their project.
 
 - Components that require client-side JavaScript or CSS should use JavaScript/CSS features that are well-supported by browsers.
 
-  You can find a list of supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+111%2C+Edge+%3E%3D+111%2C+Firefox+%3E%3D+121%2C+Safari+%3E%3D+16.4%2C+iOS+%3E%3D+16.4%2C+not+op_mini+all). To check whether or not a feature is supported, you can visit the [Can I use](https://caniuse.com) website and search for the feature.
+  You can find a list of supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+116%2C+Edge+%3E%3D+116%2C+Firefox+%3E%3D+125%2C+Safari+%3E%3D+17.0%2C+iOS+%3E%3D+17.0%2C+not+op_mini+all). To check whether or not a feature is supported, you can visit the [Can I use](https://caniuse.com) website and search for the feature.
 
 [discord]: https://astro.build/chat
 [issues]: https://github.com/withastro/starlight/issues

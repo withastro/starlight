@@ -1,10 +1,13 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.41.11",
+  "version": "0.42.0",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
+    "build": "tsdown",
     "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
     "test:coverage": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run --coverage",
+    "test:dist": "pnpm build && pnpm test:dist:ci",
+    "test:dist:ci": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true STARLIGHT_TEST_DIST=true vitest run",
     "bench": "pnpm bench:functional",
     "bench:functional": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest bench --run --config vitest.functional.bench.config.ts __bench_fn__/*.bench.ts",
     "test:e2e": "playwright install --with-deps chromium && playwright test",
@@ -21,37 +24,31 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/withastro/starlight",
+    "url": "git+https://github.com/withastro/starlight.git",
     "directory": "packages/starlight"
   },
   "bugs": "https://github.com/withastro/starlight/issues",
   "homepage": "https://starlight.astro.build",
   "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./locals": "./locals.ts",
-    "./components": "./components.ts",
-    "./components/*": "./components/*",
-    "./internal": "./internal.ts",
-    "./props": "./props.ts",
-    "./schema": "./schema.ts",
-    "./loaders": "./loaders.ts",
-    "./route-data": "./route-data.ts",
-    "./types": "./types.ts",
-    "./expressive-code": {
-      "types": "./expressive-code.d.ts",
-      "default": "./expressive-code.mjs"
-    },
-    "./expressive-code/hast": {
-      "types": "./integrations/expressive-code/hast.d.ts",
-      "default": "./integrations/expressive-code/hast.mjs"
-    },
-    "./routes/*": "./routes/*",
-    "./style/markdown.css": "./style/markdown.css"
+    ".": "./src/index.ts",
+    "./locals": "./src/locals.ts",
+    "./components": "./src/components.ts",
+    "./components/*": "./src/components/*",
+    "./internal": "./src/internal.ts",
+    "./props": "./src/props.ts",
+    "./schema": "./src/schema.ts",
+    "./loaders": "./src/loaders.ts",
+    "./route-data": "./src/route-data.ts",
+    "./types": "./src/types.ts",
+    "./expressive-code": "./src/expressive-code.ts",
+    "./expressive-code/hast": "./src/integrations/expressive-code/hast.ts",
+    "./routes/*": "./src/routes/*",
+    "./style/markdown.css": "./src/style/markdown.css"
   },
   "peerDependencies": {
-    "@astrojs/markdown-remark": "^7.2.0",
-    "astro": "^7.0.2"
+    "@astrojs/markdown-remark": "^7.3.0",
+    "astro": "^7.2.10"
   },
   "peerDependenciesMeta": {
     "@astrojs/markdown-remark": {
@@ -59,47 +56,94 @@
     }
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^7.2.2",
-    "@playwright/test": "^1.61.1",
+    "@astrojs/markdown-remark": "^7.3.0",
     "@codspeed/vitest-plugin": "^5.7.1",
+    "@playwright/test": "^1.61.1",
     "@types/node": "^22.19.17",
     "@vitest/coverage-v8": "^4.1.5",
-    "astro": "^7.1.6",
+    "astro": "^7.2.10",
     "linkedom": "^0.18.12",
     "vitest": "^4.1.5"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "^0.3.5",
-    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/markdown-satteri": "^0.4.0",
+    "@astrojs/mdx": "^8.0.0",
     "@astrojs/sitemap": "^3.7.3",
     "@pagefind/default-ui": "^1.3.0",
-    "@types/hast": "^3.0.4",
+    "@types/hast": "^3.0.5",
     "@types/js-yaml": "^4.0.9",
     "@types/mdast": "^4.0.4",
     "astro-expressive-code": "^0.44.0",
     "bcp-47": "^2.1.0",
-    "hast-util-from-html": "^2.0.3",
+    "hast-util-format": "^1.1.0",
     "hast-util-select": "^6.0.4",
+    "hast-util-to-html": "^9.0.5",
     "hast-util-to-string": "^3.0.1",
     "hastscript": "^9.0.1",
     "i18next": "^26.0.7",
     "js-yaml": "^4.1.1",
     "klona": "^2.0.6",
-    "magic-string": "^0.30.21",
+    "magic-string": "^1.2.3",
     "mdast-util-directive": "^3.1.0",
     "mdast-util-to-markdown": "^2.1.2",
     "mdast-util-to-string": "^4.0.0",
     "pagefind": "^1.5.2",
-    "rehype": "^13.0.2",
-    "rehype-format": "^5.0.1",
     "remark-directive": "^4.0.0",
-    "satteri": "^0.9.1",
+    "satteri": "^0.10.3",
     "ultrahtml": "^1.6.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
     "vfile": "^6.0.3"
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
-    "provenance": true
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./locals": {
+        "types": "./dist/locals.d.ts",
+        "import": "./dist/locals.js"
+      },
+      "./components": "./dist/components.ts",
+      "./components/*": "./dist/components/*",
+      "./internal": {
+        "types": "./dist/internal.d.ts",
+        "import": "./dist/internal.js"
+      },
+      "./props": {
+        "types": "./dist/props.d.ts",
+        "import": "./dist/props.js"
+      },
+      "./schema": {
+        "types": "./dist/schema.d.ts",
+        "import": "./dist/schema.js"
+      },
+      "./loaders": {
+        "types": "./dist/loaders.d.ts",
+        "import": "./dist/loaders.js"
+      },
+      "./route-data": {
+        "types": "./dist/route-data.d.ts",
+        "import": "./dist/route-data.js"
+      },
+      "./types": {
+        "types": "./dist/types.d.ts",
+        "import": "./dist/types.js"
+      },
+      "./expressive-code": {
+        "types": "./dist/expressive-code.d.ts",
+        "import": "./dist/expressive-code.js"
+      },
+      "./expressive-code/hast": {
+        "types": "./dist/integrations/expressive-code/hast.d.ts",
+        "import": "./dist/integrations/expressive-code/hast.js"
+      },
+      "./routes/*": "./dist/routes/*",
+      "./style/markdown.css": "./dist/style/markdown.css"
+    }
   }
 }
