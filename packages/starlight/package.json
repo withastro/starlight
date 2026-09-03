@@ -9,7 +9,7 @@
     "test:dist": "pnpm build && pnpm test:dist:ci",
     "test:dist:ci": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true STARLIGHT_TEST_DIST=true vitest run",
     "bench": "pnpm bench:functional",
-    "bench:functional": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest bench --run --config vitest.functional.bench.config.ts __bench_fn__/*.bench.ts",
+    "bench:functional": "tsdown --config tsdown.bench.config.ts && VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest bench --run --config vitest.functional.bench.config.ts __bench_fn__/*.bench.ts",
     "test:e2e": "playwright install --with-deps chromium && playwright test",
     "test:e2e:ci": "playwright test"
   },
