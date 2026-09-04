@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, test, vi } from 'vitest';
-import { useTranslations } from '../../utils/translations';
-import translations from '../../translations';
+import { useTranslations } from '../../src/utils/translations';
+import translations from '../../src/translations';
 
 describe('useTranslations()', () => {
 	test('includes localized UI strings', () => {
@@ -41,7 +41,7 @@ describe('t()', () => {
 		// module and re-computes `useTranslations`. Re-importing the module is necessary because
 		// top-level imports cannot be re-evaluated.
 		vi.resetModules();
-		const { useTranslations } = await import('../../utils/translations');
+		const { useTranslations } = await import('../../src/utils/translations');
 		t = useTranslations(undefined);
 	});
 
@@ -119,7 +119,7 @@ describe('t.all()', () => {
 			})
 		);
 		vi.resetModules();
-		const { useTranslations } = await import('../../utils/translations');
+		const { useTranslations } = await import('../../src/utils/translations');
 		t = useTranslations(undefined);
 	});
 
@@ -140,7 +140,7 @@ describe('t.exists()', () => {
 			})
 		);
 		vi.resetModules();
-		const { useTranslations } = await import('../../utils/translations');
+		const { useTranslations } = await import('../../src/utils/translations');
 		t = useTranslations(undefined);
 	});
 

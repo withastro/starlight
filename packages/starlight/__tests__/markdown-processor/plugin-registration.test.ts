@@ -1,12 +1,12 @@
 import { unified } from '@astrojs/markdown-remark';
 import { satteri } from '@astrojs/markdown-satteri';
 import { describe, expect, test, vi } from 'vitest';
-import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
+import { remarkDirectivesRestoration } from '../../src/integrations/remark-asides';
 import {
 	applyStarlightMarkdownPlugins,
 	registerDirectivesRestoration,
-} from '../../integrations/markdown-plugins';
-import * as unifiedIntegration from '../../integrations/remark-rehype';
+} from '../../src/integrations/markdown-plugins';
+import * as unifiedIntegration from '../../src/integrations/remark-rehype';
 import { createPluginTestOptions } from '../test-utils';
 
 type Processor = Parameters<typeof applyStarlightMarkdownPlugins>[0];
@@ -66,8 +66,8 @@ describe('registerDirectivesRestoration', () => {
 	test('registers the mdast restoration plugin on a Sätteri processor', () => {
 		const processor = satteri();
 		registerDirectivesRestoration(processor, unifiedIntegration);
-		expect(processor.options.mdastPlugins.map((plugin) => plugin.name)).toContain(
-			'starlight-directives-restoration'
+		expect(processor.options.mdastPlugins).toContainEqual(
+			expect.objectContaining({ name: 'starlight-directives-restoration' })
 		);
 	});
 
