@@ -40,5 +40,14 @@ export default defineConfig({
 				statements: 87,
 			},
 		},
+		experimental: {
+			diagnostics: {
+				// Using `isolate: false` could save about 1-2 seconds, but our heavy use of file-scoped
+				// module mocks, especially `astro:content`, would require manually resetting the module
+				// cache and unmocking modules between files. That effectively reimplements isolation and
+				// the tradeoff is not worth it, so we disable the associated diagnostic.
+				isolate: false,
+			},
+		},
 	},
 });

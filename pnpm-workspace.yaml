@@ -32,3 +32,8 @@ minimumReleaseAgeExclude:
   - '@astrojs/markdown-remark@7.3.0'
   - '@astrojs/markdown-satteri@0.4.0'
   - astro@7.2.10
+  # TODO(HiDeoo) Remove
+  - '@vitest/coverage-v8@5.0.0'
+  - '@vitest/mocker@5.0.0'
+  - '@vitest/spy@5.0.0'
+  - vitest@5.0.0
