@@ -122,19 +122,15 @@ const formatCO2 = Intl.NumberFormat(lang, {
 		</tr>
 	</thead>
 	<tbody>
-		{
-			data.frameworks
-				.sort((a, b) => a.co2 - b.co2)
-				.map(({ name, co2, rating, href }) => (
-					<tr>
-						<td>
-							<a {href}>{name}</a>
-						</td>
-						<td>{formatCO2(co2)}</td>
-						<td align="center">{rating}</td>
-					</tr>
-				))
-		}
+		{data.frameworks
+			.sort((a, b) => a.co2 - b.co2)
+			.map(({ name, co2, rating, href }) => (
+				<tr>
+					<td><a {href}>{name}</a></td>
+					<td>{formatCO2(co2)}</td>
+					<td align="center">{rating}</td>
+				</tr>
+			))}
 	</tbody>
 </table>
 

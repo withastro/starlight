@@ -5,26 +5,22 @@ import TableOfContentsList from '../components-internals/TableOfContents/TableOf
 const { toc } = Astro.locals.starlightRoute;
 ---
 
-{
-	toc && (
-		<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
-			<nav aria-labelledby="starlight__on-this-page--mobile">
-				<details id="starlight__mobile-toc">
-					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<span class="toggle sl-flex">
-							{Astro.locals.t('tableOfContents.onThisPage')}
-							<Icon name={'right-caret'} class="caret" size="1rem" />
-						</span>
-						<span class="display-current" />
-					</summary>
-					<div class="dropdown">
-						<TableOfContentsList toc={toc.items} isMobile />
-					</div>
-				</details>
-			</nav>
-		</mobile-starlight-toc>
-	)
-}
+{toc && (
+	<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+		<nav aria-labelledby="starlight__on-this-page--mobile">
+			<details id="starlight__mobile-toc">
+				<summary id="starlight__on-this-page--mobile" class="sl-flex">
+					<span class="toggle sl-flex">
+						{Astro.locals.t('tableOfContents.onThisPage')}
+						<Icon name={'right-caret'} class="caret" size="1rem" />
+					</span>
+					<span class="display-current" />
+				</summary>
+				<div class="dropdown"><TableOfContentsList toc={toc.items} isMobile /></div>
+			</details>
+		</nav>
+	</mobile-starlight-toc>
+)}
 
 <style>
 	@layer starlight.core {

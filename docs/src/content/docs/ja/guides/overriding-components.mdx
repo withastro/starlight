@@ -135,15 +135,11 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
-{
-	isHomepage ? (
-		<footer>Starlightで作成 🌟</footer>
-	) : (
-		<Default>
-			<slot />
-		</Default>
-	)
-}
+{isHomepage ? (
+	<footer>Starlightで作成 🌟</footer>
+) : (
+	<Default><slot /></Default>
+)}
 ```
 
 条件付きレンダリングについて、詳しくは[Astroのテンプレート構文ガイド](https://docs.astro.build/ja/basics/astro-syntax/#動的html)を参照してください。

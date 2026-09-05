@@ -288,9 +288,7 @@ export const collections = {
 В компонентах Astro этот API доступен как часть [глобального объекта `Astro`](https://docs.astro.build/en/reference/api-reference/#locals) в виде `Astro.locals.t`:
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 Вы также можете использовать API в [эндпойнтах](https://docs.astro.build/ru/guides/endpoints/), где объект `locals` доступен как часть контекста [эндпойнта](https://docs.astro.build/en/reference/api-reference/#locals):
@@ -322,9 +320,7 @@ export const GET = (context) => {
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Отрисовывает: <a href="...">Документация Astro</a> -->
 ```
 

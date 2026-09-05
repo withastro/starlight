@@ -286,9 +286,7 @@ Starlight의 [기본 제공 UI 문자열](/ko/guides/i18n/#starlight-ui-번역)�
 Astro 컴포넌트에서 이 API는 [전역 `Astro` 객체](https://docs.astro.build/ko/reference/api-reference/#locals)의 일부인 `Astro.locals.t`로 사용할 수 있습니다:
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 [엔드포인트](https://docs.astro.build/ko/guides/endpoints/)에서도 API를 사용할 수 있으며, 여기서 `locals` 객체는 [엔드포인트 컨텍스트](https://docs.astro.build/ko/reference/api-reference/#locals)의 일부로 사용할 수 있습니다:
@@ -320,9 +318,7 @@ Starlight 플러그인 컨텍스트에서 [`useTranslations()`](/ko/reference/pl
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- 렌더링: <a href="...">Astro 문서</a> -->
 ```
 

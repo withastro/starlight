@@ -7,30 +7,26 @@ const isRtl = dir === 'rtl';
 ---
 
 <div class="pagination-links print:hidden" dir={dir}>
-	{
-		prev && (
-			<a href={prev.href} rel="prev">
-				<Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.5rem" />
-				<span>
-					{Astro.locals.t('page.previousLink')}
-					<br />
-					<span class="link-title">{prev.label}</span>
-				</span>
-			</a>
-		)
-	}
-	{
-		next && (
-			<a href={next.href} rel="next">
-				<Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.5rem" />
-				<span>
-					{Astro.locals.t('page.nextLink')}
-					<br />
-					<span class="link-title">{next.label}</span>
-				</span>
-			</a>
-		)
-	}
+	{prev && (
+		<a href={prev.href} rel="prev">
+			<Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.5rem" />
+			<span>
+				{Astro.locals.t('page.previousLink')}
+				<br />
+				<span class="link-title">{prev.label}</span>
+			</span>
+		</a>
+	)}
+	{next && (
+		<a href={next.href} rel="next">
+			<Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.5rem" />
+			<span>
+				{Astro.locals.t('page.nextLink')}
+				<br />
+				<span class="link-title">{next.label}</span>
+			</span>
+		</a>
+	)}
 </div>
 
 <style>

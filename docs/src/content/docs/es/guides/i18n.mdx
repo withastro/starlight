@@ -284,9 +284,7 @@ Esto incluye soporte para funciones como [interpolación](https://www.i18next.co
 En componentes de Astro, esta API está disponible como parte del [objeto global `Astro`](https://docs.astro.build/es/reference/api-reference/#astrolocals) como `Astro.locals.t`:
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 También puedes usar la API en [endpoints](https://docs.astro.build/es/guides/endpoints/), donde el objeto `locals` está disponible como parte del [contexto del endpoint](https://docs.astro.build/es/reference/api-reference/#contextlocals):
@@ -315,9 +313,7 @@ La primera string de UI se puede renderizar pasando `'link.astro'` a la función
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Renderiza: <a href="...">Astro documentation</a> -->
 ```
 

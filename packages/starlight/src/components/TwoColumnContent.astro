@@ -1,13 +1,9 @@
 <div class="lg:sl-flex">
-	{
-		Astro.locals.starlightRoute.toc && (
-			<aside class="right-sidebar-container print:hidden">
-				<div class="right-sidebar">
-					<slot name="right-sidebar" />
-				</div>
-			</aside>
-		)
-	}
+	{Astro.locals.starlightRoute.toc && (
+		<aside class="right-sidebar-container print:hidden">
+			<div class="right-sidebar"><slot name="right-sidebar" /></div>
+		</aside>
+	)}
 	<div class="main-pane"><slot /></div>
 </div>
 

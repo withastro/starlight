@@ -12,9 +12,7 @@ const { title, description, ...attributes } = Astro.props;
 
 <div class="sl-link-card">
 	<span class="sl-flex stack">
-		<a {...attributes}>
-			<span class="title" set:html={title} />
-		</a>
+		<a {...attributes}><span class="title" set:html={title} /></a>
 		{description && <span class="description" set:html={description} />}
 	</span>
 	<Icon name="right-arrow" size="1.333em" class="icon rtl:flip" />

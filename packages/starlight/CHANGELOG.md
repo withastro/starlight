@@ -1529,9 +1529,7 @@
         ],
       },
     ]}
-  >
-    <p>This is a custom page with a custom component.</p>
-  </StarlightPage>
+  ><p>This is a custom page with a custom component.</p></StarlightPage>
   ```
 
   This configuration will now need to be updated to the following:
@@ -1553,9 +1551,7 @@
         ],
       },
     ]}
-  >
-    <p>This is a custom page with a custom component.</p>
-  </StarlightPage>
+  ><p>This is a custom page with a custom component.</p></StarlightPage>
   ```
 
   See the [“Sidebar Navigation”](https://starlight.astro.build/guides/sidebar/) guide to learn more about the available options for customizing the sidebar.
