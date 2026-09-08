@@ -20,21 +20,17 @@ const resolvedPresets = Object.entries(presets).map(([key, preset]) => {
 
 <preset-picker class="sl-flex not-content">
 	<span class="label">{labels.label}</span>
-	{
-		resolvedPresets.map(([key, { label, dark, light }]) => (
-			<button
-				data-preset={key}
-				style={{
-					'--dark-bg': dark['accent-high'],
-					'--light-bg': light.accent,
-					'--dark-text': dark['accent-low'],
-					'--light-text': light.black,
-				}}
-			>
-				{label}
-			</button>
-		))
-	}
+	{resolvedPresets.map(([key, { label, dark, light }]) => (
+		<button
+			data-preset={key}
+			style={{
+				'--dark-bg': dark['accent-high'],
+				'--light-bg': light.accent,
+				'--dark-text': dark['accent-low'],
+				'--light-text': light.black,
+			}}
+		>{label}</button>
+	))}
 	<button data-random>{labels.random}<Icon name="random" size="1rem" /></button>
 </preset-picker>
 

@@ -5,18 +5,16 @@ import Icon from '../user-components/Icon.astro';
 const links = config.social || [];
 ---
 
-{
-	links.length > 0 && (
-		<>
-			{links.map(({ label, href, icon }) => (
-				<a {href} rel="me" class="sl-flex">
-					<span class="sr-only">{label}</span>
-					<Icon name={icon} />
-				</a>
-			))}
-		</>
-	)
-}
+{links.length > 0 && (
+	<>
+		{links.map(({ label, href, icon }) => (
+			<a {href} rel="me" class="sl-flex">
+				<span class="sr-only">{label}</span>
+				<Icon name={icon} />
+			</a>
+		))}
+	</>
+)}
 
 <style>
 	@layer starlight.core {

@@ -35,30 +35,24 @@ const { labels, themes } = Astro.props;
 
 <starlight-theme-preview data-theme-preview="dark">
 	<fieldset class="not-content sl-flex">
-		{
-			/* `<legend>` is a pain to position, so we visually hide it and use an `aria-hidden` duplicate
-		for the visual representation. See https://adrianroselli.com/2022/07/use-legend-and-fieldset.html */
-		}
+		{/* `<legend>` is a pain to position, so we visually hide it and use an `aria-hidden` duplicate
+		for the visual representation. See https://adrianroselli.com/2022/07/use-legend-and-fieldset.html */}
 		<legend class="sr-only">{labels.legend}</legend>
 		<strong aria-hidden="true">{labels.legend}</strong>
-		{
-			(['dark', 'light'] as const).map((variant) => (
-				<label class:list={['sl-flex', variant]} for={`${variant}-input`}>
-					<span class="radio">
-						<Icon name="approve-check" />
-					</span>
-					<span>{labels[variant]}</span>
-					<input
-						id={`${variant}-input`}
-						class="sr-only"
-						name="preview-theme"
-						value={variant}
-						type="radio"
-						checked={variant === 'dark'}
-					/>
-				</label>
-			))
-		}
+		{(['dark', 'light'] as const).map((variant) => (
+			<label class:list={['sl-flex', variant]} for={`${variant}-input`}>
+				<span class="radio"><Icon name="approve-check" /></span>
+				<span>{labels[variant]}</span>
+				<input
+					id={`${variant}-input`}
+					class="sr-only"
+					name="preview-theme"
+					value={variant}
+					type="radio"
+					checked={variant === 'dark'}
+				/>
+			</label>
+		))}
 		{/* If the currently active theme is light mode, default to showing the light mode previews. */}
 		<script is:inline>
 			// @ts-nocheck
@@ -72,23 +66,21 @@ const { labels, themes } = Astro.props;
 
 	<ThirdPartyContent>
 		<FluidGrid minColumnWidth="25rem" gap="clamp(1rem, calc(0.75rem + 1vw), 1.5rem)">
-			{
-				themes.map(
-					async ({ title, description, href, previews }) =>
-						previews && (
-							<MediaCard {href}>
-								<div class="preview-images" slot="media" aria-hidden="true">
-									<ThemeImage src={previews.light} class="light" />
-									<ThemeImage src={previews.dark} class="dark" />
-								</div>
-								<div class="meta sl-flex">
-									<p class="title">{title}</p>
-									<p class="description" set:html={description} />
-								</div>
-							</MediaCard>
-						)
-				)
-			}
+			{themes.map(
+				async ({ title, description, href, previews }) =>
+					previews && (
+						<MediaCard {href}>
+							<div class="preview-images" slot="media" aria-hidden="true">
+								<ThemeImage src={previews.light} class="light" />
+								<ThemeImage src={previews.dark} class="dark" />
+							</div>
+							<div class="meta sl-flex">
+								<p class="title">{title}</p>
+								<p class="description" set:html={description} />
+							</div>
+						</MediaCard>
+					)
+			)}
 		</FluidGrid>
 	</ThirdPartyContent>
 </starlight-theme-preview>

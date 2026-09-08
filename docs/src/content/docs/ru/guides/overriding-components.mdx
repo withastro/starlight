@@ -138,15 +138,11 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
-{
-	isHomepage ? (
-		<footer>Создано с помощью Starlight 🌟</footer>
-	) : (
-		<Default>
-			<slot />
-		</Default>
-	)
-}
+{isHomepage ? (
+	<footer>Создано с помощью Starlight 🌟</footer>
+) : (
+	<Default><slot /></Default>
+)}
 ```
 
 Узнайте больше об отрисовке по условию в руководстве [Синтаксис Astro](https://docs.astro.build/ru/basics/astro-syntax/#динамический-html).

@@ -159,9 +159,7 @@ Die folgende Seite ersetzt zum Beispiel die Standard-Seitenleiste durch einen Li
 			],
 		},
 	]}
->
-	Beispiel-Inhalt.
-</StarlightPage>
+>Beispiel-Inhalt.</StarlightPage>
 ```
 
 In der Anleitung [„Seitenleisten-Navigation“](/de/guides/sidebar/) erfährst du mehr über die verfügbaren Optionen zum Anpassen der Seitenleiste.
@@ -211,7 +209,9 @@ Die Komponente `<AnchorHeading />` rendert ein HTML-Überschriftenelement mit ei
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 ---
 
-<AnchorHeading level="2" id="unterüberschrift">Unterüberschrift</AnchorHeading>
+<AnchorHeading level="2" id="unterüberschrift">
+	Unterüberschrift
+</AnchorHeading>
 ```
 
 Sie akzeptiert die folgenden Requisiten sowie alle anderen gültigen [globalen HTML-Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).

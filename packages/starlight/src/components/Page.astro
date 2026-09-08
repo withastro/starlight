@@ -94,31 +94,25 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 				>
 					{/* TODO: Revisit how this logic flows. */}
 					<Banner />
-					{
-						starlightRoute.entry.data.hero ? (
+					{starlightRoute.entry.data.hero ? (
+						<ContentPanel>
+							<Hero />
+							<MarkdownContent><slot /></MarkdownContent>
+							<Footer />
+						</ContentPanel>
+					) : (
+						<>
 							<ContentPanel>
-								<Hero />
-								<MarkdownContent>
-									<slot />
-								</MarkdownContent>
+								<PageTitle />
+								{starlightRoute.entry.data.draft && <DraftContentNotice />}
+								{starlightRoute.isFallback && <FallbackContentNotice />}
+							</ContentPanel>
+							<ContentPanel>
+								<MarkdownContent><slot /></MarkdownContent>
 								<Footer />
 							</ContentPanel>
-						) : (
-							<>
-								<ContentPanel>
-									<PageTitle />
-									{starlightRoute.entry.data.draft && <DraftContentNotice />}
-									{starlightRoute.isFallback && <FallbackContentNotice />}
-								</ContentPanel>
-								<ContentPanel>
-									<MarkdownContent>
-										<slot />
-									</MarkdownContent>
-									<Footer />
-								</ContentPanel>
-							</>
-						)
-					}
+						</>
+					)}
 				</main>
 			</TwoColumnContent>
 		</PageFrame>

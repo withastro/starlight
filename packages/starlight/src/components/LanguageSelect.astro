@@ -12,22 +12,20 @@ function localizedPathname(locale: string | undefined): string {
 }
 ---
 
-{
-	config.isMultilingual && (
-		<starlight-lang-select>
-			<Select
-				icon="translate"
-				label={Astro.locals.t('languageSelect.accessibleLabel')}
-				options={Object.entries(config.locales).map(([code, locale]) => ({
-					value: localizedPathname(code),
-					selected: code === Astro.locals.starlightRoute.locale,
-					label: locale!.label,
-				}))}
-				width="7em"
-			/>
-		</starlight-lang-select>
-	)
-}
+{config.isMultilingual && (
+	<starlight-lang-select>
+		<Select
+			icon="translate"
+			label={Astro.locals.t('languageSelect.accessibleLabel')}
+			options={Object.entries(config.locales).map(([code, locale]) => ({
+				value: localizedPathname(code),
+				selected: code === Astro.locals.starlightRoute.locale,
+				label: locale!.label,
+			}))}
+			width="7em"
+		/>
+	</starlight-lang-select>
+)}
 
 <script>
 	class StarlightLanguageSelect extends HTMLElement {

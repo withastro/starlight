@@ -6,13 +6,11 @@ interface Props {
 
 <div class="not-content">
 	<div class="palette">
-		{
-			Astro.props.light ? (
-				<div class="circle" style="--bg:var(--sl-color-accent)" />
-			) : (
-				<div class="circle" style="--bg:var(--sl-color-accent-high)" />
-			)
-		}
+		{Astro.props.light ? (
+			<div class="circle" style="--bg:var(--sl-color-accent)" />
+		) : (
+			<div class="circle" style="--bg:var(--sl-color-accent-high)" />
+		)}
 		<div style="--bg:var(--sl-color-black)"></div>
 		<div style="--bg:var(--sl-color-white)"></div>
 		<div style="--bg:var(--sl-color-gray-1)"></div>

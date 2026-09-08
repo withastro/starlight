@@ -286,9 +286,7 @@ Cela inclut la prise en charge de fonctionnalités telles que [l'interpolation](
 Dans les composants Astro, cette API est disponible via l'[objet global `Astro`](https://docs.astro.build/fr/reference/api-reference/#astrolocals) sous le nom `Astro.locals.t` :
 
 ```astro title="exemple.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 Vous pouvez également utiliser l'API dans les [points de terminaison](https://docs.astro.build/fr/guides/endpoints/), où l'objet `locals` est disponible dans le cadre du [contexte du point de terminaison](https://docs.astro.build/fr/reference/api-reference/#contextlocals) :
@@ -320,9 +318,7 @@ La première chaîne d'interface utilisateur peut être affichée en passant `'l
 
 ```astro {3}
 <!-- src/components/Exemple.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Affiche: <a href="...">Documentation d'Astro</a> -->
 ```
 
@@ -405,6 +401,7 @@ L'exemple suivant lit les paramètres régionaux actuels et les utilise avec la 
 import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
-<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>À propos</a
->
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>
+	À propos
+</a>
 ```

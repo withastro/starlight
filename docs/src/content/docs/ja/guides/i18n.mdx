@@ -278,9 +278,7 @@ Starlightの[組み込みUI文字列](/ja/guides/i18n/#starlightのuiを翻訳�
 Astroコンポーネントにおいて、この共通のAPIは[グローバル`Astro`オブジェクト](https://docs.astro.build/ja/reference/api-reference/#locals)の一部として`Astro.locals.t`から利用できます。
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 [エンドポイント](https://docs.astro.build/ja/guides/endpoints/)でもこの共通のAPIを使用できます。`locals`オブジェクトは[エンドポイントコンテキスト](https://docs.astro.build/ja/reference/api-reference/#locals)の一部として利用できます。
@@ -310,9 +308,7 @@ Starlightプラグインのコンテキストでは、[`useTranslations()`](/ja/
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- レンダリング結果: <a href="...">Astro documentation</a> -->
 ```
 

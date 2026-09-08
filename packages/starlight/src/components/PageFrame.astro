@@ -6,40 +6,37 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 
 <div class="page sl-flex">
 	<header class="header"><slot name="header" /></header>
-	{
-		hasSidebar && (
-			<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
-				<MobileMenuToggle />
-				<script>
-					// The mobile menu uses the popover API to open and close without JavaScript. We enhance this
-					// behaviour with focus trapping while the menu is open.
-					class StarlightSidebarPane extends HTMLElement {
-						constructor() {
-							super();
+	{hasSidebar && (
+		<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
+			<MobileMenuToggle />
+			<script>
+				// The mobile menu uses the popover API to open and close without JavaScript. We enhance this
+				// behaviour with focus trapping while the menu is open.
+				class StarlightSidebarPane extends HTMLElement {
+					constructor() {
+						super();
 
-							// Close the menu when the viewport is resized between mobile and desktop sizes.
-							matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
+						// Close the menu when the viewport is resized between mobile and desktop sizes.
+						matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
 
-							// Update the menu state when the sidebar popover is toggled.
-							this.addEventListener('toggle', ({ newState }) => this.trapFocus(newState === 'open'));
-						}
-						/** Trap keyboard focus inside the header and menu when the menu is expanded. */
-						trapFocus(shouldTrap: boolean) {
-							document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
-								el.toggleAttribute('inert', shouldTrap);
-							});
-						}
+						// Update the menu state when the sidebar popover is toggled.
+						this.addEventListener('toggle', ({ newState }) => this.trapFocus(newState === 'open'));
 					}
-					customElements.define('sl-sidebar-pane', StarlightSidebarPane);
-				</script>
-				<sl-sidebar-pane popover="" id="starlight__sidebar" class="sidebar-pane">
-					<div class="sidebar-content sl-flex">
-						<slot name="sidebar" />
-					</div>
-				</sl-sidebar-pane>
-			</nav>
-		)
-	}
+					/** Trap keyboard focus inside the header and menu when the menu is expanded. */
+					trapFocus(shouldTrap: boolean) {
+						document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
+							el.toggleAttribute('inert', shouldTrap);
+						});
+					}
+				}
+				customElements.define('sl-sidebar-pane', StarlightSidebarPane);
+			</script><sl-sidebar-pane
+				popover=""
+				id="starlight__sidebar"
+				class="sidebar-pane"
+			><div class="sidebar-content sl-flex"><slot name="sidebar" /></div></sl-sidebar-pane>
+		</nav>
+	)}
 	<div class="main-frame"><slot /></div>
 </div>
 
