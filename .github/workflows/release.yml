@@ -1,10 +1,11 @@
 name: Release
-permissions: {}
 
 on:
   push:
     branches:
       - main
+
+permissions: {}
 
 jobs:
   release:

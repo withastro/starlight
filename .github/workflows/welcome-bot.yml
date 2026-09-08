@@ -1,17 +1,18 @@
 name: WelcomeBot
 
 on:
-  pull_request_target:
+  pull_request_target: # zizmor: ignore[dangerous-triggers] comment on the PR; safe because we only checkout base branch
     branches: [main]
     types: [opened]
 
-permissions:
-  pull-requests: write
+permissions: {}
 
 jobs:
   welcome:
     name: Welcome First-Time Contributors
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: zephyrproject-rtos/action-first-interaction@58853996b1ac504b8e0f6964301f369d2bb22e5c
         with:
