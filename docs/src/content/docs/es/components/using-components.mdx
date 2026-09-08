@@ -9,7 +9,7 @@ Los componentes te permiten reutilizar fácilmente un fragmento de UI o estilos 
 Los ejemplos pueden incluir una tarjeta de enlace o un incrustado de YouTube.
 Starlight admite el uso de componentes en archivos [MDX](https://mdxjs.com/) y [Markdoc](https://markdoc.dev/) y proporciona algunos componentes comunes para que los uses.
 
-[Conoce más sobre la construcción de componentes en la documentación de Astro](https://docs.astro.build/es/core-concepts/astro-components/).
+[Conoce más sobre la construcción de componentes en la documentación de Astro](https://docs.astro.build/es/basics/astro-components/).
 
 ## Usando un componente en MDX
 
@@ -32,7 +32,7 @@ import CustomCard from '../../components/CustomCard.astro';
 </CustomCard>
 ```
 
-Debido a que Starlight está impulsado por Astro, puedes agregar soporte para componentes construidos con cualquier [framework de UI compatible (React, Preact, Svelte, Vue, Solid y Alpine)](https://docs.astro.build/es/core-concepts/framework-components/) en tus archivos MDX.
+Debido a que Starlight está impulsado por Astro, puedes agregar soporte para componentes construidos con cualquier [framework de UI compatible (React, Preact, Svelte, Vue, Solid y Alpine)](https://docs.astro.build/es/guides/framework-components/) en tus archivos MDX.
 {/* TODO: Actualizar esta liga cuando los docs en español de Astro incluyan el fragmento de la versión en inglés. */}
 Aprende más sobre [usar componentes en MDX](https://docs.astro.build/en/guides/integrations-guide/mdx/#using-components-in-mdx) en la documentación de Astro.
 
@@ -84,14 +84,14 @@ Si estos estilos entran en conflicto con la apariencia de tu componente, estable
 Usa el tipo [`ComponentProps`](https://docs.astro.build/es/guides/typescript/#tipo-componentprops) de `astro/types` para hacer referencia a las `Props` aceptadas por un componente incluso si no están exportadas por el componente en sí.
 Esto puede ser util al envolver o extender un componente existente.
 
-El siguiente ejemplo usa `ComponentProps` para obtener el tipo de las props aceptadas por el componente `Icon` incorporado de Starlight:
+El siguiente ejemplo usa `ComponentProps` para obtener el tipo de las props aceptadas por el componente `Badge` incorporado de Starlight:
 
 ```astro
 ---
 // src/components/Example.astro
 import type { ComponentProps } from 'astro/types';
-import { Icon } from '@astrojs/starlight/icon';
+import { Badge } from '@astrojs/starlight/components';
 
-type IconProps = ComponentProps<typeof Icon>;
+type BadgeProps = ComponentProps<typeof Badge>;
 ---
 ```

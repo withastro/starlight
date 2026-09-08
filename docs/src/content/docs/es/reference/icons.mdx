@@ -10,6 +10,19 @@ Starlight proporciona un conjunto de iconos integrados que puedes mostrar en tu 
 Los iconos se pueden mostrar usando el componente [`<Icon>`](/es/components/icons/).
 Estos también se utilizan a menudo en otros componentes, como [tarjetas](/es/components/cards/) o configuraciones como [acciones de hero](/es/reference/frontmatter/#hero).
 
+## Tipo `StarlightIcon`
+
+Usa el tipo de TypeScript `StarlightIcon` para hacer referencia a los nombres de los [iconos integrados de Starlight](#todos-los-iconos).
+
+```ts {2} /icon: (StarlightIcon)/
+// src/icon.ts
+import type { StarlightIcon } from '@astrojs/starlight/types';
+
+function getIconLabel(icon: StarlightIcon) {
+	// …
+}
+```
+
 ## Todos los iconos
 
 Una lista de todos los iconos disponibles se muestra a continuación con sus nombres asociados. Haz clic en un icono para copiar su nombre al portapapeles.
