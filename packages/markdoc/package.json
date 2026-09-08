@@ -17,7 +17,7 @@
     "./components": "./components.ts"
   },
   "devDependencies": {
-    "@astrojs/markdoc": "^2.0.6",
+    "@astrojs/markdoc": "^2.0.8",
     "@astrojs/starlight": "workspace:*",
     "vitest": "^4.1.5"
   },

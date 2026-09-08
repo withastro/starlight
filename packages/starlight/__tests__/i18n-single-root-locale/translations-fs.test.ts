@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
 
 describe('createTranslationSystemFromFs', () => {
 	test('creates a translation system that returns default strings', async () => {

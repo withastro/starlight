@@ -4,11 +4,14 @@ import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
 import type { MdastPluginDefinition } from 'satteri';
 import { describe, expect, test, vi } from 'vitest';
-import { remarkDirectivesRestoration } from '../../integrations/remark-asides';
-import { satteriDirectivesRestoration, starlightSatteriPlugins } from '../../integrations/satteri';
-import { starlightRemarkPlugins } from '../../integrations/remark-rehype';
-import type { StarlightUserConfig } from '../../utils/user-config';
-import { BuiltInDefaultLocale } from '../../utils/i18n';
+import { remarkDirectivesRestoration } from '../../src/integrations/remark-asides';
+import {
+	satteriDirectivesRestoration,
+	starlightSatteriPlugins,
+} from '../../src/integrations/satteri';
+import { starlightRemarkPlugins } from '../../src/integrations/remark-rehype';
+import type { StarlightUserConfig } from '../../src/utils/user-config';
+import { BuiltInDefaultLocale } from '../../src/utils/i18n';
 import { createPluginTestOptions, docFileURL } from '../test-utils';
 import { createStarlightMarkdownProcessor, describeEachProcessor, nonDocFileURL } from './utils';
 

@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
-import { getSidebar } from '../../utils/navigation';
-import type { SidebarEntry } from '../../utils/routing/types';
+import { getSidebar } from '../../src/utils/navigation';
+import type { SidebarEntry } from '../../src/utils/routing/types';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({

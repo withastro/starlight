@@ -1,5 +1,11 @@
 # @astrojs/starlight-docsearch
 
+## 0.8.0
+
+### Minor Changes
+
+- [#3572](https://github.com/withastro/starlight/pull/3572) [`292fb17`](https://github.com/withastro/starlight/commit/292fb179cbf6e2cd970ced46359c520aa14a80b4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Distributes package as JavaScript files with dedicated type declaration files instead of TypeScript source files.
+
 ## 0.7.0
 
 ### Minor Changes

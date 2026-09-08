@@ -25,3 +25,10 @@ peerDependencyRules:
 
 # Prevent installing packages published in the last 3 days
 minimumReleaseAge: 4320
+
+minimumReleaseAgeExclude:
+  - '@astrojs/internal-helpers@0.11.0'
+  - '@astrojs/mdx@8.0.0'
+  - '@astrojs/markdown-remark@7.3.0'
+  - '@astrojs/markdown-satteri@0.4.0'
+  - astro@7.2.10

@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { starlight } from '../config.ts';
-import type { Definitions } from '../../starlight/user-components/rehype-file-tree.ts';
+import type { Definitions } from '../../starlight/src/user-components/file-tree-processor.ts';
 
 const copyrightNotice = `/**
 * Based on https://github.com/elviswolcott/seti-icons which
@@ -42,12 +42,16 @@ export async function writeDefinitionsAndSVGs(
 ) {
 	const content = `${generatedFileHeader}
 
-import type { Definitions } from './rehype-file-tree.ts';
+import type { Definitions } from './file-tree-processor.ts';
 
 ${copyrightNotice}
 export const definitions: Definitions = ${JSON.stringify(definitions)};
 
 export const FileIcons = ${JSON.stringify(svgPaths)};
+
+export type FileIcon = ${Object.keys(svgPaths)
+		.map((name) => `'${name}'`)
+		.join(' | ')};
 `;
 
 	const filePath = path.join('..', 'starlight', starlight.output);

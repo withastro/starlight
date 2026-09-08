@@ -9,28 +9,31 @@ Bu sayfaya bağlantı eklemek için PR açın!
 :::
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import ThirdPartyContent from '~/components/third-party-content.astro';
 
 ## Makaleler ve Görüşler
 
 Starlight hakkında daha fazlasını öğrenmek ve diğer insanları deneyimlerini içeren makale ve gönderiler ait koleksiyon burada:
 
-<CardGrid>
-	<LinkCard
-		href="https://devm.io/open-source/starlight-astro"
-		title="Starlight ile Statik Site Oluşturma"
-		description="“Bileşenleri tasarlarken hiçbir fikir çok büyük ya da çok küçük değildir” — Starlight Lideri Chris Swithinbank ile röportaj"
-	/>
-	<LinkCard
-		href="https://frontendatscale.com/blog/hybrid-frontend-architecture/"
-		title="Astro ve Starlight ile Hibrit Ön Uç Mimarisi"
-		description="Maxi Ferreira ile Ben Holmes; Starlight, TinaCMS ve yetkilendirmeli interaktif API oyunalanı ile dokümantasyon sitesi oluşturuyor."
-	/>
-	<LinkCard
-		href="https://www.olets.dev/posts/comparing-docs-site-builders-vuepress-vs-starlight/"
-		title="Dokümantasyon site oluşturucularını karşılaştırmak: VuePress ve Starlight"
-		description="Bu iki çerçeve nasıl ölçülür?"
-	/>
-</CardGrid>
+<ThirdPartyContent>
+	<CardGrid>
+		<LinkCard
+			href="https://devm.io/open-source/starlight-astro"
+			title="Starlight ile Statik Site Oluşturma"
+			description="“Bileşenleri tasarlarken hiçbir fikir çok büyük ya da çok küçük değildir” — Starlight Lideri Chris Swithinbank ile röportaj"
+		/>
+		<LinkCard
+			href="https://frontendatscale.com/blog/hybrid-frontend-architecture/"
+			title="Astro ve Starlight ile Hibrit Ön Uç Mimarisi"
+			description="Maxi Ferreira ile Ben Holmes; Starlight, TinaCMS ve yetkilendirmeli interaktif API oyunalanı ile dokümantasyon sitesi oluşturuyor."
+		/>
+		<LinkCard
+			href="https://www.olets.dev/posts/comparing-docs-site-builders-vuepress-vs-starlight/"
+			title="Dokümantasyon site oluşturucularını karşılaştırmak: VuePress ve Starlight"
+			description="Bu iki çerçeve nasıl ölçülür?"
+		/>
+	</CardGrid>
+</ThirdPartyContent>
 
 ## Tarifler ve Rehberler
 
@@ -38,48 +41,50 @@ Tarifler tipik olarak kısa, okuyucuya belirli bir görevi tamamlayan çalışan
 
 Starlight kullanıcı tarafından sağlanan topluluk üretimi içerikleri keşfedin:
 
-<CardGrid>
-	<LinkCard
-		href="https://www.webpro.nl/scraps/versioned-docs-with-starlight-and-vercel"
-		title="Starlight ve Vercel ile Versiyonlanmış dokümantasyon"
-		description="Bir projenin her ana versiyonu için ayrı dokümantasyon versiyonlarının uygulanmasına yönelik bir rehber"
-	/>
-	<LinkCard
-		href="https://hideoo.dev/notes/starlight-heading-links"
-		title="Starlight başlıklarına bağlantılar ekleyin"
-		description="Belgelerinizin belirli bölümlerine giden bağlantıları paylaşmak için rehype eklentisi kullanma rehberi"
-	/>
-	<LinkCard
-		href="https://blog.otterlord.dev/posts/starlight-sponsors/"
-		title="Starlight sitenize sponsor ekleyin"
-		description="Belgelerinizin kenar çubuğuna özel sponsorlar bileşenini uygulamaya yönelik bir rehber"
-	/>
-	<LinkCard
-		href="https://hideoo.dev/notes/starlight-og-images"
-		title="Starlight'a Open Graph görselleri ekleme"
-		description="Sayfalarınız için sosyal görseller ve ilgili meta etiketleri oluşturma rehberi"
-	/>
-	<LinkCard
-		href="https://hideoo.dev/notes/starlight-third-party-icon-sets"
-		title="Starlight'ta üçüncü taraf ikon setlerini kullanın"
-		description="Starlight için mevcut ikonların seçimini genişletmek amacıyla unplugin-icons kullanma rehberi"
-	/>
-	<LinkCard
-		href="https://hideoo.dev/notes/starlight-custom-html-head"
-		title="Starlight sayfalarının HTML başlığını düzenleyin"
-		description="Web analizi, yazı tipleri ve komut dosyaları gibi ortak başlık içeriğini nasıl ekleyeceğinizi öğrenin"
-	/>
-	<LinkCard
-		href="https://dev.to/mrrobot/publishing-documentation-with-astro-starlight-691"
-		title="Astro Starlight ile Belgelerin Yayınlanması"
-		description="Starlight dokümantasyonunu kullanmaya başlama"
-	/>
-	<LinkCard
-		href="https://events-3bg.pages.dev/jotter/starlight/guide/"
-		title="Görünüm Geçişlerini Etkinleştir"
-		description="Bag of Tricks'in görünüm geçiş desteğiyle SPA benzeri görünüm ve hissi elde edin"
-	/>
-</CardGrid>
+<ThirdPartyContent>
+	<CardGrid>
+		<LinkCard
+			href="https://www.webpro.nl/scraps/versioned-docs-with-starlight-and-vercel"
+			title="Starlight ve Vercel ile Versiyonlanmış dokümantasyon"
+			description="Bir projenin her ana versiyonu için ayrı dokümantasyon versiyonlarının uygulanmasına yönelik bir rehber"
+		/>
+		<LinkCard
+			href="https://hideoo.dev/notes/starlight-heading-links"
+			title="Starlight başlıklarına bağlantılar ekleyin"
+			description="Belgelerinizin belirli bölümlerine giden bağlantıları paylaşmak için rehype eklentisi kullanma rehberi"
+		/>
+		<LinkCard
+			href="https://blog.otterlord.dev/posts/starlight-sponsors/"
+			title="Starlight sitenize sponsor ekleyin"
+			description="Belgelerinizin kenar çubuğuna özel sponsorlar bileşenini uygulamaya yönelik bir rehber"
+		/>
+		<LinkCard
+			href="https://hideoo.dev/notes/starlight-og-images"
+			title="Starlight'a Open Graph görselleri ekleme"
+			description="Sayfalarınız için sosyal görseller ve ilgili meta etiketleri oluşturma rehberi"
+		/>
+		<LinkCard
+			href="https://hideoo.dev/notes/starlight-third-party-icon-sets"
+			title="Starlight'ta üçüncü taraf ikon setlerini kullanın"
+			description="Starlight için mevcut ikonların seçimini genişletmek amacıyla unplugin-icons kullanma rehberi"
+		/>
+		<LinkCard
+			href="https://hideoo.dev/notes/starlight-custom-html-head"
+			title="Starlight sayfalarının HTML başlığını düzenleyin"
+			description="Web analizi, yazı tipleri ve komut dosyaları gibi ortak başlık içeriğini nasıl ekleyeceğinizi öğrenin"
+		/>
+		<LinkCard
+			href="https://dev.to/mrrobot/publishing-documentation-with-astro-starlight-691"
+			title="Astro Starlight ile Belgelerin Yayınlanması"
+			description="Starlight dokümantasyonunu kullanmaya başlama"
+		/>
+		<LinkCard
+			href="https://events-3bg.pages.dev/jotter/starlight/guide/"
+			title="Görünüm Geçişlerini Etkinleştir"
+			description="Bag of Tricks'in görünüm geçiş desteğiyle SPA benzeri görünüm ve hissi elde edin"
+		/>
+	</CardGrid>
+</ThirdPartyContent>
 
 ## Video İçerikleri
 
@@ -107,38 +112,40 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 
 ### Topluluk Videoları ve Yayınları
 
-<YouTubeGrid
-	videos={[
-		{
-			href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
-			title: 'Starlight ve Astro ile dokümanlar oluşturma',
-			description:
-				"CodingCat.dev ile Chris ve Alex'in Code'da Starlight'a girişini izleyin",
-		},
-		{
-			href: 'https://www.youtube.com/watch?v=sWkkHbwDeQc',
-			title: 'Astro Starlight',
-			description: "Bir dakikadan kısa sürede Starlight'a giriş.",
-		},
-		{
-			href: 'https://www.youtube.com/watch?v=-Ki-1E5gNCk',
-			title:
-				'Astro Starlight Belgelendirme Şablonu (özel uygulama belgeleri oluşturun!)',
-			description:
-				'Yaklaşık 5 dakika içinde yeni bir Starlight sitesini çalışır duruma getirin',
-		},
-		{
-			href: 'https://www.youtube.com/watch?v=12o7WxjAxjM',
-			title: "Starlight belgelerini proxy'lerle Next.js projesine dahil etme",
-			description:
-				"Starlight'ı Next.js web sitesinde bir alt dizin projesi olarak ayarlama",
-		},
-		{
-			href: 'https://www.youtube.com/watch?v=5pq80drDrNs',
-			title:
-				"Bu Harika Araçla Shadcn'in Dokümanlarını 30 Dakikada Yeniden Oluşturdum",
-			description:
-				"Bu videoda Starlight'ı bu kadar harika yapan şeyin ne olduğunu ve bir sonraki projenizde neden onu denemek isteyebileceğinizi ele alacağım.",
-		},
-	]}
-/>
+<ThirdPartyContent>
+	<YouTubeGrid
+		videos={[
+			{
+				href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
+				title: 'Starlight ve Astro ile dokümanlar oluşturma',
+				description:
+					"CodingCat.dev ile Chris ve Alex'in Code'da Starlight'a girişini izleyin",
+			},
+			{
+				href: 'https://www.youtube.com/watch?v=sWkkHbwDeQc',
+				title: 'Astro Starlight',
+				description: "Bir dakikadan kısa sürede Starlight'a giriş.",
+			},
+			{
+				href: 'https://www.youtube.com/watch?v=-Ki-1E5gNCk',
+				title:
+					'Astro Starlight Belgelendirme Şablonu (özel uygulama belgeleri oluşturun!)',
+				description:
+					'Yaklaşık 5 dakika içinde yeni bir Starlight sitesini çalışır duruma getirin',
+			},
+			{
+				href: 'https://www.youtube.com/watch?v=12o7WxjAxjM',
+				title: "Starlight belgelerini proxy'lerle Next.js projesine dahil etme",
+				description:
+					"Starlight'ı Next.js web sitesinde bir alt dizin projesi olarak ayarlama",
+			},
+			{
+				href: 'https://www.youtube.com/watch?v=5pq80drDrNs',
+				title:
+					"Bu Harika Araçla Shadcn'in Dokümanlarını 30 Dakikada Yeniden Oluşturdum",
+				description:
+					"Bu videoda Starlight'ı bu kadar harika yapan şeyin ne olduğunu ve bir sonraki projenizde neden onu denemek isteyebileceğinizi ele alacağım.",
+			},
+		]}
+	/>
+</ThirdPartyContent>

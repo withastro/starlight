@@ -1,5 +1,98 @@
 # @astrojs/starlight
 
+## 0.42.0
+
+### Minor Changes
+
+- [#3572](https://github.com/withastro/starlight/pull/3572) [`292fb17`](https://github.com/withastro/starlight/commit/292fb179cbf6e2cd970ced46359c520aa14a80b4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Distributes package as JavaScript files with dedicated type declaration files instead of TypeScript source files.
+
+- [#4121](https://github.com/withastro/starlight/pull/4121) [`2623ae6`](https://github.com/withastro/starlight/commit/2623ae60af0fdafc71938f96153b0427fcc2b5aa) Thanks [@delucis](https://github.com/delucis)! - Simplifies markup for Starlight’s mobile menu toggle
+
+  **⚠️ Potentially breaking change:** If you use a theme plugin, custom styles, or component overrides targeting the `MobileMenuToggle` button or `PageFrame` components, you may need to adjust these for the new markup. The button is no longer wrapped in a `<starlight-menu-button>` custom element and no longer uses the `aria-expanded` attribute. Instead, you can use the `.sl-menu-button` class name to target the button and the `:popover-open` pseudo-class to style the menu open state specifically.
+
+  In the following example, custom styles for the menu button are updated for the new approach:
+
+  ```diff
+  - starlight-menu-button button {
+  + .sl-menu-button {
+    color: var(--sl-color-text);
+  }
+
+  - starlight-menu-button[aria-expanded='true'] button {
+  + .sl-menu-button:has(~ :popover-open) {
+    color: var(--sl-color-text-accent-high);
+  }
+  ```
+
+  See [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro) and [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro) on GitHub for the full source code of the updated components.
+
+- [#3572](https://github.com/withastro/starlight/pull/3572) [`292fb17`](https://github.com/withastro/starlight/commit/292fb179cbf6e2cd970ced46359c520aa14a80b4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes the `tagline` configuration option, which was never used.
+
+  If your configuration included a `tagline` option, you can safely remove it without any replacement.
+
+- [#4134](https://github.com/withastro/starlight/pull/4134) [`6135f01`](https://github.com/withastro/starlight/commit/6135f015b527453d7083ad01d2dc6c61d72fbefc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates internal `@astrojs/mdx`, `@astrojs/markdown-satteri`, and `satteri` dependencies.
+
+  ⚠️ **BREAKING CHANGE:** The following minimum versions are now required:
+
+  - `astro` v7.2.10 or later
+  - `@astrojs/markdown-satteri` 0.4.0 or later (if you use it)
+  - `@astrojs/markdown-remark` 7.3.0 or later (if you use it)
+
+  Please update Starlight and Astro together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+- [#4121](https://github.com/withastro/starlight/pull/4121) [`2623ae6`](https://github.com/withastro/starlight/commit/2623ae60af0fdafc71938f96153b0427fcc2b5aa) Thanks [@delucis](https://github.com/delucis)! - Refactors Starlight’s mobile menu toggle to work when JavaScript fails or is disabled
+
+  ⚠️ **BREAKING CHANGE:** This release drops official support for Chromium-based browsers prior to version 116 (released August 2023), Safari-based browsers prior to version 17.0 (released September 2023), and Firefox prior to version 125 (released April 2024). You can find a list of currently supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+116%2C+Edge+%3E%3D+116%2C+Firefox+%3E%3D+125%2C+Safari+%3E%3D+17.0%2C+iOS+%3E%3D+17.0%2C+not+op_mini+all).
+
+  This change also removes the `data-mobile-menu-expanded` attribute, which was previously added to `<body>` while the mobile menu is open. If you have custom code that was depending on this attribute, you will need to update it to use a new selector to check if the mobile menu is open.
+
+  In the following example, a custom background colour for the site header while the menu is open is updated for the new approach:
+
+  ```diff
+  - [data-mobile-menu-expanded] header {
+  + body:has(sl-sidebar-pane:popover-open) header {
+    background-color: var(--sl-color-bg);
+  }
+  ```
+
+## 0.41.11
+
+### Patch Changes
+
+- [#4167](https://github.com/withastro/starlight/pull/4167) [`32a5e29`](https://github.com/withastro/starlight/commit/32a5e29127c13946ce746c36d7cb194f35d11952) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a layout issue and anchor links appearing for hidden headings, e.g. footnote headings, when `markdown.headingLinks` is enabled or the `<AnchorHeading>` component is used.
+
+- [#4148](https://github.com/withastro/starlight/pull/4148) [`cdfafd8`](https://github.com/withastro/starlight/commit/cdfafd8eedbbd6653cd6a1d3b1542b44ed1ba19e) Thanks [@ematipico](https://github.com/ematipico)! - Optimizes sidebar data generation logic to speed up sites with large sidebars
+
+## 0.41.10
+
+### Patch Changes
+
+- [#4160](https://github.com/withastro/starlight/pull/4160) [`88442c3`](https://github.com/withastro/starlight/commit/88442c333612058cb1b2c56ef689053a5994e31e) Thanks [@ArmandPhilippot](https://github.com/ArmandPhilippot)! - Adds the missing translations for Expressive Code in the following locales: `ar`, `hi`, `it`, `ja`, `ko`, `pt`, `zh-CN`, and `zh-TW`.
+
+- [#4156](https://github.com/withastro/starlight/pull/4156) [`57af92d`](https://github.com/withastro/starlight/commit/57af92d91f9a9d0936a06efb4387898aded62aa9) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `hypothesis`
+
+- [#4159](https://github.com/withastro/starlight/pull/4159) [`a0e0ba2`](https://github.com/withastro/starlight/commit/a0e0ba263c93bab214222b798b52a759fb799ba7) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds 1 new icon: `npmx`
+
+## 0.41.9
+
+### Patch Changes
+
+- [#4145](https://github.com/withastro/starlight/pull/4145) [`1c90d69`](https://github.com/withastro/starlight/commit/1c90d69b424aedef096e12577e9e7ec96bed4efc) Thanks [@pyxelr](https://github.com/pyxelr)! - Adds 1 new icon: `goodreads`
+
+## 0.41.8
+
+### Patch Changes
+
+- [#4142](https://github.com/withastro/starlight/pull/4142) [`cacbc9f`](https://github.com/withastro/starlight/commit/cacbc9ff45c551c2f20c6b307800f7ff7ee07db2) Thanks [@alebelcor](https://github.com/alebelcor)! - Adds 1 new icon: `whatsApp`
+
+- [#4133](https://github.com/withastro/starlight/pull/4133) [`3944311`](https://github.com/withastro/starlight/commit/3944311bed46f956e12e79a8eb0c32084eeeaea6) Thanks [@delucis](https://github.com/delucis)! - Internal refactor: numbered `id` attributes in the `<Tabs>` component are now page-specific instead of using a global counter
+
+- [#4138](https://github.com/withastro/starlight/pull/4138) [`cd4b665`](https://github.com/withastro/starlight/commit/cd4b6655f3235220cded12f0567e0dad1bf5adac) Thanks [@delucis](https://github.com/delucis)! - Fixes localisation of code block UI elements when using the Sätteri Markdown processor
+
 ## 0.41.7
 
 ### Patch Changes
