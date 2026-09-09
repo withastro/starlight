@@ -15,21 +15,11 @@ const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden':
 
 <svg
 	{...a11yAttrs}
-	class={Astro.props.class}
+	class:list={['sl-icon', Astro.props.class]}
+	style={{ '--sl-icon-color': color, '--sl-icon-size': size }}
 	width="16"
 	height="16"
 	viewBox="0 0 24 24"
 	fill="currentColor"
 	set:html={Icons[name]}
 />
-
-<style define:vars={{ 'sl-icon-color': color, 'sl-icon-size': size }}>
-	@layer starlight.components {
-		svg {
-			color: var(--sl-icon-color);
-			font-size: var(--sl-icon-size, 1em);
-			width: 1em;
-			height: 1em;
-		}
-	}
-</style>
