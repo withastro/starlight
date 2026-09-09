@@ -119,7 +119,7 @@ function satteriAsidesPlugin(t: I18nT, sourceFormat: SourceFormat): MdastPluginD
 			}
 
 			const icon = getAsideIcon(variant, node.attributes?.['icon']);
-			const iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon">${icon}</svg>`;
+			const iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="sl-icon starlight-aside__icon">${icon}</svg>`;
 			// Markdown and MDX require different AST shapes for raw HTML content.
 			const iconNode =
 				sourceFormat === 'mdx'
