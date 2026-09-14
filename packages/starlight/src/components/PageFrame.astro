@@ -17,8 +17,14 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 						constructor() {
 							super();
 
-							// Close the menu when the viewport is resized between mobile and desktop sizes.
-							matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
+							const desktopMediaQuery = matchMedia('(min-width: 50em)');
+
+							// Remove the popover attribute on desktop viewports. It's only needed for the mobile menu.
+							const resetPopoverAttribute = () => {
+								this.popover = desktopMediaQuery.matches ? null : 'auto';
+							}
+							resetPopoverAttribute();
+							desktopMediaQuery.addEventListener('change', () => resetPopoverAttribute());
 
 							// Update the menu state when the sidebar popover is toggled.
 							this.addEventListener('toggle', ({ newState }) => this.trapFocus(newState === 'open'));
