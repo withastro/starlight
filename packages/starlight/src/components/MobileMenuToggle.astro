@@ -31,11 +31,11 @@ import Icon from '../user-components/Icon.astro';
 			box-shadow: none;
 		}
 
-		button:has(~ :popover-open) .open-menu {
+		button:has(~ :popover-open) :global(.open-menu) {
 			display: none;
 		}
 
-		button:not(:has(~ :popover-open)) .close-menu {
+		button:not(:has(~ :popover-open)) :global(.close-menu) {
 			display: none;
 		}
 

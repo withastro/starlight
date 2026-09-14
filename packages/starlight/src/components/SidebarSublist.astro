@@ -101,14 +101,14 @@ const { sublist, nested } = Astro.props;
 			display: none;
 		}
 
-		.caret {
+		summary :global(.caret) {
 			transition: transform 0.2s ease-in-out;
 			flex-shrink: 0;
 		}
-		:global([dir='rtl']) .caret {
+		:global([dir='rtl']) summary :global(.caret) {
 			transform: rotateZ(180deg);
 		}
-		[open] > summary .caret {
+		[open] > summary :global(.caret) {
 			transform: rotateZ(90deg);
 		}
 

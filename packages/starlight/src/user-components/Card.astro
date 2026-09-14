@@ -53,7 +53,7 @@ const { icon, title } = Astro.props;
 			gap: 1rem;
 			align-items: center;
 		}
-		.card .icon {
+		.card :global(.icon) {
 			border: 1px solid var(--sl-card-border);
 			background-color: var(--sl-card-bg);
 			padding: 0.2em;
