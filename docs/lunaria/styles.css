@@ -45,3 +45,244 @@ sup {
 	display: flex;
 	justify-content: center;
 }
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+translation-freshness {
+	--freshness-color-bar-text: hsl(218, 35%, 14%);
+	--freshness-color-up-to-date: var(--ln-color-done);
+	--freshness-color-outdated-within: var(--ln-color-outdated);
+	--freshness-color-outdated-beyond: hsl(353, 89%, 63%);
+	--freshness-color-recent: hsl(265, 92%, 70%);
+
+	display: block;
+
+	form {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		margin-bottom: 2rem;
+
+		p {
+			display: grid;
+			gap: 0.5rem;
+			grid-row: span 3;
+			grid-template-rows: subgrid;
+			margin: 0;
+		}
+
+		label {
+			font-weight: bold;
+		}
+
+		small {
+			color: var(--ln-color-black);
+			font-size: 0.875rem;
+		}
+
+		input {
+			background-color: var(--theme-table-header);
+			border: 1px solid var(--ln-color-black);
+			box-sizing: border-box;
+			color: var(--theme-text-bright);
+			padding: 0.5rem 0.75rem;
+			width: 5rem;
+		}
+
+		button {
+			background-color: color-mix(in hsl, var(--theme-accent) 10%, transparent);
+			border: 1px solid currentColor;
+			color: var(--theme-accent);
+			font-size: 0.875rem;
+			justify-self: start;
+			padding: 0.75rem 1rem;
+
+			&:hover {
+				background-color: color-mix(in hsl, var(--theme-accent) 15%, transparent);
+			}
+		}
+	}
+
+	.freshness-up-to-date {
+		background-color: var(--freshness-color-up-to-date);
+	}
+
+	.freshness-outdated-within {
+		background-color: var(--freshness-color-outdated-within);
+	}
+
+	.freshness-outdated-beyond {
+		background-color: var(--freshness-color-outdated-beyond);
+	}
+
+	.freshness-recent {
+		background-color: var(--freshness-color-recent);
+	}
+
+	.freshness-legend,
+	.freshness-chart-rows {
+		list-style: none;
+		padding: 0;
+	}
+
+	.freshness-legend {
+		display: grid;
+		font-weight: bold;
+		gap: 0.75rem 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+
+		li {
+			align-items: center;
+			display: flex;
+			gap: 0.5rem;
+		}
+
+		span[aria-hidden] {
+			border: 1px solid var(--ln-color-table-border);
+			box-sizing: border-box;
+			display: inline-block;
+			height: 1rem;
+			width: 1rem;
+		}
+	}
+
+	.freshness-chart-header,
+	.freshness-chart-row {
+		display: grid;
+		gap: 1.25rem;
+		grid-template-columns: minmax(8rem, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+	}
+
+	.freshness-chart-header {
+		color: var(--ln-color-black);
+		font-size: 0.875rem;
+		font-weight: bold;
+		padding-block: 1.25rem 0.75rem;
+	}
+
+	.freshness-chart-row {
+		align-items: center;
+		border-bottom: 1px solid var(--ln-color-table-border);
+		padding-block: 1rem;
+
+		& > div {
+			min-width: 0;
+			overflow-wrap: anywhere;
+		}
+
+		p {
+			color: var(--ln-color-black);
+			margin-top: 0.25rem;
+		}
+
+		[data-locale-link] {
+			font-weight: bold;
+		}
+	}
+
+	.freshness-bar {
+		background-color: var(--ln-color-table-background);
+		display: flex;
+		height: 2.25rem;
+		overflow: hidden;
+
+		& > span {
+			align-items: center;
+			color: var(--freshness-color-bar-text);
+			display: flex;
+			font-size: 0.8125rem;
+			font-weight: bold;
+			justify-content: center;
+			min-width: min-content;
+			padding-inline: 2px;
+
+			&:empty {
+				padding-inline: 0;
+			}
+		}
+
+		& > span:not(:empty) ~ span:not(:empty) {
+			border-inline-start: 1px solid var(--theme-bg);
+		}
+	}
+
+	.freshness-activity {
+		.freshness-bar {
+			height: 1rem;
+		}
+
+		[data-activity-count] {
+			font-size: 0.875rem;
+			margin-top: 0.25rem;
+			text-align: center;
+			white-space: nowrap;
+		}
+	}
+
+	@media (max-width: 48rem) {
+		.freshness-chart-header {
+			display: none;
+		}
+
+		.freshness-chart-row {
+			gap: 0.75rem;
+			grid-template-columns: 1fr;
+		}
+	}
+
+	table {
+		border: 1px solid var(--ln-color-table-border);
+		border-collapse: collapse;
+		box-sizing: border-box;
+		font-size: 0.8125rem;
+		width: 100%;
+	}
+
+	th {
+		font-weight: normal;
+		text-align: left;
+		white-space: nowrap;
+	}
+
+	thead th {
+		background-color: var(--ln-color-table-background);
+		font-weight: bold;
+		position: sticky;
+		top: -1px;
+		z-index: 1;
+	}
+
+	th,
+	td {
+		border: 1px solid var(--ln-color-table-border);
+		padding: 0.3rem 1rem;
+	}
+
+	tbody tr:is(:hover, :focus-within) {
+		background-color: var(--ln-color-table-background);
+	}
+
+	td time {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1rem;
+
+		span {
+			white-space: nowrap;
+		}
+
+		[data-calendar-date] {
+			margin-inline-start: auto;
+		}
+	}
+}
