@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.42.1
+
+### Patch Changes
+
+- [#4198](https://github.com/withastro/starlight/pull/4198) [`96a44d4`](https://github.com/withastro/starlight/commit/96a44d4f296b512febc6e631a587103ec5297872) Thanks [@mayank99](https://github.com/mayank99)! - Removes the `popover` attribute from the sidebar pane on desktop viewports. This ensures the desktop sidebar doesn't stay in a "hidden" popover visibility state.
+
 ## 0.42.0
 
 ### Minor Changes
