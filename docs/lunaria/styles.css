@@ -136,10 +136,10 @@ translation-freshness {
 	}
 
 	.freshness-legend {
-		display: grid;
+		display: flex;
+		flex-wrap: wrap;
 		font-weight: bold;
 		gap: 0.75rem 1rem;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
 
 		li {
 			align-items: center;
