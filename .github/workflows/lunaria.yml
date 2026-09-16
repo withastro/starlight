@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@e5ab09c3c8353fa80786d8c2149873ba3978a3a7 # v7.0.0
         with:
           # Necessary for Lunaria to work properly
           # Makes the action clone the entire git history
@@ -40,7 +40,7 @@ jobs:
         shell: bash
 
       - name: Generate Lunaria Overview
-        uses: yanthomasdev/lunaria-action@06ad5ab2704d030708baf3b279ca0446b418e853 # v0.1.0
+        uses: lunariajs/action@dfc554fd4330c79f8465c8bcd4257a25a663ea34 # v0.2.0
         with:
           token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           working-directory: docs
