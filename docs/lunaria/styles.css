@@ -61,8 +61,8 @@ sup {
 translation-freshness {
 	--freshness-color-bar-text: hsl(218, 35%, 14%);
 	--freshness-color-up-to-date: var(--ln-color-done);
-	--freshness-color-outdated-within: var(--ln-color-outdated);
-	--freshness-color-outdated-beyond: hsl(353, 89%, 63%);
+	--freshness-color-outdated-within: hsl(30, 100%, 75%);
+	--freshness-color-outdated-beyond: var(--ln-color-outdated);
 	--freshness-color-recent: hsl(265, 92%, 70%);
 
 	display: block;
