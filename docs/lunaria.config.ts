@@ -197,13 +197,12 @@ const Freshness = (config: LunariaConfig, status: LunariaStatus) => {
 						</li>
 						<li>
 							<span class="freshness-recent" aria-hidden="true"></span>
-							Recently updated
+							<span id="freshness-recent-label"></span>
 						</li>
 					</ul>
 					<div class="freshness-chart-header" aria-hidden="true">
 						<span>Locale</span>
 						<span>Translation status</span>
-						<span id="freshness-activity-heading"></span>
 					</div>
 					<ul class="freshness-chart-rows"></ul>
 				</div>
@@ -252,12 +251,10 @@ const Freshness = (config: LunariaConfig, status: LunariaStatus) => {
 							<span class="freshness-outdated-within" data-outdated-within-bar></span>
 							<span class="freshness-outdated-beyond" data-outdated-beyond-bar></span>
 						</div>
-					</div>
-					<div class="freshness-activity">
-						<div class="freshness-bar" aria-hidden="true">
+						<div class="freshness-bar freshness-activity" aria-hidden="true">
 							<span class="freshness-recent" data-activity-bar></span>
+							<p data-activity-percentage></p>
 						</div>
-						<p data-activity-count aria-hidden="true"></p>
 					</div>
 				</li>
 			</template>

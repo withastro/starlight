@@ -141,8 +141,8 @@ class TranslationFreshness extends HTMLElement {
 			`Outdated ≤ ${oldUpdateAge} ${oldUnit}`;
 		this.#getElement('#freshness-outdated-beyond-label').textContent =
 			`Outdated > ${oldUpdateAge} ${oldUnit}`;
-		this.#getElement('#freshness-activity-heading').textContent =
-			`Updated in last ${recentUpdateAge} ${recentUnit}`;
+		this.#getElement('#freshness-recent-label').textContent =
+			`Updated ≤ ${recentUpdateAge} ${recentUnit}`;
 
 		for (const locale of locales) {
 			const content = document.importNode(template.content, true);
@@ -172,13 +172,15 @@ class TranslationFreshness extends HTMLElement {
 			this.#renderBar(this.#getElement('[data-outdated-within-bar]', content), within, total);
 			this.#renderBar(this.#getElement('[data-outdated-beyond-bar]', content), beyond, total);
 
-			this.#getElement('[data-activity-bar]', content).style.width =
-				`${(locale.recentUpdateCount / total) * 100}%`;
-
-			this.#getElement('[data-activity-count]', content).textContent = this.#renderCount(
+			this.#renderBar(
+				this.#getElement('[data-activity-bar]', content),
 				locale.recentUpdateCount,
 				total
 			);
+
+			const percentage = Math.round((locale.recentUpdateCount / total) * 100);
+			this.#getElement('[data-activity-percentage]', content).textContent =
+				locale.recentUpdateCount === 0 ? '0 (0%)' : `(${percentage}%)`;
 
 			fragment.append(content);
 		}
@@ -232,17 +234,6 @@ class TranslationFreshness extends HTMLElement {
 	#renderBar(element, count, total) {
 		element.style.width = `${(count / total) * 100}%`;
 		element.textContent = count === 0 ? '' : String(count);
-	}
-
-	/**
-	 * @param {number} count
-	 * @param {number} total
-	 * @returns {string}
-	 */
-	#renderCount(count, total) {
-		const percentage = Math.round((count / total) * 100);
-
-		return `${count} / ${total} (${percentage}%)`;
 	}
 
 	/**

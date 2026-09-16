@@ -160,7 +160,7 @@ translation-freshness {
 	.freshness-chart-row {
 		display: grid;
 		gap: 1.25rem;
-		grid-template-columns: minmax(8rem, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+		grid-template-columns: minmax(8rem, 1fr) minmax(0, 3fr);
 	}
 
 	.freshness-chart-header {
@@ -182,7 +182,7 @@ translation-freshness {
 
 		p {
 			color: var(--ln-color-black);
-			margin-top: 0.25rem;
+			margin-top: 0.5rem;
 		}
 
 		[data-locale-link] {
@@ -193,7 +193,7 @@ translation-freshness {
 	.freshness-bar {
 		background-color: var(--ln-color-table-background);
 		display: flex;
-		height: 2.25rem;
+		height: 2.125rem;
 		overflow: hidden;
 
 		& > span {
@@ -217,15 +217,28 @@ translation-freshness {
 	}
 
 	.freshness-activity {
-		.freshness-bar {
-			height: 1rem;
+		height: 1.5rem;
+		margin-top: 1px;
+
+		[data-activity-bar] {
+			flex-shrink: 0;
 		}
 
-		[data-activity-count] {
-			font-size: 0.875rem;
-			margin-top: 0.25rem;
-			text-align: center;
-			white-space: nowrap;
+		[data-activity-percentage] {
+			align-items: center;
+			color: var(--theme-text-bright);
+			display: flex;
+			flex-shrink: 0;
+			font-size: 0.8125rem;
+			inset-inline-end: 0;
+			margin: 0;
+			padding-inline: 0.5rem;
+			position: sticky;
+			text-shadow:
+				-1px 0 var(--theme-bg),
+				1px 0 var(--theme-bg),
+				0 -1px var(--theme-bg),
+				0 1px var(--theme-bg);
 		}
 	}
 
