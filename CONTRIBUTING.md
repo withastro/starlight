@@ -293,7 +293,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 
 [discord]: https://astro.build/chat
 [issues]: https://github.com/withastro/starlight/issues
-[sl]: https://github.com/withastro/starlight/pulls
+[sl]: https://github.com/withastro/starlight
 [pulls]: https://github.com/withastro/starlight/pulls
 [new-issue]: https://github.com/withastro/starlight/issues/new/choose
 [pr-docs]: https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request
