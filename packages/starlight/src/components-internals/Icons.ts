@@ -314,6 +314,7 @@ export type BuiltInIcon =
 	| 'codePen'
 	| 'farcaster'
 	| 'discord'
+	| 'fluxer'
 	| 'gitter'
 	| 'twitter'
 	| 'x.com'
