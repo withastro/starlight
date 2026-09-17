@@ -1,3 +1,0 @@
-# // TODO(HiDeoo) Remove
-[context.deploy-preview]
-  command = "cd docs && pnpm build:dist"
