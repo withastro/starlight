@@ -40,7 +40,7 @@ jobs:
         shell: bash
 
       - name: Generate Lunaria Overview
-        uses: lunariajs/action@dfc554fd4330c79f8465c8bcd4257a25a663ea34 # v0.2.0
+        uses: lunariajs/action@e5ab09c3c8353fa80786d8c2149873ba3978a3a7 # v0.2.0
         with:
           token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           working-directory: docs
