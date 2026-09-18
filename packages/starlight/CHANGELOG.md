@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.42.2
+
+### Patch Changes
+
+- [#4201](https://github.com/withastro/starlight/pull/4201) [`fafd989`](https://github.com/withastro/starlight/commit/fafd989453b024081e51c0c92db920a369c8153e) Thanks [@linux-universe](https://github.com/linux-universe)! - Add 1 new icon: `fluxer`
+
 ## 0.42.1
 
 ### Patch Changes
