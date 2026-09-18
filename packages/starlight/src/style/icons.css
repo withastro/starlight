@@ -1,0 +1,8 @@
+@layer starlight.components {
+	.sl-icon {
+		color: var(--sl-icon-color);
+		font-size: var(--sl-icon-size, 1em);
+		width: 1em;
+		height: 1em;
+	}
+}
