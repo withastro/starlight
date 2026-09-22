@@ -39,9 +39,9 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			}
 			customElements.define('sl-sidebar-pane', StarlightSidebarPane);
 		</script>
-		<sl-sidebar-pane popover="" id="starlight__sidebar" class="sidebar-pane"
-			><div class="sidebar-content sl-flex"><slot name="sidebar" /></div></sl-sidebar-pane
-		>
+		<sl-sidebar-pane popover="" id="starlight__sidebar" class="sidebar-pane">
+			<div class="sidebar-content sl-flex"><slot name="sidebar" /></div>
+		</sl-sidebar-pane>
 	</nav>}
 	<div class="main-frame"><slot /></div>
 </div>
