@@ -9,6 +9,7 @@ export default defineConfig({
 			title: 'Basics',
 			pagefind: false,
 			markdown: { processedDirs: ['./src/content/comments/'] },
+			components: { PageTitle: './src/components/PageTitle.astro' },
 		}),
 	],
 	vite: {

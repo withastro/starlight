@@ -1,5 +1,23 @@
 # @astrojs/starlight
 
+## 0.42.3
+
+### Patch Changes
+
+- [#4211](https://github.com/withastro/starlight/pull/4211) [`33e21ec`](https://github.com/withastro/starlight/commit/33e21ec86274070df1725580c1e8134e34062c15) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential page freeze due to table of contents highlighting when a [`<PageTitle>` component](https://starlight.astro.build/reference/overrides/#pagetitle) override does not render a heading with the required `id="_top"`.
+
+## 0.42.2
+
+### Patch Changes
+
+- [#4201](https://github.com/withastro/starlight/pull/4201) [`fafd989`](https://github.com/withastro/starlight/commit/fafd989453b024081e51c0c92db920a369c8153e) Thanks [@linux-universe](https://github.com/linux-universe)! - Add 1 new icon: `fluxer`
+
+## 0.42.1
+
+### Patch Changes
+
+- [#4198](https://github.com/withastro/starlight/pull/4198) [`96a44d4`](https://github.com/withastro/starlight/commit/96a44d4f296b512febc6e631a587103ec5297872) Thanks [@mayank99](https://github.com/mayank99)! - Removes the `popover` attribute from the sidebar pane on desktop viewports. This ensures the desktop sidebar doesn't stay in a "hidden" popover visibility state.
+
 ## 0.42.0
 
 ### Minor Changes
