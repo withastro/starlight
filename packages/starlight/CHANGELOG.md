@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.42.3
+
+### Patch Changes
+
+- [#4211](https://github.com/withastro/starlight/pull/4211) [`33e21ec`](https://github.com/withastro/starlight/commit/33e21ec86274070df1725580c1e8134e34062c15) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential page freeze due to table of contents highlighting when a [`<PageTitle>` component](https://starlight.astro.build/reference/overrides/#pagetitle) override does not render a heading with the required `id="_top"`.
+
 ## 0.42.2
 
 ### Patch Changes
