@@ -60,6 +60,6 @@ function mockSidebarRender(sublist: SidebarEntry[]) {
 	});
 }
 
-bench('new', () => {
+bench('sidebar current groups', () => {
 	mockSidebarRender(getSidebar(context.url.pathname, route.locale));
 });
