@@ -229,8 +229,13 @@ function throwFileTreeValidationError(message: string): never {
 	);
 }
 
-export interface Definitions {
-	files: Record<string, string>;
-	extensions: Record<string, string>;
-	partials: Record<string, string>;
+/**
+ * Icon names default to `StarlightIcon` so that generated definitions can be type-checked against
+ * available icons. The `file-icons-generator` package uses `string` while generating them from
+ * Seti UI.
+ */
+export interface Definitions<T extends string = StarlightIcon> {
+	files: Record<string, T>;
+	extensions: Record<string, T>;
+	partials: Record<string, T>;
 }

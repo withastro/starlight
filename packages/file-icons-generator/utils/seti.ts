@@ -75,7 +75,7 @@ export async function parseMapping(repoPath: string) {
 	const lines = mapping.split('\n');
 	// Include the `folder` icon by default as it is not defined in the mapping file.
 	const icons = new Set<string>(['folder']);
-	const definitions: Definitions = {
+	const definitions: Definitions<string> = {
 		files: { ...starlight.definitions.files },
 		extensions: { ...starlight.definitions.extensions },
 		partials: { ...starlight.definitions.partials },

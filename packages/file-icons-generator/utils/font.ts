@@ -7,7 +7,11 @@ import { getFont, getSetiIconName } from './seti.ts';
 const pathDecimalPrecision = 3;
 
 /** Extract SVG paths from the Seti UI icon font from a list of icon names matching font glyphs. */
-export async function getIconSvgPaths(repoPath: string, icons: string[], definitions: Definitions) {
+export async function getIconSvgPaths(
+	repoPath: string,
+	icons: string[],
+	definitions: Definitions<string>
+) {
 	const fontBuffer = await getFont(repoPath);
 
 	const iconSvgs: Record<string, string> = {};
@@ -106,7 +110,7 @@ function getFontGlyphAlias(icon: string): string {
 }
 
 /** Update the definitions to use an alias instead of a specific icon name. */
-function updateDefinitionsWithAlias(definitions: Definitions, icon: string, alias: string) {
+function updateDefinitionsWithAlias(definitions: Definitions<string>, icon: string, alias: string) {
 	const prefixedIcon = getSetiIconName(icon);
 	const prefixedAlias = getSetiIconName(alias);
 
