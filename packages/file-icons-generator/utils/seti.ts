@@ -89,11 +89,12 @@ export async function parseMapping(repoPath: string) {
 		if (seti.ignores.includes(lang)) continue;
 
 		const maybeOverride: string | undefined = seti.overrides[lang as keyof typeof seti.overrides];
+		const setiIcon = maybeOverride ?? lang;
 
 		// Add the icon to the list of icons to extract as SVGs.
-		icons.add(maybeOverride ?? lang);
+		icons.add(setiIcon);
 
-		const icon = getSetiIconName(lang);
+		const icon = getSetiIconName(setiIcon);
 
 		if (type === 'set') {
 			if (identifier?.startsWith('.')) {
