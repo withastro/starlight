@@ -450,6 +450,36 @@ function getSidebarCurrentEntry(sidebar: SidebarEntry[], pathname: string): Side
 
 const sidebarEntriesByPath = new WeakMap<SidebarEntry[], Map<string, SidebarLink>>();
 
+/** Map sidebar groups to a boolean indicating whether they contain a link to the current page. */
+const currentGroups = new WeakMap<SidebarGroup, boolean>();
+
+/**
+ * Iterate through the children of a sidebar group, storing and returning whether or not they
+ * contain a link to the current page.
+ */
+function findCurrentGroups(group: SidebarGroup): boolean {
+	let containsCurrent = false;
+	for (const entry of group.entries) {
+		if (entry.type === 'link') {
+			containsCurrent ||= entry.isCurrent;
+		} else {
+			const entryContainsCurrent = findCurrentGroups(entry);
+			containsCurrent ||= entryContainsCurrent;
+			currentGroups.set(entry, entryContainsCurrent);
+		}
+	}
+	currentGroups.set(group, containsCurrent);
+	return containsCurrent;
+}
+
+/**
+ * Check whether a given sidebar group contains a link to the current page (without recomputing the
+ * entire sidebar tree for every call).
+ */
+export function sidebarGroupHasCurrent(group: SidebarGroup) {
+	return currentGroups.get(group) ?? findCurrentGroups(group);
+}
+
 /** Generates a deterministic string based on the content of the passed sidebar. */
 export function getSidebarHash(sidebar: SidebarEntry[]): string {
 	let hash = 0;
