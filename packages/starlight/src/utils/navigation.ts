@@ -476,7 +476,7 @@ function findCurrentGroups(group: SidebarGroup): boolean {
  * Check whether a given sidebar group contains a link to the current page (without recomputing the
  * entire sidebar tree for every call).
  */
-export function sidebarGroupHasCurrent(group: SidebarGroup) {
+export function sidebarGroupHasCurrent(group: SidebarGroup): boolean {
 	return currentGroups.get(group) ?? findCurrentGroups(group);
 }
 
