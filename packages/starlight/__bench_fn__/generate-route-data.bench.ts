@@ -2,7 +2,8 @@ import { bench, describe, vi } from 'vitest';
 import { getRouteDataTestContext } from '../__tests__/test-utils';
 import { generateRouteData } from '../src/utils/routing/data';
 import { getRouteBySlugParam } from '../src/utils/routing';
-import { getSidebar } from '../src/utils/navigation';
+import { getSidebar, sidebarGroupHasCurrent } from '../src/utils/navigation';
+import type { SidebarEntry } from '../src/utils/routing/types';
 
 const docs = vi.hoisted(() => {
 	const docs: [string, { title: string }][] = [];
@@ -47,4 +48,18 @@ describe('routing', () => {
 	bench('sidebar', () => {
 		getSidebar(context.url.pathname, route.locale);
 	});
+});
+
+/** Recursive function that simulates the heavier logic in `<SidebarSublist>` rendering. */
+function mockSidebarRender(sublist: SidebarEntry[]) {
+	sublist.map((entry) => {
+		if (entry.type !== 'link') {
+			sidebarGroupHasCurrent(entry);
+			mockSidebarRender(entry.entries);
+		}
+	});
+}
+
+bench('new', () => {
+	mockSidebarRender(getSidebar(context.url.pathname, route.locale));
 });
