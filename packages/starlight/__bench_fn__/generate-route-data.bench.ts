@@ -1,8 +1,8 @@
 import { bench, describe, vi } from 'vitest';
 import { getRouteDataTestContext } from '../__tests__/test-utils';
-import { generateRouteData } from '../utils/routing/data';
-import { getRouteBySlugParam } from '../utils/routing';
-import { getSidebar } from '../utils/navigation';
+import { generateRouteData } from '../src/utils/routing/data';
+import { getRouteBySlugParam } from '../src/utils/routing';
+import { getSidebar } from '../src/utils/navigation';
 
 const docs = vi.hoisted(() => {
 	const docs: [string, { title: string }][] = [];
