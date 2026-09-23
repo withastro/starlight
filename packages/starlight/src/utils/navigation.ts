@@ -465,7 +465,6 @@ function findCurrentGroups(group: SidebarGroup): boolean {
 		} else {
 			const entryContainsCurrent = findCurrentGroups(entry);
 			containsCurrent ||= entryContainsCurrent;
-			currentGroups.set(entry, entryContainsCurrent);
 		}
 	}
 	currentGroups.set(group, containsCurrent);
