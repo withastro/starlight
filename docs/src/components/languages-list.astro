@@ -28,8 +28,6 @@ const langList = new Intl.ListFormat(pageLang, {
 }).format(supportedLangNames);
 ---
 
-{
-	Astro.props.startsSentence
-		? langList[0]?.toLocaleUpperCase(pageLang) + langList.slice(1)
-		: langList
-}
+{Astro.props.startsSentence
+	? langList[0]?.toLocaleUpperCase(pageLang) + langList.slice(1)
+	: langList}

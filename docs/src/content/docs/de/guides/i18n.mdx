@@ -287,9 +287,7 @@ Dazu gehört die Unterstützung von Funktionen wie [Interpolation](https://www.i
 In Astro-Komponenten ist diese API als Teil des [globalen `Astro`-Objekts](https://docs.astro.build/de/reference/api-reference/#locals) als `Astro.locals.t` verfügbar:
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 Du kannst die API auch bei [Endpunkten](https://docs.astro.build/de/guides/endpoints/) verwenden, wo das Objekt `locals` als Teil des [Endpunkt-Kontextes](https://docs.astro.build/de/reference/api-reference/#locals) verfügbar ist:
@@ -321,9 +319,7 @@ Der erste UI-String kann gerendert werden, indem man `'link.astro'` an die Funkt
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Rendert: <a href="...">Astro Dokumentation</a> -->
 ```
 
@@ -406,6 +402,7 @@ Das folgende Beispiel liest das aktuelle Gebietsschema aus und verwendet es mit 
 import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
-<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>Über uns</a
->
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>
+	Über uns
+</a>
 ```
