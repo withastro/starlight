@@ -10,7 +10,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Настройка Starlight
 
-Для работы по этому руководству вам понадобится существующий проект на Astro.
+Для работы по этому руководству вам понадобится [существующий проект на Astro](https://docs.astro.build/ru/install-and-setup/).
 
 ### Интеграция Starlight
 
@@ -77,8 +77,8 @@ export const collections = {
 };
 ```
 
-Starlight также поддерживает флаг [`legacy.collections`](https://docs.astro.build/ru/reference/legacy-flags/), при котором коллекции обрабатываются с использованием устаревшей реализации коллекций контента.
-Это полезно, если у вас есть существующий проект Astro, и вы не можете в данный момент внести изменения в коллекции для использования загрузчика.
+Starlight также поддерживает флаг [`legacy.collectionsBackwardsCompat`](https://docs.astro.build/ru/reference/legacy-flags/#collectionsbackwardscompat), который сохраняет некоторые устаревшие возможности коллекций контента из версии 4.
+Это полезно, если у вас уже есть существующий проект на Astro и в данный момент нет возможности внести изменения в коллекции, чтобы перейти на API Content Layer, появившийся в версии 5.0.
 
 ### Добавление контента
 
@@ -98,7 +98,6 @@ description: Узнайте больше о моем проекте на это�
 ```
 
 Starlight использует маршрутизацию на основе файлов, что означает, что каждый файл Markdown, MDX или Markdoc в `src/content/docs/` становится страницей на вашем сайте. Метаданные в начале файла (например, поля `title` и `description` в приведённом выше примере) могут изменить отображение страниц.
-
 Посмотрите все доступные параметры в [справочнике по метаданным](/ru/reference/frontmatter/).
 
 ## Советы для существующих сайтов
@@ -133,3 +132,5 @@ import { FileTree } from '@astrojs/starlight/components';
 Чтобы включить SSR, следуйте руководству [Адаптеры рендеринга по требованию](https://docs.astro.build/ru/guides/on-demand-rendering/) в документации Astro, для добавления серверного адаптера в ваш проект Starlight.
 
 Страницы документации, создаваемые Starlight, по умолчанию предварительно отрисовываются независимо от режима вывода вашего проекта. Для отключения предварительного рендеринга страниц установите для [параметра `prerender`](/ru/reference/configuration/#prerender) значение `false`.
+
+Если вы используете [адаптер Cloudflare](https://docs.astro.build/ru/guides/integrations-guide/cloudflare/) для включения серверного рендеринга в вашем проекте документации, обязательно также [добавьте флаг совместимости `nodejs_compat` в файл конфигурации Wrangler](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started).

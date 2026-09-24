@@ -23,6 +23,7 @@ i18n:
           - docs/src/content/docs/hi/**/*
           - docs/src/content/docs/da/**/*
           - docs/src/content/docs/uk/**/*
+          - docs/src/content/docs/fa/**/*
 
 '🌟 core':
   - changed-files:

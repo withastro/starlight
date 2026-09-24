@@ -331,7 +331,7 @@ export default {
 
 절대 파일 경로와 함께 `absolutePathToLang()`을 호출하여 해당 파일의 언어를 가져옵니다.
 
-이는 Markdown 또는 MDX 파일을 처리하기 위해 [remark 또는 rehype 플러그인](https://docs.astro.build/ko/guides/markdown-content/#markdown-플러그인)을 추가할 때 특히 유용할 수 있습니다.
+이는 Markdown 또는 MDX 파일을 처리하기 위해 [remark 또는 rehype 플러그인](https://docs.astro.build/ko/guides/markdown-content/#markdown-프로세서-플러그인)을 추가할 때 특히 유용할 수 있습니다.
 이러한 플러그인에서 사용하는 [가상 파일 형식](https://github.com/vfile/vfile)에는 처리 중인 파일의 [절대 경로](https://github.com/vfile/vfile#filepath)가 포함되어 있으며, 이는 `absolutePathToLang()`과 함께 사용하여 파일의 언어를 확인할 수 있습니다.
 반환된 언어는 해당 언어에 대한 UI 문자열을 가져오기 위해 [`useTranslations()`](#usetranslations) 도우미와 함께 사용할 수 있습니다.
 

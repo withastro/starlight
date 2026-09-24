@@ -2,3 +2,6 @@
 env.d.ts
 __tests__/**/types.d.ts
 .astro
+
+# Build output
+dist

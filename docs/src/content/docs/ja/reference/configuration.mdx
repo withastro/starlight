@@ -11,6 +11,7 @@ Starlightは[Astro](https://astro.build)ウェブフレームワークの上に�
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+
 export default defineConfig({
 	integrations: [
 		starlight({
@@ -70,8 +71,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**default:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 各ページの右側に表示される目次を設定します。デフォルトでは、`<h2>`と`<h3>`の見出しがこの目次に含まれます。
 
@@ -97,15 +98,15 @@ starlight({
 
 サイトのサイドバーのナビゲーション項目を設定します。
 
-サイドバーはリンクとリンクのグループの配列です。`slug`を使用する場合を除き、各項目は`label`と以下のプロパティのいずれかが必要です。
+サイドバーはリンク、リンクのグループ、および自動生成されたエントリの配列です。サイドバー項目は、以下のプロパティのいずれかを使用して定義します。
 
-- `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。
+- `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。リンクには`label`も必要です。
 
-- `slug` — たとえば`'guides/getting-started'`など、内部ページへの参照。
+- `slug` — たとえば`'guides/getting-started'`など、内部ページへの参照。デフォルトでは、リンク先のページのタイトルがラベルとして使用されます。
 
-- `items` — サイドバーの複数のリンクとサブグループを含む配列。
+- `items` — サイドバーの複数のリンク、サブグループ、および自動生成されたエントリを含む配列。グループには`label`も必要です。
 
-- `autogenerate` — リンクのグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。
+- `autogenerate` — リンクとサブグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。自動生成されたエントリは、グループの`items`配列内に配置できます。
 
 内部リンクは、`slug`プロパティをもつオブジェクトの代わりに文字列として指定することもできます。
 
@@ -129,7 +130,7 @@ starlight({
 		// referenceディレクトリのすべてのページにリンクするグループ。
 		{
 			label: 'リファレンス',
-			autogenerate: { directory: 'reference' },
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 	],
 });
@@ -143,9 +144,9 @@ starlight({
 
 リンクのグループはデフォルトで展開されます。`collapsed`プロパティを`true`に設定して、この動作を変更できます。
 
-自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
+自動生成されたサブグループもデフォルトで展開されます。`autogenerate.collapsed`プロパティを設定して、これらを折りたたむことができます。
 
-```js {5,13}
+```js {5,15}
 sidebar: [
   // 折りたたまれたリンクのグループ。
   {
@@ -156,10 +157,14 @@ sidebar: [
   // 自動生成される折りたたまれたサブグループを含む展開されたグループ。
   {
     label: '参照',
-    autogenerate: {
-      directory: 'reference',
-      collapsed: true,
-    },
+    items: [
+      {
+        autogenerate: {
+          directory: 'reference',
+          collapsed: true,
+        },
+      },
+    ],
   },
 ],
 ```
@@ -217,14 +222,15 @@ type SidebarItem =
 					items: SidebarItem[];
 					collapsed?: boolean;
 			  }
-			| {
-					// 自動生成されたリンクのグループ
-					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
-					collapsed?: boolean;
-			  }
-	  ));
-);
+	  ))
+	| {
+			// 自動生成されたリンクとサブグループ
+			autogenerate: {
+				directory: string;
+				collapsed?: boolean;
+				attrs?: Record<string, string | number | boolean | undefined>;
+			};
+	  };
 ```
 
 #### `BadgeConfig`
@@ -336,28 +342,20 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**type:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/ja/reference/icons/){`; href: string }>`}</code>
 
-**type:** <SocialLinksType />
-
-このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
+このサイトのソーシャルメディアアカウントに関する任意の項目です。各エントリは、サイトヘッダーにアイコンリンクとして表示されます。
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -374,14 +372,56 @@ starlight({
 });
 ```
 
+### `markdown`
+
+**type:** `{ headingLinks?: boolean; processedDirs?: string[] }`  
+**default:** `{ headingLinks: true, processedDirs: [] }`
+
+StarlightのMarkdown処理を設定します。
+
+#### `headingLinks`
+
+**type:** `boolean`  
+**default:** `true`
+
+見出しにクリック可能なアンカーリンクを付けてレンダリングするかどうかを制御します。
+
+```js
+starlight({
+	markdown: {
+		// Starlightのクリック可能な見出しアンカーリンクを無効にする。
+		headingLinks: false,
+	},
+}),
+```
+
+#### `processedDirs`
+
+**type:** `string[]`  
+**default:** `[]`
+
+StarlightのMarkdownパイプラインで処理される追加のディレクトリを定義します。デフォルトでは、Starlightの[`docsLoader()`](/ja/reference/configuration/#docsloader)を使用して読み込まれたMarkdownおよびMDXコンテンツのみが処理されます。プロジェクトのルートからの相対パスでローカルディレクトリを指定できます（例: `'./src/data/comments/'`）。
+
+Starlightの処理には、[クリック可能な見出しアンカーリンク](#headinglinks)、[補足情報のMarkdownディレクティブ構文](/ja/guides/authoring-content/#補足情報)、およびコードブロックのRTLサポートが含まれます。このオプションは、[カスタムページ](/ja/guides/pages/#カスタムページ)で`<StarlightPage>`コンポーネントを使用してカスタムコンテンツコレクションのコンテンツをレンダリングしており、そのコンテンツにもStarlightのMarkdown処理を適用したい場合に便利です。
+
+```js
+starlight({
+	markdown: {
+		// `src/data/reviews/`ディレクトリにある`reviews`コンテンツコレクションの
+		// Markdownファイルを処理する。
+		processedDirs: ['./src/data/reviews/'],
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **type:** `StarlightExpressiveCodeOptions | boolean`  
 **default:** `true`
 
-Starlightは、[Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)を使用して、コードブロックのレンダリングやコード例の一部のハイライト、コードブロックへのファイル名の追加などをおこなっています。MarkdownやMDXのコンテンツでExpressive Code構文を使用する方法については、[「コードブロック」ガイド](/ja/guides/authoring-content/#コード)を参照してください。
+Starlightは、[Expressive Code](https://expressive-code.com)を使用して、コードブロックのレンダリングやコード例の一部のハイライト、コードブロックへのファイル名の追加などをおこなっています。MarkdownやMDXのコンテンツでExpressive Code構文を使用する方法については、[「コードブロック」ガイド](/ja/guides/authoring-content/#コードブロック)を参照してください。
 
-[Expressive Code標準の設定オプション](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration)はすべて使用できます。また、Starlightの`expressiveCode`オプションを設定することで、Starlight固有のプロパティも使用できます。たとえば、Expressive Codeの`styleOverrides`オプションを設定して、デフォルトのCSSを上書きできます。これにより、コードブロックに角丸を付けるなどのカスタマイズが可能になります。
+[Expressive Code標準の設定オプション](https://expressive-code.com/reference/configuration/)はすべて使用できます。また、Starlightの`expressiveCode`オプションを設定することで、Starlight固有のプロパティも使用できます。たとえば、Expressive Codeの`styleOverrides`オプションを設定して、デフォルトのCSSを上書きできます。これにより、コードブロックに角丸を付けるなどのカスタマイズが可能になります。
 
 ```js ins={2-4}
 starlight({
@@ -406,7 +446,7 @@ starlight({
 **type:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
 **default:** `['starlight-dark', 'starlight-light']`
 
-コードブロックのスタイルに使用するテーマを設定します。サポートされているテーマのフォーマットの詳細については、[Expressive Codeの`themes`ドキュメント](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)を参照してください。
+コードブロックのスタイルに使用するテーマを設定します。サポートされているテーマのフォーマットの詳細については、[Expressive Codeの`themes`ドキュメント](https://expressive-code.com/guides/themes/)を参照してください。
 
 Starlightは、デフォルトでSarah Drasnerの[Night Owlテーマ](https://github.com/sdras/night-owl-vscode-theme)のダークとライトのバリアントを使用します。
 
@@ -436,21 +476,53 @@ Starlightは、デフォルトでSarah Drasnerの[Night Owlテーマ](https://gi
 
 ### `pagefind`
 
-**type:** `boolean`  
+**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **default:** `true`
 
-Starlightのデフォルトのサイト検索プロバイダである[Pagefind](https://pagefind.app/)を有効にするかどうかを定義します。
+Starlightのデフォルトのサイト検索プロバイダである[Pagefind](https://pagefind.app/)を設定します。
 
 `false`に設定すると、Pagefindによるサイトのインデックス作成はおこなわれません。また、デフォルトの検索UIを使用している場合は、これも非表示になります。
 
 [`prerender`](#prerender)オプションが`false`に設定されている場合、Pagefindを有効にすることはできません。
+
+Pagefindの検索クライアントを設定するには、`pagefind`にオブジェクトを設定します。
+
+- 検索結果のランキングの計算方法を制御する`pagefind.ranking`オプションの使用方法については、Pagefindドキュメントの[「Customize Pagefind's result ranking」](https://pagefind.app/docs/ranking/)を参照してください。
+- 複数サイトの検索方法を制御する`pagefind.mergeIndex`オプションの使用方法については、Pagefindドキュメントの[「Searching multiple sites」](https://pagefind.app/docs/multisite/)を参照してください。
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: PagefindRankingOptions;
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: PagefindRankingOptions;
+	}>;
+}
+
+interface PagefindRankingOptions {
+	pageLength?: number;
+	termFrequency?: number;
+	termSaturation?: number;
+	termSimilarity?: number;
+	diacriticSimilarity?: number;
+	metaWeights?: Record<string, number>;
+}
+```
 
 ### `prerender`
 
 **type:** `boolean`  
 **default:** `true`
 
-Starlightページが静的HTMLに事前レンダリングされるか、[SSRアダプター](https://docs.astro.build/ja/guides/server-side-rendering/)によってオンデマンドでレンダリングされるかを設定します。
+Starlightページが静的HTMLに事前レンダリングされるか、[SSRアダプター](https://docs.astro.build/ja/guides/on-demand-rendering/)によってオンデマンドでレンダリングされるかを設定します。
 
 Starlightページはデフォルトで事前レンダリングされます。SSRアダプターを使用してStarlightページをオンデマンドでレンダリングしたい場合は、`prerender: false`に設定します。
 
@@ -552,7 +624,15 @@ starlight({
 **type:** `boolean`  
 **default:** `false`
 
-Starlightのデフォルトの[404ページ](https://docs.astro.build/ja/core-concepts/astro-pages/#カスタム404エラーページ)を無効にします。プロジェクトでカスタムの`src/pages/404.astro`ルートを使用するには、このオプションを`true`に設定します。
+Starlightのデフォルトの[404ページ](https://docs.astro.build/ja/basics/astro-pages/#カスタム404エラーページ)を無効にします。プロジェクトでカスタムの`src/pages/404.astro`ルートを使用するには、このオプションを`true`に設定します。
+
+### `routeMiddleware`
+
+**type:** `string | string[]`
+
+Starlightがデータを処理する方法を変更できるルートミドルウェアへのパスを指定します。これらのファイルパスは、[Astroのミドルウェア](https://docs.astro.build/ja/guides/middleware/)と競合してはなりません。
+
+ルートミドルウェアの作成方法の詳細については、[ルートデータガイド](/ja/guides/route-data/#ルートデータのカスタマイズ)を参照してください。
 
 ### `components`
 
@@ -576,7 +656,7 @@ starlight({
 
 Starlightをカスタムプラグインにより拡張します。プラグインは、Starlightの機能を変更または追加するために、プロジェクトに変更を適用します。
 
-利用可能なプラグインの一覧については、[プラグインショーケース](/ja/resources/plugins/)を参照してください。
+利用可能なプラグインの一覧については、[プラグインショーケース](/ja/resources/plugins/#プラグイン)を参照してください。
 
 ```js
 starlight({
@@ -588,6 +668,9 @@ starlight({
 
 ### `credits`
 
+**type:** `boolean`  
+**default:** `false`
+
 「Starlightで作成」リンクをサイトのフッターに表示します。
 
 ```js
@@ -595,3 +678,109 @@ starlight({
 	credits: true,
 });
 ```
+
+## コンテンツコレクションの設定
+
+Starlightは、Astroの[コンテンツコレクション](https://docs.astro.build/ja/guides/content-collections/)を使用してコンテンツを読み込みます。Starlightのコンテンツローダーとスキーマにより、必要に応じてコレクションを設定できます。
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// 任意: i18nコレクションは多言語サイトのUI翻訳に使用されます
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### ローダー
+
+Starlightは、コンテンツコレクションの設定をシンプルにするために、`@astrojs/starlight/loaders`モジュールから以下の[Astroローダー](https://docs.astro.build/ja/reference/content-loader-reference/)をエクスポートしています。
+
+#### `docsLoader()`
+
+`docsLoader()`は、`src/content/docs/`ディレクトリからローカルのMarkdown、MDX、Markdocファイルを読み込みます。アンダースコア（`_`）で始まるファイル名は無視されます。
+
+##### インポート
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### オプション
+
+###### `generateId()`
+
+**type:** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+デフォルトでは、`docsLoader()`を使用して生成されたページは、ファイル名にスラッグ化処理を施し、特殊文字を削除してファイル名を小文字に変換します。このデフォルトの動作をオーバーライドしたい場合は、独自の`generateId()`関数を指定してください。
+
+たとえば、デフォルトでは削除される特殊文字を保持したい場合に便利です。デフォルトでは、`Example.File.md`は`/examplefile`として配信されます。`/Example.File`として配信したい場合は、カスタムの`generateId()`関数を定義することで実現できます。
+
+```js
+docsLoader({
+	// `.md`または`.mdx`拡張子を削除し、それ以外のファイル名は処理しない。
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+詳細については、[Astroドキュメントの`generateId()`](https://docs.astro.build/ja/reference/content-loader-reference/#generateid)を参照してください。
+
+#### `i18nLoader()`
+
+`i18nLoader()`は、`src/content/i18n/`ディレクトリからローカルのJSONおよびYAMLファイルを読み込みます。アンダースコア（`_`）で始まるファイル名は無視されます。
+
+##### インポート
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### オプション
+
+現在、`i18nLoader()`に設定可能なオプションはありません。
+
+### スキーマ
+
+Starlightは、`@astrojs/starlight/schema`モジュールから以下の[コンテンツコレクションスキーマ](https://docs.astro.build/ja/guides/content-collections/#defining-the-collection-schema)を提供しています。これらのスキーマは、Starlightが依存する`docs`および`i18n`コレクションに使用する必要があります。
+
+#### `docsSchema()`
+
+`docsSchema()`は、`docs`コレクション内のすべてのコンテンツのフロントマターを解析します。
+
+##### インポート
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### オプション
+
+###### `extend`
+
+**type:** Zodスキーマ、またはZodスキーマを返す関数
+**default:** `z.object({})`
+
+Starlightのフロントマタースキーマを追加フィールドで拡張します。`extend`オプションの使用方法の詳細については、[「フロントマタースキーマをカスタマイズする」](/ja/reference/frontmatter/#フロントマタースキーマをカスタマイズする)を参照してください。
+
+#### `i18nSchema()`
+
+`i18nSchema()`は、`i18n`コレクション内のすべてのデータファイルを解析します。
+
+##### インポート
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### オプション
+
+###### `extend`
+
+**type:** Zodオブジェクト
+**default:** `z.object({})`
+
+Starlightのi18nスキーマを追加フィールドで拡張します。`extend`オプションの使用方法の詳細については、[「翻訳スキーマを拡張する」](/ja/guides/i18n/#翻訳スキーマを拡張する)を参照してください。

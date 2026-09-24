@@ -10,7 +10,7 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 
 ## 默认侧边栏
 
-默认情况查下，Starlight 会根据你的文档文件系统结构自动生成侧边栏，使用每个文件的 `title` 属性作为侧边栏条目。
+默认情况下，Starlight 会根据你的文档文件系统结构自动生成侧边栏，使用每个文件的 `title` 属性作为侧边栏条目。
 
 例如，给定以下文件结构：
 
@@ -45,7 +45,7 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 	]}
 />
 
-在 [自动生成的分组](#自动生成的分组) 章节了解更多关于自动生成侧边栏的内容。
+在 [自动生成的链接](#自动生成的链接) 章节了解更多关于自动生成侧边栏的内容。
 
 ## 添加链接和链接分组
 
@@ -97,7 +97,7 @@ starlight({
 
 #### 内部链接的简易写法
 
-内部链接也可以通过只提供一个页面标题字符串来指定。
+内部链接也可以通过只提供一个页面 slug 字符串作为简易写法来指定。
 
 例如，以下的配置等同于上面使用 `slug` 的配置：
 
@@ -149,9 +149,9 @@ starlight({
 			items: [
 				'constellations/carina',
 				'constellations/centaurus',
-				// 星座周期的嵌套链接分组。
+				// 季节星座的嵌套链接分组。
 				{
-					label: '周期',
+					label: '季节',
 					items: [
 						'constellations/andromeda',
 						'constellations/orion',
@@ -174,7 +174,7 @@ starlight({
 				{ label: '船底座', link: '' },
 				{ label: '半人马座', link: '' },
 				{
-					label: '周期',
+					label: '季节',
 					items: [
 						{ label: '仙女座', link: '' },
 						{ label: '猎户座', link: '' },
@@ -186,21 +186,24 @@ starlight({
 	]}
 />
 
-### 自动生成的分组
+### 自动生成的链接
 
-Starlight 可以根据文档目录在侧边栏中自动生成一个分组。当你不想手动输入分组中的每个侧边栏项目时，这很有用。
+Starlight 可以根据文档目录在侧边栏中自动生成链接。
+当你不想手动输入分组中的每个侧边栏项目时，这很有用。
 
-默认情况下，页面按照文件 [`slug`](/zh-cn/reference/route-data/#slug) 的字母顺序排序。
+默认情况下，页面按照文件 [`id`](/zh-cn/reference/route-data/#id) 的字母顺序排序。
 
-使用具有 `label` 和 `autogenerate` 属性的对象添加自动生成的分组。`autogenerate` 的配置必须指定用于侧边栏条目的 `directory` 。例如，使用以下配置：
+使用具有 `autogenerate` 属性的对象添加自动生成的链接。
+`autogenerate` 的配置必须指定用于侧边栏条目的 `directory`。
+例如，使用以下配置：
 
 ```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
 			label: '星座',
-			// 自动生成一个链接分组，用于 '星座' 目录。
-			autogenerate: { directory: 'constellations' },
+			// 自动为 'constellations' 目录生成链接。
+			items: [{ autogenerate: { directory: 'constellations' } }],
 		},
 	],
 });
@@ -243,7 +246,7 @@ starlight({
 
 在单个页面中使用 [`sidebar` frontmatter 字段](/zh-cn/reference/frontmatter/#sidebar) 来自定义自动生成的链接。
 
-侧边栏 frontmatter 选项允许你设置 [自定义标签](/zh-cn/reference/frontmatter/#label) 或者为链接添加 [徽章](/zh-cn/reference/frontmatter/#badge)，[隐藏](/zh-cn/reference/frontmatter/#hidden) 侧边栏中的链接，或者定义 [自定义排序权重](/zh-cn/reference/frontmatter/#order)。
+侧边栏 frontmatter 选项允许你设置 [自定义标签](/zh-cn/reference/frontmatter/#label)，使用 [自定义属性](/zh-cn/reference/frontmatter/#attrs)，为链接添加 [徽章](/zh-cn/reference/frontmatter/#badge)，[隐藏](/zh-cn/reference/frontmatter/#hidden) 侧边栏中的链接，或者定义 [自定义排序权重](/zh-cn/reference/frontmatter/#order)。
 
 ```md "sidebar:"
 ---
@@ -261,7 +264,7 @@ sidebar:
 ---
 ```
 
-一个包含上面 frontmatter 的页面的自动生成分组将会生成以下侧边栏：
+一个包含上面 frontmatter 的页面的自动生成的链接组将会生成以下侧边栏：
 
 <SidebarPreview
 	config={[
@@ -281,12 +284,12 @@ sidebar:
 />
 
 :::note
-`sidebar` frontmatter 配置仅用于自动生成分组中的链接和使用 `slug` 属性定义的文档链接。它并不适用于使用 `link` 属性定义的链接。
+`sidebar` frontmatter 配置仅用于自动生成的链接和使用 `slug` 属性定义的文档链接。它并不适用于使用 `link` 属性定义的链接。
 :::
 
 ## 徽章
 
-链接、分组、自动生成的分组都可以包含一个 `badge` 属性，以在它们的标签旁边显示徽章。
+链接和分组都可以包含一个 `badge` 属性，以在它们的标签旁边显示徽章。
 
 ```js {9,16}
 starlight({
@@ -301,11 +304,11 @@ starlight({
 				},
 			],
 		},
-		// 带有 "Outdated" 徽章的自动生成分组。
+		// 带有 "Outdated" 徽章的分组。
 		{
 			label: '卫星',
 			badge: 'Outdated',
-			autogenerate: { directory: 'moons' },
+			items: [{ autogenerate: { directory: 'moons' } }],
 		},
 	],
 });
@@ -351,7 +354,6 @@ starlight({
 使用具有 `text`、`variant` 和 `class` 属性的对象自定义徽章样式。
 
 `text` 属性表示要显示的内容（例如 "New"）。
-
 默认情况下，徽章将使用你的网站的强调色。要使用内置的徽章样式，请将 `variant` 属性设置为以下值之一：`note`、`tip`、`danger`、`caution` 或 `success`。
 
 你还可以通过设置 `class` 属性为一个 CSS 类名来创建自定义的徽章样式。
@@ -436,10 +438,65 @@ starlight({
 	]}
 />
 
+### 为自动生成的链接自定义 HTML 属性
+
+通过在 `autogenerate` 配置中定义 `attrs` 属性，为所有[自动生成的链接](#自动生成的链接)自定义 HTML 属性。
+单个页面可以使用 [`sidebar.attrs` frontmatter 字段](/zh-cn/reference/frontmatter/#attrs) 指定自定义属性，这些属性将与 `autogenerate.attrs` 配置合并。
+
+例如，使用以下配置：
+
+```js {8}
+starlight({
+	sidebar: [
+		{
+			autogenerate: {
+				// 自动为 'constellations' 目录生成链接。
+				directory: 'constellations',
+				// 将所有自动生成链接的标签设为斜体。
+				attrs: { style: 'font-style: italic' },
+			},
+		},
+	],
+});
+```
+
+并给定以下的文件结构：
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+将生成以下侧边栏，其中所有自动生成的链接均为斜体：
+
+<SidebarPreview
+	config={[
+		{ label: '船底座', link: '', attrs: { style: 'font-style: italic' } },
+		{ label: '半人马座', link: '', attrs: { style: 'font-style: italic' } },
+		{
+			label: 'seasonal',
+			items: [
+				{
+					label: '仙女座',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+			],
+		},
+	]}
+/>
+
 ## 国际化
 
 你可以使用链接和分组条目上的 `translations` 属性，通过指定 [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 语言标签，为每种支持的语言翻译链接或分组标签，例如用 `"en"`、`"ar"` 或 `"zh-CN"` 作为键，翻译后的标签作为值。
-
 `label` 属性将用于默认语言和没有翻译的语言。
 
 ```js {5-7,11-13,18-20}
@@ -601,51 +658,22 @@ starlight({
 	]}
 />
 
-[自动生成的分组](#自动生成的分组) 遵循其父级分组的 `collapsed` 值：
+[自动生成的子组](#自动生成的链接) 也可以通过将 `autogenerate.collapsed` 属性设置为 `true` 来默认折叠。
 
-```js {5-6}
+```js {9-10}
 starlight({
 	sidebar: [
 		{
 			label: '星座',
-			// 默认折叠分组及其自动生成的子组。
-			collapsed: true,
-			autogenerate: { directory: 'constellations' },
-		},
-	],
-});
-```
-
-以上配置将生成以下侧边栏：
-
-<SidebarPreview
-	config={[
-		{
-			label: '星座',
-			collapsed: true,
 			items: [
-				{ label: '船底座', link: '' },
-				{ label: '半人马座', link: '' },
 				{
-					label: 'seasonal',
-					collapsed: true,
-					items: [{ label: '仙女座', link: '' }],
+					autogenerate: {
+						directory: 'constellations',
+						// 默认折叠自动生成的子组。
+						collapsed: true,
+					},
 				},
 			],
-		},
-	]}
-/>
-
-这个行为可以通过定义 `autogenerate.collapsed` 属性来覆盖。
-
-```js {5-7} "collapsed: true"
-starlight({
-	sidebar: [
-		{
-			label: '星座',
-			// 不折叠 "星座" 分组，但折叠其自动生成的子组。
-			collapsed: false,
-			autogenerate: { directory: 'Constellations', collapsed: true },
 		},
 	],
 });

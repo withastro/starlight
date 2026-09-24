@@ -101,16 +101,16 @@ Mit dieser Konfiguration würde eine `/einfuehrung` einen Bearbeitungslink haben
 
 Konfiguriere die Navigationselemente der Seitenleiste deiner Website.
 
-Eine Seitenleiste ist eine Array von Links und Linkgruppen.
-Mit Ausnahme von Einträgen, die `slug` verwenden, muss jeder Eintrag ein `label` und eine der folgenden Eigenschaften haben:
+Eine Seitenleiste besteht aus einer Reihe von Links, Linkgruppen und automatisch generierten Einträgen.
+Sidebar-Elemente werden mithilfe einer der folgenden Eigenschaften definiert:
 
-- `link` - ein einzelner Link zu einer bestimmten URL, z.&nbsp;B. `'/home'` oder `'https://example.com'`.
+- `link` - ein einzelner Link zu einer bestimmten URL, z.&nbsp;B. `'/home'` oder `'https://example.com'`. Ein Link muss außerdem ein `label` haben.
 
-- `slug` - ein Verweis auf eine interne Seite, z.&nbsp;B. `'guides/getting-started'`.
+- `slug` - ein Verweis auf eine interne Seite, z.&nbsp;B. `'guides/getting-started'`. Der Titel der verlinkten Seite wird standardmäßig als Bezeichnung verwendet.
 
-- `items` - ein Array, das weitere Links und Untergruppen enthält.
+- `items` - ein Array, das weitere Seitenleisten-Links, Untergruppen und automatisch generierte Einträge enthält. Eine Gruppe muss außerdem eine `label` haben.
 
-- `autogenerate` - ein Objekt, das ein Verzeichnis deiner Dokumentation angibt, aus dem automatisch eine Gruppe von Links erzeugt werden soll.
+- `autogenerate` - ein Objekt, das ein Verzeichnis deiner Dokumente angibt, für das automatisch Links und Untergruppen generiert werden sollen. Die automatisch generierten Einträge können in das `items`-Array einer Gruppe eingefügt werden.
 
 Interne Links können auch als Zeichenkette anstelle eines Objekts mit der Eigenschaft `slug` angegeben werden.
 
@@ -134,7 +134,7 @@ starlight({
 		// Eine Gruppe, die auf alle Seiten im Referenzverzeichnis verweist.
 		{
 			label: 'Referenzen',
-			autogenerate: { directory: 'referenz' },
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 	],
 });
@@ -149,9 +149,9 @@ Zum Beispiel würde eine Seite, die aus der Datei `astro.md` erzeugt wurde, übe
 
 Gruppen von Links sind standardmäßig aufgeklappt. Du kannst dieses Verhalten ändern, indem du die Eigenschaft `collapsed` einer Gruppe auf `true` setzt.
 
-Autogenerierte Untergruppen respektieren standardmäßig die Eigenschaft `collapsed` ihrer übergeordneten Gruppe. Dies kannst du mit der Eigenschaft `autogenerate.collapsed` außer Kraft setzen.
+Automatisch generierte Untergruppen werden standardmäßig ebenfalls erweitert. Setze die Eigenschaft `autogenerate.collapsed`, um sie zusammenzuklappen.
 
-```js {5,13}
+```js {5,15}
 sidebar: [
   // Eine zusammengefasste Gruppe von Links
   {
@@ -162,10 +162,14 @@ sidebar: [
   // Eine aufgeklappte Gruppe, die automatisch generierte Untergruppen enthält, welche standardmäßig eingeklappt sind.
   {
     label: 'Referenzen',
-    autogenerate: {
-      directory: 'reference',
-      collapsed: true,
-    },
+    items: [
+      {
+        autogenerate: {
+          directory: 'reference',
+          collapsed: true,
+        },
+      },
+    ],
   },
 ],
 ```
@@ -223,17 +227,15 @@ type SidebarItem =
 					items: SidebarItem[];
 					collapsed?: boolean;
 			  }
-			| {
-					// Automatisch generierte Linkgruppe
-					label: string;
-					autogenerate: {
-						directory: string;
-						collapsed?: boolean;
-						attrs?: Record<string, string | number | boolean | undefined>;
-					};
-					collapsed?: boolean;
-			  }
-	  ));
+	  ))
+	| {
+			// Automatisch generierte Links und Untergruppen
+			autogenerate: {
+				directory: string;
+				collapsed?: boolean;
+				attrs?: Record<string, string | number | boolean | undefined>;
+			};
+	  };
 ```
 
 #### `BadgeConfig`
@@ -510,12 +512,7 @@ Setze `pagefind` auf ein Objekt, um den Pagefind-Suchclient zu konfigurieren:
 
 ```ts
 interface PagefindOptions {
-	ranking?: {
-		pageLength?: number;
-		termFrequency?: number;
-		termSaturation?: number;
-		termSimilarity?: number;
-	};
+	ranking?: PagefindRankingOptions;
 	indexWeight?: number;
 	mergeIndex?: Array<{
 		bundlePath: string;
@@ -524,13 +521,17 @@ interface PagefindOptions {
 		baseUrl?: string;
 		mergeFilter?: Record<string, string | string[]>;
 		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
+		ranking?: PagefindRankingOptions;
 	}>;
+}
+
+interface PagefindRankingOptions {
+	pageLength?: number;
+	termFrequency?: number;
+	termSaturation?: number;
+	termSimilarity?: number;
+	diacriticSimilarity?: number;
+	metaWeights?: Record<string, number>;
 }
 ```
 

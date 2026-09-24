@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { StarlightConfigSchema } from '../../utils/user-config';
+import { StarlightConfigSchema } from '../../src/utils/user-config';
 
 test('preserve social config order', () => {
 	const config = StarlightConfigSchema.parse({

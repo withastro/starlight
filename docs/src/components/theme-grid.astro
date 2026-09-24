@@ -3,6 +3,7 @@ import { Icon } from '@astrojs/starlight/components';
 import FluidGrid from './fluid-grid.astro';
 import MediaCard from './media-card.astro';
 import ThemeImage from './theme-image.astro';
+import ThirdPartyContent from './third-party-content.astro';
 
 interface Props {
 	labels: {
@@ -69,25 +70,27 @@ const { labels, themes } = Astro.props;
 		</script>
 	</fieldset>
 
-	<FluidGrid minColumnWidth="25rem" gap="clamp(1rem, calc(0.75rem + 1vw), 1.5rem)">
-		{
-			themes.map(
-				async ({ title, description, href, previews }) =>
-					previews && (
-						<MediaCard {href}>
-							<div class="preview-images" slot="media" aria-hidden="true">
-								<ThemeImage src={previews.light} class="light" />
-								<ThemeImage src={previews.dark} class="dark" />
-							</div>
-							<div class="meta sl-flex">
-								<p class="title">{title}</p>
-								<p class="description" set:html={description} />
-							</div>
-						</MediaCard>
-					)
-			)
-		}
-	</FluidGrid>
+	<ThirdPartyContent>
+		<FluidGrid minColumnWidth="25rem" gap="clamp(1rem, calc(0.75rem + 1vw), 1.5rem)">
+			{
+				themes.map(
+					async ({ title, description, href, previews }) =>
+						previews && (
+							<MediaCard {href}>
+								<div class="preview-images" slot="media" aria-hidden="true">
+									<ThemeImage src={previews.light} class="light" />
+									<ThemeImage src={previews.dark} class="dark" />
+								</div>
+								<div class="meta sl-flex">
+									<p class="title">{title}</p>
+									<p class="description" set:html={description} />
+								</div>
+							</MediaCard>
+						)
+				)
+			}
+		</FluidGrid>
+	</ThirdPartyContent>
 </starlight-theme-preview>
 
 <script>

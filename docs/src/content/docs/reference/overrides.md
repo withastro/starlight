@@ -19,7 +19,7 @@ They should only include [elements permitted inside `<head>`](https://developer.
 
 #### `Head`
 
-**Default component:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
+**Default component:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Head.astro)
 
 Component rendered inside each page’s `<head>`.
 
@@ -28,7 +28,7 @@ Prefer the [`head` config option](/reference/configuration/#head), the [`head` f
 
 #### `ThemeProvider`
 
-**Default component:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro)
+**Default component:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro)
 
 Component rendered inside `<head>` that sets up dark/light theme support.
 The default implementation includes an inline script and a `<template>` used by the script in [`<ThemeSelect />`](#themeselect).
@@ -39,7 +39,7 @@ The default implementation includes an inline script and a `<template>` used by 
 
 #### `SkipLink`
 
-**Default component:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro)
+**Default component:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SkipLink.astro)
 
 Component rendered as the first element inside `<body>` which links to the main page content for accessibility.
 The default implementation is hidden until a user focuses it by tabbing with their keyboard.
@@ -54,7 +54,7 @@ When possible, prefer overriding a lower-level component.
 
 #### `PageFrame`
 
-**Default component:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Default component:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageFrame.astro)  
 **Named slots:** `header`, `sidebar`
 
 Layout component wrapped around most of the page content.
@@ -63,13 +63,13 @@ It also renders [`<MobileMenuToggle />`](#mobilemenutoggle) to support toggling 
 
 #### `MobileMenuToggle`
 
-**Default component:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
+**Default component:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileMenuToggle.astro)
 
 Component rendered inside [`<PageFrame>`](#pageframe) that is responsible for toggling the sidebar navigation on small (mobile) viewports.
 
 #### `TwoColumnContent`
 
-**Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/TwoColumnContent.astro)  
 **Named slot:** `right-sidebar`
 
 Layout component wrapped around the main content column and right sidebar (table of contents).
@@ -83,21 +83,21 @@ These components render Starlight’s top navigation bar.
 
 #### `Header`
 
-**Default component:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
+**Default component:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Header.astro)
 
 Header component displayed at the top of every page.
 The default implementation displays [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
-**Default component:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
+**Default component:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SiteTitle.astro)
 
 Component rendered at the start of the site header to render the site title.
 The default implementation includes logic for rendering logos defined in Starlight config.
 
 #### `Search`
 
-**Default component:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
+**Default component:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Search.astro)
 
 Component used to render Starlight’s search UI.
 The default implementation includes the button in the header and the code for displaying a search modal when it is clicked and loading [Pagefind’s UI](https://pagefind.app/).
@@ -108,20 +108,20 @@ This allows you to add UI for alternative search providers when disabling Pagefi
 
 #### `SocialIcons`
 
-**Default component:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
+**Default component:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SocialIcons.astro)
 
 Component rendered in the site header including social icon links.
 The default implementation uses the [`social`](/reference/configuration/#social) option in Starlight config to render icons and links.
 
 #### `ThemeSelect`
 
-**Default component:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeSelect.astro)
+**Default component:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeSelect.astro)
 
 Component rendered in the site header that allows users to select their preferred color scheme.
 
 #### `LanguageSelect`
 
-**Default component:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LanguageSelect.astro)
+**Default component:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/LanguageSelect.astro)
 
 Component rendered in the site header that allows users to switch to a different language.
 
@@ -134,7 +134,7 @@ On narrow viewports this is hidden behind a drop-down menu.
 
 #### `Sidebar`
 
-**Default component:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Sidebar.astro)
+**Default component:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Sidebar.astro)
 
 Component rendered before page content that contains global navigation.
 The default implementation displays as a sidebar on wide enough viewports and inside a drop-down menu on small (mobile) viewports.
@@ -142,7 +142,7 @@ It also renders [`<MobileMenuFooter />`](#mobilemenufooter) to show additional i
 
 #### `MobileMenuFooter`
 
-**Default component:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuFooter.astro)
+**Default component:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileMenuFooter.astro)
 
 Component rendered at the bottom of the mobile drop-down menu.
 The default implementation renders [`<ThemeSelect />`](#themeselect) and [`<LanguageSelect />`](#languageselect).
@@ -156,20 +156,20 @@ On narrow viewports this collapse into a sticky, drop-down menu.
 
 #### `PageSidebar`
 
-**Default component:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro)
+**Default component:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageSidebar.astro)
 
 Component rendered before the main page’s content to display a table of contents.
 The default implementation renders [`<TableOfContents />`](#tableofcontents) and [`<MobileTableOfContents />`](#mobiletableofcontents).
 
 #### `TableOfContents`
 
-**Default component:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro)
+**Default component:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/TableOfContents.astro)
 
 Component that renders the current page’s table of contents on wider viewports.
 
 #### `MobileTableOfContents`
 
-**Default component:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
+**Default component:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileTableOfContents.astro)
 
 Component that renders the current page’s table of contents on small (mobile) viewports.
 
@@ -181,20 +181,20 @@ These components are rendered in the main column of page content.
 
 #### `Banner`
 
-**Default component:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
+**Default component:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Banner.astro)
 
 Banner component rendered at the top of each page.
 The default implementation uses the page’s [`banner`](/reference/frontmatter/#banner) frontmatter value to decide whether or not to render.
 
 #### `ContentPanel`
 
-**Default component:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ContentPanel.astro)
+**Default component:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ContentPanel.astro)
 
 Layout component used to wrap sections of the main content column.
 
 #### `PageTitle`
 
-**Default component:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro)
+**Default component:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageTitle.astro)
 
 Component containing the `<h1>` element for the current page.
 
@@ -202,27 +202,27 @@ Implementations should ensure they set `id="_top"` on the `<h1>` element as in t
 
 #### `DraftContentNotice`
 
-**Default component:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+**Default component:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/DraftContentNotice.astro)
 
 Notice displayed to users during development when the current page is marked as a draft.
 
 #### `FallbackContentNotice`
 
-**Default component:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
+**Default component:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/FallbackContentNotice.astro)
 
 Notice displayed to users on pages where a translation for the current language is not available.
 Only used on multilingual sites.
 
 #### `Hero`
 
-**Default component:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
+**Default component:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Hero.astro)
 
 Component rendered at the top of the page when [`hero`](/reference/frontmatter/#hero) is set in frontmatter.
 The default implementation shows a large title, tagline, and call-to-action links alongside an optional image.
 
 #### `MarkdownContent`
 
-**Default component:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MarkdownContent.astro)
+**Default component:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MarkdownContent.astro)
 
 Component rendered around each page’s main content.
 The default implementation sets up basic styles to apply to Markdown content.
@@ -237,25 +237,25 @@ These components are rendered at the bottom of the main column of page content.
 
 #### `Footer`
 
-**Default component:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro)
+**Default component:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Footer.astro)
 
 Footer component displayed at the bottom of each page.
 The default implementation displays [`<LastUpdated />`](#lastupdated), [`<Pagination />`](#pagination), and [`<EditLink />`](#editlink).
 
 #### `LastUpdated`
 
-**Default component:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LastUpdated.astro)
+**Default component:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/LastUpdated.astro)
 
 Component rendered in the page footer to display the last-updated date.
 
 #### `EditLink`
 
-**Default component:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/EditLink.astro)
+**Default component:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/EditLink.astro)
 
 Component rendered in the page footer to display a link to where the page can be edited.
 
 #### `Pagination`
 
-**Default component:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Pagination.astro)
+**Default component:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Pagination.astro)
 
 Component rendered in the page footer to display navigation arrows between previous/next pages.

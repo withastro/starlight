@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
 
 describe('createTranslationSystemFromFs', () => {
 	test('creates a translation system that returns default strings', async () => {
@@ -26,6 +26,20 @@ describe('createTranslationSystemFromFs', () => {
 		);
 		const t = useTranslations('fr');
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Changer cette page"');
+	});
+
+	test('uses region-specific translations instead of base language fallback for default locale', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
+			{
+				locales: undefined,
+				defaultLocale: { label: '繁體中文', lang: 'zh-TW', dir: 'ltr', locale: undefined },
+			},
+			// Using non-existent `_src/` to ignore custom files in this test fixture.
+			{ srcDir: new URL('./_src/', import.meta.url) }
+		);
+		const t = useTranslations('zh-TW');
+		// Should use zh-TW (Traditional Chinese) "搜尋", not zh (Simplified Chinese) "搜索"
+		expect(t('search.label')).toBe('搜尋');
 	});
 
 	test('returns translation for unknown language', async () => {

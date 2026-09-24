@@ -1,5 +1,5 @@
 import type { AstroIntegrationLogger } from 'astro';
-import { type StarlightPluginContext } from '../utils/plugins';
+import { type StarlightPluginContext } from '../src/utils/plugins';
 
 export function createTestPluginContext(): StarlightPluginContext {
 	return {
@@ -20,4 +20,6 @@ export class TestAstroIntegrationLogger {
 	warn = () => undefined;
 	error = () => undefined;
 	debug = () => undefined;
+	flush = () => undefined;
+	close = () => undefined;
 }
