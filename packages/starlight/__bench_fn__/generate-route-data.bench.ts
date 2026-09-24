@@ -1,3 +1,4 @@
+import { klona } from 'klona';
 import { bench, describe, vi } from 'vitest';
 import { getRouteDataTestContext } from '../__tests__/test-utils';
 import { generateRouteData } from '../src/utils/routing/data';
@@ -61,5 +62,5 @@ function mockSidebarRender(sublist: SidebarEntry[]) {
 }
 
 bench('sidebar current groups', () => {
-	mockSidebarRender(getSidebar(context.url.pathname, route.locale));
+	mockSidebarRender(klona(getSidebar(context.url.pathname, route.locale)));
 });
