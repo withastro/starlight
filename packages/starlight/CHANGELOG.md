@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.42.4
+
+### Patch Changes
+
+- [#4149](https://github.com/withastro/starlight/pull/4149) [`fa10e87`](https://github.com/withastro/starlight/commit/fa10e87376f49f76a693e8d2b292aef65b959e37) Thanks [@ematipico](https://github.com/ematipico)! - Optimizes rendering of large nested sidebars
+
+- [#4215](https://github.com/withastro/starlight/pull/4215) [`f791de6`](https://github.com/withastro/starlight/commit/f791de65e6e14e9011586004d79f78fcef3a427e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new `seti:coffee` icon for CoffeeScript files in the `<FileTree>` component.
+
+- [#4215](https://github.com/withastro/starlight/pull/4215) [`f791de6`](https://github.com/withastro/starlight/commit/f791de65e6e14e9011586004d79f78fcef3a427e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes `<FileTree>` icons for `.ejs` and `npm-debug.log` files displaying the default file icon.
+
 ## 0.42.3
 
 ### Patch Changes
