@@ -1,11 +1,11 @@
 ---
+import { Icon } from '../components';
 import Select from './Select.astro';
 ---
 
 <starlight-theme-select>
 	{/* TODO: Can we give this select a width that works well for each language’s strings? */}
 	<Select
-		icon="laptop"
 		label={Astro.locals.t('themeSelect.accessibleLabel')}
 		options={[
 			{ label: Astro.locals.t('themeSelect.dark'), selected: false, value: 'dark' },
@@ -13,13 +13,27 @@ import Select from './Select.astro';
 			{ label: Astro.locals.t('themeSelect.auto'), selected: true, value: 'auto' },
 		]}
 		width="6.25em"
-	/>
+	>
+		<Fragment slot="icon">
+			<Icon name="moon" class="dark" />
+			<Icon name="sun" class="light" />
+			<Icon name="laptop" class="auto" />
+		</Fragment>
+	</Select>
 </starlight-theme-select>
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
 <script is:inline>
 	StarlightThemeProvider.updatePickers();
 </script>
+
+<style>
+	starlight-theme-select:has([value='dark']:not(:checked)) :global(.dark),
+	starlight-theme-select:has([value='light']:not(:checked)) :global(.light),
+	starlight-theme-select:has([value='auto']:not(:checked)) :global(.auto) {
+		display: none;
+	}
+</style>
 
 <script>
 	type Theme = 'auto' | 'dark' | 'light';
