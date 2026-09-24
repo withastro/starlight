@@ -1,0 +1,41 @@
+---
+import { AstroError } from 'astro/errors';
+import Icon from './Icon.astro';
+import type { StarlightIcon } from '../components-internals/Icons';
+import { asideVariants, getAsideIconName, type AsideVariant } from '../integrations/aside-utils';
+
+interface Props {
+	type?: AsideVariant;
+	title?: string;
+	icon?: StarlightIcon;
+}
+
+let { type = 'note', title, icon } = Astro.props;
+
+if (!asideVariants.includes(type)) {
+	throw new AstroError(
+		'Invalid `type` prop passed to the `<Aside>` component.\n',
+		`Received: ${JSON.stringify(type)}\n` +
+			`Expected one of ${asideVariants.map((i) => JSON.stringify(i)).join(', ')}`
+	);
+}
+
+const iconName = getAsideIconName(type, icon);
+
+if (!title) {
+	title = Astro.locals.t(`aside.${type}`);
+}
+---
+
+<aside aria-label={title} class={`starlight-aside starlight-aside--${type}`}>
+	<p class="starlight-aside__title" aria-hidden="true">
+		<Icon name={iconName} class="starlight-aside__icon" />{title}
+	</p>
+	{
+		/* 
+		The slot is intentionally not wrapped in newlines/whitespace to ensure CSS `:empty` 
+		can match when no content is provided. 
+	*/
+	}
+	<div class="starlight-aside__content"><slot /></div>
+</aside>

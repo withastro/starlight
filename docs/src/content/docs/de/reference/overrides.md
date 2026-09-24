@@ -23,7 +23,7 @@ Sie sollten nur [innerhalb von `<head>` erlaubte Elemente](https://developer.moz
 
 #### `Head`
 
-**Standardkomponente:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
+**Standardkomponente:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Head.astro)
 
 Diese Komponente wird innerhalb des `<head>` einer jeden Seite gerendert.
 
@@ -32,7 +32,7 @@ Bevorzuge die [Konfigurationsoption `head`](/de/reference/configuration/#head), 
 
 #### `ThemeProvider`
 
-**Standardkomponente:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro)
+**Standardkomponente:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro)
 
 Diese Komponente wird innerhalb von `<head>` gerendert und richtet die Unterstützung für dunkle/helle Themen ein.
 Die Standard-Implementierung enthält ein Inline-Skript und ein `<template>`, welches vom Skript in [`<ThemeSelect />`](#themeselect) verwendet wird.
@@ -43,7 +43,7 @@ Die Standard-Implementierung enthält ein Inline-Skript und ein `<template>`, we
 
 #### `SkipLink`
 
-**Standardkomponente:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro)
+**Standardkomponente:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SkipLink.astro)
 
 Diese Komponente wird als erstes Element innerhalb von `<body>` dargestellt und verweist aus Gründen der Barrierefreiheit auf den Hauptinhalt der Seite.
 Die Standard&shy;implementierung ist ausgeblendet, bis ein Benutzer sie durch Tabulatorbewegungen mit der Tastatur aktiviert.
@@ -58,7 +58,7 @@ Wenn möglich, bevorzuge das Überschreiben einer Komponente auf einer niedriger
 
 #### `PageFrame`
 
-**Standardkomponente:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Standardkomponente:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageFrame.astro)  
 **Benannte Slots:** `header`, `sidebar`
 
 Diese Layout-Komponente beinhaltet den größten Teil des Seiteninhalts.
@@ -67,13 +67,13 @@ Sie rendert auch [`<MobileMenuToggle />`](#mobilemenutoggle), um das Umschalten 
 
 #### `MobileMenuToggle`
 
-**Standardkomponente:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
+**Standardkomponente:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileMenuToggle.astro)
 
 Diese Komponente wird innerhalb von [`<PageFrame>`](#pageframe) gerendert und ist für das Umschalten der Seitenleisten&shy;navigation auf kleinen (mobilen) Viewports verantwortlich.
 
 #### `TwoColumnContent`
 
-**Standardkomponente:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Standardkomponente:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/TwoColumnContent.astro)  
 **Benannter Slot:** `right-sidebar`
 
 Dies ist die Layout-Komponente, welche die Hauptinhaltsspalte und die rechte Seitenleiste (Inhaltsverzeichnis) beinhaltet.
@@ -87,21 +87,21 @@ Diese Komponenten stellen die obere Navigationsleiste von Starlight dar.
 
 #### `Header`
 
-**Standardkomponente:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
+**Standardkomponente:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Header.astro)
 
 Dies ist eine Kopfzielen-Komponente, welche oben auf jeder Seite angezeigt wird.
 Die Standard&shy;implementierung zeigt [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), und [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
-**Standardkomponente:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
+**Standardkomponente:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SiteTitle.astro)
 
 Die Komponente wird die am Anfang des Website-Headers gerendert, um den Titel der Website darzustellen.
 Die Standard&shy;implementierung enthält die Logik für die Darstellung von Logos, die in der Starlight-Konfiguration definiert sind.
 
 #### `Search`
 
-**Standardkomponente:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
+**Standardkomponente:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Search.astro)
 
 Diese Komponente wird verwendet, um Starlights Suchoberfläche darzustellen.
 Die Standard&shy;implementierung enthält die Schaltfläche in der Kopfzeile und den Code für die Anzeige eines Suchmodals, wenn darauf geklickt wird, und das Laden von [Pagefinds UI](https://pagefind.app/).
@@ -112,20 +112,20 @@ So kannst du eine Benutzeroberfläche für alternative Suchanbieter hinzufügen,
 
 #### `SocialIcons`
 
-**Standardkomponente:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
+**Standardkomponente:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SocialIcons.astro)
 
 Diese Komponente wird in der Kopfzeile der Website gerendert und enthält Symbol-Links zu sozialen Netzwerken.
 Die Standard&shy;implementierung verwendet die Option [`social`](/de/reference/configuration/#social) in der Starlight-Konfiguration, um Symbole und Links darzustellen.
 
 #### `ThemeSelect`
 
-**Standardkomponente:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeSelect.astro)
+**Standardkomponente:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeSelect.astro)
 
 Diese Komponente wird in der Kopfzeile der Website gerendert und ermöglicht es den Benutzern, ihr bevorzugtes Farbschema auszuwählen.
 
 #### `LanguageSelect`
 
-**Standardkomponente:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LanguageSelect.astro)
+**Standardkomponente:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/LanguageSelect.astro)
 
 Die Komponente wird in der Kopfzeile der Website angezeigt und ermöglicht es den Nutzern, die Sprache auszuwählen.
 
@@ -138,7 +138,7 @@ Bei schmalen Ansichtsfenstern ist diese hinter einem Dropdown-Menü versteckt.
 
 #### `Sidebar`
 
-**Standardkomponente:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Sidebar.astro)
+**Standardkomponente:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Sidebar.astro)
 
 Die Komponente wird die vor dem Seiteninhalt gerendert und enthält eine globale Navigation.
 Die Standard&shy;implementierung wird als Seitenleiste in ausreichend breiten Ansichtsfenstern und innerhalb eines Dropdown-Menüs in kleinen (mobilen) Ansichtsfenstern angezeigt.
@@ -146,7 +146,7 @@ Sie rendert auch [`<MobileMenuFooter />`](#mobilemenufooter), um zusätzliche El
 
 #### `MobileMenuFooter`
 
-**Standardkomponente:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuFooter.astro)
+**Standardkomponente:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileMenuFooter.astro)
 
 Diese Komponente wird die am unteren Ende des mobilen Dropdown-Menüs gerendert.
 Die Standard&shy;implementierung rendert [`<ThemeSelect />`](#themeselect) und [`<LanguageSelect />`](#languageselect).
@@ -160,20 +160,20 @@ Bei schmalen Ansichtsfenstern wird diese Leiste zu einem Dropdown-Menü.
 
 #### `PageSidebar`
 
-**Standardkomponente:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro)
+**Standardkomponente:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageSidebar.astro)
 
 Diese Komponente wird die vor dem Inhalt der Hauptseite gerendert, um ein Inhaltsverzeichnis anzuzeigen.
 Die Standard&shy;implementierung rendert [`<TableOfContents />`](#tableofcontents) und [`<MobileTableOfContents />`](#mobiletableofcontents).
 
 #### `TableOfContents`
 
-**Standardkomponente:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro)
+**Standardkomponente:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/TableOfContents.astro)
 
 Eine Komponente zur Darstellung des Inhalts&shy;verzeichnisses der aktuellen Seite in breiteren Ansichtsfenstern.
 
 #### `MobileTableOfContents`
 
-**Standardkomponente:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
+**Standardkomponente:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileTableOfContents.astro)
 
 Diese Komponete zeigt das Inhaltsverzeichnis der aktuellen Seite auf kleinen (mobilen) Bildschirmen an.
 
@@ -185,20 +185,20 @@ Folgende Komponenten werden in der Hauptspalte des Seiteninhalts wiedergegeben.
 
 #### `Banner`
 
-**Standardkomponente:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
+**Standardkomponente:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Banner.astro)
 
 Diese Bannerkomponente wird oben auf jeder Seite angezeigt.
 Die Standard-Implementierung verwendet den [`banner`](/de/reference/frontmatter/#banner)-Frontmatter-Wert der Seite, um zu entscheiden, ob sie gerendert wird oder nicht.
 
 #### `ContentPanel`
 
-**Standardkomponente:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ContentPanel.astro)
+**Standardkomponente:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ContentPanel.astro)
 
 Diese Layout-Komponente beinhaltet Abschnitte der Hauptinhaltsspalte.
 
 #### `PageTitle`
 
-**Standardkomponente:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro)
+**Standardkomponente:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageTitle.astro)
 
 Eine Komponente, welche das `<h1>`-Element für die aktuelle Seite enthält.
 
@@ -206,27 +206,27 @@ Implementierungen sollten sicherstellen, dass sie `id="_top"` auf dem `<h1>` Ele
 
 #### `DraftContentNotice`
 
-**Standardkomponente:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+**Standardkomponente:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/DraftContentNotice.astro)
 
 Hinweis, der den Nutzern während der Entwicklung angezeigt wird, wenn die aktuelle Seite als Entwurf markiert ist.
 
 #### `FallbackContentNotice`
 
-**Standardkomponente:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
+**Standardkomponente:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/FallbackContentNotice.astro)
 
 Ein Hinweis, welcher den Benutzern auf der Seite angezeigt wird, für die keine Übersetzung in der aktuellen Sprache verfügbar ist.
 Wird nur auf mehrsprachigen Websites verwendet.
 
 #### `Hero`
 
-**Standardkomponente:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
+**Standardkomponente:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Hero.astro)
 
 Diese Komponente wird am oberen Rand der Seite angezeigt, wenn [`hero`](/de/reference/frontmatter/#hero) in frontmatter eingestellt ist.
 Die Standard&shy;implementierung zeigt einen großen Titel, eine Tagline und Call-to-Action-Links neben einem optionalen Bild.
 
 #### `MarkdownContent`
 
-**Standardkomponente:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MarkdownContent.astro)
+**Standardkomponente:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MarkdownContent.astro)
 
 Die Kompoente wird um den Hauptinhalt jeder Seite gerendert.
 Die Standard&shy;implementierung richtet grundlegende Stile ein, die auf Markdown-Inhalte angewendet werden.
@@ -241,25 +241,25 @@ Diese Komponenten werden am unteren Ende der Hauptspalte des Seiteninhalts darge
 
 #### `Footer`
 
-**Standardkomponente:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro)
+**Standardkomponente:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Footer.astro)
 
 Diese Fußzeile-Komponente wird am unteren Rand jeder Seite angezeigt.
 Die Standard&shy;implementierung zeigt [`<LastUpdated />`](#lastupdated), [`<Pagination />`](#pagination), und [`<EditLink />`](#editlink).
 
 #### `LastUpdated`
 
-**Standardkomponente:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LastUpdated.astro)
+**Standardkomponente:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/LastUpdated.astro)
 
 Eine Komponente, die in der Fußzeile der Seite gerendert wird, um das zuletzt aktualisierte Datum anzuzeigen.
 
 #### `EditLink`
 
-**Standardkomponente:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/EditLink.astro)
+**Standardkomponente:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/EditLink.astro)
 
 Die Komponente wird in der Fußzeile der Seite gerendert, um einen Link anzuzeigen, über den die Seite bearbeitet werden kann.
 
 #### `Pagination`
 
-**Standardkomponente:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Pagination.astro)
+**Standardkomponente:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Pagination.astro)
 
 Diese Komponente wird in der Fußzeile der Seite gerendert, um Navigationspfeile zwischen vorherigen/nächsten Seiten anzuzeigen.

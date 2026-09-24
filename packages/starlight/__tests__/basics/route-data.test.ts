@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { getRouteDataTestContext } from '../test-utils';
-import { generateRouteData } from '../../utils/routing/data';
-import { routes } from '../../utils/routing';
+import { generateRouteData } from '../../src/utils/routing/data';
+import { routes } from '../../src/utils/routing';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -40,6 +40,9 @@ test('adds data to route shape', () => {
 		{
 		  "next": {
 		    "attrs": {},
+		    "autogenerate": {
+		      "directory": "",
+		    },
 		    "badge": undefined,
 		    "href": "/environmental-impact/",
 		    "isCurrent": false,
@@ -63,7 +66,7 @@ test('disables table of contents for splash template', () => {
 	const route = routes[1]!;
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		context: getRouteDataTestContext('/getting-started/'),
+		context: getRouteDataTestContext({ pathname: '/getting-started/' }),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -72,7 +75,7 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 	const route = routes[2]!;
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		context: getRouteDataTestContext('/showcase/'),
+		context: getRouteDataTestContext({ pathname: '/showcase/' }),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -81,7 +84,7 @@ test('uses explicit last updated date from frontmatter', () => {
 	const route = routes[3]!;
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		context: getRouteDataTestContext('/showcase/'),
+		context: getRouteDataTestContext({ pathname: '/showcase/' }),
 	});
 	expect(data.lastUpdated).toBeInstanceOf(Date);
 	expect(data.lastUpdated).toEqual(route.entry.data.lastUpdated);

@@ -1,5 +1,5 @@
 import type { AstroIntegrationLogger } from 'astro';
-import { type StarlightPluginContext } from '../utils/plugins';
+import { type StarlightPluginContext } from '../src/utils/plugins';
 
 export function createTestPluginContext(): StarlightPluginContext {
 	return {
@@ -12,7 +12,7 @@ export function createTestPluginContext(): StarlightPluginContext {
 	};
 }
 
-class TestAstroIntegrationLogger {
+export class TestAstroIntegrationLogger {
 	options = {} as AstroIntegrationLogger['options'];
 	constructor(public label = 'test-integration-logger') {}
 	fork = (label: string) => new TestAstroIntegrationLogger(label);
@@ -20,4 +20,6 @@ class TestAstroIntegrationLogger {
 	warn = () => undefined;
 	error = () => undefined;
 	debug = () => undefined;
+	flush = () => undefined;
+	close = () => undefined;
 }

@@ -1,13 +1,17 @@
 import opentype, { type Font, Glyph } from 'opentype.js';
-import { seti, starlight } from '../config';
-import type { Definitions } from '../../starlight/user-components/rehype-file-tree';
-import { getFont, getSetiIconName } from './seti';
+import { seti, starlight } from '../config.ts';
+import type { Definitions } from '../../starlight/src/user-components/file-tree-processor.ts';
+import { getFont, getSetiIconName } from './seti.ts';
 
 // This matches the default precision used by the SVGO default preset.
 const pathDecimalPrecision = 3;
 
 /** Extract SVG paths from the Seti UI icon font from a list of icon names matching font glyphs. */
-export async function getIconSvgPaths(repoPath: string, icons: string[], definitions: Definitions) {
+export async function getIconSvgPaths(
+	repoPath: string,
+	icons: string[],
+	definitions: Definitions<string>
+) {
 	const fontBuffer = await getFont(repoPath);
 
 	const iconSvgs: Record<string, string> = {};
@@ -22,6 +26,7 @@ export async function getIconSvgPaths(repoPath: string, icons: string[], definit
 
 	for (const icon of icons) {
 		let glyph: Glyph;
+		let glyphName = icon;
 
 		try {
 			// Find the glyph matching the icon name.
@@ -29,12 +34,13 @@ export async function getIconSvgPaths(repoPath: string, icons: string[], definit
 		} catch {
 			// If the glyph is not found, this means that multiple icons share the same glyph and we have
 			// a mapping for such case.
-			const alias = getFontGlyphAlias(icon);
+			glyphName = getFontGlyphAlias(icon);
 
 			// When an alias is found, we update the definitions to use the alias instead of the original
-			// icon name and continue to the next icon as there is no need to extract an SVG.
-			updateDefinitionsWithAlias(definitions, icon, alias);
-			continue;
+			// icon name and extract the alias glyph as it may not be part of the icons to extract, e.g.
+			// `cjsx` is not used by any Seti UI mapping.
+			updateDefinitionsWithAlias(definitions, icon, glyphName);
+			glyph = font.nameToGlyph(glyphName);
 		}
 
 		// We need to compute various metrics to ensure the icon properly fits the viewBox size.
@@ -43,8 +49,17 @@ export async function getIconSvgPaths(repoPath: string, icons: string[], definit
 			starlight.iconViewBoxSize
 		);
 		const path = glyph.getPath(offsetX, offsetY, fontSize);
-		const iconName = getSetiIconName(icon);
+		const iconName = getSetiIconName(glyphName);
 		iconSvgs[iconName] = path.toSVG(pathDecimalPrecision);
+	}
+
+	// Ensure every Seti UI icon used in the definitions has a matching extracted SVG.
+	for (const record of [definitions.files, definitions.extensions, definitions.partials]) {
+		for (const [identifier, icon] of Object.entries(record)) {
+			if (icon.startsWith(starlight.prefix) && !(icon in iconSvgs)) {
+				throw new Error(`Failed to find an SVG for the icon '${icon}' used by '${identifier}'.`);
+			}
+		}
 	}
 
 	return iconSvgs;
@@ -106,7 +121,7 @@ function getFontGlyphAlias(icon: string): string {
 }
 
 /** Update the definitions to use an alias instead of a specific icon name. */
-function updateDefinitionsWithAlias(definitions: Definitions, icon: string, alias: string) {
+function updateDefinitionsWithAlias(definitions: Definitions<string>, icon: string, alias: string) {
 	const prefixedIcon = getSetiIconName(icon);
 	const prefixedAlias = getSetiIconName(alias);
 

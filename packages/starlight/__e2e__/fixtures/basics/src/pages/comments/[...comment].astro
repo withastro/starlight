@@ -1,0 +1,21 @@
+---
+import { getEntry, render } from 'astro:content';
+
+/**
+ * This route is used to test that remark/rehype plugins are transofming non-docs collection
+ * entries matching the `markdown.processedDirs` option.
+ */
+
+export function getStaticPaths() {
+	return [{ params: { comment: 'bob' } }];
+}
+
+// @ts-expect-error - we don't generate types for this test fixture before type-checking the entire
+// project.
+const entry = await getEntry('comments', 'bob');
+if (!entry) throw new Error('Could not find Bob review entry.');
+
+const { Content } = await render(entry);
+---
+
+<Content />

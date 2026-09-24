@@ -1,4 +1,8 @@
 {
-  "recommendations": ["astro-build.astro-vscode", "dbaeumer.vscode-eslint"],
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "dbaeumer.vscode-eslint",
+    "hideoo.starlight-links"
+  ],
   "unwantedRecommendations": []
 }

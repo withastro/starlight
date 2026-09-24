@@ -1,0 +1,68 @@
+@layer starlight.reset {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	* {
+		margin: 0;
+	}
+
+	html {
+		color-scheme: dark;
+		accent-color: var(--sl-color-accent);
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+	}
+
+	html[data-theme='light'] {
+		color-scheme: light;
+	}
+
+	body {
+		font-family: var(--__sl-font);
+		line-height: var(--sl-line-height);
+		-webkit-font-smoothing: antialiased;
+		color: var(--sl-color-text);
+		background-color: var(--sl-color-bg);
+	}
+
+	/* :lang(zh, ja) has not been supported by Chromium-based browsers at the time of writing (2026-05) */
+	[lang]:where(:lang(zh), :lang(ja)) {
+		text-autospace: normal;
+	}
+
+	[lang]:where(:not(:lang(zh), :lang(ja))) {
+		text-autospace: initial;
+	}
+
+	pre,
+	code,
+	samp,
+	kbd {
+		text-autospace: no-autospace;
+	}
+
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	code {
+		overflow-wrap: break-word;
+	}
+
+	code {
+		font-family: var(--__sl-font-mono);
+	}
+}

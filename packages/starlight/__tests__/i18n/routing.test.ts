@@ -1,7 +1,6 @@
 import config from 'virtual:starlight/user-config';
-import project from 'virtual:starlight/project-context';
 import { expect, test, vi } from 'vitest';
-import { routes } from '../../utils/routing';
+import { routes } from '../../src/utils/routing';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -65,11 +64,7 @@ test('fallback routes have fallback locale data in entryMeta', () => {
 });
 
 test('fallback routes use their own locale data', () => {
-	const arGuide = routes.find(
-		(route) =>
-			route.id ===
-			(project.legacyCollections ? 'ar/guides/authoring-content.md' : 'ar/guides/authoring-content')
-	);
+	const arGuide = routes.find((route) => route.id === 'ar/guides/authoring-content');
 	if (!arGuide) throw new Error('Expected to find Arabic fallback route for authoring-content.md');
 	expect(arGuide.locale).toBe('ar');
 	expect(arGuide.lang).toBe('ar');

@@ -1,4 +1,6 @@
-import { expect, testFactory, type Locator } from './test-utils';
+import type { Page } from '@playwright/test';
+import fs from 'node:fs/promises';
+import { expect, testFactory, type Locator, type StarlightPage } from './test-utils';
 
 const test = testFactory('./fixtures/basics/');
 
@@ -128,7 +130,7 @@ test.describe('components', () => {
 			expect((await tabs.boundingBox())?.y).toBe(initialBoundingBox?.y);
 		});
 
-		test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
+		test('syncs tabs with the same sync key if they do not consistently use icons', async ({
 			page,
 			getProdServer,
 		}) => {
@@ -342,39 +344,6 @@ test.describe('components', () => {
 		});
 	});
 
-	test.describe('whitespaces', () => {
-		/**
-		 * Components including styles include a trailing whitespace which can be problematic when used
-		 * inline, e.g.:
-		 *
-		 * ```mdx
-		 * Badge (<Badge text="test" />)
-		 * ```
-		 *
-		 * The example above would render as:
-		 *
-		 * ```
-		 * Badge (test )
-		 * ```
-		 *
-		 * Having a component being responsible for its own spacing is not ideal and should be avoided
-		 * especially when used inline.
-		 * To work around this issue, such components can be wrapped in a fragment.
-		 *
-		 * @see https://github.com/withastro/compiler/issues/1003
-		 */
-		test('does not include components having trailing whitespaces when used inline', async ({
-			page,
-			getProdServer,
-		}) => {
-			const starlight = await getProdServer();
-			await starlight.goto('/whitespaces');
-
-			expect(await page.getByTestId('badge').textContent()).toContain('Badge (Note)');
-			expect(await page.getByTestId('icon').textContent()).toContain('Icon ()');
-		});
-	});
-
 	test.describe('anchor headings', () => {
 		test('renders the same content for Markdown headings and Astro component', async ({
 			getProdServer,
@@ -383,14 +352,18 @@ test.describe('components', () => {
 			const starlight = await getProdServer();
 
 			await starlight.goto('/anchor-heading');
-			const markdownContent = page.locator('.sl-markdown-content');
-			const markdownHtml = await markdownContent.innerHTML();
+			const markdownHeadings = await page
+				.locator('.sl-markdown-content .sl-heading-wrapper')
+				.evaluateAll((headings) => headings.map((heading) => heading.outerHTML));
 
 			await starlight.goto('/anchor-heading-component');
-			const componentContent = page.locator('.sl-markdown-content');
-			const componentHtml = await componentContent.innerHTML();
+			const componentHeadings = await page
+				.locator('.sl-markdown-content .sl-heading-wrapper')
+				.evaluateAll((headings) => headings.map((heading) => heading.outerHTML));
 
-			expect(markdownHtml).toEqual(componentHtml);
+			// The Astro's Rust compiler may add insignificant whitespace between siblings so we compare
+			// heading wrappers individually rather than the entire content.
+			expect(markdownHeadings).toEqual(componentHeadings);
 		});
 
 		test('does not render headings anchor links for individual Markdown pages and entries not part of the `docs` collection', async ({
@@ -407,6 +380,17 @@ test.describe('components', () => {
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
 		});
+
+		test('renders headings anchor links for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.sl-anchor-link').first()).toBeAttached();
+		});
 	});
 
 	test.describe('asides', () => {
@@ -419,11 +403,21 @@ test.describe('components', () => {
 			// Individual Markdown page
 			await starlight.goto('/markdown-page');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
-			await page.pause();
 
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
+		});
+
+		test('renders Markdown asides for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.starlight-aside')).toBeAttached();
 		});
 	});
 
@@ -441,6 +435,17 @@ test.describe('components', () => {
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('code[dir="auto"]')).not.toBeAttached();
+		});
+
+		test('adds RTL support to code and preformatted text elements for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('code[dir="auto"]').first()).toBeAttached();
 		});
 	});
 
@@ -464,6 +469,31 @@ test.describe('components', () => {
 				'background-color',
 				'rgb(128, 0, 128)'
 			);
+		});
+	});
+
+	test.describe('css layer order', () => {
+		test('ensures that the StarlightPage component is always imported first to ensure a predictable CSS layer order in custom pages', async ({
+			page,
+			makeServer,
+		}) => {
+			const starlight = await makeServer('dev', { mode: 'dev' });
+			await starlight.goto('/starlight-page-css-layer-order');
+
+			const firstStyleContent = await page.evaluate(
+				() => document.head.querySelector('style')?.textContent ?? ''
+			);
+
+			const expectedLayersOrder = await fs.readFile(
+				new URL('../src/style/layers.css', import.meta.url),
+				'utf-8'
+			);
+
+			// Ensure that the first style block in the head contains the expected layers order rather
+			// the styles of the link button wrapped in a `@layer` block at-rule automatically declaring
+			// a new layer and thus potentially breaking the intended layers order as the initial order
+			// in which layers are declared indicates which layer has precedence.
+			expect(firstStyleContent).toBe(expectedLayersOrder);
 		});
 	});
 
@@ -493,3 +523,404 @@ test.describe('param normalization', () => {
 		await expect(content).toHaveText(/This file contains Arabic diacritics in the file name./);
 	});
 });
+
+test.describe('ToC highlighting', () => {
+	test.describe('highlights overview', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+	});
+
+	test.describe('highlights overview when scrolled to opening paragraph', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+	});
+
+	test.describe('highlights overview when a high banner is present', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 1', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 1 when scrolled to paragraph below', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+	});
+
+	test.describe('highlights heading 3', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 3 from focusing on a list item', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+
+	test.describe('highlights h3 above an h4', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+
+	test('does not freeze when the page title heading is missing', async ({
+		page,
+		getProdServer,
+	}) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 1280, height: 720 });
+		await starlight.goto('/headings-no-page-title');
+
+		// First, scroll to the paragraph after the table so we look up its heading by walking through
+		// its previous sibling which is a table with many row/cells.
+		await page
+			.getByText('Some content before the first heading.')
+			.evaluate((paragraph) => paragraph.scrollIntoView());
+		// Then, scroll to the first heading.
+		await page.locator('#heading-1').evaluate((heading) => heading.scrollIntoView());
+
+		await expect(page.locator('starlight-toc [aria-current="true"]')).toHaveText(/Heading 1/);
+	});
+});
+
+test.describe('mobile menu focus trap', () => {
+	test('traps focus within the mobile menu when open', async ({ page, getProdServer }) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 375, height: 667 });
+		await starlight.goto('/headings');
+
+		const currentFocus = page.locator('*:focus');
+		const mainFrame = page.locator('.main-frame');
+
+		// Open the mobile menu.
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
+		await mobileMenuButton.click();
+		await expect(currentFocus).toHaveCount(1);
+		await expect(mainFrame).toHaveAttribute('inert', '');
+
+		// Focus the theme selector, which is the last focusable element in the mobile menu.
+		const themeSelector = page.getByRole('navigation', { name: 'Main' }).getByLabel('Select theme');
+		await themeSelector.focus();
+		await expect(currentFocus).toHaveCount(1);
+
+		// Tab out of the menu.
+		await page.keyboard.press('Tab');
+
+		// Tabbing at the end of the mobile menu moves focus out of the viewport, so there should no
+		// longer be any focused element.
+		await expect(currentFocus).toHaveCount(0);
+
+		// Close the mobile menu.
+		await mobileMenuButton.click();
+
+		// The focus trap should be released and tabbing will focus the mobile table of contents button.
+		await expect(mainFrame).not.toHaveAttribute('inert', '');
+		await page.keyboard.press('Tab');
+		await expect(currentFocus).toHaveText(/On this page/);
+	});
+
+	test('releases focus trap when the viewport resizes', async ({ page, getProdServer }) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 375, height: 667 });
+		await starlight.goto('/anchor-heading');
+
+		const currentFocus = page.locator('*:focus');
+		const mainFrame = page.locator('.main-frame');
+		const anchorLinkAccessibleName = 'Section titled “An anchor heading”';
+		const anchorHeadingLink = page.getByRole('link', { name: anchorLinkAccessibleName });
+
+		// Focus the anchor heading link to check it is focusable.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+
+		// Open the mobile menu.
+		const mobileMenuButton = page.getByRole('button', { name: 'Menu' });
+		await mobileMenuButton.click();
+		await expect(currentFocus).toHaveAccessibleName('Menu');
+		await expect(mainFrame).toHaveAttribute('inert', '');
+
+		// Try to focus the anchor heading which should be prevented by the focus trap,
+		// keeping focus where it is.
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveAccessibleName('Menu');
+
+		// Resize the viewport to a wider size, which should release the focus trap.
+		await page.setViewportSize({ width: 1280, height: 720 });
+
+		// The anchor heading link should be focusable again.
+		await expect(mainFrame).not.toHaveAttribute('inert', '');
+		await anchorHeadingLink.focus();
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+
+		// Resizing back to a smaller viewport should not re-enable the focus trap.
+		await page.setViewportSize({ width: 375, height: 667 });
+		await expect(mainFrame).not.toHaveAttribute('inert', '');
+		await expect(page.locator('.sidebar-pane:popover-open')).toHaveCount(0);
+		await expect(currentFocus).toHaveText(anchorLinkAccessibleName);
+	});
+});
+
+/**
+ * Loads the given `path` in a window of the specified `width` and `height` and checks that the
+ * Starlight table of contents is highlighting an item with contents matching `pattern`.
+ * The optional `scrollBy` parameter scrolls the page by that number of pixels before testing.
+ */
+function testTOCHighlighting({
+	width,
+	height,
+	path,
+	pattern,
+	scrollBy,
+}: {
+	width: number;
+	height: number;
+	path: string;
+	pattern: RegExp;
+	scrollBy?: number;
+}) {
+	return async ({
+		page,
+		getProdServer,
+	}: {
+		page: Page;
+		getProdServer: () => Promise<StarlightPage>;
+	}) => {
+		const test = async () => {
+			if (width > 1150) {
+				// On “desktop” viewports check the correct link is set as aria-current in the page sidebar.
+				const overviewLink = page.locator('starlight-toc [aria-current="true"]');
+				await expect(overviewLink).toHaveText(pattern);
+			} else {
+				// On smaller viewports, check the <MobileTableOfContents> component.
+				// The table of contents bar should display the current heading.
+				const currentSectionLabel = page.locator('mobile-starlight-toc .display-current');
+				await expect(currentSectionLabel).toHaveText(pattern);
+				// Within the table of contents drop down, the highlighted link should be correct.
+				const overviewLink = page.locator('mobile-starlight-toc [aria-current="true"]');
+				await expect(overviewLink).toHaveText(pattern);
+			}
+		};
+
+		await page.setViewportSize({ width, height });
+		const starlight = await getProdServer();
+		await starlight.goto(path);
+		if (scrollBy) {
+			await page.mouse.wheel(0, scrollBy);
+		}
+
+		// Test highlighting on initial load
+		await test();
+
+		// Test highlighting on page refresh (which maintains scroll position)
+		await page.reload();
+		await test();
+	};
+}
