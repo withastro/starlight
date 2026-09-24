@@ -522,10 +522,9 @@ interface PagefindOptions {
 		language?: string;
 		ranking?: PagefindRankingOptions;
 	}>;
-	index?: Pick<
-		pagefind.PagefindServiceConfig,
-		'rootSelector' | 'excludeSelectors' | 'forceLanguage'
-	>;
+	index?: {
+		excludeSelectors?: string[];
+	};
 }
 
 interface PagefindRankingOptions {
