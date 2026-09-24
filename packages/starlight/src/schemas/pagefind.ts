@@ -59,6 +59,8 @@ export interface PagefindUserConfig {
 				ranking?: PagefindRankingUserConfig | undefined;
 		  }[]
 		| undefined;
+	/** Customize how Pagefind indexes your website at build time. */
+	index?: PagefindIndexUserConfig | undefined;
 }
 
 interface PagefindRankingUserConfig {
@@ -132,6 +134,20 @@ const pagefindIndexOptionsSchema = z.object({
 	ranking: pagefindRankingWeightsSchema.prefault({}),
 });
 
+interface PagefindIndexUserConfig {
+	rootSelector?: string | undefined;
+	excludeSelectors?: string[] | undefined;
+	forceLanguage?: string | undefined;
+}
+
+const pagefindIndexSchema = z.object({
+	rootSelector: z.string().optional(),
+	excludeSelectors: z.array(z.string()).optional(),
+	forceLanguage: z.string().optional(),
+	// verbose, logfile omitted as they don’t affect the output index
+	// keepIndexUrl omitted for framework convention
+});
+
 const pagefindSchema = z.object({
 	indexWeight: indexWeightSchema,
 	ranking: pagefindRankingWeightsSchema.prefault({}),
@@ -143,6 +159,7 @@ const pagefindSchema = z.object({
 			})
 		)
 		.optional(),
+	index: pagefindIndexSchema.optional(),
 });
 
 export const PagefindConfigSchema = () => pagefindSchema;
