@@ -52,12 +52,12 @@ describe('routing', () => {
 
 /** Recursive function that simulates the heavier logic in `<SidebarSublist>` rendering. */
 function mockSidebarRender(sublist: SidebarEntry[]) {
-	sublist.map((entry) => {
+	for (const entry of sublist) {
 		if (entry.type !== 'link') {
 			sidebarGroupHasCurrent(entry);
 			mockSidebarRender(entry.entries);
 		}
-	});
+	}
 }
 
 bench('sidebar current groups', () => {
