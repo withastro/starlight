@@ -135,17 +135,11 @@ const pagefindIndexOptionsSchema = z.object({
 });
 
 interface PagefindIndexUserConfig {
-	rootSelector?: string;
 	excludeSelectors?: string[];
-	forceLanguage?: string;
 }
 
 const pagefindIndexSchema = z.object({
-	rootSelector: z.string().exactOptional(),
 	excludeSelectors: z.array(z.string()).exactOptional(),
-	forceLanguage: z.string().exactOptional(),
-	// verbose, logfile omitted as they don’t affect the output index
-	// keepIndexUrl omitted for framework convention
 });
 
 const pagefindSchema = z.object({
