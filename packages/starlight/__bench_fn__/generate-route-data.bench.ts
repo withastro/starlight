@@ -3,7 +3,7 @@ import { bench, describe, vi } from 'vitest';
 import { getRouteDataTestContext } from '../__tests__/test-utils';
 import { generateRouteData } from '../src/utils/routing/data';
 import { getRouteBySlugParam } from '../src/utils/routing';
-import { flattenSidebar, getSidebar } from '../src/utils/navigation';
+import { getSidebar, sidebarGroupHasCurrent } from '../src/utils/navigation';
 import type { SidebarEntry } from '../src/utils/routing/types';
 
 const docs = vi.hoisted(() => {
@@ -55,7 +55,7 @@ describe('routing', () => {
 function mockSidebarRender(sublist: SidebarEntry[]) {
 	for (const entry of sublist) {
 		if (entry.type !== 'link') {
-			flattenSidebar(entry.entries).some((i) => i.isCurrent);
+			sidebarGroupHasCurrent(entry);
 			mockSidebarRender(entry.entries);
 		}
 	}

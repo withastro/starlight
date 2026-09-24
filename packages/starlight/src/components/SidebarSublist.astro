@@ -1,5 +1,5 @@
 ---
-import { flattenSidebar } from '../utils/navigation';
+import { sidebarGroupHasCurrent } from '../utils/navigation';
 import type { SidebarEntry } from '../utils/routing/types';
 import Icon from '../user-components/Icon.astro';
 import Badge from '../user-components/Badge.astro';
@@ -34,9 +34,7 @@ const { sublist, nested } = Astro.props;
 						)}
 					</a>
 				) : (
-					<details
-						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
-					>
+					<details open={sidebarGroupHasCurrent(entry) || !entry.collapsed}>
 						<summary>
 							<span class="group-label">
 								<span class="large">{entry.label}</span>
