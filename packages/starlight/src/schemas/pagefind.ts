@@ -135,6 +135,11 @@ const pagefindIndexOptionsSchema = z.object({
 });
 
 interface PagefindIndexUserConfig {
+	/**
+	 * Custom CSS selectors that Pagefind should ignore when indexing.
+	 * Use the `data-pagefind-ignore` attribute in your markup instead for more fine-grained control.
+	 * @example ["svg", ".my-code-blocks"]
+	 */
 	excludeSelectors?: string[];
 }
 
