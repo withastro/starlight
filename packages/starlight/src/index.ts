@@ -177,7 +177,6 @@ export default function StarlightIntegration(
 									},
 								},
 					},
-					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
 					i18n: astroI18nConfig,
