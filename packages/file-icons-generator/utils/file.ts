@@ -37,7 +37,7 @@ const generatedFileHeader = `/**
 
 /** Write the generated definitions and SVGs to the Starlight package. */
 export async function writeDefinitionsAndSVGs(
-	definitions: Definitions,
+	definitions: Definitions<string>,
 	svgPaths: Record<string, string>
 ) {
 	const content = `${generatedFileHeader}
