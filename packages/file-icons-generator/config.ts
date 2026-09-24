@@ -42,6 +42,7 @@ export const seti = {
 	 * Note that renaming an icon happens after overrides are applied.
 	 */
 	renames: {
+		cjsx: 'coffee',
 		go2: 'go',
 	},
 	/**
