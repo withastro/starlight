@@ -17,11 +17,14 @@ pnpm-lock.yaml
 **/__tests__/**/snapshots
 
 # https://github.com/withastro/prettier-plugin-astro/issues/337
-packages/starlight/user-components/Tabs.astro
+packages/starlight/src/user-components/Tabs.astro
 
 # Prettier forces whitespace between elements we want to avoid for consistency with the rehype version
-packages/starlight/components/AnchorHeading.astro
+packages/starlight/src/components/AnchorHeading.astro
 packages/starlight/__e2e__/fixtures/basics/src/content/docs/anchor-heading-component.mdx
+
+# Prettier chokes on a JS class in a <script> in a conditional expression in this component
+packages/starlight/src/components/PageFrame.astro
 
 # Malformed YAML file used for testing
 packages/starlight/__tests__/i18n/malformed-yaml-src/content/i18n/*.yml

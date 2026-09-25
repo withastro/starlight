@@ -75,5 +75,23 @@ export default defineConfig(
 			// keys for plugins.
 			'@typescript-eslint/no-redundant-type-constituents': 'off',
 		},
+	},
+
+	// Disable some rules in Starlight `global.ts` file which is mostly used for type augmentation
+	// and interface merging.
+	{
+		files: ['packages/starlight/src/global.ts'],
+		rules: {
+			'@typescript-eslint/no-empty-object-type': 'off',
+			'@typescript-eslint/no-namespace': 'off',
+		},
+	},
+
+	// Enable browser globals for the Lunaria freshness component.
+	{
+		files: ['docs/lunaria/freshness.mjs'],
+		languageOptions: {
+			globals: globals.browser,
+		},
 	}
 );

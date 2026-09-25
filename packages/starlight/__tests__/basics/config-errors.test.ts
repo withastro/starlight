@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
-import { parseWithFriendlyErrors } from '../../utils/error-map';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import { parseWithFriendlyErrors } from '../../src/utils/error-map';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
 
 function parseStarlightConfigWithFriendlyErrors(config: StarlightUserConfig) {
 	return parseWithFriendlyErrors(

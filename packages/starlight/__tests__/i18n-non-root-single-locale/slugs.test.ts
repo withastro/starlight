@@ -4,7 +4,7 @@ import {
 	localizedFilePath,
 	localizedSlug,
 	slugToLocaleData,
-} from '../../utils/slugs';
+} from '../../src/utils/slugs';
 
 describe('slugToLocaleData', () => {
 	test('returns default "fr" locale', () => {
