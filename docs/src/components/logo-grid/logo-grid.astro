@@ -37,7 +37,7 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 
 <div class="logo-grid-wrapper not-content" data-pagefind-ignore>
 	<h2 class="logo-grid-title">{Astro.props.title}</h2>
-	<div class="logo-grid" style={{ '--max-logo-height': maxHeight }}>
+	<ul class="logo-grid" style={{ '--max-logo-height': maxHeight }}>
 		{
 			Object.entries(logos).map(([key, { label, h }]) => {
 				const Logo = svgs[`./logos/${key}.svg`];
@@ -46,10 +46,15 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 						`${key}.svg not found. Make sure the file exists in the logos directory.`
 					);
 				}
-				return <Logo aria-label={label} style={{ '--h': h }} />;
+				return (
+					<li class="sl-flex">
+						<Logo aria-hidden="true" style={{ '--h': h }} />
+						<span class="sr-only">{label}</span>
+					</li>
+				);
 			})
 		}
-	</div>
+	</ul>
 </div>
 
 <style>
@@ -72,6 +77,10 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 		/* The maximum number of rows to display. */
 		--max-rows: 7;
 
+		/* Reset default user-agent list styles. */
+		list-style: none;
+		padding-inline: 0;
+
 		margin-top: calc(3rem * var(--scale));
 
 		/* Lay out logos in a centred flex container */
@@ -92,7 +101,7 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 		color: var(--sl-color-gray-3);
 	}
 
-	.logo-grid > * {
+	.logo-grid :global(svg) {
 		height: calc(var(--h, 50) * var(--scale) * 1px);
 		/* Add margin to top and bottom of logos to make up the space to the row height. This keeps each
     row in the grid of an equal height, giving a smoother vertical rhythm. */
