@@ -28,10 +28,12 @@ import Select from './Select.astro';
 </script>
 
 <style>
-	starlight-theme-select:has([value='dark']:not(:checked)) :global(.dark),
-	starlight-theme-select:has([value='light']:not(:checked)) :global(.light),
-	starlight-theme-select:has([value='auto']:not(:checked)) :global(.auto) {
-		display: none;
+	@layer starlight.components {
+		starlight-theme-select:has([value='dark']:not(:checked)) :global(.dark),
+		starlight-theme-select:has([value='light']:not(:checked)) :global(.light),
+		starlight-theme-select:has([value='auto']:not(:checked)) :global(.auto) {
+			display: none;
+		}
 	}
 </style>
 
