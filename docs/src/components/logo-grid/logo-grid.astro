@@ -31,11 +31,13 @@ const logos = {
 	knip: { label: 'Knip', h: 38 },
 	bombshell: { label: 'Bombshell', h: 45 },
 };
+
+const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 ---
 
 <div class="logo-grid-wrapper not-content" data-pagefind-ignore>
 	<h2 class="logo-grid-title">{Astro.props.title}</h2>
-	<div class="logo-grid">
+	<div class="logo-grid" style={{ '--max-logo-height': maxHeight }}>
 		{
 			Object.entries(logos).map(([key, { label, h }]) => {
 				const Logo = svgs[`./logos/${key}.svg`];
@@ -64,7 +66,7 @@ const logos = {
 
 	.logo-grid {
 		/* Row height, matches the tallest logo height. */
-		--row-h: 80;
+		--row-h: var(--max-logo-height);
 		/* Scaling factor for logo heights and other dimensions. */
 		--scale: 0.4;
 		/* The maximum number of rows to display. */
