@@ -1,7 +1,6 @@
 ---
 import context from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
-import { Icon } from '../components';
 import { localizedUrl } from '../utils/localizedUrl';
 import Select from './Select.astro';
 
@@ -17,6 +16,7 @@ function localizedPathname(locale: string | undefined): string {
 	config.isMultilingual && (
 		<starlight-lang-select>
 			<Select
+				icon="translate"
 				label={Astro.locals.t('languageSelect.accessibleLabel')}
 				options={Object.entries(config.locales).map(([code, locale]) => ({
 					value: localizedPathname(code),
@@ -24,9 +24,7 @@ function localizedPathname(locale: string | undefined): string {
 					label: locale!.label,
 				}))}
 				width="7em"
-			>
-				<Icon name="translate" slot="icon" />
-			</Select>
+			/>
 		</starlight-lang-select>
 	)
 }
