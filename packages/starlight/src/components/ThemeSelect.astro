@@ -15,9 +15,9 @@ import Select from './Select.astro';
 		width="6.25em"
 	>
 		<Fragment slot="icon">
-			<Icon name="moon" class="dark" />
-			<Icon name="sun" class="light" />
-			<Icon name="laptop" class="auto" />
+			<Icon name="moon" class="sl-theme-icon-dark" />
+			<Icon name="sun" class="sl-theme-icon-light" />
+			<Icon name="laptop" class="sl-theme-icon-auto" />
 		</Fragment>
 	</Select>
 </starlight-theme-select>
@@ -29,9 +29,9 @@ import Select from './Select.astro';
 
 <style>
 	@layer starlight.components {
-		starlight-theme-select:has([value='dark']:not(:checked)) :global(.dark),
-		starlight-theme-select:has([value='light']:not(:checked)) :global(.light),
-		starlight-theme-select:has([value='auto']:not(:checked)) :global(.auto) {
+		starlight-theme-select:has([value='dark']:not(:checked)) :global(.sl-theme-icon-dark),
+		starlight-theme-select:has([value='light']:not(:checked)) :global(.sl-theme-icon-light),
+		starlight-theme-select:has([value='auto']:not(:checked)) :global(.sl-theme-icon-auto) {
 			display: none;
 		}
 	}
