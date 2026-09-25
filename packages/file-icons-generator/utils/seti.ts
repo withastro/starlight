@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { seti, starlight } from '../config.ts';
-import type { Definitions } from '../../starlight/user-components/rehype-file-tree.ts';
+import type { Definitions } from '../../starlight/src/user-components/file-tree-processor.ts';
 
 // https://github.com/jesseweed/seti-ui/blob/master/styles/components/icons/mapping.less
 // .icon-set(".bsl", "bsl", @red);
@@ -75,7 +75,7 @@ export async function parseMapping(repoPath: string) {
 	const lines = mapping.split('\n');
 	// Include the `folder` icon by default as it is not defined in the mapping file.
 	const icons = new Set<string>(['folder']);
-	const definitions: Definitions = {
+	const definitions: Definitions<string> = {
 		files: { ...starlight.definitions.files },
 		extensions: { ...starlight.definitions.extensions },
 		partials: { ...starlight.definitions.partials },
@@ -89,11 +89,12 @@ export async function parseMapping(repoPath: string) {
 		if (seti.ignores.includes(lang)) continue;
 
 		const maybeOverride: string | undefined = seti.overrides[lang as keyof typeof seti.overrides];
+		const setiIcon = maybeOverride ?? lang;
 
 		// Add the icon to the list of icons to extract as SVGs.
-		icons.add(maybeOverride ?? lang);
+		icons.add(setiIcon);
 
-		const icon = getSetiIconName(lang);
+		const icon = getSetiIconName(setiIcon);
 
 		if (type === 'set') {
 			if (identifier?.startsWith('.')) {

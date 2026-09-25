@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
-import { docsSchema } from '../../schema';
-import { FaviconSchema } from '../../schemas/favicon';
-import { TitleTransformConfigSchema } from '../../schemas/site-title';
-import { HeadConfigSchema, type HeadUserConfig } from '../../schemas/head';
-import { parseWithFriendlyErrors } from '../../utils/error-map';
+import { docsSchema } from '../../src/schema';
+import { FaviconSchema } from '../../src/schemas/favicon';
+import { TitleTransformConfigSchema } from '../../src/schemas/site-title';
+import { HeadConfigSchema, type HeadUserConfig } from '../../src/schemas/head';
+import { parseWithFriendlyErrors } from '../../src/utils/error-map';
 import { z } from 'astro/zod';
 
 describe('FaviconSchema', () => {

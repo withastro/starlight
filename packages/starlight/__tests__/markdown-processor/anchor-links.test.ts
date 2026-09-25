@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import type { StarlightUserConfig } from '../../utils/user-config';
+import type { StarlightUserConfig } from '../../src/utils/user-config';
 import {
 	createStarlightMarkdownProcessor,
 	describeEachProcessor,

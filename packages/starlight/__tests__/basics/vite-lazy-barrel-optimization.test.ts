@@ -46,7 +46,7 @@ async function getTransform(componentBarrelPath: string) {
 	// Reset the modules registry and re-import the plugin so the module can be re-evaluated and
 	// `starlightComponentsBarrelId` re-computed.
 	const { vitePluginStarlightLazyBarrelOptimization } = await import(
-		'../../integrations/vite-lazy-barrel-optimization'
+		'../../src/integrations/vite-lazy-barrel-optimization'
 	);
 	const plugin = vitePluginStarlightLazyBarrelOptimization();
 
