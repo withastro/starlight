@@ -3,6 +3,7 @@ import Icon from '../user-components/Icon.astro';
 
 interface Props {
 	label: string;
+	icon?: Parameters<typeof Icon>[0]['name'];
 	width?: string;
 	options: Array<{
 		label: string;
@@ -23,7 +24,9 @@ interface Props {
 
 <label style={`--sl-select-width: ${Astro.props.width}`}>
 	<span class="sr-only">{Astro.props.label}</span>
-	<span class="icon label-icon"><slot name="icon" /></span>
+	<span class="icon label-icon">
+		{Astro.props.icon ? <Icon name={Astro.props.icon} /> : <slot name="icon" />}
+	</span>
 	<select autocomplete="off">
 		{
 			Astro.props.options.map(({ value, selected, label }) => (
