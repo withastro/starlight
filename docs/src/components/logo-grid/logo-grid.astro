@@ -48,7 +48,7 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 				}
 				return (
 					<li class="sl-flex">
-						<Logo aria-hidden="true" style={{ '--h': h }} />
+						<Logo aria-hidden="true" style={{ '--h': h }} height={h} />
 						<span class="sr-only">{label}</span>
 					</li>
 				);
