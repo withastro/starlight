@@ -40,6 +40,11 @@ function formatPath(
 	const formatStrategy = formatStrategies[format];
 	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
 
+	// Only format the pathname and preserve any query string or hash as-is.
+	const suffixIndex = href.search(/[?#]/);
+	const suffix = suffixIndex === -1 ? '' : href.slice(suffixIndex);
+	if (suffixIndex !== -1) href = href.slice(0, suffixIndex);
+
 	// Handle extension
 	href = formatStrategy.handleExtension(href);
 
@@ -47,12 +52,12 @@ function formatPath(
 	href = formatStrategy.addBase(href);
 
 	// Skip trailing slash handling for `build.format: 'file'`
-	if (format === 'file') return href;
+	if (format === 'file') return href + suffix;
 
 	// Handle trailing slash
 	href = href === '/' ? href : trailingSlashStrategy(href);
 
-	return href;
+	return href + suffix;
 }
 
 export function createPathFormatter(opts: FormatPathOptions) {
