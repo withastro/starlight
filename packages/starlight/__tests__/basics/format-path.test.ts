@@ -23,6 +23,13 @@ describe.each<{
 			{ path: '/guides/project-structure.html', expected: '/guides/project-structure.html' },
 			// with file extension and trailing slash
 			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure.html' },
+			// with a hash
+			{
+				path: '/reference/configuration/#sidebar',
+				expected: '/reference/configuration.html#sidebar',
+			},
+			// with a query string
+			{ path: '/api/v1/users?version=2', expected: '/api/v1/users.html?version=2' },
 		],
 	},
 	{
@@ -40,6 +47,13 @@ describe.each<{
 			{ path: '/guides/project-structure.html', expected: '/guides/project-structure.html' },
 			// with file extension and trailing slash
 			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure.html' },
+			// with a hash
+			{
+				path: '/reference/configuration/#sidebar',
+				expected: '/reference/configuration.html#sidebar',
+			},
+			// with a query string
+			{ path: '/api/v1/users?version=2', expected: '/api/v1/users.html?version=2' },
 		],
 	},
 	{
@@ -57,6 +71,13 @@ describe.each<{
 			{ path: '/guides/project-structure.html', expected: '/guides/project-structure.html' },
 			// with file extension and trailing slash
 			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure.html' },
+			// with a hash
+			{
+				path: '/reference/configuration/#sidebar',
+				expected: '/reference/configuration.html#sidebar',
+			},
+			// with a query string
+			{ path: '/api/v1/users?version=2', expected: '/api/v1/users.html?version=2' },
 		],
 	},
 	{
@@ -74,6 +95,10 @@ describe.each<{
 			{ path: '/guides/project-structure.html', expected: '/guides/project-structure/' },
 			// with file extension and trailing slash
 			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure/' },
+			// with a hash
+			{ path: '/reference/configuration/#sidebar', expected: '/reference/configuration/#sidebar' },
+			// with a query string
+			{ path: '/api/v1/users?version=2', expected: '/api/v1/users/?version=2' },
 		],
 	},
 	{
@@ -91,6 +116,10 @@ describe.each<{
 			{ path: '/guides/project-structure.html', expected: '/guides/project-structure' },
 			// with file extension and trailing slash
 			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure' },
+			// with a hash
+			{ path: '/reference/configuration/#sidebar', expected: '/reference/configuration#sidebar' },
+			// with a query string
+			{ path: '/api/v1/users?version=2', expected: '/api/v1/users?version=2' },
 		],
 	},
 	{
@@ -108,6 +137,10 @@ describe.each<{
 			{ path: '/guides/project-structure.html', expected: '/guides/project-structure' },
 			// with file extension and trailing slash
 			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure' },
+			// with a hash
+			{ path: '/reference/configuration/#sidebar', expected: '/reference/configuration/#sidebar' },
+			// with a query string
+			{ path: '/api/v1/users?version=2', expected: '/api/v1/users?version=2' },
 		],
 	},
 ])(
