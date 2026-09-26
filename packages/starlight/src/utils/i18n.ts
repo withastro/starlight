@@ -129,7 +129,7 @@ function getStarlightI18nConfig(
 				isMonolingualWithRootLocale || (isMultilingual && !prefixDefaultLocale)
 					? undefined
 					: isAstroLocaleExtendedConfig(defaultAstroLocale)
-						? defaultAstroLocale.codes[0]
+						? defaultAstroLocale.path
 						: defaultAstroLocale,
 		},
 	};
