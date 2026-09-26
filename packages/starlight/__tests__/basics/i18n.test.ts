@@ -133,7 +133,7 @@ describe('processI18nConfig', () => {
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
-					defaultLocale: { label: 'Français', lang: 'fr', dir: 'ltr', locale: 'fr' },
+					defaultLocale: { label: 'Français', lang: 'fr', dir: 'ltr', locale: 'french' },
 					locales: { french: { label: 'Français', lang: 'fr', dir: 'ltr' } },
 				},
 			},
@@ -144,7 +144,7 @@ describe('processI18nConfig', () => {
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
-					defaultLocale: { label: 'فارسی', lang: 'fa', dir: 'rtl', locale: 'fa' },
+					defaultLocale: { label: 'فارسی', lang: 'fa', dir: 'rtl', locale: 'farsi' },
 					locales: { farsi: { label: 'فارسی', lang: 'fa', dir: 'rtl' } },
 				},
 			},
@@ -234,7 +234,7 @@ describe('processI18nConfig', () => {
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
-					defaultLocale: { label: 'فارسی', lang: 'fa', dir: 'rtl', locale: 'fa' },
+					defaultLocale: { label: 'فارسی', lang: 'fa', dir: 'rtl', locale: 'farsi' },
 					locales: {
 						farsi: { label: 'فارسی', lang: 'fa', dir: 'rtl' },
 						de: { label: 'Deutsch', lang: 'de', dir: 'ltr' },
