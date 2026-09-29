@@ -5,7 +5,7 @@ import { A11yReportAttachmentName } from './constants';
 
 // We use the Lunaria config to get the list of languages rather than the Astro config as importing
 // the latter does not play well with Playwright.
-import lunariaConfig from '../lunaria.config.json' with { type: 'json' };
+import { locales as lunariaLocales } from '../lunaria.config';
 
 export { expect, type Locator } from '@playwright/test';
 
@@ -59,7 +59,7 @@ const config: Config = {
 process.env.ASTRO_TELEMETRY_DISABLED = 'true';
 process.env.ASTRO_DISABLE_UPDATE_CHECK = 'true';
 
-const locales = lunariaConfig.locales.map((locale) => locale.lang);
+const locales = lunariaLocales.map((locale) => locale.lang);
 
 export async function getDocsSiteUrls() {
 	const sitemap = new Sitemapper({ url: config.sitemap.url });

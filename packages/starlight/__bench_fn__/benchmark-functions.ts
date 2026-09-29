@@ -10,6 +10,6 @@
  * @see https://vitest.dev/guide/benchmarking#module-runner-overhead
  */
 
-export { getSidebar } from '../src/utils/navigation';
+export { getSidebar, sidebarGroupHasCurrent } from '../src/utils/navigation';
 export { getRouteBySlugParam } from '../src/utils/routing';
 export { generateRouteData } from '../src/utils/routing/data';

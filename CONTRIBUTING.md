@@ -264,7 +264,7 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://contribute.docs.astro.build/guides/i18n/#adding-a-new-language) in the Astro docs contributor guide for some helpful tips around choosing these.
 
 - Add your language to the `locales` config in `docs/astro.config.mjs`
-- Add your language to the `locales` config in `docs/lunaria.config.json`
+- Add your language to the `locales` config in `docs/lunaria.config.ts`
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
 - Create the first translated page for your language.
   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
@@ -293,7 +293,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 
 [discord]: https://astro.build/chat
 [issues]: https://github.com/withastro/starlight/issues
-[sl]: https://github.com/withastro/starlight/pulls
+[sl]: https://github.com/withastro/starlight
 [pulls]: https://github.com/withastro/starlight/pulls
 [new-issue]: https://github.com/withastro/starlight/issues/new/choose
 [pr-docs]: https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request

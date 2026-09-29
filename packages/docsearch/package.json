@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@astrojs/starlight": "workspace:*",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.2"
   },
   "publishConfig": {
     "exports": {

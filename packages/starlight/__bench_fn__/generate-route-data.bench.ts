@@ -1,6 +1,13 @@
+import { klona } from 'klona';
 import { describe, test, vi } from 'vitest';
 import { getRouteDataTestContext } from '../__tests__/test-utils';
-import { generateRouteData, getRouteBySlugParam, getSidebar } from './benchmark-functions';
+import type { SidebarEntry } from '../src/utils/routing/types';
+import {
+	generateRouteData,
+	getRouteBySlugParam,
+	getSidebar,
+	sidebarGroupHasCurrent,
+} from './benchmark-functions';
 
 const docs = vi.hoisted(() => {
 	const docs: [string, { title: string }][] = [];
@@ -23,6 +30,7 @@ vi.mock('astro:content', async () =>
 // https://vitest.dev/guide/benchmarking.html#module-runner-overhead
 const benchmarkGenerateRouteData = generateRouteData;
 const benchmarkGetSidebar = getSidebar;
+const benchmarkSidebarGroupHasCurrent = sidebarGroupHasCurrent;
 
 const slug = 'reference/section-9/level-1/level-2/level-3/level-4/level-5/level-6/level-7/page-99';
 const route = getRouteBySlugParam(slug);
@@ -53,4 +61,20 @@ describe('routing', () => {
 			benchmarkGetSidebar(context.url.pathname, route.locale);
 		}).run();
 	});
+});
+
+/** Recursive function that simulates the heavier logic in `<SidebarSublist>` rendering. */
+function mockSidebarRender(sublist: SidebarEntry[]) {
+	for (const entry of sublist) {
+		if (entry.type !== 'link') {
+			benchmarkSidebarGroupHasCurrent(entry);
+			mockSidebarRender(entry.entries);
+		}
+	}
+}
+
+test('sidebar current groups', async ({ bench }) => {
+	await bench('sidebar current groups', () => {
+		mockSidebarRender(klona(benchmarkGetSidebar(context.url.pathname, route.locale)));
+	}).run();
 });

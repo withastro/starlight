@@ -1,0 +1,8 @@
+---
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+// Omit the page title without the expected `id="_top"` on a specific page to test toc highlighting.
+const isMissingPageTitle = Astro.locals.starlightRoute.id === 'headings-no-page-title';
+---
+
+{!isMissingPageTitle && <Default />}

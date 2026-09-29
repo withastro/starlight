@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.42.0",
+  "version": "0.42.4",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "build": "tsdown",
@@ -60,10 +60,10 @@
     "@codspeed/vitest-plugin": "^5.7.1",
     "@playwright/test": "^1.61.1",
     "@types/node": "^22.19.17",
-    "@vitest/coverage-v8": "^5.0.0",
+    "@vitest/coverage-v8": "^5.0.2",
     "astro": "^7.2.10",
     "linkedom": "^0.18.12",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.2"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.0",
