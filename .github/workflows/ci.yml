@@ -244,8 +244,6 @@ jobs:
 
   zizmor:
     name: Run zizmor
-    needs: changes
-    if: ${{ needs.changes.outputs.workflows == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
