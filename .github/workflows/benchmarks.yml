@@ -23,8 +23,9 @@ on:
       - '.github/workflows/benchmarks.yml'
   workflow_dispatch:
 
+# Automatically cancel in-progress actions on the same branch
 concurrency:
-  group: codspeed-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions: {}
