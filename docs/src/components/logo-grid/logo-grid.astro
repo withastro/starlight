@@ -37,7 +37,7 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 
 <div class="logo-grid-wrapper not-content" data-pagefind-ignore>
 	<h2 class="logo-grid-title">{Astro.props.title}</h2>
-	<ul class="logo-grid" style={{ '--max-logo-height': maxHeight }}>
+	<ul role="list" class="logo-grid" style={{ '--max-logo-height': maxHeight }}>
 		{
 			Object.entries(logos).map(([key, { label, h }]) => {
 				const Logo = svgs[`./logos/${key}.svg`];
