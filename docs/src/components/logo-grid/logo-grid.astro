@@ -8,27 +8,48 @@ interface Props {
 const svgs = import.meta.glob<SvgComponent>('./logos/*.svg', { eager: true, import: 'default' });
 
 const logos = {
+	// e.g. https://openai.github.io/openai-agents-js/
 	openai: { label: 'OpenAI', h: 48 },
+	// e.g. https://github.github.com/gh-aw/
 	github: { label: 'GitHub', h: 40 },
+	// e.g. https://docs.netlify.com/
 	netlify: { label: 'Netlify', h: 80 },
+	// e.g. https://microsoft.github.io/genaiscript/, https://azure.github.io/typespec-azure/, https://aspire.dev/
 	microsoft: { label: 'Microsoft', h: 50 },
+	// e.g. https://developers.wpengine.com/docs/
 	wpengine: { label: 'WP Engine', h: 45 },
+	// e.g. https://warden.sentry.dev/guide, https://spotlightjs.com/docs/getting-started/
 	sentry: { label: 'Sentry', h: 42 },
-	supabase: { label: 'Supabase', h: 48 },
-	roblox: { label: 'Roblox', h: 33 },
+	// e.g. https://supabase.github.io/etl/
+	// supabase: { label: 'Supabase', h: 48 },
+	// roblox: { label: 'Roblox', h: 33 },
+	// e.g. https://docs.warp.dev/
 	warp: { label: 'Warp', h: 42 },
+	// e.g. https://system76.com/tech-docs/
 	system76: { label: 'System76', h: 58 },
-	vlt: { label: 'Vlt', h: 40 },
+	// e.g. https://docs.vlt.sh/
+	// vlt: { label: 'Vlt', h: 40 },
+	// e.g. https://resources.frame.work/
 	framework: { label: 'Framework', h: 35 },
+	// e.g. https://tutorialkit.dev/
 	stackblitz: { label: 'StackBlitz', h: 44 },
+	// e.g. https://support.crowdin.com/
 	crowdin: { label: 'Crowdin', h: 48 },
+	// e.g. https://stratakit.bentley.com/docs/
 	bentley: { label: 'Bentley', h: 36 },
-	valtown: { label: 'Val Town', h: 33 },
+	// e.g. https://docs.val.town/
+	// valtown: { label: 'Val Town', h: 33 },
+	// e.g. https://zulip.com/help/
 	zulip: { label: 'Zulip', h: 40 },
+	// e.g. https://docs.honeybadger.io/
 	honeybadger: { label: 'Honeybadger', h: 50 },
+	// e.g. https://contribute.freecodecamp.org/
 	freecodecamp: { label: 'freeCodeCamp', h: 34 },
+	// e.g. https://biomejs.dev/
 	biome: { label: 'Biome', h: 40 },
+	// e.g. https://knip.dev/
 	knip: { label: 'Knip', h: 38 },
+	// e.g. https://bomb.sh/
 	bombshell: { label: 'Bombshell', h: 45 },
 };
 
