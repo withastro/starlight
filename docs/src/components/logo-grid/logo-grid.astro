@@ -74,6 +74,8 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 		--row-h: var(--max-logo-height);
 		/* Scaling factor for logo heights and other dimensions. */
 		--scale: 0.36;
+		/* Vertical gap between rows. */
+		--row-gap: calc(1rem * var(--scale));
 		/* The maximum number of rows to display. */
 		--max-rows: 7;
 
@@ -85,12 +87,12 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 
 		/* Lay out logos in a centred flex container */
 		display: flex;
-		gap: calc(1rem * var(--scale)) calc(3rem * var(--scale));
+		gap: var(--row-gap) calc(3rem * var(--scale));
 		justify-content: center;
 		flex-wrap: wrap;
 
 		/** Constrain the maximum height of the logo grid. */
-		--max-h: calc(var(--max-rows) * var(--row-h) * var(--scale) * 1px);
+		--max-h: calc(var(--max-rows) * (var(--row-h) * var(--scale) * 1px + var(--row-gap)));
 		max-height: var(--max-h);
 		overflow: clip;
 		/* Fade out lower rows to hint that there are more logos when some are cut off. */
