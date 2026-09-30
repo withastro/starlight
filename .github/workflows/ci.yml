@@ -31,7 +31,6 @@ jobs:
       docs_not_content: ${{ steps.filter.outputs.docs_not_content }}
       packages: ${{ steps.filter.outputs.packages }}
       ci: ${{ steps.filter.outputs.ci }}
-      workflows: ${{ steps.filter.outputs.workflows }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -64,8 +63,6 @@ jobs:
               - 'pnpm-workspace.yaml'
             ci:
               - '.github/workflows/ci.yml'
-            workflows:
-              - '.github/workflows/*.yml'
 
   unit-test:
     name: Run unit tests
