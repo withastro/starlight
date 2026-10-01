@@ -31,7 +31,7 @@ Prefer the [`head` config option](/reference/configuration/#head), the [`head` f
 **Default component:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro)
 
 Component rendered inside `<head>` that sets up dark/light theme support.
-The default implementation includes an inline script and a `<template>` used by the script in [`<ThemeSelect />`](#themeselect).
+The default implementation includes an inline script used by the script in [`<ThemeSelect />`](#themeselect).
 
 ---
 
