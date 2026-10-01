@@ -30,6 +30,8 @@ const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden':
 			font-size: var(--sl-icon-size, 1em);
 			width: 1em;
 			height: 1em;
+			/* Prevent Firefox from cutting off edges of icons when pinch-zooming. */
+			overflow: visible;
 		}
 	}
 </style>

@@ -122,6 +122,8 @@ how we do it.
 	.sl-markdown-content .sl-anchor-icon > svg {
 		display: inline;
 		width: var(--sl-anchor-icon-size);
+		/* Prevent Firefox from cutting off edges of icons when pinch-zooming. */
+		overflow: visible;
 		/* Center the link icon SVG vertically in the line. */
 		vertical-align: top;
 		transform: translateY(
