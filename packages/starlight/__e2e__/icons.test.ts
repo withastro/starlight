@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test';
-import { optimize } from 'svgo';
 import { BuiltInIcons } from '../src/components-internals/Icons';
 
 const viewBoxSize = 24;
@@ -43,7 +42,7 @@ test('SVG icons are contained within their viewBox', async ({ page }) => {
 		.toSorted((a, b) => b.overflow - a.overflow)
 		.map(
 			({ name, overflow, markup, ...bbox }) =>
-				`- ${name}: ${overflow}\n\nSuggested markup to review: '${fitIconInViewBox(markup, bbox)}'\n`
+				`- ${name}: ${overflow}\n\nRun the following command to generate an updated icon to review:\n\n${getFitIconInViewBoxCommand(markup, bbox)}\n`
 		)
 		.join('\n');
 
@@ -53,7 +52,7 @@ test('SVG icons are contained within their viewBox', async ({ page }) => {
 	).toBe(0);
 });
 
-function fitIconInViewBox(
+function getFitIconInViewBoxCommand(
 	markup: string,
 	{ x, y, width, height }: { x: number; y: number; width: number; height: number }
 ) {
@@ -65,12 +64,9 @@ function fitIconInViewBox(
 	const translateX = Math.max(0, -scale * x) + Math.min(0, viewBoxSize - scale * (x + width));
 	const translateY = Math.max(0, -scale * y) + Math.min(0, viewBoxSize - scale * (y + height));
 
-	// Apply the computed translation and scaling to the path coordinates and optimize the resulting
-	// SVG like SVGOMG does.
-	const { data } = optimize(
-		`<svg><g transform="translate(${translateX} ${translateY}) scale(${scale})">${markup}</g></svg>`,
-		{ floatPrecision: svgoNumberPrecision }
-	);
+	// Apply the computed translation and scaling to the path coordinates.
+	const svg = `<svg><g transform="translate(${translateX} ${translateY}) scale(${scale})">${markup}</g></svg>`;
 
-	return data.replace(/^<svg[^>]*>|<\/svg>$/g, '');
+	// Generate an SVG command to optimize the icon like SVGOMG does.
+	return `pnpm dlx svgo@4 -p ${svgoNumberPrecision} --final-newline -s '${svg}'`;
 }
