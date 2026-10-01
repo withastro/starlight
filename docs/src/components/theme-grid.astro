@@ -179,11 +179,11 @@ const { labels, themes } = Astro.props;
 	}
 
 	/* Show check mark icon only when input is checked. */
-	label svg {
+	label :global(.sl-icon) {
 		opacity: 0;
 		transition: opacity var(--transition-time) ease-in-out;
 	}
-	label:has(:checked) svg {
+	label:has(:checked) :global(.sl-icon) {
 		opacity: 1;
 	}
 
@@ -192,18 +192,18 @@ const { labels, themes } = Astro.props;
 		display: grid;
 		grid-template-columns: 1fr;
 	}
-	.preview-images > * {
+	.preview-images > :global(*) {
 		grid-area: 1 / 1;
 	}
 
 	/* Fade out the preview image that isn’t currently selected. */
-	img {
+	.preview-images :global(img) {
 		transition: opacity var(--transition-time) ease-in-out;
 	}
-	[data-theme-preview='dark'] img.light {
+	[data-theme-preview='dark'] .preview-images :global(img.light) {
 		opacity: 0;
 	}
-	[data-theme-preview='light'] img.dark {
+	[data-theme-preview='light'] .preview-images :global(img.dark) {
 		opacity: 0;
 	}
 
