@@ -86,14 +86,10 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 	}
 
 	.logo-grid {
-		/* Row height, matches the tallest logo height. */
-		--row-h: var(--max-logo-height);
 		/* Scaling factor for logo heights and other dimensions. */
 		--scale: 0.36;
 		/* Vertical gap between rows. */
 		--row-gap: calc(1rem * var(--scale));
-		/* The maximum number of rows to display. */
-		--max-rows: 7;
 
 		/* Reset default user-agent list styles. */
 		list-style: none;
@@ -106,14 +102,6 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 		gap: var(--row-gap) calc(3rem * var(--scale));
 		justify-content: center;
 		flex-wrap: wrap;
-
-		/** Constrain the maximum height of the logo grid. */
-		--max-h: calc(var(--max-rows) * (var(--row-h) * var(--scale) * 1px + var(--row-gap)));
-		max-height: var(--max-h);
-		overflow: clip;
-		/* Fade out lower rows to hint that there are more logos when some are cut off. */
-		mask-image: linear-gradient(#fff, #fff 33%, #fff0);
-		mask-size: 100% var(--max-h);
 	}
 	:global([data-theme='light']) .logo-grid {
 		color: var(--sl-color-gray-3);
@@ -121,16 +109,15 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 
 	.logo-grid :global(svg) {
 		height: calc(var(--h, 50) * var(--scale) * 1px);
-		/* Add margin to top and bottom of logos to make up the space to the row height. This keeps each
-    row in the grid of an equal height, giving a smoother vertical rhythm. */
-		margin-block: calc((var(--row-h, 80) - var(--h, 50)) * var(--scale) * 1px / 2);
+		/* Add margin to top and bottom of logos keep each row in the grid of an equal height, giving a
+		smoother vertical rhythm. */
+		margin-block: calc((var(--max-logo-height, 80) - var(--h, 50)) * var(--scale) * 1px / 2);
 		width: auto;
 	}
 
 	@media (min-width: 30rem) {
 		.logo-grid {
 			--scale: 0.45;
-			--max-rows: 100;
 		}
 	}
 	@media (min-width: 50rem) {
