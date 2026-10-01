@@ -1,0 +1,238 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import type { StarlightIcon } from '@astrojs/starlight/types';
+import data from '../content/stats.json';
+
+interface Props {
+	labels: Record<'downloads' | 'stars' | 'cwv' | 'carbon' | 'contributors' | 'note', string>;
+}
+
+interface Stat {
+	label: string;
+	value: string;
+	source: string;
+	href: string;
+	icon: StarlightIcon | { svg: string };
+	featured?: boolean;
+}
+
+const { labels } = Astro.props;
+const { lang } = Astro.locals.starlightRoute.entryMeta;
+
+const formatQuantity = new Intl.NumberFormat(lang, { notation: 'compact' }).format;
+const formatPercent = new Intl.NumberFormat(lang, { style: 'percent' }).format;
+
+const stats: Stat[] = [
+	{
+		label: labels.downloads,
+		value: formatQuantity(data.downloads),
+		source: 'npm',
+		href: 'https://www.npmjs.com/package/@astrojs/starlight',
+		icon: 'download',
+		featured: true,
+	},
+	{
+		label: labels.stars,
+		value: formatQuantity(data.stars),
+		source: 'GitHub',
+		href: 'https://github.com/withastro/starlight/stargazers',
+		icon: 'star',
+		featured: true,
+	},
+	{
+		label: labels.cwv,
+		value: formatPercent(data.cwv),
+		source: 'HTTP Archive',
+		href: 'https://httparchive.org/reports/techreport/tech?tech=Starlight,MkDocs,Sphinx,VitePress,Nextra,GitBook,Docusaurus,Docsify&geo=ALL&rank=ALL&page=1',
+		icon: {
+			svg: '<path d="m15.29 10.29-2.78 2.78A2 2 0 0 0 12 13a2 2 0 0 0-2 2 2 2 0 0 0 .07.51l-.78.78a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l.78-.78A2 2 0 0 0 12 17a2 2 0 0 0 2-2 2 2 0 0 0-.07-.51l2.78-2.78a1 1 0 0 0-1.42-1.42M12 4A10 10 0 0 0 2 14a9.9 9.9 0 0 0 1.69 5.56 1 1 0 0 0 1.66-1.12 8 8 0 1 1 13.3 0 1 1 0 0 0 .27 1.39 1 1 0 0 0 .56.17 1 1 0 0 0 .83-.44A9.9 9.9 0 0 0 22 14 10 10 0 0 0 12 4"/>',
+		},
+	},
+	{
+		label: labels.carbon,
+		value: data.carbon,
+		source: 'Website Carbon',
+		href: 'https://www.websitecarbon.com/website/starlight-astro-build-getting-started/',
+		icon: {
+			svg: '<path d="M16.5 5a4.86 4.86 0 0 0-2.5.69A6 6 0 0 0 2.5 8v4a6 6 0 0 0 5 5.91V21a1 1 0 0 0 2 0v-3.09a6.1 6.1 0 0 0 2.78-1.26 5 5 0 0 0 3.22 2.25V21a1 1 0 0 0 2 0v-2.1a5 5 0 0 0 4-4.9v-4a5 5 0 0 0-5-5m-5 5v4a5 5 0 0 0 .06.57 4 4 0 0 1-2.06 1.3V13a1 1 0 0 0-2 0v2.86a4 4 0 0 1-3-3.86V8a4 4 0 0 1 6.83-2.84 3.94 3.94 0 0 1 1.06 2A5 5 0 0 0 11.5 10m8 4a3 3 0 0 1-2 2.82V13a1 1 0 0 0-2 0v3.82a3 3 0 0 1-2-2.82v-4a3 3 0 0 1 6 0Z"/>',
+		},
+	},
+	{
+		label: labels.contributors,
+		value: formatQuantity(data.contributors),
+		source: 'GitHub',
+		href: 'https://github.com/withastro/starlight/graphs/contributors',
+		icon: {
+			svg: '<path d="M12.3 12.22A4.92 4.92 0 0 0 14 8.5a5 5 0 0 0-10 0 4.92 4.92 0 0 0 1.7 3.72A8 8 0 0 0 1 19.5a1 1 0 0 0 2 0 6 6 0 0 1 12 0 1 1 0 0 0 2 0 8 8 0 0 0-4.7-7.28M9 11.5a3 3 0 1 1 3-3 3 3 0 0 1-3 3m9.74.32A5 5 0 0 0 15 3.5a1 1 0 0 0 0 2 3 3 0 0 1 3 3 3 3 0 0 1-1.5 2.59 1 1 0 0 0-.5.84 1 1 0 0 0 .45.86l.39.26.13.07a7 7 0 0 1 4 6.38 1 1 0 0 0 2 0 9 9 0 0 0-4.23-7.68"/>',
+		},
+	},
+];
+---
+
+<ul class="stats-grid not-content">
+	{
+		stats.map(({ value, label, source, href, icon, featured }) => (
+			<li class:list={['stat', { featured }]}>
+				<div class="stat-heading">
+					<span class="icon">
+						{typeof icon === 'string' ? (
+							<Icon name={icon} />
+						) : (
+							<svg
+								aria-hidden="true"
+								fill="currentColor"
+								height="1em"
+								viewBox="0 0 24 24"
+								width="1em"
+							>
+								<Fragment set:html={icon.svg} />
+							</svg>
+						)}
+					</span>
+					<strong class="value">{value}</strong>
+				</div>
+				<span class="label">{label}</span>
+				<a {href}>{source}</a>
+			</li>
+		))
+	}
+</ul>
+<p class="stats-meta">
+	{
+		// @ts-expect-error — We’re using an unknown “key” to depend on i18next’s interpolation logic.
+		Astro.locals.t(labels.note, {
+			date: new Date(data.lastUpdated).toLocaleDateString(lang, { dateStyle: 'long' }),
+		})
+	}
+</p>
+
+<style>
+	.stats-grid {
+		border: 1px solid var(--sl-color-gray-5);
+		display: grid;
+		grid-template-columns: 1fr;
+		list-style: none;
+		margin-top: 2rem;
+		padding: 0;
+	}
+
+	.stat {
+		display: grid;
+		flex-direction: column;
+		gap: 0.5rem;
+		grid-template-columns: 1fr auto;
+		line-height: 1.5;
+		padding: 1.5rem;
+		position: relative;
+	}
+
+	.stat + .stat {
+		border-top: 1px solid var(--sl-color-gray-5);
+	}
+
+	.stat-heading {
+		align-items: center;
+		display: flex;
+		gap: 1rem;
+		grid-column: 1 / -1;
+	}
+
+	.icon {
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.25rem;
+		display: grid;
+		font-size: 1.25rem;
+		height: 2.5rem;
+		place-items: center;
+		width: 2.5rem;
+	}
+
+	.value {
+		color: var(--sl-color-white);
+		font-size: var(--sl-text-4xl);
+		line-height: 1;
+	}
+
+	.label {
+		align-self: center;
+		color: var(--sl-color-gray-2);
+		font-size: var(--sl-text-lg);
+		margin-top: 0;
+	}
+
+	.stat a {
+		align-self: center;
+		color: var(--sl-color-text-accent);
+		font-size: var(--sl-text-sm);
+		margin-top: auto;
+		margin-top: 0;
+		text-underline-offset: 4px;
+	}
+
+	.stat a:hover {
+		color: var(--sl-color-white);
+	}
+
+	@media (min-width: 50rem) {
+		.stats-grid {
+			grid-template-columns: repeat(6, minmax(0, 1fr));
+		}
+
+		.label {
+			align-self: auto;
+			margin-top: 0.25rem;
+		}
+
+		.stat {
+			display: flex;
+			grid-column: span 2;
+		}
+
+		.stat.featured {
+			grid-column: span 3;
+		}
+
+		.stat.featured .value {
+			font-size: var(--sl-text-6xl);
+		}
+
+		.stat:nth-child(2) {
+			border-top: none;
+		}
+
+		.stat:nth-child(2),
+		.stat:nth-child(4),
+		.stat:nth-child(5) {
+			&::before {
+				background: var(--sl-color-gray-5);
+				content: '';
+				inset-block: 1.5rem;
+				inset-inline-start: 0;
+				position: absolute;
+				width: 1px;
+			}
+		}
+
+		.stat a {
+			align-self: flex-start;
+			margin-top: auto;
+		}
+
+		.stat-heading {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0;
+		}
+
+		.icon {
+			margin-bottom: 1rem;
+		}
+	}
+
+	.stats-meta {
+		color: var(--sl-color-gray-3);
+		font-size: var(--sl-text-sm);
+		margin-top: 0.5rem;
+		text-align: end;
+	}
+</style>
