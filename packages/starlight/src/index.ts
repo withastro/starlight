@@ -26,6 +26,8 @@ import {
 	type StarlightUserConfigWithPlugins,
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
+import { absolutePathToLang as getAbsolutePathFromLang } from './integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from './utils/collection-fs';
 import type { StarlightConfig } from './types';
 
 export default function StarlightIntegration(
@@ -65,7 +67,15 @@ export default function StarlightIntegration(
 					config.i18n
 				);
 
-				const { integrations, useTranslations, absolutePathToLang } = pluginResult;
+				const { integrations, useTranslations } = pluginResult;
+				// Rebuild absolutePathToLang with the i18n-resolved starlightConfig so it
+				// reflects locale paths injected by processI18nConfig (e.g. from Astro's i18n config).
+				function absolutePathToLang(path: string) {
+					return getAbsolutePathFromLang(path, {
+						docsPath: getCollectionPosixPath('docs', config.srcDir),
+						starlightConfig,
+					});
+				}
 				pluginTranslations = pluginResult.pluginTranslations;
 				userConfig = starlightConfig;
 
