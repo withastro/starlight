@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.42.6
+
+### Patch Changes
+
+- [#4229](https://github.com/withastro/starlight/pull/4229) [`e4a3d82`](https://github.com/withastro/starlight/commit/e4a3d82262d62677665cf2dd5ad9a1ba3ae2aa6a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential issue with icons being cut off in Firefox when pinch-zooming.
+
+- [#4226](https://github.com/withastro/starlight/pull/4226) [`fb562dd`](https://github.com/withastro/starlight/commit/fb562dddae97add7f5997c1f7fffd4f60c9f147c) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where pages not importing components from `@astrojs/starlight/components` included styles of Starlight components used on other pages.
+
+- [#4229](https://github.com/withastro/starlight/pull/4229) [`e4a3d82`](https://github.com/withastro/starlight/commit/e4a3d82262d62677665cf2dd5ad9a1ba3ae2aa6a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes the `codePen` and `node` icons slightly extending beyond their bounding box.
+
 ## 0.42.5
 
 ### Patch Changes
