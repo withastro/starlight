@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.42.5
+
+### Patch Changes
+
+- [#4227](https://github.com/withastro/starlight/pull/4227) [`5ba7a70`](https://github.com/withastro/starlight/commit/5ba7a70ad491ed8b5fc7033558dcc5428112cf97) Thanks [@I90rche](https://github.com/I90rche)! - Adds Macedonian language support
+
 ## 0.42.4
 
 ### Patch Changes
