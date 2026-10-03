@@ -2,21 +2,21 @@ name: Lunaria
 
 on:
   # Trigger the workflow every time a pull request is opened or synchronized at the target `main` branch
-  pull_request_target:
+  pull_request_target: # zizmor: ignore[dangerous-triggers] lunaria needs to comment on the PR; safe because we only checkout base branch
     types: [opened, synchronize]
     branches: [main]
     paths:
       - 'docs/**'
 
-# Allow this job to clone the repository and comment on the pull request
-permissions:
-  contents: read
-  pull-requests: write
+permissions: {}
 
 jobs:
   lunaria-overview:
     name: Generate Lunaria Overview
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout
@@ -25,6 +25,7 @@ jobs:
           # Necessary for Lunaria to work properly
           # Makes the action clone the entire git history
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup PNPM
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
