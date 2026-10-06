@@ -125,7 +125,7 @@ const errorMap: z.core.$ZodErrorMap = (issue) => {
 						expectedShape.push(
 							relativePath ? `${relativePath}: ${issue.expected}` : issue.expected
 						);
-					} else if (issue.code === 'custom') {
+					} else if (issue.code === 'custom' && relativePath) {
 						expectedShape.push(relativePath);
 					}
 				}
