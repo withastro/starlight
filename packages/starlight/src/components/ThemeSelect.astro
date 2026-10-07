@@ -22,10 +22,21 @@ import Select from './Select.astro';
 	</Select>
 </starlight-theme-select>
 
-{/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
-<script is:inline>
-	StarlightThemeProvider.updatePickers();
-</script>
+{/* Inlined to avoid FOUC. The module script further below also uses the global defined here. */}
+<script
+	is:inline
+	set:html={`
+	window.StarlightThemeProvider = {
+		updatePickers: (
+			theme = (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme')) || 'auto'
+		) => {
+			document.querySelectorAll('starlight-theme-select select').forEach((select) => {
+				select.value = theme;
+			});
+		},
+	};
+	StarlightThemeProvider.updatePickers();`}
+/>
 
 <style>
 	@layer starlight.components {
