@@ -25,8 +25,7 @@ import Select from './Select.astro';
 {/* Inlined to avoid FOUC. The module script further below also uses the global defined here. */}
 <script
 	is:inline
-	set:html={`
-	window.StarlightThemeProvider = {
+	set:html={`window.StarlightThemeProvider = {
 		updatePickers: (
 			theme = (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme')) || 'auto'
 		) => {
