@@ -26,15 +26,15 @@ import Select from './Select.astro';
 <script
 	is:inline
 	set:html={`window.StarlightThemeProvider = {
-		updatePickers: (
-			theme = (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme')) || 'auto'
-		) => {
-			document.querySelectorAll('starlight-theme-select select').forEach((select) => {
-				select.value = theme;
-			});
-		},
-	};
-	StarlightThemeProvider.updatePickers();`}
+	updatePickers: (
+		theme = (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme')) || 'auto'
+	) => {
+		document.querySelectorAll('starlight-theme-select select').forEach((select) => {
+			select.value = theme;
+		});
+	},
+};
+StarlightThemeProvider.updatePickers();`}
 />
 
 <style>
