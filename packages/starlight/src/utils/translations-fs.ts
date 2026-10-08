@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import yaml from 'js-yaml';
+import { parse } from 'yaml';
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import { createTranslationSystem } from './createTranslationSystem';
 import type { StarlightConfig } from './user-config';
@@ -32,12 +31,9 @@ export async function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 			const filePath = path.parse(file);
 			if (!contentCollectionFileExtensions.includes(filePath.ext)) continue;
 			const id = filePath.name;
-			const url = new URL(filePath.base, i18nDir);
 			const content = fs.readFileSync(new URL(file, i18nDir), 'utf-8');
 			const data = (
-				filePath.ext === '.json'
-					? JSON.parse(content)
-					: yaml.load(content, { filename: fileURLToPath(url) })
+				filePath.ext === '.json' ? JSON.parse(content) : parse(content)
 			) as i18nSchemaOutput;
 			userTranslations[id] = data;
 		}

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
-import { YAMLException } from 'js-yaml';
+import { YAMLError } from 'yaml';
 
 describe('createTranslationSystemFromFs', () => {
 	test('creates a translation system that returns default strings', async () => {
@@ -89,7 +89,7 @@ describe('createTranslationSystemFromFs', () => {
 				// Using `malformed-yaml-src/` to trigger syntax error in bad YAML file.
 				{ srcDir: new URL('./malformed-yaml-src/', import.meta.url) }
 			)
-		).rejects.toThrow(YAMLException);
+		).rejects.toThrow(YAMLError);
 	});
 
 	test('creates a translation system that uses custom strings injected by plugins', async () => {
