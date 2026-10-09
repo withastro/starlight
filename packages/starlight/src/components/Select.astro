@@ -26,11 +26,9 @@ interface Props {
 	<span class="sr-only">{Astro.props.label}</span>
 	<Icon name={Astro.props.icon} class="icon label-icon" />
 	<select autocomplete="off">
-		{
-			Astro.props.options.map(({ value, selected, label }) => (
-				<option value={value} selected={selected} set:html={label} />
-			))
-		}
+		{Astro.props.options.map(({ value, selected, label }) => (
+			<option value={value} selected={selected} set:html={label} />
+		))}
 	</select>
 	<Icon name="down-caret" class="icon caret" />
 </label>

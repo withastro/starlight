@@ -54,22 +54,16 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 <div class="logo-grid-wrapper not-content" data-pagefind-ignore>
 	<h2 class="logo-grid-title">{Astro.props.title}</h2>
 	<ul role="list" class="logo-grid" style={{ '--max-logo-height': maxHeight }}>
-		{
-			Object.entries(logos).map(([key, { label, h }]) => {
-				const Logo = svgs[`./logos/${key}.svg`];
-				if (!Logo) {
-					throw new Error(
-						`${key}.svg not found. Make sure the file exists in the logos directory.`
-					);
-				}
-				return (
-					<li class="sl-flex">
-						<Logo aria-hidden="true" style={{ '--h': h }} height={h} />
-						<span class="sr-only">{label}</span>
-					</li>
-				);
-			})
-		}
+		{Object.entries(logos).map(([key, { label, h }]) => {
+			const Logo = svgs[`./logos/${key}.svg`];
+			if (!Logo) {
+				throw new Error(`${key}.svg not found. Make sure the file exists in the logos directory.`);
+			}
+			return <li class="sl-flex">
+				<Logo aria-hidden="true" style={{ '--h': h }} height={h} />
+				<span class="sr-only">{label}</span>
+			</li>;
+		})}
 	</ul>
 </div>
 
