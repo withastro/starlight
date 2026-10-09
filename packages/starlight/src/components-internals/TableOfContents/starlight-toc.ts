@@ -37,29 +37,24 @@ export class StarlightTOC extends HTMLElement {
 			el.matches(this.tocHeadingSelector);
 
 		/** Walk up the DOM to find the nearest heading. */
-		const getElementHeading = (el: Element | null): HTMLHeadingElement | null => {
-			if (!el) return null;
-			const origin = el;
+		const getElementHeading = (el: Element | null): HTMLElement | null => {
 			while (el) {
 				// Short circuit if we reach the top-level content container or one of the other containers in main.
 				if (el.matches('.sl-markdown-content, main > *')) {
-					return document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement;
+					return document.getElementById(PAGE_TITLE_ID);
 				}
 				if (isHeading(el)) return el;
 				// Find the first heading that is a child of this element, and return it if there is one.
-				const childHeading = el.querySelector<HTMLHeadingElement>(this.tocHeadingSelector);
+				const childHeading = el.querySelector<HTMLElement>(this.tocHeadingSelector);
 				if (childHeading) return childHeading;
-				// Assign the previous sibling’s last, most deeply nested child to el.
-				el = el.previousElementSibling;
-				while (el?.lastElementChild) {
-					el = el.lastElementChild;
+				// Look for the previous sibling last and most deeply nested child.
+				let prev = el.previousElementSibling;
+				while (prev?.lastElementChild) {
+					prev = prev.lastElementChild;
 				}
-				// Look for headings amongst siblings.
-				const h = getElementHeading(el);
-				if (h) return h;
+				el = prev ?? el.parentElement;
 			}
-			// Walk back up the parent.
-			return getElementHeading(origin.parentElement);
+			return null;
 		};
 
 		/** Handle intersections and set the current link to the heading for the current intersection. */

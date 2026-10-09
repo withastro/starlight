@@ -1,5 +1,5 @@
 ---
-import { flattenSidebar } from '../utils/navigation';
+import { sidebarGroupHasCurrent } from '../utils/navigation';
 import type { SidebarEntry } from '../utils/routing/types';
 import Icon from '../user-components/Icon.astro';
 import Badge from '../user-components/Badge.astro';
@@ -28,25 +28,26 @@ const { sublist, nested } = Astro.props;
 				)}
 			</a>
 		) : (
-			<details open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}>
-				<summary>
-					<span class="group-label">
-						<span class="large">{entry.label}</span>
-						{entry.badge && (
-							<Badge
-								variant={entry.badge.variant}
-								class={entry.badge.class}
-								text={entry.badge.text}
-							/>
-						)}
-					</span>
-					<Icon name="right-caret" class="caret" size="1.25rem" />
-				</summary>
-				<SidebarRestorePoint />
-				<Astro.self sublist={entry.entries} nested />
-			</details>
+					<details open={sidebarGroupHasCurrent(entry) || !entry.collapsed}>
+						<summary>
+							<span class="group-label">
+								<span class="large">{entry.label}</span>
+								{entry.badge && (
+									<Badge
+										variant={entry.badge.variant}
+										class={entry.badge.class}
+										text={entry.badge.text}
+									/>
+								)}
+							</span>
+							<Icon name="right-caret" class="caret" size="1.25rem" />
+						</summary>
+						<SidebarRestorePoint />
+						<Astro.self sublist={entry.entries} nested />
+					</details>
+				)}
+			</li>
 		)}
-	</li>)}
 </ul>
 
 <style>

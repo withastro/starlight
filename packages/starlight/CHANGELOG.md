@@ -1,5 +1,41 @@
 # @astrojs/starlight
 
+## 0.42.6
+
+### Patch Changes
+
+- [#4252](https://github.com/withastro/starlight/pull/4252) [`40a2584`](https://github.com/withastro/starlight/commit/40a258492af4b2ee45159aa4a7ddb30c346acc0b) Thanks [@olafur-andri](https://github.com/olafur-andri)! - Adds Icelandic language support
+
+- [#4229](https://github.com/withastro/starlight/pull/4229) [`e4a3d82`](https://github.com/withastro/starlight/commit/e4a3d82262d62677665cf2dd5ad9a1ba3ae2aa6a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential issue with icons being cut off in Firefox when pinch-zooming.
+
+- [#4226](https://github.com/withastro/starlight/pull/4226) [`fb562dd`](https://github.com/withastro/starlight/commit/fb562dddae97add7f5997c1f7fffd4f60c9f147c) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where pages not importing components from `@astrojs/starlight/components` included styles of Starlight components used on other pages.
+
+- [#4250](https://github.com/withastro/starlight/pull/4250) [`531af7d`](https://github.com/withastro/starlight/commit/531af7deb7dd164e5b97a49223a82b146e575fdc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes `Failed to resolve dependency` warnings logged when running the development server in projects using the Cloudflare adapter.
+
+- [#4229](https://github.com/withastro/starlight/pull/4229) [`e4a3d82`](https://github.com/withastro/starlight/commit/e4a3d82262d62677665cf2dd5ad9a1ba3ae2aa6a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes the `codePen` and `node` icons slightly extending beyond their bounding box.
+
+## 0.42.5
+
+### Patch Changes
+
+- [#4227](https://github.com/withastro/starlight/pull/4227) [`5ba7a70`](https://github.com/withastro/starlight/commit/5ba7a70ad491ed8b5fc7033558dcc5428112cf97) Thanks [@I90rche](https://github.com/I90rche)! - Adds Macedonian language support
+
+## 0.42.4
+
+### Patch Changes
+
+- [#4149](https://github.com/withastro/starlight/pull/4149) [`fa10e87`](https://github.com/withastro/starlight/commit/fa10e87376f49f76a693e8d2b292aef65b959e37) Thanks [@ematipico](https://github.com/ematipico)! - Optimizes rendering of large nested sidebars
+
+- [#4215](https://github.com/withastro/starlight/pull/4215) [`f791de6`](https://github.com/withastro/starlight/commit/f791de65e6e14e9011586004d79f78fcef3a427e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new `seti:coffee` icon for CoffeeScript files in the `<FileTree>` component.
+
+- [#4215](https://github.com/withastro/starlight/pull/4215) [`f791de6`](https://github.com/withastro/starlight/commit/f791de65e6e14e9011586004d79f78fcef3a427e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes `<FileTree>` icons for `.ejs` and `npm-debug.log` files displaying the default file icon.
+
+## 0.42.3
+
+### Patch Changes
+
+- [#4211](https://github.com/withastro/starlight/pull/4211) [`33e21ec`](https://github.com/withastro/starlight/commit/33e21ec86274070df1725580c1e8134e34062c15) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential page freeze due to table of contents highlighting when a [`<PageTitle>` component](https://starlight.astro.build/reference/overrides/#pagetitle) override does not render a heading with the required `id="_top"`.
+
 ## 0.42.2
 
 ### Patch Changes

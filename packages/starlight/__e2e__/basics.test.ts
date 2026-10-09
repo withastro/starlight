@@ -770,6 +770,25 @@ test.describe('ToC highlighting', () => {
 			})
 		);
 	});
+
+	test('does not freeze when the page title heading is missing', async ({
+		page,
+		getProdServer,
+	}) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 1280, height: 720 });
+		await starlight.goto('/headings-no-page-title');
+
+		// First, scroll to the paragraph after the table so we look up its heading by walking through
+		// its previous sibling which is a table with many row/cells.
+		await page
+			.getByText('Some content before the first heading.')
+			.evaluate((paragraph) => paragraph.scrollIntoView());
+		// Then, scroll to the first heading.
+		await page.locator('#heading-1').evaluate((heading) => heading.scrollIntoView());
+
+		await expect(page.locator('starlight-toc [aria-current="true"]')).toHaveText(/Heading 1/);
+	});
 });
 
 test.describe('mobile menu focus trap', () => {
