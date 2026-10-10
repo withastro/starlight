@@ -1,10 +1,13 @@
 import { klona } from 'klona';
-import { bench, describe, vi } from 'vitest';
+import { describe, test, vi } from 'vitest';
 import { getRouteDataTestContext } from '../__tests__/test-utils';
-import { generateRouteData } from '../src/utils/routing/data';
-import { getRouteBySlugParam } from '../src/utils/routing';
-import { getSidebar, sidebarGroupHasCurrent } from '../src/utils/navigation';
 import type { SidebarEntry } from '../src/utils/routing/types';
+import {
+	generateRouteData,
+	getRouteBySlugParam,
+	getSidebar,
+	sidebarGroupHasCurrent,
+} from './benchmark-functions';
 
 const docs = vi.hoisted(() => {
 	const docs: [string, { title: string }][] = [];
@@ -24,6 +27,11 @@ vi.mock('astro:content', async () =>
 	(await import('../__tests__/test-utils')).mockedAstroContent({ docs })
 );
 
+// https://vitest.dev/guide/benchmarking.html#module-runner-overhead
+const benchmarkGenerateRouteData = generateRouteData;
+const benchmarkGetSidebar = getSidebar;
+const benchmarkSidebarGroupHasCurrent = sidebarGroupHasCurrent;
+
 const slug = 'reference/section-9/level-1/level-2/level-3/level-4/level-5/level-6/level-7/page-99';
 const route = getRouteBySlugParam(slug);
 if (!route) throw new Error('Expected deep benchmark route to exist.');
@@ -42,12 +50,16 @@ const props = {
 getSidebar(context.url.pathname, route.locale);
 
 describe('routing', () => {
-	bench('route_data', () => {
-		generateRouteData({ props, context });
+	test('route_data', async ({ bench }) => {
+		await bench('route_data', () => {
+			benchmarkGenerateRouteData({ props, context });
+		}).run();
 	});
 
-	bench('sidebar', () => {
-		getSidebar(context.url.pathname, route.locale);
+	test('sidebar', async ({ bench }) => {
+		await bench('sidebar', () => {
+			benchmarkGetSidebar(context.url.pathname, route.locale);
+		}).run();
 	});
 });
 
@@ -55,12 +67,14 @@ describe('routing', () => {
 function mockSidebarRender(sublist: SidebarEntry[]) {
 	for (const entry of sublist) {
 		if (entry.type !== 'link') {
-			sidebarGroupHasCurrent(entry);
+			benchmarkSidebarGroupHasCurrent(entry);
 			mockSidebarRender(entry.entries);
 		}
 	}
 }
 
-bench('sidebar current groups', () => {
-	mockSidebarRender(klona(getSidebar(context.url.pathname, route.locale)));
+test('sidebar current groups', async ({ bench }) => {
+	await bench('sidebar current groups', () => {
+		mockSidebarRender(klona(benchmarkGetSidebar(context.url.pathname, route.locale)));
+	}).run();
 });
