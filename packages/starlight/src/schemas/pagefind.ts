@@ -59,6 +59,8 @@ export interface PagefindUserConfig {
 				ranking?: PagefindRankingUserConfig | undefined;
 		  }[]
 		| undefined;
+	/** Customize how Pagefind indexes your website at build time. */
+	index?: PagefindIndexUserConfig | undefined;
 }
 
 interface PagefindRankingUserConfig {
@@ -132,6 +134,29 @@ const pagefindIndexOptionsSchema = z.object({
 	ranking: pagefindRankingWeightsSchema.prefault({}),
 });
 
+interface PagefindIndexUserConfig {
+	/**
+	 * Custom CSS selectors that Pagefind should ignore when indexing.
+	 * Use the `data-pagefind-ignore` attribute in your markup instead for more fine-grained control.
+	 * @example ["svg", ".my-code-blocks"]
+	 * @see https://pagefind.app/docs/config-options/#exclude-selectors
+	 */
+	excludeSelectors?: string[];
+	/**
+	 * Set special characters that should not be stripped when indexing and searching words.
+	 * By default, Pagefind strips most special characters such as punctuation.
+	 * Useful for sites documenting technical topics such as programming languages.
+	 * @example "<>$"
+	 * @see https://pagefind.app/docs/config-options/#include-characters
+	 */
+	includeCharacters?: string;
+}
+
+const pagefindIndexSchema = z.object({
+	excludeSelectors: z.array(z.string()).exactOptional(),
+	includeCharacters: z.string().exactOptional(),
+});
+
 const pagefindSchema = z.object({
 	indexWeight: indexWeightSchema,
 	ranking: pagefindRankingWeightsSchema.prefault({}),
@@ -143,6 +168,7 @@ const pagefindSchema = z.object({
 			})
 		)
 		.optional(),
+	index: pagefindIndexSchema.optional(),
 });
 
 export const PagefindConfigSchema = () => pagefindSchema;

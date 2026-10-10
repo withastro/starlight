@@ -46,7 +46,7 @@ declare module 'virtual:starlight/route-middleware' {
 
 declare module 'virtual:starlight/pagefind-config' {
 	export const pagefindUserConfig: Partial<
-		Extract<import('./src/types').StarlightConfig['pagefind'], object>
+		Omit<Extract<import('./src/types').StarlightConfig['pagefind'], object>, 'index'>
 	>;
 }
 
