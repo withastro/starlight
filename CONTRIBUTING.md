@@ -78,13 +78,13 @@ You can [develop locally](#developing-locally) or use an online coding developme
 2. **Generate TypeScript types** for all Astro modules:
 
    ```sh
+   cd docs
    pnpm astro sync
    ```
 
 3. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
 
    ```sh
-   cd docs
    pnpm dev --host
    ```
 
