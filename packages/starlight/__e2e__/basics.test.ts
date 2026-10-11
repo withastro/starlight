@@ -5,6 +5,29 @@ import { expect, testFactory, type Locator, type StarlightPage } from './test-ut
 const test = testFactory('./fixtures/basics/');
 
 test.describe('components', () => {
+	test('keeps the search button accessible at desktop and mobile widths', async ({
+		page,
+		getProdServer,
+	}) => {
+		const starlight = await getProdServer();
+		await starlight.goto('/tabs');
+
+		const searchButton = page.locator('button[data-open-modal]');
+		const searchLabel = searchButton.locator(':scope > span');
+		const shortcut = searchButton.locator(':scope > kbd');
+
+		await expect(searchLabel).toBeVisible();
+		await expect(searchLabel).not.toHaveAttribute('aria-hidden', 'true');
+		await expect(shortcut).toBeVisible();
+		await expect(shortcut).toHaveAttribute('aria-hidden', 'true');
+		await expect(searchButton).toHaveAccessibleName('Search');
+
+		await page.setViewportSize({ width: 375, height: 667 });
+
+		await expect(searchLabel).toBeHidden();
+		await expect(searchButton).toHaveAccessibleName('Search');
+	});
+
 	test.describe('tabs', () => {
 		test('syncs tabs with a click event', async ({ page, getProdServer }) => {
 			const starlight = await getProdServer();

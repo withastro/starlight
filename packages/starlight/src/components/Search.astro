@@ -23,8 +23,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		aria-keyshortcuts="Control+K"
 	>
 		<Icon name="magnifier" />
-		<span class="sl-hidden md:sl-block" aria-hidden="true">{Astro.locals.t('search.label')}</span>
-		<kbd class="sl-hidden md:sl-flex" style="display: none;">
+		<span class="sl-hidden md:sl-block">{Astro.locals.t('search.label')}</span>
+		<kbd class="sl-hidden md:sl-flex" style="display: none;" aria-hidden="true">
 			<kbd>{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
 		</kbd>
 	</button>
