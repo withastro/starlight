@@ -320,10 +320,10 @@ Starlightプラグインのコンテキストでは、[`useTranslations()`](/ja/
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/en/guides/astro-db/">
-	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+<a href="https://docs.astro.build/en/guides/actions/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro Actions' })}
 </a>
-<!-- レンダリング結果: <a href="...">Astro documentation for Astro DB</a> -->
+<!-- レンダリング結果: <a href="...">Astro documentation for Astro Actions</a> -->
 ```
 
 補間やフォーマットなどの`t()`関数の使い方について詳しくは、[i18nextのドキュメント](https://www.i18next.com/overview/api#t)を参照してください。
