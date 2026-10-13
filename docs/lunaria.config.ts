@@ -210,16 +210,18 @@ const Freshness = (config: LunariaConfig, status: LunariaStatus) => {
 			</div>
 			<template id="freshness-locale-template">
 				<h3></h3>
-				<table data-outdated-files>
-					<thead>
-						<tr>
-							<th>Translation</th>
-							<th>Last translation update</th>
-							<th>Last source update</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
+				<div class="table-wrapper" role="region" tabindex="0">
+					<table data-outdated-files>
+						<thead>
+							<tr>
+								<th>Translation</th>
+								<th>Last translation update</th>
+								<th>Last source update</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
 			</template>
 			<template id="freshness-file-template">
 				<tr>
