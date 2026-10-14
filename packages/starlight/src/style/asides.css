@@ -39,6 +39,8 @@
 		font-size: 1.333em;
 		width: 1em;
 		height: 1em;
+		/* Prevent Firefox from cutting off edges of icons when pinch-zooming. */
+		overflow: visible;
 	}
 
 	.starlight-aside__title + .starlight-aside__content {

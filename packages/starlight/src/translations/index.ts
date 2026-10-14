@@ -33,6 +33,8 @@ import sk from './sk.json';
 import lv from './lv.json';
 import hu from './hu.json';
 import el from './el.json';
+import mk from './mk.json';
+import isIS from './is.json';
 
 const { parse } = builtinI18nSchema();
 
@@ -72,5 +74,7 @@ export default Object.fromEntries(
 		lv,
 		hu,
 		el,
+		mk,
+		is: isIS,
 	}).map(([key, dict]) => [key, parse(dict)])
 );

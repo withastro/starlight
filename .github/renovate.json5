@@ -46,5 +46,16 @@
 			matchFileNames: ['.github/workflows/ci.yml'],
 			allowedVersions: '/^22\\./',
 		},
+		{
+			description: 'Group zizmor and zizmor-action updates',
+			matchPackageNames: ['ghcr.io/zizmorcore/zizmor', 'zizmorcore/zizmor-action'],
+			groupName: 'zizmor',
+			minimumGroupSize: 2,
+		},
+		{
+			description: 'Skip the minimum release age for zizmor updates as the GitHub Container Registry does not provide release timestamps',
+			matchPackageNames: ['ghcr.io/zizmorcore/zizmor'],
+			minimumReleaseAge: null,
+		},
 	],
 }

@@ -24,6 +24,7 @@ hero:
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
 import AboutAstro from '~/components/about-astro.astro';
+import LogoGrid from '~/components/logo-grid/logo-grid.astro';
 import TestimonialGrid from '~/components/testimonial-grid.astro';
 import Testimonial from '~/components/testimonial.astro';
 
@@ -45,6 +46,8 @@ import Testimonial from '~/components/testimonial.astro';
 		React, Vue, Svelte, Solid 등으로 확장하세요.
 	</Card>
 </CardGrid>
+
+<LogoGrid title="크고 작은 팀들이 신뢰합니다" />
 
 <TestimonialGrid title="사용 후기를 들어보세요">
   <Testimonial

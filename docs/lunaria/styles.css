@@ -253,6 +253,10 @@ translation-freshness {
 		}
 	}
 
+	.table-wrapper {
+		width: auto;
+	}
+
 	table {
 		border: 1px solid var(--ln-color-table-border);
 		border-collapse: collapse;
@@ -270,9 +274,6 @@ translation-freshness {
 	thead th {
 		background-color: var(--ln-color-table-background);
 		font-weight: bold;
-		position: sticky;
-		top: -1px;
-		z-index: 1;
 	}
 
 	th,
@@ -289,13 +290,10 @@ translation-freshness {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.25rem 1rem;
+		justify-content: space-between;
 
 		span {
 			white-space: nowrap;
-		}
-
-		[data-calendar-date] {
-			margin-inline-start: auto;
 		}
 	}
 }
