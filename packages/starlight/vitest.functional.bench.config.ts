@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import codspeedPlugin from '@codspeed/vitest-plugin';
+import { mergeConfig } from 'vitest/config';
 import { defineVitestConfig } from './__tests__/test-config';
 
 const testConfig = await defineVitestConfig({
@@ -12,15 +13,14 @@ export default async (env: Parameters<typeof testConfig>[0]) => {
 	return {
 		...config,
 		plugins: [...(config.plugins ?? []), codspeedPlugin()],
-		resolve: {
-			...config.resolve,
+		resolve: mergeConfig(config.resolve ?? {}, {
 			/** @see {@link file://./__bench_fn__/benchmark-functions.ts} */
 			alias: {
 				'./benchmark-functions': fileURLToPath(
 					new URL('./__bench_fn__/dist/benchmark-functions.mjs', import.meta.url)
 				),
 			},
-		},
+		}),
 		test: {
 			...config.test,
 			// The shared serializer path is not resolvable from this root benchmark config.
