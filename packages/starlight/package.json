@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^7.3.0",
-    "@codspeed/vitest-plugin": "^5.7.1",
+    "@codspeed/vitest-plugin": "^6.0.0",
     "@playwright/test": "^1.61.1",
     "@types/node": "^22.19.17",
     "@vitest/coverage-v8": "^5.0.2",
