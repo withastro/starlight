@@ -27,7 +27,8 @@ vi.mock('astro:content', async () =>
 	(await import('../__tests__/test-utils')).mockedAstroContent({ docs })
 );
 
-// https://vitest.dev/guide/benchmarking.html#module-runner-overhead
+// We store the imports in local variables to avoid triggering Vite’s import getters for every call.
+// See: https://vitest.dev/guide/benchmarking.html#module-runner-overhead
 const benchmarkGenerateRouteData = generateRouteData;
 const benchmarkGetSidebar = getSidebar;
 const benchmarkSidebarGroupHasCurrent = sidebarGroupHasCurrent;
