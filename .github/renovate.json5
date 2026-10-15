@@ -25,7 +25,7 @@
 		{
 			description: 'Disable package manager version updates',
 			matchPackageNames: ['pnpm'],
-			matchDepTypes: ['packageManager'],
+			matchDepTypes: ['devEngines.packageManager'],
 			enabled: false,
 		},
 		{
