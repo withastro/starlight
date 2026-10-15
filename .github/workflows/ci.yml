@@ -106,7 +106,7 @@ jobs:
           runtime: node@22.23.1
           cache: true
           install: false
-      - run: pnpm i --filter @astrojs/starlight --filter "@e2e/*"
+      - run: pnpm i --no-runtime --filter @astrojs/starlight --filter "@e2e/*"
       - name: Test packages
         run: pnpm -r test:e2e:ci
 

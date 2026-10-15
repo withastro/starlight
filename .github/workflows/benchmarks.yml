@@ -42,7 +42,6 @@ jobs:
           persist-credentials: false
       - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
           cache: true
           install: false
       - run: pnpm i --filter @astrojs/starlight

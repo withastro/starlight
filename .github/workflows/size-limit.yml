@@ -27,7 +27,6 @@ jobs:
       - name: Install pnpm, Node.js, and dependencies
         uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@24.18.0
           cache: true
       - run: 'pnpm build:examples'
       - run: pnpm size
@@ -47,7 +46,6 @@ jobs:
       - name: Install pnpm and Node.js
         uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@24.18.0
           cache: true
           install: false
       - name: Run size-limit
