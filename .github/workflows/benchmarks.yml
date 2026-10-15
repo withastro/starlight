@@ -47,7 +47,7 @@ jobs:
           cache: pnpm
       - run: pnpm i --filter @astrojs/starlight
       - name: Run benchmarks
-        uses: CodSpeedHQ/action@4296e51e7041e24dadb86d1d6e8b9320d223dbe8 # v5.0.3
+        uses: CodSpeedHQ/action@f842b9a3ffe213dbb81768fd7f7eeb4dfcf1c369 # v5.4.2
         with:
           mode: simulation
           run: pnpm --filter @astrojs/starlight bench

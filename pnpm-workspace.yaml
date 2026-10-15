@@ -33,3 +33,5 @@ minimumReleaseAgeExclude:
   - '@astrojs/markdown-satteri@0.4.0'
   - astro@7.2.10
   - '@lunariajs/core@0.2.1'
+  - '@codspeed/core@6.0.0'
+  - '@codspeed/vitest-plugin@6.0.0'
