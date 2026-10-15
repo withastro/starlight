@@ -32,7 +32,7 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2"
   },
-  "packageManager": "pnpm@11.22.0",
+  "packageManager": "pnpm@12.11.2",
   "size-limit": [
     {
       "name": "/index.html",
