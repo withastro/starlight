@@ -73,5 +73,5 @@ data.lastUpdated = new Date().toISOString();
 
 // Write updated stats back to `src/content/stats.json`.
 console.log('‣ Writing updated stats to src/content/stats.json...');
-await writeFile('src/content/stats.json', `${JSON.stringify(data, null, '\t')}\n`);
+await writeFile('src/content/stats.json', `${JSON.stringify(data, null, 2)}\n`);
 console.log('✔︎ Stats updated successfully!');
