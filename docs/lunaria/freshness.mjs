@@ -195,7 +195,10 @@ class TranslationFreshness extends HTMLElement {
 	 */
 	#renderOutdatedFiles(content, locale, now) {
 		const table = this.#getElement('[data-outdated-files]', content);
-		table.setAttribute('aria-labelledby', `freshness-${locale.lang}`);
+		this.#getElement('.table-wrapper', content).setAttribute(
+			'aria-labelledby',
+			`freshness-${locale.lang}`
+		);
 
 		const template = this.#getElement('#freshness-file-template');
 		if (!(template instanceof HTMLTemplateElement)) throw new Error('Missing file template.');
