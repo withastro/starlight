@@ -92,7 +92,10 @@ const stats: Stat[] = [
 					<strong class="value">{value}</strong>
 				</div>
 				<span class="label">{label}</span>
-				<a {href}>{source}</a>
+				<a {href}>
+					{source}
+					<span class="sr-only">({label})</span>
+				</a>
 			</li>
 		))
 	}
@@ -164,7 +167,6 @@ const stats: Stat[] = [
 		align-self: center;
 		color: var(--sl-color-text-accent);
 		font-size: var(--sl-text-sm);
-		margin-top: auto;
 		margin-top: 0;
 		text-underline-offset: 4px;
 	}
