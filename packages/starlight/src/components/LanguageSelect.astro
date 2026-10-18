@@ -20,7 +20,7 @@ function localizedPathname(locale: string | undefined): string {
 				label={Astro.locals.t('languageSelect.accessibleLabel')}
 				options={Object.entries(config.locales).map(([code, locale]) => ({
 					value: localizedPathname(code),
-					selected: code === Astro.locals.starlightRoute.locale,
+					selected: code === (Astro.locals.starlightRoute.locale ?? 'root'),
 					label: locale!.label,
 				}))}
 				width="7em"
