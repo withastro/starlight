@@ -436,8 +436,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			/* // TODO(HiDeoo)  */
 			/* --pf-error-text-secondary: var(--sl-color-red-high); */
 
-			/* // TODO(HiDeoo)  */
-			/* --pf-outline-focus: #0969da; */
+			--pf-outline-focus: var(--sl-color-accent);
 			/* // TODO(HiDeoo)  */
 			/* --pf-outline-width: 2px; */
 			/* // TODO(HiDeoo)  */
@@ -570,6 +569,11 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			starlight-pagefind .pf-modal-close {
 				display: none;
 			}
+		}
+
+		starlight-pagefind .pf-input {
+			background-color: var(--sl-color-black);
+			border: 1px solid var(--sl-color-gray-5);
 		}
 	}
 	/* TODO(HiDeoo)  */
