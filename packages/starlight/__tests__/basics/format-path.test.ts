@@ -137,3 +137,40 @@ describe.each<{
 		});
 	}
 );
+
+describe.each<{
+	options: FormatPathOptions;
+	tests: Array<{ path: string; expected: string }>;
+}>([
+	{
+		options: { format: 'directory', trailingSlash: 'always' },
+		tests: [
+			{ path: '/guides/components#tabs', expected: '/guides/components/#tabs' },
+			{ path: '/guides/components/#tabs', expected: '/guides/components/#tabs' },
+			{ path: '/search?q=astro', expected: '/search/?q=astro' },
+			{ path: '/#_top', expected: '/#_top' },
+		],
+	},
+	{
+		options: { format: 'directory', trailingSlash: 'never' },
+		tests: [
+			{ path: '/guides/components/#tabs', expected: '/guides/components#tabs' },
+			{ path: '/search/?q=astro', expected: '/search?q=astro' },
+		],
+	},
+	{
+		options: { format: 'file', trailingSlash: 'ignore' },
+		tests: [
+			{ path: '/guides/components/#tabs', expected: '/guides/components.html#tabs' },
+			{ path: '/search?q=astro', expected: '/search.html?q=astro' },
+			{ path: '/#_top', expected: '/index.html#_top' },
+		],
+	},
+])(
+	'formatPath() with a query or hash and { format: $options.format, trailingSlash: $options.trailingSlash }',
+	({ options, tests }) => {
+		test.each(tests)('returns $expected for $path', ({ path, expected }) => {
+			expect(formatPath(path, options)).toBe(expected);
+		});
+	}
+);
