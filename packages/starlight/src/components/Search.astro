@@ -13,6 +13,8 @@ const pagefindTranslations = {
 
 const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagefindTranslations) };
 if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
+
+const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/';
 ---
 
 <site-search class={Astro.props.class} {...dataAttributes}>
@@ -56,6 +58,11 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	</dialog>
 </site-search>
 
+<pagefind-config bundle-path={pagefindBundlePath} base-url={import.meta.env.BASE_URL}>
+</pagefind-config>
+<pagefind-modal-trigger></pagefind-modal-trigger>
+<pagefind-modal></pagefind-modal>
+
 {
 	/**
 	 * This is intentionally inlined to avoid briefly showing an invalid shortcut.
@@ -78,6 +85,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </script>
 
 <script>
+	import '@pagefind/component-ui';
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 
 	class SiteSearch extends HTMLElement {
@@ -298,6 +306,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 <style is:global>
 	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.core);
+	@import url('@pagefind/component-ui/css') layer(starlight.core);
 
 	@layer starlight.core {
 		[data-search-modal-open] {
