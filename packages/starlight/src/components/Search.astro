@@ -696,6 +696,12 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			white-space: normal;
 			overflow-wrap: anywhere;
 		}
+
+		@media (hover: none) {
+			starlight-pagefind pagefind-modal-footer {
+				display: none;
+			}
+		}
 	}
 	/* TODO(HiDeoo)  */
 	@layer starlight.core {
