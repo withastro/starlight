@@ -407,7 +407,48 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		starlight-pagefind {
 			display: contents;
 
+			--pf-text: var(--sl-color-white);
+			--pf-text-secondary: var(--sl-color-gray-2);
+			--pf-text-muted: var(--sl-color-gray-3);
+			--pf-background: var(--sl-color-black);
+			--pf-border: var(--sl-color-gray-5);
+			--pf-border-focus: var(--sl-color-accent);
+			--pf-skeleton: var(--sl-color-gray-5);
+			/* // TODO(HiDeoo)  */
+			/* --pf-skeleton-shine: var(--sl-color-gray-6); */
+			--pf-hover: var(--sl-color-gray-5);
+			--pf-mark: var(--sl-color-white);
+			/* // TODO(HiDeoo)  */
+			/* --pf-scroll-shadow: var(--sl-color-backdrop-overlay); */
+
+			/* // TODO(HiDeoo)  */
+			/* --pf-shadow-sm: var(--sl-shadow-sm); */
+			/* // TODO(HiDeoo)  */
+			/* --pf-shadow-md: var(--sl-shadow-md); */
+			--pf-shadow-lg: var(--sl-shadow-lg);
+
+			/* // TODO(HiDeoo)  */
+			/* --pf-error-bg: var(--sl-color-red-low); */
+			/* // TODO(HiDeoo)  */
+			/* --pf-error-border: var(--sl-color-red); */
+			/* // TODO(HiDeoo)  */
+			/* --pf-error-text: var(--sl-color-red-high); */
+			/* // TODO(HiDeoo)  */
+			/* --pf-error-text-secondary: var(--sl-color-red-high); */
+
+			/* // TODO(HiDeoo)  */
+			/* --pf-outline-focus: #0969da; */
+			/* // TODO(HiDeoo)  */
+			/* --pf-outline-width: 2px; */
+			/* // TODO(HiDeoo)  */
+			/* --pf-outline-offset: 2px; */
+
 			--pf-font: var(--__sl-font);
+
+			--pf-input-height: 2.5rem;
+
+			/* // TODO(HiDeoo)  */
+
 			--pf-icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z'/%3E%3C/svg%3E");
 		}
 
@@ -424,7 +465,6 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			border-radius: revert;
 			background-color: transparent;
 			color: var(--sl-color-gray-1);
-			height: 2.5rem;
 			font-size: var(--sl-text-xl);
 			font-family: var(--__sl-font);
 			line-height: var(--sl-line-height);
@@ -500,7 +540,6 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			max-width: 100%;
 			height: 100%;
 			max-height: 100%;
-			box-shadow: var(--sl-shadow-lg);
 			animation: none;
 		}
 
