@@ -412,7 +412,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			--pf-text-muted: var(--sl-color-gray-3);
 			--pf-background: var(--sl-color-black);
 			--pf-border: var(--sl-color-gray-5);
-			--pf-border-focus: var(--sl-color-accent);
+			--pf-border-focus: var(--sl-color-accent-high);
 			--pf-skeleton: var(--sl-color-gray-5);
 			/* // TODO(HiDeoo)  */
 			/* --pf-skeleton-shine: var(--sl-color-gray-6); */
@@ -421,8 +421,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			/* // TODO(HiDeoo)  */
 			/* --pf-scroll-shadow: var(--sl-color-backdrop-overlay); */
 
-			/* // TODO(HiDeoo)  */
-			/* --pf-shadow-sm: var(--sl-shadow-sm); */
+			--pf-shadow-sm: none;
 			/* // TODO(HiDeoo)  */
 			/* --pf-shadow-md: var(--sl-shadow-md); */
 			--pf-shadow-lg: var(--sl-shadow-lg);
@@ -445,6 +444,16 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			--pf-font: var(--__sl-font);
 
 			--pf-input-height: 2.5rem;
+			/* // TODO(HiDeoo)  */
+			/* --pf-input-font-size: 16px; Keep at 16px+ to prevent iOS auto-zoom on focus */
+			/* // TODO(HiDeoo)  */
+			/* --pf-summary-font-size: 12px; */
+			--pf-result-title-font-size: var(--sl-text-base);
+			--pf-result-excerpt-font-size: var(--sl-text-xs);
+
+			/* // TODO(HiDeoo)  */
+
+			--pf-results-gap: 1rem;
 
 			/* // TODO(HiDeoo)  */
 
@@ -575,6 +584,31 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		starlight-pagefind .pf-input {
 			background-color: var(--sl-color-black);
 			border: 1px solid var(--sl-color-gray-5);
+		}
+
+		starlight-pagefind .pf-result-card:has([data-pf-selected], .pf-result-link:focus-visible) {
+			background-color: var(--sl-color-accent-low);
+			border-color: var(--sl-color-accent-high);
+			box-shadow: none;
+		}
+
+		starlight-pagefind .pf-result-card::before {
+			content: '';
+			flex-shrink: 0;
+			width: 1.5rem;
+			background-color: var(--sl-color-gray-3);
+			-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+				center no-repeat;
+			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+				center no-repeat;
+		}
+
+		[dir='rtl'] starlight-pagefind .pf-result-card::before {
+			transform: matrix(-1, 0, 0, 1, 0, 0);
+		}
+
+		starlight-pagefind .pf-result-link:hover {
+			text-decoration: none;
 		}
 	}
 	/* TODO(HiDeoo)  */
