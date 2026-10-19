@@ -58,7 +58,11 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 	</dialog>
 </site-search>
 
-<pagefind-config bundle-path={pagefindBundlePath} base-url={import.meta.env.BASE_URL}>
+<pagefind-config
+	bundle-path={pagefindBundlePath}
+	base-url={import.meta.env.BASE_URL}
+	data-strip-trailing-slash={project.trailingSlash === 'never' ? '' : undefined}
+>
 </pagefind-config>
 <pagefind-modal-trigger></pagefind-modal-trigger>
 <pagefind-modal></pagefind-modal>
@@ -92,10 +96,54 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 
 	const { mergeIndex = [], ...pagefindOptions } = pagefindUserConfig;
 
-	// Importing `@pagefind/component-ui` registers the custom elements and creates the default
-	// instance so we can't use `configureInstance()` afterwards.
+	// TODO(HiDeoo) Importing `@pagefind/component-ui` registers the custom elements and creates the
+	// default instance so we can't use `configureInstance()` afterwards.
+	// Use `configureInstance()` once https://github.com/Pagefind/pagefind/pull/1323 is released.
 	instance.options.mergeIndex = mergeIndex;
 	instance.pagefindOptions = { ...instance.pagefindOptions, ...pagefindOptions };
+
+	const shouldStrip = document
+		.querySelector('pagefind-config')
+		?.hasAttribute('data-strip-trailing-slash');
+
+	if (shouldStrip) {
+		const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
+
+		// TODO(HiDeoo) The Pagefind Component UI does not provide an equivalent to `processResult()` to
+		// modify results before rendering them. To support `trailingSlash: 'never'`, we monkey-patch the
+		// `search()` method for now.
+		// Remove this workaround once https://github.com/Pagefind/pagefind/issues/1215 is resolved.
+		const load = instance.__load__.bind(instance);
+		let isPatched = false;
+		instance.__load__ = async () => {
+			await load();
+
+			// @ts-expect-error - private property
+			const pagefind = instance.__pagefind__;
+			if (isPatched || !pagefind) return;
+			isPatched = true;
+
+			const search = pagefind.search.bind(pagefind);
+			pagefind.search = async (...args: unknown[]) => {
+				const response = await search(...args);
+
+				for (const result of response?.results ?? []) {
+					const data = result.data;
+					result.data = async () => {
+						const fragment = await data();
+						fragment.url = stripTrailingSlash(fragment.url);
+						fragment.sub_results = fragment.sub_results.map((sub: { url: string }) => ({
+							...sub,
+							url: stripTrailingSlash(sub.url),
+						}));
+						return fragment;
+					};
+				}
+
+				return response;
+			};
+		};
+	}
 
 	class SiteSearch extends HTMLElement {
 		constructor() {
