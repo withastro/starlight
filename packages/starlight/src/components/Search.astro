@@ -446,8 +446,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			--pf-input-height: 2.5rem;
 			/* // TODO(HiDeoo)  */
 			/* --pf-input-font-size: 16px; Keep at 16px+ to prevent iOS auto-zoom on focus */
-			/* // TODO(HiDeoo)  */
-			/* --pf-summary-font-size: 12px; */
+			--pf-summary-font-size: var(--sl-text-xs);
 			--pf-result-title-font-size: var(--sl-text-base);
 			--pf-result-excerpt-font-size: var(--sl-text-xs);
 
@@ -589,6 +588,11 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		starlight-pagefind .pf-input {
 			background-color: var(--sl-color-black);
 			border: 1px solid var(--sl-color-gray-5);
+		}
+
+		starlight-pagefind .pf-summary {
+			padding-block: 0.5rem;
+			color: var(--sl-color-gray-2);
 		}
 
 		starlight-pagefind
