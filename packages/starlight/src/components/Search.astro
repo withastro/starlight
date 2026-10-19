@@ -61,11 +61,12 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 <pagefind-config
 	bundle-path={pagefindBundlePath}
 	base-url={import.meta.env.BASE_URL}
-	data-strip-trailing-slash={project.trailingSlash === 'never' ? '' : undefined}
+	{...dataAttributes}
 >
 </pagefind-config>
 <pagefind-modal-trigger></pagefind-modal-trigger>
-<pagefind-modal></pagefind-modal>
+{/* TODO(HiDeoo) Restore the modal, see below for more details. */}
+{/* <pagefind-modal></pagefind-modal> */}
 
 {
 	/**
@@ -93,7 +94,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 
 	const instance = getInstanceManager().getInstance();
-
+	const config = document.querySelector('pagefind-config');
 	const { mergeIndex = [], ...pagefindOptions } = pagefindUserConfig;
 
 	// TODO(HiDeoo) Importing `@pagefind/component-ui` registers the custom elements and creates the
@@ -102,9 +103,15 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 	instance.options.mergeIndex = mergeIndex;
 	instance.pagefindOptions = { ...instance.pagefindOptions, ...pagefindOptions };
 
-	const shouldStrip = document
-		.querySelector('pagefind-config')
-		?.hasAttribute('data-strip-trailing-slash');
+	instance.setTranslations(JSON.parse(config?.getAttribute('data-translations') ?? '{}'));
+	// TODO(HiDeoo) Setting the translations re-renders the modal but the existing `<dialog>` ends
+	// up being wrapped in a new one. This means that opening the modal only shows a backdrop, as the
+	// content is in a closed nested `<dialog>`. To work around the issue, we only create the modal
+	// after setting the translations.
+	// Remove this workaround once the issue is resolved.
+	document.querySelector('pagefind-modal-trigger')?.after(document.createElement('pagefind-modal'));
+
+	const shouldStrip = config?.hasAttribute('data-strip-trailing-slash');
 
 	if (shouldStrip) {
 		const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
