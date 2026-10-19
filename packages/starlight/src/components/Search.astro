@@ -85,8 +85,17 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 </script>
 
 <script>
-	import '@pagefind/component-ui';
+	import { getInstanceManager } from '@pagefind/component-ui';
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
+
+	const instance = getInstanceManager().getInstance();
+
+	const { mergeIndex = [], ...pagefindOptions } = pagefindUserConfig;
+
+	// Importing `@pagefind/component-ui` registers the custom elements and creates the default
+	// instance so we can't use `configureInstance()` afterwards.
+	instance.options.mergeIndex = mergeIndex;
+	instance.pagefindOptions = { ...instance.pagefindOptions, ...pagefindOptions };
 
 	class SiteSearch extends HTMLElement {
 		constructor() {
