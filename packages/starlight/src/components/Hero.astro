@@ -10,6 +10,7 @@ const { title = data.title, tagline, image, actions = [] } = data.hero || {};
 const imageAttrs = {
 	loading: 'eager' as const,
 	decoding: 'async' as const,
+	fetchpriority: 'high' as const,
 	width: 400,
 	height: 400,
 	alt: image?.alt || '',
