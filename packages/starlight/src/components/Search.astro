@@ -37,7 +37,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			<button data-close-modal class="sl-flex md:sl-hidden">
 				{Astro.locals.t('search.cancelLabel')}
 			</button>
-			{
+			{/* TODO(HiDeoo) Restore dev mode warning. */}
+			<!-- {
 				import.meta.env.DEV ? (
 					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
 						<p>{Astro.locals.t('search.devWarning')}</p>
@@ -47,7 +48,10 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 						<div id="starlight__search" />
 					</div>
 				)
-			}
+			} -->
+			<div class="search-container">
+				<div id="starlight__search"></div>
+			</div>
 		</div>
 	</dialog>
 </site-search>
@@ -133,7 +137,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
 
 			window.addEventListener('DOMContentLoaded', () => {
-				if (import.meta.env.DEV) return;
+				// TODO(HiDeoo) Restore dev mode check.
+				// if (import.meta.env.DEV) return;
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 				onIdle(async () => {
 					// @ts-expect-error — Missing types for @pagefind/default-ui package.
