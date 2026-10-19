@@ -522,6 +522,16 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			-webkit-backdrop-filter: blur(0.25rem);
 			backdrop-filter: blur(0.25rem);
 		}
+
+		starlight-pagefind .pf-modal-close {
+			display: flex;
+		}
+
+		@media (min-width: 50rem) {
+			starlight-pagefind .pf-modal-close {
+				display: none;
+			}
+		}
 	}
 	/* TODO(HiDeoo)  */
 	@layer starlight.core {
