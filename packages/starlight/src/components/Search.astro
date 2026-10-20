@@ -67,6 +67,7 @@ const showDevWarning = false; // import.meta.env.DEV;
 
 <script>
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
+	import { setPagefindInstance } from '../utils/pagefind';
 
 	class StarlightPagefind extends HTMLElement {
 		constructor() {
@@ -139,6 +140,8 @@ const showDevWarning = false; // import.meta.env.DEV;
 						};
 					};
 				}
+
+				setPagefindInstance(instance);
 			});
 		}
 	}
