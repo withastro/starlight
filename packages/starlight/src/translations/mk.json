@@ -30,13 +30,9 @@
   "expressiveCode.copyButtonTooltip": "Копирај во меморија",
   "expressiveCode.terminalWindowFallbackTitle": "Прозор на терминал",
   "pagefind.clear_search": "Исчисти",
-  "pagefind.load_more": "Вчитај повеќе резултати",
   "pagefind.search_label": "Пребарај ја веб-локацијата",
-  "pagefind.filters_label": "Филтри",
   "pagefind.zero_results": "Нема резултати за [SEARCH_TERM]",
   "pagefind.many_results": "[COUNT] резултати за [SEARCH_TERM]",
   "pagefind.one_result": "[COUNT] резултат за [SEARCH_TERM]",
-  "pagefind.alt_search": "Нема резултати за [SEARCH_TERM]. Прикажани се резултати за [DIFFERENT_TERM]",
-  "pagefind.search_suggestion": "Нема резултати за [SEARCH_TERM]. Обидете се со некое од следниве пребарувања:",
   "pagefind.searching": "Се пребарува [SEARCH_TERM]..."
 }

@@ -32,13 +32,9 @@
   "expressiveCode.terminalWindowFallbackTitle": "Útstöðvargluggi",
 
   "pagefind.clear_search": "Hreinsa",
-  "pagefind.load_more": "Sækja fleiri niðurstöður",
   "pagefind.search_label": "Leita á þessum vef",
-  "pagefind.filters_label": "Síur",
   "pagefind.zero_results": "Engar niðurstöður fundust fyrir [SEARCH_TERM]",
   "pagefind.many_results": "[COUNT] niðurstöður fyrir [SEARCH_TERM]",
   "pagefind.one_result": "[COUNT] niðurstaða fyrir [SEARCH_TERM]",
-  "pagefind.alt_search": "Engar niðurstöður fundust fyrir [SEARCH_TERM]. Sýni niðurstöður fyrir [DIFFERENT_TERM] í staðinn",
-  "pagefind.search_suggestion": "Engar niðurstöður fundust fyrir [SEARCH_TERM]. Prófaðu eina af eftirfarandi leitum:",
   "pagefind.searching": "Leita að [SEARCH_TERM]..."
 }

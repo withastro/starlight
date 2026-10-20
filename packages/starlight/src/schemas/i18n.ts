@@ -175,19 +175,9 @@ function pagefindI18nSchema() {
 					'Pagefind UI translation. English default value: `"Clear"`. See https://pagefind.app/docs/ui/#translations',
 			}),
 
-			'pagefind.load_more': z.string().meta({
-				description:
-					'Pagefind UI translation. English default value: `"Load more results"`. See https://pagefind.app/docs/ui/#translations',
-			}),
-
 			'pagefind.search_label': z.string().meta({
 				description:
 					'Pagefind UI translation. English default value: `"Search this site"`. See https://pagefind.app/docs/ui/#translations',
-			}),
-
-			'pagefind.filters_label': z.string().meta({
-				description:
-					'Pagefind UI translation. English default value: `"Filters"`. See https://pagefind.app/docs/ui/#translations',
 			}),
 
 			'pagefind.zero_results': z.string().meta({
@@ -218,16 +208,6 @@ function pagefindI18nSchema() {
 			'pagefind.total_many_results': z.string().meta({
 				description:
 					'Pagefind UI translation. English default value: `"[COUNT] results"`. See https://pagefind.app/docs/ui/#translations',
-			}),
-
-			'pagefind.alt_search': z.string().meta({
-				description:
-					'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead"`. See https://pagefind.app/docs/ui/#translations',
-			}),
-
-			'pagefind.search_suggestion': z.string().meta({
-				description:
-					'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]. Try one of the following searches:"`. See https://pagefind.app/docs/ui/#translations',
 			}),
 
 			'pagefind.searching': z.string().meta({
@@ -268,16 +248,6 @@ function pagefindI18nSchema() {
 			'pagefind.error_search': z.string().meta({
 				description:
 					'Pagefind UI translation. English default value: `"Search failed"`. See https://pagefind.app/docs/ui/#translations',
-			}),
-
-			'pagefind.filter_selected_one': z.string().meta({
-				description:
-					'Pagefind UI translation. English default value: `"[COUNT] selected"`. See https://pagefind.app/docs/ui/#translations',
-			}),
-
-			'pagefind.filter_selected_many': z.string().meta({
-				description:
-					'Pagefind UI translation. English default value: `"[COUNT] selected"`. See https://pagefind.app/docs/ui/#translations',
 			}),
 
 			'pagefind.input_hint': z.string().meta({
