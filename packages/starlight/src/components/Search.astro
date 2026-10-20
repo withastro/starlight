@@ -407,6 +407,11 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		starlight-pagefind {
 			display: contents;
 
+			/**
+			 * Theme
+			 * @see https://pagefind.app/docs/css-variables/#core-variables
+			 */
+
 			--pf-text: var(--sl-color-white);
 			--pf-text-secondary: var(--sl-color-gray-2);
 			--pf-text-muted: var(--sl-color-gray-3);
@@ -414,8 +419,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			--pf-border: var(--sl-color-gray-5);
 			--pf-border-focus: var(--sl-color-accent-high);
 			--pf-skeleton: var(--sl-color-gray-5);
-			/* // TODO(HiDeoo)  */
-			/* --pf-skeleton-shine: var(--sl-color-gray-6); */
+			--pf-skeleton-shine: color-mix(in srgb, var(--sl-color-gray-5), var(--sl-color-gray-6));
 			--pf-hover: var(--sl-color-gray-5);
 			--pf-mark: var(--sl-color-white);
 			/* // TODO(HiDeoo)  */
@@ -456,8 +460,13 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 
 			/* // TODO(HiDeoo)  */
 
+			--pf-image-width: 1.5rem;
+			--pf-image-height: 1.5rem;
+
 			--pf-icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z'/%3E%3C/svg%3E");
 		}
+
+		/* Trigger */
 
 		starlight-pagefind pagefind-modal-trigger {
 			all: unset;
@@ -530,6 +539,8 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			}
 		}
 
+		/* Modal */
+
 		starlight-pagefind pagefind-modal {
 			all: unset;
 		}
@@ -585,15 +596,21 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			}
 		}
 
+		/* Input */
+
 		starlight-pagefind .pf-input {
 			background-color: var(--sl-color-black);
 			border: 1px solid var(--sl-color-gray-5);
 		}
 
+		/* Summary */
+
 		starlight-pagefind .pf-summary {
 			padding-block: 0.5rem;
 			color: var(--sl-color-gray-2);
 		}
+
+		/* Results */
 
 		starlight-pagefind
 			:is(.pf-result-card, .pf-heading-chip):has(
@@ -637,6 +654,10 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			border-end-end-radius: revert-layer;
 		}
 
+		starlight-pagefind :is(.pf-result-card, .pf-heading-chip) {
+			padding-inline-end: 1rem;
+		}
+
 		starlight-pagefind .pf-result-card::before {
 			content: '';
 			flex-shrink: 0;
@@ -646,14 +667,6 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 				center no-repeat;
 			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
 				center no-repeat;
-		}
-
-		starlight-pagefind :is(.pf-result-title, .pf-result-excerpt, .pf-heading-excerpt) {
-			line-height: var(--sl-line-height);
-		}
-
-		starlight-pagefind :is(.pf-result-card, .pf-heading-chip) {
-			padding-inline-end: 1rem;
 		}
 
 		starlight-pagefind .pf-heading-link::before {
@@ -682,6 +695,10 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			transform: matrix(-1, 0, 0, 1, 0, 0);
 		}
 
+		starlight-pagefind :is(.pf-result-title, .pf-result-excerpt, .pf-heading-excerpt) {
+			line-height: var(--sl-line-height);
+		}
+
 		starlight-pagefind :is(.pf-result-link, .pf-heading-link):hover {
 			text-decoration: none;
 		}
@@ -696,6 +713,27 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			white-space: normal;
 			overflow-wrap: anywhere;
 		}
+
+		/* Skeleton */
+
+		starlight-pagefind .pf-skeleton {
+			animation-duration: 3s;
+		}
+
+		starlight-pagefind .pf-result-card:has(.pf-skeleton)::before {
+			content: none;
+		}
+
+		starlight-pagefind .pf-skeleton-image {
+			align-self: center;
+		}
+
+		starlight-pagefind .pf-skeleton-title {
+			height: 1rem;
+			margin-bottom: 0.75rem;
+		}
+
+		/* Footer */
 
 		@media (hover: none) {
 			starlight-pagefind pagefind-modal-footer {
