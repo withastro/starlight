@@ -422,11 +422,11 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			--pf-skeleton-shine: color-mix(in srgb, var(--sl-color-gray-5), var(--sl-color-gray-6));
 			--pf-hover: var(--sl-color-gray-5);
 			--pf-mark: var(--sl-color-white);
-			/* // TODO(HiDeoo)  */
-			/* --pf-scroll-shadow: var(--sl-color-backdrop-overlay); */
+			/* // TODO(HiDeoo) filters */
+			/* --pf-scroll-shadow: rgba(0, 0, 0, 0.08); */
 
 			--pf-shadow-sm: none;
-			/* // TODO(HiDeoo)  */
+			/* // TODO(HiDeoo) filters */
 			/* --pf-shadow-md: var(--sl-shadow-md); */
 			--pf-shadow-lg: var(--sl-shadow-lg);
 
@@ -436,30 +436,31 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			--pf-error-text-secondary: var(--sl-color-red-high);
 
 			--pf-outline-focus: var(--sl-color-accent);
-			/* // TODO(HiDeoo)  */
-			/* --pf-outline-width: 2px; */
-			/* // TODO(HiDeoo)  */
-			/* --pf-outline-offset: 2px; */
 
 			--pf-font: var(--__sl-font);
 
 			--pf-input-height: 2.5rem;
-			/* // TODO(HiDeoo)  */
-			/* --pf-input-font-size: 16px; Keep at 16px+ to prevent iOS auto-zoom on focus */
 			--pf-summary-font-size: var(--sl-text-xs);
 			--pf-result-title-font-size: var(--sl-text-base);
 			--pf-result-excerpt-font-size: var(--sl-text-xs);
 
-			/* // TODO(HiDeoo)  */
-
 			--pf-results-gap: 1rem;
 
-			/* // TODO(HiDeoo)  */
-
+			/* // TODO(HiDeoo) filters */
+			/* --pf-border-radius: 6px; */
 			--pf-image-width: 1.5rem;
 			--pf-image-height: 1.5rem;
 
 			--pf-icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z'/%3E%3C/svg%3E");
+			/* // TODO(HiDeoo) filters */
+			/* --pf-icon-arrow: url('data:image/svg+xml,...'); */
+
+			--pf-modal-backdrop: var(--sl-color-backdrop-overlay);
+
+			/* // TODO(HiDeoo) filters */
+			/* --pf-dropdown-max-height: 280px; */
+			/* // TODO(HiDeoo) filters */
+			/* --pf-dropdown-z-index: 9999; */
 		}
 
 		/* Trigger */
@@ -551,32 +552,33 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		}
 
 		starlight-pagefind dialog.pf-modal {
-			margin: 0;
+			--pf-modal-max-width: 100%;
+			--pf-modal-max-height: 100%;
+			--pf-modal-top: 0;
+
 			background-color: var(--sl-color-gray-6);
 			border: 1px solid var(--sl-color-gray-5);
 			border-radius: 0;
 			width: 100%;
-			max-width: 100%;
 			height: 100%;
-			max-height: 100%;
 			animation: none;
 		}
 
 		@media (min-width: 50rem) {
 			starlight-pagefind dialog.pf-modal {
-				margin: 4rem auto auto;
+				--pf-modal-max-width: 40rem;
+				--pf-modal-max-height: calc(100% - 8rem);
+				--pf-modal-top: 4rem;
+
 				border-radius: 0.5rem;
 				width: 90%;
-				max-width: 40rem;
 				height: max-content;
 				min-height: 15rem;
-				max-height: calc(100% - 8rem);
 				animation: revert-layer;
 			}
 		}
 
 		starlight-pagefind dialog.pf-modal::backdrop {
-			background-color: var(--sl-color-backdrop-overlay);
 			-webkit-backdrop-filter: blur(0.25rem);
 			backdrop-filter: blur(0.25rem);
 		}
