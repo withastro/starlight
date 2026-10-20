@@ -2,7 +2,6 @@
   "skipLink.label": "Прескокни до содржината",
   "search.label": "Пребарај",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Откажи",
   "search.devWarning": "Пребарување е дозволено само во продукциски верзии. \nОбидете се да ја изградите и прегледате веб-локацијата за да го тестирате локално.",
   "themeSelect.accessibleLabel": "Одбери тема",
   "themeSelect.dark": "Темна",

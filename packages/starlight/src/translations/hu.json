@@ -2,7 +2,6 @@
   "skipLink.label": "Tovább a tartalomhoz",
   "search.label": "Keresés",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Mégsem",
   "search.devWarning": "A keresés csak a production build-ekben működik. \nPróbáld meg először buildelni, hogy kipróbálhasd.",
   "themeSelect.accessibleLabel": "Téma választás",
   "themeSelect.dark": "Sötét",

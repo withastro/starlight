@@ -2,7 +2,6 @@
   "skipLink.label": "Ir ao contido",
   "search.label": "Busca",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Deixar",
   "search.devWarning": "A busca só está dispoñible nas versións de producción. \nTrata de construir e ollear o sitio para probalo localmente.",
   "themeSelect.accessibleLabel": "Selecciona tema",
   "themeSelect.dark": "Escuro",

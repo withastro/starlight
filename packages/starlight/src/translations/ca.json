@@ -2,7 +2,6 @@
   "skipLink.label": "Saltar al contingut",
   "search.label": "Cercar",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Cancel·lar",
   "search.devWarning": "La cerca només està disponible a les versions de producció.  \nProva de construir i previsualitzar el lloc per provar-ho localment.",
   "themeSelect.accessibleLabel": "Seleccionar tema",
   "themeSelect.dark": "Fosc",

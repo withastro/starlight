@@ -81,10 +81,6 @@ function starlightI18nSchema() {
 					'Visible representation of the Control key potentially used in the shortcut key to open the search modal.',
 			}),
 
-			'search.cancelLabel': z
-				.string()
-				.meta({ description: 'Text for the “Cancel” button that closes the search modal.' }),
-
 			'search.devWarning': z.string().meta({
 				description: 'Warning displayed when opening the Search in a dev environment.',
 			}),
