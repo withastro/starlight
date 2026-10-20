@@ -76,6 +76,8 @@ function starlightI18nSchema() {
 
 			'search.label': z.string().meta({ description: 'Text displayed in the search bar.' }),
 
+			// TODO(HiDeoo) Currently unused as the Pagefind Component UI does not support translating
+			// the Control key. This should be fixed upstream.
 			'search.ctrlKey': z.string().meta({
 				description:
 					'Visible representation of the Control key potentially used in the shortcut key to open the search modal.',
