@@ -1,4 +1,5 @@
 ---
+import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 import project from 'virtual:starlight/project-context';
 
 const pagefindTranslations = {
@@ -51,7 +52,7 @@ const showDevWarning = false; // import.meta.env.DEV;
 					<pagefind-modal-body>
 						<pagefind-summary />
 						<div class="search-results">
-							<pagefind-filter-pane />
+							<pagefind-filter-pane show-empty={pagefindUserConfig.showEmptyFilters} />
 							<pagefind-results />
 						</div>
 					</pagefind-modal-body>
@@ -78,7 +79,7 @@ const showDevWarning = false; // import.meta.env.DEV;
 				const { getInstanceManager } = await import('@pagefind/component-ui');
 
 				const instance = getInstanceManager().getInstance();
-				const { mergeIndex = [], ...pagefindOptions } = pagefindUserConfig;
+				const { mergeIndex = [], showEmptyFilters, ...pagefindOptions } = pagefindUserConfig;
 
 				// TODO(HiDeoo) Importing `@pagefind/component-ui` registers the custom elements and
 				// creates the default instance so we can't use `configureInstance()` afterwards.

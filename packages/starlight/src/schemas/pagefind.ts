@@ -11,6 +11,14 @@ export interface PagefindUserConfig {
 	/** Configure how search result rankings are calculated by Pagefind. */
 	ranking?: PagefindRankingUserConfig | undefined;
 	/**
+	 * Show filter options with zero results.
+	 *
+	 * The default value is `false`.
+	 *
+	 * @see https://pagefind.app/docs/components/filter-pane/
+	 */
+	showEmptyFilters?: boolean | undefined;
+	/**
 	 * Configure how search indexes from different sites are merged by Pagefind.
 	 * Each entry of this array represents a `PagefindIndexOptions` from pagefind.
 	 *
@@ -135,6 +143,7 @@ const pagefindIndexOptionsSchema = z.object({
 const pagefindSchema = z.object({
 	indexWeight: indexWeightSchema,
 	ranking: pagefindRankingWeightsSchema.prefault({}),
+	showEmptyFilters: z.boolean().default(false),
 	mergeIndex: z
 		.array(
 			z.object({
