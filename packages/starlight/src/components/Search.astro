@@ -15,6 +15,9 @@ const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagef
 if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
 
 const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/';
+
+// TODO(HiDeoo) Restore dev mode warning.
+const showDevWarning = false; // import.meta.env.DEV;
 ---
 
 <site-search class={Astro.props.class} {...dataAttributes}>
@@ -75,19 +78,31 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 	{/* TODO(HiDeoo) Replace the template with `<pagefind-modal>`, see below for more details. */}
 	{/* <pagefind-modal> */}
 	<template>
-		<pagefind-modal-header>
-			<pagefind-input></pagefind-input>
-		</pagefind-modal-header>
-		<pagefind-modal-body>
-			<pagefind-summary></pagefind-summary>
-			<div class="search-results">
-				<pagefind-filter-pane></pagefind-filter-pane>
-				<pagefind-results></pagefind-results>
-			</div>
-		</pagefind-modal-body>
-		<pagefind-modal-footer>
-			<pagefind-keyboard-hints></pagefind-keyboard-hints>
-		</pagefind-modal-footer>
+		{
+			showDevWarning ? (
+				<pagefind-modal-body style="display: flex;">
+					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
+						<p>{Astro.locals.t('search.devWarning')}</p>
+					</div>
+				</pagefind-modal-body>
+			) : (
+				<>
+					<pagefind-modal-header>
+						<pagefind-input />
+					</pagefind-modal-header>
+					<pagefind-modal-body>
+						<pagefind-summary />
+						<div class="search-results">
+							<pagefind-filter-pane />
+							<pagefind-results />
+						</div>
+					</pagefind-modal-body>
+					<pagefind-modal-footer>
+						<pagefind-keyboard-hints />
+					</pagefind-modal-footer>
+				</>
+			)
+		}
 	</template>
 	{/* </pagefind-modal> */}
 </starlight-pagefind>
