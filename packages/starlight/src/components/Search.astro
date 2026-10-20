@@ -72,8 +72,24 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			<span class="pf-trigger-text">{Astro.locals.t('search.label')}</span>
 		</button>
 	</pagefind-modal-trigger>
-	{/* TODO(HiDeoo) Restore the modal, see below for more details. */}
-	{/* <pagefind-modal></pagefind-modal> */}
+	{/* TODO(HiDeoo) Replace the template with `<pagefind-modal>`, see below for more details. */}
+	{/* <pagefind-modal> */}
+	<template>
+		<pagefind-modal-header>
+			<pagefind-input></pagefind-input>
+		</pagefind-modal-header>
+		<pagefind-modal-body>
+			<pagefind-summary></pagefind-summary>
+			<div class="search-results">
+				<pagefind-filter-pane></pagefind-filter-pane>
+				<pagefind-results></pagefind-results>
+			</div>
+		</pagefind-modal-body>
+		<pagefind-modal-footer>
+			<pagefind-keyboard-hints></pagefind-keyboard-hints>
+		</pagefind-modal-footer>
+	</template>
+	{/* </pagefind-modal> */}
 </starlight-pagefind>
 
 {
@@ -126,11 +142,12 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 				// TODO(HiDeoo) Setting the translations re-renders the modal but the existing `<dialog>`
 				// ends up being wrapped in a new one. This means that opening the modal only shows a
 				// backdrop, as the content is in a closed nested `<dialog>`. To work around the issue, we
-				// only create the modal after setting the translations.
-				// Remove this workaround once the issue is resolved.
-				this.querySelector('pagefind-modal-trigger')?.after(
-					document.createElement('pagefind-modal')
-				);
+				// only create the modal after setting the translations, using the content of a template.
+				// Remove this workaround and the template once the issue is resolved.
+				const modal = document.createElement('pagefind-modal');
+				const template = this.querySelector('template');
+				if (template) modal.append(template.content.cloneNode(true));
+				this.querySelector('pagefind-modal-trigger')?.after(modal);
 
 				if (this.dataset.stripTrailingSlash !== undefined) {
 					const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
@@ -422,12 +439,8 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			--pf-skeleton-shine: color-mix(in srgb, var(--sl-color-gray-5), var(--sl-color-gray-6));
 			--pf-hover: var(--sl-color-gray-5);
 			--pf-mark: var(--sl-color-white);
-			/* // TODO(HiDeoo) filters */
-			/* --pf-scroll-shadow: rgba(0, 0, 0, 0.08); */
 
 			--pf-shadow-sm: none;
-			/* // TODO(HiDeoo) filters */
-			/* --pf-shadow-md: var(--sl-shadow-md); */
 			--pf-shadow-lg: var(--sl-shadow-lg);
 
 			--pf-error-bg: var(--sl-color-red-low);
@@ -446,21 +459,13 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 
 			--pf-results-gap: 1rem;
 
-			/* // TODO(HiDeoo) filters */
-			/* --pf-border-radius: 6px; */
 			--pf-image-width: 1.5rem;
 			--pf-image-height: 1.5rem;
 
 			--pf-icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z'/%3E%3C/svg%3E");
-			/* // TODO(HiDeoo) filters */
-			/* --pf-icon-arrow: url('data:image/svg+xml,...'); */
+			--pf-icon-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='6.75 8.875 10.5 6.25'%3E%3Cpath d='M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z'/%3E%3C/svg%3E");
 
 			--pf-modal-backdrop: var(--sl-color-backdrop-overlay);
-
-			/* // TODO(HiDeoo) filters */
-			/* --pf-dropdown-max-height: 280px; */
-			/* // TODO(HiDeoo) filters */
-			/* --pf-dropdown-z-index: 9999; */
 		}
 
 		/* Trigger */
@@ -710,6 +715,38 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			font-size: var(--sl-text-xs);
 			white-space: normal;
 			overflow-wrap: anywhere;
+		}
+
+		/* Filters */
+
+		starlight-pagefind .search-results {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+		}
+
+		starlight-pagefind pagefind-filter-pane {
+			flex: 1;
+			min-width: min(13rem, 100%);
+		}
+
+		starlight-pagefind pagefind-results {
+			flex: 1000;
+			min-width: min(20rem, 100%);
+		}
+
+		starlight-pagefind dialog.pf-modal:has(.pf-input:placeholder-shown) pagefind-filter-pane,
+		starlight-pagefind pagefind-filter-pane:not(:has(.pf-filter-group:not([data-pf-hidden]))) {
+			/* Only show the filter pane once a search query has been entered and at least one filter group is visible. */
+			display: none;
+		}
+
+		starlight-pagefind .pf-filter-pane {
+			background-color: var(--sl-color-black);
+		}
+
+		starlight-pagefind :is(.pf-filter-group-title, .pf-filter-checkbox-count) {
+			font-size: var(--sl-text-2xs);
 		}
 
 		/* Skeleton */
