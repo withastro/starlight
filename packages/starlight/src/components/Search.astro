@@ -471,6 +471,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		/* Trigger */
 
 		starlight-pagefind pagefind-modal-trigger {
+			/* Undo Pagefind `all: initial;` reset so that the trigger inherits Starlight text styles. */
 			all: unset;
 			display: contents;
 		}
@@ -480,17 +481,18 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			align-items: center;
 			gap: 0.5rem;
 			border: 0;
-			border-radius: revert;
 			background-color: transparent;
 			color: var(--sl-color-gray-1);
 			font-size: var(--sl-text-xl);
 			font-family: var(--__sl-font);
 			line-height: var(--sl-line-height);
+			width: auto;
+			transition: none;
+			/* Use browser defaults for some properties to match Starlight button styles. */
+			border-radius: revert;
 			outline: revert;
 			outline-offset: revert;
-			width: auto;
 			padding: revert;
-			transition: none;
 		}
 
 		starlight-pagefind .pf-trigger-icon {
@@ -537,6 +539,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 			}
 
 			starlight-pagefind .pf-trigger-key {
+				/* Remove Pagefind individual key styles as we display the entire shortcut as a single pill. */
 				all: unset;
 			}
 		}
@@ -544,10 +547,15 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		/* Modal */
 
 		starlight-pagefind pagefind-modal {
+			/* Undo Pagefind `all: initial;` reset so that the modal inherits Starlight text styles. */
 			all: unset;
 		}
 
 		starlight-pagefind pagefind-modal * {
+			/**
+			 * Nested Pagefind components are also reset so we need to restore inherited properties that
+			 * Pagefind doesn't define.
+			 */
 			-webkit-font-smoothing: inherit;
 			color-scheme: inherit;
 		}
@@ -579,6 +587,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 				width: 90%;
 				height: max-content;
 				min-height: 15rem;
+				/* Restore Pagefind opening animation disabled on smaller viewports. */
 				animation: revert-layer;
 			}
 		}
@@ -653,6 +662,7 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		}
 
 		starlight-pagefind .pf-heading-chip:last-child {
+			/* Restore Pagefind rounded bottom corners on the last heading chip. */
 			border-end-start-radius: revert-layer;
 			border-end-end-radius: revert-layer;
 		}
@@ -731,7 +741,8 @@ const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagef
 		}
 
 		starlight-pagefind pagefind-results {
-			flex: 1000;
+			/* Make the results take almost all the free space of the row and leave the filter pane at its minimum width. */
+			flex: 999;
 			min-width: min(20rem, 100%);
 		}
 
