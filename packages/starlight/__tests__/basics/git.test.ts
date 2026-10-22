@@ -108,6 +108,11 @@ describe('getAllNewestCommitDate', () => {
 		writeFile('updated-same-day.md', 'content 1');
 		commitAllChanges('update updated.md', '2023-06-25T14:22:35Z');
 
+		writeFile('updated-non-ascii-ü-文档.md', 'content 0');
+		commitAllChanges('add updated.md', '2020-03-14');
+		writeFile('updated-non-ascii-ü-文档.md', 'content 1');
+		commitAllChanges('update updated.md', '2020-03-15');
+
 		const latestDates = new Map(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
 
 		const expectedDates = new Map<string, ISODate>([
@@ -115,6 +120,7 @@ describe('getAllNewestCommitDate', () => {
 			['updated.md', '2023-06-25'],
 			['updated with space.md', '2021-01-02'],
 			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+			['updated-non-ascii-ü-文档.md', '2020-03-15'],
 		]);
 
 		for (const [file, date] of latestDates.entries()) {
@@ -137,6 +143,7 @@ describe('getAllNewestCommitDate', () => {
 			['updated.md', '2023-06-25'],
 			['updated with space.md', '2021-01-02'],
 			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+			['updated-non-ascii-ü-文档.md', '2020-03-15'],
 		]);
 
 		for (const [file, expectedDate] of expectedDates.entries()) {

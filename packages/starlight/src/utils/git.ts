@@ -61,6 +61,10 @@ export function getAllNewestCommitDate(rootPath: string, docsPath: string): [str
 	const gitLog = spawnSync(
 		'git',
 		[
+			// Print file names containing non-ASCII characters verbatim instead of quoting and escaping
+			// them, e.g. `café.md` instead of `"caf\303\251.md"`.
+			'-c',
+			'core.quotePath=false',
 			'log',
 			// Format each history entry as t:<seconds since epoch>
 			'--format=t:%ct',
