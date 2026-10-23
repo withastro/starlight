@@ -1,8 +1,11 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import type { SvgComponent } from 'astro/types';
+import { LinkButton } from '@astrojs/starlight/components';
 
 interface Props {
 	title: string;
+	cta?: string;
 }
 
 const svgs = import.meta.glob<SvgComponent>('./logos/*.svg', { eager: true, import: 'default' });
@@ -49,10 +52,12 @@ const logos = {
 };
 
 const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
+
+const { title, cta } = Astro.props;
 ---
 
 <div class="logo-grid-wrapper not-content" data-pagefind-ignore>
-	<h2 class="logo-grid-title">{Astro.props.title}</h2>
+	<h2 class="logo-grid-title">{title}</h2>
 	<ul role="list" class="logo-grid" style={{ '--max-logo-height': maxHeight }}>
 		{
 			Object.entries(logos).map(([key, { label, h }]) => {
@@ -71,10 +76,27 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 			})
 		}
 	</ul>
+	{
+		cta && (
+			<div class="logo-grid-cta">
+				<LinkButton
+					href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', '/sponsor/')}
+					icon="heart"
+				>
+					{cta}
+				</LinkButton>
+			</div>
+		)
+	}
 </div>
 
 <style>
 	.logo-grid-wrapper {
+		/* Scaling factor for logo heights and other dimensions. */
+		--scale: 0.36;
+		/* Spacing between logos and around the grid. */
+		--spacing: calc(3rem * var(--scale));
+
 		margin-block: 5rem;
 	}
 	.logo-grid-title {
@@ -86,8 +108,6 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 	}
 
 	.logo-grid {
-		/* Scaling factor for logo heights and other dimensions. */
-		--scale: 0.36;
 		/* Vertical gap between rows. */
 		--row-gap: calc(1rem * var(--scale));
 
@@ -95,11 +115,11 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 		list-style: none;
 		padding-inline: 0;
 
-		margin-top: calc(3rem * var(--scale));
+		margin-top: var(--spacing);
 
 		/* Lay out logos in a centred flex container */
 		display: flex;
-		gap: var(--row-gap) calc(3rem * var(--scale));
+		gap: var(--row-gap) var(--spacing);
 		justify-content: center;
 		flex-wrap: wrap;
 	}
@@ -116,13 +136,18 @@ const maxHeight = Math.max(...Object.values(logos).map(({ h }) => h));
 	}
 
 	@media (min-width: 30rem) {
-		.logo-grid {
+		.logo-grid-wrapper {
 			--scale: 0.45;
 		}
 	}
 	@media (min-width: 50rem) {
-		.logo-grid {
+		.logo-grid-wrapper {
 			--scale: 0.55;
 		}
+	}
+
+	.logo-grid-cta {
+		margin-top: var(--spacing);
+		text-align: center;
 	}
 </style>
