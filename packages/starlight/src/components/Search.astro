@@ -471,6 +471,18 @@ const showDevWarning = false; // import.meta.env.DEV;
 			font-size: var(--sl-text-xs);
 			white-space: normal;
 			overflow-wrap: anywhere;
+			/**
+			 * Limit excerpts to a few lines as content without spaces can produce very long excerpts.
+			 * Despite the use of vendor-prefixed and deprecated properties, as documented, "the
+			 * co-dependency of these three properties is a fully specified behavior and will continue to
+			 * be supported".
+			 * Use `line-clamp` once it is properly supported across all target browsers.
+			 * @see https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-clamp#description
+			 */
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
 		}
 
 		/* Filters */
