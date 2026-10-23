@@ -22,7 +22,8 @@ const icons = Object.keys(Icons) as StarlightIcon[];
 			return (
 				<button class="icon-preview" aria-label={`Copy ${icon} icon to clipboard`} data-name={icon}>
 					<Icon name={icon} size="1.5rem" />
-					<span aria-live="polite">{icon}</span>
+					{/* The trailing space ensures Pagefind indexes each icon name as a separate word. */}
+					<span aria-live="polite">{icon}</span>{' '}
 				</button>
 			);
 		})
