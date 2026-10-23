@@ -31,16 +31,14 @@ if (image) {
 ---
 
 <div class="hero">
-	{
-		darkImage && (
-			<Image
-				src={darkImage}
-				fetchpriority={lightImage ? undefined : 'high'}
-				{...imageAttrs}
-				class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
-			/>
-		)
-	}
+	{darkImage && (
+		<Image
+			src={darkImage}
+			fetchpriority={lightImage ? undefined : 'high'}
+			{...imageAttrs}
+			class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
+		/>
+	)}
 	{lightImage && <Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />}
 	{rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />}
 	<div class="sl-flex stack">
