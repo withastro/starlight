@@ -148,8 +148,9 @@ export function vitePluginStarlightVirtualModules(
 					['', 'export const routeMiddleware = [\n'] as [string, string]
 				)
 				.join('\n') + '];',
+		/** Pagefind user configuration for use on the client-side. Excludes the build-time `index` configuration. */
+		'virtual:starlight/pagefind-config': `export const pagefindUserConfig = ${JSON.stringify(opts.pagefind ? { ...opts.pagefind, index: undefined } : {})}`,
 		/** Map of modules exporting Starlight’s templating components. */
-		'virtual:starlight/pagefind-config': `export const pagefindUserConfig = ${JSON.stringify(opts.pagefind || {})}`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 
