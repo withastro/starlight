@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.42.7
+
+### Patch Changes
+
+- [#4264](https://github.com/withastro/starlight/pull/4264) [`94e0985`](https://github.com/withastro/starlight/commit/94e0985ddbbbd5c0f50a4cea94dc2c92de0a607c) Thanks [@chrispezza](https://github.com/chrispezza)! - Fixes a layout shift where the table of contents could be painted at the start of the content area and then jump to the end when a page's HTML arrived in several chunks
+
+- [#4285](https://github.com/withastro/starlight/pull/4285) [`6f22edd`](https://github.com/withastro/starlight/commit/6f22eddf21c90aed7bd4e3c82e48615a56268a69) Thanks [@tunetheweb](https://github.com/tunetheweb)! - Improves hero image loading by adding `fetchpriority="high"` hint for browsers
+
 ## 0.42.6
 
 ### Patch Changes

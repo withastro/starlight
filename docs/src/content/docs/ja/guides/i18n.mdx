@@ -181,7 +181,7 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 {/* prettier-ignore */}
 <LanguagesList startsSentence />の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
 
-`18n`データコレクションを使用すると、サポートしたい言語の翻訳を追加したり、デフォルトのラベルを上書きしたりできます。
+`i18n`データコレクションを使用すると、サポートしたい言語の翻訳を追加したり、デフォルトのラベルを上書きしたりできます。
 
 <Steps>
 
@@ -252,7 +252,8 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
 ```diff lang="js"
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -316,10 +317,10 @@ Starlightプラグインのコンテキストでは、[`useTranslations()`](/ja/
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/en/guides/astro-db/">
-	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+<a href="https://docs.astro.build/en/guides/actions/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro Actions' })}
 </a>
-<!-- レンダリング結果: <a href="...">Astro documentation for Astro DB</a> -->
+<!-- レンダリング結果: <a href="...">Astro documentation for Astro Actions</a> -->
 ```
 
 補間やフォーマットなどの`t()`関数の使い方について詳しくは、[i18nextのドキュメント](https://www.i18next.com/overview/api#t)を参照してください。
