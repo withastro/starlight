@@ -1,5 +1,27 @@
 # @astrojs/starlight
 
+## 0.42.7
+
+### Patch Changes
+
+- [#4264](https://github.com/withastro/starlight/pull/4264) [`94e0985`](https://github.com/withastro/starlight/commit/94e0985ddbbbd5c0f50a4cea94dc2c92de0a607c) Thanks [@chrispezza](https://github.com/chrispezza)! - Fixes a layout shift where the table of contents could be painted at the start of the content area and then jump to the end when a page's HTML arrived in several chunks
+
+- [#4285](https://github.com/withastro/starlight/pull/4285) [`6f22edd`](https://github.com/withastro/starlight/commit/6f22eddf21c90aed7bd4e3c82e48615a56268a69) Thanks [@tunetheweb](https://github.com/tunetheweb)! - Improves hero image loading by adding `fetchpriority="high"` hint for browsers
+
+## 0.42.6
+
+### Patch Changes
+
+- [#4252](https://github.com/withastro/starlight/pull/4252) [`40a2584`](https://github.com/withastro/starlight/commit/40a258492af4b2ee45159aa4a7ddb30c346acc0b) Thanks [@olafur-andri](https://github.com/olafur-andri)! - Adds Icelandic language support
+
+- [#4229](https://github.com/withastro/starlight/pull/4229) [`e4a3d82`](https://github.com/withastro/starlight/commit/e4a3d82262d62677665cf2dd5ad9a1ba3ae2aa6a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential issue with icons being cut off in Firefox when pinch-zooming.
+
+- [#4226](https://github.com/withastro/starlight/pull/4226) [`fb562dd`](https://github.com/withastro/starlight/commit/fb562dddae97add7f5997c1f7fffd4f60c9f147c) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where pages not importing components from `@astrojs/starlight/components` included styles of Starlight components used on other pages.
+
+- [#4250](https://github.com/withastro/starlight/pull/4250) [`531af7d`](https://github.com/withastro/starlight/commit/531af7deb7dd164e5b97a49223a82b146e575fdc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes `Failed to resolve dependency` warnings logged when running the development server in projects using the Cloudflare adapter.
+
+- [#4229](https://github.com/withastro/starlight/pull/4229) [`e4a3d82`](https://github.com/withastro/starlight/commit/e4a3d82262d62677665cf2dd5ad9a1ba3ae2aa6a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes the `codePen` and `node` icons slightly extending beyond their bounding box.
+
 ## 0.42.5
 
 ### Patch Changes
