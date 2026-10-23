@@ -61,15 +61,14 @@ export function getAllNewestCommitDate(rootPath: string, docsPath: string): [str
 	const gitLog = spawnSync(
 		'git',
 		[
-			// Print file names containing non-ASCII characters verbatim instead of quoting and escaping
-			// them, e.g. `café.md` instead of `"caf\303\251.md"`.
-			'-c',
-			'core.quotePath=false',
 			'log',
 			// Format each history entry as t:<seconds since epoch>
 			'--format=t:%ct',
-			// In each entry include the name and status for each modified file
-			'--name-status',
+			// In each entry include the name of each modified file
+			'--name-only',
+			// Separate entries and file names with NUL characters and print file names verbatim instead
+			// of quoting and escaping them, e.g. `café.md` instead of `"caf\303\251.md"`.
+			'-z',
 			'--',
 			docsPath,
 		],
@@ -93,25 +92,22 @@ export function getAllNewestCommitDate(rootPath: string, docsPath: string): [str
 	let runningDate = Date.now();
 	const latestDates = new Map<string, number>();
 
-	for (const logLine of gitLog.stdout.split('\n')) {
-		if (logLine.startsWith('t:')) {
+	// With `-z`, the output is a list of NUL-separated entries: each commit is a `t:<seconds since
+	// epoch>` entry followed by the entries for the files modified in that commit. For renamed and
+	// copied files, `--name-only` only lists the name of the file as of the commit being processed.
+	for (const rawEntry of gitLog.stdout.split('\0')) {
+		// Git separates the commit entry from its first file name with a newline, in addition to the NUL.
+		const entry = rawEntry.replace(/^\n/, '');
+		if (entry === '') continue;
+
+		if (/^t:\d+$/.test(entry)) {
 			// t:<seconds since epoch>
-			runningDate = Number.parseInt(logLine.slice(2)) * 1000;
+			runningDate = Number.parseInt(entry.slice(2)) * 1000;
+			continue;
 		}
 
-		// - Added files take the format `A\t<file>`
-		// - Modified files take the format `M\t<file>`
-		// - Deleted files take the format `D\t<file>`
-		// - Renamed files take the format `R<count>\t<old>\t<new>`
-		// - Copied files take the format `C<count>\t<old>\t<new>`
-		// The name of the file as of the commit being processed is always
-		// the last part of the log line.
-		const tabSplit = logLine.lastIndexOf('\t');
-		if (tabSplit === -1) continue;
-		const fileName = logLine.slice(tabSplit + 1);
-
-		const currentLatest = latestDates.get(fileName) || 0;
-		latestDates.set(fileName, Math.max(currentLatest, runningDate));
+		const currentLatest = latestDates.get(entry) || 0;
+		latestDates.set(entry, Math.max(currentLatest, runningDate));
 	}
 
 	return Array.from(latestDates.entries()).map(([file, date]) => {
