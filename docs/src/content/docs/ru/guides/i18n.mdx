@@ -318,7 +318,7 @@ export const GET = (context) => {
 
 Первую строку пользовательского интерфейса можно отобразить, передав `'link.astro'` в функцию `t()`:
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Отрисовывает: <a href="...">Документация Astro</a> -->

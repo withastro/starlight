@@ -307,7 +307,7 @@ Starlightプラグインのコンテキストでは、[`useTranslations()`](/ja/
 
 最初のUI文字列は、`t()`関数に`'link.astro'`を渡すことでレンダリングできます。
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- レンダリング結果: <a href="...">Astro documentation</a> -->

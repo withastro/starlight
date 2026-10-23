@@ -311,7 +311,7 @@ Por ejemplo, dado un archivo de traducción personalizado con el siguiente conte
 
 La primera string de UI se puede renderizar pasando `'link.astro'` a la función `t()`:
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Renderiza: <a href="...">Astro documentation</a> -->

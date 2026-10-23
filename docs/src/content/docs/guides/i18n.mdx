@@ -317,7 +317,7 @@ For example, given a custom translation file with the following content:
 
 The first UI string can be rendered by passing `'link.astro'` to the `t()` function:
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Renders: <a href="...">Astro documentation</a> -->

@@ -317,7 +317,7 @@ Nehmen wir zum Beispiel eine benutzerdefinierte Übersetzungsdatei mit folgendem
 
 Der erste UI-String kann gerendert werden, indem man `'link.astro'` an die Funktion `t()` übergibt:
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Rendert: <a href="...">Astro Dokumentation</a> -->

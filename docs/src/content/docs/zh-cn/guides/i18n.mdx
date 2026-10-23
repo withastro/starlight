@@ -315,7 +315,7 @@ export const GET = (context) => {
 
 第一个 UI 字符串可以通过将 `'link.astro'` 传递给 `t()` 函数来渲染：
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- 渲染结果：<a href="...">Astro documentation</a> -->

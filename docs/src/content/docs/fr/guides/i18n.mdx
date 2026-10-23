@@ -316,7 +316,7 @@ Par exemple, étant donné un fichier de traduction personnalisé avec le conten
 
 La première chaîne d'interface utilisateur peut être affichée en passant `'link.astro'` à la fonction `t()` :
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Exemple.astro -->
 <a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Affiche: <a href="...">Documentation d'Astro</a> -->
