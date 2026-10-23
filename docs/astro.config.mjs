@@ -115,6 +115,17 @@ export default defineConfig({
 								fa: 'تأثیرات محیطی',
 							},
 						},
+						{
+							label: 'Accessibility Statement',
+							slug: 'accessibility-statement',
+							translations: {
+								de: 'Erklärung zur Barrierefreiheit',
+								es: 'Declaración de accesibilidad',
+								ja: 'アクセシビリティステートメント',
+								fr: "Déclaration d'accessibilité",
+								it: 'Dichiarazione di accessibilità',
+							},
+						},
 					],
 				},
 				{
