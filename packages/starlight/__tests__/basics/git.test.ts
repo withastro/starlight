@@ -158,6 +158,31 @@ describe('getAllNewestCommitDate', () => {
 		}
 	});
 
+	test('returns the newest commit date from inlined API regardless of the Unicode normalization form', () => {
+		writeFile('composed-caf\u00e9.md', 'content');
+		commitAllChanges('add composed-café.md', '2018-02-03');
+		writeFile('decomposed-cafe\u0301.md', 'content');
+		commitAllChanges('add decomposed-café.md', '2018-02-04');
+
+		const api = makeInlineGitAPI(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
+
+		expectCommitDateToEqual(api.getNewestCommitDate('composed-cafe\u0301.md'), '2018-02-03');
+		expectCommitDateToEqual(api.getNewestCommitDate('decomposed-caf\u00e9.md'), '2018-02-04');
+	});
+
+	// A backslash is a path separator on Windows and cannot be used in a file name.
+	test.skipIf(process.platform === 'win32')(
+		'keeps backslashes in file names on POSIX systems',
+		() => {
+			writeFile('back\\slash.md', 'content');
+			commitAllChanges('add back\\slash.md', '2018-03-04');
+
+			const api = makeInlineGitAPI(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
+
+			expectCommitDateToEqual(api.getNewestCommitDate('back\\slash.md'), '2018-03-04');
+		}
+	);
+
 	test('returns an empty list when the git history for the directory cannot be retrieved', () => {
 		expect(
 			getAllNewestCommitDate(getRepoPath(), getFilePath('../not-a-starlight-test-repo'))

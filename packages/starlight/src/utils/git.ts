@@ -2,7 +2,7 @@
  * Git module to be used from the dev server and from the integration.
  */
 
-import { basename, dirname, relative, resolve } from 'node:path';
+import { basename, dirname, relative, resolve, sep } from 'node:path';
 import { realpathSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
@@ -113,8 +113,9 @@ export function getAllNewestCommitDate(rootPath: string, docsPath: string): [str
 	return Array.from(latestDates.entries()).map(([file, date]) => {
 		const fileFullPath = resolve(repoRoot, file);
 		let fileInDirectory = relative(rootPath, fileFullPath);
-		// Format path to unix style path.
-		fileInDirectory = fileInDirectory?.replace(/\\/g, '/');
+		// Format path to unix style path. Only on Windows, as a backslash is a valid file name character
+		// on other platforms.
+		if (sep === '\\') fileInDirectory = fileInDirectory.replace(/\\/g, '/');
 
 		return [fileInDirectory, date];
 	});
