@@ -125,7 +125,13 @@ const errorMap: z.core.$ZodErrorMap = (issue) => {
 						expectedShape.push(
 							relativePath ? `${relativePath}: ${issue.expected}` : issue.expected
 						);
-					} else if (issue.code === 'custom' && relativePath) {
+					}
+					// Ignore custom issues on the value of the union option as they have no path
+					// associated with them to show in the expected type.
+					// Such issues come from `z.custom()` or `superRefine()` and since Zod 4.5,
+					// `superRefine()` runs even when a strict object has unknown keys.
+					// See: https://github.com/withastro/starlight/pull/4218#discussion_r4196241859
+					else if (issue.code === 'custom' && relativePath) {
 						expectedShape.push(relativePath);
 					}
 				}
