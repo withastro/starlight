@@ -42,7 +42,7 @@ export function starlightSatteriPlugins(options: MarkdownProcessorPluginOptions)
 			({ fileURL }) => {
 				if (!shouldTransformPath(fileURL, allowedPaths)) return;
 
-				const plugins = [satteriRtlCodeSupportPlugin()];
+				const plugins: HastPluginEntry[] = [satteriRtlCodeSupportPlugin()];
 
 				if (options.starlightConfig.markdown.headingLinks) {
 					// `shouldTransformPath` above already returned for a missing `fileURL`.
