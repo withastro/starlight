@@ -103,9 +103,10 @@ function entriesFromAutogenerateConfig(
 	routes: Route[]
 ): (SidebarAutoLink | SidebarGroup)[] {
 	const { attrs, collapsed, directory } = item.autogenerate;
-	const localeDir = locale ? locale + '/' + directory : directory;
+	const localeDir = [locale, directory].filter(Boolean).join('/');
 	const autogenerate = { directory };
 	const dirDocs = routes.filter((doc) => {
+		if (!directory) return true;
 		const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
 		return (
 			// Match against `foo.md` or `foo/index.md`.
