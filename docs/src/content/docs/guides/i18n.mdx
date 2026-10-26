@@ -67,7 +67,11 @@ Starlight provides built-in support for multilingual sites, including routing, f
 
 </Steps>
 
-For more advanced i18n scenarios, Starlight also supports configuring internationalization using the [Astro’s `i18n` config](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing) option.
+Starlight generates Astro’s `i18n` configuration from your Starlight `locales` configuration.
+This also applies to pages outside Starlight in the same Astro project.
+
+For more advanced i18n scenarios, Starlight also supports configuring internationalization using [Astro’s `i18n` config](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing) option instead.
+Do not configure Astro’s `i18n` and Starlight’s `locales` together, as this causes an error.
 
 ### Use a root locale
 
