@@ -159,7 +159,6 @@ export default function StarlightIntegration(
 											// speed up dev server start time and prevent restarts.
 											'@astrojs/cloudflare/entrypoints/server',
 											'@astrojs/starlight>i18next',
-											'@astrojs/starlight>js-yaml',
 											'@astrojs/starlight>klona/lite',
 											// TODO: once Expressive Code is refactored/fixed, remove this workaround for
 											// Expressive Code relying on CJS dependencies like postcss not compatible
