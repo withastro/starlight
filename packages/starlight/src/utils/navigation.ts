@@ -103,18 +103,19 @@ function entriesFromAutogenerateConfig(
 	routes: Route[]
 ): (SidebarAutoLink | SidebarGroup)[] {
 	const { attrs, collapsed, directory } = item.autogenerate;
-	const localeDir = [locale, directory].filter(Boolean).join('/');
+	const localeDir = locale ? locale + (directory ? '/' + directory : '') : directory;
 	const autogenerate = { directory };
-	const dirDocs = routes.filter((doc) => {
-		if (!directory) return true;
-		const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
-		return (
-			// Match against `foo.md` or `foo/index.md`.
-			stripExtension(filePathFromContentDir) === localeDir ||
-			// Match against `foo/anything/else.md`.
-			filePathFromContentDir.startsWith(localeDir + '/')
-		);
-	});
+	const dirDocs = directory
+		? routes.filter((doc) => {
+				const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
+				return (
+					// Match against `foo.md` or `foo/index.md`.
+					stripExtension(filePathFromContentDir) === localeDir ||
+					// Match against `foo/anything/else.md`.
+					filePathFromContentDir.startsWith(localeDir + '/')
+				);
+			})
+		: routes;
 	const tree = treeify(dirDocs, locale, localeDir);
 	return sidebarFromDir(tree, { collapsed: collapsed ?? false, attrs }, autogenerate);
 }
