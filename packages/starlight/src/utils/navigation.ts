@@ -60,7 +60,7 @@ interface Dir {
 
 /** Create a new directory object. */
 function makeDir(slug: string): Dir {
-	const dir = {} as Dir;
+	const dir = Object.create(null) as Dir;
 	// Add DirKey and SlugKey as non-enumerable properties so that `Object.entries(dir)` ignores them.
 	Object.defineProperty(dir, DirKey, { enumerable: false });
 	Object.defineProperty(dir, SlugKey, { value: slug, enumerable: false });
