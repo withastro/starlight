@@ -106,6 +106,8 @@ jobs:
           runtime: node@22.23.1
           cache: true
           install: false
+      # Use `--no-runtime` to prevent `pnpm i` from installing the runtime specified in
+      # `devEngines.runtime` and keep the Node.js version set above.
       - run: pnpm i --no-runtime --filter @astrojs/starlight --filter "@e2e/*"
       - name: Test packages
         run: pnpm -r test:e2e:ci
