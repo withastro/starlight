@@ -54,3 +54,4 @@ jobs:
           github_token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           build_script: 'build:examples'
           package_manager: pnpm
+          script: pnpm exec size-limit --json
