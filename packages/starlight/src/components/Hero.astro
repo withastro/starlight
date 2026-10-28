@@ -35,6 +35,7 @@ if (image) {
 		darkImage && (
 			<Image
 				src={darkImage}
+				fetchpriority={lightImage ? undefined : 'high'}
 				{...imageAttrs}
 				class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
 			/>
