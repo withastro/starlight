@@ -37,3 +37,4 @@ minimumReleaseAgeExclude:
   - '@lunariajs/core@0.2.1'
   - '@codspeed/core@6.0.0'
   - '@codspeed/vitest-plugin@6.0.0'
+  - prettier-plugin-astro@1.1.2

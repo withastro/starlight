@@ -138,15 +138,11 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
-{
-	isHomepage ? (
-		<footer>Built with Starlight 🌟</footer>
-	) : (
-		<Default>
-			<slot />
-		</Default>
-	)
-}
+{isHomepage ? (
+	<footer>Built with Starlight 🌟</footer>
+) : (
+	<Default><slot /></Default>
+)}
 ```
 
 了解更多关于条件渲染的内容，请参阅 [Astro 模板语法指南](https://docs.astro.build/zh-cn/basics/astro-syntax/#动态-html)。

@@ -91,7 +91,7 @@ function getStarlightI18nConfig(
 		);
 	}
 
-	const prefixDefaultLocale = astroI18nConfig.routing.prefixDefaultLocale;
+	const prefixDefaultLocale = astroI18nConfig.routing?.prefixDefaultLocale;
 	const isMultilingual = astroI18nConfig.locales.length > 1;
 	const isMonolingualWithRootLocale = !isMultilingual && !prefixDefaultLocale;
 
