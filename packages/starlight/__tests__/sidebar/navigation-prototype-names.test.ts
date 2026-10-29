@@ -20,7 +20,7 @@ describe('getSidebar', () => {
 		const sidebar = getSidebar('/reference/constructor/overview/', undefined);
 		const reference = sidebar.find((entry) => entry.label === 'Reference');
 		const groups = reference?.type === 'group' ? reference.entries : [];
-		expect(groups.map((entry) => entry.label).sort()).toEqual([
+		expect(groups.map((entry) => entry.label)).toEqual([
 			'constructor',
 			'hasOwnProperty',
 			'ordinary',
