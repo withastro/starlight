@@ -1,6 +1,7 @@
 ---
-import { TabItemTagname } from './tabs-processor';
 import type { StarlightIcon } from '../components-internals/Icons';
+import { tabsContext, tabsContextMissingError } from './tabs-context';
+import { containsFocusableElement } from './tabs-find-focusable-element';
 
 interface Props {
 	icon?: StarlightIcon;
@@ -12,8 +13,25 @@ const { icon, label } = Astro.props;
 if (!label) {
 	throw new Error('Missing prop `label` on `<TabItem>` component.');
 }
+
+const context = tabsContext.getStore();
+
+if (!context) {
+	return tabsContextMissingError;
+}
+
+const isFirst = context.panels.length === 0;
+const ids = context.getIDs();
+context.panels.push({ ...ids, label, icon });
+
+const html = await Astro.slots.render('default');
 ---
 
-<TabItemTagname data-label={label} data-icon={icon}>
-	<slot />
-</TabItemTagname>
+<div
+	id={ids.panelId}
+	aria-labelledby={ids.tabId}
+	role="tabpanel"
+	tabindex={containsFocusableElement(html) ? 0 : undefined}
+	hidden={!isFirst}
+	set:html={html}
+/>

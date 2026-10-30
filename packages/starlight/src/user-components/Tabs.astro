@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { processPanels } from './tabs-processor';
+import { tabsContext, tabsContextMissingError, type TabsContext } from './tabs-context';
 
 interface Props {
 	syncKey?: string;
@@ -48,8 +48,27 @@ if (isSynced) {
 locals[tabInstanceCountSymbol] ??= 0;
 const tabInstanceCount = locals[tabInstanceCountSymbol]++;
 
-const panelHtml = await Astro.slots.render('default');
-const { html, panels } = processPanels(panelHtml, tabInstanceCount);
+let count = 0;
+const context: TabsContext = {
+	getIDs:() => {
+		const id = count++;
+		return {
+			panelId: `tab-panel-${tabInstanceCount}-${id}`,
+			tabId: `tab-${tabInstanceCount}-${id}`,
+		};
+	},
+	panels: [],
+};
+
+let html;
+html = await tabsContext.run(context, () => Astro.slots.render('default'));
+// This is a workaround for how Astro renders slots in MDX, where slotted content is rendered early,
+// and `slots.render()` just reuses the result. Calling `render()` a second time is inefficient, but
+// causes Astro to properly re-render the slot with the required async context.
+if (html.includes(tabsContextMissingError)) {
+	html = await tabsContext.run(context, () => Astro.slots.render('default'));
+}
+const { panels } = context;
 ---
 
 {/* Inlined to avoid a flash of invalid active tab. */}
