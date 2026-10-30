@@ -1,5 +1,5 @@
 ---
-import Icon from '../user-components/Icon.astro';
+import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 import project from 'virtual:starlight/project-context';
 
 const pagefindTranslations = {
@@ -13,173 +13,246 @@ const pagefindTranslations = {
 
 const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagefindTranslations) };
 if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
+
+const pagefindBundlePath = import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/';
+
+// TODO(HiDeoo) Restore dev mode warning.
+const showDevWarning = false; // import.meta.env.DEV;
 ---
 
-<site-search class={Astro.props.class} {...dataAttributes}>
-	<button
-		data-open-modal
-		disabled
-		aria-label={Astro.locals.t('search.label')}
-		aria-keyshortcuts="Control+K"
-	>
-		<Icon name="magnifier" />
-		<span class="sl-hidden md:sl-block" aria-hidden="true">{Astro.locals.t('search.label')}</span>
-		<kbd class="sl-hidden md:sl-flex" style="display: none;">
-			<kbd>{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
-		</kbd>
-	</button>
-
-	<dialog style="padding:0" aria-label={Astro.locals.t('search.label')}>
-		<div class="dialog-frame sl-flex">
-			{
-				/* TODO: Make the layout of this button flexible to accommodate different word lengths. Currently hard-coded for English: “Cancel” */
-			}
-			<button data-close-modal class="sl-flex md:sl-hidden">
-				{Astro.locals.t('search.cancelLabel')}
-			</button>
-			{
-				import.meta.env.DEV ? (
+<starlight-pagefind class={Astro.props.class} {...dataAttributes}>
+	<pagefind-config bundle-path={pagefindBundlePath} base-url={import.meta.env.BASE_URL}>
+	</pagefind-config>
+	<pagefind-modal-trigger placeholder={Astro.locals.t('search.label')}>
+		<button
+			type="button"
+			class="pf-trigger-btn"
+			disabled
+			aria-label={Astro.locals.t('search.label')}
+		>
+			<span class="pf-trigger-icon" aria-hidden="true"></span>
+			<span class="pf-trigger-text">{Astro.locals.t('search.label')}</span>
+		</button>
+	</pagefind-modal-trigger>
+	{/* TODO(HiDeoo) Replace the template with `<pagefind-modal>`, see below for more details. */}
+	{/* <pagefind-modal> */}
+	<template>
+		{
+			showDevWarning ? (
+				<pagefind-modal-body style="display: flex;">
 					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
 						<p>{Astro.locals.t('search.devWarning')}</p>
 					</div>
-				) : (
-					<div class="search-container">
-						<div id="starlight__search" />
-					</div>
-				)
-			}
-		</div>
-	</dialog>
-</site-search>
-
-{
-	/**
-	 * This is intentionally inlined to avoid briefly showing an invalid shortcut.
-	 * Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
-	 * user agent is spoofed by some browsers when opening the devtools.
-	 */
-}
-<script is:inline>
-	(() => {
-		const openBtn = document.querySelector('button[data-open-modal]');
-		const shortcut = openBtn?.querySelector('kbd');
-		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
-		const platformKey = shortcut.querySelector('kbd');
-		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
-			platformKey.textContent = '⌘';
-			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+				</pagefind-modal-body>
+			) : (
+				<>
+					<pagefind-modal-header>
+						<pagefind-input />
+					</pagefind-modal-header>
+					<pagefind-modal-body>
+						<pagefind-summary />
+						<div class="search-results">
+							<pagefind-filter-pane
+								show-empty={pagefindUserConfig.showEmptyFilters}
+								open={pagefindUserConfig.openFilters?.join(',')}
+							/>
+							<pagefind-results />
+						</div>
+					</pagefind-modal-body>
+					<pagefind-modal-footer>
+						<pagefind-keyboard-hints />
+					</pagefind-modal-footer>
+				</>
+			)
 		}
-		shortcut.style.display = '';
-	})();
-</script>
+	</template>
+	{/* </pagefind-modal> */}
+</starlight-pagefind>
 
 <script>
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
+	import { setPagefindInstance } from '../utils/pagefind';
 
-	class SiteSearch extends HTMLElement {
+	class StarlightPagefind extends HTMLElement {
 		constructor() {
 			super();
-			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
-			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!;
-			const dialog = this.querySelector('dialog')!;
-			const dialogFrame = this.querySelector('.dialog-frame')!;
+			const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 
-			/** Close the modal if a user clicks on a link or outside of the modal. */
-			const onClick = (event: MouseEvent) => {
-				const isLink = 'href' in (event.target || {});
-				if (
-					isLink ||
-					(document.body.contains(event.target as Node) &&
-						!dialogFrame.contains(event.target as Node))
-				) {
-					closeModal();
+			onIdle(async () => {
+				const { getInstanceManager } = await import('@pagefind/component-ui');
+
+				const instance = getInstanceManager().getInstance();
+				const {
+					mergeIndex = [],
+					showEmptyFilters,
+					openFilters,
+					...pagefindOptions
+				} = pagefindUserConfig;
+
+				// TODO(HiDeoo) Importing `@pagefind/component-ui` registers the custom elements and
+				// creates the default instance so we can't use `configureInstance()` afterwards.
+				// Use `configureInstance()` once https://github.com/Pagefind/pagefind/pull/1323 is released.
+				instance.options.mergeIndex = mergeIndex;
+				instance.pagefindOptions = { ...instance.pagefindOptions, ...pagefindOptions };
+
+				let translations = {};
+				try {
+					translations = JSON.parse(this.dataset.translations || '{}');
+				} catch {}
+
+				instance.setTranslations(translations);
+				// TODO(HiDeoo) Setting the translations re-renders the modal but the existing `<dialog>`
+				// ends up being wrapped in a new one. This means that opening the modal only shows a
+				// backdrop, as the content is in a closed nested `<dialog>`. To work around the issue, we
+				// only create the modal after setting the translations, using the content of a template.
+				// Remove this workaround and the template once the issue is resolved.
+				const modal = document.createElement('pagefind-modal');
+				const template = this.querySelector('template');
+				if (template) modal.append(template.content.cloneNode(true));
+				this.querySelector('pagefind-modal-trigger')?.after(modal);
+
+				if (this.dataset.stripTrailingSlash !== undefined) {
+					const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
+
+					// TODO(HiDeoo) The Pagefind Component UI does not provide an equivalent to
+					// `processResult()` to modify results before rendering them. To support
+					// `trailingSlash: 'never'`, we monkey-patch the `search()` method for now.
+					// Remove this workaround once https://github.com/Pagefind/pagefind/issues/1215 is resolved.
+					const load = instance.__load__.bind(instance);
+					let isPatched = false;
+					instance.__load__ = async () => {
+						await load();
+
+						// @ts-expect-error - private property
+						const pagefind = instance.__pagefind__;
+						if (isPatched || !pagefind) return;
+						isPatched = true;
+
+						const search = pagefind.search.bind(pagefind);
+						pagefind.search = async (...args: unknown[]) => {
+							const response = await search(...args);
+
+							for (const result of response?.results ?? []) {
+								const data = result.data;
+								result.data = async () => {
+									const fragment = await data();
+									fragment.url = stripTrailingSlash(fragment.url);
+									fragment.sub_results = fragment.sub_results.map((sub: { url: string }) => ({
+										...sub,
+										url: stripTrailingSlash(sub.url),
+									}));
+									return fragment;
+								};
+							}
+
+							return response;
+						};
+					};
 				}
-			};
 
-			const openModal = (event?: MouseEvent) => {
-				dialog.showModal();
-				document.body.toggleAttribute('data-search-modal-open', true);
-				this.querySelector('input')?.focus();
-				event?.stopPropagation();
-				window.addEventListener('click', onClick);
-			};
-
-			const closeModal = () => dialog.close();
-
-			openBtn.addEventListener('click', openModal);
-			openBtn.disabled = false;
-			closeBtn.addEventListener('click', closeModal);
-
-			dialog.addEventListener('close', () => {
-				document.body.toggleAttribute('data-search-modal-open', false);
-				window.removeEventListener('click', onClick);
-			});
-
-			// Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
-			window.addEventListener('keydown', (e) => {
-				if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
-					dialog.open ? closeModal() : openModal();
-					e.preventDefault();
-				}
-			});
-
-			let translations = {};
-			try {
-				translations = JSON.parse(this.dataset.translations || '{}');
-			} catch {}
-
-			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
-			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
-			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
-
-			window.addEventListener('DOMContentLoaded', () => {
-				if (import.meta.env.DEV) return;
-				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-				onIdle(async () => {
-					// @ts-expect-error — Missing types for @pagefind/default-ui package.
-					const { PagefindUI } = await import('@pagefind/default-ui');
-					new PagefindUI({
-						...pagefindUserConfig,
-						element: '#starlight__search',
-						baseUrl: import.meta.env.BASE_URL,
-						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
-						showImages: false,
-						translations,
-						showSubResults: true,
-						processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
-							result.url = formatURL(result.url);
-							result.sub_results = result.sub_results.map((sub_result) => {
-								sub_result.url = formatURL(sub_result.url);
-								return sub_result;
-							});
-						},
-					});
-				});
+				setPagefindInstance(instance);
 			});
 		}
 	}
-	customElements.define('site-search', SiteSearch);
+	customElements.define('starlight-pagefind', StarlightPagefind);
 </script>
 
-<style>
+<style is:global>
+	/**
+	 * Pagefind uses some selector tricks (`:is(*, #\#):is(*, #\#):is(*, #\#)`) to ensure a very high
+	 * specificity. We import styles in a nested layer to allow Starlight styles in the
+	 * `starlight.core` layer to easily override them no matter their specificity.
+	 * @see https://github.com/Pagefind/pagefind/blob/4bc7e6887d4ca28f6d951e36d3c56fa5dfe042fe/pagefind_ui/component/css/pagefind-component-ui.css#L1-L21
+	 */
+	@import url('@pagefind/component-ui/css') layer(starlight.core.pagefind);
+
 	@layer starlight.core {
-		site-search {
+		starlight-pagefind {
+			display: contents;
+
+			/**
+			 * Theme
+			 * @see https://pagefind.app/docs/css-variables/#core-variables
+			 */
+
+			--pf-text: var(--sl-color-white);
+			--pf-text-secondary: var(--sl-color-gray-2);
+			--pf-text-muted: var(--sl-color-gray-3);
+			--pf-background: var(--sl-color-black);
+			--pf-border: var(--sl-color-gray-5);
+			--pf-border-focus: var(--sl-color-accent-high);
+			--pf-skeleton: var(--sl-color-gray-5);
+			--pf-skeleton-shine: color-mix(in srgb, var(--sl-color-gray-5), var(--sl-color-gray-6));
+			--pf-hover: var(--sl-color-gray-5);
+			--pf-mark: var(--sl-color-white);
+
+			--pf-shadow-sm: none;
+			--pf-shadow-lg: var(--sl-shadow-lg);
+
+			--pf-error-bg: var(--sl-color-red-low);
+			--pf-error-border: var(--sl-color-red);
+			--pf-error-text: var(--sl-color-red-high);
+			--pf-error-text-secondary: var(--sl-color-red-high);
+
+			--pf-outline-focus: var(--sl-color-accent);
+
+			--pf-font: var(--__sl-font);
+
+			--pf-input-height: 2.5rem;
+			--pf-summary-font-size: var(--sl-text-xs);
+			--pf-result-title-font-size: var(--sl-text-base);
+			--pf-result-excerpt-font-size: var(--sl-text-xs);
+
+			--pf-results-gap: 1rem;
+
+			--pf-image-width: 1.5rem;
+			--pf-image-height: 1.5rem;
+
+			--pf-icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z'/%3E%3C/svg%3E");
+			--pf-icon-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='6.75 8.875 10.5 6.25'%3E%3Cpath d='M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z'/%3E%3C/svg%3E");
+
+			--pf-modal-backdrop: var(--sl-color-backdrop-overlay);
+		}
+
+		/* Trigger */
+
+		starlight-pagefind pagefind-modal-trigger {
+			/* Undo Pagefind `all: initial;` reset so that the trigger inherits Starlight text styles. */
+			all: unset;
 			display: contents;
 		}
-		button[data-open-modal] {
+
+		starlight-pagefind .pf-trigger-btn {
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
 			border: 0;
 			background-color: transparent;
 			color: var(--sl-color-gray-1);
-			cursor: pointer;
-			height: 2.5rem;
 			font-size: var(--sl-text-xl);
+			font-family: var(--__sl-font);
+			line-height: var(--sl-line-height);
+			width: auto;
+			transition: none;
+			/* Use browser defaults for some properties to match Starlight button styles. */
+			border-radius: revert;
+			outline: revert;
+			outline-offset: revert;
+			padding: revert;
+		}
+
+		starlight-pagefind .pf-trigger-icon {
+			width: 1em;
+			height: 1em;
+			background: currentColor;
+		}
+
+		starlight-pagefind :is(.pf-trigger-text, .pf-trigger-shortcut) {
+			display: none;
 		}
 
 		@media (min-width: 50rem) {
-			button[data-open-modal] {
+			starlight-pagefind .pf-trigger-btn {
 				border: 1px solid var(--sl-color-gray-5);
 				border-radius: 0.5rem;
 				padding-inline-start: 0.75rem;
@@ -190,299 +263,286 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 				width: 100%;
 				max-width: 22rem;
 			}
-			button[data-open-modal]:hover {
+
+			starlight-pagefind .pf-trigger-btn:hover {
 				border-color: var(--sl-color-gray-2);
 				color: var(--sl-color-white);
 			}
 
-			button[data-open-modal] > :last-child {
-				margin-inline-start: auto;
+			starlight-pagefind .pf-trigger-text {
+				display: block;
+				color: inherit;
+			}
+
+			starlight-pagefind .pf-trigger-shortcut {
+				display: flex;
+				border-radius: 0.25rem;
+				font-size: var(--sl-text-2xs);
+				gap: 0.25em;
+				padding-inline: 0.375rem;
+				margin: 0;
+				background-color: var(--sl-color-gray-6);
+			}
+
+			starlight-pagefind .pf-trigger-key {
+				/* Remove Pagefind individual key styles as we display the entire shortcut as a single pill. */
+				all: unset;
 			}
 		}
 
-		button > kbd {
-			border-radius: 0.25rem;
-			font-size: var(--sl-text-2xs);
-			gap: 0.25em;
-			padding-inline: 0.375rem;
-			background-color: var(--sl-color-gray-6);
+		/* Modal */
+
+		starlight-pagefind pagefind-modal {
+			/* Undo Pagefind `all: initial;` reset so that the modal inherits Starlight text styles. */
+			all: unset;
 		}
 
-		kbd {
-			font-family: var(--__sl-font);
+		starlight-pagefind pagefind-modal * {
+			/**
+			 * Nested Pagefind components are also reset so we need to restore inherited properties that
+			 * Pagefind doesn't define.
+			 */
+			-webkit-font-smoothing: inherit;
+			color-scheme: inherit;
 		}
 
-		dialog {
-			margin: 0;
+		body:has(starlight-pagefind dialog.pf-modal[open]) {
+			overflow: hidden;
+		}
+
+		starlight-pagefind dialog.pf-modal {
+			--pf-modal-max-width: 100%;
+			--pf-modal-max-height: 100%;
+			--pf-modal-top: 0;
+
 			background-color: var(--sl-color-gray-6);
 			border: 1px solid var(--sl-color-gray-5);
+			border-radius: 0;
 			width: 100%;
-			max-width: 100%;
 			height: 100%;
-			max-height: 100%;
-			box-shadow: var(--sl-shadow-lg);
-		}
-		dialog[open] {
-			display: flex;
+			animation: none;
 		}
 
-		dialog::backdrop {
-			background-color: var(--sl-color-backdrop-overlay);
+		@media (min-width: 50rem) {
+			starlight-pagefind dialog.pf-modal {
+				--pf-modal-max-width: 40rem;
+				--pf-modal-max-height: calc(100% - 8rem);
+				--pf-modal-top: 4rem;
+
+				border-radius: 0.5rem;
+				width: 90%;
+				height: max-content;
+				min-height: 15rem;
+				/* Restore Pagefind opening animation disabled on smaller viewports. */
+				animation: revert-layer;
+			}
+		}
+
+		starlight-pagefind dialog.pf-modal::backdrop {
 			-webkit-backdrop-filter: blur(0.25rem);
 			backdrop-filter: blur(0.25rem);
 		}
 
-		.dialog-frame {
-			position: relative;
-			overflow: auto;
-			flex-direction: column;
-			flex-grow: 1;
-			gap: 1rem;
-			padding: 1rem;
-		}
-
-		button[data-close-modal] {
-			position: absolute;
-			z-index: 1;
-			align-items: center;
-			align-self: flex-end;
-			height: calc(64px * var(--pagefind-ui-scale));
-			padding: 0.25rem;
-			border: 0;
-			background: transparent;
-			cursor: pointer;
+		starlight-pagefind .pf-modal-close {
+			display: flex;
 			color: var(--sl-color-text-accent);
 		}
 
-		#starlight__search {
-			--pagefind-ui-primary: var(--sl-color-text);
-			--pagefind-ui-text: var(--sl-color-gray-2);
-			--pagefind-ui-font: var(--__sl-font);
-			--pagefind-ui-background: var(--sl-color-black);
-			--pagefind-ui-border: var(--sl-color-gray-5);
-			--pagefind-ui-border-width: 1px;
-			--pagefind-ui-tag: var(--sl-color-gray-5);
-			--sl-search-cancel-space: 5rem;
-		}
-
-		:root[data-theme='light'] #starlight__search {
-			--pagefind-ui-tag: var(--sl-color-gray-6);
-		}
-
 		@media (min-width: 50rem) {
-			#starlight__search {
-				--sl-search-cancel-space: 0px;
-			}
-
-			dialog {
-				margin: 4rem auto auto;
-				border-radius: 0.5rem;
-				width: 90%;
-				max-width: 40rem;
-				height: max-content;
-				min-height: 15rem;
-				max-height: calc(100% - 8rem);
-			}
-
-			.dialog-frame {
-				padding: 1.5rem;
+			starlight-pagefind .pf-modal-close {
+				display: none;
 			}
 		}
-	}
-</style>
 
-<style is:global>
-	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.core);
+		/* Input */
 
-	@layer starlight.core {
-		[data-search-modal-open] {
-			overflow: hidden;
-		}
-
-		#starlight__search {
-			--sl-search-result-spacing: calc(1.25rem * var(--pagefind-ui-scale));
-			--sl-search-result-pad-inline-start: calc(3.75rem * var(--pagefind-ui-scale));
-			--sl-search-result-pad-inline-end: calc(1.25rem * var(--pagefind-ui-scale));
-			--sl-search-result-pad-block: calc(0.9375rem * var(--pagefind-ui-scale));
-			--sl-search-result-nested-pad-block: calc(0.625rem * var(--pagefind-ui-scale));
-			--sl-search-corners: calc(0.3125rem * var(--pagefind-ui-scale));
-			--sl-search-page-icon-size: calc(1.875rem * var(--pagefind-ui-scale));
-			--sl-search-page-icon-inline-start: calc(
-				(var(--sl-search-result-pad-inline-start) - var(--sl-search-page-icon-size)) / 2
-			);
-			--sl-search-tree-diagram-size: calc(2.5rem * var(--pagefind-ui-scale));
-			--sl-search-tree-diagram-inline-start: calc(
-				(var(--sl-search-result-pad-inline-start) - var(--sl-search-tree-diagram-size)) / 2
-			);
-		}
-
-		#starlight__search .pagefind-ui__form::before {
-			--pagefind-ui-text: var(--sl-color-gray-1);
-			opacity: 1;
-		}
-
-		#starlight__search .pagefind-ui__search-input {
-			color: var(--sl-color-white);
-			font-weight: 400;
-			width: calc(100% - var(--sl-search-cancel-space));
-		}
-
-		#starlight__search input:focus {
-			--pagefind-ui-border: var(--sl-color-accent);
-		}
-
-		#starlight__search .pagefind-ui__search-clear {
-			inset-inline-end: var(--sl-search-cancel-space);
-			width: calc(60px * var(--pagefind-ui-scale));
-			padding: 0;
-			background-color: transparent;
-			overflow: hidden;
-		}
-		#starlight__search .pagefind-ui__search-clear:focus {
-			outline: 1px solid var(--sl-color-accent);
-		}
-		#starlight__search .pagefind-ui__search-clear::before {
-			content: '';
-			-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
-				center / 50% no-repeat;
-			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
-				center / 50% no-repeat;
-			background-color: var(--sl-color-text-accent);
-			display: block;
-			width: 100%;
-			height: 100%;
-		}
-
-		#starlight__search .pagefind-ui__results > * + * {
-			margin-top: var(--sl-search-result-spacing);
-		}
-		#starlight__search .pagefind-ui__result {
-			border: 0;
-			padding: 0;
-		}
-
-		#starlight__search .pagefind-ui__result-nested {
-			position: relative;
-			padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
-			padding-inline-start: var(--sl-search-result-pad-inline-start);
-		}
-
-		#starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
-		#starlight__search .pagefind-ui__result-nested {
-			position: relative;
+		starlight-pagefind .pf-input {
 			background-color: var(--sl-color-black);
+			border: 1px solid var(--sl-color-gray-5);
 		}
 
-		#starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):hover,
-		#starlight__search
-			.pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):focus-within,
-		#starlight__search .pagefind-ui__result-nested:hover,
-		#starlight__search .pagefind-ui__result-nested:focus-within {
-			outline: 1px solid var(--sl-color-accent-high);
+		/* Summary */
+
+		starlight-pagefind .pf-summary {
+			padding-block: 0.5rem;
+			color: var(--sl-color-gray-2);
 		}
 
-		#starlight__search
-			.pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):focus-within,
-		#starlight__search .pagefind-ui__result-nested:focus-within {
+		/* Results */
+
+		starlight-pagefind
+			:is(.pf-result-card, .pf-heading-chip):has(
+				[data-pf-selected],
+				:is(.pf-result-link, .pf-heading-link):focus-visible
+			) {
 			background-color: var(--sl-color-accent-low);
+			border-color: var(--sl-color-accent-high);
+			box-shadow: none;
 		}
 
-		#starlight__search .pagefind-ui__result-thumb,
-		#starlight__search .pagefind-ui__result-inner {
-			margin-top: 0;
+		starlight-pagefind
+			:is(.pf-result-card, .pf-heading-chip):is(
+				:hover,
+				:has([data-pf-selected], :is(.pf-result-link, .pf-heading-link):focus-visible)
+			) {
+			z-index: 1;
 		}
 
-		#starlight__search .pagefind-ui__result-inner > :first-child {
-			border-radius: var(--sl-search-corners) var(--sl-search-corners) 0 0;
-		}
-		#starlight__search .pagefind-ui__result-inner > :last-child {
-			border-radius: 0 0 var(--sl-search-corners) var(--sl-search-corners);
+		starlight-pagefind :is(.pf-result, .pf-heading-chips) {
+			gap: 0;
 		}
 
-		#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title {
-			padding: var(--sl-search-result-pad-block) var(--sl-search-result-pad-inline-end);
-			padding-inline-start: var(--sl-search-result-pad-inline-start);
+		starlight-pagefind .pf-heading-chips {
+			padding-inline-start: 0;
 		}
-		#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title::before {
+
+		starlight-pagefind .pf-result:has(.pf-heading-chip) .pf-result-card {
+			border-end-start-radius: 0;
+			border-end-end-radius: 0;
+		}
+
+		starlight-pagefind .pf-heading-chip {
+			border-radius: 0;
+			margin-block-start: -1px;
+			padding-inline-start: 3rem;
+		}
+
+		starlight-pagefind .pf-heading-chip:last-child {
+			/* Restore Pagefind rounded bottom corners on the last heading chip. */
+			border-end-start-radius: revert-layer;
+			border-end-end-radius: revert-layer;
+		}
+
+		starlight-pagefind :is(.pf-result-card, .pf-heading-chip) {
+			padding-inline-end: 1rem;
+		}
+
+		starlight-pagefind .pf-result-card::before {
+			content: '';
+			flex-shrink: 0;
+			width: 1.5rem;
+			background-color: var(--sl-color-gray-3);
+			-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+				center no-repeat;
+			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+				center no-repeat;
+		}
+
+		starlight-pagefind .pf-heading-link::before {
+			content: none;
+		}
+
+		starlight-pagefind .pf-heading-chip::before {
 			content: '';
 			position: absolute;
 			inset-block: 0;
-			inset-inline-start: var(--sl-search-page-icon-inline-start);
-			width: var(--sl-search-page-icon-size);
-			background: var(--sl-color-gray-3);
-			-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
-				center no-repeat;
-			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
-				center no-repeat;
-		}
-
-		#starlight__search .pagefind-ui__result-inner {
-			align-items: stretch;
-			gap: 1px;
-		}
-
-		#starlight__search .pagefind-ui__result-link {
-			position: unset;
-			--pagefind-ui-text: var(--sl-color-white);
-			font-weight: 600;
-		}
-
-		#starlight__search .pagefind-ui__result-link:hover {
-			text-decoration: none;
-		}
-
-		#starlight__search .pagefind-ui__result-nested .pagefind-ui__result-link::before {
-			content: unset;
-		}
-
-		#starlight__search .pagefind-ui__result-nested::before {
-			content: '';
-			position: absolute;
-			inset-block: 0;
-			inset-inline-start: var(--sl-search-tree-diagram-inline-start);
-			width: var(--sl-search-tree-diagram-size);
-			background: var(--sl-color-gray-4);
+			inset-inline-start: 0.5rem;
+			width: 2rem;
+			background-color: var(--sl-color-gray-4);
 			-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
 				0% 0% / 100% no-repeat;
 			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
 				0% 0% / 100% no-repeat;
 		}
-		#starlight__search .pagefind-ui__result-nested:last-of-type::before {
+
+		starlight-pagefind .pf-heading-chip:last-child::before {
 			-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 			mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 		}
 
-		/* Flip page and tree icons around the vertical axis when in an RTL layout. */
-		[dir='rtl'] .pagefind-ui__result-title::before,
-		[dir='rtl'] .pagefind-ui__result-nested::before {
+		[dir='rtl'] starlight-pagefind :is(.pf-result-card, .pf-heading-chip)::before {
 			transform: matrix(-1, 0, 0, 1, 0, 0);
 		}
 
-		#starlight__search .pagefind-ui__result-link::after {
-			content: '';
-			position: absolute;
-			inset: 0;
+		starlight-pagefind :is(.pf-result-title, .pf-result-excerpt, .pf-heading-excerpt) {
+			line-height: var(--sl-line-height);
 		}
 
-		#starlight__search .pagefind-ui__result-excerpt {
-			font-size: calc(1rem * var(--pagefind-ui-scale));
+		starlight-pagefind :is(.pf-result-link, .pf-heading-link):hover {
+			text-decoration: none;
+		}
+
+		starlight-pagefind .pf-heading-link {
+			font-size: 0.9375rem;
+			line-height: 1.875rem;
+		}
+
+		starlight-pagefind .pf-heading-excerpt {
+			font-size: var(--sl-text-xs);
+			white-space: normal;
 			overflow-wrap: anywhere;
+			/**
+			 * Limit excerpts to a few lines as content without spaces can produce very long excerpts.
+			 * Despite the use of vendor-prefixed and deprecated properties, as documented, "the
+			 * co-dependency of these three properties is a fully specified behavior and will continue to
+			 * be supported".
+			 * Use `line-clamp` once it is properly supported across all target browsers.
+			 * @see https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-clamp#description
+			 */
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
 		}
 
-		#starlight__search mark {
-			color: var(--sl-color-gray-2);
-			background-color: transparent;
-			font-weight: 600;
+		/* Filters */
+
+		starlight-pagefind .search-results {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
 		}
 
-		#starlight__search .pagefind-ui__filter-value::before {
-			border-color: var(--sl-color-text-invert);
+		starlight-pagefind pagefind-filter-pane {
+			flex: 1;
+			min-width: min(13rem, 100%);
 		}
 
-		#starlight__search .pagefind-ui__result-tags {
+		starlight-pagefind pagefind-results {
+			/* Make the results take almost all the free space of the row and leave the filter pane at its minimum width. */
+			flex: 999;
+			min-width: min(20rem, 100%);
+		}
+
+		starlight-pagefind dialog.pf-modal:has(.pf-input:placeholder-shown) pagefind-filter-pane,
+		starlight-pagefind pagefind-filter-pane:not(:has(.pf-filter-group:not([data-pf-hidden]))) {
+			/* Only show the filter pane once a search query has been entered and at least one filter group is visible. */
+			display: none;
+		}
+
+		starlight-pagefind .pf-filter-pane {
 			background-color: var(--sl-color-black);
-			margin-top: 0;
-			padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
+		}
+
+		starlight-pagefind :is(.pf-filter-group-title, .pf-filter-checkbox-count) {
+			font-size: var(--sl-text-2xs);
+		}
+
+		/* Skeleton */
+
+		starlight-pagefind .pf-skeleton {
+			animation-duration: 3s;
+		}
+
+		starlight-pagefind .pf-result-card:has(.pf-skeleton)::before {
+			content: none;
+		}
+
+		starlight-pagefind .pf-skeleton-image {
+			align-self: center;
+		}
+
+		starlight-pagefind .pf-skeleton-title {
+			height: 1rem;
+			margin-bottom: 0.75rem;
+		}
+
+		/* Footer */
+
+		@media (hover: none) {
+			starlight-pagefind pagefind-modal-footer {
+				display: none;
+			}
 		}
 	}
 </style>

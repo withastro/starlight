@@ -40,6 +40,7 @@
     "./schema": "./src/schema.ts",
     "./loaders": "./src/loaders.ts",
     "./route-data": "./src/route-data.ts",
+    "./pagefind": "./src/pagefind.ts",
     "./types": "./src/types.ts",
     "./expressive-code": "./src/expressive-code.ts",
     "./expressive-code/hast": "./src/integrations/expressive-code/hast.ts",
@@ -69,7 +70,7 @@
     "@astrojs/markdown-satteri": "^0.4.0",
     "@astrojs/mdx": "^8.0.0",
     "@astrojs/sitemap": "^3.7.3",
-    "@pagefind/default-ui": "^1.3.0",
+    "@pagefind/component-ui": "^1.5.2",
     "@types/hast": "^3.0.5",
     "@types/js-yaml": "^4.0.9",
     "@types/mdast": "^4.0.4",
@@ -129,6 +130,10 @@
       "./route-data": {
         "types": "./dist/route-data.d.ts",
         "import": "./dist/route-data.js"
+      },
+      "./pagefind": {
+        "types": "./dist/pagefind.d.ts",
+        "import": "./dist/pagefind.js"
       },
       "./types": {
         "types": "./dist/types.d.ts",
