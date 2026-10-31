@@ -12,6 +12,7 @@ vi.mock('astro:content', async () =>
 				'showcase.mdx',
 				{ title: 'Custom edit link', editUrl: 'https://example.com/custom-edit?link' },
 			],
+			['languages/c#.md', { title: 'C#' }],
 		],
 	})
 );
@@ -37,6 +38,17 @@ test('synthesizes edit URL using file location and `editLink.baseUrl`', () => {
 			'https://github.com/withastro/starlight/edit/main/docs/src/content/docs/getting-started.mdx'
 		);
 	}
+});
+
+test('encodes special characters in file paths when synthesizing edit URLs', () => {
+	const route = routes[3]!;
+	const data = generateRouteData({
+		props: { ...route, headings: [] },
+		context: getRouteDataTestContext(),
+	});
+	expect(data.editUrl?.href).toBe(
+		'https://github.com/withastro/starlight/edit/main/docs/src/content/docs/languages/c%23.md'
+	);
 });
 
 test('uses frontmatter `editUrl` if defined', () => {

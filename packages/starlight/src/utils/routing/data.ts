@@ -104,7 +104,9 @@ function getEditUrl({ entry }: PageProps): URL | undefined {
 		url = editUrl;
 	} else if (config.editLink.baseUrl) {
 		// If a base URL was added in Starlight config, synthesize the edit URL from it.
-		url = ensureTrailingSlash(config.editLink.baseUrl) + entry.filePath;
+		url =
+			ensureTrailingSlash(config.editLink.baseUrl) +
+			entry.filePath.split('/').map(encodeURIComponent).join('/');
 	}
 	return url ? new URL(url) : undefined;
 }
