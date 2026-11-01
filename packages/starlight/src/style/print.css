@@ -100,6 +100,13 @@
 		overflow-x: hidden;
 		white-space: pre-wrap;
 	}
+	.sl-markdown-content table:not(:where(.not-content *)) {
+		display: table;
+		overflow: visible;
+	}
+	.sl-markdown-content :is(th, td) code:not(:where(.not-content *)) {
+		overflow-wrap: anywhere;
+	}
 	.sl-markdown-content .expressive-code,
 	.sl-markdown-content figure,
 	.sl-markdown-content pre {
