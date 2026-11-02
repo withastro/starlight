@@ -23,7 +23,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 					// Remove the popover attribute on desktop viewports. It's only needed for the mobile menu.
 					const resetPopoverAttribute = () => {
 						this.popover = desktopMediaQuery.matches ? null : 'auto';
-					}
+					};
 					resetPopoverAttribute();
 					desktopMediaQuery.addEventListener('change', () => resetPopoverAttribute());
 
