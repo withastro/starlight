@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
-import { getSidebar } from '../../src/utils/navigation';
+import { flattenSidebar, getSidebar, getSidebarFromConfig } from '../../src/utils/navigation';
+import { SidebarItemSchema } from '../../src/schemas/sidebar';
 import type { SidebarEntry } from '../../src/utils/routing/types';
 
 vi.mock('astro:content', async () =>
@@ -202,6 +203,18 @@ describe('getSidebar', () => {
 			  },
 			]
 		`);
+	});
+
+	test('includes the directory landing page when autogenerating from that directory', () => {
+		const sidebar = getSidebarFromConfig(
+			[SidebarItemSchema.parse({ autogenerate: { directory: 'reference/frontmatter' } })],
+			'/reference/frontmatter/',
+			undefined
+		);
+		expect(flattenSidebar(sidebar).map(({ href, isCurrent }) => ({ href, isCurrent }))).toEqual([
+			{ href: '/reference/frontmatter/', isCurrent: true },
+			{ href: '/reference/frontmatter/foo/', isCurrent: false },
+		]);
 	});
 
 	test("ensures trailing slash consistency between internal and auto-generated sidebar links when using `trailingSlash: 'ignore'`", () => {

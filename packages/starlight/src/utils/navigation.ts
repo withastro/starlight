@@ -213,8 +213,8 @@ function makeLink({ attrs = {}, badge, autogenerate, ...opts }: MakeLinkOptions)
 function getBreadcrumbs(path: string, baseDir: string): string[] {
 	// Strip extension from path.
 	const pathWithoutExt = stripExtension(path);
-	// Index paths will match `baseDir` and don’t include breadcrumbs.
-	if (pathWithoutExt === baseDir) return [];
+	// Treat a page matching `baseDir` as the directory’s index page.
+	if (pathWithoutExt === baseDir) return ['index'];
 	// Ensure base directory ends in a trailing slash.
 	baseDir = ensureTrailingSlash(baseDir);
 	// Strip base directory from path if present.
