@@ -13,13 +13,9 @@ import Icon from '../user-components/Icon.astro';
 	</div>
 	<Pagination />
 
-	{
-		config.credits && (
-			<a class="kudos sl-flex" href="https://starlight.astro.build">
-				<Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
-			</a>
-		)
-	}
+	{config.credits && <a class="kudos sl-flex" href="https://starlight.astro.build">
+		<Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
+	</a>}
 </footer>
 
 <style>
