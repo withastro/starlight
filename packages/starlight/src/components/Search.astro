@@ -124,7 +124,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
 			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
 
-			window.addEventListener('DOMContentLoaded', () => {
+			const initPagefind = () => {
 				if (import.meta.env.DEV) return;
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 				onIdle(async () => {
@@ -147,7 +147,14 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 						},
 					});
 				});
-			});
+			};
+			// The script may run after the page has loaded, for example when it's
+			// added dynamically, in which case DOMContentLoaded has already fired.
+			if (document.readyState === 'loading') {
+				window.addEventListener('DOMContentLoaded', initPagefind);
+			} else {
+				initPagefind();
+			}
 		}
 	}
 	customElements.define('site-search', SiteSearch);
