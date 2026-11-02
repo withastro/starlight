@@ -32,7 +32,18 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2"
   },
-  "packageManager": "pnpm@11.22.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.11.2",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "24.18.0",
+      "onFail": "download"
+    }
+  },
   "size-limit": [
     {
       "name": "/index.html",
