@@ -166,11 +166,8 @@ export default function StarlightIntegration(
 											// with non-Node.js compatible environments like Cloudflare.
 											'@astrojs/starlight>astro-expressive-code/components',
 											'@astrojs/starlight>astro-expressive-code>hast-util-select',
-											'@astrojs/starlight>astro-expressive-code>rehype',
 											'@astrojs/starlight>astro-expressive-code>unist-util-visit',
-											'@astrojs/starlight>astro-expressive-code>rehype-format',
 											'@astrojs/starlight>astro-expressive-code>hastscript',
-											'@astrojs/starlight>astro-expressive-code>hast-util-from-html',
 											'@astrojs/starlight>astro-expressive-code>hast-util-to-string',
 											'@astrojs/starlight>astro-expressive-code>@expressive-code/core>postcss',
 										],

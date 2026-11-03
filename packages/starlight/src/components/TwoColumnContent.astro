@@ -1,13 +1,7 @@
 <div class="lg:sl-flex">
-	{
-		Astro.locals.starlightRoute.toc && (
-			<aside class="right-sidebar-container print:hidden">
-				<div class="right-sidebar">
-					<slot name="right-sidebar" />
-				</div>
-			</aside>
-		)
-	}
+	{Astro.locals.starlightRoute.toc && <aside class="right-sidebar-container print:hidden">
+		<div class="right-sidebar"><slot name="right-sidebar" /></div>
+	</aside>}
 	<div class="main-pane"><slot /></div>
 </div>
 
@@ -21,6 +15,8 @@
 			.right-sidebar-container {
 				order: 2;
 				position: relative;
+				/* Keep the sidebar at the end of the row if it paints before the main pane is parsed. */
+				margin-inline-start: auto;
 				width: max(
 					var(--sl-sidebar-width),
 					calc(
