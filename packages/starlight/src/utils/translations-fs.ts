@@ -1,10 +1,12 @@
+import type { AstroConfig } from 'astro';
+import { AstroError } from 'astro/errors';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import { createTranslationSystem } from './createTranslationSystem';
 import type { StarlightConfig } from './user-config';
-import type { AstroConfig } from 'astro';
 
 const contentCollectionFileExtensions = ['.json', '.yaml', '.yml'];
 
@@ -31,11 +33,19 @@ export async function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 			const filePath = path.parse(file);
 			if (!contentCollectionFileExtensions.includes(filePath.ext)) continue;
 			const id = filePath.name;
-			const content = fs.readFileSync(new URL(file, i18nDir), 'utf-8');
-			const data = (
-				filePath.ext === '.json' ? JSON.parse(content) : parse(content)
-			) as i18nSchemaOutput;
-			userTranslations[id] = data;
+			const url = new URL(file, i18nDir);
+			const content = fs.readFileSync(url, 'utf-8');
+			try {
+				const data = (
+					filePath.ext === '.json' ? JSON.parse(content) : parse(content)
+				) as i18nSchemaOutput;
+				userTranslations[id] = data;
+			} catch (e) {
+				const message = e instanceof Error ? e.message : String(e);
+				const error = new AstroError(`Failed to parse '${fileURLToPath(url)}'`, message);
+				error.cause = e;
+				throw error;
+			}
 		}
 	} catch (e: unknown) {
 		if (e instanceof Error && 'code' in e && e.code === 'ENOENT') {
