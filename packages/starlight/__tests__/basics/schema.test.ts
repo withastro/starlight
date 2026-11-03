@@ -1,10 +1,11 @@
+import { z } from 'astro/zod';
 import { describe, expect, test } from 'vitest';
+import { parse } from 'yaml';
 import { docsSchema } from '../../src/schema';
 import { FaviconSchema } from '../../src/schemas/favicon';
-import { TitleTransformConfigSchema } from '../../src/schemas/site-title';
 import { HeadConfigSchema, type HeadUserConfig } from '../../src/schemas/head';
+import { TitleTransformConfigSchema } from '../../src/schemas/site-title';
 import { parseWithFriendlyErrors } from '../../src/utils/error-map';
-import { z } from 'astro/zod';
 
 describe('FaviconSchema', () => {
 	test('returns the proper href and type attributes', () => {
@@ -170,6 +171,27 @@ describe('HeadConfigSchema', () => {
 						    content: "1234"
 						"
 				`);
+		});
+		test('suggests valid YAML for date-like `meta` content', () => {
+			// Parse an invalid head config and get the raw error message.
+			// Content value can be potentially be interpreted as a date and must be handled correctly.
+			const result = HeadConfigSchema({ source: 'content' }).safeParse([
+				{ tag: 'meta', attrs: { name: 'date' }, content: '2026-10-07' },
+			]);
+
+			// Extract the suggested YAML snippet from the error message.
+			const suggestion = result.error?.issues[0]?.message.split('\n\n').at(-1);
+
+			// Parse the suggestion like Astro parses frontmatter YAML.
+			// https://github.com/withastro/astro/blob/88f0bd642b082274a57999bb9e74f89d7477e47e/packages/internal-helpers/src/yaml.ts#L4-L8
+			const parsed: unknown = parse(suggestion ?? '', {
+				customTags: ['timestamp'],
+				merge: true,
+				schema: 'core',
+			});
+
+			// The parsed suggestion should include `content` as a string.
+			expect(parsed).toEqual([{ tag: 'meta', attrs: { name: 'date', content: '2026-10-07' } }]);
 		});
 	});
 });

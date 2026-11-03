@@ -39,7 +39,9 @@ export const HeadConfigSchema = ({
 						attrs: { ...(config.attrs ?? { name: 'identifier' }), content: config.content },
 					};
 					const code =
-						source === 'config' ? JSON.stringify(correctTag, null, 2) : stringify([correctTag]);
+						source === 'config'
+							? JSON.stringify(correctTag, null, 2)
+							: stringify([correctTag], { customTags: ['timestamp'] });
 					ctx.issues.push({
 						code: 'custom',
 						message:
