@@ -36,10 +36,9 @@ export async function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 			const url = new URL(file, i18nDir);
 			const content = fs.readFileSync(url, 'utf-8');
 			try {
-				const data = (
+				userTranslations[id] = (
 					filePath.ext === '.json' ? JSON.parse(content) : parse(content)
 				) as i18nSchemaOutput;
-				userTranslations[id] = data;
 			} catch (e) {
 				const message = e instanceof Error ? e.message : String(e);
 				const error = new AstroError(`Failed to parse '${fileURLToPath(url)}'`, message);
