@@ -18,6 +18,12 @@
       "options": {
         "printWidth": 80
       }
+    },
+    {
+      "files": ["*.astro", "*.md", "*.mdx"],
+      "options": {
+        "astroCompressHTML": "none"
+      }
     }
   ]
 }

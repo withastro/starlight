@@ -60,7 +60,7 @@ interface Dir {
 
 /** Create a new directory object. */
 function makeDir(slug: string): Dir {
-	const dir = {} as Dir;
+	const dir = Object.create(null) as Dir;
 	// Add DirKey and SlugKey as non-enumerable properties so that `Object.entries(dir)` ignores them.
 	Object.defineProperty(dir, DirKey, { enumerable: false });
 	Object.defineProperty(dir, SlugKey, { value: slug, enumerable: false });
@@ -103,17 +103,19 @@ function entriesFromAutogenerateConfig(
 	routes: Route[]
 ): (SidebarAutoLink | SidebarGroup)[] {
 	const { attrs, collapsed, directory } = item.autogenerate;
-	const localeDir = locale ? locale + '/' + directory : directory;
+	const localeDir = locale ? locale + (directory ? '/' + directory : '') : directory;
 	const autogenerate = { directory };
-	const dirDocs = routes.filter((doc) => {
-		const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
-		return (
-			// Match against `foo.md` or `foo/index.md`.
-			stripExtension(filePathFromContentDir) === localeDir ||
-			// Match against `foo/anything/else.md`.
-			filePathFromContentDir.startsWith(localeDir + '/')
-		);
-	});
+	const dirDocs = directory
+		? routes.filter((doc) => {
+				const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
+				return (
+					// Match against `foo.md` or `foo/index.md`.
+					stripExtension(filePathFromContentDir) === localeDir ||
+					// Match against `foo/anything/else.md`.
+					filePathFromContentDir.startsWith(localeDir + '/')
+				);
+			})
+		: routes;
 	const tree = treeify(dirDocs, locale, localeDir);
 	return sidebarFromDir(tree, { collapsed: collapsed ?? false, attrs }, autogenerate);
 }

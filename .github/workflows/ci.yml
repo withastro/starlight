@@ -75,12 +75,10 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          node-version: 22.23.1
-          cache: 'pnpm'
-      - run: pnpm i
+          runtime: node@22.23.1
+          cache: true
       - name: Build packages
         run: pnpm build
       - name: Test packages
@@ -103,12 +101,14 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          node-version: 22.23.1
-          cache: 'pnpm'
-      - run: pnpm i --filter @astrojs/starlight --filter "@e2e/*"
+          runtime: node@22.23.1
+          cache: true
+          install: false
+      # Use `--no-runtime` to prevent `pnpm i` from installing the runtime specified in
+      # `devEngines.runtime` and keep the Node.js version set above.
+      - run: pnpm i --no-runtime --filter @astrojs/starlight --filter "@e2e/*"
       - name: Test packages
         run: pnpm -r test:e2e:ci
 
@@ -121,12 +121,10 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          node-version: 22.23.1
-          cache: 'pnpm'
-      - run: pnpm i
+          runtime: node@22.23.1
+          cache: true
       - name: Generate docs types
         working-directory: docs
         run: pnpm astro sync
@@ -142,12 +140,10 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          node-version: 22.23.1
-          cache: 'pnpm'
-      - run: pnpm i
+          runtime: node@22.23.1
+          cache: true
       - name: Generate types
         working-directory: ./docs
         run: pnpm astro sync
@@ -173,17 +169,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-
-      - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - name: Install pnpm, Node.js, and dependencies
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          node-version: 22.23.1
-          cache: 'pnpm'
-
-      - name: Install Dependencies
-        run: pnpm i
+          runtime: node@22.23.1
+          cache: true
 
       - name: Run accessibility audit
         working-directory: ./docs
@@ -200,12 +190,10 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          node-version: 22.23.1
-          cache: 'pnpm'
-      - run: pnpm i
+          runtime: node@22.23.1
+          cache: true
       - name: Build docs site
         working-directory: ./docs
         run: pnpm build
@@ -223,17 +211,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-
-      - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - name: Install pnpm, Node.js, and dependencies
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          node-version: 22.23.1
-          cache: 'pnpm'
-
-      - name: Install Dependencies
-        run: pnpm i
+          runtime: node@22.23.1
+          cache: true
 
       - name: Build docs site and check links
         working-directory: ./docs
