@@ -3,7 +3,7 @@ title: Контент сообщества
 description: Откройте для себя подготовленные сообществом руководства, статьи и видео, которые помогут вам учиться и строить с помощью Starlight!
 ---
 
-:::tip[Добавьте собственную работу!]
+:::tip[Добавьте своё!]
 Вы создали какой-то материал о Starlight?
 Откройте PR, добавляющий вашу ссылку на эту страницу!
 :::
@@ -34,7 +34,7 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		/>
 		<LinkCard
 			href="https://www.olets.dev/posts/comparing-docs-site-builders-vuepress-vs-starlight/"
-			title="Сравнение конструкторов сайтов документаций: VuePress против Starlight"
+			title="Сравнение сборщиков сайтов документации: VuePress против Starlight"
 			description="Как соотносятся эти две системы?"
 		/>
 		<LinkCard
@@ -49,8 +49,8 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		/>
 		<LinkCard
 			href="https://blog.cloudflare.com/open-source-all-the-way-down-upgrading-our-developer-documentation/"
-			title="Открытый код на каждом уровне"
-			description="Как Cloudflare использовал Starlight для обновления своей документации для разработчиков."
+			title="Полностью открытый исходный код"
+			description="Как Cloudflare использовал Starlight для обновления документации для разработчиков."
 		/>
 		<LinkCard
 			href="https://starlight-changelog.netlify.app/"
@@ -60,7 +60,7 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		<LinkCard
 			href="https://hideoo.dev/notes/contributing-to-starlight"
 			title="Вклад в Starlight"
-			description="Мой личный опыт и рекомендации по внесению вклада в open-source проекты, такие как Starlight."
+			description="Мой личный опыт и рекомендации по внесению вклада в open-source-проекты, такие как Starlight."
 		/>
 	</CardGrid>
 </ThirdPartyContent>
@@ -80,8 +80,8 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		/>
 		<LinkCard
 			href="https://hideoo.dev/notes/starlight-heading-links"
-			title="Добавление ссылок на рубрики Starlight"
-			description="Руководство по использованию плагина rehype для обмена ссылками на определенные разделы вашей документации."
+			title="Добавление ссылок на заголовки Starlight"
+			description="Руководство по использованию плагина rehype для создания ссылок на конкретные разделы вашей документации."
 		/>
 		<LinkCard
 			href="https://blog.otterlord.dev/posts/starlight-sponsors/"
@@ -96,11 +96,11 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		<LinkCard
 			href="https://hideoo.dev/notes/starlight-third-party-icon-sets"
 			title="Использование сторонних наборов иконок в Starlight"
-			description="Руководство по использованию unplugin-icons для расширения выбора доступных иконок для Starlight."
+			description="Руководство по использованию unplugin-icons для расширения набора доступных иконок в Starlight."
 		/>
 		<LinkCard
 			href="https://hideoo.dev/notes/starlight-custom-html-head"
-			title="Редактирование HTML-заголовка страниц Starlight"
+			title="Редактирование HTML head страниц Starlight"
 			description="Узнайте, как добавлять дополнительные данные в head страницы: веб-аналитику, шрифты и скрипты."
 		/>
 		<LinkCard
@@ -121,7 +121,7 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		<LinkCard
 			href="https://starlight-examples.netlify.app/"
 			title="Примеры Starlight"
-			description="Коллекция вставок StackBlitz, демонстрирующих практические способы работы с сайтами документации Starlight."
+			description="Коллекция встраиваемых примеров StackBlitz, демонстрирующих практические способы работы с сайтами документации Starlight."
 		/>
 		<LinkCard
 			href="https://hideoo.dev/notebooks/starlight-plugins-by-example"
@@ -140,7 +140,7 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		/>
 		<LinkCard
 			href="https://desired-state.leaflet.pub/3mpvcsbo2tk2x"
-			title="Выпадающее меню тем на мобильных, обычный список — на десктопе"
+			title="Выпадающее меню разделов на мобильных, обычный список — на десктопе"
 			description="Объединяем два плагина, чтобы на мобильных устройствах было выпадающее меню, а на десктопе — обычный список."
 		/>
 		<LinkCard
@@ -171,22 +171,27 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 		<LinkCard
 			href="https://hideoo.dev/notes/starlight-list-recent-github-releases"
 			title="Выводим последние GitHub-релизы в Starlight через Astro Content Layer API"
-			description="Узнайте, как использовать Astro Content Layer APIВ для получения списка последних GitHub-релизов в проекте на Starlight."
+			description="Узнайте, как использовать Astro Content Layer API для получения списка последних GitHub-релизов в проекте на Starlight."
 		/>
 		<LinkCard
 			href="https://hideoo.dev/notes/starlight-sitewide-banner"
 			title="Добавляем общий баннер на весь сайт Starlight"
-			description="Как сделать общий для всего сайта баннер, используя встроенную функцию Starlight для баннеров на отдельных страницах."
+			description="Как создать баннер на весь сайт с помощью встроенной в Starlight функции баннеров для отдельных страниц."
 		/>
 		<LinkCard
 			href="https://lirantal.com/blog/customizing-astro-starlight-sidebar-gated-content-auth"
-			title="Настройка боковой панели Astro Starlight для закрытого контента с аутентификацией"
-			description="Защитите свои учебные материалы, используя Clerk и SSR для динамического скрытия или отображения разделов сайдбара Starlight в зависимости от статуса авторизации пользователя."
+			title="Настройка боковой панели Astro Starlight для контента с ограниченным доступом и аутентификацией"
+			description="Защитите свои учебные материалы, используя Clerk и SSR для динамического скрытия или отображения разделов боковой панели Starlight в зависимости от статуса авторизации пользователя."
 		/>
 		<LinkCard
 			href="https://encatch.com/docs/integrations/documentation-platforms/astro-starlight"
 			title="Собираем отзывы пользователей с помощью Encatch"
 			description="Добавьте в документацию Starlight отзывы читателей, предложения по улучшению и сбор сообщений о проблемах прямо на страницах."
+		/>
+		<LinkCard
+			href="https://desired-state.leaflet.pub/3mpvjajgyo22v"
+			title="Настройка заголовка «Обзор»"
+			description="Адаптация первого заголовка оглавления Starlight с помощью мидлвара маршрутов."
 		/>
 	</CardGrid>
 </ThirdPartyContent>
@@ -208,9 +213,9 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 		},
 		{
 			href: 'https://www.youtube.com/watch?v=j8K-ESJF814',
-			title: 'Starlight один год!',
+			title: 'Starlight исполнился год!',
 			description:
-				'Sarah рассказывает о созданной сообществом Astro теме для документации',
+				'Sarah рассказывает о теме для документации от Astro, созданной сообществом',
 		},
 	]}
 />
@@ -230,7 +235,7 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 				href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
 				title: 'Создание документов с помощью Starlight и Astro',
 				description:
-					'Посмотрите, как Крис и Алекс погружаются в Starlight с помощью CodingCat.dev',
+					'Посмотрите, как Крис и Алекс погружаются в Starlight в шоу Code на CodingCat.dev',
 			},
 			{
 				href: 'https://www.youtube.com/watch?v=sWkkHbwDeQc',
@@ -253,15 +258,15 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 			{
 				href: 'https://www.youtube.com/watch?v=5pq80drDrNs',
 				title:
-					'Я воссоздал документы Shadcn за 30 минут с помощью этого удивительного инструмента',
+					'Я воссоздал документацию Shadcn за 30 минут с помощью этого удивительного инструмента',
 				description:
 					'В этом видео я рассказываю о том, что делает Starlight таким крутым и почему вы можете попробовать его в своем следующем проекте.',
 			},
 			{
 				href: 'https://www.youtube.com/watch?v=Q1E4Gkt63ko',
-				title: 'Astro Starlight и взрыв эмоций с Крисом Свитинбанком',
+				title: 'Astro Starlight и emoji-blast с Крисом Свитинбанком',
 				description:
-					'В этой статье Крис, создатель Starlight, рассказывает о том, как настроить этот фреймворк для нового сайта, посвящённого эмодзи. 🌟 🎇',
+					'В этом видео Крис, создатель Starlight, рассказывает о том, как настроить этот фреймворк для нового сайта emoji-blast. 🌟 🎇',
 			},
 		]}
 	/>
