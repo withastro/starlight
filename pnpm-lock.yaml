@@ -452,6 +452,9 @@ importers:
       linkedom:
         specifier: ^0.18.12
         version: 0.18.12
+      mdast-util-to-hast:
+        specifier: ^13.2.1
+        version: 13.2.1
       vitest:
         specifier: ^5.0.2
         version: 5.0.3(@types/node@22.19.17)(@vitest/coverage-v8@5.0.3)(vite@8.3.5(@types/node@22.19.17)(esbuild@0.28.0)(jiti@2.7.0)(yaml@2.9.1))
