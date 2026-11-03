@@ -42,7 +42,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 
 #### Developing locally
 
-**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v22.13.0 or higher) and [pnpm](https://pnpm.io/) (using the version specified by the `packageManager` field in `package.json`). Make sure you have these installed before following these steps.
+**Prerequisites:** Developing Starlight requires [pnpm](https://pnpm.io/), which automatically uses the pnpm and Node.js versions specified by the `devEngines` field in `package.json`. Make sure you have pnpm installed before following these steps.
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
 
@@ -67,8 +67,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 5. **Generate TypeScript types** for all Astro modules:
 
    ```sh
-   cd docs
-   pnpm astro sync
+   pnpm -F ./docs astro sync
    ```
 
 #### Developing using GitHub Codespaces
@@ -78,7 +77,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 2. **Generate TypeScript types** for all Astro modules:
 
    ```sh
-   pnpm astro sync
+   pnpm -F ./docs astro sync
    ```
 
 3. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
