@@ -129,7 +129,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 	class StarlightDocSearch extends HTMLElement {
 		constructor() {
 			super();
-			window.addEventListener('DOMContentLoaded', async () => {
+			const initDocSearch = async () => {
 				const { default: docsearch } = await import('@docsearch/js');
 				const options = { ...config, container: 'sl-doc-search' };
 				try {
@@ -137,7 +137,14 @@ const docsearchTranslations: DocSearchTranslationProps = {
 					Object.assign(options, translations);
 				} catch {}
 				docsearch(options);
-			});
+			};
+			// The script may run after the page has loaded, for example when it's
+			// added dynamically, in which case DOMContentLoaded has already fired.
+			if (document.readyState === 'loading') {
+				window.addEventListener('DOMContentLoaded', initDocSearch);
+			} else {
+				initDocSearch();
+			}
 		}
 	}
 	customElements.define('sl-doc-search', StarlightDocSearch);
