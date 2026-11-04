@@ -115,13 +115,16 @@ export function getHead(
 	// Link to Twitter account if set in Starlight config.
 	const twitterLink = config.social?.find(({ icon }) => icon === 'twitter' || icon === 'x.com');
 	if (twitterLink) {
-		headDefaults.push({
-			tag: 'meta',
-			attrs: {
-				name: 'twitter:site',
-				content: new URL(twitterLink.href).pathname.replace('/', '@'),
-			},
-		});
+		const account = getTwitterHandle(twitterLink.href);
+		if (account) {
+			headDefaults.push({
+				tag: 'meta',
+				attrs: {
+					name: 'twitter:site',
+					content: account,
+				},
+			});
+		}
 	}
 
 	return createHead(headDefaults, config.head, data.head);
@@ -232,4 +235,10 @@ function getImportance(entry: HeadConfig[number]) {
 	}
 	// 4. SEO meta tags.
 	return 0;
+}
+
+/** Extract and normalize a Twitter / X account handle with a leading `@`. */
+export function getTwitterHandle(href: string): string | undefined {
+	const handle = new URL(href).pathname.replace(/^\/+|\/+$/g, '').replace(/^@/, '');
+	return handle ? '@' + handle : undefined;
 }

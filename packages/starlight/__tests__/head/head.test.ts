@@ -4,6 +4,7 @@ import { generateRouteData } from '../../src/utils/routing/data';
 import { routes } from '../../src/utils/routing';
 import type { HeadConfig } from '../../src/schemas/head';
 import { type Route } from '../../src/utils/routing/types';
+import { getTwitterHandle } from '../../src/utils/head';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -228,3 +229,25 @@ function getTestHead({
 				: getRouteDataTestContext({ setSite: setSite }),
 	}).head;
 }
+
+describe('getTwitterHandle', () => {
+	test('extracts handle from standard twitter URL', () => {
+		expect(getTwitterHandle('https://twitter.com/astrodotbuild')).toBe('@astrodotbuild');
+		expect(getTwitterHandle('https://x.com/astrodotbuild')).toBe('@astrodotbuild');
+	});
+
+	test('strips trailing slashes from URL path', () => {
+		expect(getTwitterHandle('https://x.com/astrodotbuild/')).toBe('@astrodotbuild');
+		expect(getTwitterHandle('https://x.com/astrodotbuild///')).toBe('@astrodotbuild');
+	});
+
+	test('normalizes leading @ in URL path', () => {
+		expect(getTwitterHandle('https://x.com/@astrodotbuild')).toBe('@astrodotbuild');
+		expect(getTwitterHandle('https://x.com/@astrodotbuild/')).toBe('@astrodotbuild');
+	});
+
+	test('returns undefined when no username is in the path', () => {
+		expect(getTwitterHandle('https://x.com/')).toBeUndefined();
+		expect(getTwitterHandle('https://x.com')).toBeUndefined();
+	});
+});
