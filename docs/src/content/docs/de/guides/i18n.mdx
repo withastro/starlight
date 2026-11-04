@@ -5,7 +5,7 @@ description: Lerne, wie du deine Starlight-Website so konfigurierst, dass sie me
 
 import { FileTree, Steps } from '@astrojs/starlight/components';
 
-Starlight bietet eingebaute Unterstützung für mehrsprachige Websites, einschließlich Routing, Fallback-Inhalte und vollständige Unterstützung von rechts-nach-links (RTL) Sprachen.
+Starlight bietet eingebaute Unterstützung für mehrsprachige Websites, einschließlich Routing, Fallback-Inhalten und vollständiger Unterstützung für Sprachen mit Schreibrichtung von rechts nach links (RTL).
 
 ## Konfiguriere i18n
 
@@ -69,11 +69,11 @@ Starlight bietet eingebaute Unterstützung für mehrsprachige Websites, einschli
 
 Für fortgeschrittene i18n-Szenarien unterstützt Starlight auch die Konfiguration der Internationalisierung mit [Astro's `i18n`-Konfigurations&shy;option](https://docs.astro.build/de/guides/internationalization/#configure-i18n-routing).
 
-### Verwende ein Root-Verzeichnis
+### Ein Root-Gebietsschema verwenden
 
-Du kannst ein Root-Verzeichnis verwenden, um eine Sprache ohne i18n-Präfix in ihrem Pfad anzubieten. Wenn zum Beispiel Englisch dein Stammverzeichnis ist, würde ein englischer Seitenpfad unter `/about` anstelle von `/en/about` zu finden sein.
+Du kannst ein „Root“-Gebietsschema verwenden, um eine Sprache ohne i18n-Präfix in ihrem Pfad anzubieten. Wenn zum Beispiel Englisch dein Root-Gebietsschema ist, würde ein englischer Seitenpfad unter `/about` anstelle von `/en/about` zu finden sein.
 
-Um ein Stammverzeichnis festzulegen, verwende den Key `root` in deiner `locales`-Konfiguration. Wenn das Root-Verzeichnis auch das Standard-Verzeichnis für deinen Inhalt ist, entferne `defaultLocale` oder setze es auf `'root'`.
+Um ein Root-Gebietsschema festzulegen, verwende den Schlüssel `root` in deiner `locales`-Konfiguration. Wenn das Root-Gebietsschema auch das Standardgebietsschema für deinen Inhalt ist, entferne `defaultLocale` oder setze es auf `'root'`.
 
 ```js {9,11-14}
 // astro.config.mjs
@@ -88,7 +88,7 @@ export default defineConfig({
 			locales: {
 				root: {
 					label: 'English',
-					lang: 'en', // lang ist für Stammverzeichnis erforderlich
+					lang: 'en', // lang ist für Root-Gebietsschemas erforderlich
 				},
 				'zh-cn': {
 					label: '简体中文',
@@ -100,7 +100,7 @@ export default defineConfig({
 });
 ```
 
-Wenn du ein `root`-Verzeichnis verwendest, speichere die Seiten für diese Sprache direkt in `src/content/docs/`, anstatt in einem speziellen Sprachordner. Zum Beispiel sind hier die Homepage-Dateien für Englisch und Chinesisch, wenn man die obige Konfiguration verwendet:
+Wenn du ein `root`-Gebietsschema verwendest, speichere die Seiten für diese Sprache direkt in `src/content/docs/`, anstatt in einem eigenen Sprachordner. Zum Beispiel sind hier die Homepage-Dateien für Englisch und Chinesisch bei Verwendung der obigen Konfiguration:
 
 <FileTree>
 
@@ -141,7 +141,7 @@ Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, oh
 
 ## Fallback-Inhalt
 
-Starlight erwartet, dass du äquivalente Seiten in allen deinen Sprachen erstellst. Wenn du zum Beispiel eine `de/about.md` Datei hast, erstelle eine `about.md` für jede andere Sprache, die du unterstützt. Dies ermöglicht Starlight, automatisch Ersatzinhalte für Seiten zu liefern, die noch nicht übersetzt wurden.
+Starlight erwartet, dass du äquivalente Seiten in allen deinen Sprachen erstellst. Wenn du zum Beispiel eine `en/about.md`-Datei hast, erstelle eine `about.md` für jede andere Sprache, die du unterstützt. Dies ermöglicht Starlight, automatisch Fallback-Inhalte für Seiten zu liefern, die noch nicht übersetzt wurden.
 
 Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight den Lesern den Inhalt dieser Seite in der Standardsprache (eingestellt über `defaultLocale`). Wenn du z.&nbsp;B. noch keine französische Version deiner "About"-Seite erstellt hast und deine Standardsprache Englisch ist, werden Besucher von `/fr/about` den englischen Inhalt von `/en/about` sehen, mit einem Hinweis, dass diese Seite noch nicht übersetzt wurde. Auf diese Weise kannst du Inhalte in deiner Standardsprache hinzufügen und sie dann nach und nach übersetzen, wenn du Lust dazu hast.
 
@@ -178,7 +178,7 @@ export default defineConfig({
 import LanguagesList from '~/components/languages-list.astro';
 import UIStringsList from '~/components/ui-strings-list.astro';
 
-Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.&nbsp;B. die Überschrift "Auf dieser Seite" im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
+Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.&nbsp;B. die Überschrift „Auf dieser Seite“ im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
 
 <LanguagesList startsSentence /> werden standardmäßig übersetzt, und wir freuen
 uns über [Beiträge zur Aufnahme weiterer
@@ -281,7 +281,7 @@ Mehr über Inhaltssammlungs&shy;schemas erfährst du in [„Ein Sammelschema def
 
 ## UI-Übersetzungen verwenden
 
-Du kannst auf Starlights [eingebaute UI-Strings](/de/guides/i18n/#starlights-ui-übersetzen) sowie auf [benutzerdefinierte](/de/guides/i18n/#übersetzungsschema-erweitern) und [plugin-provided](/de/reference/plugins/#injecttranslations) UI-Strings über eine einheitliche API zugreifen, die von [i18next](https://www.i18next.com/) unterstützt wird.
+Du kannst auf Starlights [eingebaute UI-Strings](/de/guides/i18n/#starlights-ui-übersetzen) sowie auf [benutzerdefinierte](/de/guides/i18n/#übersetzungsschema-erweitern) und [von Plugins bereitgestellte](/de/reference/plugins/#injecttranslations) UI-Strings über eine einheitliche API zugreifen, die von [i18next](https://www.i18next.com/) unterstützt wird.
 Dazu gehört die Unterstützung von Funktionen wie [Interpolation](https://www.i18next.com/translation-function/interpolation) und [Pluralisierung](https://www.i18next.com/translation-function/plurals).
 
 In Astro-Komponenten ist diese API als Teil des [globalen `Astro`-Objekts](https://docs.astro.build/de/reference/api-reference/#locals) als `Astro.locals.t` verfügbar:
