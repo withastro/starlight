@@ -135,8 +135,8 @@
 	}
 	/* Tables. */
 	.sl-markdown-content :is(th, td):not(:where(.not-content *)),
-	/* Code needs to be targeted explicitly because we set it to `break-word` in `reset.css`. */
-	.sl-markdown-content :is(th, td) code:not(:where(.not-content *)) {
+	/* We set some elements to `break-word` in `reset.css`, so we also apply `anywhere` to child elements to override that. */
+	.sl-markdown-content :is(th, td) *:not(:where(.not-content *)) {
 		/* Wrap table contents to prevent it overflowing outside the page width. */
 		overflow-wrap: anywhere;
 	}
