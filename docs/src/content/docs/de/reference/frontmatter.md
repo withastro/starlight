@@ -65,7 +65,7 @@ head:
 **Typ:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
 Überschreibt die [globale `tableOfContents`-Konfiguration](/de/reference/configuration/#tableofcontents).
-Passe die einzuschließenden Überschriftsebenen an oder setze sie auf `false`, um das Inhaltsverzeichnis auf dieser Seite auszublenden.
+Passe die einzuschließenden Überschriftenebenen an oder setze sie auf `false`, um das Inhaltsverzeichnis auf dieser Seite auszublenden.
 
 ```md
 ---
