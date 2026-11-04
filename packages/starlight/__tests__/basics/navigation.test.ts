@@ -1,5 +1,11 @@
 import { describe, expect, test, vi } from 'vitest';
-import { flattenSidebar, getPrevNextLinks, getSidebar } from '../../src/utils/navigation';
+import {
+	flattenSidebar,
+	getPrevNextLinks,
+	getSidebar,
+	getSidebarFromConfig,
+} from '../../src/utils/navigation';
+import { SidebarItemSchema } from '../../src/schemas/sidebar';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -163,6 +169,20 @@ describe('getSidebar', () => {
 		expect(getLocaleRoutes).toHaveBeenCalledOnce();
 
 		getLocaleRoutes.mockRestore();
+	});
+});
+
+describe('root autogeneration', () => {
+	test.each(['', '/'])('matches the default sidebar for directory "%s"', (directory) => {
+		const expected = getSidebarFromConfig(undefined, '/environmental-impact/', undefined);
+		expect(expected).toHaveLength(4);
+		expect(
+			getSidebarFromConfig(
+				[SidebarItemSchema.parse({ autogenerate: { directory } })],
+				'/environmental-impact/',
+				undefined
+			)
+		).toEqual(expected);
 	});
 });
 
