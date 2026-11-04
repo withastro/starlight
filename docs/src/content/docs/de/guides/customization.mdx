@@ -5,7 +5,7 @@ description: Lerne, wie du deine Starlight-Website mit deinem Logo, eigenen Schr
 
 import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
-Starlight bietet sinnvolle Standard-Styling und -Funktionen, so dass du schnell loslegen kannst, ohne dass eine Konfiguration erforderlich ist.
+Starlight bietet ein sinnvolles Standard-Styling und sinnvolle Standardfunktionen, sodass du schnell loslegen kannst, ohne dass eine Konfiguration erforderlich ist.
 Wenn du das Aussehen deiner Starlight-Website anpassen willst, findest du in dieser Anleitung alle nötigen Informationen.
 
 ## Dein Logo hinzufügen
@@ -80,7 +80,7 @@ Du kannst verschiedene Versionen deines Logos im Light- und Dark-Mode anzeigen.
 
    </FileTree>
 
-2. Füge den Pfad zu deiner Logovarianten als die Optionen `light` und `dark` anstelle von `src` in `astro.config.mjs` ein:
+2. Füge den Pfad zu deinen Logovarianten als die Optionen `light` und `dark` anstelle von `src` in `astro.config.mjs` ein:
 
    ```diff lang="js"
    starlight({
@@ -107,7 +107,7 @@ export default defineConfig({
 });
 ```
 
-Erfahre in den Astro Docs, wie du [einen Sitemap-Link zur `robots.txt` hinzufügst] (https://docs.astro.build/de/guides/integrations-guide/sitemap/#sitemap-link-in-robotstxt).
+Erfahre in den Astro Docs, wie du [einen Sitemap-Link zur `robots.txt` hinzufügst](https://docs.astro.build/de/guides/integrations-guide/sitemap/#sitemap-link-in-robotstxt).
 
 ## Seitenlayout
 
@@ -202,7 +202,7 @@ Starlight bietet integrierte Unterstützung für das Hinzufügen von Links zu de
 
 Jeder Eintrag im Array `social` muss ein Objekt mit drei Eigenschaften sein:
 
-- `icon`: eines der [eingebauten Symbolen](/de/reference/icons/) von Starlight, z.&nbsp;B. `"github"`.
+- `icon`: eines der [in Starlight integrierten Symbole](/de/reference/icons/), z.&nbsp;B. `"github"`.
 - `label`: eine zugängliche Bezeichnung für den Link, z.&nbsp;B. `"GitHub"`.
 - `href`: die URL für den Link, z.&nbsp;B. `"https://github.com/withastro/starlight"`.
 
@@ -232,7 +232,7 @@ export default defineConfig({
 
 ## Bearbeitungslinks
 
-Starlight kann einen "Seite bearbeiten"-Link in der Fußzeile jeder Seite anzeigen.
+Starlight kann einen „Seite bearbeiten“-Link in der Fußzeile jeder Seite anzeigen.
 Dies macht es dem Leser leicht, die zu bearbeitende Datei zu finden, um deine Dokumentation zu verbessern.
 Insbesondere bei Open-Source-Projekten kann dies dazu beitragen, Beiträge aus deiner Community zu fördern.
 
@@ -246,7 +246,7 @@ Der Wert von `editLink.baseUrl` wird dem Pfad zur aktuellen Seite vorangestellt,
 
 Wenn sich dein Starlight-Projekt nicht im Stammverzeichnis deines Repositorys befindet, füge den Pfad zum Projekt am Ende der Basis-URL ein.
 
-Dieses Beispiel zeigt den Bearbeitungslink, der für die Starlight-Dokumentation konfiguriert ist, die sich im Unterverzeichnis `docs/` im `main`-Branch des `withastro/starlight`-Repository auf GitHub befinden:
+Dieses Beispiel zeigt den Bearbeitungslink, der für die Starlight-Dokumentation konfiguriert ist, die sich im Unterverzeichnis `docs/` im `main`-Branch des `withastro/starlight`-Repositorys auf GitHub befindet:
 
 ```js {9-11}
 // astro.config.mjs
@@ -388,7 +388,7 @@ Es bietet npm-Module, die du für die gewünschten Schriftarten installieren kan
 
 <Steps>
 
-1.  Suche die Schriftart, die du verwenden möchten, im [Fontsource-Katalog](https://fontsource.org/).
+1.  Suche die Schriftart, die du verwenden möchtest, im [Fontsource-Katalog](https://fontsource.org/).
     In diesem Beispiel wird [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif) verwendet.
 
 2.  Installiere das Paket für deine gewählte Schriftart.
@@ -471,4 +471,4 @@ main {
 }
 ```
 
-Folge der [Anleitung für benutzerdefiniertes CSS-Styles](/de/guides/css-and-tailwind/#benutzerdefinierte-css-styles-stile), um deine Styles zu deiner Website hinzuzufügen.
+Folge der [Anleitung für benutzerdefinierte CSS-Styles](/de/guides/css-and-tailwind/#benutzerdefinierte-css-styles-stile), um deine Styles zu deiner Website hinzuzufügen.
