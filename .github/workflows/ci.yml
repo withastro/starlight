@@ -6,6 +6,7 @@ on:
   merge_group:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:
@@ -19,6 +20,11 @@ permissions: {}
 
 jobs:
   changes:
+    # Skip CI jobs on Changesets draft release PRs.
+    if: >
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main' &&
+        github.event.pull_request.head.repo.full_name == 'withastro/starlight')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -77,7 +83,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
+          runtime: node@22.23.4
           cache: true
       - name: Build packages
         run: pnpm build
@@ -103,7 +109,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
+          runtime: node@22.23.4
           cache: true
           install: false
       # Use `--no-runtime` to prevent `pnpm i` from installing the runtime specified in
@@ -114,6 +120,7 @@ jobs:
 
   type-check:
     name: Run type checks
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -123,7 +130,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
+          runtime: node@22.23.4
           cache: true
       - name: Generate docs types
         working-directory: docs
@@ -133,6 +140,7 @@ jobs:
 
   lint:
     name: Lint code
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -142,7 +150,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
+          runtime: node@22.23.4
           cache: true
       - name: Generate types
         working-directory: ./docs
@@ -172,7 +180,7 @@ jobs:
       - name: Install pnpm, Node.js, and dependencies
         uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
+          runtime: node@22.23.4
           cache: true
 
       - name: Run accessibility audit
@@ -192,7 +200,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
+          runtime: node@22.23.4
           cache: true
       - name: Build docs site
         working-directory: ./docs
@@ -214,7 +222,7 @@ jobs:
       - name: Install pnpm, Node.js, and dependencies
         uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
-          runtime: node@22.23.1
+          runtime: node@22.23.4
           cache: true
 
       - name: Build docs site and check links
@@ -223,6 +231,7 @@ jobs:
 
   zizmor:
     name: Run zizmor
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read

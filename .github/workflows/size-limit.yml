@@ -3,6 +3,7 @@ name: Size Limit
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:
@@ -34,7 +35,11 @@ jobs:
   # This check cannot run in forks, so is only run for PRs from this repo.
   # It will run size-limit for both `main` and the PR branch and comment in the PR with changes.
   size-limit:
-    if: ${{ github.event.pull_request.head.repo.full_name == 'withastro/starlight' }}
+    # Skip on Changesets draft release PRs.
+    if: >
+      github.event.pull_request.head.repo.full_name == 'withastro/starlight' &&
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main')
     name: Check build output is within performance budget
     runs-on: ubuntu-latest
     permissions:

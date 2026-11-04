@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.42.9
+
+### Patch Changes
+
+- [#4218](https://github.com/withastro/starlight/pull/4218) [`effea21`](https://github.com/withastro/starlight/commit/effea2172f631f00a6e4d38643587fc4ab22ff71) Thanks [@delucis](https://github.com/delucis)! - Reduces install size by ~400 KB by switching the YAML parser used internally for projects using Astro 7.3.6 or later
+
+- [#4316](https://github.com/withastro/starlight/pull/4316) [`8679b1c`](https://github.com/withastro/starlight/commit/8679b1c3326b6a3992aa0869b1c968cd2af2608a) Thanks [@clean99](https://github.com/clean99)! - Fixes localized routes and language switcher links for pages in directories named like `Object.prototype` properties, such as `constructor`.
+
+- [#4341](https://github.com/withastro/starlight/pull/4341) [`e1ac1b4`](https://github.com/withastro/starlight/commit/e1ac1b47aaae2504cb48285ec384c011fa6c4675) Thanks [@delucis](https://github.com/delucis)! - Prevents tables overflowing and clipping when printing a page
+
 ## 0.42.8
 
 ### Patch Changes
