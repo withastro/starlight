@@ -1,5 +1,5 @@
 import { pluginFramesTexts } from 'astro-expressive-code';
-import { afterEach, expect, test, vi } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { addTranslations } from '../../src/integrations/expressive-code/translations';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
 
@@ -13,10 +13,6 @@ vi.mock('astro-expressive-code', async () => {
 			overrideTexts: vi.fn(),
 		},
 	};
-});
-
-afterEach(() => {
-	vi.clearAllMocks();
 });
 
 test('adds default english translations with no i18n config', () => {

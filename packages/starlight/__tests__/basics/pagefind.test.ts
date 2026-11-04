@@ -1,14 +1,10 @@
 import { fileURLToPath } from 'node:url';
-import { afterEach, expect, test, vi } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import * as pagefind from 'pagefind';
 import { starlightPagefind } from '../../src/integrations/pagefind';
 import { TestAstroIntegrationLogger } from '../test-plugin-utils';
 
 vi.mock('pagefind');
-
-afterEach(() => {
-	vi.clearAllMocks();
-});
 
 async function runStarlightPagefind(outputDir: URL) {
 	const index = createMockIndex();

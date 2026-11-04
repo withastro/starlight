@@ -138,15 +138,11 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
-{
-	isHomepage ? (
-		<footer>Built with Starlight 🌟</footer>
-	) : (
-		<Default>
-			<slot />
-		</Default>
-	)
-}
+{isHomepage ? (
+	<footer>Built with Starlight 🌟</footer>
+) : (
+	<Default><slot /></Default>
+)}
 ```
 
 Learn more about conditional rendering in [Astro’s Template Syntax guide](https://docs.astro.build/en/basics/astro-syntax/#dynamic-html).

@@ -1,5 +1,4 @@
 name: Preview Release
-permissions: {}
 
 on:
   pull_request:
@@ -8,8 +7,10 @@ on:
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+permissions: {}
 
 jobs:
   preview:
@@ -28,17 +29,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-
-      - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
-        with:
-          node-version: 24.18.0
-          cache: 'pnpm'
-
-      - name: Install Dependencies
-        run: pnpm i
+      - name: Install pnpm, Node.js, and dependencies
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
 
       - name: Build Packages
         run: pnpm run build
@@ -74,14 +66,15 @@ jobs:
       # We remove the preview label before publishing so that the label is always removed even if
       # publishing fails, so we can retry by only adding the label again.
       - name: Remove Preview Label
-        uses: actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1.3.0
-        with:
-          labels: pr-preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label pr-preview
+        continue-on-error: true # if label removal fails (e.g. fork), continue publishing
 
       - name: Publish preview packages
         env:
           PACKAGES: ${{ steps.preview.outputs.packages }}
-        run: |
+        run: | # zizmor: ignore[use-trusted-publishing] false positive: pkg-pr-new uses a separate preview registry, not npm
           if [ -z "$PACKAGES" ]; then
             echo "::error::No packages to publish in this preview release."
             echo "::error::Make sure the pull request includes a changeset."
