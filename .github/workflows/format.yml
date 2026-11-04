@@ -17,7 +17,7 @@ jobs:
     if: github.repository_owner == 'withastro'
     permissions:
       contents: write
-    uses: withastro/automation/.github/workflows/format.yml@2946ab18ea547e22a48eb7f338caed3b99bcf52f # v1.3.0
+    uses: withastro/automation/.github/workflows/format.yml@d6bf66bb1fbfb68577eccfa1211ff7357fea0054 # v1.3.3
     with:
       command: "format"
     secrets:
