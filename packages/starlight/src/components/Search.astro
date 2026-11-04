@@ -79,21 +79,15 @@ const showDevWarning = false; // import.meta.env.DEV;
 			const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 
 			onIdle(async () => {
-				const { getInstanceManager } = await import('@pagefind/component-ui');
+				const { configureInstance } = await import('@pagefind/component-ui');
 
-				const instance = getInstanceManager().getInstance();
 				const {
 					mergeIndex = [],
 					showEmptyFilters,
 					openFilters,
 					...pagefindOptions
 				} = pagefindUserConfig;
-
-				// TODO(HiDeoo) Importing `@pagefind/component-ui` registers the custom elements and
-				// creates the default instance so we can't use `configureInstance()` afterwards.
-				// Use `configureInstance()` once https://github.com/Pagefind/pagefind/pull/1323 is released.
-				instance.options.mergeIndex = mergeIndex;
-				instance.pagefindOptions = { ...instance.pagefindOptions, ...pagefindOptions };
+				const instance = configureInstance('default', { mergeIndex, ...pagefindOptions });
 
 				let translations = {};
 				try {
