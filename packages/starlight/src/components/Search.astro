@@ -21,8 +21,10 @@ const showDevWarning = false; // import.meta.env.DEV;
 ---
 
 <starlight-pagefind class={Astro.props.class} {...dataAttributes}>
-	<pagefind-config bundle-path={pagefindBundlePath} base-url={import.meta.env.BASE_URL}>
-	</pagefind-config>
+	<pagefind-config
+		bundle-path={pagefindBundlePath}
+		base-url={import.meta.env.BASE_URL}
+	></pagefind-config>
 	<pagefind-modal-trigger placeholder={Astro.locals.t('search.label')}>
 		<button
 			type="button"
@@ -37,34 +39,32 @@ const showDevWarning = false; // import.meta.env.DEV;
 	{/* TODO(HiDeoo) Replace the template with `<pagefind-modal>`, see below for more details. */}
 	{/* <pagefind-modal> */}
 	<template>
-		{
-			showDevWarning ? (
-				<pagefind-modal-body style="display: flex;">
-					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
-						<p>{Astro.locals.t('search.devWarning')}</p>
+		{showDevWarning ? (
+			<pagefind-modal-body style="display: flex">
+				<div style="margin: auto; text-align: center; white-space: pre-line" dir="ltr">
+					<p>{Astro.locals.t('search.devWarning')}</p>
+				</div>
+			</pagefind-modal-body>
+		) : (
+			<>
+				<pagefind-modal-header>
+					<pagefind-input />
+				</pagefind-modal-header>
+				<pagefind-modal-body>
+					<pagefind-summary />
+					<div class="search-results">
+						<pagefind-filter-pane
+							show-empty={pagefindUserConfig.showEmptyFilters}
+							open={pagefindUserConfig.openFilters?.join(',')}
+						/>
+						<pagefind-results />
 					</div>
 				</pagefind-modal-body>
-			) : (
-				<>
-					<pagefind-modal-header>
-						<pagefind-input />
-					</pagefind-modal-header>
-					<pagefind-modal-body>
-						<pagefind-summary />
-						<div class="search-results">
-							<pagefind-filter-pane
-								show-empty={pagefindUserConfig.showEmptyFilters}
-								open={pagefindUserConfig.openFilters?.join(',')}
-							/>
-							<pagefind-results />
-						</div>
-					</pagefind-modal-body>
-					<pagefind-modal-footer>
-						<pagefind-keyboard-hints />
-					</pagefind-modal-footer>
-				</>
-			)
-		}
+				<pagefind-modal-footer>
+					<pagefind-keyboard-hints />
+				</pagefind-modal-footer>
+			</>
+		)}
 	</template>
 	{/* </pagefind-modal> */}
 </starlight-pagefind>

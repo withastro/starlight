@@ -9,19 +9,17 @@ const triggerType =
 	id === 'demo/trigger-filters' ? 'filters' : id === 'demo/trigger-search' ? 'search' : undefined;
 ---
 
-{
-	triggerType ? (
-		<custom-site-search data-trigger-type={triggerType}>
-			<Default>
-				<slot />
-			</Default>
-		</custom-site-search>
-	) : (
+{triggerType ? (
+	<custom-site-search data-trigger-type={triggerType}>
 		<Default>
 			<slot />
 		</Default>
-	)
-}
+	</custom-site-search>
+) : (
+	<Default>
+		<slot />
+	</Default>
+)}
 
 <script>
 	customElements.define(
