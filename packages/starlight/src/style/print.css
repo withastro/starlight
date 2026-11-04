@@ -133,6 +133,13 @@
 		margin-block: unset;
 		font-size: 0.9375em;
 	}
+	/* Tables. */
+	.sl-markdown-content :is(th, td):not(:where(.not-content *)),
+	/* Code needs to be targeted explicitly because we set it to `break-word` in `reset.css`. */
+	.sl-markdown-content :is(th, td) code:not(:where(.not-content *)) {
+		/* Wrap table contents to prevent it overflowing outside the page width. */
+		overflow-wrap: anywhere;
+	}
 
 	/* user-components/Badge.astro */
 	.sl-badge {
