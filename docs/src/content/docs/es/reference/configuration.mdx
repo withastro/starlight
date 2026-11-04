@@ -11,6 +11,7 @@ Starlight es una integración construida sobre el framework [Astro](https://astr
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+
 export default defineConfig({
 	integrations: [
 		starlight({
@@ -71,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**tipo:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**por defecto:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**tipo:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**por defecto:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 Configura la tabla de contenidos que se muestra a la derecha de cada página. De forma predeterminada, los encabezados `<h2>` y `<h3>` se incluirán en esta tabla de contenidos.
 
@@ -98,16 +99,16 @@ Con esta configuración, una página `/introduction` tendría un enlace de edici
 
 Configura los elementos de navegación de la barra lateral de tu sitio.
 
-Una barra lateral es un conjunto de enlaces y grupos de enlaces.
-Con la excepción de los elementos que usan `slug`, cada elemento debe tener una `label` y una de las siguientes propiedades:
+Una barra lateral es un array de enlaces, grupos de enlaces y entradas generadas automáticamente.
+Los elementos de la barra lateral se definen usando una de las siguientes propiedades:
 
-- `link` — Un solo enlace a una URL específica, p. ej. `'/home'` o `'https://example.com'`.
+- `link` — Un solo enlace a una URL específica, p. ej. `'/home'` o `'https://example.com'`. Un enlace también debe tener una `label`.
 
-- `slug` — una referencia a una página interna, p. ej. `'guides/getting-started'`.
+- `slug` — una referencia a una página interna, p. ej. `'guides/getting-started'`. De forma predeterminada, se usará el título de la página enlazada como etiqueta.
 
-- `items` — Un array que contiene más enlaces de la barra lateral y subgrupos.
+- `items` — Un array que contiene más enlaces de la barra lateral, subgrupos y entradas generadas automáticamente. Un grupo también debe tener una `label`.
 
-- `autogenerate` — Un objeto que especifica un directorio de tus documentos para generar automáticamente un grupo de enlaces.
+- `autogenerate` — Un objeto que especifica un directorio de tus documentos para generar automáticamente enlaces y subgrupos. Las entradas generadas automáticamente se pueden colocar en el array `items` de un grupo.
 
 Los enlaces internos también se pueden especificar como una cadena en lugar de un objeto con una propiedad `slug`.
 
@@ -131,9 +132,7 @@ starlight({
 		// Un grupo que enlaza a todas las páginas del directorio de referencia.
 		{
 			label: 'Reference',
-			autogenerate: {
-				directory: 'reference',
-			},
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 	],
 });
@@ -148,9 +147,9 @@ Por ejemplo, una página generada a partir de `astro.md` aparecería por encima 
 
 Los grupos de enlaces se expanden de forma predeterminada. Puedes cambiar este comportamiento estableciendo la propiedad `collapsed` de un grupo como `true`.
 
-Los subgrupos generados automáticamente respetan por defecto la propiedad `collapsed` de su grupo padre. Puedes establecer la propiedad `autogenerate.collapsed` para anular esto.
+Los subgrupos generados automáticamente también están expandidos de forma predeterminada. Establece la propiedad `autogenerate.collapsed` para colapsarlos.
 
-```js {5,13}
+```js {5,15}
 sidebar: [
   // Un grupo colapsado de enlaces.
   {
@@ -161,17 +160,21 @@ sidebar: [
   // Un grupo expandido que contiene subgrupos generados automáticamente colapsados.
   {
     label: 'Reference',
-    autogenerate: {
-      directory: 'reference',
-      collapsed: true,
-    },
+    items: [
+      {
+        autogenerate: {
+          directory: 'reference',
+          collapsed: true,
+        },
+      },
+    ],
   },
 ],
 ```
 
 #### Traduciendo etiquetas
 
-Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está en el idioma predeterminado. Puedes establecer una propiedad de `translations` para proporcionar etiquetas en los otros idiomas que tu sitio admita:
+Si tu sitio es multilingüe, se considera que la `label` de cada elemento está en el idioma predeterminado. Puedes establecer una propiedad de `translations` para proporcionar etiquetas en los otros idiomas que tu sitio admita:
 
 ```js {5,9,14}
 sidebar: [
@@ -222,13 +225,15 @@ type SidebarItem =
 					items: SidebarItem[];
 					collapsed?: boolean;
 			  }
-			| {
-					// Grupo de enlaces autogenerado
-					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
-					collapsed?: boolean;
-			  }
-	  ));
+	  ))
+	| {
+			// Enlaces y subgrupos generados automáticamente
+			autogenerate: {
+				directory: string;
+				collapsed?: boolean;
+				attrs?: Record<string, string | number | boolean | undefined>;
+			};
+	  };
 ```
 
 #### `BadgeConfig`
@@ -256,7 +261,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'My Site',
 			// Establece el inglés como el idioma predeterminado para este sitio.
 			defaultLocale: 'en',
 			locales: {
@@ -342,27 +347,21 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**tipo:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/reference/icons/){`; href: string }>`}</code>
 
-**tipo:** <SocialLinksType />
-
-Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
+Detalles opcionales sobre las cuentas de redes sociales para este sitio.
+Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -379,15 +378,60 @@ starlight({
 });
 ```
 
+### `markdown`
+
+**tipo:** `{ headingLinks?: boolean; processedDirs?: string[] }`  
+**por defecto:** `{ headingLinks: true, processedDirs: [] }`
+
+Configura el procesamiento de Markdown de Starlight.
+
+#### `headingLinks`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Determina si los títulos se renderizan con un enlace en el que se puede hacer clic.
+
+```js
+starlight({
+	markdown: {
+		// Deshabilita los enlaces de los títulos de Starlight en los que se puede hacer clic.
+		headingLinks: false,
+	},
+}),
+```
+
+#### `processedDirs`
+
+**tipo:** `string[]`  
+**por defecto:** `[]`
+
+Define directorios adicionales en los que Starlight debe procesar los archivos mediante su proceso de Markdown.
+Por defecto, solo se procesa el contenido Markdown y MDX cargado mediante la función [`docsLoader()`](/es/reference/configuration/#docsloader) de Starlight.
+Admite directorios locales relativos a la raíz de tu proyecto, p. ej., `'./src/data/comments/'`.
+
+El procesamiento de Starlight incluye compatibilidad con [enlaces en los títulos en los que se puede hacer clic](#headinglinks), [la sintaxis de la directiva de apartados de Markdown](/es/guides/authoring-content/#apartados) y compatibilidad con la escritura de derecha a izquierda (RTL) para los bloques de código.
+Esta opción puede resultar útil si estás renderizando contenido de una colección de contenido personalizada en una [página personalizada](/es/guides/pages/#páginas-personalizadas) utilizando el componente `<StarlightPage>` y deseas que el procesamiento de Markdown de Starlight se aplique también a ese contenido.
+
+```js
+starlight({
+	markdown: {
+		// Procesar los archivos Markdown de la colección de contenidos `reviews` ubicada en el
+        // directorio `src/data/reviews/`.
+		processedDirs: ['./src/data/reviews/'],
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **tipo:** `StarlightExpressiveCodeOptions | boolean`  
 **por defecto:** `true`
 
-Starlight usa [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para renderizar bloques de código y agregar soporte para resaltar partes de ejemplos de código, agregar nombres de archivo a bloques de código y más.
+Starlight usa [Expressive Code](https://expressive-code.com) para renderizar bloques de código y agregar soporte para resaltar partes de ejemplos de código, agregar nombres de archivo a bloques de código y más.
 Consulta la [guía de “Bloques de código”](/es/guides/authoring-content/#bloques-de-código) para aprender a usar la sintaxis de Expressive Code en tu contenido Markdown y MDX.
 
-Puedes usar cualquier de las [opciones de configuración estándar de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) así como algunas propiedades específicas de Starlight, estableciéndolas en la opción `expressiveCode` de Starlight.
+Puedes usar cualquier de las [opciones de configuración estándar de Expressive Code](https://expressive-code.com/reference/configuration/) así como algunas propiedades específicas de Starlight, estableciéndolas en la opción `expressiveCode` de Starlight.
 Por ejemplo, establece la opción `styleOverrides` de Expressive Code para anular el CSS predeterminado. Esto permite personalizaciones como darle a tus bloques de código esquinas redondeadas:
 
 ```js ins={2-4}
@@ -414,7 +458,7 @@ Adicionalmente a las opciones estándar de Expressive Code, también puedes esta
 **por defecto:** `['starlight-dark', 'starlight-light']`
 
 Establece los temas utilizados para dar estilo a los bloques de código.
-Consulta la [documentación de temas de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) para obtener detalles de los formatos de tema admitidos.
+Consulta la [documentación de `themes` de Expressive Code](https://expressive-code.com/guides/themes/) para obtener detalles de los formatos de tema admitidos.
 
 Starlight usa por defecto las variantes oscura y clara del [tema Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner.
 
@@ -447,15 +491,47 @@ Cuando usas temas personalizados y estableces esto en `true`, debes proporcionar
 
 ### `pagefind`
 
-**tipo:** `boolean`  
+**tipo:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **por defecto:** `true`
 
-Define si el proveedor de búsqueda predeterminado de Starlight [Pagefind](https://pagefind.app/) está habilitado.
+Configura [Pagefind](https://pagefind.app/), el proveedor de búsqueda predeterminado de Starlight para tu sitio.
 
-Establece esta opción a `false` para excluir una página de los resultados de búsqueda.
-Esto también ocultará la interfaz de usuario de búsqueda predeterminada si está en uso.
+Establécelo en `false` para deshabilitar la indexación de tu sitio con Pagefind.
+Esto también ocultará la interfaz de búsqueda predeterminada si se está usando.
 
-Pagefind no puede estar habilitado cuando la opción [`prerender`](#prerender) está establecida en `false`.
+Pagefind no se puede habilitar cuando la opción [`prerender`](#prerender) está establecida en `false`.
+
+Establece `pagefind` como un objeto para configurar el cliente de búsqueda de Pagefind:
+
+- Consulta [“Customize Pagefind's result ranking” (Personalizar el ranking de resultados de Pagefind)](https://pagefind.app/docs/ranking/) en la documentación de Pagefind para obtener más detalles sobre cómo usar la opción `pagefind.ranking` para controlar cómo se calcula el ranking de los resultados de búsqueda.
+- Consulta [“Searching multiple sites” (Buscar en varios sitios)](https://pagefind.app/docs/multisite/) en la documentación de Pagefind para obtener más detalles sobre cómo usar la opción `pagefind.mergeIndex` para controlar cómo buscar en varios sitios.
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: PagefindRankingOptions;
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: PagefindRankingOptions;
+	}>;
+}
+
+interface PagefindRankingOptions {
+	pageLength?: number;
+	termFrequency?: number;
+	termSaturation?: number;
+	termSimilarity?: number;
+	diacriticSimilarity?: number;
+	metaWeights?: Record<string, number>;
+}
+```
 
 ### `prerender`
 
@@ -505,8 +581,8 @@ interface HeadConfig {
 
 ### `lastUpdated`
 
-**type:** `boolean`  
-**default:** `false`
+**tipo:** `boolean`  
+**por defecto:** `false`
 
 Controla si se muestra el pie de página que indica cuándo se actualizó por última vez la página.
 
@@ -570,6 +646,15 @@ Por ejemplo, esta página es titulada "Referencia de Configuración" y este siti
 
 Deshabilita la inyección de la [página 404](https://docs.astro.build/es/core-concepts/astro-pages/#página-de-error-404-personalizada) predeterminada de Starlight. Para usar una ruta `src/pages/404.astro` personalizada en tu proyecto, establece esta opción en `true`.
 
+### `routeMiddleware`
+
+**tipo:** `string | string[]`
+
+Proporciona las rutas a middleware de ruta que puede modificar cómo Starlight procesa tus datos.
+Estas rutas de archivo no deben entrar en conflicto con el [middleware de Astro](https://docs.astro.build/es/guides/middleware/).
+
+Consulta la [guía de Datos de ruta](/es/guides/route-data/#customizing-route-data) para obtener detalles sobre cómo crear middleware de ruta.
+
 ### `components`
 
 **tipo:** `Record<string, string>`
@@ -605,6 +690,9 @@ Consulta la [Referencia de Plugins](/es/reference/plugins/) para obtener detalle
 
 ### `credits`
 
+**tipo:** `boolean`  
+**por defecto:** `false`
+
 Habilita la visualización de un enlace “Hecho con Starlight” en el pie de página de tu sitio.
 
 ```js
@@ -612,3 +700,118 @@ starlight({
 	credits: true,
 });
 ```
+
+## Configurar colecciones de contenido
+
+Starlight usa las [colecciones de contenido](https://docs.astro.build/es/guides/content-collections/) de Astro para cargar tu contenido.
+Los loaders y esquemas de contenido de Starlight ayudan a configurar las colecciones según sea necesario.
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// Opcional: la colección i18n se usa para traducir la interfaz en sitios multilingües
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### Loaders
+
+Starlight exporta los siguientes [loaders de Astro](https://docs.astro.build/es/reference/content-loader-reference/) desde el módulo `@astrojs/starlight/loaders` para simplificar la configuración de las colecciones de contenido.
+
+#### `docsLoader()`
+
+El `docsLoader()` carga archivos locales de Markdown, MDX y Markdoc desde el directorio `src/content/docs/`.
+Se ignoran los nombres de archivo que comienzan con un guion bajo (`_`).
+
+##### Importación
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Opciones
+
+###### `generateId()`
+
+**tipo:** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+Por defecto, las páginas generadas con `docsLoader()` procesan los nombres de tus archivos usando un sluggifier, que elimina los caracteres especiales y convierte el nombre del archivo a minúsculas.
+Si quieres anular este comportamiento, proporciona tu propia función `generateId()`.
+
+Por ejemplo, esto puede ser útil para conservar caracteres especiales que de otro modo se eliminarían.
+Por defecto, `Example.File.md` se serviría en `/examplefile`.
+Si quisieras servirlo en `/Example.File`, podrías hacerlo definiendo una función `generateId()` personalizada:
+
+```js
+docsLoader({
+	// Elimina la extensión `.md` o `.mdx`, pero por lo demás no procesa los nombres de archivo.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+Consulta [`generateId()` en la documentación de Astro](https://docs.astro.build/es/reference/content-loader-reference/#generateid) para obtener más detalles.
+
+#### `i18nLoader()`
+
+El `i18nLoader()` carga archivos locales JSON y YAML desde el directorio `src/content/i18n/`.
+Se ignoran los nombres de archivo que comienzan con un guion bajo (`_`).
+
+##### Importación
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Opciones
+
+Actualmente no hay opciones para configurar `i18nLoader()`.
+
+### Esquemas
+
+Starlight proporciona los siguientes [esquemas de colecciones de contenido](https://docs.astro.build/es/guides/content-collections/#definiendo-el-esquema-de-la-colección) desde el módulo `@astrojs/starlight/schema`.
+Estos esquemas deben usarse para las colecciones `docs` e `i18n` de las que depende Starlight.
+
+#### `docsSchema()`
+
+El `docsSchema()` analiza el frontmatter de todo tu contenido en la colección `docs`.
+
+##### Importación
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### Opciones
+
+###### `extend`
+
+**tipo:** esquema de Zod o función que devuelve un esquema de Zod  
+**por defecto:** `z.object({})`
+
+Extiende el esquema de frontmatter de Starlight con campos adicionales.
+Consulta [“Personalizar el esquema del frontmatter”](/es/reference/frontmatter/#customize-frontmatter-schema) para obtener más detalles sobre cómo usar la opción `extend`.
+
+#### `i18nSchema()`
+
+El `i18nSchema()` analiza todos los archivos de datos de la colección `i18n`.
+
+##### Importación
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### Opciones
+
+###### `extend`
+
+**tipo:** objeto de Zod  
+**por defecto:** `z.object({})`
+
+Extiende el esquema i18n de Starlight con campos adicionales.
+Consulta [“Extender el esquema de traducción”](/es/guides/i18n/#extend-translation-schema) para obtener más detalles sobre cómo usar la opción `extend`.
