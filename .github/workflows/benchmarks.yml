@@ -13,6 +13,7 @@ on:
       - '.github/workflows/benchmarks.yml'
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'packages/starlight/**'
       - '!packages/starlight/__tests__/**'
@@ -32,7 +33,12 @@ permissions: {}
 
 jobs:
   benchmarks:
-    if: github.repository_owner == 'withastro'
+    # Skip benchmarks on Changesets draft release PRs.
+    if: >
+      github.repository_owner == 'withastro' &&
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main' &&
+        github.event.pull_request.head.repo.full_name == 'withastro/starlight')
     runs-on: ubuntu-latest
     permissions:
       contents: read

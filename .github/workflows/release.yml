@@ -37,4 +37,5 @@ jobs:
           publish-script: pnpm changeset publish
           commit-message: '[ci] release'
           pr-title: '[ci] release'
+          pr-draft: always
           github-token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}

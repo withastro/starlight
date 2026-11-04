@@ -6,6 +6,7 @@ on:
   merge_group:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:
@@ -19,6 +20,11 @@ permissions: {}
 
 jobs:
   changes:
+    # Skip CI jobs on Changesets draft release PRs.
+    if: >
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main' &&
+        github.event.pull_request.head.repo.full_name == 'withastro/starlight')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -114,6 +120,7 @@ jobs:
 
   type-check:
     name: Run type checks
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -133,6 +140,7 @@ jobs:
 
   lint:
     name: Lint code
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -223,6 +231,7 @@ jobs:
 
   zizmor:
     name: Run zizmor
+    needs: changes
     runs-on: ubuntu-latest
     permissions:
       contents: read
