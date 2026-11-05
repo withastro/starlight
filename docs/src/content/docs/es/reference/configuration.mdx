@@ -390,12 +390,12 @@ Configura el procesamiento de Markdown de Starlight.
 **tipo:** `boolean`  
 **por defecto:** `true`
 
-Determina si los títulos se renderizan con un enlace en el que se puede hacer clic.
+Determina si los encabezados se renderizan con un enlace en el que se puede hacer clic.
 
 ```js
 starlight({
 	markdown: {
-		// Deshabilita los enlaces de los títulos de Starlight en los que se puede hacer clic.
+		// Deshabilita los enlaces de los encabezados de Starlight en los que se puede hacer clic.
 		headingLinks: false,
 	},
 }),
@@ -410,14 +410,14 @@ Define directorios adicionales en los que Starlight debe procesar los archivos m
 Por defecto, solo se procesa el contenido Markdown y MDX cargado mediante la función [`docsLoader()`](/es/reference/configuration/#docsloader) de Starlight.
 Admite directorios locales relativos a la raíz de tu proyecto, p. ej., `'./src/data/comments/'`.
 
-El procesamiento de Starlight incluye compatibilidad con [enlaces en los títulos en los que se puede hacer clic](#headinglinks), [la sintaxis de la directiva de apartados de Markdown](/es/guides/authoring-content/#apartados) y compatibilidad con la escritura de derecha a izquierda (RTL) para los bloques de código.
+El procesamiento de Starlight incluye compatibilidad con [enlaces en los encabezados en los que se puede hacer clic](#headinglinks), [la sintaxis de la directiva de apartados de Markdown](/es/guides/authoring-content/#apartados) y compatibilidad con la escritura de derecha a izquierda (RTL) para los bloques de código.
 Esta opción puede resultar útil si estás renderizando contenido de una colección de contenido personalizada en una [página personalizada](/es/guides/pages/#páginas-personalizadas) utilizando el componente `<StarlightPage>` y deseas que el procesamiento de Markdown de Starlight se aplique también a ese contenido.
 
 ```js
 starlight({
 	markdown: {
 		// Procesar los archivos Markdown de la colección de contenidos `reviews` ubicada en el
-        // directorio `src/data/reviews/`.
+		// directorio `src/data/reviews/`.
 		processedDirs: ['./src/data/reviews/'],
 	},
 }),
@@ -503,8 +503,8 @@ Pagefind no se puede habilitar cuando la opción [`prerender`](#prerender) está
 
 Establece `pagefind` como un objeto para configurar el cliente de búsqueda de Pagefind:
 
-- Consulta [“Customize Pagefind's result ranking” (Personalizar el ranking de resultados de Pagefind)](https://pagefind.app/docs/ranking/) en la documentación de Pagefind para obtener más detalles sobre cómo usar la opción `pagefind.ranking` para controlar cómo se calcula el ranking de los resultados de búsqueda.
-- Consulta [“Searching multiple sites” (Buscar en varios sitios)](https://pagefind.app/docs/multisite/) en la documentación de Pagefind para obtener más detalles sobre cómo usar la opción `pagefind.mergeIndex` para controlar cómo buscar en varios sitios.
+- Consulta [“Personalizar el ranking de resultados de Pagefind”](https://pagefind.app/docs/ranking/) en la documentación de Pagefind para obtener más detalles sobre cómo usar la opción `pagefind.ranking` para controlar cómo se calcula el ranking de los resultados de búsqueda.
+- Consulta [“Buscar en varios sitios”](https://pagefind.app/docs/multisite/) en la documentación de Pagefind para obtener más detalles sobre cómo usar la opción `pagefind.mergeIndex` para controlar cómo buscar en varios sitios.
 
 #### `PagefindOptions`
 
@@ -538,7 +538,7 @@ interface PagefindRankingOptions {
 **tipo:** `boolean`  
 **por defecto:** `true`
 
-Define si las páginas de Starlight deben ser pre-renderizadas a HTML estático o renderizadas bajo demanda por un [adaptador SSR](https://docs.astro.build/es/guides/server-side-rendering/).
+Define si las páginas de Starlight deben ser pre-renderizadas a HTML estático o renderizadas bajo demanda por un [adaptador SSR](https://docs.astro.build/es/guides/on-demand-rendering/).
 
 Las páginas de Starlight se pre-renderizan de forma predeterminada.
 Si estás usando un adaptador SSR y deseas renderizar las páginas de Starlight bajo demanda, establece `prerender: false`.
@@ -644,7 +644,7 @@ Por ejemplo, esta página es titulada "Referencia de Configuración" y este siti
 **tipo:** `boolean`  
 **por defecto:** `false`
 
-Deshabilita la inyección de la [página 404](https://docs.astro.build/es/core-concepts/astro-pages/#página-de-error-404-personalizada) predeterminada de Starlight. Para usar una ruta `src/pages/404.astro` personalizada en tu proyecto, establece esta opción en `true`.
+Deshabilita la inyección de la [página 404](https://docs.astro.build/es/basics/astro-pages/#página-de-error-404-personalizada) predeterminada de Starlight. Para usar una ruta `src/pages/404.astro` personalizada en tu proyecto, establece esta opción en `true`.
 
 ### `routeMiddleware`
 
