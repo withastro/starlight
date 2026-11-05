@@ -291,6 +291,11 @@ const showDevWarning = false; // import.meta.env.DEV;
 			all: unset;
 		}
 
+		starlight-pagefind pagefind-modal:not(:defined) {
+			/* Hide the modal content until Pagefind is loaded. */
+			display: none;
+		}
+
 		starlight-pagefind pagefind-modal * {
 			/**
 			 * Nested Pagefind components are also reset so we need to restore inherited properties that
