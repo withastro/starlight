@@ -319,6 +319,11 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			width: calc(100% - var(--sl-search-cancel-space));
 		}
 
+		#starlight__search .pagefind-ui__search-input::placeholder {
+			color: var(--sl-color-gray-3);
+			opacity: 1;
+		}
+
 		#starlight__search input:focus {
 			--pagefind-ui-border: var(--sl-color-accent);
 		}
