@@ -686,12 +686,12 @@ El preajuste `starlightMarkdoc()` admite las siguientes opciones de configuraci�
 **tipo:** `boolean`  
 **por defecto:** `true`
 
-Determina si los encabezados se renderizan con un vínculo en el que se puede hacer clic.
+Determina si los encabezados se renderizan con un enlace en el que se puede hacer clic.
 Equivalente a la opción [`markdown.headingLinks`](/es/reference/configuration/#markdown), que se aplica a los archivos Markdown y MDX.
 
 ```js "headingLinks: false"
 export default defineMarkdocConfig({
-	// Deshabilita el soporte por defecto para los vínculos de los encabezados
+	// Deshabilita el soporte por defecto para los enlaces de los encabezados
 	extends: [starlightMarkdoc({ headingLinks: false })],
 });
 ```
