@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.42.10
+
+### Patch Changes
+
+- [#4354](https://github.com/withastro/starlight/pull/4354) [`56b8587`](https://github.com/withastro/starlight/commit/56b85878982b6e2502310fd0e427a9331f90ea8f) Thanks [@jasikpark](https://github.com/jasikpark)! - Improves the color contrast of the search input placeholder text
+
+- [#4337](https://github.com/withastro/starlight/pull/4337) [`c5d0a7f`](https://github.com/withastro/starlight/commit/c5d0a7fb0b9788d52d8f5345c6661f18e100359e) Thanks [@moonmeister](https://github.com/moonmeister)! - Fixes search not loading when the search script runs after the page has finished loading, for example when a Content Security Policy requires scripts to be added dynamically
+
+- [#4352](https://github.com/withastro/starlight/pull/4352) [`3edab29`](https://github.com/withastro/starlight/commit/3edab29e42a9d786c7f79054b402fb3b7c6ba531) Thanks [@delucis](https://github.com/delucis)! - Fixes the Astro `trailingSlash` and `build.format` options not being applied correctly to sidebar links that include a query string or hash
+
 ## 0.42.9
 
 ### Patch Changes
