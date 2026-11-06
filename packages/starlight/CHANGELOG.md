@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.42.11
+
+### Patch Changes
+
+- [#4332](https://github.com/withastro/starlight/pull/4332) [`ad19424`](https://github.com/withastro/starlight/commit/ad19424b2bb2b3290a13064cec28bf653d7730dd) Thanks [@RaphaelFakhri](https://github.com/RaphaelFakhri)! - Fixes the `twitter:site` meta tag including a trailing slash when the configured X or Twitter social link ends with `/`
+
 ## 0.42.10
 
 ### Patch Changes
