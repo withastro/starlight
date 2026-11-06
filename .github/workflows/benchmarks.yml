@@ -13,6 +13,7 @@ on:
       - '.github/workflows/benchmarks.yml'
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'packages/starlight/**'
       - '!packages/starlight/__tests__/**'
@@ -32,22 +33,27 @@ permissions: {}
 
 jobs:
   benchmarks:
-    if: github.repository_owner == 'withastro'
+    # Skip benchmarks on Changesets draft release PRs.
+    if: >
+      github.repository_owner == 'withastro' &&
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main' &&
+        github.event.pull_request.head.repo.full_name == 'withastro/starlight')
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
           cache: true
           install: false
       - run: pnpm i --filter @astrojs/starlight
       - name: Run benchmarks
-        uses: CodSpeedHQ/action@f842b9a3ffe213dbb81768fd7f7eeb4dfcf1c369 # v5.4.2
+        uses: CodSpeedHQ/action@61efe07e57e55bedeab750c434504de272a56e8c # v5.6.1
         with:
           mode: simulation
           run: pnpm --filter @astrojs/starlight bench

@@ -132,6 +132,36 @@ Una advertencia *con* un título personalizado.
 
 </Preview>
 
+### Usar iconos personalizados
+
+Para sobreescribir los iconos predeterminados de los apartados, utiliza el atributo [`icon`](#icon) y asígnale el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos).
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	Una sugerencia *con* un icono personalizado.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+Una sugerencia *con* un icono personalizado.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	Una sugerencia *con* un icono personalizado.
+</Aside>
+
+</Preview>
+
 ## Props de `<Aside>`
 
 **Implementación:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/user-components/Aside.astro)
@@ -156,3 +186,9 @@ El tipo de apartado a mostrar:
 
 El título del apartado a mostrar.
 Si `title` no está establecido, se usará el título predeterminado para el `type` actual del apartado.
+
+### `icon`
+
+**tipo:** [`StarlightIcon`](/es/reference/icons/#tipo-starlighticon)
+
+Un apartado puede incluir un atributo `icon` con el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos).
