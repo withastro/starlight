@@ -512,6 +512,8 @@ Set `pagefind` to an object to configure the Pagefind search client:
 interface PagefindOptions {
 	ranking?: PagefindRankingOptions;
 	indexWeight?: number;
+	showEmptyFilters?: boolean;
+	openFilters?: string[];
 	mergeIndex?: Array<{
 		bundlePath: string;
 		indexWeight?: number;

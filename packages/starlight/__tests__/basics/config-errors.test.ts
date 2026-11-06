@@ -75,6 +75,7 @@ test('parses bare minimum valid config successfully', () => {
 		      "termSaturation": 2,
 		      "termSimilarity": 9,
 		    },
+		    "showEmptyFilters": false,
 		  },
 		  "pagination": true,
 		  "prerender": true,

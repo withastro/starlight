@@ -2,7 +2,6 @@
   "skipLink.label": "Перейти к содержимому",
   "search.label": "Поиск",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Отменить",
   "search.devWarning": "Поиск доступен только в продакшен-сборках. \nВыполните сборку и запустите превью, чтобы протестировать поиск локально.",
   "themeSelect.accessibleLabel": "Выберите тему",
   "themeSelect.dark": "Тёмная",

@@ -150,6 +150,14 @@ export default function StarlightIntegration(
 								pluginTranslations
 							),
 						],
+						optimizeDeps: {
+							// Prebundle the Pagefind Component UI dynamically imported by the search component to
+							// avoid a page reload when the dependency is discovered during development. It is
+							// loaded even in development mode to render the modal displaying the dev warning.
+							include: starlightConfig.pagefind
+								? ['@astrojs/starlight>@pagefind/component-ui']
+								: [],
+						},
 						ssr: isNodeCompatibleEnv
 							? {}
 							: {
