@@ -218,6 +218,46 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### Escapar de los caracteres especiales
+
+Escapa de caracteres especiales, como los guiones bajos o los espacios, en los nombres de archivo rodeándolos con comillas invertidas.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- `__init__.py`
+- `Hola mundo.txt`
+- **`LÉEME PRIMERO.md`**
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- `__init__.py`
+- `Hola mundo.txt`
+- **`LÉEME PRIMERO.md`**
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- `__init__.py`
+- `Hello mundo.txt`
+- **`LÉEME PRIMERO.md`**
+
+</FileTree>
+
+</Preview>
+
 ## Props de `<FileTree>`
 
 **Implementación:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/user-components/FileTree.astro)
