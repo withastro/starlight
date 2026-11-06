@@ -185,7 +185,7 @@ export function remarkAsides(options: MarkdownProcessorPluginOptions): Plugin<[]
 								width: 16,
 								height: 16,
 								fill: 'currentColor',
-								class: 'starlight-aside__icon',
+								class: 'sl-icon starlight-aside__icon',
 							},
 							iconPath
 						),
