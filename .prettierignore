@@ -6,6 +6,7 @@
 **/build
 **/.astro
 **/__coverage__
+packages/*/types
 
 # Directories
 .changeset

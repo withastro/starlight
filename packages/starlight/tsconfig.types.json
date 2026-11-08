@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src", "virtual.d.ts"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noCheck": true,
+    "noEmit": false,
+    "outDir": "types",
+    "rootDir": "src",
+    "types": ["astro/client"]
+  },
+  "contentMappers": [{ "package": "@astrojs/ts-content-mapper", "extensions": [".astro"] }]
+}

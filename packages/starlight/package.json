@@ -3,7 +3,7 @@
   "version": "0.42.10",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
-    "build": "tsdown",
+    "build": "rm -rf types && tsc -p tsconfig.types.json --runExternalCode && tsdown",
     "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
     "test:coverage": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run --coverage",
     "test:dist": "pnpm build && pnpm test:dist:ci",
@@ -96,50 +96,57 @@
     "yaml": "^2.9.1"
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "publishConfig": {
     "exports": {
       ".": {
-        "types": "./dist/index.d.ts",
+        "types": "./types/index.d.ts",
         "import": "./dist/index.js"
       },
       "./locals": {
-        "types": "./dist/locals.d.ts",
+        "types": "./types/locals.d.ts",
         "import": "./dist/locals.js"
       },
-      "./components": "./dist/components.ts",
-      "./components/*": "./dist/components/*",
+      "./components": {
+        "types": "./types/components.d.ts",
+        "default": "./dist/components.ts"
+      },
+      "./components/*.astro": {
+        "types": "./types/components/*.d.astro.ts",
+        "default": "./dist/components/*.astro"
+      },
       "./internal": {
-        "types": "./dist/internal.d.ts",
+        "types": "./types/internal.d.ts",
         "import": "./dist/internal.js"
       },
       "./props": {
-        "types": "./dist/props.d.ts",
+        "types": "./types/props.d.ts",
         "import": "./dist/props.js"
       },
       "./schema": {
-        "types": "./dist/schema.d.ts",
+        "types": "./types/schema.d.ts",
         "import": "./dist/schema.js"
       },
       "./loaders": {
-        "types": "./dist/loaders.d.ts",
+        "types": "./types/loaders.d.ts",
         "import": "./dist/loaders.js"
       },
       "./route-data": {
-        "types": "./dist/route-data.d.ts",
+        "types": "./types/route-data.d.ts",
         "import": "./dist/route-data.js"
       },
       "./types": {
-        "types": "./dist/types.d.ts",
+        "types": "./types/types.d.ts",
         "import": "./dist/types.js"
       },
       "./expressive-code": {
-        "types": "./dist/expressive-code.d.ts",
+        "types": "./types/expressive-code.d.ts",
         "import": "./dist/expressive-code.js"
       },
       "./expressive-code/hast": {
-        "types": "./dist/integrations/expressive-code/hast.d.ts",
+        "types": "./types/integrations/expressive-code/hast.d.ts",
         "import": "./dist/integrations/expressive-code/hast.js"
       },
       "./routes/*": "./dist/routes/*",
