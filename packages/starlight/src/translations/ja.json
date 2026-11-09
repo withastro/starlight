@@ -29,5 +29,15 @@
   "expressiveCode.copyButtonCopied": "コピーしました！",
   "fileTree.directory": "ディレクトリ",
   "builtWithStarlight.label": "Starlightで作成",
+  "pagefind.clear_search": "クリア",
+  "pagefind.load_more": "次を読み込む",
+  "pagefind.search_label": "このサイトを検索",
+  "pagefind.filters_label": "フィルタ",
+  "pagefind.zero_results": "[SEARCH_TERM]の検索に一致する情報はありませんでした",
+  "pagefind.many_results": "[SEARCH_TERM]の[COUNT]件の検索結果",
+  "pagefind.one_result": "[SEARCH_TERM]の[COUNT]件の検索結果",
+  "pagefind.alt_search": "[SEARCH_TERM]の検索に一致する情報はありませんでした。[DIFFERENT_TERM]の検索結果を表示しています",
+  "pagefind.search_suggestion": "[SEARCH_TERM]の検索に一致する情報はありませんでした。次のいずれかの検索を試してください",
+  "pagefind.searching": "[SEARCH_TERM]を検索しています",
   "heading.anchorLabel": "Section titled “{{title}}”"
 }
