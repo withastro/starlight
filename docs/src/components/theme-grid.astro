@@ -183,18 +183,18 @@ const { labels, themes } = Astro.props;
 		display: grid;
 		grid-template-columns: 1fr;
 	}
-	.preview-images > :global(*) {
+	.preview-images > * {
 		grid-area: 1 / 1;
 	}
 
 	/* Fade out the preview image that isn’t currently selected. */
-	.preview-images :global(img) {
+	.preview-images img {
 		transition: opacity var(--transition-time) ease-in-out;
 	}
-	[data-theme-preview='dark'] .preview-images :global(img.light) {
+	[data-theme-preview='dark'] .preview-images img.light {
 		opacity: 0;
 	}
-	[data-theme-preview='light'] .preview-images :global(img.dark) {
+	[data-theme-preview='light'] .preview-images img.dark {
 		opacity: 0;
 	}
 
