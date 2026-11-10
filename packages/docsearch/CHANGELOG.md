@@ -1,5 +1,11 @@
 # @astrojs/starlight-docsearch
 
+## 0.8.1
+
+### Patch Changes
+
+- [#4337](https://github.com/withastro/starlight/pull/4337) [`c5d0a7f`](https://github.com/withastro/starlight/commit/c5d0a7fb0b9788d52d8f5345c6661f18e100359e) Thanks [@moonmeister](https://github.com/moonmeister)! - Fixes DocSearch not loading when its script runs after the page has finished loading, for example when a Content Security Policy requires scripts to be added dynamically
+
 ## 0.8.0
 
 ### Minor Changes
