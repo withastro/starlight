@@ -188,13 +188,13 @@ const { labels, themes } = Astro.props;
 	}
 
 	/* Fade out the preview image that isn’t currently selected. */
-	.preview-images img {
+	img {
 		transition: opacity var(--transition-time) ease-in-out;
 	}
-	[data-theme-preview='dark'] .preview-images img.light {
+	[data-theme-preview='dark'] img.light {
 		opacity: 0;
 	}
-	[data-theme-preview='light'] .preview-images img.dark {
+	[data-theme-preview='light'] img.dark {
 		opacity: 0;
 	}
 
