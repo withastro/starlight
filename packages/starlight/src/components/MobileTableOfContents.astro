@@ -74,10 +74,10 @@ const { toc } = Astro.locals.starlightRoute;
 			border-color: var(--sl-color-gray-2);
 		}
 
-		:global([dir='rtl']) :global(.caret) {
+		:global([dir='rtl']) .caret {
 			transform: rotateZ(180deg);
 		}
-		details[open] :global(.caret) {
+		details[open] .caret {
 			transform: rotateZ(90deg);
 		}
 

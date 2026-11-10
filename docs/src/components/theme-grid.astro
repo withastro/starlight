@@ -170,11 +170,11 @@ const { labels, themes } = Astro.props;
 	}
 
 	/* Show check mark icon only when input is checked. */
-	label :global(.sl-icon) {
+	label svg {
 		opacity: 0;
 		transition: opacity var(--transition-time) ease-in-out;
 	}
-	label:has(:checked) :global(.sl-icon) {
+	label:has(:checked) svg {
 		opacity: 1;
 	}
 

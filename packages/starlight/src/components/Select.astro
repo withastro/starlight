@@ -50,7 +50,7 @@ interface Props {
 			color: var(--sl-color-white);
 		}
 
-		label :global(.icon) {
+		.icon {
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
@@ -84,12 +84,12 @@ interface Props {
 	}
 
 	@layer starlight.components {
-		label :global(.label-icon) {
+		.label-icon {
 			font-size: var(--sl-label-icon-size);
 			inset-inline-start: 0;
 		}
 
-		label :global(.caret) {
+		.caret {
 			font-size: var(--sl-caret-size);
 			inset-inline-end: 0;
 		}
