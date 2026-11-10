@@ -10,7 +10,7 @@ Si quieres agregar Starlight a un proyecto de Astro existente, esta guía te exp
 
 ## Configuración de Starlight
 
-Para seguir esta guía, necesitarás un proyecto de Astro existente.
+Para seguir esta guía, necesitarás un [proyecto de Astro existente](https://docs.astro.build/es/install-and-setup/).
 
 ### Agregando la integración de Starlight
 
@@ -62,19 +62,23 @@ Encuentra todas las opciones disponibles en la [referencia de configuración de 
 
 ### Configura las colecciones de contenido
 
-Starlight está construido sobre las [colecciones de contenido](https://docs.astro.build/es/guides/content-collections/) de Astro, las cuales están configuradas en el archivo `src/content/config.ts`.
+Starlight está construido sobre las [colecciones de contenido](https://docs.astro.build/es/guides/content-collections/) de Astro, las cuales están configuradas en el archivo `src/content.config.ts`.
 
-Crea o actualiza el archivo de configuración de contenido, agregando una colección `docs` que usa el `docsSchema` de Starlight:
+Crea o actualiza el archivo de configuración de contenido, agregando una colección `docs` que usa el [`docsLoader`](/es/reference/configuration/#docsloader) y [`docsSchema`](/es/reference/configuration/#docsschema) de Starlight:
 
-```js ins={3,6}
-// src/content/config.ts
+```js ins={3-4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
+
+Starlight también es compatible con la opción [`legacy.collectionsBackwardsCompat`](https://docs.astro.build/es/reference/legacy-flags/#collectionsbackwardscompat), que conserva algunas características heredadas de la v4 de las colecciones de contenido.
+Esto puede ser útil si ya tienes un proyecto Astro y, por el momento, no puedes realizar cambios en las colecciones para migrar a la API de la capa de contenido introducida en la v5.0.
 
 ### Agrega contenido
 
@@ -125,6 +129,8 @@ En el futuro, planeamos soportar mejor este caso de uso para evitar la necesidad
 
 ### Usa Starlight con SSR
 
-Para habilitar el SSR, sigue la guía [“Adaptadores de Renderizado bajo Demanda”](https://docs.astro.build/es/guides/server-side-rendering/) en la documentación de Astro para agregar un adaptador de servidor a tu proyecto Starlight.
+Para habilitar el SSR, sigue la guía [“Adaptadores de Renderizado bajo Demanda”](https://docs.astro.build/es/guides/on-demand-rendering/) en la documentación de Astro para agregar un adaptador de servidor a tu proyecto Starlight.
 
 Las páginas de documentación generadas por Starlight se pre-renderizan de forma predeterminada independientemente del modo de salida de tu proyecto. Para excluir tus páginas de Starlight de la pre-renderización, establece la [opción de configuración `prerender`](/es/reference/configuration/#prerender) en `false`.
+
+Si estás usando el [adaptador de Cloudflare](https://docs.astro.build/es/guides/integrations-guide/cloudflare/) para habilitar el renderizado en el servidor en tu proyecto de documentación, asegúrate también de [añadir la opción de compatibilidad `nodejs_compat` a tu archivo de configuración Wrangler](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started).
