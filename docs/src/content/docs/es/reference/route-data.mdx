@@ -62,20 +62,11 @@ El título del sitio para la configuración regional de esta página.
 El valor para el atributo `href` del título del sitio, que enlaza de vuelta a la página de inicio, por ejemplo, `/`.
 Para sitios multilingües, esto incluirá la configuración regional actual, por ejemplo, `/en/` o `/zh-cn/`.
 
-### `slug`
-
-**Tipo:** `string`
-
-El slug para esta página generado a partir del nombre del archivo de contenido.
-
-Esta propiedad está obsoleta y se eliminará en una futura versión de Starlight.
-Migra a la nueva API de Content Layer utilizando el [`docsLoader`](/es/manual-setup/#configura-las-colecciones-de-contenido) de Starlight y utiliza la propiedad [`id`](#id) en su lugar.
-
 ### `id`
 
 **Tipo:** `string`
 
-El slug para esta página o el ID único para esta página basado en el nombre del archivo de contenido si se utiliza el flag [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/#collections).
+El slug para esta página.
 
 ### `isFallback`
 
@@ -109,9 +100,102 @@ Aprende más sobre la forma de este objeto en la referencia del [Tipo de Entrada
 
 ### `sidebar`
 
-**Tipo:** `SidebarEntry[]`
+**Tipo:** `<code>Array&lt;<a href="#tipo-sidebarlink">SidebarLink</a> | <a href="#tipo-sidebargroup">SidebarGroup</a>&gt;</code>
 
 Entradas de la barra lateral de navegación del sitio para esta página.
+Cada entrada es un enlace de la barra lateral o un grupo de la barra lateral.
+
+#### Tipo `SidebarLink`
+
+Las entradas de enlaces de la barra lateral representan enlaces que se renderizan en la barra lateral y tienen las siguientes propiedades:
+
+##### `type`
+
+**Tipo:** `'link'`
+
+El tipo que identifica esta entrada como un enlace de la barra lateral.
+
+##### `label`
+
+**Tipo:** `string`
+
+El texto del enlace.
+
+##### `href`
+
+**Tipo:** `string`
+
+La URL a la que apunta el enlace.
+
+##### `isCurrent`
+
+**Tipo:** `boolean`
+
+`true` si el enlace apunta a la página actual.
+
+##### `attrs`
+
+**Tipo:** `Record<string, string | number | boolean | undefined>`
+
+Atributos HTML añadidos al elemento `<a>` renderizado.
+
+##### `badge`
+
+**Tipo:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Configuración de la insignia que se renderiza junto a la etiqueta del enlace, si la hay.
+Consulta la [referencia de propiedades del componente `<Badge>`](/es/components/badges/#props-de-badge) para obtener más detalles.
+
+##### `autogenerate`
+
+**Tipo:** `{ directory: string } | undefined`
+
+Para los enlaces creados a partir de una [entrada de la barra lateral generada automáticamente](/es/guides/sidebar/#grupos-autogenerados), `directory` coincide con el valor configurado en [`autogenerate.directory`](/es/reference/configuration/#sidebar).
+
+Cuando la [`sidebar`](/es/reference/configuration/#sidebar) no está configurada, Starlight genera entradas para todas las páginas de documentación y usa una cadena de texto vacía (`''`) como valor de `directory`.
+
+#### Tipo `SidebarGroup`
+
+Las entradas de grupo de la barra lateral representan un conjunto de enlaces que se renderizan en la barra lateral y tienen las siguientes propiedades:
+
+##### `type`
+
+**Tipo:** `'group'`
+
+El tipo que identifica esta entrada como un grupo de barra lateral.
+
+##### `label`
+
+**Tipo:** `string`
+
+El texto del grupo.
+
+##### `entries`
+
+**Tipo:** <code>Array&lt;<a href="#tipo-sidebarlink">SidebarLink</a> | <a href="#tipo-sidebargroup">SidebarGroup</a>&gt;</code>
+
+Las entradas anidadas de la barra lateral de este grupo, que pueden ser enlaces o grupos.
+
+##### `collapsed`
+
+**Tipo:** `boolean`
+
+Si el grupo aparece oculto por defecto.
+
+##### `badge`
+
+**Tipo:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
+
+Configuración de la insignia que se renderiza junto a la etiqueta del grupo, si la hay.
+Consulta la [referencia de propiedades del componente `<Badge>`](/es/components/badges/#props-de-badge) para obtener más detalles.
+
+##### `autogenerate`
+
+**Tipo:** `{ directory: string } | undefined`
+
+Para los grupos creados a partir de una [entrada de la barra lateral generada automáticamente](/es/guides/sidebar/#grupos-autogenerados), `directory` coincide con el valor configurado en [`autogenerate.directory`](/es/reference/configuration/#sidebar).
+
+Cuando la [`sidebar`](/es/reference/configuration/#sidebar) no está configurada, Starlight genera entradas para todas las páginas de documentación y usa una cadena de texto vacía (`''`) como valor de `directory`.
 
 ### `hasSidebar`
 
