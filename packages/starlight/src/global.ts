@@ -46,10 +46,6 @@ declare global {
 			starlightRoute: StarlightRouteData;
 		}
 	}
-
-	var StarlightThemeProvider: {
-		updatePickers(theme?: string): void;
-	};
 }
 
 /**

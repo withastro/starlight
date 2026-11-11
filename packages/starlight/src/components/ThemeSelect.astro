@@ -22,20 +22,14 @@ import Select from './Select.astro';
 	</Select>
 </starlight-theme-select>
 
-{/* Inlined to avoid FOUC. The module script further below also uses the global defined here. */}
+{/* Inlined to avoid FOUC. Uses `set:html` to avoid an incorrect type error. */}
 <script
 	is:inline
-	set:html={`window.StarlightThemeProvider = {
-	updatePickers: (
-		theme = (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme')) || 'auto'
-	) => {
-		document.querySelectorAll('starlight-theme-select select').forEach((select) => {
-			select.value = theme;
-		});
-	},
-};
-StarlightThemeProvider.updatePickers();`}
-/>
+	set:html={`(() => {
+		const theme = (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme'));
+		if (theme) document.querySelectorAll('starlight-theme-select select').forEach((s) => { s.value = theme; });
+	})();`}
+></script>
 
 <style>
 	@layer starlight.components {
@@ -74,7 +68,11 @@ StarlightThemeProvider.updatePickers();`}
 
 	/** Update select menu UI, document theme, and local storage state. */
 	function onThemeChange(theme: Theme): void {
-		StarlightThemeProvider.updatePickers(theme);
+		document
+			.querySelectorAll<HTMLSelectElement>('starlight-theme-select select')
+			.forEach((select) => {
+				select.value = theme;
+			});
 		document.documentElement.dataset.theme = theme === 'auto' ? getPreferredColorScheme() : theme;
 		storeTheme(theme);
 	}
