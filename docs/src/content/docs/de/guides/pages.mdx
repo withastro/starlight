@@ -20,7 +20,7 @@ Du kannst die Unterstützung für Markdoc hinzufügen, indem du dem [„Markdoc�
 
 ### Seiten hinzufügen
 
-Füge neue Seiten zu deiner Website hinzu, indem du `.md` oder `.mdx` Dateien in `src/content/docs/` erstellst.
+Füge neue Seiten zu deiner Website hinzu, indem du `.md`- oder `.mdx`-Dateien in `src/content/docs/` erstellst.
 Verwende Unterordner, um deine Dateien zu organisieren und um mehrere Pfadsegmente zu erstellen.
 
 Die folgende Dateistruktur erzeugt zum Beispiel Seiten unter `example.com/hello-world` und `example.com/reference/faq`:
@@ -95,7 +95,7 @@ import CustomComponent from './CustomComponent.astro';
 	</p>
 	<CustomComponent />
 
-	<AnchorHeading level="2" id="erfahre-menr">Erfahre mehr</AnchorHeading>
+	<AnchorHeading level="2" id="erfahre-mehr">Erfahre mehr</AnchorHeading>
 	<p>
 		<a href="https://starlight.astro.build/">
 			Lies mehr in der Starlight-Dokumentation
@@ -125,20 +125,20 @@ Die Komponente `<StarlightPage />` akzeptiert die folgenden Eigenschaften.
 **erforderlich**  
 **Typ:** `StarlightPageFrontmatter`
 
-Setzt die [Frontmatter Eigenschaften](/de/reference/frontmatter/) für diese Seite, ähnlich wie Frontmatter in Markdown-Seiten.
+Setzt die [Frontmatter-Eigenschaften](/de/reference/frontmatter/) für diese Seite, ähnlich wie Frontmatter in Markdown-Seiten.
 Die Eigenschaft [`title`](/de/reference/frontmatter/#title-erforderlich) ist erforderlich und alle anderen Eigenschaften sind optional.
 
-Die folgenden Eigenschaften unterscheiden sich von Markdown frontmatter:
+Die folgenden Eigenschaften unterscheiden sich vom Markdown-Frontmatter:
 
 - Die Eigenschaft [`slug`](/de/reference/frontmatter/#slug) wird nicht unterstützt und wird automatisch anhand der URL der benutzerdefinierten Seite gesetzt.
 - Die Option [`editUrl`](/de/reference/frontmatter/#editurl) erfordert eine URL, um einen Bearbeitungslink anzuzeigen.
 - Die Frontmatter-Eigenschaft [`sidebar`](/de/reference/frontmatter/#sidebar), mit der du festlegen kannst, wie die Seite in [autogenerierten Linkgruppen](/de/reference/configuration/#sidebar) erscheint, ist nicht verfügbar. Seiten, die die Komponente `<StarlightPage />` verwenden, sind nicht Teil einer Sammlung und können nicht zu einer automatisch generierten Seitenleistengruppe hinzugefügt werden.
-- Die Option [`draft`](/de/reference/frontmatter/#draft) zeigt nur einen [Hinweis](/de/reference/overrides/#draftcontentnotice) an, dass die Seite ein Entwurf ist, schließt sie aber nicht automatisch von der Produktion aus.
+- Die Option [`draft`](/de/reference/frontmatter/#draft) zeigt nur einen [Hinweis](/de/reference/overrides/#draftcontentnotice) an, dass die Seite ein Entwurf ist, schließt sie aber nicht automatisch von Produktions-Builds aus.
 
 ##### `sidebar`
 
 **Typ:** [`SidebarItem[]`](/de/reference/configuration/#sidebaritem)  
-**Standard:** die Seitenleiste, die auf der Grundlage der [globalen `Sidebar`-Konfiguration](/de/reference/configuration/#sidebar) erzeugt wird
+**Standard:** die Seitenleiste, die auf der Grundlage der [globalen `sidebar`-Konfiguration](/de/reference/configuration/#sidebar) erzeugt wird
 
 Legt eine benutzerdefinierte Navigationsleiste für diese Seite fest.
 Wenn sie nicht gesetzt wird, verwendet die Seite die globale Standard-Seitenleiste.
@@ -189,7 +189,7 @@ Legt die Schreibrichtung für den Inhalt dieser Seite fest.
 
 ##### `lang`
 
-**Typ:** `String`  
+**Typ:** `string`  
 **Standard:** die Sprache des aktuellen Gebietsschemas
 
 Setzt das BCP-47 Sprach-Tag für den Inhalt dieser Seite, z.&nbsp;B. `en`, `zh-CN` oder `pt-BR`.
@@ -215,14 +215,14 @@ import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 </AnchorHeading>
 ```
 
-Sie akzeptiert die folgenden Requisiten sowie alle anderen gültigen [globalen HTML-Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+Sie akzeptiert die folgenden Eigenschaften sowie alle anderen gültigen [globalen HTML-Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
 
 ##### `level`
 
 **erforderlich**  
 **Typ:** `1 | 2 | 3 | 4 | 5 | 6`
 
-Die zu rendernde Überschriftsebene.
+Die zu rendernde Überschriftenebene.
 Zum Beispiel würde `level="1"` ein `<h1>`-Element darstellen.
 
 ##### `id`
@@ -231,4 +231,4 @@ Zum Beispiel würde `level="1"` ein `<h1>`-Element darstellen.
 **Typ:** `string`
 
 Die eindeutige ID für diese Überschrift.
-Dieser wird als `id`-Attribut der gerenderten Überschrift verwendet und das Ankersymbol verlinkt darauf.
+Sie wird als `id`-Attribut der gerenderten Überschrift verwendet und das Ankersymbol verlinkt darauf.

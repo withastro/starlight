@@ -1,5 +1,25 @@
 # @astrojs/starlight
 
+## 0.42.10
+
+### Patch Changes
+
+- [#4354](https://github.com/withastro/starlight/pull/4354) [`56b8587`](https://github.com/withastro/starlight/commit/56b85878982b6e2502310fd0e427a9331f90ea8f) Thanks [@jasikpark](https://github.com/jasikpark)! - Improves the color contrast of the search input placeholder text
+
+- [#4337](https://github.com/withastro/starlight/pull/4337) [`c5d0a7f`](https://github.com/withastro/starlight/commit/c5d0a7fb0b9788d52d8f5345c6661f18e100359e) Thanks [@moonmeister](https://github.com/moonmeister)! - Fixes search not loading when the search script runs after the page has finished loading, for example when a Content Security Policy requires scripts to be added dynamically
+
+- [#4352](https://github.com/withastro/starlight/pull/4352) [`3edab29`](https://github.com/withastro/starlight/commit/3edab29e42a9d786c7f79054b402fb3b7c6ba531) Thanks [@delucis](https://github.com/delucis)! - Fixes the Astro `trailingSlash` and `build.format` options not being applied correctly to sidebar links that include a query string or hash
+
+## 0.42.9
+
+### Patch Changes
+
+- [#4218](https://github.com/withastro/starlight/pull/4218) [`effea21`](https://github.com/withastro/starlight/commit/effea2172f631f00a6e4d38643587fc4ab22ff71) Thanks [@delucis](https://github.com/delucis)! - Reduces install size by ~400 KB by switching the YAML parser used internally for projects using Astro 7.3.6 or later
+
+- [#4316](https://github.com/withastro/starlight/pull/4316) [`8679b1c`](https://github.com/withastro/starlight/commit/8679b1c3326b6a3992aa0869b1c968cd2af2608a) Thanks [@clean99](https://github.com/clean99)! - Fixes localized routes and language switcher links for pages in directories named like `Object.prototype` properties, such as `constructor`.
+
+- [#4341](https://github.com/withastro/starlight/pull/4341) [`e1ac1b4`](https://github.com/withastro/starlight/commit/e1ac1b47aaae2504cb48285ec384c011fa6c4675) Thanks [@delucis](https://github.com/delucis)! - Prevents tables overflowing and clipping when printing a page
+
 ## 0.42.8
 
 ### Patch Changes
