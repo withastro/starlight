@@ -1,0 +1,13 @@
+---
+import { LinkCard as Link } from '@astrojs/starlight/components';
+import type { ComponentProps } from 'astro/types';
+
+type Props = ComponentProps<typeof Link>;
+
+// If this link is to an external site, indicate to crawlers that it is third-party content.
+if (URL.canParse(Astro.props.href!) && !Astro.props.rel) {
+	Astro.props.rel = 'nofollow ugc';
+}
+---
+
+<Link {...Astro.props}><slot /></Link>
