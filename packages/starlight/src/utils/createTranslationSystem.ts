@@ -46,6 +46,10 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 		resources: translations,
 		fallbackLng:
 			config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang,
+		// Keeps backwards compatibility with i18next v26 so that `key: ""` in a translation file still
+		// emits `""` instead of the fallback language’s value. A rare case, but using the v27 default
+		// would be impossible for users to work around because they don’t control this init call.
+		returnEmptyString: true,
 	});
 
 	/**

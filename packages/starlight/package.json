@@ -80,7 +80,7 @@
     "hast-util-to-html": "^9.0.5",
     "hast-util-to-string": "^3.0.1",
     "hastscript": "^9.0.1",
-    "i18next": "^26.0.7",
+    "i18next": "^27.0.1",
     "klona": "^2.0.6",
     "magic-string": "^1.2.3",
     "mdast-util-directive": "^3.1.0",
