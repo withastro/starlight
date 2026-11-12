@@ -20,7 +20,7 @@
     "@changesets/cli": "^3.0.2",
     "@eslint/js": "^10.0.1",
     "@size-limit/file": "^12.1.0",
-    "@typescript/native": "npm:typescript@7.1.0-dev.20261105.1",
+    "@typescript/native": "npm:typescript@7.1.0-beta",
     "astro": "^7.3.6",
     "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
