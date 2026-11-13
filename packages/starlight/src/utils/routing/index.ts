@@ -10,7 +10,7 @@ import type { Route, StarlightDocsCollectionEntry, StarlightDocsEntry } from './
 // We do this here so all pages trigger it and at the top level so it runs just once.
 validateLogoImports();
 
-interface Path extends GetStaticPathsItem {
+export interface Path extends GetStaticPathsItem {
 	params: { slug: string | undefined };
 }
 

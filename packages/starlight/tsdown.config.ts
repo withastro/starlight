@@ -7,7 +7,7 @@ export default defineConfig({
 	deps: {
 		neverBundle: [/^astro:/, /^virtual:starlight\//],
 	},
-	dts: true,
+	dts: false,
 	entry: [
 		'src/**/*.ts',
 		// The user components barrel file should not be transpiled as it's consumed as-is by Astro.

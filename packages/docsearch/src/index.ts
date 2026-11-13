@@ -3,7 +3,7 @@ import type docsearch from '@docsearch/js';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { DocSearchConfigSchema } from './config';
+import { DocSearchConfigSchema, type SearchOptions } from './config';
 
 const moduleId = 'virtual:starlight/docsearch-config';
 const resolvedModuleId = `\0${moduleId}`;
@@ -43,7 +43,7 @@ interface DocSearchInlineUserConfig {
 	 * The Algolia Search Parameters.
 	 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
 	 */
-	searchParameters?: DocSearchClientOptions['searchParameters'] | undefined;
+	searchParameters?: SearchOptions | undefined;
 }
 
 interface DocSearchModuleUserConfig {

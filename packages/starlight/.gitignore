@@ -5,3 +5,4 @@ __tests__/**/types.d.ts
 
 # Build output
 dist
+/types
