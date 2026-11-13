@@ -64,7 +64,7 @@ describe('t()', () => {
 	test('escapes by default', () => {
 		expect(t).toBeTypeOf('function');
 		// @ts-expect-error - using a mocked translation key.
-		expect(t('test.escape', { tag: '<img />' })).toBe('The tag is &lt;img &#x2F;&gt;');
+		expect(t('test.escape', { tag: '<img />' })).toBe('The tag is &lt;img /&gt;');
 	});
 
 	test('supports unescaped strings', () => {
