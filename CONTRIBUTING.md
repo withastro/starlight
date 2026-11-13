@@ -91,7 +91,7 @@ The dev container used for GitHub Codespaces can also be used with [other suppor
 
 ### Making a Pull Request
 
-When making a pull request containing changes impacting users to Starlight or any related packages (`packages/*`), be sure to [add a changeset](https://changesets.dev/guide/getting-started) that will describe the changes to users.
+When making a pull request containing changes impacting users to Starlight or any related packages (`packages/*`), be sure to [add a changeset](https://changesets.dev/faq#how-do-i-add-a-changeset) that will describe the changes to users.
 Documentation-only (`docs/*`) and non-package (`examples/*`) changes do not need changesets.
 
 ```sh
