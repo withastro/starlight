@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Fixes asides accepting custom icon names that match `Object.prototype` properties, such as `constructor` or `toString`, instead of reporting an invalid icon
+Errors if an aside is passed an icon name that matches `Object.prototype` properties, such as `constructor` or `toString`
