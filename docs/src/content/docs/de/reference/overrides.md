@@ -62,7 +62,7 @@ Wenn möglich, bevorzuge das Überschreiben einer Komponente auf einer niedriger
 **Benannte Slots:** `header`, `sidebar`
 
 Diese Layout-Komponente beinhaltet den größten Teil des Seiteninhalts.
-Die Standard&shy;implementierung konfiguriert das Kopfzeilen-Seitennavigation-Haupt-Layout und beinhaltet `header` und `sidebar` benannte Slots zusammen mit einem Standard-Slot für den Hauptinhalt.
+Die Standard&shy;implementierung richtet das Layout aus Kopfzeile, Seitenleiste und Hauptbereich ein und beinhaltet die benannten Slots `header` und `sidebar` zusammen mit einem Standard-Slot für den Hauptinhalt.
 Sie rendert auch [`<MobileMenuToggle />`](#mobilemenutoggle), um das Umschalten der Seitenleisten&shy;navigation auf kleinen (mobilen) Viewports zu unterstützen.
 
 #### `MobileMenuToggle`
@@ -89,14 +89,14 @@ Diese Komponenten stellen die obere Navigationsleiste von Starlight dar.
 
 **Standardkomponente:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Header.astro)
 
-Dies ist eine Kopfzielen-Komponente, welche oben auf jeder Seite angezeigt wird.
+Diese Kopfzeilen-Komponente wird oben auf jeder Seite angezeigt.
 Die Standard&shy;implementierung zeigt [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), und [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
 **Standardkomponente:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SiteTitle.astro)
 
-Die Komponente wird die am Anfang des Website-Headers gerendert, um den Titel der Website darzustellen.
+Diese Komponente wird am Anfang der Kopfzeile der Website gerendert, um den Titel der Website darzustellen.
 Die Standard&shy;implementierung enthält die Logik für die Darstellung von Logos, die in der Starlight-Konfiguration definiert sind.
 
 #### `Search`
@@ -140,7 +140,7 @@ Bei schmalen Ansichtsfenstern ist diese hinter einem Dropdown-Menü versteckt.
 
 **Standardkomponente:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Sidebar.astro)
 
-Die Komponente wird die vor dem Seiteninhalt gerendert und enthält eine globale Navigation.
+Diese Komponente wird vor dem Seiteninhalt gerendert und enthält die globale Navigation.
 Die Standard&shy;implementierung wird als Seitenleiste in ausreichend breiten Ansichtsfenstern und innerhalb eines Dropdown-Menüs in kleinen (mobilen) Ansichtsfenstern angezeigt.
 Sie rendert auch [`<MobileMenuFooter />`](#mobilemenufooter), um zusätzliche Elemente innerhalb des mobilen Menüs anzuzeigen.
 
@@ -148,7 +148,7 @@ Sie rendert auch [`<MobileMenuFooter />`](#mobilemenufooter), um zusätzliche El
 
 **Standardkomponente:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileMenuFooter.astro)
 
-Diese Komponente wird die am unteren Ende des mobilen Dropdown-Menüs gerendert.
+Diese Komponente wird am unteren Ende des mobilen Dropdown-Menüs gerendert.
 Die Standard&shy;implementierung rendert [`<ThemeSelect />`](#themeselect) und [`<LanguageSelect />`](#languageselect).
 
 ---
@@ -162,7 +162,7 @@ Bei schmalen Ansichtsfenstern wird diese Leiste zu einem Dropdown-Menü.
 
 **Standardkomponente:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageSidebar.astro)
 
-Diese Komponente wird die vor dem Inhalt der Hauptseite gerendert, um ein Inhaltsverzeichnis anzuzeigen.
+Diese Komponente wird vor dem Inhalt der Hauptseite gerendert, um ein Inhaltsverzeichnis anzuzeigen.
 Die Standard&shy;implementierung rendert [`<TableOfContents />`](#tableofcontents) und [`<MobileTableOfContents />`](#mobiletableofcontents).
 
 #### `TableOfContents`
@@ -175,7 +175,7 @@ Eine Komponente zur Darstellung des Inhalts&shy;verzeichnisses der aktuellen Sei
 
 **Standardkomponente:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileTableOfContents.astro)
 
-Diese Komponete zeigt das Inhaltsverzeichnis der aktuellen Seite auf kleinen (mobilen) Bildschirmen an.
+Diese Komponente zeigt das Inhaltsverzeichnis der aktuellen Seite auf kleinen (mobilen) Viewports an.
 
 ---
 
@@ -202,7 +202,7 @@ Diese Layout-Komponente beinhaltet Abschnitte der Hauptinhaltsspalte.
 
 Eine Komponente, welche das `<h1>`-Element für die aktuelle Seite enthält.
 
-Implementierungen sollten sicherstellen, dass sie `id="_top"` auf dem `<h1>` Element wie in der Standard&shy;implementierung setzen.
+Implementierungen sollten sicherstellen, dass sie `id="_top"` auf dem `<h1>`-Element wie in der Standard&shy;implementierung setzen.
 
 #### `DraftContentNotice`
 
@@ -221,14 +221,14 @@ Wird nur auf mehrsprachigen Websites verwendet.
 
 **Standardkomponente:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Hero.astro)
 
-Diese Komponente wird am oberen Rand der Seite angezeigt, wenn [`hero`](/de/reference/frontmatter/#hero) in frontmatter eingestellt ist.
+Diese Komponente wird am oberen Rand der Seite angezeigt, wenn [`hero`](/de/reference/frontmatter/#hero) im Frontmatter festgelegt ist.
 Die Standard&shy;implementierung zeigt einen großen Titel, eine Tagline und Call-to-Action-Links neben einem optionalen Bild.
 
 #### `MarkdownContent`
 
 **Standardkomponente:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MarkdownContent.astro)
 
-Die Kompoente wird um den Hauptinhalt jeder Seite gerendert.
+Diese Komponente wird um den Hauptinhalt jeder Seite herum gerendert.
 Die Standard&shy;implementierung richtet grundlegende Stile ein, die auf Markdown-Inhalte angewendet werden.
 
 Die Markdown-Inhaltsstile werden auch in der Datei `@astrojs/starlight/style/markdown.css` veröffentlicht und auf die CSS-Klasse `.sl-markdown-content` bezogen.

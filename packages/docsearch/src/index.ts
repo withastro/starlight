@@ -77,7 +77,7 @@ interface DocSearchModuleUserConfig {
 	 *   apiKey: '...',
 	 *   indexName: '...',
 	 *   getMissingResultsUrl({ query }) {
-	 *     return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+	 *     return `https://github.com/algolia/docsearch/issues/new?title=${encodeURIComponent(query)}`;
 	 *   },
 	 * } satisfies DocSearchClientOptions;
 	 */

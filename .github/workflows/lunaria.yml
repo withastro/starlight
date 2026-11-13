@@ -1,26 +1,24 @@
 name: Lunaria
 
 on:
-  # Trigger the workflow every time a pull request is opened or synchronized at the target `main` branch
-  pull_request_target: # zizmor: ignore[dangerous-triggers] lunaria needs to comment on the PR; safe because we only checkout base branch
-    types: [opened, synchronize]
-    branches: [main]
-    paths:
-      - 'docs/**'
+  # Run every time the `Lunaria Trigger` workflow completes
+  workflow_run: # zizmor: ignore[dangerous-triggers] lunaria needs to comment on the PR; safe because we only checkout the default branch
+    workflows: [Lunaria Trigger]
+    types: [completed]
 
 permissions: {}
 
 jobs:
   lunaria-overview:
     name: Generate Lunaria Overview
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: read
       pull-requests: write
 
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # Necessary for Lunaria to work properly
           # Makes the action clone the entire git history
@@ -28,12 +26,12 @@ jobs:
           persist-credentials: false
 
       - name: Install pnpm, Node.js, and dependencies
-        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
           cache: true
 
       - name: Generate Lunaria Overview
-        uses: lunariajs/action@e5ab09c3c8353fa80786d8c2149873ba3978a3a7 # v0.2.0
+        uses: lunariajs/action@fb6be638db02f58f6e5e5ec125f5505e208adde2 # v0.4.0
         with:
           token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           working-directory: docs

@@ -45,7 +45,7 @@ Puedes resaltar `código en línea` con comillas invertidas.
 
 ## Imágenes
 
-Las imágenes en Starlight utilizan el [soporte de assets optimizados incorporado en Astro](https://docs.astro.build/en/guides/assets/).
+Las imágenes en Starlight utilizan el [soporte de assets optimizados incorporado en Astro](https://docs.astro.build/es/guides/images/).
 
 Markdown y MDX admiten la sintaxis Markdown para mostrar imágenes, que incluye alt-text para lectores de pantalla y tecnología de asistencia.
 
@@ -142,12 +142,27 @@ npm run create astro@latest --template starlight
 Puedes especificar un título personalizado para el apartado utilizando corchetes cuadrados después del tipo del apartado, por ejemplo, `:::tip[¿Sabías esto?]`.
 
 :::tip[¿Sabías esto?]
-Astro te ayuda a construir sitios web más rápidos con la[“Arquitectura de Islas”](https://docs.astro.build/es/concepts/islands/).
+Astro te ayuda a construir sitios web más rápidos con la [“Arquitectura de Islas”](https://docs.astro.build/es/concepts/islands/).
 :::
 
 ```md
 :::tip[¿Sabías esto?]
-Astro te ayuda a construir sitios web más rápidos con la[“Arquitectura de Islas”](https://docs.astro.build/es/concepts/islands/).
+Astro te ayuda a construir sitios web más rápidos con la [“Arquitectura de Islas”](https://docs.astro.build/es/concepts/islands/).
+:::
+```
+
+### Iconos personalizados para los apartados
+
+Puedes especificar un icono personalizado para el apartado entre llaves, después del tipo de apartado o de [título personalizado](#títulos-personalizados-para-los-apartados), p. ej., `:::tip{icon="heart"}` o `:::tip[¿Sabías esto?]{icon="heart"}`, respectivamente.
+El nombre del icono debe ser el de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos).
+
+:::tip{icon="heart"}
+Astro te ayuda a construir sitios web más rápidos con la [“Arquitectura de Islas”](https://docs.astro.build/es/concepts/islands/).
+:::
+
+```md
+:::tip{icon="heart"}
+Astro te ayuda a construir sitios web más rápidos con la [“Arquitectura de Islas”](https://docs.astro.build/es/concepts/islands/).
 :::
 ```
 
@@ -219,13 +234,13 @@ var fun = function lang(l) {
 
 ### Características de Expressive Code
 
-Starlight usa [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para ampliar las posibilidades de formato de los bloques de código.
+Starlight usa [Expressive Code](https://expressive-code.com/) para ampliar las posibilidades de formato de los bloques de código.
 Los marcadores de texto de Expressive Code y los plugins de marcos de ventana están habilitados de forma predeterminada.
 El renderizado de los bloques de código se puede configurar utilizando la opción de configuración [`expressiveCode`](/es/reference/configuration/#expressivecode) de Starlight.
 
 #### Marcadores de texto
 
-Puedes resaltar líneas específicas o partes de tus bloques de código utilizando [los marcadores de texto de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) en la línea de apertura de tu bloque de código.
+Puedes resaltar líneas específicas o partes de tus bloques de código utilizando [los marcadores de texto de Expressive Code](https://expressive-code.com/key-features/text-markers/) en la línea de apertura de tu bloque de código.
 Usa llaves (`{ }`) para resaltar líneas enteras, y comillas para resaltar cadenas de texto.
 
 Hay tres estilos de resaltado: neutral para llamar la atención sobre el código, verde para indicar código insertado y rojo para indicar código eliminado.
@@ -233,10 +248,10 @@ Tanto el texto como las líneas enteras pueden marcarse con el marcador predeter
 
 Expressive Code proporciona varias opciones para personalizar la apariencia visual de tus ejemplos de código.
 Muchas de estas opciones se pueden combinar, para obtener ejemplos de código altamente ilustrativos.
-Por favor, explora la [documentación de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) para ver las extensas opciones disponibles.
+Por favor, explora la [documentación de Expressive Code](https://expressive-code.com/key-features/text-markers/#configuration) para ver las extensas opciones disponibles.
 Algunos de los ejemplos más comunes se muestran a continuación:
 
-- [Marca líneas enteras y rangos de líneas usando el marcador `{ }`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [Marca líneas enteras y rangos de líneas usando el marcador `{ }`](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -244,6 +259,10 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     retrun 'Esta es la línea #3 de este fragmento'
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js {2-3}
@@ -254,7 +273,24 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```
   ````
 
-- [Marca selecciones de texto usando el marcador `" "` o expresiones regulares](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// Esta línea (#2) y la siguiente están resaltadas
+  	return 'Esta es la línea #3 de este fragmento';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Marca selecciones de texto usando el marcador `" "` o expresiones regulares](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
   ```js "Términos individuales" /También.*compatibles/
   // Términos individuales también pueden ser resaltados
@@ -262,6 +298,10 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   	return 'También las expresiones regulares son compatibles';
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js "Términos individuales" /También.*compatibles/
@@ -272,7 +312,24 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```
   ````
 
-- [Marca texto o líneas como insertadas o eliminadas con `ins` o `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'Términos individuales' /También.*compatibles/" %}
+  // Términos individuales también pueden ser resaltados
+  function demo() {
+  	return 'También las expresiones regulares son compatibles';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Marca texto o líneas como insertadas o eliminadas con `ins` o `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
   ```js "return true;" ins="insertados" del="eliminados"
   function demo() {
@@ -281,6 +338,10 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   	return true;
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js "return true;" ins="insertados" del="eliminados"
@@ -292,7 +353,25 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```
   ````
 
-- [Combina el resaltado de sintaxis con la sintaxis similar a `diff`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='insertados' del='eliminados'" %}
+  function demo() {
+  	console.log('Estos son tipos de marcadores insertados y eliminados');
+  	// La declaración de retorno utiliza el tipo de marcador predeterminado
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Combina el resaltado de sintaxis con la sintaxis similar a `diff`](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -303,6 +382,10 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -313,6 +396,25 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // ¡El bloque completo se resalta como JavaScript,
+      // y aún podemos añadir marcadores de diferencias a él!
+  -   console.log('Código antiguo a eliminar')
+  +   console.log('¡Nuevo y brillante código!')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### Marcos y títulos
 
@@ -322,13 +424,17 @@ Otros lenguajes se muestran dentro de un marco de estilo de editor de código si
 
 Un título opcional del bloque de código se puede establecer con un atributo `title="..."` después de las comillas invertidas de apertura del bloque de código y el identificador del lenguaje, o con un comentario del nombre del archivo en las primeras líneas del código.
 
-- [Añade una pestaña con el nombre del archivo con un comentario](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Añade una pestaña con el nombre del archivo con un comentario](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // mi-archivo-de-prueba.js
   console.log('¡Hola mundo!');
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js
   // mi-archivo-de-prueba.js
@@ -336,11 +442,30 @@ Un título opcional del bloque de código se puede establecer con un atributo `t
   ```
   ````
 
-- [Agrega un título a la ventana Terminal](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // mi-archivo-de-prueba.js
+  console.log('¡Hola mundo!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Agrega un título a la ventana Terminal](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="Instalando dependencias…"
   npm install
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```bash title="Instalando dependencias…"
@@ -348,17 +473,49 @@ Un título opcional del bloque de código se puede establecer con un atributo `t
   ```
   ````
 
-- [Desactiva los marcos de ventana con `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="Instalando dependencias…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Desactiva los marcos de ventana con `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "Esto no se renderiza como una terminal a pesar de usar el lenguaje bash"
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```bash frame="none"
   echo "Esto no se renderiza como una terminal a pesar de usar el lenguaje bash"
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "Esto no se renderiza como una terminal a pesar de usar el lenguaje bash"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## Details
 
@@ -385,13 +542,25 @@ La [constelación de Andrómeda](<https://es.wikipedia.org/wiki/Andr%C3%B3meda_(
 </details>
 ```
 
+## Notas a pie de página
+
+Las [notas a pie de página](https://www.markdownguide.org/extended-syntax/#footnotes) resultan útiles para añadir referencias breves o aclaraciones sin interrumpir la fluidez del contenido. Aparecen como enlaces numerados en superíndice que remiten al texto al que se hace referencia, que se recoge al final de la página.
+
+Define una nota a pie de página usando corchetes con un símbolo de intercalación y una referencia numerada:
+
+```md
+Aquí hay una nota al pie de página[^1] seguida de un texto adicional.
+
+[^1]: Mi referencia.
+```
+
 ## Otras características comunes de Markdown
 
 Starlight admite todas las demás sintaxis de autoría de Markdown, como listas y tablas. Puedes consultar la [Guía de referencia de Markdown](https://www.markdownguide.org/cheat-sheet/) para obtener una descripción general rápida de todos los elementos de sintaxis de Markdown.
 
 ## Configuración avanzada de Markdown y MDX
 
-Starlight utiliza el motor de renderizado de Markdown y MDX de Astro, construido sobre remark y rehype. Puedes añadir soporte para sintaxis y comportamientos personalizados añadiendo `remarkPlugins` o `rehypePlugins` en tu archivo de configuración de Astro. Consulta la sección ["Plugins de Markdown"](https://docs.astro.build/es/guides/markdown-content/#plugins-de-markdown) en la documentación de Astro para obtener más información.
+Starlight renderiza Markdown y MDX usando el [`markdown.processor`](https://docs.astro.build/es/reference/configuration-reference/#markdownprocessor) configurable de Astro. Puedes añadir compatibilidad con sintaxis y comportamientos personalizados pasando plugins y opciones a tu procesador configurado. Consulta ["Plugins del procesador de Markdown"](https://docs.astro.build/es/guides/markdown-content/#markdown-processor-plugins) en la documentación de Astro para obtener más información.
 
 ## Markdoc
 
@@ -507,3 +676,22 @@ Si ya tienes un sitio Starlight y quieres agregar Markdoc, sigue estos pasos.
 </Steps>
 
 Para obtener más información sobre la sintaxis y las características de Markdoc, consulta la [documentación de Markdoc](https://markdoc.dev/docs/syntax) o la [guía de integración de Astro Markdoc](https://docs.astro.build/es/guides/integrations-guide/markdoc/).
+
+### Configuración del ajuste preestablecido Markdoc
+
+El preajuste `starlightMarkdoc()` admite las siguientes opciones de configuración:
+
+#### `headingLinks`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Determina si los encabezados se renderizan con un enlace en el que se puede hacer clic.
+Equivalente a la opción [`markdown.headingLinks`](/es/reference/configuration/#markdown), que se aplica a los archivos Markdown y MDX.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// Deshabilita el soporte por defecto para los enlaces de los encabezados
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

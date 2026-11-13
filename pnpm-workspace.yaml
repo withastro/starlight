@@ -27,13 +27,3 @@ peerDependencyRules:
 minimumReleaseAge: 4320
 # Automatically remove release age exclusions no longer used by the lockfile on `pnpm add/update/remove`
 minimumReleaseAgeExcludePrune: true
-
-minimumReleaseAgeExclude:
-  - '@astrojs/internal-helpers@0.11.0'
-  - '@astrojs/mdx@8.0.0'
-  - '@astrojs/markdown-remark@7.3.0'
-  - '@astrojs/markdown-satteri@0.4.0'
-  - astro@7.2.10
-  - '@lunariajs/core@0.2.1'
-  - '@codspeed/core@6.0.0'
-  - '@codspeed/vitest-plugin@6.0.0'
