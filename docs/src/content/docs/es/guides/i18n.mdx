@@ -184,20 +184,21 @@ forma predeterminada, y damos la bienvenida a [contribuciones para agregar más
 idiomas
 predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
-Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
+Puedes proporcionar traducciones para idiomas adicionales, o editar nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
 
 <Steps>
 
-1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
+1. Configura la colección de datos `i18n` en `src/content.config.ts` si aún no está configurada:
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -220,7 +221,7 @@ Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras eti
 
    <UIStringsList />
 
-   Los bloques de código de Starlight están impulsados por la biblioteca [Expressive Code](https://github.com/expressive-code/expressive-code).
+   Los bloques de código de Starlight están impulsados por la biblioteca [Expressive Code](https://expressive-code.com/).
    Puedes establecer traducciones para las cadenas de UI en el mismo archivo JSON utilizando las llaves `expressiveCode`:
 
    ```json
@@ -257,14 +258,16 @@ Agrega claves personalizadas a los diccionarios de traducción de tu sitio estab
 En el siguiente ejemplo, una clave nueva, opcional `custom.label` se agrega a las claves predeterminadas:
 
 ```diff lang="js"
-// src/content/config.ts
-import { defineCollection, z } from 'astro:content';
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -295,6 +298,9 @@ export const GET = (context) => {
 };
 ```
 
+En el contexto de un plugin de Starlight, puedes usar el helper [`useTranslations()`](/es/reference/plugins/#usetranslations) para acceder a esta API para un idioma específico.
+Consulta la [referencia de plugins](/es/reference/plugins/) para obtener más información.
+
 ### Renderizar una string de UI
 
 Renderiza strings de UI utilizando la función `locals.t()`.
@@ -322,10 +328,10 @@ El valor de `feature` debe establecerse en un objeto de opciones pasado como seg
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/en/guides/astro-db/">
-	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+<a href="https://docs.astro.build/es/guides/actions/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro Actions' })}
 </a>
-<!-- Renderiza: <a href="...">Astro documentation for Astro DB</a> -->
+<!-- Renderiza: <a href="...">Astro documentation for Astro Actions</a> -->
 ```
 
 Ver la [documentación de i18next](https://www.i18next.com/overview/api#t) para obtener más información sobre cómo usar la función `t()` con interpolación, formato y más.
@@ -352,14 +358,14 @@ const allStrings = Astro.locals.t.all();
 #### `t.exists()`
 
 Para comprobar si una clave de traducción existe para un idioma, utiliza la función `locals.t.exists()` con la clave de traducción como primer argumento.
-Pasa un segundo argumento opcional si necesitas anular el idioma actual.
+Pasa un segundo argumento opcional si necesitas comprobar si existe una traducción para un idioma específico.
 
 ```astro
 ---
 // src/components/Example.astro
-const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+const keyExists = Astro.locals.t.exists('a.key');
 //    ^ true
-const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+const keyExistsInFrench = Astro.locals.t.exists('other.key', { lngs: ['fr'] });
 //    ^ false
 ---
 ```
