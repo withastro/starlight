@@ -22,7 +22,7 @@ export function getAsideIconName(variant: AsideVariant, customIcon?: string | nu
 
 	if (customIcon) {
 		iconName = customIcon as StarlightIcon;
-		if (!Icons[iconName]) throwInvalidAsideIconError(iconName);
+		if (!Object.hasOwn(Icons, iconName)) throwInvalidAsideIconError(iconName);
 	}
 
 	return iconName;
