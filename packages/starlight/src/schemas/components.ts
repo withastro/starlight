@@ -17,8 +17,7 @@ export type ComponentUserConfig =
 			Head?: string | undefined;
 			/**
 			 * Component rendered inside `<head>` that sets up dark/light theme support.
-			 * The default implementation includes an inline script and a `<template>` used by the
-			 * script in `ThemeSelect.astro`.
+			 * The default implementation includes an inline script that sets the theme when the page loads.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro `ThemeProvider` default implementation}
 			 */

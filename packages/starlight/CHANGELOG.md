@@ -1,5 +1,81 @@
 # @astrojs/starlight
 
+## 0.43.0
+
+### Minor Changes
+
+- [#4190](https://github.com/withastro/starlight/pull/4190) [`3f2336b`](https://github.com/withastro/starlight/commit/3f2336bb893a8dc0e3dacf5386e067d5c15374b8) Thanks [@delucis](https://github.com/delucis)! - ⚠️ **BREAKING CHANGE:** Adds support for any Astro [`scopedStyleStrategy`](https://docs.astro.build/en/reference/configuration-reference/#scopedstylestrategy) configuration.
+
+  Previously, Starlight forced the `"where"` strategy, resulting in CSS selectors like `:where(.astro-HASH)`. Starlight now respects the strategy set in `astro.config.mjs` and will default to Astro’s default `"attribute"` strategy, resulting in attribute selectors like `[data-astro-cid-HASH]`.
+
+  The new default can change some styling behaviour, so we recommend checking for visual changes in your site when updating. In particular, note the following:
+
+  - Attribute selectors have a higher specificity than `:where()` selectors. Check to ensure styles still apply and no CSS changes are needed to ensure the relative specificity of declarations remains the same.
+  - Astro’s `"attribute"` strategy does not automatically pass along a parent component’s scope when passing a `class` down to a child component. If you have components that depended on this, you will need to update the child component to spread the parent’s data attribute where you are reusing the class name, for example:
+
+    ```astro
+    ---
+    // Parent.astro
+    ---
+
+    <Child class="special-case" />
+
+    <style>
+      .special-case {
+        --accent-color: red;
+      }
+    </style>
+    ```
+
+    ```diff
+    ---
+    // Child.astro
+    -const { class: className } = Astro.props;
+    +const { class: className, ...attributes } = Astro.props;
+    ---
+
+    -<div class={className}>
+    +<div class={className} {...attributes}>
+      <!-- ... -->
+    </div>
+    ```
+
+    See [“Passing a `class` to a child component”](https://docs.astro.build/en/guides/styling/#passing-a-class-to-a-child-component) in the Astro docs for more details.
+
+  Alternatively, if you wish to continue using the previous scoping strategy in your site, set it explicitly in your Astro configuration file:
+
+  ```diff
+  // astro.config.mjs
+  import { defineConfig } from 'astro/config';
+
+  export default defineConfig({
+  + scopedStyleStrategy: "where",
+    // ...
+  });
+  ```
+
+- [#3674](https://github.com/withastro/starlight/pull/3674) [`993ac27`](https://github.com/withastro/starlight/commit/993ac275ed6f70a8ad5bc42fad950b44bb320113) Thanks [@controversial](https://github.com/controversial)! - Adds support for Pagefind’s [`excludeSelectors`](https://pagefind.app/docs/config-options/#exclude-selectors) and [`includeCharacters`](https://pagefind.app/docs/config-options/#include-characters) configuration to customize how search indexes are built
+
+- [#4219](https://github.com/withastro/starlight/pull/4219) [`35abe4f`](https://github.com/withastro/starlight/commit/35abe4f7f6e0d2ced0a4d10c01cb1abbe1afc736) Thanks [@delucis](https://github.com/delucis)! - Refactors Starlight’s theme select menu to reduce its JavaScript use
+
+  ⚠️ **Potentially breaking change:** If your project or theme plugin overrides the `ThemeSelect` component, check that it still works after updating. The global API previously used by theme select components has been removed and calling `StarlightThemeProvider.updatePickers()` will no longer work.
+
+  See [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro), [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeSelect.astro), and [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/LanguageSelect.astro) on GitHub for the full source code of the updated components.
+
+- [#4385](https://github.com/withastro/starlight/pull/4385) [`c130349`](https://github.com/withastro/starlight/commit/c130349fe1659f3ab5874a096402ac873b835982) Thanks [@delucis](https://github.com/delucis)! - Updates dependency `i18next` to v27
+
+  ⚠️ **Potentially breaking change:** If you use Starlight’s [translation APIs](https://starlight.astro.build/guides/i18n/#using-ui-translations) directly, see [i18next’s migration guide](https://www.i18next.com/misc/migration-guide) for details. We don’t expect any changes to impact Starlight users, but [let us know](https://github.com/withastro/starlight/issues/new/choose) if they do.
+
+### Patch Changes
+
+- [#4390](https://github.com/withastro/starlight/pull/4390) [`f8b072a`](https://github.com/withastro/starlight/commit/f8b072a770701b5f84411a5fdec9994a97900869) Thanks [@Toyenzo](https://github.com/Toyenzo)! - Errors if an aside is passed an icon name that matches `Object.prototype` properties, such as `constructor` or `toString`
+
+## 0.42.11
+
+### Patch Changes
+
+- [#4332](https://github.com/withastro/starlight/pull/4332) [`ad19424`](https://github.com/withastro/starlight/commit/ad19424b2bb2b3290a13064cec28bf653d7730dd) Thanks [@RaphaelFakhri](https://github.com/RaphaelFakhri)! - Fixes the `twitter:site` meta tag including a trailing slash when the configured X or Twitter social link ends with `/`
+
 ## 0.42.10
 
 ### Patch Changes

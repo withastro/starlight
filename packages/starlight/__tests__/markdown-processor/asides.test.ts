@@ -84,6 +84,17 @@ describeEachProcessor(
 			consoleError.mockRestore();
 		});
 
+		test.each(['constructor', 'toString', '__proto__'])(
+			'throws on a custom icon named after an Object.prototype property (%s)',
+			async (icon) => {
+				const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+				await expect(() =>
+					ctx().render(`\n:::note{icon="${icon}"}\nSome text\n:::\n`)
+				).rejects.toThrow();
+				consoleError.mockRestore();
+			}
+		);
+
 		test('renders a custom icon with multiple paths inside the svg', async () => {
 			const res = await ctx().render(`\n:::note{icon="external"}\nSome text\n:::\n`);
 			await expect(res.code).toMatchFileSnapshot(
