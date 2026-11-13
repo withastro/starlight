@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.43.1
+
+### Patch Changes
+
+- [#4396](https://github.com/withastro/starlight/pull/4396) [`46a5020`](https://github.com/withastro/starlight/commit/46a5020d0e0e2ebf2ad35e065f7716b6032c04ce) Thanks [@trueberryless](https://github.com/trueberryless)! - Fixes a regression where the icon of the `<Aside>` component was rendered smaller than the icon of Markdown asides.
+
 ## 0.43.0
 
 ### Minor Changes
