@@ -489,6 +489,8 @@ Pagefindの検索クライアントを設定するには、`pagefind`にオブ�
 
 - 検索結果のランキングの計算方法を制御する`pagefind.ranking`オプションの使用方法については、Pagefindドキュメントの[「Customize Pagefind's result ranking」](https://pagefind.app/docs/ranking/)を参照してください。
 - 複数サイトの検索方法を制御する`pagefind.mergeIndex`オプションの使用方法については、Pagefindドキュメントの[「Searching multiple sites」](https://pagefind.app/docs/multisite/)を参照してください。
+- コンテンツのインデックス作成方法をカスタマイズする`pagefind.index`オプションの使用方法については、Pagefindドキュメントの[「Exclude selectors」](https://pagefind.app/docs/config-options/#exclude-selectors)と[「Include characters」](https://pagefind.app/docs/config-options/#include-characters)を参照してください。
+  （その他のPagefindのインデックス作成オプションは、Starlightでは利用できません。）
 
 #### `PagefindOptions`
 
@@ -505,6 +507,10 @@ interface PagefindOptions {
 		language?: string;
 		ranking?: PagefindRankingOptions;
 	}>;
+	index?: {
+		excludeSelectors?: string[];
+		includeCharacters?: string;
+	};
 }
 
 interface PagefindRankingOptions {
