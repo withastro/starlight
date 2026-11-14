@@ -507,6 +507,8 @@ Setze `pagefind` auf ein Objekt, um den Pagefind-Suchclient zu konfigurieren:
 
 - Siehe [„Anpassen des Pagefind-Rankings (EN)“](https://pagefind.app/docs/ranking/) in der Pagefind-Dokumentation für weitere Details über die Verwendung der Option `pagefind.ranking`, um zu kontrollieren, wie die Rangfolge der Suchergebnisse berechnet wird
 - Siehe [„Mehrere Websites durchsuchen (EN)“](https://pagefind.app/docs/multisite/) in der Pagefind-Dokumentation für weitere Informationen über die Verwendung der Option `pagefind.mergeIndex` zur Steuerung der Suche über mehrere Websites
+- Siehe [„Selektoren ausschließen (EN)“](https://pagefind.app/docs/config-options/#exclude-selectors) und [„Zeichen einbeziehen (EN)“](https://pagefind.app/docs/config-options/#include-characters) in der Pagefind-Dokumentation für weitere Informationen über die Verwendung der Option `pagefind.index`, um anzupassen, wie Inhalte indexiert werden.
+  (Andere Pagefind-Indexierungsoptionen sind in Starlight nicht verfügbar.)
 
 #### `PagefindOptions`
 
@@ -523,6 +525,10 @@ interface PagefindOptions {
 		language?: string;
 		ranking?: PagefindRankingOptions;
 	}>;
+	index?: {
+		excludeSelectors?: string[];
+		includeCharacters?: string;
+	};
 }
 
 interface PagefindRankingOptions {
