@@ -419,6 +419,21 @@ test.describe('components', () => {
 			await starlight.goto('/comments/bob');
 			await expect(page.locator('.starlight-aside')).toBeAttached();
 		});
+
+		test('renders the same icon size for Markdown asides and the `<Aside>` component', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			await starlight.goto('/asides-component');
+			const sizes = await page
+				.locator('.starlight-aside__icon')
+				.evaluateAll((icons) => icons.map((icon) => icon.getBoundingClientRect().width));
+
+			expect(sizes).toHaveLength(2);
+			expect(sizes[1]).toBe(sizes[0]);
+		});
 	});
 
 	test.describe('RTL support', () => {
