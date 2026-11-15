@@ -329,7 +329,7 @@ El ejemplo anterior registrará un mensaje que incluye una cadena de texto de in
 
 Llama a `absolutePathToLang()` con una ruta de archivo absoluta para obtener el idioma de ese archivo.
 
-{/* TODO: cambiar enlance cuando la página de los docs esté traducida */}
+<!-- TODO: cambiar enlace cuando la página de los docs esté traducida -->
 Esto puede ser especialmente útil al añadir [plugins de remark o rehype](https://docs.astro.build/es/guides/markdown-content/#markdown-processor-plugins) para procesar archivos Markdown o MDX.
 El [formato de archivo virtual](https://github.com/vfile/vfile) utilizado por estos plugins incluye la [ruta absoluta](https://github.com/vfile/vfile#filepath) del archivo que se está procesando, que se puede utilizar con `absolutePathToLang()` para determinar el idioma del archivo.
 El idioma devuelto se puede utilizar con el helper [`useTranslations()`](#usetranslations) para obtener las cadenas de texto de la interfaz de usuario para ese idioma.
