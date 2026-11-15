@@ -285,7 +285,7 @@ export default {
   name: 'long-process-plugin',
   hooks: {
     'config:setup'({ logger }) {
-      logger.info('Starting long process…');
+      logger.info('Iniciando un proceso largo…');
       // Algún proceso largo…
     },
   },
