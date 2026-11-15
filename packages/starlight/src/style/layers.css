@@ -1,1 +1,1 @@
-@layer starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils;
+@layer starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.components.icon, starlight.components.aside, starlight.utils;

@@ -31,7 +31,7 @@ Starlight의 [`components`](/ko/reference/configuration/#components) 구성 옵�
 **기본 컴포넌트:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro)
 
 다크/라이트 테마를 설정하기 위해 `<head>` 내에서 렌더링되는 컴포넌트입니다.
-기본 구현에는 [`<ThemeSelect />`](#themeselect)에서 사용되는 인라인 스크립트와 `<template>`이 포함되어 있습니다.
+기본 구현에는 페이지가 로드될 때 테마를 설정하는 인라인 스크립트가 포함되어 있습니다.
 
 ---
 
