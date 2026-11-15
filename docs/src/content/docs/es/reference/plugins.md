@@ -15,6 +15,7 @@ Aprende más sobre el uso de un plugin de Starlight en la [Referencia de Configu
 Un plugin de Starlight tiene la siguiente forma.
 Consulta a continuación los detalles de las diferentes propiedades y parámetros del hook.
 
+<!-- prettier-ignore-start -->
 ```ts
 interface StarlightPlugin {
   name: string;
@@ -39,6 +40,7 @@ interface StarlightPlugin {
   };
 }
 ```
+<!-- prettier-ignore-end -->
 
 ## `name`
 
