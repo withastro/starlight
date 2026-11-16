@@ -26,5 +26,6 @@
   "aside.danger": "Κίνδυνος",
   "fileTree.directory": "Φάκελος",
   "builtWithStarlight.label": "Δημιουργήθηκε με το Starlight",
-  "heading.anchorLabel": "Ενότητα με τίτλο «{{title}}»"
+  "heading.anchorLabel": "Ενότητα με τίτλο «{{title}}»",
+  "banner.accessibleLabel": "Announcement"
 }

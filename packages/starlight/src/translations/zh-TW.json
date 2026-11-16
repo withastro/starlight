@@ -29,5 +29,6 @@
   "expressiveCode.copyButtonCopied": "複製成功！",
   "fileTree.directory": "目錄",
   "builtWithStarlight.label": "Built with Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Section titled “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

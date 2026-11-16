@@ -26,5 +26,6 @@
   "aside.danger": "Advarsel",
   "fileTree.directory": "Mappe",
   "builtWithStarlight.label": "Bygget med Starlight",
-  "heading.anchorLabel": "Sektion kaldt “{{title}}”"
+  "heading.anchorLabel": "Sektion kaldt “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

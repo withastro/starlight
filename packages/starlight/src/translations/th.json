@@ -26,5 +26,6 @@
   "aside.danger": "อันตราย",
   "fileTree.directory": "โฟลเดอร์",
   "builtWithStarlight.label": "ถูกสร้างขึ้นด้วย Starlight",
-  "heading.anchorLabel": "หัวข้อที่มีชื่อว่า “{{title}}”"
+  "heading.anchorLabel": "หัวข้อที่มีชื่อว่า “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

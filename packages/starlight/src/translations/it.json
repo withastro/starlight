@@ -29,5 +29,6 @@
   "expressiveCode.copyButtonCopied": "Copiato!",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "Built with Starlight",
-  "heading.anchorLabel": "Sezione intitolata “{{title}}”"
+  "heading.anchorLabel": "Sezione intitolata “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

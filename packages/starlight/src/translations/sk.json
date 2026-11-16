@@ -26,5 +26,6 @@
   "aside.danger": "Nebezpečenstvo",
   "fileTree.directory": "Adresár",
   "builtWithStarlight.label": "Postavené so Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Section titled “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

@@ -29,5 +29,6 @@
   "expressiveCode.copyButtonCopied": "कॉपी हो गया!",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "Starlight द्वारा निर्मित",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Section titled “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

@@ -39,5 +39,6 @@
   "pagefind.one_result": "[COUNT] резултат за [SEARCH_TERM]",
   "pagefind.alt_search": "Нема резултати за [SEARCH_TERM]. Прикажани се резултати за [DIFFERENT_TERM]",
   "pagefind.search_suggestion": "Нема резултати за [SEARCH_TERM]. Обидете се со некое од следниве пребарувања:",
-  "pagefind.searching": "Се пребарува [SEARCH_TERM]..."
+  "pagefind.searching": "Се пребарува [SEARCH_TERM]...",
+  "banner.accessibleLabel": "Announcement"
 }

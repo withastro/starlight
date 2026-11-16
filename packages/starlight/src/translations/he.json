@@ -26,5 +26,6 @@
   "aside.danger": "Danger",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "Built with Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Section titled “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

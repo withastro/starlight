@@ -165,6 +165,10 @@ function starlightI18nSchema() {
 			'heading.anchorLabel': z
 				.string()
 				.meta({ description: 'Label for anchor links in Markdown content.' }),
+
+			'banner.accessibleLabel': z.string().meta({
+				description: 'Accessible label for the announcement banner landmark.',
+			}),
 		})
 		.partial();
 }

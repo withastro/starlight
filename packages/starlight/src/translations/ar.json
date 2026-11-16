@@ -29,5 +29,6 @@
   "expressiveCode.copyButtonCopied": "تم النسخ!",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "طوِّر بواسطة Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Section titled “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

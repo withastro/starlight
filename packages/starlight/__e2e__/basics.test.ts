@@ -924,3 +924,46 @@ function testTOCHighlighting({
 		await test();
 	};
 }
+
+test.describe('banner layout', () => {
+	test('centers banner across main frame and starts right sidebar below banner on wide screens', async ({
+		page,
+		getProdServer,
+	}) => {
+		await page.setViewportSize({ width: 1600, height: 900 });
+		const starlight = await getProdServer();
+		await starlight.goto('/headings-banner');
+
+		const banner = page.locator('.sl-banner');
+		await expect(banner).toBeVisible();
+		await expect(banner).toHaveAttribute('role', 'region');
+		await expect(banner).toHaveAttribute('aria-label', 'Announcement');
+		await expect(page.locator('main .sl-banner')).toHaveCount(0);
+
+		const twoColumnBox = await page.locator('.main-frame > .lg\\:sl-flex').boundingBox();
+		const mainPaneBox = await page.locator('.main-pane').boundingBox();
+		const bannerBox = await banner.boundingBox();
+		const rightSidebarBox = await page.locator('.right-sidebar').boundingBox();
+		const headerBox = await page.locator('header.header').boundingBox();
+
+		expect(twoColumnBox).not.toBeNull();
+		expect(mainPaneBox).not.toBeNull();
+		expect(bannerBox).not.toBeNull();
+		expect(rightSidebarBox).not.toBeNull();
+		expect(headerBox).not.toBeNull();
+
+		// Banner spans full width of the two-column content area rather than stopping at `.main-pane`.
+		expect(Math.abs(bannerBox!.x - twoColumnBox!.x)).toBeLessThanOrEqual(1);
+		expect(Math.abs(bannerBox!.width - twoColumnBox!.width)).toBeLessThanOrEqual(1);
+		expect(bannerBox!.width).toBeGreaterThan(mainPaneBox!.width);
+
+		// Right sidebar starts cleanly below the banner instead of overlapping it.
+		expect(rightSidebarBox!.y).toBeGreaterThanOrEqual(bannerBox!.y + bannerBox!.height - 1);
+
+		// Scrolling keeps the right sidebar pinned directly beneath the header.
+		await page.evaluate(() => window.scrollTo(0, 500));
+		const scrolledSidebarBox = await page.locator('.right-sidebar').boundingBox();
+		expect(scrolledSidebarBox).not.toBeNull();
+		expect(scrolledSidebarBox!.y).toBeGreaterThanOrEqual(headerBox!.height - 1);
+	});
+});

@@ -26,5 +26,6 @@
   "aside.danger": "Tehlike",
   "fileTree.directory": "Dizin",
   "builtWithStarlight.label": "Starlight ile oluşturuldu",
-  "heading.anchorLabel": "Bölüm başlığı “{{title}}”"
+  "heading.anchorLabel": "Bölüm başlığı “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

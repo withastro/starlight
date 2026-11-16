@@ -29,5 +29,6 @@
   "expressiveCode.copyButtonCopied": "복사 완료!",
   "fileTree.directory": "디렉터리",
   "builtWithStarlight.label": "이 웹사이트는 Starlight로 제작되었습니다.",
-  "heading.anchorLabel": "섹션 제목: “{{title}}”"
+  "heading.anchorLabel": "섹션 제목: “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

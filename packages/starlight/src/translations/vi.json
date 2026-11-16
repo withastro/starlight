@@ -26,5 +26,6 @@
   "aside.danger": "Nguy hiểm",
   "fileTree.directory": "Thư mục",
   "builtWithStarlight.label": "Được xây dựng bằng Starlight",
-  "heading.anchorLabel": "Phần tiêu đề “{{title}}”"
+  "heading.anchorLabel": "Phần tiêu đề “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

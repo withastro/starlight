@@ -29,5 +29,6 @@
   "expressiveCode.copyButtonTooltip": "Skopiuj do schowka",
   "expressiveCode.terminalWindowFallbackTitle": "Okno terminala",
   "builtWithStarlight.label": "Built with Starlight",
-  "heading.anchorLabel": "Dział zatytułowany „{{title}}”"
+  "heading.anchorLabel": "Dział zatytułowany „{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

@@ -26,5 +26,6 @@
   "aside.danger": "Vaara",
   "fileTree.directory": "Hakemisto",
   "builtWithStarlight.label": "Rakennettu Starlightilla",
-  "heading.anchorLabel": "Osio nimeltä “{{title}}”"
+  "heading.anchorLabel": "Osio nimeltä “{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }

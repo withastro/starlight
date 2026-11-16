@@ -40,7 +40,7 @@ export class StarlightTOC extends HTMLElement {
 		const getElementHeading = (el: Element | null): HTMLElement | null => {
 			while (el) {
 				// Short circuit if we reach the top-level content container or one of the other containers in main.
-				if (el.matches('.sl-markdown-content, main > *')) {
+				if (el.matches('.sl-markdown-content, main > *, .sl-banner')) {
 					return document.getElementById(PAGE_TITLE_ID);
 				}
 				if (isHeading(el)) return el;
@@ -83,6 +83,7 @@ export class StarlightTOC extends HTMLElement {
 				`main :where(${this.tocHeadingSelector}, .sl-heading-wrapper) ~ *:not(:has(${this.tocHeadingSelector}))`,
 				`main .sl-markdown-content > *:not(:has(${this.tocHeadingSelector}))`,
 				`main > *:not(:has(${this.tocHeadingSelector}))`,
+				`.sl-banner`,
 			].join()
 		);
 

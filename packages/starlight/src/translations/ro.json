@@ -26,5 +26,6 @@
   "aside.danger": "Pericol",
   "fileTree.directory": "Director",
   "builtWithStarlight.label": "Creat cu Starlight",
-  "heading.anchorLabel": "Secțiune intitulată „{{title}}”"
+  "heading.anchorLabel": "Secțiune intitulată „{{title}}”",
+  "banner.accessibleLabel": "Announcement"
 }
