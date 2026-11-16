@@ -128,5 +128,3 @@ import { FileTree } from '@astrojs/starlight/components';
 SSRを有効にするには、Astroドキュメントの「[オンデマンドレンダリングアダプター](https://docs.astro.build/ja/guides/on-demand-rendering/)」ガイドに従い、Starlightプロジェクトにサーバーアダプターを追加します。
 
 Starlightによって生成されるドキュメントページは、プロジェクトの出力モードに関係なくデフォルトでプリレンダリングされます。Starlightページのプリレンダリングを無効にするには、[`prerender`設定オプション](/ja/reference/configuration/#prerender)を`false`に設定します。
-
-ドキュメントプロジェクトでサーバーサイドレンダリングを有効にするために[Cloudflareアダプター](https://docs.astro.build/ja/guides/integrations-guide/cloudflare/)を使用している場合は、必ず[Wrangler設定ファイルに`nodejs_compat`互換性フラグも追加してください](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started)。

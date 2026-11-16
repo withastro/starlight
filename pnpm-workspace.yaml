@@ -27,6 +27,3 @@ peerDependencyRules:
 minimumReleaseAge: 4320
 # Automatically remove release age exclusions no longer used by the lockfile on `pnpm add/update/remove`
 minimumReleaseAgeExcludePrune: true
-
-minimumReleaseAgeExclude:
-  - '@lunariajs/core@0.2.1'

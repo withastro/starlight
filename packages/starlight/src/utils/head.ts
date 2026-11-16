@@ -6,6 +6,7 @@ import type { PageProps, RouteDataContext } from './routing/data';
 import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
 import { localizedUrl } from './localizedUrl';
+import { stripLeadingAndTrailingSlashes } from './path';
 import { isAbsoluteUrl } from './url';
 
 const HeadSchema = HeadConfigSchema({ source: 'content' });
@@ -119,7 +120,7 @@ export function getHead(
 			tag: 'meta',
 			attrs: {
 				name: 'twitter:site',
-				content: new URL(twitterLink.href).pathname.replace('/', '@'),
+				content: '@' + stripLeadingAndTrailingSlashes(new URL(twitterLink.href).pathname),
 			},
 		});
 	}

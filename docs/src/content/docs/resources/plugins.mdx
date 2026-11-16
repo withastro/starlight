@@ -27,6 +27,7 @@ Extend your site with official plugins supported by the Starlight team and commu
 
 ### Community plugins
 
+import LinkCard from '~/components/link-card.astro';
 import ThirdPartyContent from '~/components/third-party-content.astro';
 
 <ThirdPartyContent>
@@ -306,12 +307,22 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 			title="@heydeacon/starlight"
 			description="Add the Deacon chat widget, an AI support agent that answers questions from your docs."
 		/>
+		<LinkCard
+			href="https://github.com/fengyiqicoder/starlight-onetag"
+			title="starlight-onetag"
+			description="Add AI for readers with no backend: Ask AI, answers in search, page translation, code explanations, page summaries and ask-about-selection."
+		/>
+		<LinkCard
+			href="https://github.com/alessandroros/starlight-annotations"
+			title="starlight-annotations"
+			description="Let readers highlight text and leave notes, committed to your GitHub, GitLab or Gitea repository."
+		/>
 	</CardGrid>
 </ThirdPartyContent>
 
 ## Community tools and integrations
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid } from '@astrojs/starlight/components';
 
 These community tools and integrations can be used to add features to your Starlight site.
 
@@ -416,6 +427,11 @@ These community tools and integrations can be used to add features to your Starl
 			href="https://github.com/prisant-labs/starlight-visual-customizer"
 			title="Starlight Visual Customizer"
 			description="A browser-based theme editor: restyle colors, typography, layout and components on live Starlight pages, then export a custom CSS file."
+		/>
+		<LinkCard
+			href="https://zeku.dev"
+			title="Zeku"
+			description="A desktop writing app for Astro sites with live preview and Starlight support. Paid, with a 14-day free trial."
 		/>
 	</CardGrid>
 </ThirdPartyContent>

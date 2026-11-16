@@ -81,7 +81,7 @@ Wird nur in mehrsprachigen Websites verwendet.
 
 **Typ:** `{ dir: 'ltr' | 'rtl'; lang: string }`
 
-Gebietsschema-Metadaten für den Seiteninhalt. Du kannst von den Werten der Top-Level-Locale unterscheiden, wenn eine Seite Fallback-Inhalte verwendet.
+Gebietsschema-Metadaten für den Seiteninhalt. Kann sich von den Werten des Gebietsschemas auf oberster Ebene unterscheiden, wenn eine Seite Fallback-Inhalte verwendet.
 
 ### `entry`
 
@@ -98,7 +98,7 @@ entry: {
 }
 ```
 
-Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](https://docs.astro.build/de/reference/modules/astro-content/#collectionentry) Referenz.
+Erfahre mehr über die Form dieses Objekts in der Referenz zum [Astro-Typ `CollectionEntry`](https://docs.astro.build/de/reference/modules/astro-content/#collectionentry).
 
 ### `sidebar`
 
@@ -182,13 +182,13 @@ Die verschachtelten Einträge in der Seitenleiste innerhalb dieser Gruppe, bei d
 
 **Typ:** `boolean`
 
-Ob die Gruppe standardmäßig ausgeblendet ist.
+Ob die Gruppe standardmäßig eingeklappt ist.
 
 ##### `badge`
 
 **Typ:** `{ text: string; variant: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'; class?: string } | undefined`
 
-Konfiguration des Abzeichens, das gegebenfalls neben der Gruppenbezeichnung angezeigt werden soll.
+Konfiguration des Abzeichens, das gegebenenfalls neben der Gruppenbezeichnung angezeigt wird.
 Weitere Informationen findest du in der [Referenz zu den Eigenschaften der `<Badge>`-Komponente](/de/components/badges/#badge-eigenschaften).
 
 ##### `autogenerate`
@@ -222,7 +222,7 @@ Inhaltsverzeichnis für diese Seite, falls aktiviert.
 **Typ:** `{ depth: number; slug: string; text: string }[]`
 
 Array aller Markdown-Überschriften, die aus der aktuellen Seite extrahiert wurden.
-Verwende stattdessen [`toc`](#toc), wenn du einen Inhaltsverzeichnis-Komponenten erstellen willst, welches die Konfigurations&shy;optionen von Starlight berücksichtigt.
+Verwende stattdessen [`toc`](#toc), wenn du eine Inhaltsverzeichnis-Komponente erstellen willst, die die Konfigurations&shy;optionen von Starlight berücksichtigt.
 
 ### `lastUpdated`
 
@@ -247,7 +247,7 @@ Enthält wichtige Tags wie `<title>` und `<meta charset="utf-8">`.
 
 ### `defineRouteMiddleware()`
 
-Verwende das Hilfsmethode `defineRouteMiddleware()`, um dein Route-Middleware-Modul zu definieren:
+Verwende die Hilfsfunktion `defineRouteMiddleware()`, um dein Route-Middleware-Modul zu typisieren:
 
 ```ts "defineRouteMiddleware"
 // src/routeData.ts
@@ -262,7 +262,7 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 Wenn du Code schreibst, der mit den Routendaten von Starlight arbeiten muss, kannst du den Typ `StarlightRouteData` importieren, damit er der Form von `Astro.locals.starlightRoute` entspricht.
 
-Im folgenden Beispiel aktualisiert die Funktion `usePageTitleInTOC()` die Routedaten so, dass der Titel der aktuellen Seite als Beschriftung für den ersten Eintrag im Inhaltsverzeichnis verwendet wird und die Standard&shy;beschriftung „Übersicht“ ersetzt.
+Im folgenden Beispiel aktualisiert die Funktion `usePageTitleInTOC()` die Routedaten so, dass der Titel der aktuellen Seite als Beschriftung für den ersten Eintrag im Inhaltsverzeichnis verwendet wird und die Standard&shy;beschriftung „Überblick“ ersetzt.
 Mit dem Typ `StarlightRouteData` kannst du prüfen, ob die Änderungen der Routendaten gültig sind.
 
 ```ts "StarlightRouteData"

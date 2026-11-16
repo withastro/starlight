@@ -27,7 +27,7 @@ Starlightの[`components`](/ja/reference/configuration/#components)設定オプ�
 
 **デフォルトコンポーネント:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro)
 
-ダーク/ライトテーマのサポートを設定するための、`<head>`内にレンダリングされるコンポーネント。デフォルトの実装では、インラインスクリプトと[`<ThemeSelect />`](#themeselect)で使用される`<template>`が含まれています。
+ダーク/ライトテーマのサポートを設定するための、`<head>`内にレンダリングされるコンポーネント。デフォルトの実装には、ページの読み込み時にテーマを設定するインラインスクリプトが含まれています。
 
 ---
 

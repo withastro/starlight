@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight-docsearch",
-  "version": "0.8.0",
+  "version": "0.8.2",
   "description": "Algolia DocSearch plugin for the Starlight documentation theme for Astro",
   "scripts": {
     "build": "tsdown"
