@@ -51,7 +51,7 @@ jobs:
         with:
           cache: true
           install: false
-      - run: pnpm i --filter @astrojs/starlight --filter @bench/components --filter @bench/large-sidebar --filter @bench/locales
+      - run: pnpm i --filter @astrojs/starlight --filter @bench/large-sidebar --filter @bench/locales
       - name: Run benchmarks
         uses: CodSpeedHQ/action@af75f77f17a054769abefaa42fe8dc2975469b5f # v5.6.3
         with:
