@@ -465,7 +465,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
+        specifier: ^7.3.6
         version: 7.4.4(@astrojs/markdown-remark@7.3.5(supports-color@10.2.2))(@types/node@24.12.4)(esbuild@0.28.0)(jiti@2.7.0)(yaml@2.9.1)
 
   packages/starlight/__bench_e2e__/fixtures/large-sidebar:
@@ -474,7 +474,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
+        specifier: ^7.3.6
         version: 7.4.4(@astrojs/markdown-remark@7.3.5(supports-color@10.2.2))(@types/node@24.12.4)(esbuild@0.28.0)(jiti@2.7.0)(yaml@2.9.1)
 
   packages/starlight/__bench_e2e__/fixtures/locales:
@@ -483,7 +483,7 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^7.1.6
+        specifier: ^7.3.6
         version: 7.4.4(@astrojs/markdown-remark@7.3.5(supports-color@10.2.2))(@types/node@24.12.4)(esbuild@0.28.0)(jiti@2.7.0)(yaml@2.9.1)
 
   packages/starlight/__e2e__/fixtures/basics:
