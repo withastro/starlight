@@ -1,19 +1,24 @@
 import { beforeAll, describe, test } from 'vitest';
-import builtinTranslations from '../src/translations';
 import {
 	buildBenchOptions,
 	buildFixture,
 	cleanFixture,
-	createComponentDocs,
+	frontmatter,
 	resetFixtureBuild,
 	writeFixtureDocs,
+	type DocFile,
 } from './fixtures';
-
-const locales = Object.keys(builtinTranslations);
+import { nonRootLocales } from './fixtures/locales/locales';
 
 describe('locales', () => {
 	beforeAll(async () => {
-		await writeFixtureDocs('locales', createComponentDocs(locales));
+		await writeFixtureDocs(
+			'locales',
+			createLocaleDocs(
+				nonRootLocales.map(({ key }) => key),
+				40
+			)
+		);
 		await resetFixtureBuild('locales');
 
 		return () => cleanFixture('locales');
@@ -25,3 +30,34 @@ describe('locales', () => {
 		}).run(buildBenchOptions);
 	});
 });
+
+/**
+ * Create pages for the root locale and translate half of them into every other locale. Missing
+ * translations use fallback routes.
+ */
+function createLocaleDocs(locales: string[], pagesPerLocale: number): DocFile[] {
+	const docs: DocFile[] = [];
+	for (let page = 0; page < pagesPerLocale; page++) {
+		docs.push({ path: `page-${page}.md`, content: getMarkdownContent(`Page ${page}`) });
+		if (page % 2 !== 0) continue;
+
+		for (const locale of locales) {
+			docs.push({
+				path: `${locale}/page-${page}.md`,
+				content: getMarkdownContent(`Page ${page} (${locale})`),
+			});
+		}
+	}
+	return docs;
+}
+
+function getMarkdownContent(title: string) {
+	return (
+		frontmatter(title) +
+		Array.from(
+			{ length: 3 },
+			(_, index) =>
+				`## Section ${index}\n\nBenchmark content.\n\n### Subsection ${index}\n\nBenchmark content.\n`
+		).join('\n')
+	);
+}
