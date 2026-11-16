@@ -132,5 +132,3 @@ import { FileTree } from '@astrojs/starlight/components';
 Чтобы включить SSR, следуйте руководству [Адаптеры рендеринга по требованию](https://docs.astro.build/ru/guides/on-demand-rendering/) в документации Astro, для добавления серверного адаптера в ваш проект Starlight.
 
 Страницы документации, создаваемые Starlight, по умолчанию предварительно отрисовываются независимо от режима вывода вашего проекта. Для отключения предварительного рендеринга страниц установите для [параметра `prerender`](/ru/reference/configuration/#prerender) значение `false`.
-
-Если вы используете [адаптер Cloudflare](https://docs.astro.build/ru/guides/integrations-guide/cloudflare/) для включения серверного рендеринга в вашем проекте документации, обязательно также [добавьте флаг совместимости `nodejs_compat` в файл конфигурации Wrangler](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started).

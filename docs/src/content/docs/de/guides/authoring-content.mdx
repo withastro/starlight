@@ -3,13 +3,13 @@ title: Inhalte in Markdown verfassen
 description: Ein Überblick über die von Starlight unterstützte Markdown-Syntax.
 ---
 
-Starlight unterstützt die gesamte Bandbreite der [Markdown](https://daringfireball.net/projects/markdown/) Syntax in `.md` Dateien sowie Frontmatter [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) um Metadaten wie Titel und Beschreibung zu definieren.
+Starlight unterstützt die gesamte Bandbreite der [Markdown](https://daringfireball.net/projects/markdown/)-Syntax in `.md`-Dateien sowie [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) im Frontmatter, um Metadaten wie Titel und Beschreibung zu definieren.
 
 Bitte prüfe die [MDX-Dokumentation](https://mdxjs.com/docs/what-is-mdx/#markdown) oder [Markdoc-Dokumentation](https://markdoc.dev/docs/syntax), wenn du diese Dateiformate verwendest, da die Unterstützung und Verwendung von Markdown unterschiedlich sein kann.
 
 ## Frontmatter
 
-Du kannst einzelne Seiten in Starlight anpassen, indem du Werte in deinen Frontmatter festlegst.
+Du kannst einzelne Seiten in Starlight anpassen, indem du Werte in ihrem Frontmatter festlegst.
 Frontmatter wird oben in deinen Dateien zwischen `---`-Trennzeichen festgelegt:
 
 ```md title="src/content/docs/example.md"
@@ -21,14 +21,14 @@ Nach dem zweiten `---` folgt der Seiteninhalt.
 ```
 
 Jede Seite muss mindestens einen `title` enthalten.
-Alle verfügbaren Felder und Informationen zum Hinzufügen benutzerdefinierter Felder findst du in der [Frontmatter-Referenz](/de/reference/frontmatter/).
+Alle verfügbaren Felder und Informationen zum Hinzufügen benutzerdefinierter Felder findest du in der [Frontmatter-Referenz](/de/reference/frontmatter/).
 
 ## Inline-Stile
 
-Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
+Text kann **fett**, _kursiv_ oder ~~durchgestrichen~~ sein.
 
 ```md
-Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
+Text kann **fett**, _kursiv_ oder ~~durchgestrichen~~ sein.
 ```
 
 Du kannst [auf eine andere Seite](/de/getting-started/) verlinken.
@@ -49,10 +49,10 @@ Bilder in Starlight verwenden [Astros eingebaute optimierte Asset-Unterstützung
 
 Markdown und MDX unterstützen die Markdown-Syntax für die Anzeige von Bildern, einschließlich Alt-Text für Bildschirmleser und unterstützende Technologien.
 
-![Eine Illustration von Planeten und Sternen mit dem Wort "Astro"](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+![Eine Illustration von Planeten und Sternen mit dem Wort „astro“](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
 
 ```md
-![Eine Illustration von Planeten und Sternen mit dem Wort "astro"](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+![Eine Illustration von Planeten und Sternen mit dem Wort „astro“](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
 ```
 
 Relative Bildpfade werden auch für in deinem Projekt lokal gespeicherte Bilder unterstützt.
@@ -69,11 +69,11 @@ Mit einer Überschrift kannst du den Inhalt strukturieren. Überschriften in Mar
 
 ### Wie du Seiteninhalte in Starlight strukturierst
 
-Starlight ist so konfiguriert, dass es automatisch den Seitentitel als Überschrift verwendet und eine "Übersicht"-Überschrift an den Anfang des Inhalts&shy;verzeichnisses jeder Seite setzt. Wir empfehlen, jede Seite mit normalem Text zu beginnen und die Seitenüberschriften ab `<h2>` zu verwenden:
+Starlight ist so konfiguriert, dass es automatisch den Seitentitel als Überschrift verwendet und eine „Überblick“-Überschrift an den Anfang des Inhalts&shy;verzeichnisses jeder Seite setzt. Wir empfehlen, jede Seite mit normalem Text zu beginnen und die Seitenüberschriften ab `<h2>` zu verwenden:
 
 ```md
 ---
-title: Markdown Anleitung
+title: Markdown-Anleitung
 description: Wie man Markdown in Starlight benutzt
 ---
 
@@ -86,7 +86,7 @@ Diese Seite beschreibt, wie man Markdown in Starlight benutzt.
 
 ### Automatische Überschriften-Ankerlinks
 
-Wenn du Überschriften in Markdown verwendst, erhaltst du automatisch Ankerlinks, sodass du direkt auf bestimmte Abschnitte deiner Seite verlinken kannst:
+Wenn du Überschriften in Markdown verwendest, erhaltst du automatisch Ankerlinks, sodass du direkt auf bestimmte Abschnitte deiner Seite verlinken kannst:
 
 ```md
 ---
@@ -109,16 +109,16 @@ Erfahre mehr darüber, wie Astro Kopfzeilen-IDs verarbeitet, in [der Astro-Dokum
 
 ## Nebenbemerkungen
 
-Nebenbemerkungen (auch bekannt als "Ermahnungen" oder "Callouts") sind nützlich, um sekundäre Informationen neben dem Hauptinhalt einer Seite anzuzeigen.
+Nebenbemerkungen (auch bekannt als „Ermahnungen“ oder „Callouts“) sind nützlich, um sekundäre Informationen neben dem Hauptinhalt einer Seite anzuzeigen.
 
-Starlight bietet eine eigene Markdown-Syntax für die Darstellung von Nebeninformationen. Seitenblöcke werden mit einem Paar dreifacher Doppelpunkte `:::` angezeigt, um den Inhalt zu umschließen, und können vom Typ `note`, `tip`, `caution` oder `danger` sein.
+Starlight bietet eine eigene Markdown-Syntax für die Darstellung von Nebenbemerkungen. Nebenbemerkungs&shy;blöcke werden durch ein Paar dreifacher Doppelpunkte `:::` gekennzeichnet, das den Inhalt umschließt, und können vom Typ `note`, `tip`, `caution` oder `danger` sein.
 
 Du kannst alle anderen Markdown-Inhaltstypen innerhalb einer Nebenbemerkung verschachteln, allerdings eignen sich diese am besten für kurze und prägnante Inhaltsstücke.
 
 ### Nebenbemerkung `note`
 
 :::note
-Starlight ist ein Toolkit für Dokumentations-Websites, das mit [Astro](https://astro.build/de) erstellt wurde. Du kannst mit diesem Befehl beginnen:
+Starlight ist ein Toolkit für Dokumentations-Websites, das mit [Astro](https://astro.build/) erstellt wurde. Du kannst mit diesem Befehl beginnen:
 
 ```sh
 npm create astro@latest -- --template starlight
@@ -128,7 +128,7 @@ npm create astro@latest -- --template starlight
 
 ````md
 :::note
-Starlight ist ein Toolkit für Dokumentations-Websites, das mit [Astro](https://astro.build/de) erstellt wurde. Du kannst mit diesem Befehl beginnen:
+Starlight ist ein Toolkit für Dokumentations-Websites, das mit [Astro](https://astro.build/) erstellt wurde. Du kannst mit diesem Befehl beginnen:
 
 ```sh
 npm create astro@latest -- --template starlight
@@ -142,12 +142,12 @@ npm create astro@latest -- --template starlight
 Du kannst einen benutzerdefinierten Titel für die Nebenbemerkung in eckigen Klammern nach dem Typen angeben, z.&nbsp;B. `:::tip[Wusstest du schon?]`.
 
 :::tip[Wusstest du schon?]
-Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+Astro hilft dir, schnellere Websites mit [„Inselarchitektur“](https://docs.astro.build/de/concepts/islands/) zu erstellen.
 :::
 
 ```md
 :::tip[Wusstest du schon?]
-Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+Astro hilft dir, schnellere Websites mit [„Inselarchitektur“](https://docs.astro.build/de/concepts/islands/) zu erstellen.
 :::
 ```
 
@@ -157,19 +157,19 @@ Du kannst ein benutzerdefiniertes Symbol für die Nebenbemerkungen in geschweift
 Der Name des Symbols muss dem Namen [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) entsprechen.
 
 :::tip{icon="heart"}
-Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+Astro hilft dir, schnellere Websites mit [„Inselarchitektur“](https://docs.astro.build/de/concepts/islands/) zu erstellen.
 :::
 
 ```md
 :::tip{icon="heart"}
-Astro hilft dir, schnellere Websites mit ["Inselarchitektur"](https://docs.astro.build/de/concepts/islands/) zu erstellen.
+Astro hilft dir, schnellere Websites mit [„Inselarchitektur“](https://docs.astro.build/de/concepts/islands/) zu erstellen.
 :::
 ```
 
 ### Weitere Typen
 
 Vorsichts- und Gefahrenhinweise sind hilfreich, um die Aufmerksamkeit des Benutzers auf Details zu lenken, über die er stolpern könnte.
-Wenn du diese häufig verwenden, kann das auch ein Zeichen dafür sein, dass die Sache, die du dokumentierst, von einem neuen Design profitieren könnte.
+Wenn du diese häufig verwendest, kann das auch ein Zeichen dafür sein, dass die Sache, die du dokumentierst, von einem neuen Design profitieren könnte.
 
 :::caution
 Wenn du nicht sicher bist, ob du eine großartige Dokumentationswebsite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
@@ -203,12 +203,12 @@ Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein un
 
 > Dies ist ein Blockzitat, das üblicherweise verwendet wird, wenn eine andere Person oder ein Dokument zitiert wird.
 >
-> Blockzitate werden durch ein ">" am Anfang jeder Zeile gekennzeichnet.
+> Blockzitate werden durch ein `>` am Anfang jeder Zeile gekennzeichnet.
 
 ```md
 > Dies ist ein Blockzitat, das üblicherweise verwendet wird, wenn eine andere Person oder ein Dokument zitiert wird.
 >
-> Blockzitate werden durch ein ">" am Anfang jeder Zeile gekennzeichnet.
+> Blockzitate werden durch ein `>` am Anfang jeder Zeile gekennzeichnet.
 ```
 
 ## Codeblöcke
@@ -216,7 +216,7 @@ Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein un
 Ein Codeblock wird durch einen Block mit drei Backticks <code>```</code> am Anfang und Ende gekennzeichnet. Du kannst die verwendete Programmiersprache nach den ersten drei Backticks angeben.
 
 ```js
-// Javascript-Code mit Syntaxhervorhebung.
+// JavaScript-Code mit Syntaxhervorhebung.
 var fun = function lang(l) {
 	dateformat.i18n = require('./lang/' + l);
 	return true;
@@ -225,7 +225,7 @@ var fun = function lang(l) {
 
 ````md
 ```js
-// Javascript-Code mit Syntaxhervorhebung.
+// JavaScript-Code mit Syntaxhervorhebung.
 var fun = function lang(l) {
 	dateformat.i18n = require('./lang/' + l);
 	return true;
@@ -237,7 +237,7 @@ var fun = function lang(l) {
 
 Starlight verwendet [Expressive Code](https://expressive-code.com/), um die Formatierungs&shy;möglichkeiten für Codeblöcke zu erweitern.
 Die Textmarker und Fensterrahmen-Plugins von Expressive Code sind standardmäßig aktiviert.
-Die Darstellung von Codeblöcken kann mit Starlights [`expressiveCode` Konfigurations&shy;option](/de/reference/configuration/#expressivecode) konfiguriert werden.
+Die Darstellung von Codeblöcken kann mit Starlights [`expressiveCode`-Konfigurations&shy;option](/de/reference/configuration/#expressivecode) konfiguriert werden.
 
 #### Textmarkierungen
 
@@ -417,7 +417,7 @@ Einige der gebräuchlichsten Beispiele sind unten aufgeführt:
 
   </Tabs>
 
-#### Rahmen und Überschriften
+#### Rahmen und Titel
 
 Codeblöcke können innerhalb eines fensterähnlichen Rahmens dargestellt werden.
 Ein Rahmen, der wie ein Terminalfenster aussieht, wird für Shell-Skriptsprachen (z.&nbsp;B. `bash` oder `sh`) verwendet.
@@ -520,10 +520,10 @@ Der optionale Titel eines Code-Blocks kann entweder mit einem `title="..."`-Attr
 
 ## Details
 
-Details (auch bekannt als „Offenlegungen“ oder „Akkordeons“) sind nützlich, um Inhalte zu verbergen, die nicht unmittelbar relevant sind.
+Details (auch bekannt als „Aufklappbereiche“ oder „Akkordeons“) sind nützlich, um Inhalte zu verbergen, die nicht unmittelbar relevant sind.
 Die Nutzer können auf eine kurze Zusammenfassung klicken, um den gesamten Inhalt zu sehen.
 
-Verwende die Standard-HTML-Elemente [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) und [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) in deinem Markdown-Inhalt, um ein Offenlegungs-Widget zu erstellen.
+Verwende die Standard-HTML-Elemente [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) und [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) in deinem Markdown-Inhalt, um einen Aufklappbereich zu erstellen.
 
 Du kannst jede andere Markdown-Syntax innerhalb eines `<details>`-Elements verschachteln.
 
@@ -561,7 +561,7 @@ Starlight unterstützt alle anderen Markdown-Autorensyntaxen, wie Listen und Tab
 
 ## Erweiterte Markdown- und MDX-Konfiguration
 
-Starlight nutzt zum Rendern von Markdown- und MDX-Seiten Astros konfigurierbaren [Markdown-Prozessor](https://docs.astro.build/de/reference/configuration-reference/#markdownprocessor). Du kannst eine Unterstützung für eigene Syntax und Verhalten hinzufügen, indem du Plugins und Optionen an den konfigurierten Prozessor weiterreichst. Weitere Informationen findest du unter ["Markdown-Prozessor-Plugins"](https://docs.astro.build/de/guides/markdown-content/#markdown-processor-plugins) in der Astro-Dokumentation.
+Starlight nutzt zum Rendern von Markdown- und MDX-Seiten Astros konfigurierbaren [Markdown-Prozessor](https://docs.astro.build/de/reference/configuration-reference/#markdownprocessor). Du kannst eine Unterstützung für eigene Syntax und Verhalten hinzufügen, indem du Plugins und Optionen an den konfigurierten Prozessor weiterreichst. Weitere Informationen findest du unter [„Markdown-Prozessor-Plugins“](https://docs.astro.build/de/guides/markdown-content/#markdown-processor-plugins) in der Astro-Dokumentation.
 
 ## Markdoc
 
@@ -692,7 +692,7 @@ Entspricht der Option [`markdown.headingLinks`](/de/reference/configuration/#mar
 
 ```js "headingLinks: false"
 export default defineMarkdocConfig({
-	// Deaktiviere die Standardunterstützung für Überschrift-Ankerlinks
+	// Deaktiviere die Standardunterstützung für Überschriften-Ankerlinks
 	extends: [starlightMarkdoc({ headingLinks: false })],
 });
 ```

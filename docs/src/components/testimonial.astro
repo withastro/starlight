@@ -19,9 +19,7 @@ const src = (await avatar()).default;
 ---
 
 <li class="testimonial">
-	<blockquote class="quote" cite={cite}>
-		<slot />
-	</blockquote>
+	<blockquote class="quote" cite={cite}><slot /></blockquote>
 	<div class="footer">
 		<Image class="avatar" height="96" width="96" {src} alt="" />
 		<div>

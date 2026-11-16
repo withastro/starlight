@@ -1,4 +1,4 @@
-@layer starlight.components {
+@layer starlight.components.aside {
 	.starlight-aside {
 		padding: 1rem;
 		border-inline-start: 0.25rem solid var(--sl-color-asides-border);
@@ -39,6 +39,8 @@
 		font-size: 1.333em;
 		width: 1em;
 		height: 1em;
+		/* Prevent Firefox from cutting off edges of icons when pinch-zooming. */
+		overflow: visible;
 	}
 
 	.starlight-aside__title + .starlight-aside__content {

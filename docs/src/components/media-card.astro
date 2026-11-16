@@ -4,10 +4,11 @@ interface Props {
 }
 const { href } = Astro.props;
 const El = href ? 'a' : 'span';
+const attrs = href ? { href, rel: 'nofollow ugc' } : {};
 ---
 
 <li class="not-content sl-flex">
-	<El class="media-card sl-flex" {href}>
+	<El class="media-card sl-flex" {...attrs}>
 		<div class="media"><slot name="media" /></div>
 		<slot />
 	</El>

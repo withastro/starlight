@@ -66,13 +66,13 @@ const { html } = processSteps(content);
 
 	@layer starlight.content {
 		/* Adjust first item inside a step so that it aligns vertically with the number
-			even if using a larger font size (e.g. a heading) */
+		even if using a larger font size (e.g. a heading) */
 		.sl-steps > li > :first-child {
 			/*
-		The `lh` unit is not yet supported by all browsers in our support matrix
-		— see https://caniuse.com/mdn-css_types_length_lh
-		In unsupported browsers we approximate this using our known line-heights.
-		*/
+			The `lh` unit is not yet supported by all browsers in our support matrix
+			— see https://caniuse.com/mdn-css_types_length_lh
+			In unsupported browsers we approximate this using our known line-heights.
+			*/
 			--lh: calc(1em * var(--sl-line-height));
 			--shift-y: calc(0.5 * (var(--bullet-size) - var(--lh)));
 			transform: translateY(var(--shift-y));

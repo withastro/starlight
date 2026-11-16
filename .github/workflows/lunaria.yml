@@ -1,46 +1,37 @@
 name: Lunaria
 
 on:
-  # Trigger the workflow every time a pull request is opened or synchronized at the target `main` branch
-  pull_request_target:
-    types: [opened, synchronize]
-    branches: [main]
-    paths:
-      - 'docs/**'
+  # Run every time the `Lunaria Trigger` workflow completes
+  workflow_run: # zizmor: ignore[dangerous-triggers] lunaria needs to comment on the PR; safe because we only checkout the default branch
+    workflows: [Lunaria Trigger]
+    types: [completed]
 
-# Allow this job to clone the repository and comment on the pull request
-permissions:
-  contents: read
-  pull-requests: write
+permissions: {}
 
 jobs:
   lunaria-overview:
     name: Generate Lunaria Overview
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # Necessary for Lunaria to work properly
           # Makes the action clone the entire git history
           fetch-depth: 0
+          persist-credentials: false
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-
-      - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - name: Install pnpm, Node.js, and dependencies
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
-          node-version: 24.18.0
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install
-        shell: bash
+          cache: true
 
       - name: Generate Lunaria Overview
-        uses: yanthomasdev/lunaria-action@06ad5ab2704d030708baf3b279ca0446b418e853 # v0.1.0
+        uses: lunariajs/action@fb6be638db02f58f6e5e5ec125f5505e208adde2 # v0.4.0
         with:
           token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           working-directory: docs

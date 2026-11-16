@@ -12,7 +12,7 @@ export function slugToLocale(
 ): string | undefined {
 	const localesConfig = config.locales ?? {};
 	const baseSegment = slug?.split('/')[0];
-	if (baseSegment && localesConfig[baseSegment]) return baseSegment;
+	if (baseSegment && Object.hasOwn(localesConfig, baseSegment)) return baseSegment;
 	if (!localesConfig.root) return config.defaultLocale.locale;
 	return undefined;
 }

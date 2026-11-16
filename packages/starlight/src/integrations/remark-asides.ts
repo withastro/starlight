@@ -1,4 +1,6 @@
 /// <reference types="mdast-util-directive" />
+// TODO: Remove once Sätteri itself provides the type augmentation for data nodes we use this for.
+/// <reference types="mdast-util-to-hast" />
 
 import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';

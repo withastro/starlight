@@ -314,7 +314,7 @@ export default {
 
 絶対ファイルパスを指定して`absolutePathToLang()`を呼び出すと、そのファイルの言語を取得できます。
 
-これは、MarkdownやMDXファイルを処理する[remarkやrehypeプラグイン](https://docs.astro.build/ja/guides/markdown-content/#markdown-plugins)を追加する際に特に便利です。これらのプラグインが使用する[仮想ファイル形式](https://github.com/vfile/vfile)には、処理中のファイルの[絶対パス](https://github.com/vfile/vfile#filepath)が含まれており、`absolutePathToLang()`と組み合わせてファイルの言語を判定できます。返された言語は、[`useTranslations()`](#usetranslations)ヘルパーと組み合わせて、その言語のUI文字列を取得するために使用できます。
+これは、MarkdownやMDXファイルを処理する[remarkやrehypeプラグイン](https://docs.astro.build/ja/guides/markdown-content/#markdownプロセッサプラグイン)を追加する際に特に便利です。これらのプラグインが使用する[仮想ファイル形式](https://github.com/vfile/vfile)には、処理中のファイルの[絶対パス](https://github.com/vfile/vfile#filepath)が含まれており、`absolutePathToLang()`と組み合わせてファイルの言語を判定できます。返された言語は、[`useTranslations()`](#usetranslations)ヘルパーと組み合わせて、その言語のUI文字列を取得するために使用できます。
 
 たとえば、以下のStarlight設定があるとします。
 

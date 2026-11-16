@@ -13,6 +13,9 @@ const docsPackageJson = new URL('package.json', docsDir);
 const tarballPath = join(tmpdir(), `starlight-${process.pid}.tgz`);
 const pnpmPath = process.env.npm_execpath ?? '';
 
+// Depending on the version, pnpm can be a JavaScript entry point or a standalone binary.
+const isPnpmJavaScript = /\.(?:c|m)?js$/i.test(pnpmPath);
+
 if (!pnpmPath || !process.env.npm_config_user_agent?.startsWith('pnpm/')) {
 	throw new Error('The script must be run using pnpm');
 }
@@ -53,5 +56,9 @@ try {
  * @param {...string} args - Arguments to pass to the pnpm command.
  */
 function runPnpm(cwd, ...args) {
-	execFileSync(process.execPath, [pnpmPath, ...args], { cwd, stdio: 'inherit' });
+	execFileSync(
+		isPnpmJavaScript ? process.execPath : pnpmPath,
+		isPnpmJavaScript ? [pnpmPath, ...args] : args,
+		{ cwd, stdio: 'inherit' }
+	);
 }

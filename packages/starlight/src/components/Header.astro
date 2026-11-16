@@ -15,16 +15,10 @@ const shouldRenderSearch =
 ---
 
 <div class="header">
-	<div class="title-wrapper sl-flex">
-		<SiteTitle />
-	</div>
-	<div class="sl-flex print:hidden">
-		{shouldRenderSearch && <Search />}
-	</div>
+	<div class="title-wrapper sl-flex"><SiteTitle /></div>
+	<div class="sl-flex print:hidden">{shouldRenderSearch && <Search />}</div>
 	<div class="sl-hidden md:sl-flex print:hidden right-group">
-		<div class="sl-flex social-icons">
-			<SocialIcons />
-		</div>
+		<div class="sl-flex social-icons"><SocialIcons /></div>
 		<ThemeSelect />
 		<LanguageSelect />
 	</div>
@@ -78,7 +72,7 @@ const shouldRenderSearch =
 				);
 				display: grid;
 				grid-template-columns:
-        /* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest  */
+					/* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest */
 					minmax(
 						calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
 						auto

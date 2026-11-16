@@ -85,5 +85,13 @@ export default defineConfig(
 			'@typescript-eslint/no-empty-object-type': 'off',
 			'@typescript-eslint/no-namespace': 'off',
 		},
+	},
+
+	// Enable browser globals for the Lunaria freshness component.
+	{
+		files: ['docs/lunaria/freshness.mjs'],
+		languageOptions: {
+			globals: globals.browser,
+		},
 	}
 );

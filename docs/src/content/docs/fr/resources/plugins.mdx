@@ -27,6 +27,7 @@ Les [modules d'extension](/fr/reference/plugins/) peuvent personnaliser la confi
 
 ### Modules d'extension communautaires
 
+import LinkCard from '~/components/link-card.astro';
 import ThirdPartyContent from '~/components/third-party-content.astro';
 
 <ThirdPartyContent>
@@ -261,12 +262,17 @@ import ThirdPartyContent from '~/components/third-party-content.astro';
 			title="starlight-custom-navigation"
 			description="Ajouter des bandeaux de navigation latéraux, des boutons flottants, des raccourcis clavier et des gestes de balayage pour naviguer entre les pages."
 		/>
+		<LinkCard
+			href="https://github.com/HiDeoo/starlight-to-skills"
+			title="starlight-to-skills"
+			description="Transformez les pages de documentation de Starlight en compétences d'agent (« skills » en anglais) vérifiées, faciles à trouver et à jour."
+		/>
 	</CardGrid>
 </ThirdPartyContent>
 
 ## Outils et intégrations communautaires
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid } from '@astrojs/starlight/components';
 
 Ces outils et intégrations communautaires peuvent être utilisés pour ajouter des fonctionnalités à votre site Starlight.
 
@@ -343,14 +349,19 @@ Ces outils et intégrations communautaires peuvent être utilisés pour ajouter 
 			description="Afficher rapidement un lien vers une ressource téléchargeable sur votre site Starlight."
 		/>
 		<LinkCard
-			href="https://github.com/trueberryless-org/starlight-contributor-list"
-			title="starlight-contributor-list"
+			href="https://github.com/trueberryless/astro-contributors"
+			title="astro-contributors"
 			description="Afficher la liste de tous les contributeurs de votre projet."
 		/>
 		<LinkCard
 			href="https://github.com/pixelizing/axiom-studio-for-starlight"
 			title="Axiom Studio pour Starlight"
 			description="Un éditeur fonctionnant localement dans le navigateur pour modifier les pages Markdown et MDX, gérer le frontmatter et prévisualiser la documentation Starlight sans toucher aux fichiers sources."
+		/>
+		<LinkCard
+			href="https://github.com/joesaby/astro-archify"
+			title="astro-archify"
+			description="Générer lors de la compilation des diagrammes système Archify à partir de blocs de code JSON IR. Fonctionne avec Astro et Starlight."
 		/>
 	</CardGrid>
 </ThirdPartyContent>

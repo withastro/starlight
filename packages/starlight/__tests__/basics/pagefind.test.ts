@@ -1,21 +1,17 @@
 import { fileURLToPath } from 'node:url';
-import { afterEach, expect, test, vi } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import * as pagefind from 'pagefind';
 import { starlightPagefind } from '../../src/integrations/pagefind';
 import { TestAstroIntegrationLogger } from '../test-plugin-utils';
 
 vi.mock('pagefind');
 
-afterEach(() => {
-	vi.clearAllMocks();
-});
-
 async function runStarlightPagefind(outputDir: URL) {
 	const index = createMockIndex();
 
 	vi.mocked(pagefind.createIndex).mockResolvedValue({ index, errors: [] });
 
-	await starlightPagefind({ dir: outputDir, logger: new TestAstroIntegrationLogger() });
+	await starlightPagefind({ dir: outputDir, logger: new TestAstroIntegrationLogger() }, {});
 
 	return index;
 }
@@ -61,7 +57,7 @@ test('logs Pagefind errors and closes Pagefind', async () => {
 		errors: [errorMessage],
 	});
 
-	await expect(starlightPagefind({ dir: outputDir, logger })).rejects.toThrow();
+	await expect(starlightPagefind({ dir: outputDir, logger }, {})).rejects.toThrow();
 
 	expect(logger.error).toHaveBeenCalledWith(`Pagefind error: ${errorMessage}`);
 

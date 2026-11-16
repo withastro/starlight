@@ -27,7 +27,7 @@ export function localizedUrl(
 	const htmlExt = '.html';
 	const isRootHtml = baseSegment?.endsWith(htmlExt);
 	const baseSlug = isRootHtml ? baseSegment?.slice(0, -1 * htmlExt.length) : baseSegment;
-	if (baseSlug && baseSlug in config.locales) {
+	if (baseSlug && Object.hasOwn(config.locales, baseSlug)) {
 		// We’re in a localized route, substitute the new locale (or strip for root lang).
 		if (locale) {
 			url.pathname = url.pathname.replace(baseSlug, locale);

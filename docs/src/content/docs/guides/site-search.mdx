@@ -136,7 +136,7 @@ A separate configuration file is required to pass function options like `transfo
    	apiKey: 'YOUR_SEARCH_API_KEY',
    	indexName: 'YOUR_INDEX_NAME',
    	getMissingResultsUrl({ query }) {
-   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   		return `https://github.com/algolia/docsearch/issues/new?title=${encodeURIComponent(query)}`;
    	},
    	// ...
    } satisfies DocSearchClientOptions;

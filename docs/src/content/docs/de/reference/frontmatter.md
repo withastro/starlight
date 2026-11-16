@@ -1,5 +1,5 @@
 ---
-title: Frontmatter Referenz
+title: Frontmatter-Referenz
 description: Ein Überblick über die von Starlight unterstützten Standard-Frontmatter-Felder.
 sidebar:
   label: Frontmatter
@@ -41,13 +41,13 @@ Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte IDs definier
 
 **Typ:** `string | boolean`
 
-Überschreibt die [globale `editLink`-Konfiguration](/de/reference/configuration/#editlink). Setze die Konfiguration auf `false`, um den Link `Seite bearbeiten` für eine bestimmte Seite zu deaktivieren oder gibt eine alternative URL an, unter welcher der Inhalt dieser Seite bearbeitet werden kann.
+Überschreibt die [globale `editLink`-Konfiguration](/de/reference/configuration/#editlink). Setze die Konfiguration auf `false`, um den Link „Seite bearbeiten“ für eine bestimmte Seite zu deaktivieren, oder gib eine alternative URL an, unter der der Inhalt dieser Seite bearbeitet werden kann.
 
 ### `head`
 
 **Typ:** [`HeadConfig[]`](/de/reference/configuration/#headconfig)
 
-Du kannst zusätzliche Tags zum `<head>` deiner Seite hinzufügen, indem du das Feld `head` Frontmatter verwendest. Dies bedeutet, dass du benutzerdefinierte Stile, Metadaten oder andere Tags zu einer einzelnen Seite hinzufügen kannst. Ähnlich wie bei der [globalen `head` Option](/de/reference/configuration/#head).
+Du kannst zusätzliche Tags zum `<head>` deiner Seite hinzufügen, indem du das Frontmatter-Feld `head` verwendest. Dies bedeutet, dass du benutzerdefinierte Stile, Metadaten oder andere Tags zu einer einzelnen Seite hinzufügen kannst. Ähnlich wie bei der [globalen `head` Option](/de/reference/configuration/#head).
 
 ```md
 ---
@@ -56,7 +56,7 @@ title: Über uns
 head:
   # Benutze einen eigenen <title> Tag
   - tag: title
-    content: Benutzerdefinierter "Über uns"-Titel
+    content: Benutzerdefinierter „Über uns“-Titel
 ---
 ```
 
@@ -65,7 +65,7 @@ head:
 **Typ:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
 Überschreibt die [globale `tableOfContents`-Konfiguration](/de/reference/configuration/#tableofcontents).
-Passe die einzuschließenden Überschriftsebenen an oder setze sie auf `false`, um das Inhaltsverzeichnis auf dieser Seite auszublenden.
+Passe die einzuschließenden Überschriftenebenen an oder setze sie auf `false`, um das Inhaltsverzeichnis auf dieser Seite auszublenden.
 
 ```md
 ---
@@ -109,7 +109,7 @@ title: Meine Website
 template: splash
 hero:
   title: 'Mein Projekt: Schnell ins All'
-  tagline: Bringe deine Wertgegenstände im Handumdrehen auf den Mond und wieder zurück.
+  tagline: Bringe deine Sachen im Handumdrehen auf den Mond und wieder zurück.
   image:
     alt: Ein glitzerndes, leuchtend farbiges Logo
     file: ~/assets/logo.png
@@ -126,7 +126,7 @@ hero:
 ---
 ```
 
-Du kannst verschiedene Versionen der Hero-Komponente im hellen und dunklen Modus anzeigen.
+Du kannst verschiedene Versionen des Hero-Bildes im Hell- und Dunkelmodus anzeigen.
 
 ```md
 ---
@@ -275,7 +275,7 @@ pagefind: false
 **Typ:** `boolean`  
 **Standard:** `false`
 
-Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build). Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
+Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build) aufgenommen werden soll. Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
 
 ```md
 ---
@@ -360,7 +360,7 @@ sidebar:
 
 Füge der Seite in der Seitenleiste ein Abzeichen hinzu, wenn es in einer automatisch generierten Gruppe von Links angezeigt wird.
 Bei Verwendung einer Zeichenkette wird das Abzeichen mit einer Standard-Akzentfarbe angezeigt.
-Optional kann ein [`BadgeConfig` Objekt](/de/reference/configuration/#badgeconfig) mit den Feldern `text`, `variant` and `class` übergeben werden, um das Abzeichen anzupassen.
+Optional kann ein [`BadgeConfig`-Objekt](/de/reference/configuration/#badgeconfig) mit den Feldern `text`, `variant` und `class` übergeben werden, um das Abzeichen anzupassen.
 
 ```md
 ---
@@ -425,7 +425,7 @@ Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines 
 **Typ:** Zod-Schema oder Funktion, die ein Zod-Schema zurückgibt  
 **Standard:** `z.object({})`
 
-Erweitere das Schema von Starlight um zusätzliche Felder, indem du `extend` in den `docsSchema()` Optionen setzt.
+Erweitere das Schema von Starlight um zusätzliche Felder, indem du `extend` in den `docsSchema()`-Optionen setzt.
 Der Wert sollte ein [Zod-Schema](https://docs.astro.build/de/guides/content-collections/#datentypen-mit-zod-definieren) sein.
 
 Im folgenden Beispiel geben wir einen strengeren Typ für `description` an, um es zur Pflicht zu machen und fügen ein neues optionales Feld `category` hinzu:

@@ -33,31 +33,31 @@ Para usar un color de insignia integrado, establece el atributo [`variant`](#var
 ```mdx
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Nota" variant="note" />
-<Badge text="Éxito" variant="success" />
-<Badge text="Consejo" variant="tip" />
-<Badge text="Precaución" variant="caution" />
-<Badge text="Peligro" variant="danger" />
+- <Badge text="Nota" variant="note" />
+- <Badge text="Éxito" variant="success" />
+- <Badge text="Consejo" variant="tip" />
+- <Badge text="Precaución" variant="caution" />
+- <Badge text="Peligro" variant="danger" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
-{% badge text="Nota" variant="note" /%}
-{% badge text="Éxito" variant="success" /%}
-{% badge text="Consejo" variant="tip" /%}
-{% badge text="Precaución" variant="caution" /%}
-{% badge text="Peligro" variant="danger" /%}
+- {% badge text="Nota" variant="note" /%}
+- {% badge text="Éxito" variant="success" /%}
+- {% badge text="Consejo" variant="tip" /%}
+- {% badge text="Precaución" variant="caution" /%}
+- {% badge text="Peligro" variant="danger" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Nota" variant="note" />
-	<Badge text="Éxito" variant="success" />
-	<Badge text="Consejo" variant="tip" />
-	<Badge text="Precaución" variant="caution" />
-	<Badge text="Peligro" variant="danger" />
+	- <Badge text="Nota" variant="note" />
+	- <Badge text="Éxito" variant="success" />
+	- <Badge text="Consejo" variant="tip" />
+	- <Badge text="Precaución" variant="caution" />
+	- <Badge text="Peligro" variant="danger" />
 </Fragment>
 
 </Preview>
@@ -71,25 +71,25 @@ Usa el atributo [`size`](#size) para controlar el tamaño del texto de la insign
 ```mdx /size="\w+"/
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Nuevo" size="small" />
-<Badge text="Nuevo y mejorado" size="medium" />
-<Badge text="Nuevo, mejorado y grande" size="large" />
+- <Badge text="Nuevo" size="small" />
+- <Badge text="Nuevo y mejorado" size="medium" />
+- <Badge text="Nuevo, mejorado y grande" size="large" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc /size="\w+"/
-{% badge text="Nuevo" size="small" /%}
-{% badge text="Nuevo y mejorado" size="medium" /%}
-{% badge text="Nuevo, mejorado y grande" size="large" /%}
+- {% badge text="Nuevo" size="small" /%}
+- {% badge text="Nuevo y mejorado" size="medium" /%}
+- {% badge text="Nuevo, mejorado y grande" size="large" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Nuevo" size="small" />
-	<Badge text="Nuevo y mejorado" size="medium" />
-	<Badge text="Nuevo, mejorado y grande" size="large" />
+	- <Badge text="Nuevo" size="small" />
+	- <Badge text="Nuevo y mejorado" size="medium" />
+	- <Badge text="Nuevo, mejorado y grande" size="large" />
 </Fragment>
 
 </Preview>

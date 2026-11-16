@@ -7,7 +7,7 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Du kannst deine Starlight-Website mit benutzerdefinierten CSS-Dateien gestalten oder das Starlight Tailwind-Plugin verwenden.
 
-Wenn Du nach einer schnellen Möglichkeit suchst, das standardmäßige Aussehen deiner Website abzuändern, dann schau Dir die [Community-Themes](/de/resources/themes/) an.
+Wenn du nach einer schnellen Möglichkeit suchst, das standardmäßige Aussehen deiner Website abzuändern, dann schau dir die [Community-Themes](/de/resources/themes/) an.
 
 ## Benutzerdefinierte CSS-Styles (Stile)
 
@@ -26,7 +26,7 @@ Passe die Styles deiner Starlight-Website an, indem du zusätzliche CSS-Dateien 
    }
    ```
 
-2. Füge den Pfad zu deiner CSS-Datei in Starlights `customCss`- Array in `astro.config.mjs` ein:
+2. Füge in `astro.config.mjs` den Pfad zu deiner CSS-Datei zum `customCss`-Array hinzu:
 
    ```diff lang="js"
    // astro.config.mjs
@@ -107,7 +107,7 @@ yarn create astro --template starlight/tailwind
 
 ### Tailwind zu einem bestehenden Projekt hinzufügen
 
-Wenn dir bereits eine Starlight-Website vorliegt und Tailwind CSS hinzufügen möchtest, folge dieser Anleitung.
+Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchtest, folge dieser Anleitung.
 
 <Steps>
 
@@ -171,7 +171,7 @@ Wenn dir bereits eine Starlight-Website vorliegt und Tailwind CSS hinzufügen m�
 
     </Tabs>
 
-3.  Ersetze den Inhalt der Datei `src/styles/global.css`, die von Astro für die Kompatibilität mit Starlight gerüstet wurde:
+3.  Ersetze für die Kompatibilität mit Starlight den Inhalt der von Astro erzeugten Datei `src/styles/global.css`:
 
     ```css
     /* src/styles/global.css */
@@ -187,25 +187,25 @@ Wenn dir bereits eine Starlight-Website vorliegt und Tailwind CSS hinzufügen m�
 
 4.  Aktualisiere die Starlight-Konfiguration, um die Tailwind-CSS-Datei als erstes Element im Array `customCss` hinzuzufügen:
 
-        ```js ins={11-12}
-        // astro.config.mjs
-        import { defineConfig } from 'astro/config';
-        import starlight from '@astrojs/starlight';
-        import tailwindcss from '@tailwindcss/vite';
+    ```js ins={11-12}
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+    import tailwindcss from '@tailwindcss/vite';
 
-        export default defineConfig({
-          integrations: [
-            starlight({
-              title: 'Dokumentation mit Tailwind',
-              customCss: [
-                // Pfad zu deinen grundlegenden Tailwind-Styles
-                './src/styles/global.css',
-              ],
-            }),
-          ],
-          vite: { plugins: [tailwindcss()] },
-        });
-        ```
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Dokumentation mit Tailwind',
+    			customCss: [
+    				// Pfad zu deinen grundlegenden Tailwind-Styles:
+    				'./src/styles/global.css',
+    			],
+    		}),
+    	],
+    	vite: { plugins: [tailwindcss()] },
+    });
+    ```
 
 </Steps>
 
@@ -288,7 +288,7 @@ Die folgende Tailwind-CSS-Konfiguration richtet Tailwind ohne Plugins oder zusä
 
 1. Nimm für Starlight-Seiten deine bevorzugte Tailwind-CSS-Konfiguration, indem du [„Tailwind zu einem bestehenden Projekt hinzufügen“](#tailwind-zu-einem-bestehenden-projekt-hinzufügen) befolgst.
 
-2. Für andere Seiten nimm einfach deine Tailwind CSS-Einstellungen, indem du sie dort importierst. Das macht man oft in einer Layout-Komponente, damit die Tailwind-Stile auf allen Seiten mit dem gleichen Layout funktionieren.
+2. Wende für andere Seiten deine bevorzugte Tailwind-CSS-Konfiguration an, indem du sie dort importierst. Das geschieht oft in einer Layout-Komponente, damit die Tailwind-Styles auf allen Seiten mit demselben Layout verwendet werden können.
    ```astro
    ---
    // src/layouts/CustomPageLayout.astro

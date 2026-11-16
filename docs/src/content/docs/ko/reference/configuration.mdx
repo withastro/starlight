@@ -509,6 +509,8 @@ Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하�
 
 - `pagefind.ranking` 옵션을 사용하여 검색 결과 순위 계산 방법을 제어하는 방법에 대한 자세한 내용은 Pagefind 문서의 ["Customize Pagefind's result ranking"](https://pagefind.app/docs/ranking/)을 참조하세요.
 - 여러 사이트에서 검색하는 방법을 제어하기 위해 `pagefind.mergeIndex` 옵션을 사용하는 방법에 대한 자세한 내용은 Pagefind 문서의 ["Searching multiple sites"](https://pagefind.app/docs/multisite/)를 참조하세요.
+- `pagefind.index` 옵션을 사용하여 콘텐츠가 색인되는 방식을 사용자 정의하는 방법에 대한 자세한 내용은 Pagefind 문서의 ["Exclude selectors"](https://pagefind.app/docs/config-options/#exclude-selectors) 및 ["Include characters"](https://pagefind.app/docs/config-options/#include-characters)를 참조하세요.
+  (다른 Pagefind 색인 옵션은 Starlight에서 사용할 수 없습니다.)
 
 #### `PagefindOptions`
 
@@ -525,6 +527,10 @@ interface PagefindOptions {
 		language?: string;
 		ranking?: PagefindRankingOptions;
 	}>;
+	index?: {
+		excludeSelectors?: string[];
+		includeCharacters?: string;
+	};
 }
 
 interface PagefindRankingOptions {

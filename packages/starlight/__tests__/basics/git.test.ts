@@ -108,6 +108,16 @@ describe('getAllNewestCommitDate', () => {
 		writeFile('updated-same-day.md', 'content 1');
 		commitAllChanges('update updated.md', '2023-06-25T14:22:35Z');
 
+		writeFile('updated-non-ascii-ü-文档.md', 'content 0');
+		commitAllChanges('add updated.md', '2020-03-14');
+		writeFile('updated-non-ascii-ü-文档.md', 'content 1');
+		commitAllChanges('update updated.md', '2020-03-15');
+
+		writeFile('"quoted".md', 'content 0');
+		commitAllChanges('add quoted.md', '2019-05-01');
+		writeFile('"quoted".md', 'content 1');
+		commitAllChanges('update quoted.md', '2019-05-02');
+
 		const latestDates = new Map(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
 
 		const expectedDates = new Map<string, ISODate>([
@@ -115,6 +125,8 @@ describe('getAllNewestCommitDate', () => {
 			['updated.md', '2023-06-25'],
 			['updated with space.md', '2021-01-02'],
 			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+			['updated-non-ascii-ü-文档.md', '2020-03-15'],
+			['"quoted".md', '2019-05-02'],
 		]);
 
 		for (const [file, date] of latestDates.entries()) {
@@ -137,6 +149,7 @@ describe('getAllNewestCommitDate', () => {
 			['updated.md', '2023-06-25'],
 			['updated with space.md', '2021-01-02'],
 			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+			['updated-non-ascii-ü-文档.md', '2020-03-15'],
 		]);
 
 		for (const [file, expectedDate] of expectedDates.entries()) {
@@ -144,6 +157,31 @@ describe('getAllNewestCommitDate', () => {
 			expectCommitDateToEqual(latestDate, expectedDate);
 		}
 	});
+
+	test('returns the newest commit date from inlined API regardless of the Unicode normalization form', () => {
+		writeFile('composed-caf\u00e9.md', 'content');
+		commitAllChanges('add composed-café.md', '2018-02-03');
+		writeFile('decomposed-cafe\u0301.md', 'content');
+		commitAllChanges('add decomposed-café.md', '2018-02-04');
+
+		const api = makeInlineGitAPI(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
+
+		expectCommitDateToEqual(api.getNewestCommitDate('composed-cafe\u0301.md'), '2018-02-03');
+		expectCommitDateToEqual(api.getNewestCommitDate('decomposed-caf\u00e9.md'), '2018-02-04');
+	});
+
+	// A backslash is a path separator on Windows and cannot be used in a file name.
+	test.skipIf(process.platform === 'win32')(
+		'keeps backslashes in file names on POSIX systems',
+		() => {
+			writeFile('back\\slash.md', 'content');
+			commitAllChanges('add back\\slash.md', '2018-03-04');
+
+			const api = makeInlineGitAPI(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
+
+			expectCommitDateToEqual(api.getNewestCommitDate('back\\slash.md'), '2018-03-04');
+		}
+	);
 
 	test('returns an empty list when the git history for the directory cannot be retrieved', () => {
 		expect(

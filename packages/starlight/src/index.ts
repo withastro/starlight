@@ -159,25 +159,20 @@ export default function StarlightIntegration(
 											// speed up dev server start time and prevent restarts.
 											'@astrojs/cloudflare/entrypoints/server',
 											'@astrojs/starlight>i18next',
-											'@astrojs/starlight>js-yaml',
 											'@astrojs/starlight>klona/lite',
 											// TODO: once Expressive Code is refactored/fixed, remove this workaround for
 											// Expressive Code relying on CJS dependencies like postcss not compatible
 											// with non-Node.js compatible environments like Cloudflare.
 											'@astrojs/starlight>astro-expressive-code/components',
 											'@astrojs/starlight>astro-expressive-code>hast-util-select',
-											'@astrojs/starlight>astro-expressive-code>rehype',
 											'@astrojs/starlight>astro-expressive-code>unist-util-visit',
-											'@astrojs/starlight>astro-expressive-code>rehype-format',
 											'@astrojs/starlight>astro-expressive-code>hastscript',
-											'@astrojs/starlight>astro-expressive-code>hast-util-from-html',
 											'@astrojs/starlight>astro-expressive-code>hast-util-to-string',
 											'@astrojs/starlight>astro-expressive-code>@expressive-code/core>postcss',
 										],
 									},
 								},
 					},
-					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
 					i18n: astroI18nConfig,
@@ -190,7 +185,7 @@ export default function StarlightIntegration(
 
 			'astro:build:done': async (options) => {
 				if (!userConfig.pagefind) return;
-				return starlightPagefind(options);
+				return starlightPagefind(options, userConfig.pagefind);
 			},
 		},
 	};

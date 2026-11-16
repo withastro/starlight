@@ -42,7 +42,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 
 #### Developing locally
 
-**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v22.13.0 or higher) and [pnpm](https://pnpm.io/) (using the version specified by the `packageManager` field in `package.json`). Make sure you have these installed before following these steps.
+**Prerequisites:** Developing Starlight requires [pnpm](https://pnpm.io/), which automatically uses the pnpm and Node.js versions specified by the `devEngines` field in `package.json`. Make sure you have pnpm installed before following these steps.
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
 
@@ -67,8 +67,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 5. **Generate TypeScript types** for all Astro modules:
 
    ```sh
-   cd docs
-   pnpm astro sync
+   pnpm -F ./docs astro sync
    ```
 
 #### Developing using GitHub Codespaces
@@ -78,7 +77,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 2. **Generate TypeScript types** for all Astro modules:
 
    ```sh
-   pnpm astro sync
+   pnpm -F ./docs astro sync
    ```
 
 3. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
@@ -92,7 +91,7 @@ The dev container used for GitHub Codespaces can also be used with [other suppor
 
 ### Making a Pull Request
 
-When making a pull request containing changes impacting users to Starlight or any related packages (`packages/*`), be sure to [add a changeset](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md#i-am-in-a-multi-package-repository-a-mono-repo) that will describe the changes to users.
+When making a pull request containing changes impacting users to Starlight or any related packages (`packages/*`), be sure to [add a changeset](https://changesets.dev/faq#how-do-i-add-a-changeset) that will describe the changes to users.
 Documentation-only (`docs/*`) and non-package (`examples/*`) changes do not need changesets.
 
 ```sh
@@ -264,7 +263,7 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://contribute.docs.astro.build/guides/i18n/#adding-a-new-language) in the Astro docs contributor guide for some helpful tips around choosing these.
 
 - Add your language to the `locales` config in `docs/astro.config.mjs`
-- Add your language to the `locales` config in `docs/lunaria.config.json`
+- Add your language to the `locales` config in `docs/lunaria.config.ts`
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
 - Create the first translated page for your language.
   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
@@ -293,7 +292,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 
 [discord]: https://astro.build/chat
 [issues]: https://github.com/withastro/starlight/issues
-[sl]: https://github.com/withastro/starlight/pulls
+[sl]: https://github.com/withastro/starlight
 [pulls]: https://github.com/withastro/starlight/pulls
 [new-issue]: https://github.com/withastro/starlight/issues/new/choose
 [pr-docs]: https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request

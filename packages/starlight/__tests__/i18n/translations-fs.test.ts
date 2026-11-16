@@ -1,6 +1,5 @@
 import { describe, expect, test } from 'vitest';
 import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
-import { YAMLException } from 'js-yaml';
 
 describe('createTranslationSystemFromFs', () => {
 	test('creates a translation system that returns default strings', async () => {
@@ -79,7 +78,7 @@ describe('createTranslationSystemFromFs', () => {
 				// Using `malformed-json-src/` to trigger syntax error in bad JSON file.
 				{ srcDir: new URL('./malformed-json-src/', import.meta.url) }
 			)
-		).rejects.toThrow(SyntaxError);
+		).rejects.toThrow(/Failed to parse '.+src[/\\]content[/\\]i18n[/\\]en\.json'/);
 	});
 
 	test('throws on malformed i18n YAML', async () => {
@@ -89,7 +88,7 @@ describe('createTranslationSystemFromFs', () => {
 				// Using `malformed-yaml-src/` to trigger syntax error in bad YAML file.
 				{ srcDir: new URL('./malformed-yaml-src/', import.meta.url) }
 			)
-		).rejects.toThrow(YAMLException);
+		).rejects.toThrow(/Failed to parse '.+src[/\\]content[/\\]i18n[/\\]en\.yml'/);
 	});
 
 	test('creates a translation system that uses custom strings injected by plugins', async () => {

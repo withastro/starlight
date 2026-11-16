@@ -60,7 +60,7 @@ interface Dir {
 
 /** Create a new directory object. */
 function makeDir(slug: string): Dir {
-	const dir = {} as Dir;
+	const dir = Object.create(null) as Dir;
 	// Add DirKey and SlugKey as non-enumerable properties so that `Object.entries(dir)` ignores them.
 	Object.defineProperty(dir, DirKey, { enumerable: false });
 	Object.defineProperty(dir, SlugKey, { value: slug, enumerable: false });
@@ -103,17 +103,19 @@ function entriesFromAutogenerateConfig(
 	routes: Route[]
 ): (SidebarAutoLink | SidebarGroup)[] {
 	const { attrs, collapsed, directory } = item.autogenerate;
-	const localeDir = locale ? locale + '/' + directory : directory;
+	const localeDir = locale ? locale + (directory ? '/' + directory : '') : directory;
 	const autogenerate = { directory };
-	const dirDocs = routes.filter((doc) => {
-		const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
-		return (
-			// Match against `foo.md` or `foo/index.md`.
-			stripExtension(filePathFromContentDir) === localeDir ||
-			// Match against `foo/anything/else.md`.
-			filePathFromContentDir.startsWith(localeDir + '/')
-		);
-	});
+	const dirDocs = directory
+		? routes.filter((doc) => {
+				const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
+				return (
+					// Match against `foo.md` or `foo/index.md`.
+					stripExtension(filePathFromContentDir) === localeDir ||
+					// Match against `foo/anything/else.md`.
+					filePathFromContentDir.startsWith(localeDir + '/')
+				);
+			})
+		: routes;
 	const tree = treeify(dirDocs, locale, localeDir);
 	return sidebarFromDir(tree, { collapsed: collapsed ?? false, attrs }, autogenerate);
 }
@@ -449,6 +451,47 @@ function getSidebarCurrentEntry(sidebar: SidebarEntry[], pathname: string): Side
 }
 
 const sidebarEntriesByPath = new WeakMap<SidebarEntry[], Map<string, SidebarLink>>();
+
+/** Map sidebar groups to a boolean indicating whether they contain a link to the current page. */
+const currentGroups = new WeakMap<SidebarGroup, boolean>();
+
+/**
+ * Iterate through the children of a sidebar group, storing and returning whether or not they
+ * contain a link to the current page.
+ */
+function findCurrentGroups(group: SidebarGroup): boolean {
+	let containsCurrent = false;
+	for (const entry of group.entries) {
+		if (entry.type === 'link') {
+			containsCurrent ||= entry.isCurrent;
+		} else {
+			const entryContainsCurrent = findCurrentGroups(entry);
+			containsCurrent ||= entryContainsCurrent;
+		}
+	}
+	currentGroups.set(group, containsCurrent);
+	return containsCurrent;
+}
+
+/**
+ * Check whether a given sidebar group contains a link to the current page (without recomputing the
+ * entire sidebar tree for every call).
+ *
+ * ⚠️ Results are cached per sidebar group so this helper must only be called with a page’s finalised
+ * sidebar data when rendering a component.
+ *
+ * **Do not use in the following cases:**
+ *
+ * - Directly on the result of `getSidebar()` — this data is re-used across pages and calling
+ *   `sidebarGroupHasCurrent()` could result in incorrect cached data from previous pages.
+ *
+ * - On `locals.starlightRoute.sidebar` before all user mutations of sidebar data have been
+ *   completed — this could result in incorrect cached data that does not reflect subsequent changes
+ *   to the sidebar.
+ */
+export function sidebarGroupHasCurrent(group: SidebarGroup): boolean {
+	return currentGroups.get(group) ?? findCurrentGroups(group);
+}
 
 /** Generates a deterministic string based on the content of the passed sidebar. */
 export function getSidebarHash(sidebar: SidebarEntry[]): string {

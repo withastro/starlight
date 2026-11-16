@@ -24,6 +24,7 @@ hero:
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
 import AboutAstro from '~/components/about-astro.astro';
+import LogoGrid from '~/components/logo-grid/logo-grid.astro';
 import TestimonialGrid from '~/components/testimonial-grid.astro';
 import Testimonial from '~/components/testimonial.astro';
 
@@ -41,6 +42,8 @@ import Testimonial from '~/components/testimonial.astro';
 		Starlightは、特定のフレームワークに依存しない、ドキュメント向けの完全なソリューションとして提供されています。React、Vue、Svelte、Solidなどで拡張可能です。
 	</Card>
 </CardGrid>
+
+<LogoGrid title="大小さまざまなチームに信頼されています" />
 
 <TestimonialGrid title="人々の声">
   <Testimonial

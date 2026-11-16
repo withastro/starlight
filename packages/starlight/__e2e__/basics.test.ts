@@ -419,6 +419,21 @@ test.describe('components', () => {
 			await starlight.goto('/comments/bob');
 			await expect(page.locator('.starlight-aside')).toBeAttached();
 		});
+
+		test('renders the same icon size for Markdown asides and the `<Aside>` component', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			await starlight.goto('/asides-component');
+			const sizes = await page
+				.locator('.starlight-aside__icon')
+				.evaluateAll((icons) => icons.map((icon) => icon.getBoundingClientRect().width));
+
+			expect(sizes).toHaveLength(2);
+			expect(sizes[1]).toBe(sizes[0]);
+		});
 	});
 
 	test.describe('RTL support', () => {
@@ -769,6 +784,25 @@ test.describe('ToC highlighting', () => {
 				pattern: /Heading 3/,
 			})
 		);
+	});
+
+	test('does not freeze when the page title heading is missing', async ({
+		page,
+		getProdServer,
+	}) => {
+		const starlight = await getProdServer();
+		await page.setViewportSize({ width: 1280, height: 720 });
+		await starlight.goto('/headings-no-page-title');
+
+		// First, scroll to the paragraph after the table so we look up its heading by walking through
+		// its previous sibling which is a table with many row/cells.
+		await page
+			.getByText('Some content before the first heading.')
+			.evaluate((paragraph) => paragraph.scrollIntoView());
+		// Then, scroll to the first heading.
+		await page.locator('#heading-1').evaluate((heading) => heading.scrollIntoView());
+
+		await expect(page.locator('starlight-toc [aria-current="true"]')).toHaveText(/Heading 1/);
 	});
 });
 

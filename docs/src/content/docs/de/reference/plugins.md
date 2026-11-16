@@ -48,7 +48,7 @@ interface StarlightPlugin {
 
 **Typ:** `string`
 
-Ein Plugin muss einen eindeutigen Namen angeben, der es beschreibt. Der Name wird verwendet, wenn [Logging-Nachrichten](#logger) sich auf dieses Plugin bezieht und kann von anderen Plugins verwendet werden, um das Vorhandensein dieses Plugins zu erkennen.
+Ein Plugin muss einen eindeutigen Namen angeben, der es beschreibt. Der Name wird verwendet, wenn [Meldungen protokolliert](#logger) werden, die sich auf dieses Plugin beziehen, und kann von anderen Plugins verwendet werden, um das Vorhandensein dieses Plugins zu erkennen.
 
 ## `hooks`
 
@@ -84,7 +84,7 @@ Im folgenden Beispiel injiziert ein Plugin Übersetzungen für einen benutzerdef
 ```ts {6-13} /(injectTranslations)[^(]/
 // plugin.ts
 export default {
-  name: 'plugin-use-translations',
+  name: 'plugin-with-translations',
   hooks: {
     'i18n:setup'({ injectTranslations }) {
       injectTranslations({
@@ -219,7 +219,7 @@ export default {
 
 #### `addRouteMiddleware`
 
-**Typ:** `(config: { entrypoint: string; order?: 'pre' | 'post' | 'default'}) => void`
+**Typ:** `(config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void`
 
 Eine Callback-Funktion, um der Website einen [Routen-Middleware-Handler](/de/guides/route-data/) hinzuzufügen.
 

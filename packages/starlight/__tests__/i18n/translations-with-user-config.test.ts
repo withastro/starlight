@@ -5,8 +5,8 @@ import { useTranslations } from '../../src/utils/translations';
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
 		i18n: [
-			['en-US', { 'page.editLink': 'Modify this doc!' }],
-			['pt-BR', { 'page.editLink': 'Modifique esse doc!' }],
+			['en-US', { 'page.editLink': 'Modify this doc!', 'test.empty': 'Fallback string' }],
+			['pt-BR', { 'page.editLink': 'Modifique esse doc!', 'test.empty': '' }],
 		],
 	})
 );
@@ -22,5 +22,11 @@ describe('useTranslations()', () => {
 		const t = useTranslations('pt-BR');
 		expect(t('page.editLink')).toBe('Modifique esse doc!');
 		expect(t('page.editLink')).not.toBe(translations.pt?.['page.editLink']);
+	});
+
+	test('falls back to default language if the translation is an empty string', () => {
+		const t = useTranslations('pt-BR');
+		// @ts-expect-error — Using a custom key from the mocked content which isn’t reflected in types.
+		expect(t('test.empty')).toBe('Fallback string');
 	});
 });
