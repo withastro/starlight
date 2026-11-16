@@ -51,9 +51,36 @@ jobs:
         with:
           cache: true
           install: false
-      - run: pnpm i --filter @astrojs/starlight --filter @bench/large-sidebar --filter @bench/locales
+      - run: pnpm i --filter @astrojs/starlight
       - name: Run benchmarks
         uses: CodSpeedHQ/action@af75f77f17a054769abefaa42fe8dc2975469b5f # v5.6.3
         with:
           mode: simulation
-          run: pnpm --filter @astrojs/starlight bench
+          run: pnpm --filter @astrojs/starlight bench:functional
+
+  e2e-benchmarks:
+    # Skip benchmarks on Changesets draft release PRs.
+    if: >
+      github.repository_owner == 'withastro' &&
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main' &&
+        github.event.pull_request.head.repo.full_name == 'withastro/starlight')
+    # https://codspeed.io/docs/features/macro-runners#aws-graviton-arm64
+    runs-on: codspeed-macro-arm64-graviton-ubuntu-22-04
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          cache: true
+          install: false
+      - run: pnpm i --filter @astrojs/starlight --filter "@bench/*"
+      - name: Run E2E benchmarks
+        uses: CodSpeedHQ/action@af75f77f17a054769abefaa42fe8dc2975469b5f # v5.6.3
+        with:
+          mode: walltime
+          run: pnpm --filter @astrojs/starlight bench:e2e
