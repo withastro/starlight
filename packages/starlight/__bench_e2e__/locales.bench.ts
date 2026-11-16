@@ -1,4 +1,4 @@
-import { beforeAll, describe, test } from 'vitest';
+import { beforeAll, test } from 'vitest';
 import {
 	buildBenchOptions,
 	buildFixture,
@@ -10,25 +10,23 @@ import {
 } from './fixtures';
 import { nonRootLocales } from './fixtures/locales/locales';
 
-describe('locales', () => {
-	beforeAll(async () => {
-		await writeFixtureDocs(
-			'locales',
-			createLocaleDocs(
-				nonRootLocales.map(({ key }) => key),
-				40
-			)
-		);
-		await resetFixtureBuild('locales');
+beforeAll(async () => {
+	await writeFixtureDocs(
+		'locales',
+		createLocaleDocs(
+			nonRootLocales.map(({ key }) => key),
+			40
+		)
+	);
+	await resetFixtureBuild('locales');
 
-		return () => cleanFixture('locales');
-	});
+	return () => cleanFixture('locales');
+});
 
-	test('build', async ({ bench }) => {
-		await bench('build', async () => {
-			await buildFixture('locales');
-		}).run(buildBenchOptions);
-	});
+test('locales', async ({ bench }) => {
+	await bench('build', async () => {
+		await buildFixture('locales');
+	}).run(buildBenchOptions);
 });
 
 /**

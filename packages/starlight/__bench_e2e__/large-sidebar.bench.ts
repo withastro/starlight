@@ -1,4 +1,4 @@
-import { beforeAll, describe, test } from 'vitest';
+import { beforeAll, test } from 'vitest';
 import {
 	buildBenchOptions,
 	buildFixture,
@@ -9,19 +9,17 @@ import {
 	type DocFile,
 } from './fixtures';
 
-describe('large_sidebar', () => {
-	beforeAll(async () => {
-		await writeFixtureDocs('large-sidebar', createLargeSidebarDocs());
-		await resetFixtureBuild('large-sidebar');
+beforeAll(async () => {
+	await writeFixtureDocs('large-sidebar', createLargeSidebarDocs());
+	await resetFixtureBuild('large-sidebar');
 
-		return () => cleanFixture('large-sidebar');
-	});
+	return () => cleanFixture('large-sidebar');
+});
 
-	test('build', async ({ bench }) => {
-		await bench('build', async () => {
-			await buildFixture('large-sidebar');
-		}).run(buildBenchOptions);
-	});
+test('large_sidebar', async ({ bench }) => {
+	await bench('build', async () => {
+		await buildFixture('large-sidebar');
+	}).run(buildBenchOptions);
 });
 
 /** Create 10 top-level groups each with 7 nested subgroups. Every group contains 14 pages. */
