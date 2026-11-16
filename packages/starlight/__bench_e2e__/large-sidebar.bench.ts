@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest';
+import { beforeAll, describe, test } from 'vitest';
 import {
 	buildBenchOptions,
 	buildFixture,
@@ -9,12 +9,16 @@ import {
 } from './fixtures';
 
 describe('large_sidebar', () => {
-	bench('build', () => buildFixture('large-sidebar'), {
-		...buildBenchOptions,
-		setup: async () => {
-			await writeFixtureDocs('large-sidebar', createLargeSidebarDocs());
-			await resetFixtureBuild('large-sidebar');
-		},
-		teardown: () => cleanFixture('large-sidebar'),
+	beforeAll(async () => {
+		await writeFixtureDocs('large-sidebar', createLargeSidebarDocs());
+		await resetFixtureBuild('large-sidebar');
+
+		return () => cleanFixture('large-sidebar');
+	});
+
+	test('build', async ({ bench }) => {
+		await bench('build', async () => {
+			await buildFixture('large-sidebar');
+		}).run(buildBenchOptions);
 	});
 });

@@ -1,6 +1,6 @@
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
-import builtinTranslations from '../../../translations/index.ts';
+import builtinTranslations from '../../../src/translations';
 
 export default defineConfig({
 	integrations: [
