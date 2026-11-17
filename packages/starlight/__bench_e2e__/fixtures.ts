@@ -10,7 +10,8 @@ type FixtureName = 'large-sidebar' | 'locales';
 
 export interface DocFile {
 	path: string;
-	content: string;
+	title: string;
+	body: string;
 }
 
 export const buildBenchOptions = {
@@ -26,19 +27,15 @@ function getFixtureRoot(name: FixtureName) {
 	return fileURLToPath(new URL(`./fixtures/${name}/`, import.meta.url));
 }
 
-export function frontmatter(title: string) {
-	return `---\ntitle: ${title}\n---\n\n`;
-}
-
 export async function writeFixtureDocs(name: FixtureName, docs: DocFile[]) {
 	const root = getFixtureRoot(name);
 	const docsRoot = join(root, 'src/content/docs');
 	await rm(docsRoot, { recursive: true, force: true });
 	await Promise.all(
-		docs.map(async ({ path, content }) => {
+		docs.map(async ({ path, title, body }) => {
 			const filePath = join(docsRoot, path);
 			await mkdir(dirname(filePath), { recursive: true });
-			await writeFile(filePath, content);
+			await writeFile(filePath, `---\ntitle: ${title}\n---\n\n${body}`);
 		})
 	);
 }

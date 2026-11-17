@@ -3,7 +3,6 @@ import {
 	buildBenchOptions,
 	buildFixture,
 	cleanFixture,
-	frontmatter,
 	resetFixtureBuild,
 	writeFixtureDocs,
 	type DocFile,
@@ -33,7 +32,8 @@ function createLargeSidebarDocs(): DocFile[] {
 			for (let page = 0; page < 14; page++) {
 				docs.push({
 					path: `${directory}/page-${page}.md`,
-					content: frontmatter(`Page ${section}-${level}-${page}`) + 'Benchmark content.\n',
+					title: `Page ${section}-${level}-${page}`,
+					body: 'Benchmark content.\n',
 				});
 			}
 		}

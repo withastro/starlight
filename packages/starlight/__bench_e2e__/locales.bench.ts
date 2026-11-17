@@ -3,7 +3,6 @@ import {
 	buildBenchOptions,
 	buildFixture,
 	cleanFixture,
-	frontmatter,
 	resetFixtureBuild,
 	writeFixtureDocs,
 	type DocFile,
@@ -29,6 +28,12 @@ test('locales', async ({ bench }) => {
 	}).run(buildBenchOptions);
 });
 
+const markdownBody = Array.from(
+	{ length: 3 },
+	(_, index) =>
+		`## Section ${index}\n\nBenchmark content.\n\n### Subsection ${index}\n\nBenchmark content.\n`
+).join('\n');
+
 /**
  * Create pages for the root locale and translate half of them into every other locale. Missing
  * translations use fallback routes.
@@ -36,26 +41,16 @@ test('locales', async ({ bench }) => {
 function createLocaleDocs(locales: string[], pagesPerLocale: number): DocFile[] {
 	const docs: DocFile[] = [];
 	for (let page = 0; page < pagesPerLocale; page++) {
-		docs.push({ path: `page-${page}.md`, content: getMarkdownContent(`Page ${page}`) });
+		docs.push({ path: `page-${page}.md`, title: `Page ${page}`, body: markdownBody });
 		if (page % 2 !== 0) continue;
 
 		for (const locale of locales) {
 			docs.push({
 				path: `${locale}/page-${page}.md`,
-				content: getMarkdownContent(`Page ${page} (${locale})`),
+				title: `Page ${page} (${locale})`,
+				body: markdownBody,
 			});
 		}
 	}
 	return docs;
-}
-
-function getMarkdownContent(title: string) {
-	return (
-		frontmatter(title) +
-		Array.from(
-			{ length: 3 },
-			(_, index) =>
-				`## Section ${index}\n\nBenchmark content.\n\n### Subsection ${index}\n\nBenchmark content.\n`
-		).join('\n')
-	);
 }
