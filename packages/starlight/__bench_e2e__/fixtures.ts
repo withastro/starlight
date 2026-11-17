@@ -1,4 +1,3 @@
-import { rmSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -20,6 +19,8 @@ export const buildBenchOptions = {
 	warmupIterations: 0,
 	warmupTime: 0,
 };
+
+const astroArtifactDirs = ['.astro', 'dist', 'node_modules/.astro'];
 
 function getFixtureRoot(name: FixtureName) {
 	return fileURLToPath(new URL(`./fixtures/${name}/`, import.meta.url));
@@ -44,19 +45,16 @@ export async function writeFixtureDocs(name: FixtureName, docs: DocFile[]) {
 
 export async function resetFixtureBuild(name: FixtureName) {
 	const root = getFixtureRoot(name);
-	await Promise.all([
-		rm(join(root, '.astro'), { recursive: true, force: true }),
-		rm(join(root, 'dist'), { recursive: true, force: true }),
-	]);
+	await Promise.all(
+		astroArtifactDirs.map((dir) => rm(join(root, dir), { recursive: true, force: true }))
+	);
 }
 
 export async function buildFixture(name: FixtureName) {
 	await build({ logLevel: 'silent', root: getFixtureRoot(name) });
 }
 
-export function cleanFixture(name: FixtureName) {
-	const root = getFixtureRoot(name);
-	for (const path of ['src/content/docs', '.astro', 'dist']) {
-		rmSync(join(root, path), { recursive: true, force: true });
-	}
+export async function cleanFixture(name: FixtureName) {
+	await rm(join(getFixtureRoot(name), 'src/content/docs'), { recursive: true, force: true });
+	await resetFixtureBuild(name);
 }
