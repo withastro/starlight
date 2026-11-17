@@ -312,11 +312,11 @@ importers:
   packages/docsearch:
     dependencies:
       '@docsearch/css':
-        specifier: ^4.2.0
-        version: 4.7.1
+        specifier: ^5.2.0
+        version: 5.2.0
       '@docsearch/js':
-        specifier: ^4.2.0
-        version: 4.7.1
+        specifier: ^5.2.0
+        version: 5.2.0
     devDependencies:
       '@astrojs/starlight':
         specifier: workspace:*
@@ -835,11 +835,11 @@ packages:
     resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
     engines: {node: '>=14'}
 
-  '@docsearch/css@4.7.1':
-    resolution: {integrity: sha512-AsMPnbNmVLDNjhtgfq4ZRskNvWR8vuK6riEegHp3kjBFtxbmTWPzZ5s1FJ04SGr2D0ZXglueUNISsV2sDgV6Jw==}
+  '@docsearch/css@5.2.0':
+    resolution: {integrity: sha512-KqJjLYMniiiKgZFdK+f7LTy3ZTL5r13buvxagNjDnYVGfa0NR+bb9BnjZq3FTl3VvsmkeW3aSr9AGIZsiQXY/A==}
 
-  '@docsearch/js@4.7.1':
-    resolution: {integrity: sha512-3FWRs18TuemPlLP5NeQG3+aYarmp3gTGnYLnZTLVlTnbFLWAgHafxUdFDWqtsqyvsbCMAeHyzwrX6MG6BuZfZA==}
+  '@docsearch/js@5.2.0':
+    resolution: {integrity: sha512-5gIXOpG72MIptdCL40xPRDElWKzIM/gZpCLXN115cOOCWFbUUv+AkXhPPVZv5uRuIqIXygrT2ZpUgSxsD2xifA==}
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -4972,9 +4972,9 @@ snapshots:
 
   '@ctrl/tinycolor@4.1.0': {}
 
-  '@docsearch/css@4.7.1': {}
+  '@docsearch/css@5.2.0': {}
 
-  '@docsearch/js@4.7.1': {}
+  '@docsearch/js@5.2.0': {}
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:
