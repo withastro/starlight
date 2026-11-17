@@ -9,7 +9,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Starlight 설정
 
-이 가이드를 따르기 위해서는 기존 Astro 프로젝트가 필요합니다.
+이 가이드를 따르기 위해서는 [기존 Astro 프로젝트](https://docs.astro.build/ko/install-and-setup/)가 필요합니다.
 
 ### Starlight 통합 추가
 
@@ -76,8 +76,8 @@ export const collections = {
 };
 ```
 
-Starlight는 레거시 콘텐츠 컬렉션 구현을 사용하여 컬렉션을 처리하는 [`legacy.collections` 플래그](https://docs.astro.build/ko/reference/legacy-flags/)도 지원합니다.
-이 플래그는 기존 Astro 프로젝트가 있고 현재 로더를 사용하기 위해 컬렉션을 변경할 수 없는 경우에 유용합니다.
+Starlight는 일부 v4 레거시 콘텐츠 컬렉션 기능을 유지하는 [`legacy.collectionsBackwardsCompat` 플래그](https://docs.astro.build/ko/reference/legacy-flags/#collectionsbackwardscompat)도 지원합니다.
+이미 진행 중인 Astro 프로젝트가 있고, 현재 시점에서 컬렉션을 수정하여 v5.0에서 도입된 Content Layer API로 마이그레이션할 수 없는 경우 이 방법이 유용합니다.
 
 ### 콘텐츠 추가
 

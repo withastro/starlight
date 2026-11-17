@@ -1,13 +1,13 @@
 import { describe, expect, test, vi } from 'vitest';
 import {
 	localeToLang,
-	localizedId,
+	localizedFilePath,
 	localizedSlug,
 	slugToLocaleData,
 	slugToParam,
 	slugToPathname,
 	urlToSlug,
-} from '../../utils/slugs';
+} from '../../src/utils/slugs';
 
 describe('slugToLocaleData', () => {
 	test('returns an undefined locale for root locale slugs', () => {
@@ -75,9 +75,9 @@ describe('localeToLang', () => {
 	});
 });
 
-describe('localizedId', () => {
+describe('localizedFilePath', () => {
 	test('returns unchanged when no locales are set', () => {
-		expect(localizedId('test.md', undefined)).toBe('test.md');
+		expect(localizedFilePath('test.md', undefined)).toBe('test.md');
 	});
 });
 

@@ -6,35 +6,67 @@ on:
   merge_group:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: 18
   ASTRO_TELEMETRY_DISABLED: true
+
+permissions: {}
 
 jobs:
   changes:
-    runs-on: ubuntu-latest
+    # Skip CI jobs on Changesets draft release PRs.
+    if: >
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main' &&
+        github.event.pull_request.head.repo.full_name == 'withastro/starlight')
+    runs-on: ubuntu-slim
     permissions:
+      contents: read
       pull-requests: read
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
+      docs_fa: ${{ steps.filter.outputs.docs_fa }}
+      docs_ja: ${{ steps.filter.outputs.docs_ja }}
+      docs_en: ${{ steps.filter.outputs.docs_en }}
+      docs_not_content: ${{ steps.filter.outputs.docs_not_content }}
       packages: ${{ steps.filter.outputs.packages }}
       ci: ${{ steps.filter.outputs.ci }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
         id: filter
+        # When updating filters here, make sure to also add or remove them from the
+        # outputs block above.
         with:
           filters: |
             docs:
               - 'docs/**'
+            docs_fa:
+              - 'docs/src/content/docs/fa/**'
+            docs_ja:
+              - 'docs/src/content/docs/ja/**'
+            docs_en:
+              - 'docs/src/content/docs/**'
+              # Exclude languages with a two-letter code
+              - '!docs/src/content/docs/{a..z}{a..z}/**'
+              # Exclude languages with a region subtag
+              - '!docs/src/content/docs/{a..z}{a..z}-{a..z}{a..z}/**'
+            docs_not_content:
+              - 'docs/**'
+              - '!docs/src/content/docs/**'
             packages:
               - 'packages/**'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
             ci:
               - '.github/workflows/ci.yml'
 
@@ -43,19 +75,22 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-      - run: pnpm i
+          persist-credentials: false
+      - uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          runtime: node@22.23.4
+          cache: true
+      - name: Build packages
+        run: pnpm build
       - name: Test packages
         run: pnpm -r test:coverage
-      - name: Test legacy collections support
-        working-directory: packages/starlight
-        run: pnpm test:legacy
+      - name: Test built packages
+        run: pnpm -r test:dist:ci
 
   e2e-test:
     name: 'Run E2E tests (${{ matrix.os }})'
@@ -66,28 +101,37 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-      - run: pnpm i
+          persist-credentials: false
+      - uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          runtime: node@22.23.4
+          cache: true
+          install: false
+      # Use `--no-runtime` to prevent `pnpm i` from installing the runtime specified in
+      # `devEngines.runtime` and keep the Node.js version set above.
+      - run: pnpm i --no-runtime --filter @astrojs/starlight --filter "@e2e/*"
       - name: Test packages
-        run: pnpm -r test:e2e
+        run: pnpm -r test:e2e:ci
 
   type-check:
     name: Run type checks
+    needs: changes
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-      - run: pnpm i
+          persist-credentials: false
+      - uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          runtime: node@22.23.4
+          cache: true
       - name: Generate docs types
         working-directory: docs
         run: pnpm astro sync
@@ -96,15 +140,18 @@ jobs:
 
   lint:
     name: Lint code
+    needs: changes
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-      - run: pnpm i
+          persist-credentials: false
+      - uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          runtime: node@22.23.4
+          cache: true
       - name: Generate types
         working-directory: ./docs
         run: pnpm astro sync
@@ -113,38 +160,48 @@ jobs:
 
   a11y:
     name: Check for accessibility issues
+    needs: changes
+    if: >
+      needs.changes.outputs.docs_not_content == 'true' ||
+      needs.changes.outputs.docs_fa == 'true' ||
+      needs.changes.outputs.docs_ja == 'true' ||
+      needs.changes.outputs.docs_en == 'true' ||
+      needs.changes.outputs.ci == 'true' ||
+      needs.changes.outputs.packages == 'true'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-
-      - name: Setup Node
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
+          persist-credentials: false
 
-      - name: Install Dependencies
-        run: pnpm i
+      - name: Install pnpm, Node.js, and dependencies
+        uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          runtime: node@22.23.4
+          cache: true
 
       - name: Run accessibility audit
         working-directory: ./docs
-        run: pnpm t
+        run: pnpm test:ci
 
   windows-smoke:
     name: Docs site builds on Windows
+    needs: changes
+    if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' || needs.changes.outputs.docs_not_content == 'true' }}
     runs-on: windows-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-      - run: pnpm i
+          persist-credentials: false
+      - uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          runtime: node@22.23.4
+          cache: true
       - name: Build docs site
         working-directory: ./docs
         run: pnpm build
@@ -154,22 +211,38 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.docs == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-
-      - name: Setup Node
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
+          persist-credentials: false
 
-      - name: Install Dependencies
-        run: pnpm i
+      - name: Install pnpm, Node.js, and dependencies
+        uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          runtime: node@22.23.4
+          cache: true
 
       - name: Build docs site and check links
         working-directory: ./docs
         run: pnpm linkcheck
+
+  zizmor:
+    name: Run zizmor
+    needs: changes
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
+        with:
+          version: 1.32.0

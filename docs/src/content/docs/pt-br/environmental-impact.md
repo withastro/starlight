@@ -123,7 +123,6 @@ Esses testes com o [Website Carbon Calculator][wcc] comparam páginas similares 
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [WebPageTest Carbon Control](https://www.webpagetest.org/carbon-control/)
-- [Ecoping](https://ecoping.earth/)
 
 ### Artigos e palestras
 

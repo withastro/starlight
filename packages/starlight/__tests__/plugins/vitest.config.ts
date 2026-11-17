@@ -21,7 +21,7 @@ export default defineVitestConfig({
 						description: 'plugin 1',
 						/**
 						 * The configuration received by a plugin should be the user provided configuration as-is
-						 * befor any Zod `transform`s are applied.
+						 * before any Zod `transform`s are applied.
 						 * To test this, we use this plugin to update the `favicon` value to a specific value if
 						 * the `favicon` config value is an object, which would mean that the associated Zod
 						 * `transform` was applied.

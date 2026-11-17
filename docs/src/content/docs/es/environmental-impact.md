@@ -109,7 +109,6 @@ Estas pruebas con el [Calculadora de Carbono de Sitios Web][wcc] comparan págin
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [Control de Carbono WebPageTest](https://www.webpagetest.org/carbon-control/)
-- [Ecoping](https://ecoping.earth/)
 
 ### Artículos y charlas
 

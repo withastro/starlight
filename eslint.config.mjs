@@ -3,22 +3,14 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import { globalIgnores } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import prettierConfig from 'eslint-config-prettier';
 
-export default tseslint.config(
+export default defineConfig(
 	// Ignore hidden files and directories, `*.d.ts` files (as most recommendations are mostly for
 	// users rather than libraries), types testing files, example directories, and build directories.
-	globalIgnores([
-		'**/.*',
-		'**/*.d.ts',
-		'**/*.test-d.ts',
-		'**/examples/',
-		'**/dist/',
-		'**/build/',
-		'**/examples/',
-	]),
+	globalIgnores(['**/.*', '**/*.d.ts', '**/*.test-d.ts', '**/examples/', '**/dist/', '**/build/']),
 
 	// Setup Node.js globals from `globalThis` (does not include CommonJS arguments).
 	{
@@ -66,7 +58,12 @@ export default tseslint.config(
 			// or starting with `_`.
 			'@typescript-eslint/no-unused-vars': [
 				'error',
-				{ ignoreRestSiblings: true, destructuredArrayIgnorePattern: '^_', varsIgnorePattern: '^_' },
+				{
+					ignoreRestSiblings: true,
+					destructuredArrayIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					argsIgnorePattern: '^_',
+				},
 			],
 			// Allow using `any` in rest parameter arrays, e.g. `(...args: any[]) => void`.
 			'@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
@@ -77,6 +74,24 @@ export default tseslint.config(
 			// fallbacks for some types that may not be accessible in some user environments, e.g. i18n
 			// keys for plugins.
 			'@typescript-eslint/no-redundant-type-constituents': 'off',
+		},
+	},
+
+	// Disable some rules in Starlight `global.ts` file which is mostly used for type augmentation
+	// and interface merging.
+	{
+		files: ['packages/starlight/src/global.ts'],
+		rules: {
+			'@typescript-eslint/no-empty-object-type': 'off',
+			'@typescript-eslint/no-namespace': 'off',
+		},
+	},
+
+	// Enable browser globals for the Lunaria freshness component.
+	{
+		files: ['docs/lunaria/freshness.mjs'],
+		languageOptions: {
+			globals: globals.browser,
 		},
 	}
 );

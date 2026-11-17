@@ -259,7 +259,8 @@ In the following example, a new, optional `custom.label` key is added to the def
 
 ```diff lang="js"
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -286,9 +287,7 @@ This includes support for features like [interpolation](https://www.i18next.com/
 In Astro components, this API is available as part of the [global `Astro` object](https://docs.astro.build/en/reference/api-reference/#locals) as `Astro.locals.t`:
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 You can also use the API in [endpoints](https://docs.astro.build/en/guides/endpoints/), where the `locals` object is available as part of the [endpoint context](https://docs.astro.build/en/reference/api-reference/#locals):
@@ -318,11 +317,9 @@ For example, given a custom translation file with the following content:
 
 The first UI string can be rendered by passing `'link.astro'` to the `t()` function:
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Renders: <a href="...">Astro documentation</a> -->
 ```
 
@@ -331,10 +328,10 @@ The value for `feature` must be set in an options object passed as the second ar
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/en/guides/astro-db/">
-	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+<a href="https://docs.astro.build/en/guides/actions/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro Actions' })}
 </a>
-<!-- Renders: <a href="...">Astro documentation for Astro DB</a> -->
+<!-- Renders: <a href="...">Astro documentation for Astro Actions</a> -->
 ```
 
 See the [i18next documentation](https://www.i18next.com/overview/api#t) for more information on how to use the `t()` function with interpolation, formatting, and more.

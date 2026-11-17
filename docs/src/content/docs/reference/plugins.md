@@ -331,7 +331,7 @@ The example above will log a message that includes a built-in UI string for the 
 
 Call `absolutePathToLang()` with an absolute file path to get the language for that file.
 
-This can be particularly useful when adding [remark or rehype plugins](https://docs.astro.build/en/guides/markdown-content/#markdown-plugins) to process Markdown or MDX files.
+This can be particularly useful when adding [remark or rehype plugins](https://docs.astro.build/en/guides/markdown-content/#markdown-processor-plugins) to process Markdown or MDX files.
 The [virtual file format](https://github.com/vfile/vfile) used by these plugins includes the [absolute path](https://github.com/vfile/vfile#filepath) of the file being processed, which can be used with `absolutePathToLang()` to determine the language of the file.
 The returned language can be used with the [`useTranslations()`](#usetranslations) helper to get UI strings for that language.
 

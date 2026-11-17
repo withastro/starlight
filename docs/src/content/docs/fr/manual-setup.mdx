@@ -10,7 +10,7 @@ Si vous voulez ajouter Starlight à un projet Astro existant, ce guide vous expl
 
 ## Configurer Starlight
 
-Pour suivre ce guide, vous aurez besoin d'un projet Astro existant.
+Pour suivre ce guide, vous aurez besoin d'un [projet Astro existant](https://docs.astro.build/fr/install-and-setup/).
 
 ### Ajouter l'intégration Starlight
 
@@ -77,8 +77,8 @@ export const collections = {
 };
 ```
 
-Starlight est également compatible avec [l'option `legacy.collections`](https://docs.astro.build/fr/reference/legacy-flags/) où les collections sont gérées en utilisant l'implémentation de collections de contenu héritée.
-Celà est utile si vous avez un projet Astro existant et que vous ne pouvez pas apporter de modifications aux collections pour utiliser un chargeur.
+Starlight est également compatible avec [l'option `legacy.collectionsBackwardsCompat`](https://docs.astro.build/fr/reference/legacy-flags/#collectionsbackwardscompat) qui préserve certaines fonctionnalités héritées des collections de contenu de la v4.
+Celà est utile si vous avez un projet Astro existant et que vous ne pouvez pas apporter de modifications aux collections pour le moment afin de migrer vers l'API de couche de contenu introduite dans la v5.0.
 
 ### Ajouter du contenu
 

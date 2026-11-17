@@ -2,9 +2,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
-import starlightDocSearch from '@astrojs/starlight-docsearch';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
+/** @satisfies {import('@astrojs/starlight/types').StarlightUserConfig['locales']} */
 export const locales = {
 	root: { label: 'English', lang: 'en' },
 	de: { label: 'Deutsch', lang: 'de' },
@@ -22,6 +22,7 @@ export const locales = {
 	hi: { label: 'हिंदी', lang: 'hi' },
 	da: { label: 'Dansk', lang: 'da' },
 	uk: { label: 'Українська', lang: 'uk' },
+	fa: { label: 'فارسی', lang: 'fa', dir: 'rtl' },
 };
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
@@ -88,6 +89,7 @@ export default defineConfig({
 						ru: 'Первые шаги',
 						hi: 'यहाँ से शुरू करे',
 						uk: 'Почніть звідси',
+						fa: 'از اینجا آغاز کنید',
 					},
 					items: [
 						'getting-started',
@@ -110,6 +112,7 @@ export default defineConfig({
 								ru: 'Влияние на окружающую среду',
 								hi: 'पर्यावरणीय प्रभाव',
 								uk: 'Вплив на довкілля',
+								fa: 'تأثیرات محیطی',
 							},
 						},
 					],
@@ -131,8 +134,9 @@ export default defineConfig({
 						ru: 'Руководства',
 						hi: 'गाइड',
 						uk: 'Ґайди',
+						fa: 'راهنماها',
 					},
-					autogenerate: { directory: 'guides' },
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 				{
 					label: 'Components',
@@ -144,8 +148,9 @@ export default defineConfig({
 						ja: 'コンポーネント',
 						'zh-CN': '组件',
 						uk: 'Компоненти',
+						fa: 'مؤلفه‌ها',
 					},
-					autogenerate: { directory: 'components' },
+					items: [{ autogenerate: { directory: 'components' } }],
 				},
 				{
 					label: 'Reference',
@@ -163,8 +168,9 @@ export default defineConfig({
 						ru: 'Справочник',
 						hi: 'संदर्भ',
 						uk: 'Довідник',
+						fa: 'مرجع',
 					},
-					autogenerate: { directory: 'reference' },
+					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 				{
 					label: 'Resources',
@@ -178,8 +184,9 @@ export default defineConfig({
 						ru: 'Ресурсы',
 						ko: '리소스',
 						uk: 'Ресурси',
+						fa: 'منابع',
 					},
-					autogenerate: { directory: 'resources' },
+					items: [{ autogenerate: { directory: 'resources' } }],
 				},
 			],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
@@ -190,14 +197,7 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 					]
-				: [
-						starlightDocSearch({
-							appId: 'PMZUYBQDAK',
-							apiKey: '24b09689d5b4223813d9b8e48563c8f6',
-							indexName: '[Demo][Tmp] Astro Starlight',
-							askAi: 'askAIDemo'
-						}),
-				],
+				: [],
 		}),
 	],
 });

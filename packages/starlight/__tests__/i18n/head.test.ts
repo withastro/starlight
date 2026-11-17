@@ -1,8 +1,8 @@
 import { expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { getRouteDataTestContext } from '../test-utils';
-import { generateRouteData } from '../../utils/routing/data';
-import { routes } from '../../utils/routing';
+import { generateRouteData } from '../../src/utils/routing/data';
+import { routes } from '../../src/utils/routing';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -26,4 +26,20 @@ test('includes links to language alternates', () => {
 			},
 		});
 	}
+});
+
+test('includes link to default language', () => {
+	const route = routes[0]!;
+	const { head } = generateRouteData({
+		props: { ...route, headings: [] },
+		context: getRouteDataTestContext(),
+	});
+	expect(head).toContainEqual({
+		tag: 'link',
+		attrs: {
+			rel: 'alternate',
+			href: `https://example.com/en/`,
+			hreflang: 'x-default',
+		},
+	});
 });

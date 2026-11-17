@@ -1,5 +1,41 @@
 # @astrojs/starlight-docsearch
 
+## 0.8.2
+
+### Patch Changes
+
+- [#4382](https://github.com/withastro/starlight/pull/4382) [`d44af25`](https://github.com/withastro/starlight/commit/d44af250cb836a454549a43a7b27ce296df05819) Thanks [@delucis](https://github.com/delucis)! - Fixes a documentation example for the `clientOptionsModule` config
+
+## 0.8.1
+
+### Patch Changes
+
+- [#4337](https://github.com/withastro/starlight/pull/4337) [`c5d0a7f`](https://github.com/withastro/starlight/commit/c5d0a7fb0b9788d52d8f5345c6661f18e100359e) Thanks [@moonmeister](https://github.com/moonmeister)! - Fixes DocSearch not loading when its script runs after the page has finished loading, for example when a Content Security Policy requires scripts to be added dynamically
+
+## 0.8.0
+
+### Minor Changes
+
+- [#3572](https://github.com/withastro/starlight/pull/3572) [`292fb17`](https://github.com/withastro/starlight/commit/292fb179cbf6e2cd970ced46359c520aa14a80b4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Distributes package as JavaScript files with dedicated type declaration files instead of TypeScript source files.
+
+## 0.7.0
+
+### Minor Changes
+
+- [#3644](https://github.com/withastro/starlight/pull/3644) [`0d2e7ed`](https://github.com/withastro/starlight/commit/0d2e7ed74a604b028fcab0c81b4c35c0c9365343) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.38.0
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+## 0.6.1
+
+### Patch Changes
+
+- [#3500](https://github.com/withastro/starlight/pull/3500) [`7700456`](https://github.com/withastro/starlight/commit/770045663c8ca3cc44983dd0d444955eba441243) Thanks [@delucis](https://github.com/delucis)! - This is the first release published with OIDC trusted publishing.
+
 ## 0.6.0
 
 ### Minor Changes

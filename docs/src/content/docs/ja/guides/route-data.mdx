@@ -1,0 +1,139 @@
+---
+title: ルートデータ
+description: Starlight のページデータモデルがどのようにページをレンダリングするか、またそのカスタマイズ方法について学びましょう。
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Starlight がドキュメント内のページをレンダリングするとき、まずそのページ上の内容を表すルートデータオブジェクトを作成します。  
+このガイドでは、ルートデータがどのように生成され、どのように使用されるか、また Starlight の既定の動作を変更するためにカスタマイズする方法を説明します。
+
+利用可能なすべてのプロパティ一覧については、[「ルートデータリファレンス」](/ja/reference/route-data/) を参照してください。
+
+## ルートデータとは？
+
+Starlight のルートデータは、1 ページをレンダリングするために必要なすべての情報を含むオブジェクトです。  
+これは、現在のページに関する情報に加え、Starlight の設定から生成されるデータも含みます。
+
+## ルートデータの使用方法
+
+Starlight のすべてのコンポーネントは、ルートデータを使用して各ページで何をレンダリングするかを決定します。  
+たとえば、[`siteTitle`](/ja/reference/route-data/#sitetitle) 文字列はサイトタイトルの表示に使用され、[`sidebar`](/ja/reference/route-data/#sidebar) 配列はグローバルサイドバーのナビゲーションをレンダリングするために使用されます。
+
+このデータは Astro コンポーネント内で `Astro.locals.starlightRoute` グローバルからアクセスできます。
+
+```astro title="example.astro" {2}
+---
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<p>このサイトのタイトルは「{siteTitle}」です。</p>
+```
+
+これは、表示内容をカスタマイズするために [コンポーネントのオーバーライド](/ja/guides/overriding-components/) を作成するときなどに便利です。
+
+## ルートデータのカスタマイズ
+
+Starlight のルートデータは、設定なしでそのまま動作します。  
+しかし、高度なユースケースでは、サイトの表示方法を変更するために一部またはすべてのページでルートデータをカスタマイズしたい場合があります。
+
+これは [コンポーネントのオーバーライド](/ja/guides/overriding-components/) と似た概念ですが、Starlight がデータを「どのように」レンダリングするかを変更する代わりに、Starlight が「レンダリングするデータ自体」を変更します。
+
+### ルートデータをカスタマイズすべき場合
+
+既存の設定オプションでは実現できない形で、Starlight がデータを処理する方法を変更したい場合にルートデータのカスタマイズが役立ちます。
+
+たとえば、サイドバー項目をフィルタリングしたり、特定のページのタイトルをカスタマイズしたりできます。  
+このような変更は、Starlight の既定コンポーネントを変更することなく、これらのコンポーネントに渡すデータを修正するだけで実現できます。
+
+### ルートデータをカスタマイズする方法
+
+ルートデータは特別な形式の「ミドルウェア」を使ってカスタマイズできます。  
+これは Starlight がページをレンダリングするたびに呼び出され、ルートデータオブジェクト内の値を変更できる関数です。
+
+<Steps>
+
+1. Starlight の `defineRouteMiddleware()` ユーティリティを使って、`onRequest` 関数をエクスポートする新しいファイルを作成します。
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware(() => {});
+   ```
+
+2. `astro.config.mjs` で、ルートデータミドルウェアファイルの場所を Starlight に指定します。
+
+   ```js ins={9}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'カスタムルートデータのページ',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
+   });
+   ```
+
+3. `onRequest` 関数を更新してルートデータを変更します。
+
+   ミドルウェアが最初に受け取る引数は [Astro の `context` オブジェクト](https://docs.astro.build/ja/reference/api-reference/) です。  
+   これには、現在のページレンダリングに関するすべての情報（現在の URL や `locals` など）が含まれています。
+
+   次の例では、すべてのページタイトルの末尾に感嘆符を追加して、ドキュメントを少し楽しくします。
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware((context) => {
+   	// このページのコンテンツコレクションエントリを取得
+   	const { entry } = context.locals.starlightRoute;
+   	// タイトルの末尾に感嘆符を追加
+   	entry.data.title = entry.data.title + '!';
+   });
+   ```
+
+</Steps>
+
+#### 複数のルートミドルウェア
+
+Starlight は複数のミドルウェアもサポートしています。  
+複数のハンドラーを追加する場合は、`routeMiddleware` にパスの配列を設定します。
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: '複数のミドルウェアのページ',
+			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
+		}),
+	],
+});
+```
+
+#### 後続のルートミドルウェアを待機する
+
+スタック内の後続ミドルウェアが実行されるのを待ってからコードを実行したい場合、ミドルウェア関数の第 2 引数として渡される `next()` コールバックを `await` することができます。  
+これは、たとえばプラグインのミドルウェアが実行された後に変更を加えたい場合に便利です。
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// 後続のミドルウェアが実行されるのを待つ
+	await next();
+	// ルートデータを変更
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + '!';
+});
+```

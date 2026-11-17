@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { generateToC } from '../../utils/generateToC';
+import { generateToC } from '../../src/utils/generateToC';
 
 const defaultOpts = { minHeadingLevel: 2, maxHeadingLevel: 3, title: 'Overview' };
 

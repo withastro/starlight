@@ -22,3 +22,5 @@ test-results/
 
 # Vercel output
 .vercel
+
+.idea

@@ -10,7 +10,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## 设置 Starlight
 
-要遵循本指南，你需要一个现有的 Astro 项目。
+要遵循本指南，你需要一个 [现有的 Astro 项目](https://docs.astro.build/zh-cn/install-and-setup/)。
 
 ### 添加 Starlight 集成
 
@@ -64,7 +64,7 @@ export default defineConfig({
 
 Starlight 是建立在 Astro 的[内容集合](https://docs.astro.build/zh-cn/guides/content-collections/)之上的，这些集合在 `src/content.config.ts` 文件中配置。
 
-创建或更新内容配置文件，添加一个使用 Starlight 的 `docsLoader` 和 `docsSchema` 的 `docs` 集合：
+创建或更新内容配置文件，添加一个使用 Starlight 的 [`docsLoader`](/zh-cn/reference/configuration/#docsloader) 和 [`docsSchema`](/zh-cn/reference/configuration/#docsschema) 的 `docs` 集合：
 
 ```js ins={3-4,7}
 // src/content.config.ts
@@ -77,8 +77,8 @@ export const collections = {
 };
 ```
 
-Starlight 也支持 [`legacy.collections` 标志](https://docs.astro.build/zh-cn/reference/legacy-flags/)，其中集合使用旧版的内容集合实现处理。
-这对于你有一个现有的 Astro 项目，目前无法对集合进行任何更改以使用加载器的情况非常有用。
+Starlight 也支持 [`legacy.collectionsBackwardsCompat` 标志](https://docs.astro.build/zh-cn/reference/legacy-flags/#collectionsbackwardscompat)，该标志保留了 v4 版本中的一些旧版内容集合功能。
+这对于你有一个现有的 Astro 项目，目前无法对集合进行任何更改以迁移到 v5.0 中引入的 Content Layer API 的情况非常有用。
 
 ### 添加内容
 
@@ -97,7 +97,8 @@ description: 通过 Starlight 构建的文档网站，了解有关我的项目�
 欢迎来到我的项目！
 ```
 
-Starlight 使用基于文件的路由，这意味着 `src/content/docs/` 中的每个 Markdown、MDX 或 Markdoc 文件都将变成你站点上的一个页面。前置元数据（上面示例中的 `title` 和 `description` 字段）可以更改每个页面的显示方式。在 [frontmatter 指南](/zh-cn/reference/frontmatter/) 中查看所有可用选项。
+Starlight 使用基于文件的路由，这意味着 `src/content/docs/` 中的每个 Markdown、MDX 或 Markdoc 文件都将变成你站点上的一个页面。前置元数据（上面示例中的 `title` 和 `description` 字段）可以更改每个页面的显示方式。
+在 [frontmatter 指南](/zh-cn/reference/frontmatter/) 中查看所有可用选项。
 
 ## 现有站点的提示
 

@@ -1,8 +1,11 @@
+import { z } from 'astro/zod';
 import { describe, expect, test } from 'vitest';
-import { FaviconSchema } from '../../schemas/favicon';
-import { TitleTransformConfigSchema } from '../../schemas/site-title';
-import { HeadConfigSchema, type HeadUserConfig } from '../../schemas/head';
-import { parseWithFriendlyErrors } from '../../utils/error-map';
+import { parse } from 'yaml';
+import { docsSchema } from '../../src/schema';
+import { FaviconSchema } from '../../src/schemas/favicon';
+import { HeadConfigSchema, type HeadUserConfig } from '../../src/schemas/head';
+import { TitleTransformConfigSchema } from '../../src/schemas/site-title';
+import { parseWithFriendlyErrors } from '../../src/utils/error-map';
 
 describe('FaviconSchema', () => {
 	test('returns the proper href and type attributes', () => {
@@ -140,34 +143,328 @@ describe('HeadConfigSchema', () => {
 		test('errors with head `meta` tag with `content` and attributes', () => {
 			expect(() => parseHeadConfigWithFriendlyErrors('content', headConfigWithoutAttrs))
 				.toThrowErrorMatchingInlineSnapshot(`
-				"[AstroUserError]:
-					Data does not match schema
-				Hint:
-					The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
-					You should instead use a \`content\` attribute with an additional attribute such as \`name\`, \`property\`, or \`http-equiv\` to identify the kind of metadata it represents in the \`attrs\` object:
-					
-					- tag: meta
-					  attrs:
-					    name: identifier
-					    content: '1234'
-					"
-			`);
+					"[AstroUserError]:
+						Data does not match schema
+					Hint:
+						The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
+						You should instead use a \`content\` attribute with an additional attribute such as \`name\`, \`property\`, or \`http-equiv\` to identify the kind of metadata it represents in the \`attrs\` object:
+						
+						- tag: meta
+						  attrs:
+						    name: identifier
+						    content: "1234"
+						"
+				`);
 		});
 		test('errors with head `meta` tag with `content` and no attributes', () => {
 			expect(() => parseHeadConfigWithFriendlyErrors('content', headConfigWithAttrs))
 				.toThrowErrorMatchingInlineSnapshot(`
-				"[AstroUserError]:
-					Data does not match schema
-				Hint:
-					The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
-					You should instead use a \`content\` attribute in the \`attrs\` object:
-					
-					- tag: meta
-					  attrs:
-					    property: test:id
-					    content: '1234'
-					"
-			`);
+					"[AstroUserError]:
+						Data does not match schema
+					Hint:
+						The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
+						You should instead use a \`content\` attribute in the \`attrs\` object:
+						
+						- tag: meta
+						  attrs:
+						    property: test:id
+						    content: "1234"
+						"
+				`);
 		});
+		test('suggests valid YAML for date-like `meta` content', () => {
+			// Parse an invalid head config and get the raw error message.
+			// Content value can be potentially be interpreted as a date and must be handled correctly.
+			const result = HeadConfigSchema({ source: 'content' }).safeParse([
+				{ tag: 'meta', attrs: { name: 'date' }, content: '2026-10-07' },
+			]);
+
+			// Extract the suggested YAML snippet from the error message.
+			const suggestion = result.error?.issues[0]?.message.split('\n\n').at(-1);
+
+			// Parse the suggestion like Astro parses frontmatter YAML.
+			// https://github.com/withastro/astro/blob/88f0bd642b082274a57999bb9e74f89d7477e47e/packages/internal-helpers/src/yaml.ts#L4-L8
+			const parsed: unknown = parse(suggestion ?? '', {
+				customTags: ['timestamp'],
+				merge: true,
+				schema: 'core',
+			});
+
+			// The parsed suggestion should include `content` as a string.
+			expect(parsed).toEqual([{ tag: 'meta', attrs: { name: 'date', content: '2026-10-07' } }]);
+		});
+	});
+});
+
+describe('docsSchema', () => {
+	test('basic frontmatter should parse to expected shape', () => {
+		const schema = docsSchema()({ image: () => ({}) as never });
+		const parsed = schema.parse({ title: 'Test Title' });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test('docs schema can be extended to make property required', () => {
+		const schema = docsSchema({ extend: z.object({ description: z.string() }) })({
+			image: () => ({}) as never,
+		});
+		expect(() => schema.parse({ title: 'Test Title' })).toThrowErrorMatchingInlineSnapshot(`
+			[ZodError: [
+			  {
+			    "expected": "string",
+			    "code": "invalid_type",
+			    "path": [
+			      "description"
+			    ],
+			    "message": "Invalid input: expected string, received undefined"
+			  }
+			]]
+		`);
+	});
+
+	test('an existing enum can be extended', () => {
+		const schema = docsSchema({
+			extend: z.object({
+				template: z.enum(['doc', 'splash', 'custom']),
+				hero: z
+					.object({
+						actions: z
+							.array(
+								z.object({ variant: z.enum(['primary', 'secondary', 'custom']).default('primary') })
+							)
+							.default([]),
+					})
+					.optional(),
+			}),
+		})({
+			image: () => ({}) as never,
+		});
+
+		const parsed = schema.parse({
+			title: 'Test Title',
+			template: 'custom',
+			hero: { actions: [{ variant: 'custom', text: '', link: '' }] },
+		});
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "hero": {
+			    "actions": [
+			      {
+			        "link": "",
+			        "text": "",
+			        "variant": "custom",
+			      },
+			    ],
+			  },
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "custom",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test('docs schema can be extended to add a new property', () => {
+		const schema = docsSchema({ extend: z.object({ custom: z.string() }) })({
+			image: () => ({}) as never,
+		});
+		const parsed = schema.parse({ title: 'Test Title', custom: 'Custom Value' });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "custom": "Custom Value",
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test(`docs schema can be extended to override existing property`, () => {
+		const schema = docsSchema({
+			extend: z.object({
+				hero: z
+					.object({
+						actions: z.array(z.object({ icon: z.string() })).default([]),
+					})
+					.optional(),
+			}),
+		})({
+			image: () => ({}) as never,
+		});
+		const parsed = schema.parse({
+			title: 'Test Title',
+			hero: { actions: [{ text: '', link: '', icon: 'icon-x' }] },
+		});
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "hero": {
+			    "actions": [
+			      {
+			        "icon": "icon-x",
+			        "link": "",
+			        "text": "",
+			        "variant": "primary",
+			      },
+			    ],
+			  },
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test('docs schema can be extended to add a property to a nested object', () => {
+		const schema = docsSchema({ extend: z.object({ sidebar: z.object({ custom: z.number() }) }) })({
+			image: () => ({}) as never,
+		});
+		const parsed = schema.parse({ title: 'Test Title', sidebar: { custom: 42 } });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "custom": 42,
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Test Title",
+			}
+		`);
+	});
+
+	test('docs schema preserves user-defined refinements when extending a nested object', () => {
+		const schema = docsSchema({
+			extend: z.object({
+				sidebar: z
+					.object({ custom: z.number() })
+					.refine(({ custom }) => custom > 0, 'custom must be positive'),
+			}),
+		})({
+			image: () => ({}) as never,
+		});
+
+		expect(() => schema.parse({ title: 'Test Title', sidebar: { custom: 42 } })).not.toThrow();
+
+		expect(() => schema.parse({ title: 'Test Title', sidebar: { custom: -1 } }))
+			.toThrowErrorMatchingInlineSnapshot(`
+		[ZodError: [
+		  {
+		    "code": "custom",
+		    "path": [
+		      "sidebar"
+		    ],
+		    "message": "custom must be positive"
+		  }
+		]]
+	`);
+	});
+
+	test('docs schema can be extended with a union of objects', () => {
+		const baseSchema = z.object({ type: z.literal('base').optional().default('base') });
+		const extendedSchema = baseSchema.extend({ type: z.literal('extended'), name: z.string() });
+
+		const schema = docsSchema({ extend: z.union([baseSchema, extendedSchema]) })({
+			image: () => ({}) as never,
+		});
+
+		const parsedBase = schema.parse({ title: 'Base' });
+		expect(parsedBase).toMatchInlineSnapshot(`
+        {
+          "draft": false,
+          "editUrl": true,
+          "head": [],
+          "pagefind": true,
+          "sidebar": {
+            "attrs": {},
+            "hidden": false,
+          },
+          "template": "doc",
+          "title": "Base",
+          "type": "base",
+        }
+  `);
+
+		const parsedExtended = schema.parse({ title: 'Extended', type: 'extended', name: 'test' });
+		expect(parsedExtended).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "name": "test",
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Extended",
+			  "type": "extended",
+			}
+		`);
+	});
+
+	test('docs schema can be extended with a discriminated union of objects', () => {
+		const schema = docsSchema({
+			extend: z.discriminatedUnion('type', [
+				z.object({ type: z.literal('base') }),
+				z.object({ type: z.literal('extended'), name: z.string() }),
+			]),
+		})({
+			image: () => ({}) as never,
+		});
+
+		const parsed = schema.parse({ title: 'Extended', type: 'extended', name: 'test' });
+		expect(parsed).toMatchInlineSnapshot(`
+			{
+			  "draft": false,
+			  "editUrl": true,
+			  "head": [],
+			  "name": "test",
+			  "pagefind": true,
+			  "sidebar": {
+			    "attrs": {},
+			    "hidden": false,
+			  },
+			  "template": "doc",
+			  "title": "Extended",
+			  "type": "extended",
+			}
+		`);
 	});
 });

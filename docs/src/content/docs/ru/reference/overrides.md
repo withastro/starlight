@@ -19,7 +19,7 @@ tableOfContents:
 
 #### `Head`
 
-**Стандартный компонент:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
+**Стандартный компонент:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Head.astro)
 
 Компонент, отображаемый внутри `<head>` каждой страницы.
 
@@ -28,7 +28,7 @@ tableOfContents:
 
 #### `ThemeProvider`
 
-**Стандартный компонент:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro)
+**Стандартный компонент:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro)
 
 Компонент, отображаемый внутри `<head>`, который устанавливает поддержку тёмной/светлой темы.
 Реализация по умолчанию включает в себя встроенный скрипт и `<template>`, используемый скриптом в [`<ThemeSelect />`](#themeselect).
@@ -39,7 +39,7 @@ tableOfContents:
 
 #### `SkipLink`
 
-**Стандартный компонент:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro)
+**Стандартный компонент:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SkipLink.astro)
 
 Компонент, отображаемый как первый элемент внутри `<body>`, который ссылается на основное содержимое страницы для обеспечения доступности.
 Реализация по умолчанию скрыта до тех пор, пока пользователь не наведет на нее курсор с помощью табуляции на клавиатуре.
@@ -54,7 +54,7 @@ tableOfContents:
 
 #### `PageFrame`
 
-**Стандартный компонент:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Стандартный компонент:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageFrame.astro)
 **Именованные слоты:** `header`, `sidebar`
 
 Компонент макета оборачивается вокруг большей части содержимого страницы.
@@ -63,13 +63,13 @@ tableOfContents:
 
 #### `MobileMenuToggle`
 
-**Стандартный компонент:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
+**Стандартный компонент:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileMenuToggle.astro)
 
 Компонент, отображаемый внутри [`<PageFrame>`](#pageframe), который отвечает за переключение навигации боковой панели на маленьких (мобильных) экранах просмотра.
 
 #### `TwoColumnContent`
 
-**Стандартный компонент:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Стандартный компонент:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/TwoColumnContent.astro)
 **Именованный слот:** `right-sidebar`
 
 Компонент макета оборачивается вокруг колонки с основным содержанием и правой боковой панели (оглавление).
@@ -83,21 +83,21 @@ tableOfContents:
 
 #### `Header`
 
-**Стандартный компонент:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
+**Стандартный компонент:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Header.astro)
 
 Компонент заголовка отображается в верхней части каждой страницы.
 По умолчанию отображаются [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), и [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
-**Стандартный компонент:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
+**Стандартный компонент:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SiteTitle.astro)
 
 Компонент, отображаемый в начале заголовка сайта для отображения заголовка сайта.
 Реализация по умолчанию включает логику для отрисовки логотипов, определённую в конфигурации Starlight.
 
 #### `Search`
 
-**Стандартный компонент:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
+**Стандартный компонент:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Search.astro)
 
 Компонент, используемый для отображения пользовательского интерфейса поиска Starlight.
 Реализация по умолчанию включает кнопку в заголовке и код для отображения модального окна поиска при нажатии на нее и загрузки [интерфейса Pagefind](https://pagefind.app/).
@@ -108,20 +108,20 @@ tableOfContents:
 
 #### `SocialIcons`
 
-**Стандартный компонент:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
+**Стандартный компонент:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/SocialIcons.astro)
 
 Компонент, отображаемый в шапке сайта, включая ссылки на социальные иконки.
 Реализация по умолчанию использует опцию [`social`](/ru/reference/configuration/#social) в конфигурации Starlight для отображения иконок и ссылок.
 
 #### `ThemeSelect`
 
-**Стандартный компонент:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeSelect.astro)
+**Стандартный компонент:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeSelect.astro)
 
 Компонент, отображаемый в шапке сайта, который позволяет пользователям выбрать желаемую цветовую схему.
 
 #### `LanguageSelect`
 
-**Стандартный компонент:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LanguageSelect.astro)
+**Стандартный компонент:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/LanguageSelect.astro)
 
 Компонент, отображаемый в заголовке сайта, который позволяет пользователям переключиться на другой язык.
 
@@ -134,7 +134,7 @@ tableOfContents:
 
 #### `Sidebar`
 
-**Стандартный компонент:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Sidebar.astro)
+**Стандартный компонент:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Sidebar.astro)
 
 Компонент, отображаемый перед содержимым страницы, содержащим глобальную навигацию.
 Реализация по умолчанию отображается в виде боковой панели на достаточно широких экранах и в виде выпадающего меню на маленьких (мобильных) экранах.
@@ -142,7 +142,7 @@ tableOfContents:
 
 #### `MobileMenuFooter`
 
-**Стандартный компонент:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuFooter.astro)
+**Стандартный компонент:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileMenuFooter.astro)
 
 Компонент, отображаемый в нижней части мобильного выпадающего меню.
 Реализация по умолчанию отображает [`<ThemeSelect />`](#themeselect) и [`<LanguageSelect />`](#languageselect).
@@ -156,20 +156,20 @@ tableOfContents:
 
 #### `PageSidebar`
 
-**Стандартный компонент:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro)
+**Стандартный компонент:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageSidebar.astro)
 
 Компонент, отображаемый перед содержимым главной страницы для вывода оглавления.
 Реализация по умолчанию отображает [`<TableOfContents />`](#tableofcontents) и [`<MobileTableOfContents />`](#mobiletableofcontents).
 
 #### `TableOfContents`
 
-**Стандартный компонент:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro)
+**Стандартный компонент:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/TableOfContents.astro)
 
 Компонент, который отображает оглавление текущей страницы на широких экранах просмотра.
 
 #### `MobileTableOfContents`
 
-**Стандартный компонент:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
+**Стандартный компонент:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MobileTableOfContents.astro)
 
 Компонент, который отображает оглавление текущей страницы на маленьких (мобильных) экранах просмотра.
 
@@ -181,20 +181,20 @@ tableOfContents:
 
 #### `Banner`
 
-**Стандартный компонент:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
+**Стандартный компонент:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Banner.astro)
 
 Баннерный компонент, отображаемый в верхней части каждой страницы.
 Реализация по умолчанию использует значение [`banner`](/ru/reference/frontmatter/#banner) метаданных страницы для принятия решения о необходимости отрисовки.
 
 #### `ContentPanel`
 
-**Стандартный компонент:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ContentPanel.astro)
+**Стандартный компонент:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ContentPanel.astro)
 
 Компонент макета, используемый для обёртывания секций колонки основного содержимого.
 
 #### `PageTitle`
 
-**Стандартный компонент:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro)
+**Стандартный компонент:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/PageTitle.astro)
 
 Компонент, содержащий элемент `<h1>` для текущей страницы.
 
@@ -202,27 +202,27 @@ tableOfContents:
 
 #### `DraftContentNotice`
 
-**Стандартный компонент:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+**Стандартный компонент:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/DraftContentNotice.astro)
 
 Уведомление, отображаемое пользователям во время разработки, когда текущая страница помечена как черновик.
 
 #### `FallbackContentNotice`
 
-**Стандартный компонент:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
+**Стандартный компонент:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/FallbackContentNotice.astro)
 
 Уведомление, отображаемое пользователям на страницах, где перевод на текущий язык недоступен.
 Используется только на многоязычных сайтах.
 
 #### `Hero`
 
-**Стандартный компонент:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
+**Стандартный компонент:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Hero.astro)
 
 Компонент, отображаемый в верхней части страницы, когда в метаданных задан параметр [`hero`](/ru/reference/frontmatter/#hero).
 В стандартном варианте на экране отображается крупный заголовок, теглайн и ссылки, призывающие к действию, а также дополнительное изображение.
 
 #### `MarkdownContent`
 
-**Стандартный компонент:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MarkdownContent.astro)
+**Стандартный компонент:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MarkdownContent.astro)
 
 Компонент отображается вокруг основного содержимого каждой страницы.
 Реализация по умолчанию устанавливает базовые стили для применения к содержимому Markdown.
@@ -237,25 +237,25 @@ tableOfContents:
 
 #### `Footer`
 
-**Стандартный компонент:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro)
+**Стандартный компонент:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Footer.astro)
 
 Компонент нижнего колонтитула отображается внизу каждой страницы.
 Реализация по умолчанию отображает [`<LastUpdated />`](#lastupdated), [`<Pagination />`](#pagination) и [`<EditLink />`](#editlink).
 
 #### `LastUpdated`
 
-**Стандартный компонент:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LastUpdated.astro)
+**Стандартный компонент:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/LastUpdated.astro)
 
 Компонент отображается в нижнем колонтитуле страницы для отображения даты последнего обновления.
 
 #### `EditLink`
 
-**Стандартный компонент:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/EditLink.astro)
+**Стандартный компонент:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/EditLink.astro)
 
 Компонент, отображаемый в нижнем колонтитуле страницы для отображения ссылки на страницу, где её можно редактировать.
 
 #### `Pagination`
 
-**Стандартный компонент:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Pagination.astro)
+**Стандартный компонент:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/Pagination.astro)
 
 Компонент отображается в нижнем колонтитуле страницы для отображения стрелок навигации между предыдущими и следующими страницами.

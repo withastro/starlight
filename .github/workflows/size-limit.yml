@@ -3,11 +3,14 @@ name: Size Limit
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+permissions: {}
 
 jobs:
   # This basic check runs size-limit for the current branch.
@@ -16,25 +19,44 @@ jobs:
     if: ${{ github.event.pull_request.head.repo.full_name != 'withastro/starlight' }}
     name: Check build output is within performance budget (forks)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - run: pnpm i
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pnpm, Node.js, and dependencies
+        uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          cache: true
       - run: 'pnpm build:examples'
       - run: pnpm size
 
   # This check cannot run in forks, so is only run for PRs from this repo.
   # It will run size-limit for both `main` and the PR branch and comment in the PR with changes.
   size-limit:
-    if: ${{ github.event.pull_request.head.repo.full_name == 'withastro/starlight' }}
+    # Skip on Changesets draft release PRs.
+    if: >
+      github.event.pull_request.head.repo.full_name == 'withastro/starlight' &&
+      !(github.event.pull_request.draft &&
+        github.head_ref == 'changeset-release/main')
     name: Check build output is within performance budget
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
+        with:
+          cache: true
+          install: false
       - name: Run size-limit
         uses: andresz1/size-limit-action@94bc357df29c36c8f8d50ea497c3e225c3c95d1d # v1.8.0
         with:
           github_token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           build_script: 'build:examples'
           package_manager: pnpm
+          script: pnpm exec size-limit --json

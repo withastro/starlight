@@ -260,7 +260,8 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 ```diff lang="js"
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -287,9 +288,7 @@ export const collections = {
 В компонентах Astro этот API доступен как часть [глобального объекта `Astro`](https://docs.astro.build/en/reference/api-reference/#locals) в виде `Astro.locals.t`:
 
 ```astro title="example.astro"
-<p dir={Astro.locals.t.dir()}>
-	{Astro.locals.t('404.text')}
-</p>
+<p dir={Astro.locals.t.dir()}>{Astro.locals.t('404.text')}</p>
 ```
 
 Вы также можете использовать API в [эндпойнтах](https://docs.astro.build/ru/guides/endpoints/), где объект `locals` доступен как часть контекста [эндпойнта](https://docs.astro.build/en/reference/api-reference/#locals):
@@ -319,11 +318,9 @@ export const GET = (context) => {
 
 Первую строку пользовательского интерфейса можно отобразить, передав `'link.astro'` в функцию `t()`:
 
-```astro {3}
+```astro /{(.+)}/
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/">
-	{Astro.locals.t('link.astro')}
-</a>
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
 <!-- Отрисовывает: <a href="...">Документация Astro</a> -->
 ```
 
@@ -332,10 +329,10 @@ export const GET = (context) => {
 
 ```astro {3}
 <!-- src/components/Example.astro -->
-<a href="https://docs.astro.build/ru/guides/astro-db/">
-	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+<a href="https://docs.astro.build/ru/guides/actions/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro Actions' })}
 </a>
-<!-- Отрисовывает: <a href="...">Документация Astro о Astro DB</a> -->
+<!-- Отрисовывает: <a href="...">Astro Actions — Документация Astro</a> -->
 ```
 
 Подробнее о том, как использовать функцию `t()` для интерполяции, форматирования и т. д., см. в [документации i18next](https://www.i18next.com/overview/api#t).

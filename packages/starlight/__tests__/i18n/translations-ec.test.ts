@@ -1,7 +1,7 @@
 import { pluginFramesTexts } from 'astro-expressive-code';
-import { afterEach, expect, test, vi } from 'vitest';
-import { addTranslations } from '../../integrations/expressive-code/translations';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import { expect, test, vi } from 'vitest';
+import { addTranslations } from '../../src/integrations/expressive-code/translations';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
 
 vi.mock('astro-expressive-code', async () => {
 	const mod =
@@ -15,16 +15,12 @@ vi.mock('astro-expressive-code', async () => {
 	};
 });
 
-afterEach(() => {
-	vi.clearAllMocks();
-});
-
 test('adds default english translations with no i18n config', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations(undefined);
 
 	addTranslations(config, useTranslations);
 
-	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en']);
+	expect(getExpressiveCodeOverriddenLanguages()).toEqual(['en']);
 });
 
 test('adds translations in a monolingual site with english as root locale', () => {
@@ -34,7 +30,7 @@ test('adds translations in a monolingual site with english as root locale', () =
 
 	addTranslations(config, useTranslations);
 
-	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en']);
+	expect(getExpressiveCodeOverriddenLanguages()).toEqual(['en']);
 });
 
 test('adds translations in a monolingual site with french as root locale', () => {
@@ -44,7 +40,7 @@ test('adds translations in a monolingual site with french as root locale', () =>
 
 	addTranslations(config, useTranslations);
 
-	expect(getExpressiveCodeOverridenLanguages()).toEqual(['fr']);
+	expect(getExpressiveCodeOverriddenLanguages()).toEqual(['fr']);
 });
 
 test('add translations in a multilingual site with english as root locale', () => {
@@ -55,7 +51,7 @@ test('add translations in a multilingual site with english as root locale', () =
 
 	addTranslations(config, useTranslations);
 
-	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en', 'fr']);
+	expect(getExpressiveCodeOverriddenLanguages()).toEqual(['en', 'fr']);
 });
 
 test('add translations in a multilingual site with french as root locale', () => {
@@ -66,7 +62,7 @@ test('add translations in a multilingual site with french as root locale', () =>
 
 	addTranslations(config, useTranslations);
 
-	expect(getExpressiveCodeOverridenLanguages()).toEqual(['fr', 'ru']);
+	expect(getExpressiveCodeOverriddenLanguages()).toEqual(['fr', 'ru']);
 });
 
 test('add translations in a multilingual site with english as default locale', () => {
@@ -80,7 +76,7 @@ test('add translations in a multilingual site with english as default locale', (
 
 	addTranslations(config, useTranslations);
 
-	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en', 'fr']);
+	expect(getExpressiveCodeOverriddenLanguages()).toEqual(['en', 'fr']);
 });
 
 test('add translations in a multilingual site with french as default locale', () => {
@@ -94,7 +90,7 @@ test('add translations in a multilingual site with french as default locale', ()
 
 	addTranslations(config, useTranslations);
 
-	expect(getExpressiveCodeOverridenLanguages()).toEqual(['fr', 'ru']);
+	expect(getExpressiveCodeOverriddenLanguages()).toEqual(['fr', 'ru']);
 });
 
 test('does not add translations if the label does not exist', () => {
@@ -125,6 +121,6 @@ function getStarlightConfigAndUseTranslations(
 	] as const;
 }
 
-function getExpressiveCodeOverridenLanguages() {
+function getExpressiveCodeOverriddenLanguages() {
 	return [...new Set(vi.mocked(pluginFramesTexts.overrideTexts).mock.calls.map(([lang]) => lang))];
 }

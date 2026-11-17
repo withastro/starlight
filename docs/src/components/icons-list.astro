@@ -1,6 +1,9 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
-import { Icons, type StarlightIcon } from '../../../packages/starlight/components/Icons';
+import {
+	Icons,
+	type StarlightIcon,
+} from '../../../packages/starlight/src/components-internals/Icons';
 
 interface Props {
 	labels?: {
@@ -14,16 +17,17 @@ const icons = Object.keys(Icons) as StarlightIcon[];
 ---
 
 <div class="icons-grid" data-label-copied={copied}>
-	{
-		icons.map((icon) => {
-			return (
-				<button class="icon-preview" aria-label={`Copy ${icon} icon to clipboard`} data-name={icon}>
-					<Icon name={icon} size="1.5rem" />
-					<span aria-live="polite">{icon}</span>
-				</button>
-			);
-		})
-	}
+	{icons.map((icon) => {
+		return <button
+			class="icon-preview"
+			aria-label={`Copy ${icon} icon to clipboard`}
+			data-name={icon}
+		>
+			<Icon name={icon} size="1.5rem" />
+			{/* The trailing space ensures Pagefind indexes each icon name as a separate word. */}
+			<span aria-live="polite">{icon}</span>{' '}
+		</button>;
+	})}
 </div>
 
 <script>

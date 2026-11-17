@@ -1,7 +1,7 @@
 ---
 title: Welcome to Starlight
 description: Get started building your docs site with Starlight.
-template: splash
+template: splash # Remove or comment out this line to display the site sidebar on this page.
 hero:
   title: Welcome to Starlight with Markdoc
   tagline: Congrats on setting up a new Starlight project!
@@ -20,16 +20,25 @@ hero:
 ## Next steps
 
 {% cardgrid stagger=true %}
+
 {% card title="Update content" icon="pencil" %}
 Edit `src/content/docs/index.mdoc` to see this page change.
 {% /card %}
+
+{% card title="Change page layout" icon="document" %}
+Delete `template: splash` in `src/content/docs/index.mdoc` to display a sidebar on this page.
+{% /card %}
+
 {% card title="Add new content" icon="add-document" %}
 Add Markdoc files to `src/content/docs` to create new pages.
 {% /card %}
+
 {% card title="Configure your site" icon="setting" %}
 Edit your `sidebar` and other config in `astro.config.mjs`.
 {% /card %}
+
 {% card title="Read the docs" icon="open-book" %}
 Learn more in [the Starlight Docs](https://starlight.astro.build/).
 {% /card %}
+
 {% /cardgrid %}

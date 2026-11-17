@@ -1,6 +1,6 @@
-import { writeDefinitionsAndSVGs } from './utils/file';
-import { getIconSvgPaths } from './utils/font';
-import { deleteRepo, parseMapping, setupRepo } from './utils/seti';
+import { writeDefinitionsAndSVGs } from './utils/file.ts';
+import { getIconSvgPaths } from './utils/font.ts';
+import { deleteRepo, parseMapping, setupRepo } from './utils/seti.ts';
 
 /**
  * Script generating definitions used by the Starlight `<FileTree>` component and associated SVGs.
@@ -11,7 +11,7 @@ import { deleteRepo, parseMapping, setupRepo } from './utils/seti';
  * ready to be consumed by Starlight.
  *
  * @see {@link file://./config.ts} for the configuration used by this script.
- * @see {@link file://../starlight/user-components/file-tree-icons.ts} for the generated file.
+ * @see {@link file://./../starlight/src/user-components/file-tree-icons.ts} for the generated file.
  * @see {@link https://opentype.js.org/glyph-inspector.html} for a font glyph inspector.
  */
 

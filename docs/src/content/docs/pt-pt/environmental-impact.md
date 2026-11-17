@@ -125,7 +125,6 @@ Estes testes realizados com o [Website Carbon Calculator][wcc] comparam páginas
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [WebPageTest Carbon Control](https://www.webpagetest.org/carbon-control/)
-- [Ecoping](https://ecoping.earth/)
 
 ### Artigos e palestras
 
@@ -138,5 +137,5 @@ Estes testes realizados com o [Website Carbon Calculator][wcc] comparam páginas
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
 [http]: https://httparchive.org/reports/state-of-the-web
 [assets]: https://docs.astro.build/en/guides/images/
-[islands]: https://docs.astro.build/pt-pt/concepts/islands/
+[islands]: https://docs.astro.build/pt-br/concepts/islands/
 [wcc]: https://www.websitecarbon.com/

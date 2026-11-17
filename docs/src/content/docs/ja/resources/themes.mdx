@@ -12,11 +12,13 @@ head:
 
 import ThemeGrid from '~/components/theme-grid.astro';
 
-テーマはStarlightのプラグインで、[カスタムCSS](/ja/guides/css-and-tailwind/)、[コンポーネントのオーバーライド](/ja/guides/overriding-components/)などによってサイトの見た目を変更できるほか、新しい機能を追加できます。
+テーマはStarlightのプラグインで、[カスタムCSS](/ja/guides/css-and-tailwind/)、[コンポーネントのオーバーライド](/ja/guides/overriding-components/)、その他の新機能などによってサイトの見た目を変更します。
 
 ## コミュニティテーマ
 
 コミュニティが作成したテーマをインストールすると、サイトの見た目や使い心地を手早くカスタマイズできます。
+
+以下のリストですべてのテーマをプレビューできるほか、[Starlightテーマのデモサイト](https://starlight-themes.netlify.app/)でインタラクティブに試すこともできます。
 
 <ThemeGrid
 	labels={{
@@ -36,7 +38,7 @@ import ThemeGrid from '~/components/theme-grid.astro';
 			previews: { light: 'rapide-light.png', dark: 'rapide-dark.png' },
 		},
 		{
-			title: 'Starlight Obsidian Theme',
+			title: 'Starlight Obsidian',
 			description:
 				'Obsidian Publishサイトのスタイルに着想を得たStarlightテーマです。',
 			href: 'https://fevol.github.io/starlight-theme-obsidian/',
@@ -76,8 +78,8 @@ import ThemeGrid from '~/components/theme-grid.astro';
 		{
 			title: 'Starlight Next.js',
 			description: 'Next.jsのドキュメントに着想を得たStarlightテーマです。',
-			href: 'https://starlight-theme-next.trueberryless.org/',
-			previews: { light: 'nextjs-light.png', dark: 'nextjs-dark.png' },
+			href: 'https://starlight-theme-next.netlify.app/',
+			previews: { light: 'next-light.png', dark: 'next-dark.png' },
 		},
 		{
 			title: 'Starlight Galaxy',
@@ -92,6 +94,98 @@ import ThemeGrid from '~/components/theme-grid.astro';
 				'スムーズなフロートインアニメーションを備えた直感的でモダンなStarlightテーマです。',
 			href: 'https://pelagornis-page.netlify.app/',
 			previews: { light: 'page-light.png', dark: 'page-dark.png' },
+		},
+		{
+			title: 'Starlight Gruvbox',
+			description: 'レトロでグルーヴィなStarlightテーマです。',
+			href: 'https://starlight-theme-gruvbox.otterlord.dev/',
+			previews: { light: 'gruvbox-light.png', dark: 'gruvbox-dark.png' },
+		},
+		{
+			title: 'Starlight Six',
+			description:
+				'Six TechnologyによるクリーンでモダンなStarlightテーマです。',
+			href: 'https://six-tech.github.io/Six.StarlightTheme/',
+			previews: { light: 'six-light.png', dark: 'six-dark.png' },
+		},
+		{
+			title: 'Starlight Vintage',
+			description:
+				'Starlightテーマは、旧バージョンのAstroドキュメントの不朽のデザインから多大な影響を受けています。',
+			href: 'https://starlight-theme-vintage.netlify.app/',
+			previews: { light: 'vintage-light.png', dark: 'vintage-dark.png' },
+		},
+		{
+			title: 'Starlight Rosé Pine',
+			description: 'StarlightにSohoの雰囲気を。',
+			href: 'https://starlight-theme-rose-pine.netlify.app/',
+			previews: { light: 'rose-pine-light.png', dark: 'rose-pine-dark.png' },
+		},
+		{
+			title: 'Starlight Nord',
+			description:
+				'Arctic Ice StudioのNord Themeに着想を得た、北極を思わせる青みがかったStarlightテーマです。',
+			href: 'https://kazettique.github.io/starlight-theme-nord/',
+			previews: { light: 'nord-light.png', dark: 'nord-dark.png' },
+		},
+		{
+			title: 'Starlight Terminal',
+			description:
+				'モダンとレトロの要素を組み合わせた、カスタマイズ済みのAstro Starlightテーマです。',
+			href: 'https://madlinux7.github.io/starlight-theme-terminal/',
+			previews: { light: 'terminal-light.png', dark: 'terminal-dark.png' },
+		},
+		{
+			title: 'Starlight Celestia',
+			description:
+				'一体感のあるサイドバーとあたたかみのあるアクセントを備えた、すっきりとしたモダンなテーマです。',
+			href: 'https://starlight-theme-celestia.devxy.codefloe.page/',
+			previews: { light: 'celestia-light.png', dark: 'celestia-dark.png' },
+		},
+		{
+			title: 'Starlight Lucode',
+			description:
+				'shadcn/uiに着想を得た、シャープで洗練された製品ドキュメント向けテーマです。',
+			href: 'https://lucas-labs.github.io/lucode-starlight-theme/',
+			previews: { light: 'lucode-light.png', dark: 'lucode-dark.png' },
+		},
+		{
+			title: 'Starlight MD3',
+			description:
+				'ダイナミックなカラーロール、トーンに基づくサーフェス、ステートレイヤー、モーションを備えた、Material Design 3とMaterial Youに着想を得たテーマです。',
+			href: 'https://axiaobo7788.github.io/starlight-material-design-theme/',
+			previews: { light: 'md3-light.png', dark: 'md3-dark.png' },
+		},
+		{
+			title: 'Starlight mdBook',
+			description:
+				'レイアウトや周辺のUI、5つの組み込みカラースキームを含め、rust-langのmdBookの見た目と使い心地を再現したテーマです。',
+			href: 'https://starlight-theme-mdbook.netlify.app/',
+			previews: { light: 'mdbook-light.png', dark: 'mdbook-dark.png' },
+		},
+		{
+			title: 'Exquisitus',
+			description:
+				'読みやすさと美しさをどちらも損なわずに両立するStarlightテーマです。',
+			href: 'https://starlight-theme-exquisitus.aka-300.workers.dev/',
+			previews: { light: 'exquisitus-light.png', dark: 'exquisitus-dark.png' },
+		},
+		{
+			title: 'Dracula for Starlight',
+			description:
+				'定番のDraculaパレットを使い、ライト版にはAlucardを採用しています。',
+			href: 'https://wasi-master.github.io/dracula-for-starlight/',
+			previews: { light: 'dracula-light.png', dark: 'dracula-dark.png' },
+		},
+		{
+			title: 'Large Print',
+			description:
+				'高齢者が読みやすいテーマです。大きなセリフ体、読者が操作できるフォントサイズのコントロール、あたたかみのあるダークモード、オプションでセルフホストできるCJKウェブフォントを備えています。',
+			href: 'https://www.xianmi.co/starlight/',
+			previews: {
+				light: 'large-print-light.png',
+				dark: 'large-print-dark.png',
+			},
 		},
 	]}
 />

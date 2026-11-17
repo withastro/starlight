@@ -1,5 +1,0 @@
----
-const { head } = Astro.locals.starlightRoute;
----
-
-{head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}

@@ -1,0 +1,20 @@
+name: Lunaria Trigger
+
+on:
+  # Trigger the workflow every time a pull request is opened or synchronized at the target `main` branch
+  pull_request:
+    types: [opened, synchronize]
+    branches: [main]
+    paths:
+      - 'docs/**'
+
+permissions: {}
+
+jobs:
+  lunaria-trigger:
+    name: Trigger Lunaria Overview
+    runs-on: ubuntu-slim
+
+    steps:
+      - run: echo "Triggering the Lunaria workflow"
+

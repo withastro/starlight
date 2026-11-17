@@ -1,0 +1,6 @@
+{
+  // Starlight must import user components directly instead of using the user components barrel
+  // file. To help avoid auto-import mistakes, we hide relative imports of this file from
+  // auto-import suggestions.
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": ["^(\\.{1,2}/)+components(\\.ts)?$"]
+}

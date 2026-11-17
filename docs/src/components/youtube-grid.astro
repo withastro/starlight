@@ -8,5 +8,7 @@ interface Props {
 ---
 
 <FluidGrid minColumnWidth="16rem">
-	{Astro.props.videos.map((video) => <YoutubeCard {...video} />)}
+	{Astro.props.videos.map((video) => (
+		<YoutubeCard {...video} />
+	))}
 </FluidGrid>
