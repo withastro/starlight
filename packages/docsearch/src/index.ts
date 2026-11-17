@@ -3,7 +3,7 @@ import type docsearch from '@docsearch/js';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { DocSearchConfigSchema } from './config';
+import { DocSearchConfigSchema, type DocSearchIndex } from './config';
 
 const moduleId = 'virtual:starlight/docsearch-config';
 const resolvedModuleId = `\0${moduleId}`;
@@ -22,8 +22,12 @@ interface DocSearchInlineUserConfig {
 	appId: string;
 	/** Your Algolia Search API key. */
 	apiKey: string;
-	/** Your Algolia index name. */
-	indexName: string;
+	/**
+	 * The Algolia indices to search, either as index names or as objects containing a name and
+	 * optional search parameters for that index.
+	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference#indices
+	 */
+	indices: Array<string | DocSearchIndexConfig>;
 	/**
 	 * The maximum number of results to display per search group.
 	 * @default 5
@@ -39,11 +43,16 @@ interface DocSearchInlineUserConfig {
 	 * @default false
 	 */
 	insights?: boolean | undefined;
+}
+
+interface DocSearchIndexConfig {
+	/** Your Algolia index name. */
+	name: string;
 	/**
-	 * The Algolia Search Parameters.
+	 * The Algolia Search Parameters to use for this index.
 	 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
 	 */
-	searchParameters?: DocSearchClientOptions['searchParameters'] | undefined;
+	searchParameters?: DocSearchIndex['searchParameters'] | undefined;
 }
 
 interface DocSearchModuleUserConfig {
@@ -75,7 +84,7 @@ interface DocSearchModuleUserConfig {
 	 * export default {
 	 *   appId: '...',
 	 *   apiKey: '...',
-	 *   indexName: '...',
+	 *   indices: ['...'],
 	 *   getMissingResultsUrl({ query }) {
 	 *     return `https://github.com/algolia/docsearch/issues/new?title=${encodeURIComponent(query)}`;
 	 *   },
