@@ -21,7 +21,7 @@ test('large_sidebar', async ({ bench }) => {
 	}).run(buildBenchOptions);
 });
 
-/** Create 10 top-level groups each with 7 nested subgroups. Every group contains 14 pages. */
+/** Create 10 top-level groups each with 7 nested subgroups. Every group contains 10 pages. */
 function createLargeSidebarDocs(): DocFile[] {
 	const docs: DocFile[] = [];
 	for (let section = 0; section < 10; section++) {
@@ -29,7 +29,7 @@ function createLargeSidebarDocs(): DocFile[] {
 			const directory = ['reference', `section-${section}`]
 				.concat(Array.from({ length: level }, (_, index) => `level-${index + 1}`))
 				.join('/');
-			for (let page = 0; page < 14; page++) {
+			for (let page = 0; page < 10; page++) {
 				docs.push({
 					path: `${directory}/page-${page}.md`,
 					title: `Page ${section}-${level}-${page}`,
