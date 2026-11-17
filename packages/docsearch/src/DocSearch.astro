@@ -135,7 +135,9 @@ const docsearchTranslations: DocSearchTranslationProps = {
 				Object.assign(options, translations);
 			} catch {}
 			if ('askAi' in options) {
-				import('@docsearch/js').then(({ default: docsearch }) => docsearch(options));
+				Promise.all([import('@docsearch/js'), import('@docsearch/css/dist/_askai.css')]).then(
+					([{ default: docsearch }]) => docsearch(options)
+				);
 			} else {
 				import('@docsearch/js/docsearch').then(({ default: docsearch }) => docsearch(options));
 			}
