@@ -1,5 +1,6 @@
 import type { StarlightPlugin } from '@astrojs/starlight/types';
-import type docsearch from '@docsearch/js';
+import type { DocSearchProps as DocSearchKeywordProps } from '@docsearch/js/docsearch';
+import type { DocSearchProps as DocSearchAIProps } from '@docsearch/js';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,10 +13,9 @@ const resolvedModuleId = `\0${moduleId}`;
 const pluginResolveIdIdFilter = new RegExp(`^${moduleId}$`);
 const pluginLoadIdFilter = new RegExp(`^${resolvedModuleId}$`);
 
-export type DocSearchClientOptions = Omit<
-	Parameters<typeof docsearch>[0],
-	'container' | 'translations'
->;
+export type DocSearchClientOptions =
+	| Omit<DocSearchKeywordProps, 'container' | 'translations'>
+	| Omit<DocSearchAIProps, 'container' | 'translations'>;
 
 interface DocSearchInlineUserConfig {
 	/** Your Algolia application ID. */
