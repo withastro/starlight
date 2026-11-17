@@ -1,6 +1,7 @@
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import type { BenchRunOptions } from 'vitest';
 import { build } from 'astro';
 
 process.env.ASTRO_TELEMETRY_DISABLED = 'true';
@@ -14,11 +15,13 @@ export interface DocFile {
 	body: string;
 }
 
-export const buildBenchOptions = {
+export const buildBenchOptions: BenchRunOptions = {
+	// Number of builds to run in the benchmark.
 	iterations: 1,
+	// Disable the minimum time budget per task so only `iterations` controls the number of builds.
 	time: 0,
-	warmupIterations: 0,
-	warmupTime: 0,
+	// Disable warmup to measure a cold build a cold build like a real `astro build`.
+	warmup: false,
 };
 
 const astroArtifactDirs = ['.astro', 'dist', 'node_modules/.astro'];
