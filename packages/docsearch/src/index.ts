@@ -77,7 +77,7 @@ interface DocSearchModuleUserConfig {
 	 * When `clientOptionsModule` is set, all options must be set via the module file. Other inline
 	 * options passed to the plugin in `astro.config.mjs` will be ignored.
 	 *
-	 * @see https://docsearch.algolia.com/docs/api
+	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference/
 	 *
 	 * @example
 	 * // astro.config.mjs
