@@ -134,7 +134,11 @@ const docsearchTranslations: DocSearchTranslationProps = {
 				const translations = JSON.parse(this.dataset.translations || '{}');
 				Object.assign(options, translations);
 			} catch {}
-			import('@docsearch/js').then(({ default: docsearch }) => docsearch(options));
+			if ('askAi' in options) {
+				import('@docsearch/js').then(({ default: docsearch }) => docsearch(options));
+			} else {
+				import('@docsearch/js/docsearch').then(({ default: docsearch }) => docsearch(options));
+			}
 		}
 	}
 	customElements.define('sl-doc-search', StarlightDocSearch);
