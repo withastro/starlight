@@ -24,6 +24,7 @@ export const DocSearchConfigSchema = z
 		maxResultsPerGroup: z.number().optional(),
 		disableUserPersonalization: z.boolean().optional(),
 		insights: z.boolean().optional(),
+		askAi: z.string().optional(),
 	})
 	.or(
 		z.strictObject({

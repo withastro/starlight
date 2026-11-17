@@ -25,7 +25,7 @@ interface DocSearchInlineUserConfig {
 	/**
 	 * The Algolia indices to search, either as index names or as objects containing a name and
 	 * optional search parameters for that index.
-	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference#indices
+	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference/#indices
 	 */
 	indices: Array<string | DocSearchIndexConfig>;
 	/**
@@ -43,6 +43,13 @@ interface DocSearchInlineUserConfig {
 	 * @default false
 	 */
 	insights?: boolean | undefined;
+	/**
+	 * Your Algolia Agent Studio agent ID used to enable Ask AI.
+	 *
+	 * To configure additional Ask AI options, use `clientOptionsModule` instead.
+	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference/#askai
+	 */
+	askAi?: string | undefined;
 }
 
 interface DocSearchIndexConfig {
