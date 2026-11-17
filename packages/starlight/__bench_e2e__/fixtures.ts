@@ -20,7 +20,7 @@ export const buildBenchOptions: BenchRunOptions = {
 	iterations: 1,
 	// Disable the minimum time budget per task so only `iterations` controls the number of builds.
 	time: 0,
-	// Disable warmup to measure a cold build a cold build like a real `astro build`.
+	// Disable warmup to measure a cold build like a real `astro build`.
 	warmup: false,
 };
 
