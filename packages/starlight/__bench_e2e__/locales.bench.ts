@@ -23,7 +23,7 @@ beforeAll(async () => {
 });
 
 test('locales', async ({ bench }) => {
-	await bench('build', async () => {
+	await bench('locales', async () => {
 		await buildFixture('locales');
 	}).run(buildBenchOptions);
 });

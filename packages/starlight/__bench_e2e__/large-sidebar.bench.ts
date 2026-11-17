@@ -16,7 +16,7 @@ beforeAll(async () => {
 });
 
 test('large_sidebar', async ({ bench }) => {
-	await bench('build', async () => {
+	await bench('large_sidebar', async () => {
 		await buildFixture('large-sidebar');
 	}).run(buildBenchOptions);
 });
