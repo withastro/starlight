@@ -44,12 +44,19 @@ const docsearchTranslations: DocSearchTranslationProps = {
 		aria-label={Astro.locals.t('search.label')}
 	>
 		<span class="DocSearch-Button-Container">
-			<svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20">
+			{/* https://github.com/algolia/docsearch/blob/1412418c58fc2a404b2bd4b5c450f318579877dd/packages/docsearch-react/src/icons/SearchIcon.tsx */}
+			<svg
+				width="20"
+				height="20"
+				class="DocSearch-Search-Icon"
+				viewBox="0 0 24 24"
+				aria-hidden="true"
+			>
+				<circle cx="11" cy="11" r="8" stroke="currentColor" fill="none" stroke-width="1.4"></circle>
 				<path
-					d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
+					d="m21 21-4.3-4.3"
 					stroke="currentColor"
 					fill="none"
-					fill-rule="evenodd"
 					stroke-linecap="round"
 					stroke-linejoin="round"
 				></path>
@@ -76,8 +83,10 @@ const docsearchTranslations: DocSearchTranslationProps = {
 		display: contents;
 	}
 	.DocSearch-Search-Icon {
-		width: 0.875em;
-		height: 0.875em;
+		width: 1em;
+		height: 1em;
+	}
+	.DocSearch-Search-Icon * {
 		stroke-width: 0.125rem;
 	}
 	.DocSearch-Button-Placeholder,
