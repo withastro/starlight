@@ -108,11 +108,6 @@ interface DocSearchModuleUserConfig {
 //
 // @see https://github.com/microsoft/TypeScript/issues/62309
 //
-// Additionally, in this specific case, relying on `z.input<schema>` would not work as
-// `@docsearch/js` references types from `@algolia/client-search` that TypeScript would try to
-// reference using a name when generating definitions but fail to do so because our package does
-// not directly depend on `@algolia/client-search`.
-//
 // As such approach uses 2 sources of truth (a schema and an hand-written type), we use type tests
 // to ensure that the hand-written type always matches the inferred input type from the schema.
 //
