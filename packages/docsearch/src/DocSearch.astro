@@ -1,5 +1,13 @@
 ---
 import '@docsearch/css/dist/modal.css';
+// We always import the Ask AI styles (~4 kB gzipped which was always included in v4) even when Ask
+// AI is disabled, as Astro includes every stylesheet imported by a component script on the page,
+// even when the import is conditional.
+// Adding a `<link>` tag using the styles URL from a `?url` import would skip the CSS pipeline and
+// load the styles after the page styles, causing potential order issues.
+// Picking the styles at build time based on the `askAi` option would not work with the
+// `clientOptionsModule` option as its options are only known at runtime.
+import '@docsearch/css/dist/_askai.css';
 import type docsearch from '@docsearch/js';
 import './variables.css';
 
@@ -148,9 +156,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 				Object.assign(options, translations);
 			} catch {}
 			if ('askAi' in options) {
-				Promise.all([import('@docsearch/js'), import('@docsearch/css/dist/_askai.css')]).then(
-					([{ default: docsearch }]) => docsearch(options)
-				);
+				import('@docsearch/js').then(({ default: docsearch }) => docsearch(options));
 			} else {
 				import('@docsearch/js/docsearch').then(({ default: docsearch }) => docsearch(options));
 			}
