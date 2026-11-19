@@ -30,6 +30,8 @@ If you use the [`clientOptionsModule` option](https://starlight.astro.build/guid
 - `docsearch.searchBox.cancelButtonAriaLabel` → `docsearch.searchBox.closeButtonAriaLabel`
 - `docsearch.footer.searchByText` → `docsearch.footer.poweredByText`
 
+DocSearch v5 also updates the wording of some default UI strings so you may want to review your existing translations.
+
 See ["Translating the DocSearch UI"](https://starlight.astro.build/guides/site-search/#translating-the-docsearch-ui) in the Starlight documentation for all available keys and their default values.
 
 #### Review your custom DocSearch styles
