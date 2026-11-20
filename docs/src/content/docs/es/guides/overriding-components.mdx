@@ -36,10 +36,11 @@ Sobreescribir los componentes por defecto de Starlight puede ser útil cuando:
    ```astro
    ---
    // src/components/EmailLink.astro
-   import type { Props } from '@astrojs/starlight/props';
+
+   const email = 'houston@example.com';
    ---
 
-   <a href="mailto:houston@example.com">Escríbeme</a>
+   <a href=`mailto:${email}`>Escríbeme</a>
    ```
 
 3. Dile a Starlight que use tu componente personalizado en la opción de configuración [`components`](/es/reference/configuration/#components) en `astro.config.mjs`:
@@ -70,35 +71,46 @@ Puedes construir con los componentes de UI por defecto de Starlight de la misma 
 
 El ejemplo a continuación muestra un componente personalizado que renderiza un enlace de correo electrónico junto con el componente `SocialIcons` por defecto:
 
-```astro {4,8}
+```astro {3,7}
 ---
 // src/components/EmailLink.astro
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
-<a href="mailto:houston@example.com">Escríbeme</a>
-<Default {...Astro.props}><slot /></Default>
+<a href="mailto:houston@example.com">E-mail Me</a>
+<Default><slot /></Default>
 ```
 
-Cuando renderizas un componente integrado dentro de un componente personalizado:
+Cuando renderizas un componente integrado dentro de un componente personalizado, añade un [`<slot />`](https://docs.astro.build/en/basics/astro-components/#slots) dentro del componente predeterminado. Esto gratantiza que, si se le pasan elementos hijos al componente, Astro sepa dónde renderizarlos.
 
-- Propaga `Astro.props` dentro de él. Esto se asegura de que reciba todos los datos que necesita para renderizar.
-- Agrega un [`<slot />`](https://docs.astro.build/es/core-concepts/astro-components/#slots) dentro del componente por defecto. Esto se asegura de que si el componente recibe cualquier elemento hijo, Astro sepa donde renderizarlos.
+Si reutilizas los componentes [`PageFrame`](/es/reference/overrides/#pageframe) o [`TwoColumnContent`](/es/reference/overrides/#twocolumncontent) que contienen [slots con nombre](https://docs.astro.build/es/basics/astro-components/#slots-con-nombre), también debes de [transferir](https://docs.astro.build/es/basics/astro-components/#transferir-slots) esos slots.
+
+El siguiente ejemplo muestra un componente personalizado que reutiliza el componente `TwoColumnContent`, el cual contiene un slot con nombre adicional, `right-sidebar`, que debe transferirse:
+
+```astro {8}
+---
+// src/components/CustomContent.astro
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
 
 ## Usa los datos de la página
 
-Cuando sobreescribes un componente de Starlight, tu implementación personalizada recibe un objeto `Astro.props` estándar que contiene todos los datos de la página actual.
+Cuando sobreescribes un componente de Starlight, puedes acceder al objeto global [`starlightRoute`](/es/guides/route-data/) que contiene todos los datos de la página actual.
 Esto te permite usar estos valores para controlar como se renderiza tu plantilla de componente.
 
-Por ejemplo, puedes leer los valores de frontmatter de la página como `Astro.props.entry.data`. En el siguiente ejemplo, un componente de reemplazo [`PageTitle`](/es/reference/overrides/#pagetitle) usa esto para mostrar el título de la página actual:
+En el siguiente ejemplo, un componente [`PageTitle`](/es/reference/overrides/#pagetitle) de reemplazo muestra el título de la página actual tal como se establece en el frontmatter del contenido:
 
-```astro {5} "{title}"
+```astro {4} "{title}"
 ---
 // src/components/Title.astro
-import type { Props } from '@astrojs/starlight/props';
 
-const { title } = Astro.props.entry.data;
+const { title } = Astro.locals.starlightRoute.entry.data;
 ---
 
 <h1 id="_top">{title}</h1>
@@ -110,7 +122,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Aprende más sobre todas las props disponibles en la [Referencia de Sobreescripciones](/es/reference/overrides/#props-de-componentes).
+Aprende más sobre todas las propiedades disponibles en la [Referencia de los Datos de Ruta](/es/reference/route-data/).
 
 ### Solo sobreescribe en páginas específicas
 
@@ -121,16 +133,15 @@ En el siguiente ejemplo, un componente que sobreescribe el [`Footer`](/es/refere
 ```astro
 ---
 // src/components/ConditionalFooter.astro
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
 {isHomepage ? (
 	<footer>Construido con Starlight 🌟</footer>
 ) : (
-	<Default {...Astro.props}><slot /></Default>
+	<Default><slot /></Default>
 )}
 ```
 
