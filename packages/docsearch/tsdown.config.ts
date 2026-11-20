@@ -2,7 +2,7 @@ import { defineConfig } from 'tsdown';
 
 export default defineConfig({
 	copy: ['src/DocSearch.astro', 'src/variables.css'],
-	dts: true,
+	dts: false,
 	entry: ['src/index.ts', 'src/schema.ts'],
 	fixedExtension: false,
 	publint: { strict: true },

@@ -1,7 +1,11 @@
 import type { DocSearchClientOptions } from './index';
 import { z } from 'astro/zod';
 
-type SearchOptions = DocSearchClientOptions['searchParameters'];
+// We explicitly use an interface here instead of a type alias to ensure that the declaration files
+// use a local name for the type rather than referencing the external `@algolia/client-search` type
+// as we don't depend on this package directly.
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface SearchOptions extends NonNullable<DocSearchClientOptions['searchParameters']> {}
 
 /** DocSearch configuration options. */
 export const DocSearchConfigSchema = z

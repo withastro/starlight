@@ -127,7 +127,7 @@ const AutoSidebarEntriesSchema = z
 	});
 export type AutoSidebarEntries = z.infer<typeof AutoSidebarEntriesSchema>;
 
-type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
+export type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
 	/** Array of links and subcategories to display in this category. */
 	items: Array<
 		| z.input<typeof SidebarLinkItemSchema>
@@ -138,7 +138,7 @@ type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
 	>;
 };
 
-type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
+export type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
 	/** Array of links and subcategories to display in this category. */
 	items: Array<
 		| z.output<typeof SidebarLinkItemSchema>
