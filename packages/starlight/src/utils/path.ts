@@ -54,5 +54,6 @@ export function ensureHtmlExtension(path: string) {
 /** Remove the extension from a path. */
 export function stripExtension(path: string) {
 	const periodIndex = path.lastIndexOf('.');
-	return path.slice(0, periodIndex > -1 ? periodIndex : undefined);
+	const slashIndex = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
+	return path.slice(0, periodIndex > slashIndex + 1 ? periodIndex : undefined);
 }
