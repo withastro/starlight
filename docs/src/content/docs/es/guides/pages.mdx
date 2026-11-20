@@ -3,6 +3,8 @@ title: Páginas
 description: Aprende cómo crear y gestionar las páginas de tu sitio de documentación con Starlight.
 sidebar:
   order: 1
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 Starlight genera las páginas HTML de tu sitio basadas en tu contenido, con opciones flexibles proporcionadas a través del frontmatter de Markdown.
@@ -73,28 +75,49 @@ Lee más en la [Guía de Páginas en la documentación de Astro](https://docs.as
 
 ### Usar el diseño de Starlight en páginas personalizadas
 
-Para usar el diseño de Starlight en páginas personalizadas, envuelve el contenido de tu página con el componente `<StarlightPage />`.
+Para usar el diseño de Starlight en páginas personalizadas, envuelve el contenido de tu página con el [componente `<StarlightPage>`](#componente-starlightpage).
 Esto puede ser útil si estás generando contenido dinámicamente pero aún quieres usar el diseño de Starlight.
+
+Para agregar enlaces de ancla a los encabezados que coincidan con los estilos de enlaces de ancla de Markdown de Starlight, puedes usar el [componente `<AnchorHeading>`](#componente-anchorheading) en tus páginas personalizadas.
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
 
 <StarlightPage frontmatter={{ title: 'Mi página personalizada' }}>
 	<p>Esta es una página personalizada con un componente personalizado:</p>
 	<CustomComponent />
+
+	<AnchorHeading level="2" id="learn-more">Más información</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/">Lee más en la documentación de Starlight</a>
+	</p>
 </StarlightPage>
 ```
 
-#### Props
+#### Componente `<StarlightPage>`
+
+El componente `<StarlightPage />` renderiza una página completa de contenido utilizando el diseño y los estilos de Starlight.
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Mi página personalizada' }}>
+	<!-- Contenido de la página personalizada -->
+</StarlightPage>
+```
 
 El componente `<StarlightPage />` acepta las siguientes props.
 
-##### `frontmatter` (requerido)
+##### `frontmatter`
 
+**requerido**  
 **tipo:** `StarlightPageFrontmatter`
 
 Establece las [propiedades de frontmatter](/es/reference/frontmatter/) para esta página, similar al frontmatter en las páginas de Markdown.
@@ -115,7 +138,7 @@ Las siguientes propiedades difieren del frontmatter de Markdown:
 Proporciona una barra lateral de navegación personalizada para esta página.
 Si no se establece, la página usará la barra lateral global predeterminada.
 
-Por ejemplo, la siguiente página anula la barra lateral predeterminada con un enlace a la página de inicio y un grupo de enlaces a varias otras páginas personalizadas.
+Por ejemplo, la siguiente página reemplaza la barra lateral predeterminada con un enlace a la página de inicio y un grupo de enlaces a varias otras páginas personalizadas.
 
 ```astro {3-13}
 <StarlightPage
@@ -126,12 +149,12 @@ Por ejemplo, la siguiente página anula la barra lateral predeterminada con un e
 			label: 'Constelaciones',
 			items: [
 				{ label: 'Andromeda', link: '/andromeda/' },
-				{ label: 'Orion', link: '/orion/', isCurrent: true },
+				{ label: 'Orion', link: '/orion/' },
 				{ label: 'Osa Menor', link: '/ursa-minor/', badge: 'Stub' },
 			],
 		},
 	]}
-	>Contenido de la página</StarlightPage
+	>Contenido de ejemplo.</StarlightPage
 >
 ```
 
@@ -171,4 +194,34 @@ Establece la etiqueta de idioma BCP-47 para el contenido de esta página, por ej
 **tipo:** `boolean`  
 **por defecto:** `false`
 
-Indica si esta página está utilizando [contenido alternativo](/es/guides/i18n/#contenido-de-respaldo) porque no hay traducción para el idioma actual.
+Indica si esta página está utilizando [contenido de respaldo](/es/guides/i18n/#contenido-de-respaldo) porque no hay traducción para el idioma actual.
+
+#### Componente `<AnchorHeading>`
+
+El componente `<AnchorHeading />` renderiza un elemento de encabezado HTML con un enlace de ancla clickeable que coincide con los estilos de Markdown de Starlight.
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-encabezado">Sub-encabezado</AnchorHeading>
+```
+
+Acepta las siguientes props así como cualquier otro [atributo global de HTML](https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes) válido.
+
+##### `level`
+
+**requerido**  
+**tipo:** `1 | 2 | 3 | 4 | 5 | 6`
+
+El nivel de encabezado a renderizar.
+Por ejemplo, `level="1"` renderizaría un elemento `<h1>`.
+
+##### `id`
+
+**requerido**  
+**tipo:** `string`
+
+El ID único para este encabezado.
+Esto se usará como el atributo `id` del encabezado renderizado y el ícono de ancla enlazará a él.
