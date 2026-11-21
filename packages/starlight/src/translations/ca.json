@@ -2,7 +2,6 @@
   "skipLink.label": "Saltar al contingut",
   "search.label": "Cercar",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Cancel·lar",
   "search.devWarning": "La cerca només està disponible a les versions de producció.  \nProva de construir i previsualitzar el lloc per provar-ho localment.",
   "themeSelect.accessibleLabel": "Seleccionar tema",
   "themeSelect.dark": "Fosc",
@@ -30,14 +29,10 @@
   "fileTree.directory": "Directori",
   "builtWithStarlight.label": "Fet amb Starlight",
   "pagefind.clear_search": "Netejar",
-  "pagefind.load_more": "Carregar més resultats",
   "pagefind.search_label": "Cercar pàgina",
-  "pagefind.filters_label": "Filtres",
   "pagefind.zero_results": "Cap resultat per a: [SEARCH_TERM]",
   "pagefind.many_results": "[COUNT] resultats per a: [SEARCH_TERM]",
   "pagefind.one_result": "[COUNT] resultat per a: [SEARCH_TERM]",
-  "pagefind.alt_search": "Cap resultat per a [SEARCH_TERM]. Mostrant resultats per a: [DIFFERENT_TERM]",
-  "pagefind.search_suggestion": "Cap resultat per a [SEARCH_TERM]. Prova alguna d’aquestes cerques:",
   "pagefind.searching": "Cercant [SEARCH_TERM]...",
   "heading.anchorLabel": "Section titled “{{title}}”"
 }

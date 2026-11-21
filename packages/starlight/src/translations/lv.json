@@ -2,7 +2,6 @@
   "skipLink.label": "Pāriet uz saturu",
   "search.label": "Meklēt",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Atcelt",
   "search.devWarning": "Meklēšana ir pieejama tikai ražošanas kompilācijās. \nMēģiniet kompilēt un priekšskatīt vietni, lai to pārbaudītu lokāli.",
   "themeSelect.accessibleLabel": "Izvēlieties tēmu",
   "themeSelect.dark": "Tumša",
