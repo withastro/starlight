@@ -442,7 +442,8 @@ function getSidebarCurrentEntry(sidebar: SidebarEntry[], pathname: string): Side
 	if (!entriesByPath) {
 		entriesByPath = new Map();
 		for (const entry of flattenSidebar(sidebar)) {
-			const path = neverPathFormatter(encodeURI(entry.href));
+			// `Astro.url.pathname` never includes a query string or fragment, so drop them from the href.
+			const path = neverPathFormatter(encodeURI(entry.href.replace(/[?#].*$/s, '')));
 			if (!entriesByPath.has(path)) entriesByPath.set(path, entry);
 		}
 		sidebarEntriesByPath.set(sidebar, entriesByPath);

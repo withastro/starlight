@@ -257,6 +257,40 @@ describe('flattenSidebar', () => {
 	});
 });
 
+describe('getSidebarFromConfig', () => {
+	test.each(['/environmental-impact/#section', '/environmental-impact/?tab=one'])(
+		'marks a link with a hash or query suffix (%s) as current',
+		(link) => {
+			const sidebar = getSidebarFromConfig(
+				[
+					SidebarItemSchema.parse({ label: 'Eco', link }),
+					SidebarItemSchema.parse({ label: 'Home', link: '/' }),
+				],
+				'/environmental-impact/',
+				undefined
+			);
+			const [eco, home] = flattenSidebar(sidebar);
+			expect(eco?.isCurrent).toBe(true);
+			expect(home?.isCurrent).toBe(false);
+		}
+	);
+
+	test('keeps previous and next links when the current link has a hash', () => {
+		const sidebar = getSidebarFromConfig(
+			[
+				SidebarItemSchema.parse({ label: 'Home', link: '/' }),
+				SidebarItemSchema.parse({ label: 'Eco', link: '/environmental-impact/#section' }),
+				SidebarItemSchema.parse({ label: 'Authoring', link: '/guides/authoring-content/' }),
+			],
+			'/environmental-impact/',
+			undefined
+		);
+		const links = getPrevNextLinks(sidebar, true, {});
+		expect(links.prev?.href).toBe('/');
+		expect(links.next?.href).toBe('/guides/authoring-content/');
+	});
+});
+
 describe('getPrevNextLinks', () => {
 	test('returns stable previous/next values', () => {
 		const sidebar = getSidebar('/environmental-impact/', undefined);
