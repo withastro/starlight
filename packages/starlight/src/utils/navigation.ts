@@ -442,7 +442,8 @@ function getSidebarCurrentEntry(sidebar: SidebarEntry[], pathname: string): Side
 	if (!entriesByPath) {
 		entriesByPath = new Map();
 		for (const entry of flattenSidebar(sidebar)) {
-			const path = neverPathFormatter(encodeURI(entry.href));
+			// A query string or hash does not change the page a link points to.
+			const path = neverPathFormatter(encodeURI(entry.href.replace(/[?#].*$/, '')));
 			if (!entriesByPath.has(path)) entriesByPath.set(path, entry);
 		}
 		sidebarEntriesByPath.set(sidebar, entriesByPath);
