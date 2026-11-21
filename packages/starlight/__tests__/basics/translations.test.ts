@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, test, vi } from 'vitest';
+import { createTranslationSystem } from '../../src/utils/createTranslationSystem';
 import { useTranslations } from '../../src/utils/translations';
 import translations from '../../src/translations';
 
@@ -153,5 +154,23 @@ describe('t.exists()', () => {
 	test('returns `false` for unknown translations', () => {
 		expect(t.exists).toBeTypeOf('function');
 		expect(t.exists('test.unknown')).toBe(false);
+	});
+});
+
+describe('createTranslationSystem()', () => {
+	test('falls back to base language for numeric BCP-47 region subtags like es-419 and en-001', async () => {
+		const useT = await createTranslationSystem(
+			{
+				defaultLocale: { lang: 'fr', dir: 'ltr', label: 'Français', locale: undefined },
+				locales: {
+					es: { lang: 'es-419', dir: 'ltr', label: 'Español (Latinoamérica)' },
+					en: { lang: 'en-001', dir: 'ltr', label: 'English' },
+				},
+			},
+			{}
+		);
+
+		expect(useT('es-419')('skipLink.label')).toBe(translations.es['skipLink.label']);
+		expect(useT('en-001')('skipLink.label')).toBe(translations.en['skipLink.label']);
 	});
 });

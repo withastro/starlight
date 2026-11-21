@@ -87,7 +87,7 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
  * const lang = stripLangRegion('en-GB'); // => 'en'
  */
 function stripLangRegion(lang: string) {
-	return lang.replace(/-[a-zA-Z]{2}/, '');
+	return lang.replace(/-(?:[a-zA-Z]{2}|\d{3})(?=-|$)/, '');
 }
 
 /**
