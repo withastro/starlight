@@ -82,7 +82,9 @@ export function deepMergeSchemas(defaultSchema: z.ZodType, userSchema: z.ZodType
 
 		for (const key of Object.keys(userSchema.shape)) {
 			const userFieldSchema = userSchema.shape[key] as z.ZodType;
-			const defaultFieldSchema = shape[key] as z.ZodType | undefined;
+			const defaultFieldSchema = Object.hasOwn(shape, key)
+				? (shape[key] as z.ZodType)
+				: undefined;
 
 			shape[key] = defaultFieldSchema
 				? deepMergeSchemas(defaultFieldSchema, userFieldSchema)

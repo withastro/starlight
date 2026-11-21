@@ -467,4 +467,23 @@ describe('docsSchema', () => {
 			}
 		`);
 	});
+
+	test('docs schema can be extended with Object.prototype property names', () => {
+		const schema = docsSchema({
+			extend: z.object({
+				toString: z.string().optional(),
+				constructor: z.string().optional(),
+			}),
+		})({
+			image: () => ({}) as never,
+		});
+
+		const parsed = schema.parse({
+			title: 'Prototype Keys',
+			toString: 'custom-to-string',
+			constructor: 'custom-constructor',
+		});
+		expect(parsed.toString).toBe('custom-to-string');
+		expect(parsed.constructor).toBe('custom-constructor');
+	});
 });
