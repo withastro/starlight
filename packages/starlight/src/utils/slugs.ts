@@ -104,7 +104,9 @@ export function localizedFilePath(filePath: string, locale: string | undefined):
 export function urlToSlug(url: URL): string {
 	let pathname = url.pathname;
 	const base = stripTrailingSlash(import.meta.env.BASE_URL);
-	if (pathname.startsWith(base)) pathname = pathname.replace(base, '');
+	if (base && (pathname === base || pathname.startsWith(base + '/'))) {
+		pathname = pathname.slice(base.length);
+	}
 	const segments = pathname.split('/');
 	const htmlExt = '.html';
 	if (segments.at(-1) === 'index.html') {

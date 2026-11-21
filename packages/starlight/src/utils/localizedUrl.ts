@@ -19,9 +19,9 @@ export function localizedUrl(
 	if (locale === 'root') locale = '';
 	/** Base URL with trailing `/` stripped. */
 	const base = stripTrailingSlash(import.meta.env.BASE_URL);
-	const hasBase = url.pathname.startsWith(base);
+	const hasBase = Boolean(base) && (url.pathname === base || url.pathname.startsWith(base + '/'));
 	// Temporarily remove base to simplify
-	if (hasBase) url.pathname = url.pathname.replace(base, '');
+	if (hasBase) url.pathname = url.pathname.slice(base.length);
 	const [_leadingSlash, baseSegment] = url.pathname.split('/');
 	// Strip .html extension to handle file output builds where URL might be e.g. `/en.html`
 	const htmlExt = '.html';

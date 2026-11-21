@@ -112,6 +112,7 @@ describe('urlToSlug', () => {
 		expect(urlToSlug(new URL('https://example.com/base/dir/sub-dir/page/'))).toBe(
 			'dir/sub-dir/page'
 		);
+		expect(urlToSlug(new URL('https://example.com/base-other/page/'))).toBe('base-other/page');
 		vi.unstubAllEnvs();
 	});
 });
