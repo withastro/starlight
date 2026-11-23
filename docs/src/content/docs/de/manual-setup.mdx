@@ -1,6 +1,6 @@
 ---
 title: Manuelle Einrichtung
-description: Lerne wie du Starlight manuell konfigurierst, um es zu einem bestehenden Astro-Projekt hinzuzufügen.
+description: Lerne, wie du Starlight manuell konfigurierst, um es zu einem bestehenden Astro-Projekt hinzuzufügen.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -77,12 +77,12 @@ export const collections = {
 };
 ```
 
-Starlight unterstützt auch die Option [`legacy.collectionsBackwardsCompat`](https://docs.astro.build/de/reference/legacy-flags/#collectionsbackwardscompat), das einige ältere Funktionen zu Content-Collections aus Version 4 beibehält.
-Dies ist nützlich, wenn du ein bestehendes Astro-Projekt hast und zum jetzigen Zeitpunkt keine Änderungen an den Sammlungen vornehmen kannst, um einen Loader zu verwenden.
+Starlight unterstützt auch die Option [`legacy.collectionsBackwardsCompat`](https://docs.astro.build/de/reference/legacy-flags/#collectionsbackwardscompat), die einige ältere Funktionen zu Content-Collections aus Version 4 beibehält.
+Dies ist nützlich, wenn du ein bestehendes Astro-Projekt hast und zum jetzigen Zeitpunkt keine Änderungen an den Sammlungen vornehmen kannst, um auf die in v5.0 eingeführte Content-Layer-API umzusteigen.
 
 ### Inhalte hinzufügen
 
-Starlight ist jetzt konfiguriert und du kannst Inhalte hinzuzufügen.
+Starlight ist jetzt konfiguriert und du kannst Inhalte hinzufügen.
 
 Erstelle ein Verzeichnis `src/content/docs/` und füge zunächst eine `index.md`-Datei hinzu.
 Dies wird die Startseite deiner neuen Website sein:
@@ -108,7 +108,7 @@ Wenn du ein bestehendes Astro-Projekt hast, kannst du mit Starlight schnell eine
 
 Um alle Starlight-Seiten mit einem anderen Pfad aufrufen zu können, lege den gesamten Inhalt in einem Unterverzeichnis von `src/content/docs/` ab.
 
-Wenn zum Beispiel die URL alle Starlight-Seiten mit `/guides/` beginnen sollen, füge deine Inhalte in das Verzeichnis `src/content/docs/guides/` ein:
+Wenn zum Beispiel die URLs aller Starlight-Seiten mit `/guides/` beginnen sollen, füge deine Inhalte in das Verzeichnis `src/content/docs/guides/` ein:
 
 import { FileTree } from '@astrojs/starlight/components';
 
