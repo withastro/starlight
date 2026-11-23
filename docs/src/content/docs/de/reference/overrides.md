@@ -35,7 +35,7 @@ Bevorzuge die [Konfigurationsoption `head`](/de/reference/configuration/#head), 
 **Standardkomponente:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/ThemeProvider.astro)
 
 Diese Komponente wird innerhalb von `<head>` gerendert und richtet die Unterstützung für dunkle/helle Themen ein.
-Die Standard-Implementierung enthält ein Inline-Skript und ein `<template>`, welches vom Skript in [`<ThemeSelect />`](#themeselect) verwendet wird.
+Die Standard-Implementierung enthält ein Inline-Skript, das beim Laden der Seite das Theme festlegt.
 
 ---
 

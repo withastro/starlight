@@ -9,7 +9,7 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Standardmäßig enthalten Websites, die Starlight verwenden, eine Volltextsuche mit [Pagefind](https://pagefind.app/), einem schnellen, bandbreitenarmen Suchwerkzeug für statische Websites.
 
-Es ist keine Konfiguration erforderlich, um die Suche zu aktivieren. Erstelle und implementiere deine Website und benutze dann die Suchleiste im Kopfbereich der Website, um nach Inhalten zu suchen.
+Es ist keine Konfiguration erforderlich, um die Suche zu aktivieren. Erstelle und veröffentliche deine Website und benutze dann die Suchleiste im Kopfbereich der Website, um nach Inhalten zu suchen.
 
 ## Inhalte in den Suchergebnissen ausblenden
 
@@ -135,7 +135,7 @@ Eine separate Konfigurationsdatei ist erforderlich, um Funktionsoptionen wie `tr
    	apiKey: 'DEIN_SUCH_API_SCHLÜSSEL',
    	indexName: 'DEIN_INDEX_NAME',
    	getMissingResultsUrl({ query }) {
-   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   		return `https://github.com/algolia/docsearch/issues/new?title=${encodeURIComponent(query)}`;
    	},
    	// ...
    } satisfies DocSearchClientOptions;
@@ -169,11 +169,11 @@ Alle unterstützten Optionen findest du in der [DocSearch JavaScript Client API 
 #### Die Benutzeroberfläche von DocSearch übersetzen
 
 DocSearch stellt standardmäßig nur englische Benutzeroberflächen-Strings zur Verfügung.
-Füge mithilfe des in Starlight integrierten [Internationalisierungs&shy;systems](/de/guides/i18n/#starlights-ui-übersetzen) Übersetzungen der Benutzeroberfläche der Modale für deine Sprache hinzu.
+Füge mithilfe des in Starlight integrierten [Internationalisierungs&shy;systems](/de/guides/i18n/#starlights-ui-übersetzen) Übersetzungen der Benutzeroberfläche des Modals für deine Sprache hinzu.
 
 <Steps>
 
-1. Erweitere die Definition der Starlight-Inhaltssammlung `i18n` um das DocSearch-Schema in `src/content.config.ts`:
+1. Erweitere die Definition der Starlight-Content-Collection `i18n` um das DocSearch-Schema in `src/content.config.ts`:
 
    ```js ins={5} ins=/{ extend: .+ }/
    // src/content.config.ts
