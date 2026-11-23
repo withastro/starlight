@@ -175,7 +175,7 @@ export default {
     'config:setup'({ config, updateConfig }) {
       updateConfig({
         social: [
-          ...config.social,
+          ...(config.social ?? []),
           {
             icon: 'twitter',
             label: 'Twitter',
