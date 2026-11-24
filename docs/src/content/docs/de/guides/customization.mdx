@@ -26,7 +26,7 @@ Das Hinzufügen eines eigenen Logos im Header ist ein schneller Weg, um einer St
 
    </FileTree>
 
-2. Füge den Pfad zu deinem Logo als Starlights [`logo.src`](/de/reference/configuration/#logo) Option in `astro.config.mjs` ein:
+2. Füge den Pfad zu deinem Logo als Starlights [`logo.src`](/de/reference/configuration/#logo)-Option in `astro.config.mjs` ein:
 
    ```diff lang="js"
    // astro.config.mjs
@@ -49,7 +49,7 @@ Das Hinzufügen eines eigenen Logos im Header ist ein schneller Weg, um einer St
 
 Standardmäßig wird das Logo neben dem `title` deiner Website angezeigt.
 Wenn dein Logobild bereits den Titel der Website enthält, kannst du den Titeltext optisch ausblenden, indem du die Option `replacesTitle` setzt.
-Der `title`-Text wird für Bildschirmleser weiterhin angezeigt, so dass die Kopfzeile zugänglich bleibt.
+Der `title`-Text wird für Bildschirmleser weiterhin angezeigt, sodass die Kopfzeile zugänglich bleibt.
 
 ```js {5}
 starlight({
@@ -130,7 +130,7 @@ template: splash
 Starlight zeigt auf jeder Seite ein Inhaltsverzeichnis an, um es den Lesern zu erleichtern, zu der gesuchten Überschrift zu springen.
 Du kannst das Inhaltsverzeichnis global in der Starlight-Integration oder seitenweise im Frontmatter anpassen - oder sogar deaktivieren.
 
-Standardmäßig werden die Überschriften `<h2>` und `<h3>` in das Inhaltsverzeichnis aufgenommen. Ändere die Überschriftenebenen für die gesamte Website mit den Optionen `minHeadingLevel` und `maxHeadingLevel` in deinem [globalen `tableOfContents`](/de/reference/configuration/#tableofcontents). Überschreibe diese Standardwerte auf einer individuellen Seite, indem du die entsprechenden [Frontmatter `tableOfContents`](/de/reference/frontmatter/#tableofcontents) Eigenschaften hinzufügst:
+Standardmäßig werden die Überschriften `<h2>` und `<h3>` in das Inhaltsverzeichnis aufgenommen. Ändere die Überschriftenebenen für die gesamte Website mit den Optionen `minHeadingLevel` und `maxHeadingLevel` in deinem [globalen `tableOfContents`](/de/reference/configuration/#tableofcontents). Überschreibe diese Standardwerte auf einer individuellen Seite, indem du die entsprechenden [Frontmatter-`tableOfContents`](/de/reference/frontmatter/#tableofcontents)-Eigenschaften hinzufügst:
 
 <Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
@@ -281,7 +281,7 @@ Du kannst dies anpassen, indem du eine `404.md` (oder `404.mdx`) Datei zu deinem
 
 </FileTree>
 
-Du kannst alle Seitenlayout- und Anpassungstechniken von Starlight in deiner 404-Seite verwenden. Zum Beispiel verwendet die Standard 404-Seite die [`splash` Vorlage](#seitenlayout) und [`hero`](/de/reference/frontmatter/#hero) Komponente in Frontmatter:
+Du kannst alle Seitenlayout- und Anpassungstechniken von Starlight in deiner 404-Seite verwenden. Zum Beispiel verwendet die Standard-404-Seite die [`splash`-Vorlage](#seitenlayout) und [`hero`](/de/reference/frontmatter/#hero)-Komponente in Frontmatter:
 
 ```md {4,6-8}
 ---

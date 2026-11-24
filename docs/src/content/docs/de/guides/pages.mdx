@@ -75,7 +75,7 @@ Mehr dazu findest du in der [„Seiten“-Anleitung in der Astro-Dokumentation](
 
 ### Das Starlight-Design in eigenen Seiten verwenden
 
-Um das Starlight-Layout in benutzerdefinierten Seiten zu verwenden, umhüllst du deinen Seiteninhalt mit der [Komponente `<StarlightPage />`](#starlightpage-komponente).
+Um das Starlight-Layout in benutzerdefinierten Seiten zu verwenden, umhüllst du deinen Seiteninhalt mit der [`<StarlightPage />`-Komponente](#starlightpage-komponente).
 Das kann hilfreich sein, wenn du Inhalte dynamisch generierst, aber trotzdem das Starlight-Design verwenden willst.
 
 Um Ankerlinks zu Überschriften hinzuzufügen, die den Markdown-Ankerlinkstilen von Starlight entsprechen, kannst du die [`<AnchorHeading>`-Komponente](#anchorheading-komponente) in deinen eigenen Seiten verwenden.
@@ -106,7 +106,7 @@ import CustomComponent from './CustomComponent.astro';
 
 #### `<StarlightPage>`-Komponente
 
-Die Komponente `<StarlightPage />` rendert eine ganze Seite mit dem Layout und den Stilen von Starlight.
+Die `<StarlightPage />`-Komponente rendert eine ganze Seite mit dem Layout und den Stilen von Starlight.
 
 ```astro
 ---
@@ -118,7 +118,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 </StarlightPage>
 ```
 
-Die Komponente `<StarlightPage />` akzeptiert die folgenden Eigenschaften.
+Die `<StarlightPage />`-Komponente akzeptiert die folgenden Eigenschaften.
 
 ##### `frontmatter`
 
@@ -132,7 +132,7 @@ Die folgenden Eigenschaften unterscheiden sich vom Markdown-Frontmatter:
 
 - Die Eigenschaft [`slug`](/de/reference/frontmatter/#slug) wird nicht unterstützt und wird automatisch anhand der URL der benutzerdefinierten Seite gesetzt.
 - Die Option [`editUrl`](/de/reference/frontmatter/#editurl) erfordert eine URL, um einen Bearbeitungslink anzuzeigen.
-- Die Frontmatter-Eigenschaft [`sidebar`](/de/reference/frontmatter/#sidebar), mit der du festlegen kannst, wie die Seite in [autogenerierten Linkgruppen](/de/reference/configuration/#sidebar) erscheint, ist nicht verfügbar. Seiten, die die Komponente `<StarlightPage />` verwenden, sind nicht Teil einer Sammlung und können nicht zu einer automatisch generierten Seitenleistengruppe hinzugefügt werden.
+- Die Frontmatter-Eigenschaft [`sidebar`](/de/reference/frontmatter/#sidebar), mit der du festlegen kannst, wie die Seite in [autogenerierten Linkgruppen](/de/reference/configuration/#sidebar) erscheint, ist nicht verfügbar. Seiten, die die `<StarlightPage />`-Komponente verwenden, sind nicht Teil einer Sammlung und können nicht zu einer automatisch generierten Seitenleistengruppe hinzugefügt werden.
 - Die Option [`draft`](/de/reference/frontmatter/#draft) zeigt nur einen [Hinweis](/de/reference/overrides/#draftcontentnotice) an, dass die Seite ein Entwurf ist, schließt sie aber nicht automatisch von Produktions-Builds aus.
 
 ##### `sidebar`
@@ -203,7 +203,7 @@ Gibt an, ob diese Seite [Fallback-Inhalt](/de/guides/i18n/#fallback-inhalt) verw
 
 #### `<AnchorHeading>`-Komponente
 
-Die Komponente `<AnchorHeading />` rendert ein HTML-Überschriftenelement mit einem klickbaren Anker-Link, der den Markdown-Styles von Starlight entspricht.
+Die `<AnchorHeading />`-Komponente rendert ein HTML-Überschriftenelement mit einem klickbaren Anker-Link, der den Markdown-Styles von Starlight entspricht.
 
 ```astro
 ---
