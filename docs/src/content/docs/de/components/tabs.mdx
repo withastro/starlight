@@ -5,7 +5,7 @@ description: Lerne, wie du in Starlight Oberflächen mit Registerkarten erstells
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Um eine Oberfläche mit Registerkarten zu erstellen, verwende die Komponenten `<Tabs>` und `<TabItem>`.
+Um eine Oberfläche mit Registerkarten zu erstellen, verwende die `<Tabs>`- und `<TabItem>`-Komponenten.
 Registerkarten sind nützlich, um gleichwertige Informationen zu gruppieren, wenn ein Nutzer nur eine von mehreren Optionen sehen muss.
 
 import Preview from '~/components/component-preview.astro';
@@ -27,7 +27,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Verwendung
 
-Zeige eine Oberfläche mit Registerkarten an, indem du die Komponenten `<Tabs>` und `<TabItem>` benutzt.
+Zeige eine Oberfläche mit Registerkarten an, indem du die `<Tabs>`- und `<TabItem>`-Komponenten verwendest.
 Jedes `<TabItem>` muss ein [`label`](#label) haben, um es den Benutzern anzuzeigen.
 
 <Preview>
@@ -193,7 +193,7 @@ Io, Europa, Ganymed
 
 **Implementation:** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/user-components/Tabs.astro)
 
-Die Komponente `<Tabs>` fasst mehrere `<TabItem>`-Komponenten zusammen und akzeptiert die folgenden Eigenschaften:
+Die `<Tabs>`-Komponente fasst mehrere `<TabItem>`-Komponenten zusammen und akzeptiert die folgenden Eigenschaften:
 
 ### `syncKey`
 

@@ -178,7 +178,7 @@ export default defineConfig({
 import LanguagesList from '~/components/languages-list.astro';
 import UIStringsList from '~/components/ui-strings-list.astro';
 
-Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.&nbsp;B. die Überschrift „Auf dieser Seite“ im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
+Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.&nbsp;B. die Überschrift „Auf dieser Seite“ im Inhaltsverzeichnis), sodass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
 
 <LanguagesList startsSentence /> werden standardmäßig übersetzt, und wir freuen
 uns über [Beiträge zur Aufnahme weiterer
@@ -222,7 +222,7 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
    <UIStringsList />
 
    Die Codeblöcke von Starlight werden von der [Expressive Code](https://expressive-code.com/) Bibliothek unterstützt.
-   Du kannst die Übersetzungen für die UI-Strings in derselben JSON-Datei mit Hilfe von `expressiveCode`-Schlüsseln festlegen:
+   Du kannst die Übersetzungen für die UI-Strings in derselben JSON-Datei mithilfe von `expressiveCode`-Schlüsseln festlegen:
 
    ```json
    {
@@ -392,9 +392,9 @@ Weitere Informationen findest du in der [`dir()`-Referenz in der i18next-Dokumen
 
 ## Zugriff auf das aktuelle Gebietsschema
 
-Du kannst [`Astro.currentLocale`](https://docs.astro.build/de/reference/api-reference/#currentlocale) verwenden, um das aktuelle Gebietsschema in `.astro` Komponenten zu lesen.
+Du kannst [`Astro.currentLocale`](https://docs.astro.build/de/reference/api-reference/#currentlocale) verwenden, um das aktuelle Gebietsschema in `.astro`-Komponenten zu lesen.
 
-Das folgende Beispiel liest das aktuelle Gebietsschema aus und verwendet es mit Hilfe der [`getRelativeLocaleUrl()`](https://docs.astro.build/de/reference/modules/astro-i18n/#getrelativelocaleurl)-Methode, um einen Link zu einer Informationsseite in der aktuellen Sprache zu erzeugen:
+Das folgende Beispiel liest das aktuelle Gebietsschema aus und verwendet es mithilfe der [`getRelativeLocaleUrl()`](https://docs.astro.build/de/reference/modules/astro-i18n/#getrelativelocaleurl)-Methode, um einen Link zu einer Informationsseite in der aktuellen Sprache zu erzeugen:
 
 ```astro
 ---
