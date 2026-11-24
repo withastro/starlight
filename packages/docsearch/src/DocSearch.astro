@@ -155,7 +155,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 				const translations = JSON.parse(this.dataset.translations || '{}');
 				Object.assign(options, translations);
 			} catch {}
-			if ('askAi' in options) {
+			if ('askAi' in options && options.askAi) {
 				import('@docsearch/js').then(({ default: docsearch }) => docsearch(options));
 			} else {
 				import('@docsearch/js/docsearch').then(({ default: docsearch }) => docsearch(options));
