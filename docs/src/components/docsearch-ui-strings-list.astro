@@ -1,0 +1,13 @@
+---
+import { Code } from '@astrojs/starlight/components';
+import uiStrings from './docsearch-ui-strings-list.json?raw';
+
+interface Props {
+	title: string;
+}
+---
+
+<details>
+	<summary>{Astro.props.title}</summary>
+	<Code code={uiStrings} lang="json" title="src/content/i18n/en.json" />
+</details>
