@@ -41,7 +41,11 @@
 	--docsearch-hit-height: 56px;
 	--docsearch-hit-highlight-color: var(--sl-color-gray-5);
 	--docsearch-hit-background: var(--sl-color-black);
-	--docsearch-hit-focus-background: var(--sl-color-accent-low);
+	--docsearch-hit-focus-background: color-mix(
+		in srgb,
+		var(--sl-color-accent) 10%,
+		var(--docsearch-hit-background)
+	);
 
 	/* footer */
 	--docsearch-footer-height: 44px;
