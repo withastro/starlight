@@ -65,8 +65,8 @@ jobs:
       !(github.event.pull_request.draft &&
         github.head_ref == 'changeset-release/main' &&
         github.event.pull_request.head.repo.full_name == 'withastro/starlight')
-    # https://codspeed.io/docs/features/macro-runners#aws-graviton-arm64
-    runs-on: codspeed-macro-arm64-graviton-ubuntu-22-04
+    # https://codspeed.io/docs/features/macro-runners#amd-ryzen-9950x-x86_64
+    runs-on: codspeed-macro-x64-ryzen-9950x-ubuntu-24-04
     permissions:
       contents: read
       id-token: write
