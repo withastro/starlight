@@ -35,6 +35,7 @@ import hu from './hu.json';
 import el from './el.json';
 import mk from './mk.json';
 import isIS from './is.json';
+import tg from './tg.json';
 
 const { parse } = builtinI18nSchema();
 
@@ -76,5 +77,6 @@ export default Object.fromEntries(
 		el,
 		mk,
 		is: isIS,
+		tg,
 	}).map(([key, dict]) => [key, parse(dict)])
 );
