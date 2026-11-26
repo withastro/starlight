@@ -229,7 +229,7 @@ Die Standard&shy;implementierung zeigt einen großen Titel, eine Tagline und Cal
 **Standardkomponente:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/src/components/MarkdownContent.astro)
 
 Diese Komponente wird um den Hauptinhalt jeder Seite herum gerendert.
-Die Standard&shy;implementierung richtet grundlegende Stile ein, die auf Markdown-Inhalte angewendet werden.
+Die Standard&shy;implementierung richtet grundlegende Styles ein, die auf Markdown-Inhalte angewendet werden.
 
 Die Markdown-Inhaltsstile werden auch in der Datei `@astrojs/starlight/style/markdown.css` veröffentlicht und auf die CSS-Klasse `.sl-markdown-content` bezogen.
 

@@ -9,7 +9,7 @@ Du kannst deine Starlight-Website mit benutzerdefinierten CSS-Dateien gestalten 
 
 Wenn du nach einer schnellen Möglichkeit suchst, das standardmäßige Aussehen deiner Website abzuändern, dann schau dir die [Community-Themes](/de/resources/themes/) an.
 
-## Benutzerdefinierte CSS-Styles (Stile)
+## Benutzerdefinierte CSS-Styles
 
 Passe die Styles deiner Starlight-Website an, indem du zusätzliche CSS-Dateien bereitstellst, um die Standard-Styles von Starlight zu verändern oder zu erweitern.
 
@@ -52,11 +52,11 @@ Du kannst dir alle CSS-Eigenschaften, die von Starlight verwendet werden und die
 
 ### Kaskadenschichten
 
-Starlight verwendet intern [Kaskadenschichten](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers), um die Reihenfolge der Stile zu verwalten.
+Starlight verwendet intern [Kaskadenschichten](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers), um die Reihenfolge der Styles zu verwalten.
 Dies gewährleistet eine vorhersehbare CSS-Reihenfolge und ermöglicht einfachere Überschreibungen.
 Jedes benutzerdefinierte CSS ohne Schichten überschreibt die Standardstile von Starlight.
 
-Wenn du Kaskadenschichten verwendest, kannst du [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) in deinem benutzerdefinierten CSS verwenden, um die Rangfolge der verschiedenen Schichten in Bezug auf die Stile der Schicht `starlight` festzulegen:
+Wenn du Kaskadenschichten verwendest, kannst du [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) in deinem benutzerdefinierten CSS verwenden, um die Rangfolge der verschiedenen Schichten in Bezug auf die Styles der Schicht `starlight` festzulegen:
 
 ```css "starlight"
 /* src/styles/custom.css */
@@ -64,7 +64,7 @@ Wenn du Kaskadenschichten verwendest, kannst du [`@layer`](https://developer.moz
 ```
 
 Das obige Beispiel definiert eine benutzerdefinierte Schicht namens `my-reset`, die vor allen Starlight-Schichten angewendet wird, und eine weitere Schicht namens `my-overrides`, die nach allen Starlight-Schichten angewendet wird.
-Alle Stile in der Schicht `my-overrides` haben Vorrang vor den Stilen von Starlight, aber Starlight kann immer noch Stile ändern, die in der Schicht `my-reset` festgelegt wurden.
+Alle Styles in der Schicht `my-overrides` haben Vorrang vor den Styles von Starlight, aber Starlight kann immer noch Styles ändern, die in der Schicht `my-reset` festgelegt wurden.
 
 ## Tailwind CSS
 
@@ -75,7 +75,7 @@ Das Starlight Tailwind CSS wendet die folgende Konfiguration an:
 
 - Konfiguriert Tailwinds `dark:`-Varianten so, dass sie mit Starlights Dark Mode funktionieren.
 - Verwendet Tailwind [Themenfarben und Schriftarten](#starlight-mit-tailwind-designen) in Starlights UI.
-- Stellt wesentliche Teile der Preflight-Reset-Stile von Tailwind wieder her.
+- Stellt wesentliche Teile der Preflight-Reset-Styles von Tailwind wieder her.
 
 ### Erstelle ein neues Projekt mit Tailwind
 
@@ -182,7 +182,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-    Diese Tailwind-Theme-Konfiguration legt die Reihenfolge der [Kaskadenschichten](#kaskadenschichten) von Starlight fest, importiert das ergänzende CSS von Starlight für Tailwind und importiert die Theme- und Utility-Stile von Tailwind.
+    Diese Tailwind-Theme-Konfiguration legt die Reihenfolge der [Kaskadenschichten](#kaskadenschichten) von Starlight fest, importiert das ergänzende CSS von Starlight für Tailwind und importiert die Theme- und Utility-Styles von Tailwind.
     Wenn dein Projekt eine zusätzliche Tailwind-Konfiguration erfordert, schau dir den Abschnitt [„Mehrere Tailwind-Konfigurationen verwenden“](#mehrere-tailwind-konfigurationen-verwenden) an.
 
 4.  Aktualisiere die Starlight-Konfiguration, um die Tailwind-CSS-Datei als erstes Element im Array `customCss` hinzuzufügen:
@@ -274,8 +274,8 @@ Wenn diese Option aktiviert ist, überschreiben die folgenden benutzerdefinierte
 
 ### Mehrere Tailwind-Konfigurationen verwenden
 
-Mehrere Tailwind-Konfigurationen können verwendet werden, um verschiedene Stile auf verschiedene Teile deiner Website anzuwenden, z.&nbsp;B. wenn du [Starlight in einem Unterpfad verwendest](/de/manual-setup/#starlight-mit-einem-anderen-pfad-verwenden) oder wenn du [benutzerdefinierte Seiten](/de/guides/pages/#benutzerdefinierte-seiten) zu deiner Website hinzufügst.
-Du möchtest vielleicht die Preflight-Reset-Stile von Tailwind auf deinen benutzerdefinierten Seiten verwenden und trotzdem die Kompatibilitätsschicht von Starlight auf Starlight-Seiten anwenden.
+Mehrere Tailwind-Konfigurationen können verwendet werden, um verschiedene Styles auf verschiedene Teile deiner Website anzuwenden, z.&nbsp;B. wenn du [Starlight in einem Unterpfad verwendest](/de/manual-setup/#starlight-mit-einem-anderen-pfad-verwenden) oder wenn du [benutzerdefinierte Seiten](/de/guides/pages/#benutzerdefinierte-seiten) zu deiner Website hinzufügst.
+Du möchtest vielleicht die Preflight-Reset-Styles von Tailwind auf deinen benutzerdefinierten Seiten verwenden und trotzdem die Kompatibilitätsschicht von Starlight auf Starlight-Seiten anwenden.
 
 Die folgende Tailwind-CSS-Konfiguration richtet Tailwind ohne Plugins oder zusätzliche Einstellungen ein und kann als Ausgangspunkt für Seiten verwendet werden, die nicht mit Starlight erstellt wurden:
 
@@ -351,8 +351,8 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 >
 	<Fragment slot="css-docs">
 		Füge das folgende CSS in deinem Projekt in eine [benutzerdefinierte
-		CSS-Datei](#benutzerdefinierte-css-styles-stile) ein, um dieses Theme auf
-		deiner Website anzuwenden.
+		CSS-Datei](#benutzerdefinierte-css-styles) ein, um dieses Theme auf deiner
+		Website anzuwenden.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
 		Füge die folgenden CSS-Variablen in den `@theme`-Block in deiner
