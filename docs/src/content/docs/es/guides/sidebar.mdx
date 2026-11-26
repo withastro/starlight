@@ -191,9 +191,11 @@ La configuración anterior genera la siguiente barra lateral:
 Starlight puede generar automáticamente un grupo en tu barra lateral basado en un directorio de tu documentación.
 Esto es útil cuando no deseas ingresar manualmente cada elemento de la barra lateral en un grupo.
 
-Por defecto, las páginas se ordenan en orden alfabético según el [`slug`](/es/reference/overrides/#slug) del archivo.
+Por defecto, las páginas se ordenan en orden alfabético según el [`id`](/es/reference/route-data/#id) del archivo.
 
-Agrega un grupo autogenerado usando un objeto con las propiedades `label` y `autogenerate`. Tu configuración `autogenerate` debe especificar el `directory` para usar en las entradas de la barra lateral. Por ejemplo, con la siguiente configuración:
+Agrega un grupo autogenerado usando un objeto con la propiedad `autogenerate`.
+Tu configuración `autogenerate` debe especificar el `directory` para usar en las entradas de la barra lateral.
+Por ejemplo, con la siguiente configuración:
 
 ```js "label:" "autogenerate:"
 starlight({
@@ -201,7 +203,7 @@ starlight({
 		{
 			label: 'Constelaciones',
 			// Un grupo de enlaces autogenerados para el directorio 'constellations'.
-			autogenerate: { directory: 'constellations' },
+			items: [{ autogenerate: { directory: 'constellations' } }],
 		},
 	],
 });
@@ -244,10 +246,11 @@ La siguiente barra lateral se generará automáticamente:
 
 Usa el campo [`sidebar`](/es/reference/frontmatter/#sidebar) en las páginas individuales para personalizar los enlaces autogenerados.
 
-Las opciones del frontmatter de la barra lateral te permiten establecer un [etiqueta personalizada](/es/reference/frontmatter/#label) o agregar una [insignia](/es/reference/frontmatter/#badge) a un enlace, [ocultar](/es/reference/frontmatter/#hidden) un enlace de la barra lateral o definir un [peso de ordenación personalizado](/es/reference/frontmatter/#order).
+Las opciones del frontmatter de la barra lateral te permiten establecer una [etiqueta personalizada](/es/reference/frontmatter/#label), usar los [atributos personalizados](/es/reference/frontmatter/#attrs) o agregar una [insignia](/es/reference/frontmatter/#badge) a un enlace, [ocultar](/es/reference/frontmatter/#hidden) un enlace de la barra lateral o definir un [peso de ordenación personalizado](/es/reference/frontmatter/#order).
 
 ```md "sidebar:"
 ---
+# src/content/docs/example.md
 title: Mi página
 sidebar:
   # Configura una etiqueta personalizada para el enlace
@@ -305,7 +308,7 @@ starlight({
 		{
 			label: 'Moons',
 			badge: 'Obsoleto',
-			autogenerate: { directory: 'moons' },
+			items: [{ autogenerate: { directory: 'moons' } }],
 		},
 	],
 });
@@ -389,18 +392,21 @@ La configuración anterior genera la siguiente barra lateral:
 	]}
 />
 
+Aprende más sobre [el uso y la personalización de insignias](/es/components/badges/#uso).
+
 ## Atributos HTML personalizados
 
 Los enlaces también pueden incluir una propiedad `attrs` para agregar atributos HTML personalizados al elemento de enlace.
 
 En el siguiente ejemplo, `attrs` se usa para agregar un atributo `target="_blank"`, de modo que el enlace se abra en una nueva pestaña, y para aplicar un atributo `style` personalizado para poner en cursiva la etiqueta del enlace:
 
-```js {9}
+```js {10}
 starlight({
 	sidebar: [
 		{
 			label: 'Recursos',
 			items: [
+			// Un enlace externo al sitio web de la NASA que se abre en una nueva pestaña.
 				{
 					label: 'NASA',
 					link: 'https://www.nasa.gov/',
@@ -432,10 +438,65 @@ La configuración anterior genera la siguiente barra lateral:
 	]}
 />
 
+### Atributos HTML personalizados para enlaces autogenerados
+
+Personaliza los atributos HTML de todos los [enlaces autogenerados](#grupos-autogenerados) definiendo la propiedad `attrs` en la configuración de `autogenerate`.
+Las páginas individuales pueden especificar atributos personalizados usando el [campo de frontmatter `sidebar.attrs`](/es/reference/frontmatter/#attrs), que se combinarán con la configuración de `autogenerate.attrs`.
+
+Por ejemplo, con la siguiente configuración:
+
+```js {8}
+starlight({
+	sidebar: [
+		{
+			autogenerate: {
+				// Genera enlaces automáticamente para el directorio 'constellations'.
+				directory: 'constellations',
+				// Aplica cursiva a todas las etiquetas de enlaces autogenerados.
+				attrs: { style: 'font-style: italic' },
+			},
+		},
+	],
+});
+```
+
+Y la siguiente estructura de archivos:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+Se generará la siguiente barra lateral con todos los enlaces autogenerados en cursiva:
+
+<SidebarPreview
+	config={[
+		{ label: 'Carina', link: '', attrs: { style: 'font-style: italic' } },
+		{ label: 'Centaurus', link: '', attrs: { style: 'font-style: italic' } },
+		{
+			label: 'seasonal',
+			items: [
+				{
+					label: 'Andromeda',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+			],
+		},
+	]}
+/>
+
 ## Internacionalización
 
 Usa la propiedad `translations` en las entradas de enlace y grupo para traducir la etiqueta del enlace o grupo para cada idioma compatible especificando una etiqueta de idioma [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), p. ej. `"en"`, `"ar"`, o `"zh-CN"`, como clave, y la etiqueta traducida como valor.
-
 La propiedad `label` se utilizará para el idioma predeterminado y para los idiomas sin traducción.
 
 ```js {5-7,11-13,18-20}
@@ -574,7 +635,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Constelaciones',
-			// Collapsa el grupo de forma predeterminada.
+			// Contrae el grupo de forma predeterminada.
 			collapsed: true,
 			items: ['constellations/andromeda', 'constellations/orion'],
 		},
@@ -597,54 +658,22 @@ La configuración anterior genera la siguiente barra lateral:
 	]}
 />
 
-[Grupos autogenerados](#grupos-autogenerados) respetan el valor `collapsed` de su grupo padre:
+[Los subgrupos autogenerados](#grupos-autogenerados) también puede contraerse de forma predeterminada al establecer la propiedad `autogenerate.collapsed` en `true`:
 
-```js {5-6}
+```js {9-10}
 starlight({
 	sidebar: [
 		{
 			label: 'Constelaciones',
-			// Colapsa el grupo y sus subgrupos autogenerados de forma predeterminada.
-			collapsed: true,
-			autogenerate: { directory: 'constellations' },
-		},
-	],
-});
-```
-
-La configuración anterior genera la siguiente barra lateral:
-
-<SidebarPreview
-	config={[
-		{
-			label: 'Constelaciones',
-			collapsed: true,
 			items: [
-
-    			{ label: 'Carina', link: '' },
-    			{ label: 'Centaurus', link: '' },
-    			{
-    				label: 'seasonal',
-    				collapsed: true,
-    				items: [{ label: 'Andrómeda', link: '' }],
-    			},
-    		],
-    	},
-    ]}
-
-/>
-
-Este comportamiento puede remplazarse definiendo la propiedad `autogenerate.collapsed`.
-
-```js {5-7} "collapsed: true"
-starlight({
-	sidebar: [
-		{
-			label: 'Constelaciones',
-			// No colapsa el grupo "Constelattions" pero colapsa sus
-			// subgrupos autogenerados.
-			collapsed: false,
-			autogenerate: { directory: 'constellations', collapsed: true },
+				{
+					autogenerate: {
+						directory: 'constellations',
+						// Colapsa los subgrupos autogenerados de forma predeterminada.
+						collapsed: true,
+					},
+				},
+			],
 		},
 	],
 });
@@ -662,9 +691,9 @@ La configuración anterior genera la siguiente barra lateral:
 				{
 					label: 'seasonal',
 					collapsed: true,
-					items: [{ label: 'Andrómeda', link: '' }],
+					items: [{ label: 'Andromeda', link: '' }],
 				},
 			],
-		},
-	]}
+    	},
+    ]}
 />
