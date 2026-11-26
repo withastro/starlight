@@ -166,13 +166,14 @@ function astroIntegrationFavicon({
 				// like `[filename]`, but when it detects a pattern without an extension, Astro enforces the
 				// trailing slash and only accepts requests like `/favicon.ico/` resulting in 404s in dev.
 
+				const jsTsExtension = extname(import.meta.url);
 				if (favicon && !faviconIsInPublicDir) {
 					// If the user’s favicon is already in the public directory, we don’t need to inject the
 					// route, because Astro will handle exposing it for us.
 					injectRoute({
 						prerender: true,
 						pattern: favicon.attrs.href,
-						entrypoint: new URL('./endpoint.ts', import.meta.url),
+						entrypoint: new URL('./endpoint' + jsTsExtension, import.meta.url),
 					});
 				}
 
@@ -180,7 +181,7 @@ function astroIntegrationFavicon({
 					injectRoute({
 						prerender: true,
 						pattern: icoFallback.attrs.href,
-						entrypoint: new URL('./fallback-endpoint.ts', import.meta.url),
+						entrypoint: new URL('./fallback-endpoint' + jsTsExtension, import.meta.url),
 					});
 				}
 			},
