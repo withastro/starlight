@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.43.2
+
+### Patch Changes
+
+- [#4441](https://github.com/withastro/starlight/pull/4441) [`4eedd86`](https://github.com/withastro/starlight/commit/4eedd86cab4ca6e490f2647ba3dc1262d4dd0c4d) Thanks [@ismoil77](https://github.com/ismoil77)! - Adds Tajik language support
+
 ## 0.43.1
 
 ### Patch Changes
