@@ -19,6 +19,7 @@ import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
 import { vitePluginStarlightLazyBarrelOptimization } from './integrations/vite-lazy-barrel-optimization';
 import { vitePluginStarlightVirtualModules } from './integrations/vite-virtual-modules';
+import { builtinPlugins } from './plugins';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -53,7 +54,7 @@ export default function StarlightIntegration(
 				updateConfig,
 			}) => {
 				// Run plugins to get the updated configuration and any extra Astro integrations to load.
-				const pluginResult = await runPlugins(opts, plugins, {
+				const pluginResult = await runPlugins(opts, (plugins || []).concat(...builtinPlugins), {
 					command,
 					config,
 					isRestart,

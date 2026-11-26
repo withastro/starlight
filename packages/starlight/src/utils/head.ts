@@ -1,3 +1,4 @@
+import favicons from 'virtual:starlight/favicons';
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
 import { version } from '../../package.json';
@@ -7,9 +8,37 @@ import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
 import { localizedUrl } from './localizedUrl';
 import { stripLeadingAndTrailingSlashes } from './path';
-import { isAbsoluteUrl } from './url';
 
 const HeadSchema = HeadConfigSchema({ source: 'content' });
+
+const faviconDefaults: NonNullable<HeadUserConfig> = [
+	favicons.externalFavicon &&
+		({
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				...favicons.externalFavicon,
+			},
+		} as const),
+	favicons.icoFallback &&
+		({
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				...favicons.icoFallback.attrs,
+				href: fileWithBase(favicons.icoFallback.attrs.href),
+			},
+		} as const),
+	favicons.favicon &&
+		({
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				...favicons.favicon.attrs,
+				href: fileWithBase(favicons.favicon.attrs.href),
+			},
+		} as const),
+].filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
 
 /** Get the head for the current page. */
 export function getHead(
@@ -44,16 +73,7 @@ export function getHead(
 			attrs: { name: 'generator', content: `Starlight v${version}` },
 		},
 		// Favicon
-		{
-			tag: 'link',
-			attrs: {
-				rel: 'shortcut icon',
-				href: isAbsoluteUrl(config.favicon.href)
-					? config.favicon.href
-					: fileWithBase(config.favicon.href),
-				type: config.favicon.type,
-			},
-		},
+		...faviconDefaults,
 		// OpenGraph Tags
 		{ tag: 'meta', attrs: { property: 'og:title', content: data.title } },
 		{ tag: 'meta', attrs: { property: 'og:type', content: 'article' } },
@@ -218,17 +238,6 @@ function getImportance(entry: HeadConfig[number]) {
 	if (entry.tag === 'title') return 90;
 	// 3. Anything that isn’t an SEO meta tag.
 	if (entry.tag !== 'meta') {
-		// The default favicon should be below any extra icons that the user may have set
-		// because if several icons are equally appropriate, the last one is used and we
-		// want to use the SVG icon when supported.
-		if (
-			entry.tag === 'link' &&
-			entry.attrs &&
-			'rel' in entry.attrs &&
-			entry.attrs.rel === 'shortcut icon'
-		) {
-			return 70;
-		}
 		return 80;
 	}
 	// 4. SEO meta tags.

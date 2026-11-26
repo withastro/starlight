@@ -1,42 +1,24 @@
 import { extname } from 'node:path';
 import { z } from 'astro/zod';
+import { isFaviconExt } from '../plugins/favicon/utils';
 
-const faviconTypeMap = {
-	'.ico': 'image/x-icon',
-	'.gif': 'image/gif',
-	'.jpeg': 'image/jpeg',
-	'.jpg': 'image/jpeg',
-	'.png': 'image/png',
-	'.svg': 'image/svg+xml',
-};
-
-export type FaviconUserConfig = string | undefined;
+export type FaviconUserConfig = string | false | undefined;
 
 export const FaviconSchema = () =>
 	z
 		.string()
-		.default('/favicon.svg')
-		.transform((favicon, ctx) => {
+		.superRefine((favicon, ctx) => {
 			// favicon can be absolute or relative url
 			const { pathname } = new URL(favicon, 'https://example.com');
 			const ext = extname(pathname).toLowerCase();
 
 			if (!isFaviconExt(ext)) {
-				ctx.issues.push({
+				ctx.addIssue({
 					code: 'custom',
 					message: 'favicon must be a .ico, .gif, .jpg, .png, or .svg file',
 					input: favicon,
 				});
-
-				return z.NEVER;
 			}
-
-			return {
-				href: favicon,
-				type: faviconTypeMap[ext],
-			};
-		});
-
-function isFaviconExt(ext: string): ext is keyof typeof faviconTypeMap {
-	return ext in faviconTypeMap;
-}
+		})
+		.or(z.literal(false))
+		.optional();
