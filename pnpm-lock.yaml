@@ -455,6 +455,9 @@ importers:
       mdast-util-to-hast:
         specifier: ^13.2.1
         version: 13.2.1
+      sharp:
+        specifier: ^0.35.3
+        version: 0.35.4(@types/node@22.19.17)
       vitest:
         specifier: ^5.0.2
         version: 5.0.3(@types/node@22.19.17)(@vitest/coverage-v8@5.0.3)(vite@8.3.5(@types/node@22.19.17)(esbuild@0.28.0)(jiti@2.7.0)(yaml@2.9.1))
@@ -8539,7 +8542,6 @@ snapshots:
       '@img/sharp-win32-ia32': 0.35.4
       '@img/sharp-win32-x64': 0.35.4
       '@types/node': 22.19.17
-    optional: true
 
   sharp@0.35.4(@types/node@24.12.4):
     dependencies:
