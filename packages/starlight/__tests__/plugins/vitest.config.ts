@@ -17,16 +17,14 @@ export default defineVitestConfig({
 			hooks: {
 				'config:setup'({ config, updateConfig }) {
 					updateConfig({
-						title: `${typeof config.title === 'string' ? config.title : ''} - Custom`,
-						description: 'plugin 1',
 						/**
 						 * The configuration received by a plugin should be the user provided configuration as-is
 						 * before any Zod `transform`s are applied.
-						 * To test this, we use this plugin to update the `favicon` value to a specific value if
-						 * the `favicon` config value is an object, which would mean that the associated Zod
-						 * `transform` was applied.
+						 * To test this, we use this plugin to mark the `title` as invalid if the `title` config
+						 * value is an object, which would mean that the associated Zod `transform` was applied.
 						 */
-						favicon: typeof config.favicon === 'object' ? 'invalid.svg' : 'valid.svg',
+						title: typeof config.title === 'string' ? `${config.title} - Custom` : 'INVALID',
+						description: 'plugin 1',
 					});
 				},
 			},

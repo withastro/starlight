@@ -19,11 +19,11 @@ test('runs plugins in the order that they are configured and always passes down 
 
 test('receives the user provided configuration without any Zod `transform`s applied', () => {
 	/**
-	 * If the `transform` associated to the favicon schema was applied, the favicon `href` would be
-	 * `invalid.svg`.
+	 * If the `transform` associated with the title schema were applied, the default locale’s title
+	 * would be `"INVALID"`.
 	 * @see {@link file://./vitest.config.ts} for more details in the `test-plugin-1` plugin.
 	 */
-	expect(config.favicon.href).toBe('valid.svg');
+	expect(config.title[config.defaultLocale.lang!]).toMatchInlineSnapshot(`"Plugins - Custom"`);
 });
 
 test('receives the user provided configuration including the plugins list', async () => {

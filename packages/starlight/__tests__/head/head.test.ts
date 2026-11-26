@@ -149,6 +149,12 @@ test('sorts head by tag importance', () => {
 		{ tag: 'meta', attrs: expect.objectContaining({ 'http-equiv': 'x' }) },
 		// <title>
 		{ tag: 'title', content: 'Home Page | Docs With Custom Head' },
+		// Favicons
+		{
+			tag: 'link',
+			attrs: { href: '/favicon.ico', rel: 'icon', sizes: '32x32', type: 'image/x-icon' },
+		},
+		{ tag: 'link', attrs: { href: '/favicon.svg', rel: 'icon', type: 'image/svg+xml' } },
 		// Sitemap
 		{ tag: 'link', attrs: { rel: 'sitemap', href: '/sitemap-index.xml' } },
 		// Canonical link
@@ -169,14 +175,14 @@ test('sorts head by tag importance', () => {
 	expect(head.slice(-expectedHeadEnd.length)).toEqual(expectedHeadEnd);
 });
 
-test('places the default favicon below any user provided icons', () => {
+test('places the default favicon before any user-provided icons', () => {
 	const head = getTestHead({
 		heads: [
 			{
 				tag: 'link',
 				attrs: {
 					rel: 'icon',
-					href: '/favicon.ico',
+					href: '/custom-favicon.ico',
 					sizes: '32x32',
 				},
 			},
@@ -184,11 +190,18 @@ test('places the default favicon below any user provided icons', () => {
 	});
 
 	const defaultFaviconIndex = head.findIndex(
-		(tag) => tag.tag === 'link' && tag.attrs?.rel === 'shortcut icon'
+		(tag) =>
+			tag.tag === 'link' &&
+			tag.attrs?.rel === 'icon' &&
+			typeof tag.attrs?.href === 'string' &&
+			tag.attrs.href.endsWith('.svg')
 	);
-	const userFaviconIndex = head.findIndex((tag) => tag.tag === 'link' && tag.attrs?.rel === 'icon');
+	const userFaviconIndex = head.findIndex(
+		(tag) =>
+			tag.tag === 'link' && tag.attrs?.rel === 'icon' && tag.attrs.href === '/custom-favicon.ico'
+	);
 
-	expect(defaultFaviconIndex).toBeGreaterThan(userFaviconIndex);
+	expect(defaultFaviconIndex).toBeLessThan(userFaviconIndex);
 });
 
 test('omits meta og:url tag when site is not set', () => {
