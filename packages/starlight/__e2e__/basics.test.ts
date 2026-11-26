@@ -316,6 +316,34 @@ test.describe('components', () => {
 			);
 		});
 
+		test('syncs tabs when accessing `localStorage` throws', async ({ page, getProdServer }) => {
+			// Simulate a browser blocking site data, in which case accessing `localStorage` throws.
+			await page.addInitScript(() => {
+				Object.defineProperty(window, 'localStorage', {
+					get() {
+						throw new DOMException('The operation is insecure.', 'SecurityError');
+					},
+				});
+			});
+			const pageErrors: Error[] = [];
+			page.on('pageerror', (error) => pageErrors.push(error));
+
+			const starlight = await getProdServer();
+			await starlight.goto('/tabs');
+
+			const tabs = page.locator('starlight-tabs');
+			const pkgTabsA = tabs.nth(0);
+			const pkgTabsB = tabs.nth(2);
+
+			// Select the pnpm tab in the first set of synced tabs.
+			await pkgTabsA.getByRole('tab').filter({ hasText: 'pnpm' }).click();
+
+			await expectSelectedTab(pkgTabsA, 'pnpm', 'pnpm command');
+			await expectSelectedTab(pkgTabsB, 'pnpm', 'another pnpm command');
+
+			expect(pageErrors).toEqual([]);
+		});
+
 		test('syncs and restores nested tabs', async ({ page, getProdServer }) => {
 			const starlight = await getProdServer();
 			await starlight.goto('/tabs-nested');
@@ -509,6 +537,37 @@ test.describe('components', () => {
 			// a new layer and thus potentially breaking the intended layers order as the initial order
 			// in which layers are declared indicates which layer has precedence.
 			expect(firstStyleContent).toBe(expectedLayersOrder);
+		});
+	});
+
+	test.describe('theme select', () => {
+		test('changes the theme when accessing `localStorage` throws', async ({
+			page,
+			getProdServer,
+		}) => {
+			// Simulate a browser blocking site data, in which case accessing `localStorage` throws.
+			await page.addInitScript(() => {
+				Object.defineProperty(window, 'localStorage', {
+					get() {
+						throw new DOMException('The operation is insecure.', 'SecurityError');
+					},
+				});
+			});
+			const pageErrors: Error[] = [];
+			page.on('pageerror', (error) => pageErrors.push(error));
+
+			await page.emulateMedia({ colorScheme: 'light' });
+			const starlight = await getProdServer();
+			await starlight.goto('/');
+
+			// The system color scheme is used as the initial theme.
+			await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+
+			const themeSelect = page.getByRole('banner').getByLabel('Select theme');
+			await themeSelect.selectOption('dark');
+			await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+
+			expect(pageErrors).toEqual([]);
 		});
 	});
 

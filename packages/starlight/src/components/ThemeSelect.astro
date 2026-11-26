@@ -26,7 +26,8 @@ import Select from './Select.astro';
 <script
 	is:inline
 	set:html={`(() => {
-		const theme = (typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme'));
+		let theme;
+		try { theme = localStorage.getItem('starlight-theme'); } catch {}
 		if (theme) document.querySelectorAll('starlight-theme-select select').forEach((s) => { s.value = theme; });
 	})();`}
 ></script>
@@ -52,14 +53,20 @@ import Select from './Select.astro';
 		theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
 
 	/** Load the user’s preference from `localStorage`. */
-	const loadTheme = (): Theme =>
-		parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey));
+	const loadTheme = (): Theme => {
+		try {
+			return parseTheme(localStorage.getItem(storageKey));
+		} catch {
+			// `localStorage` can be unavailable or throw, e.g. when site data is blocked.
+			return 'auto';
+		}
+	};
 
 	/** Store the user’s preference in `localStorage`. */
 	function storeTheme(theme: Theme): void {
-		if (typeof localStorage !== 'undefined') {
+		try {
 			localStorage.setItem(storageKey, theme === 'light' || theme === 'dark' ? theme : '');
-		}
+		} catch {}
 	}
 
 	/** Get the preferred system color scheme. */
