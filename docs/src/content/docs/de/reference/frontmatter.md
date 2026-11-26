@@ -47,7 +47,7 @@ Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte IDs definier
 
 **Typ:** [`HeadConfig[]`](/de/reference/configuration/#headconfig)
 
-Du kannst zusätzliche Tags zum `<head>` deiner Seite hinzufügen, indem du das Frontmatter-Feld `head` verwendest. Dies bedeutet, dass du benutzerdefinierte Stile, Metadaten oder andere Tags zu einer einzelnen Seite hinzufügen kannst. Ähnlich wie bei der [globalen `head` Option](/de/reference/configuration/#head).
+Du kannst zusätzliche Tags zum `<head>` deiner Seite hinzufügen, indem du das Frontmatter-Feld `head` verwendest. Dies bedeutet, dass du benutzerdefinierte Styles, Metadaten oder andere Tags zu einer einzelnen Seite hinzufügen kannst. Ähnlich wie bei der [globalen `head`-Option](/de/reference/configuration/#head).
 
 ```md
 ---
@@ -403,7 +403,7 @@ sidebar:
 
 ## Frontmatter-Schema anpassen
 
-Das Frontmatter-Schema für die Starlight-Inhaltssammlung `docs` wird in `src/content.config.ts` mit dem `docsSchema()`-Helper konfiguriert:
+Das Frontmatter-Schema für die Starlight-Content-Collection `docs` wird in `src/content.config.ts` mit dem `docsSchema()`-Helper konfiguriert:
 
 ```ts {4,7}
 // src/content.config.ts
@@ -416,7 +416,7 @@ export const collections = {
 };
 ```
 
-Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in der Astro-Dokumentation.
+Mehr über Schemata für Content-Collections erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in der Astro-Dokumentation.
 
 `docsSchema()` nimmt die folgenden Optionen an:
 

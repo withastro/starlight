@@ -306,7 +306,7 @@ Im obigen Beispiel wird eine Meldung protokolliert, die die angegebene Info-Meld
 
 Rufe `useTranslations()` mit einem BCP-47-Sprach-Tag auf, um eine Utility-Funktion zu generieren, die Zugriff auf UI-Strings für diese Sprache bietet.
 `useTranslations()` gibt ein Äquivalent der API `Astro.locals.t()` zurück, die in Astro-Komponenten verfügbar ist.
-Weitere Informationen zu den verfügbaren APIs findest du im Leitfaden [„UI-Übersetzungen verwenden“](/de/guides/i18n/#ui-übersetzungen-verwenden).
+Weitere Informationen zu den verfügbaren APIs findest du in der Anleitung [„UI-Übersetzungen verwenden“](/de/guides/i18n/#ui-übersetzungen-verwenden).
 
 ```ts {6}
 // plugin.ts

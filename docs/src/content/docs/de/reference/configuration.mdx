@@ -413,7 +413,7 @@ Standardmäßig werden nur Markdown- und MDX-Inhalte verarbeitet, die mit Starli
 Unterstützt lokale Verzeichnisse, die relativ zum Stammverzeichnis deines Projekts liegen, z.&nbsp;B. `'./src/data/comments/'`.
 
 Starlight unterstützt [anklickbare Überschriften-Ankerlinks](#headinglinks), die [Markdown-Direktiven-Syntax für Nebenbemerkungen](/de/guides/authoring-content/#nebenbemerkungen) und die RTL-Unterstützung für Codeblöcke.
-Diese Option kann nützlich sein, wenn du Inhalte aus einer benutzerdefinierten Inhaltssammlung in einer [benutzerdefinierten Seite](/de/guides/pages/#benutzerdefinierte-seiten) mit der `<StarlightPage>`-Komponente renderst und erwartest, dass die Markdown-Verarbeitung von Starlight auch auf diese Inhalte angewendet wird.
+Diese Option kann nützlich sein, wenn du Inhalte aus einer benutzerdefinierten Content-Collection in einer [benutzerdefinierten Seite](/de/guides/pages/#benutzerdefinierte-seiten) mit der `<StarlightPage>`-Komponente renderst und erwartest, dass die Markdown-Verarbeitung von Starlight auch auf diese Inhalte angewendet wird.
 
 ```js
 starlight({
@@ -575,7 +575,7 @@ starlight({
 ```
 
 Einträge in `head` werden direkt in HTML-Elemente umgewandelt und durchlaufen nicht Astros [script](https://docs.astro.build/de/guides/client-side-scripts/#script-bundling) oder [style](https://docs.astro.build/de/guides/styling/#styles-stile-in-astro) Verarbeitung.
-Wenn du lokale Elemente wie Skripte, Stile oder Bilder importieren musst, [überschreibe die Komponente Head](/de/guides/overriding-components/#eine-integrierte-komponente-wiederverwenden).
+Wenn du lokale Elemente wie Skripte, Styles oder Bilder importieren musst, [überschreibe die Komponente Head](/de/guides/overriding-components/#eine-integrierte-komponente-wiederverwenden).
 
 #### `HeadConfig`
 
@@ -709,9 +709,9 @@ starlight({
 });
 ```
 
-## Inhaltssammlungen konfigurieren
+## Content-Collections konfigurieren
 
-Starlight nutzt Astro [Inhaltssammlungen](https://docs.astro.build/de/guides/content-collections/), um deine Inhalte zu laden.
+Starlight nutzt Astro [Content-Collections](https://docs.astro.build/de/guides/content-collections/), um deine Inhalte zu laden.
 Die Inhaltslader und Schemata von Starlight helfen dir dabei, die Sammlungen nach Bedarf zu konfigurieren.
 
 ```js
@@ -730,7 +730,7 @@ export const collections = {
 
 ### Inhaltslader
 
-Starlight exportiert die folgenden [Astro-Lader](https://docs.astro.build/de/reference/content-loader-reference/) aus dem Modul `@astrojs/starlight/loaders`, um die Konfiguration von Inhaltssammlungen zu vereinfachen.
+Starlight exportiert die folgenden [Astro-Lader](https://docs.astro.build/de/reference/content-loader-reference/) aus dem Modul `@astrojs/starlight/loaders`, um die Konfiguration von Content-Collections zu vereinfachen.
 
 #### `docsLoader()`
 
@@ -783,7 +783,7 @@ Derzeit gibt es keine Optionen zum Konfigurieren von `i18nLoader()`.
 
 ### Schemata
 
-Starlight stellt die folgenden [Inhaltssammlungs&shy;schemata](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) aus dem Modul `@astrojs/starlight/schema` zur Verfügung.
+Starlight stellt die folgenden [Content-Collection-Schemas](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) aus dem Modul `@astrojs/starlight/schema` zur Verfügung.
 Diese Schemata müssen für die Sammlungen `docs` und `i18n` verwendet werden, von denen Starlight abhängt.
 
 #### `docsSchema()`
