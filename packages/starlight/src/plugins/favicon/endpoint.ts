@@ -7,6 +7,6 @@ export const GET = (() => {
 	}
 
 	return new Response(Buffer.from(data.favicon.buffer), {
-		headers: { 'Content-Type': data.favicon.mimeType },
+		headers: { 'Content-Type': data.favicon.attrs.type },
 	});
 }) satisfies APIRoute;

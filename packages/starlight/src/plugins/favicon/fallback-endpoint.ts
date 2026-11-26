@@ -7,6 +7,6 @@ export const GET = (() => {
 	}
 
 	return new Response(Buffer.from(data.icoFallback.buffer), {
-		headers: { 'Content-Type': data.icoFallback.mimeType },
+		headers: { 'Content-Type': data.icoFallback.attrs.type },
 	});
 }) satisfies APIRoute;
