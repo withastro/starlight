@@ -3,7 +3,7 @@
   "version": "0.8.2",
   "description": "Algolia DocSearch plugin for the Starlight documentation theme for Astro",
   "scripts": {
-    "build": "tsdown"
+    "build": "rm -rf types && tsc -p tsconfig.types.json --runExternalCode && tsdown"
   },
   "author": "Chris Swithinbank <swithinbank@gmail.com>",
   "license": "MIT",
@@ -16,7 +16,8 @@
   "homepage": "https://starlight.astro.build",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "exports": {
     ".": "./src/index.ts",
@@ -38,12 +39,15 @@
   "publishConfig": {
     "exports": {
       ".": {
-        "types": "./dist/index.d.ts",
+        "types": "./types/index.d.ts",
         "import": "./dist/index.js"
       },
-      "./DocSearch.astro": "./dist/DocSearch.astro",
+      "./DocSearch.astro": {
+        "types": "./types/DocSearch.d.astro.ts",
+        "default": "./dist/DocSearch.astro"
+      },
       "./schema": {
-        "types": "./dist/schema.d.ts",
+        "types": "./types/schema.d.ts",
         "import": "./dist/schema.js"
       }
     }
