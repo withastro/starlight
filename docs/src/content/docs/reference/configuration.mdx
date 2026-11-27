@@ -605,34 +605,46 @@ A page can override this setting or the link text and/or URL using the [`prev`](
 
 ### `favicon`
 
-**type:** `string`  
-**default:** `'/favicon.svg'`
+**type:** `string | false`  
+**default:** `'./public/favicon.svg'`
 
-Set the path of the default favicon for your website which should be located in the `public/` directory and be a valid (`.ico`, `.gif`, `.jpg`, `.png`, or `.svg`) icon file.
+Set the path to the favicon for your website.
+The value should be a file path relative to the root of your project and the file should be a valid `.ico`, `.gif`, `.jpg`, `.png`, or `.svg` file.
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg',
+  favicon: './src/assets/favicon.svg',
 }),
 ```
 
-If you need to set additional variants or fallback favicons, you can add tags using the [`head` option](#head):
+Starlight will generate the required meta tags in your site `<head>` to link to your favicon.
+If your favicon is not a `.ico` file, Starlight will automatically generate one from your favicon image to improve support for some older browsers and web services.
+
+If you need to set additional variants, you can add tags using the [`head` option](#head).
+Icons set via `head` must be in the `public/` directory and their `href` should be a URL pathname rather than a file path:
 
 ```js
 starlight({
-	favicon: '/images/favicon.svg',
+	favicon: './src/assets/favicon.svg',
 	head: [
-		// Add ICO favicon fallback for Safari.
+		// Add home screen icon for iOS devices
 		{
 			tag: 'link',
 			attrs: {
-				rel: 'icon',
-				href: '/images/favicon.ico',
-				sizes: '32x32',
+				rel: 'apple-touch-icon',
+				href: '/apple-touch-icon.png',
 			},
 		},
 	],
 });
+```
+
+To disable Starlight’s favicon handling entirely, set the option to `false`:
+
+```js
+starlight({
+  favicon: false,
+}),
 ```
 
 ### `titleDelimiter`

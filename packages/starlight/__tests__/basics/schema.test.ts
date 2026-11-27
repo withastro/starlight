@@ -13,8 +13,7 @@ describe('FaviconSchema', () => {
 
 		const favicon = FaviconSchema().parse(icon);
 
-		expect(favicon.href).toBe(icon);
-		expect(favicon.type).toBe('image/jpeg');
+		expect(favicon).toBe(icon);
 	});
 
 	test('returns the proper href and type attributes when contains query', () => {
@@ -22,8 +21,7 @@ describe('FaviconSchema', () => {
 
 		const favicon = FaviconSchema().parse(icon);
 
-		expect(favicon.href).toBe(icon);
-		expect(favicon.type).toBe('image/gif');
+		expect(favicon).toBe(icon);
 	});
 
 	test('returns the proper href and type attributes when contains fragment', () => {
@@ -31,8 +29,7 @@ describe('FaviconSchema', () => {
 
 		const favicon = FaviconSchema().parse(icon);
 
-		expect(favicon.href).toBe(icon);
-		expect(favicon.type).toBe('image/png');
+		expect(favicon).toBe(icon);
 	});
 
 	test('returns the proper href and type attributes when contains query and fragment', () => {
@@ -40,8 +37,7 @@ describe('FaviconSchema', () => {
 
 		const favicon = FaviconSchema().parse(icon);
 
-		expect(favicon.href).toBe(icon);
-		expect(favicon.type).toBe('image/x-icon');
+		expect(favicon).toBe(icon);
 	});
 
 	test('throws on invalid favicon extensions', () => {

@@ -6,7 +6,12 @@ export function createTestPluginContext(): StarlightPluginContext {
 		command: 'dev',
 		// @ts-expect-error - we don't provide a full Astro config but only what is needed for the
 		// plugins to run.
-		config: { srcDir: new URL('./src/', import.meta.url), integrations: [] },
+		config: {
+			root: new URL('./', import.meta.url),
+			srcDir: new URL('./src/', import.meta.url),
+			publicDir: new URL('./public/', import.meta.url),
+			integrations: [],
+		},
 		isRestart: false,
 		logger: new TestAstroIntegrationLogger(),
 	};

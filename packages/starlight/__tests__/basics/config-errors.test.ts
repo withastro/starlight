@@ -54,10 +54,6 @@ test('parses bare minimum valid config successfully', () => {
 		  },
 		  "disable404Route": false,
 		  "editLink": {},
-		  "favicon": {
-		    "href": "/favicon.svg",
-		    "type": "image/svg+xml",
-		  },
 		  "head": [],
 		  "isMultilingual": false,
 		  "isUsingBuiltInDefaultLocale": true,

@@ -14,7 +14,7 @@ test('places the default favicon below any user provided icons', () => {
 		props: { ...routes[0]!, headings: [] },
 		context: getRouteDataTestContext(),
 	});
-	const faviconEntry = head.find((tag) => tag.tag === 'link' && tag.attrs?.rel === 'shortcut icon');
+	const faviconEntry = head.find((tag) => tag.tag === 'link' && tag.attrs?.rel === 'icon');
 
 	expect(faviconEntry?.attrs?.href).toBe('https://example.com/favicon.ico');
 });

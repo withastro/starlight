@@ -3,7 +3,7 @@ import { defineConfig } from 'tsdown';
 
 export default defineConfig({
 	checks: { pluginTimings: false },
-	copy: ['src/components.ts', 'src/style', { from: 'src/**/*.astro', flatten: false }],
+	copy: ['src/components.ts', 'src/style', { from: 'src/**/*.{astro,svg}', flatten: false }],
 	deps: {
 		neverBundle: [/^astro:/, /^virtual:starlight\//],
 	},
