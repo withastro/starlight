@@ -2,7 +2,6 @@
   "skipLink.label": "콘텐츠로 이동",
   "search.label": "검색",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "취소",
   "search.devWarning": "검색 기능은 프로덕션 빌드에서만 작동합니다. \n로컬에서 테스트하려면 사이트를 빌드하고 미리 보기를 실행하세요.",
   "themeSelect.accessibleLabel": "테마 선택",
   "themeSelect.dark": "어두운 테마",

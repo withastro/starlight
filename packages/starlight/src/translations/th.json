@@ -2,7 +2,6 @@
   "skipLink.label": "ข้ามไปยังเนื้อหา",
   "search.label": "ค้นหา",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "ยกเลิก",
   "search.devWarning": "การค้นหาสามารถใช้งานได้ในเฉพาะเวอร์ชันใช้งานจริงเท่านั้น\nโปรดลองบิลด์และดูตัวอย่างเว็บไซต์เพื่อทดสอบฟังก์ชันบนอุปกรณ์ของคุณ",
   "themeSelect.accessibleLabel": "เลือกธีม",
   "themeSelect.dark": "มืด",

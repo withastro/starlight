@@ -2,7 +2,6 @@
   "skipLink.label": "Μετάβαση στο περιεχόμενο",
   "search.label": "Αναζήτηση",
   "search.ctrlKey": "Ctrl",
-  "search.cancelLabel": "Ακύρωση",
   "search.devWarning": "Η αναζήτηση είναι διαθέσιμη μόνο σε builds παραγωγής.\nΔοκίμασε να κάνεις build τον ιστότοπο και να τον προεπισκοπήσεις για να τον ελέγξεις τοπικά.",
   "themeSelect.accessibleLabel": "Επιλογή χρωματικού θέματος",
   "themeSelect.dark": "Σκοτεινό",
