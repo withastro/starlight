@@ -1,8 +1,10 @@
 {/* This is intentionally inlined to avoid FOUC. */}
 <script is:inline>
 	(() => {
-		const storedTheme =
-			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		let storedTheme;
+		try {
+			storedTheme = localStorage.getItem('starlight-theme');
+		} catch {}
 		const theme =
 			storedTheme ||
 			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
