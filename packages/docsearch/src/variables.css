@@ -1,47 +1,111 @@
-/* Variables */
+/* Variables (https://github.com/algolia/docsearch/blob/1412418c58fc2a404b2bd4b5c450f318579877dd/packages/docsearch-css/src/_variables.css) */
 :root {
+	--docsearch-font-family: var(--__sl-font);
 	--docsearch-primary-color: var(--sl-color-text-accent);
+	--docsearch-soft-primary-color: var(--sl-color-gray-6);
+	--docsearch-subtle-color: var(--sl-color-gray-5);
 	--docsearch-text-color: var(--sl-color-text);
+	--docsearch-error-color: var(--sl-color-red);
+	--docsearch-error-soft-color: var(--sl-color-red-low);
+	--docsearch-error-text-color: var(--sl-color-red-high);
+	--docsearch-success-color: var(--sl-color-green-low);
+	--docsearch-secondary-text-color: var(--sl-color-gray-2);
+	--docsearch-background-color: var(--sl-color-gray-6);
 	--docsearch-spacing: 12px;
 	--docsearch-icon-stroke-width: 1.4;
+	--docsearch-focus-color: var(--sl-color-text-accent);
 	--docsearch-highlight-color: var(--docsearch-primary-color);
 	--docsearch-muted-color: var(--sl-color-gray-3);
+	--docsearch-icon-color: var(--sl-color-gray-2);
 	--docsearch-container-background: var(--sl-color-backdrop-overlay);
+	--docsearch-logo-color: var(--docsearch-muted-color);
+	--docsearch-border-radius: 4px;
 
 	/* modal */
-	--docsearch-modal-width: 560px;
+	--docsearch-modal-width: 800px;
 	--docsearch-modal-height: 600px;
-	--docsearch-modal-background: var(--sl-color-gray-6);
+	--docsearch-modal-radius: 12px;
+	--docsearch-modal-variable-height: 60dvh;
+	--docsearch-modal-background: var(--sl-color-black);
 	--docsearch-modal-shadow: var(--sl-shadow-lg);
 
 	/* searchbox */
 	--docsearch-searchbox-height: 56px;
-	--docsearch-searchbox-background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+	--docsearch-searchbox-initial-height: 56px;
+	--docsearch-searchbox-background: var(--sl-color-black);
 	--docsearch-searchbox-focus-background: var(--sl-color-black);
-	--docsearch-searchbox-shadow: inset 0 0 0 1px var(--docsearch-primary-color);
+	--docsearch-actions-width: 99px;
+	--docsearch-actions-height: 44px;
 
 	/* hit */
 	--docsearch-hit-height: 56px;
-	--docsearch-hit-color: var(--sl-color-white);
-	--docsearch-hit-active-color: var(--sl-color-black);
+	--docsearch-hit-highlight-color: var(--sl-color-gray-5);
 	--docsearch-hit-background: var(--sl-color-black);
-
-	/* key */
-	--docsearch-key-gradient: linear-gradient(
-		var(--sl-color-bg-inline-code) 0%,
-		var(--sl-color-bg-inline-code) 100%
-	);
+	--docsearch-hit-focus-background: var(--sl-color-gray-7, var(--sl-color-gray-6));
 
 	/* footer */
 	--docsearch-footer-height: 44px;
 	--docsearch-footer-background: var(--sl-color-black);
-	--docsearch-footer-shadow: 0 -1px 0 0 var(--sl-color-hairline-light);
+
+	/* animations */
+	--shimmer-bg: linear-gradient(
+		90deg,
+		rgb(224 227 232) 0%,
+		var(--docsearch-muted-color) 20%,
+		var(--docsearch-muted-color) 60%,
+		rgb(224 227 232) 95%
+	);
+	--docsearch-dropdown-menu-background: var(--sl-color-black);
+	--docsearch-dropdown-menu-item-hover-background: var(--sl-color-gray-6);
+
+	/* Chip */
+	--docsearch-chip-text-color: var(--sl-color-black);
+	--docsearch-chip-background: var(--sl-color-text-accent);
+
+	/* Menu */
+	--docsearch-menu-trigger-active-background: var(--sl-color-gray-5);
+	--docsearch-menu-trigger-active-text-color: var(--sl-color-white);
+
+	/* Popover */
+	--docsearch-popover-background: var(--sl-color-black);
+	--docsearch-popover-shadow: 0 0 0 1px var(--docsearch-subtle-color), var(--sl-shadow-md);
+	--docsearch-popover-arrow-color: var(--docsearch-subtle-color);
+
+	/* markdown */
+	--docsearch-code-block-background: var(--sl-color-gray-6);
+}
+
+/* Responsive (https://github.com/algolia/docsearch/blob/1412418c58fc2a404b2bd4b5c450f318579877dd/packages/docsearch-css/src/modal.css#L1094-L1098) */
+@media (max-width: 768px) {
+	:root {
+		--docsearch-modal-radius: 0;
+		--docsearch-spacing: 10px;
+	}
 }
 
 /* Custom style overrides */
 .DocSearch-Modal {
-	border: 1px solid var(--sl-color-hairline-light);
+	border: 1px solid var(--docsearch-subtle-color);
 }
 .DocSearch-Logo svg * {
 	fill: var(--docsearch-muted-color);
+}
+.DocSearch-Commands-Key {
+	background-color: var(--sl-color-bg-inline-code);
+}
+.DocSearch-Hit[aria-selected='true'] :is(a, .DocSearch-Hit--AskAI) {
+	box-shadow: inset 0 0 0 1px var(--sl-color-gray-3);
+}
+.DocSearch-Menu-content {
+	box-shadow:
+		0 0 0 1px var(--docsearch-subtle-color),
+		var(--sl-shadow-md);
+}
+.DocSearch-Hit mark {
+	/* Reduce underline offset so it is visible and not clipped outside the element. */
+	text-underline-offset: 0.15em;
+}
+.DocSearch-Markdown-Content a {
+	/* Restore underline on links in AI responses to match Starlight’s styles and improve accessibility. */
+	text-decoration: underline;
 }

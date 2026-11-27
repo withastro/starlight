@@ -1,9 +1,10 @@
 import type { StarlightPlugin } from '@astrojs/starlight/types';
-import type docsearch from '@docsearch/js';
+import type { DocSearchProps as DocSearchKeywordProps } from '@docsearch/js/docsearch';
+import type { DocSearchProps as DocSearchAIProps } from '@docsearch/js';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { DocSearchConfigSchema } from './config';
+import { DocSearchConfigSchema, type DocSearchIndex } from './config';
 
 const moduleId = 'virtual:starlight/docsearch-config';
 const resolvedModuleId = `\0${moduleId}`;
@@ -12,18 +13,21 @@ const resolvedModuleId = `\0${moduleId}`;
 const pluginResolveIdIdFilter = new RegExp(`^${moduleId}$`);
 const pluginLoadIdFilter = new RegExp(`^${resolvedModuleId}$`);
 
-export type DocSearchClientOptions = Omit<
-	Parameters<typeof docsearch>[0],
-	'container' | 'translations'
->;
+export type DocSearchClientOptions =
+	| Omit<DocSearchKeywordProps, 'container' | 'translations'>
+	| Omit<DocSearchAIProps, 'container' | 'translations'>;
 
 interface DocSearchInlineUserConfig {
 	/** Your Algolia application ID. */
 	appId: string;
 	/** Your Algolia Search API key. */
 	apiKey: string;
-	/** Your Algolia index name. */
-	indexName: string;
+	/**
+	 * The Algolia indices to search, either as index names or as objects containing a name and
+	 * optional search parameters for that index.
+	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference/#indices
+	 */
+	indices: Array<string | DocSearchIndexConfig>;
 	/**
 	 * The maximum number of results to display per search group.
 	 * @default 5
@@ -40,10 +44,22 @@ interface DocSearchInlineUserConfig {
 	 */
 	insights?: boolean | undefined;
 	/**
-	 * The Algolia Search Parameters.
+	 * Your Algolia Agent Studio agent ID used to enable Ask AI.
+	 *
+	 * To configure additional Ask AI options, use `clientOptionsModule` instead.
+	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference/#askai
+	 */
+	askAi?: string | undefined;
+}
+
+interface DocSearchIndexConfig {
+	/** Your Algolia index name. */
+	name: string;
+	/**
+	 * The Algolia Search Parameters to use for this index.
 	 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
 	 */
-	searchParameters?: DocSearchClientOptions['searchParameters'] | undefined;
+	searchParameters?: DocSearchIndex['searchParameters'] | undefined;
 }
 
 interface DocSearchModuleUserConfig {
@@ -61,7 +77,7 @@ interface DocSearchModuleUserConfig {
 	 * When `clientOptionsModule` is set, all options must be set via the module file. Other inline
 	 * options passed to the plugin in `astro.config.mjs` will be ignored.
 	 *
-	 * @see https://docsearch.algolia.com/docs/api
+	 * @see https://docsearch.algolia.com/docs/packages/js/api-reference/
 	 *
 	 * @example
 	 * // astro.config.mjs
@@ -75,7 +91,7 @@ interface DocSearchModuleUserConfig {
 	 * export default {
 	 *   appId: '...',
 	 *   apiKey: '...',
-	 *   indexName: '...',
+	 *   indices: ['...'],
 	 *   getMissingResultsUrl({ query }) {
 	 *     return `https://github.com/algolia/docsearch/issues/new?title=${encodeURIComponent(query)}`;
 	 *   },
@@ -91,11 +107,6 @@ interface DocSearchModuleUserConfig {
 // issues, such comments can be either missing or misplaced in the emitted declaration files.
 //
 // @see https://github.com/microsoft/TypeScript/issues/62309
-//
-// Additionally, in this specific case, relying on `z.input<schema>` would not work as
-// `@docsearch/js` references types from `@algolia/client-search` that TypeScript would try to
-// reference using a name when generating definitions but fail to do so because our package does
-// not directly depend on `@algolia/client-search`.
 //
 // As such approach uses 2 sources of truth (a schema and an hand-written type), we use type tests
 // to ensure that the hand-written type always matches the inferred input type from the schema.

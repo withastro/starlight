@@ -82,7 +82,7 @@ If you have access to [Algolia’s DocSearch program](https://docsearch.algolia.
 
    </Tabs>
 
-2. Add DocSearch to your Starlight [`plugins`](/reference/configuration/#plugins) config in `astro.config.mjs` and pass it your Algolia `appId`, `apiKey`, and `indexName`:
+2. Add DocSearch to your Starlight [`plugins`](/reference/configuration/#plugins) config in `astro.config.mjs` and pass it your Algolia `appId`, `apiKey`, and `indices`:
 
    ```js ins={4,10-16}
    // astro.config.mjs
@@ -98,7 +98,7 @@ If you have access to [Algolia’s DocSearch program](https://docsearch.algolia.
    				starlightDocSearch({
    					appId: 'YOUR_APP_ID',
    					apiKey: 'YOUR_SEARCH_API_KEY',
-   					indexName: 'YOUR_INDEX_NAME',
+   					indices: ['YOUR_INDEX_NAME'],
    				}),
    			],
    		}),
@@ -114,14 +114,15 @@ With this updated configuration, the search bar on your site will now open an Al
 
 The Starlight DocSearch plugin supports customizing the DocSearch component with the following inline options:
 
+- `indices`: Set the Algolia indices to search. Each entry can be either an index name or an object with a `name` and an optional `searchParameters` object customizing the [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) for that index.
 - `maxResultsPerGroup`: Limit the number of results displayed for each search group. Default is `5`.
 - `disableUserPersonalization`: Prevent DocSearch from saving a user’s recent searches and favorites to local storage. Default is `false`.
 - `insights`: Enable the Algolia Insights plugin and send search events to your DocSearch index. Default is `false`.
-- `searchParameters`: An object customizing the [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/).
+- `askAi`: Enable Ask AI using the ID of your [Algolia Agent Studio](https://docsearch.algolia.com/docs/agent-studio/getting-started/) agent. See ["Additional DocSearch options"](#additional-docsearch-options) to customize other Ask AI options.
 
 ##### Additional DocSearch options
 
-A separate configuration file is required to pass function options like `transformItems()` or `resultsFooterComponent()` to the DocSearch component.
+A separate configuration file is required to pass other options to the DocSearch component, including function options like `transformItems()` or `resultsFooterComponent()`.
 
 <Steps>
 
@@ -134,7 +135,7 @@ A separate configuration file is required to pass function options like `transfo
    export default {
    	appId: 'YOUR_APP_ID',
    	apiKey: 'YOUR_SEARCH_API_KEY',
-   	indexName: 'YOUR_INDEX_NAME',
+   	indices: ['YOUR_INDEX_NAME'],
    	getMissingResultsUrl({ query }) {
    		return `https://github.com/algolia/docsearch/issues/new?title=${encodeURIComponent(query)}`;
    	},
@@ -166,12 +167,14 @@ A separate configuration file is required to pass function options like `transfo
 
 </Steps>
 
-See the [DocSearch JavaScript client API Reference](https://docsearch.algolia.com/docs/api/) for all supported options.
+See the [DocSearch JavaScript client API Reference](https://docsearch.algolia.com/docs/packages/js/api-reference/) for all supported options.
 
 #### Translating the DocSearch UI
 
 DocSearch only provides English UI strings by default.
 Add translations of the modal UI for your language using Starlight’s built-in [internationalization system](/guides/i18n/#translate-starlights-ui).
+
+import DocSearchUIStringsList from '~/components/docsearch-ui-strings-list.astro';
 
 <Steps>
 
@@ -195,41 +198,9 @@ Add translations of the modal UI for your language using Starlight’s built-in 
 
 2. Add translations to your JSON files in `src/content/i18n/`.
 
-   These are the English defaults used by DocSearch:
+   <DocSearchUIStringsList title="English defaults used by DocSearch" />
 
-   ```json title="src/content/i18n/en.json"
-   {
-   	"docsearch.searchBox.resetButtonTitle": "Clear the query",
-   	"docsearch.searchBox.resetButtonAriaLabel": "Clear the query",
-   	"docsearch.searchBox.cancelButtonText": "Cancel",
-   	"docsearch.searchBox.cancelButtonAriaLabel": "Cancel",
-   	"docsearch.searchBox.searchInputLabel": "Search",
-
-   	"docsearch.startScreen.recentSearchesTitle": "Recent",
-   	"docsearch.startScreen.noRecentSearchesText": "No recent searches",
-   	"docsearch.startScreen.saveRecentSearchButtonTitle": "Save this search",
-   	"docsearch.startScreen.removeRecentSearchButtonTitle": "Remove this search from history",
-   	"docsearch.startScreen.favoriteSearchesTitle": "Favorite",
-   	"docsearch.startScreen.removeFavoriteSearchButtonTitle": "Remove this search from favorites",
-
-   	"docsearch.errorScreen.titleText": "Unable to fetch results",
-   	"docsearch.errorScreen.helpText": "You might want to check your network connection.",
-
-   	"docsearch.footer.selectText": "to select",
-   	"docsearch.footer.selectKeyAriaLabel": "Enter key",
-   	"docsearch.footer.navigateText": "to navigate",
-   	"docsearch.footer.navigateUpKeyAriaLabel": "Arrow up",
-   	"docsearch.footer.navigateDownKeyAriaLabel": "Arrow down",
-   	"docsearch.footer.closeText": "to close",
-   	"docsearch.footer.closeKeyAriaLabel": "Escape key",
-   	"docsearch.footer.searchByText": "Search by",
-
-   	"docsearch.noResultsScreen.noResultsText": "No results for",
-   	"docsearch.noResultsScreen.suggestedQueryText": "Try searching for",
-   	"docsearch.noResultsScreen.reportMissingResultsText": "Believe this query should return results?",
-   	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
-   }
-   ```
+   When Ask AI is enabled, the placeholder in the DocSearch modal shows `Search docs or ask AI a question` instead of Starlight’s [`search.label` UI string](/guides/i18n/#translate-starlights-ui). Translate it using the `docsearch.searchBox.placeholderText` UI string.
 
 </Steps>
 
