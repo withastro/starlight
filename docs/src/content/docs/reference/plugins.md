@@ -261,9 +261,9 @@ A read-only copy of the user-supplied [Astro configuration](https://docs.astro.b
 
 The command used to run Starlight:
 
-- `dev` - Project is executed with `astro dev`
-- `build` - Project is executed with `astro build`
-- `preview` - Project is executed with `astro preview`
+- `dev` — Project is executed with `astro dev`
+- `build` — Project is executed with `astro build`
+- `preview` — Project is executed with `astro preview`
 
 #### `isRestart`
 
